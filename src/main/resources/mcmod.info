@@ -1,0 +1,11 @@
+[
+{
+  "modid": "projecteintegration",
+  "name": "ProjectE Integration",
+  "description": "Bringing ProjectE support to all your favorite or obscure mods!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "authorList": ["TagnumElite"],
+  "requiredMods": ["projecte"]
+}
+]

@@ -1,0 +1,71 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+
+version = "${version}"
+group = "com.tagnumelite.projecteintegration"
+archivesBaseName = "ProjectEIntegration-1.12.2"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2811"
+    runDir = "run"
+    
+    mappings = "snapshot_${mcp_version}"
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
+    replace '@VERSION@', "${version}"
+    
+    replace 'after:actuallyadditions', "after:actuallyadditions@[${version_aa},)"
+}
+
+repositories {
+    maven {
+		name "ModMaven"
+		url "https://modmaven.k-4u.nl"
+	}
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+}
+
+dependencies {
+    deobfCompile "projecte:ProjectE:1.12.2:${pe_version}"
+	
+	deobfCompile ("de.ellpeck.actuallyadditions:ActuallyAdditions:${version_aa}") {
+		exclude group: 'mezz.jei'
+	}
+    runtime "cucumber:Cucumber:1.12.2:1.1.3" //ExtendedCrafting Dependencie
+    deobfCompile "extended-crafting:ExtendedCrafting:${version_ec}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
