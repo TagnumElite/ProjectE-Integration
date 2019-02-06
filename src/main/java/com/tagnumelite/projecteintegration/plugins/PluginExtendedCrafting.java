@@ -10,12 +10,15 @@ import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.utils.Utils;
 
 import moze_intel.projecte.api.proxy.IConversionProxy;
+import moze_intel.projecte.api.proxy.IEMCProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 
 public class PluginExtendedCrafting {
+	public static void addEMC(IEMCProxy proxy) {}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addConversions(IConversionProxy proxy) {
 		for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {

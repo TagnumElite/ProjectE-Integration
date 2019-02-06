@@ -11,12 +11,16 @@ import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
 import de.ellpeck.actuallyadditions.mod.blocks.InitBlocks;
 import de.ellpeck.actuallyadditions.mod.items.InitItems;
 import moze_intel.projecte.api.proxy.IConversionProxy;
+import moze_intel.projecte.api.proxy.IEMCProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 public class PluginActuallyAdditions {
+	public static void addEMC(IEMCProxy proxy) {
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addConversions(IConversionProxy proxy) {
 		// Empowerer Recipes
