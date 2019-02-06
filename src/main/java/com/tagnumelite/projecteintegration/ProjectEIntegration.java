@@ -9,8 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.tagnumelite.projecteintegration.plugins.PluginActuallyAdditions;
-import com.tagnumelite.projecteintegration.plugins.PluginAppliedEnergistics;
-import com.tagnumelite.projecteintegration.plugins.PluginAvaritia;
 import com.tagnumelite.projecteintegration.plugins.PluginExtendedCrafting;
 
 import moze_intel.projecte.api.ProjectEAPI;
