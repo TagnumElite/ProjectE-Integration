@@ -32,6 +32,7 @@ minecraft {
     replace '@VERSION@', "${version}"
     
     replace 'after:actuallyadditions', "after:actuallyadditions@[${version_aa},)"
+    replace 'after:extendedcrafting', "after:extendedcrafting@[${version_ec},)"
 }
 
 repositories {
@@ -51,8 +52,10 @@ dependencies {
 	deobfCompile ("de.ellpeck.actuallyadditions:ActuallyAdditions:${version_aa}") {
 		exclude group: 'mezz.jei'
 	}
-    runtime "cucumber:Cucumber:1.12.2:1.1.3" //ExtendedCrafting Dependencie
-    deobfCompile "extended-crafting:ExtendedCrafting:${version_ec}"
+    
+    // CurseForge
+    runtime "cucumber:Cucumber:1.12.2:1.1.3" //ExtendedCrafting Dependency
+    deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_ec}"
 }
 
 processResources {
@@ -69,4 +72,61 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+task srcJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+jar {}
+
+artifacts {
+    archives deobfJar
+	archives srcJar
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+	inputFile = jar.archivePath
+	outputFile = jar.archivePath
+}
+
+task signDeobfJar(type: SignJar, dependsOn: deobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = deobfJar.archivePath
+    outputFile = deobfJar.archivePath
+}
+
+task signSrcJar(type: SignJar, dependsOn: srcJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = srcJar.archivePath
+    outputFile = srcJar.archivePath
+}
+
+build.dependsOn signJar
+build.dependsOn signDeobfJar
+build.dependsOn signSrcJar
 

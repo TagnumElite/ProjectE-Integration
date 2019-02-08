@@ -7,7 +7,7 @@ import com.blakebr0.extendedcrafting.crafting.CompressorRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.endercrafter.EnderCrafterRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.table.TableRecipeManager;
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.utils.Utils;
+import com.tagnumelite.projecteintegration.other.Utils;
 
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
@@ -16,11 +16,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 
-public class PluginExtendedCrafting {
-	public static void addEMC(IEMCProxy proxy) {}
+@Plugin()
+public class PluginExtendedCrafting implements IPlugin {
+	@Override
+	public String modid() {
+		return "extendedcrafting";
+	}
+	
+	@Override
+	public void addEMC(IEMCProxy proxy) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void addConversions(IConversionProxy proxy) {
+	public void addConversions(IConversionProxy proxy) {
 		for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
 			ItemStack output = recipe.getOutput();
 			if (output.isEmpty())

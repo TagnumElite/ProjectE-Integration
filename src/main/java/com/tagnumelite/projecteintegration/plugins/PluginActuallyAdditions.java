@@ -1,8 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.ProjectEIntegration;
-import com.tagnumelite.projecteintegration.utils.Utils;
+import com.tagnumelite.projecteintegration.other.Utils;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
@@ -17,12 +16,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
-public class PluginActuallyAdditions {
-	public static void addEMC(IEMCProxy proxy) {
+@Plugin()
+public class PluginActuallyAdditions implements IPlugin {
+	@Override
+	public String modid() {
+		return "actuallyadditions";
+	}
+	
+	public void addEMC(IEMCProxy proxy) {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void addConversions(IConversionProxy proxy) {
+	public void addConversions(IConversionProxy proxy) {
 		// Empowerer Recipes
 		for (EmpowererRecipe recipe : ActuallyAdditionsAPI.EMPOWERER_RECIPES) {
 			ItemStack output = recipe.getOutput();
@@ -49,7 +54,6 @@ public class PluginActuallyAdditions {
 				ingredients.addIngredient(Utils.createFromIngredient(proxy, stand4), 1);
 			
 			proxy.addConversion(output.getCount(), output, ingredients.getMap());
-			ProjectEIntegration.LOG.info("Item: {} registered: Count: {}", output.getDisplayName(), output.getCount());
 		}
 		
 		//Reconstructor Recipes
@@ -62,7 +66,6 @@ public class PluginActuallyAdditions {
 				continue;
 			
 			proxy.addConversion(output.getCount(), output, ImmutableMap.of(Utils.createFromIngredient(proxy, input), 1));
-			ProjectEIntegration.LOG.info("Item: {} registered: Count: {}", output.getDisplayName(), output.getCount());
 		}
 		
 		//Crusher Recipes
