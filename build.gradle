@@ -6,12 +6,16 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		//classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.1.0"
+		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.1.0"
     }
 }
 
+plugins {
+	id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.60'
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
-//apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: 'com.matthewprenger.cursegradle'
 
 version = "${version}"
 group = "com.tagnumelite.projecteintegration"
@@ -31,8 +35,8 @@ minecraft {
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
     replace '@VERSION@', "${version}"
     
-    replace 'after:actuallyadditions', "after:actuallyadditions@[${version_aa},)"
-    replace 'after:extendedcrafting', "after:extendedcrafting@[${version_ec},)"
+    replace 'after:actuallyadditions', "after:actuallyadditions@[${version_actuallyadditions},)"
+    replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
 }
 
 repositories {
@@ -49,13 +53,11 @@ repositories {
 dependencies {
     deobfCompile "projecte:ProjectE:1.12.2:${pe_version}"
 	
-	deobfCompile ("de.ellpeck.actuallyadditions:ActuallyAdditions:${version_aa}") {
-		exclude group: 'mezz.jei'
-	}
+	deobfCompile "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     
     // CurseForge
-    runtime "cucumber:Cucumber:1.12.2:1.1.3" //ExtendedCrafting Dependency
-    deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_ec}"
+    runtime "cucumber:Cucumber:1.12.2:${version_cucumber}" //ExtendedCrafting Dependency
+    deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_extendedcrafting}"
 }
 
 processResources {
@@ -88,6 +90,34 @@ jar {}
 artifacts {
     archives deobfJar
 	archives srcJar
+}
+
+curseforge {
+	apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
+	project {
+		id = "${cf_project}"
+		changelogType = 'markdown'
+		changelog = changelog = file('CHANGELOG.MD')
+		releaseType = "${release_type}"
+		addGameVersion "1.12.2"
+		mainArtifact(jar) {
+		  displayName = "[1.12.2] ProjectE Integration - ${version}"
+		}
+		addArtifact(deobfJar) {
+		  displayName = "[1.12.2] ProjectE Integration (Deobfuscated) - ${version}"
+		}
+		addArtifact(srcJar) {
+		  displayName = "[1.12.2] ProjectE Integration (Sources) - ${version}"
+		}
+		relations {
+            requiredDependency 'ProjectE'
+            
+            // From Other Mavens
+            optionalLibrary 'Actually-Additions'
+            // From CurseForge Maven
+            optionalLibrary 'Extended-Crafting'
+        }
+	}
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
@@ -126,7 +156,50 @@ task signSrcJar(type: SignJar, dependsOn: srcJar) {
     outputFile = srcJar.archivePath
 }
 
+task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    file = new File("CHANGELOG.md");
+    gitHubIssuePattern = "nonada123";
+    templateContent = """
+Changelog of ProjectE Integration
+
+{{#tags}}
+## {{name}}
+ {{#issues}}
+  {{#hasIssue}}
+   {{#hasLink}}
+### {{name}} [{{issue}}]({{link}}) {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
+   {{/hasLink}}
+   {{^hasLink}}
+### {{name}} {{issue}} {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
+   {{/hasLink}}
+  {{/hasIssue}}
+  {{^hasIssue}}
+### {{name}}
+  {{/hasIssue}}
+
+  {{#commits}}
+**{{{messageTitle}}}**
+{{#messageBodyItems}}
+ * {{.}}
+{{/messageBodyItems}}
+
+[{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commit/{{hash}}) {{authorName}} *{{commitTime}}*
+
+  {{/commits}}
+
+ {{/issues}}
+{{/tags}}
+ """;
+}
+
 build.dependsOn signJar
 build.dependsOn signDeobfJar
 build.dependsOn signSrcJar
+tasks.build.dependsOn makeChangelog
 
+afterEvaluate {
+	tasks["curseforge${cf_project}"].dependsOn.add(signJar)
+	tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
+	tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
+	tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
+}
