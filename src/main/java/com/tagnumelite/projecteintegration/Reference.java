@@ -7,5 +7,6 @@ public class Reference {
     
     public static final String DEPENDENCIES = "required-after:projecte;"
     		                                         + "after:actuallyadditions;"
+    		                                         + "after:armorplus;"
     		                                         + "after:extendedcrafting;";
 }

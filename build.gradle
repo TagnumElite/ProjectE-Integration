@@ -36,6 +36,7 @@ minecraft {
     replace '@VERSION@', "${version}"
     
     replace 'after:actuallyadditions', "after:actuallyadditions@[${version_actuallyadditions},)"
+    //replace 'after:armorplus', "after:armorplus@[${version_armorplus},)"
     replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
 }
 
@@ -56,7 +57,9 @@ dependencies {
 	deobfCompile "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     
     // CurseForge
+    deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
     runtime "cucumber:Cucumber:1.12.2:${version_cucumber}" //ExtendedCrafting Dependency
+    runtime "thedragonlib:thedragonlib:1.12.2:${version_thedragonlib}" //ArmorPlus Dependency
     deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_extendedcrafting}"
 }
 
@@ -101,13 +104,13 @@ curseforge {
 		releaseType = "${release_type}"
 		addGameVersion "1.12.2"
 		mainArtifact(jar) {
-		  displayName = "[1.12.2] ProjectE Integration - ${version}"
+		  displayName = "ProjectE Integration - ${version}"
 		}
 		addArtifact(deobfJar) {
-		  displayName = "[1.12.2] ProjectE Integration (Deobfuscated) - ${version}"
+		  displayName = "ProjectE Integration (Deobfuscated) - ${version}"
 		}
 		addArtifact(srcJar) {
-		  displayName = "[1.12.2] ProjectE Integration (Sources) - ${version}"
+		  displayName = "ProjectE Integration (Sources) - ${version}"
 		}
 		relations {
             requiredDependency 'ProjectE'
@@ -115,6 +118,7 @@ curseforge {
             // From Other Mavens
             optionalLibrary 'Actually-Additions'
             // From CurseForge Maven
+            optionalLibrary 'ArmorPlus'
             optionalLibrary 'Extended-Crafting'
         }
 	}

@@ -7,8 +7,10 @@ import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.EmpowererRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
+import moze_intel.projecte.api.proxy.IBlacklistProxy;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
+import moze_intel.projecte.api.proxy.ITransmutationProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -96,4 +98,10 @@ public class PluginActuallyAdditions implements IPlugin {
 			}
 		}
 	}
+
+	@Override
+	public void addBlacklist(IBlacklistProxy proxy) {}
+
+	@Override
+	public void addTransmutation(ITransmutationProxy proxy) {}
 }

@@ -22,8 +22,10 @@ import com.tagnumelite.projecteintegration.plugins.IPlugin;
 import com.tagnumelite.projecteintegration.plugins.Plugin;
 
 import moze_intel.projecte.api.ProjectEAPI;
+import moze_intel.projecte.api.proxy.IBlacklistProxy;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
+import moze_intel.projecte.api.proxy.ITransmutationProxy;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, dependencies=Reference.DEPENDENCIES, certificateFingerprint="342c9251777bda1ef9b9f1cb1387c2bd4d06cd78")
 public class PEIntegration
@@ -53,8 +55,8 @@ public class PEIntegration
     			Plugin plugin = asmClass.getAnnotation(Plugin.class);
     			if (plugin != null && IPlugin.class.isAssignableFrom(asmClass)) {
     				String modid = plugin.modid();
-    				if (!Loader.isModLoaded(modid))
-    					continue;
+    	    		if (!config.getBoolean("enable", ConfigHelper.getPluginConfig(modid), true, "Enable the plugin") || !Loader.isModLoaded(modid))
+    	    			continue;
         			Class<? extends IPlugin> asm_instance = asmClass.asSubclass(IPlugin.class);
         			IPlugin instance = asm_instance.newInstance();
         			PLUGINS.put(modid, instance);
@@ -76,13 +78,23 @@ public class PEIntegration
     	
     	IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
     	IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
+    	IBlacklistProxy blacklist_proxy = ProjectEAPI.getBlacklistProxy();
+    	ITransmutationProxy transmutation_proxy = ProjectEAPI.getTransmutationProxy();
     	
     	for (Entry<String, IPlugin> entry : PLUGINS.entrySet()) {
-    		IPlugin plugin = entry.getValue();
     		String category = ConfigHelper.getPluginConfig(entry.getKey());
+    		
+    		
+    		IPlugin plugin = entry.getValue();
     		plugin.addConfig(config, category);
+    		
     		plugin.addEMC(emc_proxy);
+    		
     		plugin.addConversions(conversion_proxy);
+    		
+    		plugin.addBlacklist(blacklist_proxy);
+    		
+    		plugin.addTransmutation(transmutation_proxy);
     	}
     	
     	if(config.hasChanged())
