@@ -10,10 +10,6 @@ buildscript {
     }
 }
 
-plugins {
-	id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.60'
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
 
@@ -99,8 +95,7 @@ curseforge {
 	apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
 	project {
 		id = "${cf_project}"
-		changelogType = 'markdown'
-		changelog = changelog = file('CHANGELOG.MD')
+		changelog = "See https://github.com/TagnumElite/ProjectE-Integration/releases"
 		releaseType = "${release_type}"
 		addGameVersion "1.12.2"
 		mainArtifact(jar) {
@@ -160,50 +155,12 @@ task signSrcJar(type: SignJar, dependsOn: srcJar) {
     outputFile = srcJar.archivePath
 }
 
-task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    file = new File("CHANGELOG.md");
-    gitHubIssuePattern = "nonada123";
-    templateContent = """
-Changelog of ProjectE Integration
-
-{{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
-
-  {{#commits}}
-**{{{messageTitle}}}**
-{{#messageBodyItems}}
- * {{.}}
-{{/messageBodyItems}}
-
-[{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commit/{{hash}}) {{authorName}} *{{commitTime}}*
-
-  {{/commits}}
-
- {{/issues}}
-{{/tags}}
- """;
-}
-
 build.dependsOn signJar
 build.dependsOn signDeobfJar
 build.dependsOn signSrcJar
-tasks.build.dependsOn makeChangelog
 
 afterEvaluate {
 	tasks["curseforge${cf_project}"].dependsOn.add(signJar)
 	tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
 	tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
-	tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
 }
