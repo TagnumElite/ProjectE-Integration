@@ -43,6 +43,7 @@ public class PEIntegration
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	LOG.info("Starting Phase: Pre Initialization");
+    	final long startTime = System.currentTimeMillis();
     	
     	config = new Configuration(event.getSuggestedConfigurationFile());
     	DEBUG = config.getBoolean("debug", ConfigHelper.CATEGORY_GENERAL, false, "Enable DEBUG Logging?");
@@ -69,12 +70,15 @@ public class PEIntegration
     	if (config.hasChanged())
     		config.save();
     	
-    	LOG.info("Finished Phase: Pre Initialization");
+    	final long endTime = System.currentTimeMillis();
+    	
+    	LOG.info("Finished Phase: Pre Initialization. Took {}ms", (endTime - startTime));
     }
     
     @EventHandler
-    public void postInit(FMLServerAboutToStartEvent event) {
+    public void serverAboutToStart(FMLServerAboutToStartEvent event) {
     	LOG.info("Starting Phase: Post Initialization");
+    	final long startTime = System.currentTimeMillis();
     	
     	IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
     	IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
@@ -100,7 +104,9 @@ public class PEIntegration
     	if(config.hasChanged())
     		config.save();
     	
-    	LOG.info("Finished Phase: Post Initialization");
+    	final long endTime = System.currentTimeMillis();
+    	
+    	LOG.info("Finished Phase: Post Initialization. Took {}ms", (endTime - startTime));
     }
     
     public static void debug(String message) {
