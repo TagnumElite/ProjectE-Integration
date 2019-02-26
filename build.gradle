@@ -69,6 +69,7 @@ dependencies {
         exclude group: 'CraftTweaker2'
         exclude group: 'codechicken', module: 'CodeChickenLib'
     }
+    runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
     
     // CurseForge
     deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
