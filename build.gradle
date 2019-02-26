@@ -49,6 +49,10 @@ repositories {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
+    maven {
+        name = "CoFH Maven"
+        url = "http://maven.covers1624.net"
+    }
 }
 
 dependencies {
@@ -59,6 +63,12 @@ dependencies {
     runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
 		exclude group: 'mezz.jei'
 	}
+    deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
+    runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'CraftTweaker2'
+        exclude group: 'codechicken', module: 'CodeChickenLib'
+    }
     
     // CurseForge
     deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
@@ -122,6 +132,7 @@ curseforge {
             // From Other Mavens
             optionalLibrary 'Actually-Additions'
             optionalLibrary 'Applied-Energistics-2'
+            optionalLibrary 'Avaritia-1-10'
             // From CurseForge Maven
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Extended-Crafting'

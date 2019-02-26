@@ -1,5 +1,7 @@
 package com.tagnumelite.projecteintegration.other;
 
+import java.util.HashMap;
+
 import com.google.common.collect.ImmutableMap;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.emc.IngredientMap;
@@ -9,12 +11,25 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 
 public class Utils {
+	private static HashMap<Ingredient, Object> MAP_INGREDIENTS = new HashMap<Ingredient, Object>();
+	
 	public static Object createFromIngredient(IConversionProxy proxy, Ingredient ingredient) {
+		if (ingredient == Ingredient.EMPTY)
+			return null;
+		
+		if (MAP_INGREDIENTS.containsKey(ingredient))
+			return MAP_INGREDIENTS.get(ingredient);
+		
 		Object obj = new Object();
 		
-		for (ItemStack stack : ingredient.getMatchingStacks())
-			proxy.addConversion(1, obj, ImmutableMap.of((Object)stack, 1));
+		for (ItemStack stack : ingredient.getMatchingStacks()) {
+			if (stack == null || stack.isEmpty())
+				continue;
+			
+			proxy.addConversion(1, obj, ImmutableMap.of(stack, 1));
+		}
 		
+		MAP_INGREDIENTS.put(ingredient, obj);
 		return obj;
 	}
 	
@@ -35,15 +50,7 @@ public class Utils {
 			if (ingredient == Ingredient.EMPTY)
 				continue;
 
-			ItemStack[] matching = ingredient.getMatchingStacks();
-			if (matching .length <= 0)
-				continue;
-
-			Object obj = new Object();
-			for (ItemStack item : matching)
-				proxy.addConversion(1, obj, ImmutableMap.of(item, 1));
-
-			ingredients.addIngredient(obj, 1);
+			ingredients.addIngredient(createFromIngredient(proxy, ingredient), 1);
 		}
 
 		proxy.addConversion(output.getCount(), output, ingredients.getMap());
@@ -60,5 +67,9 @@ public class Utils {
 	@SuppressWarnings("rawtypes")
 	public static void debugRecipe(String machine, ItemStack output, IngredientMap ingredients) {
 		
+	}
+
+	public static void clearCache() {
+		MAP_INGREDIENTS.clear();
 	}
 }

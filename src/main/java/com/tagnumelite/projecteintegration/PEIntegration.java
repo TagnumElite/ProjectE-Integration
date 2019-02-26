@@ -19,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.tagnumelite.projecteintegration.other.ConfigHelper;
+import com.tagnumelite.projecteintegration.other.Utils;
 import com.tagnumelite.projecteintegration.plugins.IPlugin;
 import com.tagnumelite.projecteintegration.plugins.Plugin;
 
@@ -130,6 +131,9 @@ public class PEIntegration
     	
     	if(config.hasChanged())
     		config.save();
+    	
+    	Utils.clearCache();
+    	PLUGINS.clear();
     	
     	final long endTime = System.currentTimeMillis();
     	
