@@ -133,6 +133,7 @@ curseforge {
             optionalLibrary 'Actually-Additions'
             optionalLibrary 'Applied-Energistics-2'
             optionalLibrary 'Avaritia-1-10'
+            
             // From CurseForge Maven
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Extended-Crafting'
