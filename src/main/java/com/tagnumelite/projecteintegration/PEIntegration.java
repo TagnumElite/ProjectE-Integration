@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
@@ -31,9 +32,16 @@ import moze_intel.projecte.api.proxy.ITransmutationProxy;
 public class PEIntegration
 {
 	public static Configuration config;
+	private static boolean DISABLE;
 	public static boolean DEBUG;
+	private static boolean LOADED = false;
+	private static boolean PRELOAD = false;
     public static Logger LOG = LogManager.getLogger(Reference.MODID);
     private Map<String, IPlugin> PLUGINS = new HashMap<String, IPlugin>();
+    
+    public boolean isLoaded() {
+    	return LOADED;
+    }
     
     @EventHandler
     public void fingerprintViolation(FMLFingerprintViolationEvent event) {
@@ -46,6 +54,15 @@ public class PEIntegration
     	final long startTime = System.currentTimeMillis();
     	
     	config = new Configuration(event.getSuggestedConfigurationFile());
+    	
+    	DISABLE = config.getBoolean("disable", ConfigHelper.CATEGORY_GENERAL, false, "Disable the mod outright? Why though?");
+    	PRELOAD = config.getBoolean("preload", ConfigHelper.CATEGORY_GENERAL, false, "Load EMC conversions during Post Initialization?");
+    	
+    	if (DISABLE) {
+        	LOG.info("Finished Phase: Pre Initialization. Mod Disabled");
+    		return;
+    	}
+    	
     	DEBUG = config.getBoolean("debug", ConfigHelper.CATEGORY_GENERAL, false, "Enable DEBUG Logging?");
     	
     	Set<ASMData> ASM_DATA_SET = event.getAsmData().getAll(Plugin.class.getCanonicalName());
@@ -76,8 +93,22 @@ public class PEIntegration
     }
     
     @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    	if (PRELOAD)
+    		load_plugins();
+    }
+    
+    @EventHandler
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {
-    	LOG.info("Starting Phase: Post Initialization");
+    	if (!PRELOAD)
+        	load_plugins();
+    }
+    
+    private void load_plugins() {
+    	if (DISABLE || LOADED) //If mod is disabled or has already loaded, then return
+    		return;
+    	
+    	LOG.info("Loading Plugins");
     	final long startTime = System.currentTimeMillis();
     	
     	IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
@@ -88,16 +119,12 @@ public class PEIntegration
     	for (Entry<String, IPlugin> entry : PLUGINS.entrySet()) {
     		String category = ConfigHelper.getPluginConfig(entry.getKey());
     		
-    		
     		IPlugin plugin = entry.getValue();
     		plugin.addConfig(config, category);
     		
     		plugin.addEMC(emc_proxy);
-    		
     		plugin.addConversions(conversion_proxy);
-    		
     		plugin.addBlacklist(blacklist_proxy);
-    		
     		plugin.addTransmutation(transmutation_proxy);
     	}
     	
@@ -106,7 +133,8 @@ public class PEIntegration
     	
     	final long endTime = System.currentTimeMillis();
     	
-    	LOG.info("Finished Phase: Post Initialization. Took {}ms", (endTime - startTime));
+    	LOG.info("Finished Loading Plugins. Took {}ms", (endTime - startTime));
+    	LOADED = true;
     }
     
     public static void debug(String message) {

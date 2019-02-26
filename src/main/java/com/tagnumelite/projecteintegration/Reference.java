@@ -9,5 +9,6 @@ public class Reference {
     		                                         + "after:actuallyadditions;"
     		                                         + "after:appliedenergistics2;"
     		                                         + "after:armorplus;"
-    		                                         + "after:extendedcrafting;";
+    		                                         + "after:extendedcrafting;"
+    		                                         + "after:nuclearcraft;";
 }
