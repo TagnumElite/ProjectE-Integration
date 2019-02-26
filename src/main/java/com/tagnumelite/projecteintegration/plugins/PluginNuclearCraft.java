@@ -39,7 +39,8 @@ public class PluginNuclearCraft implements IPlugin {
 	public void addConversions(IConversionProxy proxy) {
 		
 		for (Type recipe_type : NCRecipes.Type.values()) {
-			if (config.getBoolean("enable_" + recipe_type.toString().toLowerCase() + "_conversions", category, true, "")) {
+			final String recipe_name = recipe_type.toString();
+			if (config.getBoolean("enable_" + recipe_name.toLowerCase() + "_conversions", category, true, "Enable EMC Conversions for Machine: '" + recipe_name + "'")) {
 				final ProcessorRecipeHandler recipe_handler = recipe_type.getRecipeHandler();
 				
 				for (ProcessorRecipe recipe : recipe_handler.recipes) {
