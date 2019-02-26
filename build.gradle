@@ -65,6 +65,7 @@ dependencies {
     runtime "cucumber:Cucumber:1.12.2:${version_cucumber}" //ExtendedCrafting Dependency
     runtime "thedragonlib:thedragonlib:1.12.2:${version_thedragonlib}" //ArmorPlus Dependency
     deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_extendedcrafting}"
+    deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:1.12.2"
 }
 
 processResources {
@@ -124,6 +125,7 @@ curseforge {
             // From CurseForge Maven
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Extended-Crafting'
+            optionalLibrary 'NuclearCraft-mod'
         }
 	}
 }
