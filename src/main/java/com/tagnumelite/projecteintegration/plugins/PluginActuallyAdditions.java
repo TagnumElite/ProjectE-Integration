@@ -1,6 +1,8 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.other.Utils;
 
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
@@ -16,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.config.Configuration;
 
-@Plugin(modid="actuallyadditions")
+@PEIPlugin(modid="actuallyadditions")
 public class PluginActuallyAdditions implements IPlugin {
 	private static boolean enable_empowerer;
 	private static boolean enable_reconstructor;

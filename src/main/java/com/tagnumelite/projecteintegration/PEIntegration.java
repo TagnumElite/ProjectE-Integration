@@ -18,10 +18,10 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.other.ConfigHelper;
 import com.tagnumelite.projecteintegration.other.Utils;
-import com.tagnumelite.projecteintegration.plugins.IPlugin;
-import com.tagnumelite.projecteintegration.plugins.Plugin;
 
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IBlacklistProxy;
@@ -66,14 +66,14 @@ public class PEIntegration
     	
     	DEBUG = config.getBoolean("debug", ConfigHelper.CATEGORY_GENERAL, false, "Enable DEBUG Logging?");
     	
-    	Set<ASMData> ASM_DATA_SET = event.getAsmData().getAll(Plugin.class.getCanonicalName());
+    	Set<ASMData> ASM_DATA_SET = event.getAsmData().getAll(PEIPlugin.class.getCanonicalName());
     	
     	for (ASMData asm_data : ASM_DATA_SET) {
     		try {
     			Class<?> asmClass = Class.forName(asm_data.getClassName());
-    			Plugin plugin = asmClass.getAnnotation(Plugin.class);
+    			PEIPlugin plugin = asmClass.getAnnotation(PEIPlugin.class);
     			if (plugin != null && IPlugin.class.isAssignableFrom(asmClass)) {
-    				String modid = plugin.modid();
+    				String modid = plugin.modid().toLowerCase();
     	    		if (!config.getBoolean("enable", ConfigHelper.getPluginConfig(modid), true, "Enable the plugin") || !Loader.isModLoaded(modid))
     	    			continue;
         			Class<? extends IPlugin> asm_instance = asmClass.asSubclass(IPlugin.class);

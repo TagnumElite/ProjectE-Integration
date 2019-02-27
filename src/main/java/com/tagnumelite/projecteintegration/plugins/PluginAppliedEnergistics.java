@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.other.Utils;
 
 import appeng.api.AEApi;
@@ -18,7 +20,7 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@Plugin(modid="appliedenergistics2")
+@PEIPlugin(modid="appliedenergistics2")
 public class PluginAppliedEnergistics implements IPlugin {
 	private boolean enable_grinder_conversions;
 	private boolean enable_inscriber_conversions;

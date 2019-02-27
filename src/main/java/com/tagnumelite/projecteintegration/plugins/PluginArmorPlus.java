@@ -6,6 +6,8 @@ import com.sofodev.armorplus.api.crafting.base.BaseShapedOreRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseShapedRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseShapelessOreRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseShapelessRecipe;
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.other.Utils;
 
 import moze_intel.projecte.api.proxy.IBlacklistProxy;
@@ -17,7 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@Plugin(modid="armorplus")
+@PEIPlugin(modid="armorplus")
 public class PluginArmorPlus implements IPlugin {
 	private static boolean enable_workbench_conversions;
 

@@ -1,6 +1,8 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.other.Utils;
 
 import morph.avaritia.recipe.AvaritiaRecipeManager;
@@ -16,7 +18,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@Plugin(modid="avaritia")
+@PEIPlugin(modid="avaritia")
 public class PluginAvaritia implements IPlugin {
 	private static boolean enable_extreme_conversions;
 	private static boolean enable_compressor_conversions;

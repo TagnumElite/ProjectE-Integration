@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIPlugin;
 
 import moze_intel.projecte.api.proxy.IBlacklistProxy;
 import moze_intel.projecte.api.proxy.IConversionProxy;
@@ -20,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@Plugin(modid="nuclearcraft")
+@PEIPlugin(modid="nuclearcraft")
 public class PluginNuclearCraft implements IPlugin {
 	private Configuration config;
 	private String category;
