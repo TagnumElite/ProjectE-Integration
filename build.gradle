@@ -84,6 +84,8 @@ dependencies {
     deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
     runtime "cucumber:Cucumber:1.12.2:${version_cucumber}" //ExtendedCrafting Dependency
     runtime "thedragonlib:thedragonlib:1.12.2:${version_thedragonlib}" //ArmorPlus Dependency
+	deobfProvided "endercore:EnderCore:1.12.2:${version_endercore}"
+	deobfProvided "ender-io:EnderIO:1.12.2:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:1.12.2:${version_extendedcrafting}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:1.12.2"
 }

@@ -35,7 +35,7 @@ public class PluginBotania extends PEIPlugin {
 
 	@Override
 	public void setupIntegration() {
-		addEMC("mana", mana, 1);
+		addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIED}");
 		
 		addMapper(new ElvenTradeMapper());
 		addMapper(new PetalMapper());

@@ -53,7 +53,6 @@ public class PluginExtendedCrafting extends PEIPlugin {
 					if (((List<?>) input).isEmpty())
 						continue;
 					
-					PEIApi.LOG.debug("Extended Crafting turning input into list {} -> {} for {}", input, (List<?>) input, output.getDisplayName());
 					input = PEIApi.getList((List<?>) input);
 					/*Object input_l = PEIApi.getList((List<?>) input);
 					if (input_l == null)
@@ -61,8 +60,6 @@ public class PluginExtendedCrafting extends PEIPlugin {
 					
 					input = input_l;*/
 				}
-				
-				PEIApi.LOG.debug("Extended Crafting Compressor: Turning {} into {}", input.getClass(), output.getDisplayName());
 					
 				addConversion(output.getCount(), output, ImmutableMap.of(input, recipe.getInputCount()));
 			}
