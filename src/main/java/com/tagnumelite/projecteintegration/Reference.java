@@ -6,6 +6,9 @@ public class Reference {
     		                                         + "after:appliedenergistics2;"
     		                                         + "after:armorplus;"
     		                                         + "after:avaritia;"
+    		                                         + "after:botania;"
+    		                                         + "after:draconicevolution;"
+    		                                         + "after:enderio;"
     		                                         + "after:extendedcrafting;"
     		                                         + "after:nuclearcraft;";
 }
