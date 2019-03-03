@@ -1,41 +1,47 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.other.Utils;
-
+import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+import morph.avaritia.init.ModItems;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.compressor.ICompressorRecipe;
 import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import moze_intel.projecte.api.proxy.IBlacklistProxy;
-import moze_intel.projecte.api.proxy.IConversionProxy;
-import moze_intel.projecte.api.proxy.IEMCProxy;
-import moze_intel.projecte.api.proxy.ITransmutationProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@PEIPlugin(modid="avaritia")
-public class PluginAvaritia implements IPlugin {
-	private static boolean enable_extreme_conversions;
-	private static boolean enable_compressor_conversions;
+@RegPEIPlugin(modid="avaritia")
+public class PluginAvaritia extends PEIPlugin {
+	private final float compressor_cost_multiplier;
 
-	@Override
-	public void addConfig(Configuration config, String category) {
-		enable_extreme_conversions = config.getBoolean("enable_extreme_conversions", category, true, "Enable EMC conversions for the Extreme Crafting Table");
-		enable_compressor_conversions = config.getBoolean("enable_extreme_conversions", category, true, "Enable EMC conversions for the Compressor");
+	public PluginAvaritia(String modid, Configuration config) {
+		super(modid, config);
+		
+		this.compressor_cost_multiplier = config.getFloat("compressor_cost_multiplier", this.category, 1F, 0.00001F, 1F, "Mupltier to the EMC calulation");
 	}
-
+	
 	@Override
-	public void addEMC(IEMCProxy proxy) {}
+	public void setupIntegration() {
+		addEMC(ModItems.neutron_pile, 128);
+		
+		addMapper(new ExtremeMapper());
+		addMapper(new CompressorMapper());
+	}
+	
+	private class ExtremeMapper extends PEIMapper {
 
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addConversions(IConversionProxy proxy) {
-		if (enable_extreme_conversions) {
+		public ExtremeMapper() {
+			super("Extreme Crafting Table",
+					"");
+		}
+
+		@Override
+		public void setup() {
 			for (IExtremeRecipe recipe : AvaritiaRecipeManager.EXTREME_RECIPES.values()) {
 				ItemStack output = recipe.getRecipeOutput();
 				if (output.isEmpty())
@@ -43,33 +49,37 @@ public class PluginAvaritia implements IPlugin {
 				
 				NonNullList<Ingredient> inputs = recipe.getIngredients();
 				
-				IngredientMap ingredients = new IngredientMap();
+				IngredientMap<Object> ingredients = new IngredientMap<Object>();
 	
 				for (Ingredient input : inputs) {
 					if (input == Ingredient.EMPTY)
 						continue;
 					
-					ingredients.addIngredient(Utils.createFromIngredient(proxy, input), 1);
+					ingredients.addIngredient(PEIApi.getIngredient(input), 1);
 				}
 				
-				proxy.addConversion(output.getCount(), output, ingredients.getMap());
+				addConversion(output, ingredients.getMap());
 			}
 		}
 		
-		if (enable_compressor_conversions) {
+	}
+	
+	private class CompressorMapper extends PEIMapper {
+
+		public CompressorMapper() {
+			super("Compressor",
+					"");
+		}
+
+		@Override
+		public void setup() {
 			for (ICompressorRecipe recipe : AvaritiaRecipeManager.COMPRESSOR_RECIPES.values()) {
 				ItemStack output = recipe.getResult();
 				if (output.isEmpty())
 					continue;
 				
-				proxy.addConversion(output.getCount(), output, ImmutableMap.of(Utils.createFromIngredient(proxy, recipe.getIngredients().get(0)), recipe.getCost()));
+				addConversion(output, ImmutableMap.of(PEIApi.getList(recipe.getIngredients()), Math.max(Math.round(recipe.getCost() * compressor_cost_multiplier), 1)));
 			}
 		}
 	}
-
-	@Override
-	public void addBlacklist(IBlacklistProxy proxy) {}
-
-	@Override
-	public void addTransmutation(ITransmutationProxy proxy) {}
 }

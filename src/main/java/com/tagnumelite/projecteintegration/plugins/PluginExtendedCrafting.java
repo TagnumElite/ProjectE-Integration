@@ -1,5 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
+import java.util.List;
+
 import com.blakebr0.extendedcrafting.crafting.CombinationRecipe;
 import com.blakebr0.extendedcrafting.crafting.CombinationRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.CompressorRecipe;
@@ -7,106 +9,111 @@ import com.blakebr0.extendedcrafting.crafting.CompressorRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.endercrafter.EnderCrafterRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.table.TableRecipeManager;
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.other.Utils;
-
-import moze_intel.projecte.api.proxy.IBlacklistProxy;
-import moze_intel.projecte.api.proxy.IConversionProxy;
-import moze_intel.projecte.api.proxy.IEMCProxy;
-import moze_intel.projecte.api.proxy.ITransmutationProxy;
+import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@PEIPlugin(modid="extendedcrafting")
-public class PluginExtendedCrafting implements IPlugin {
-	private static boolean enable_compressor_conversions;
-	private static boolean enable_combination_conversions;
-	private static boolean enable_ender_conversions;
-	private static boolean enable_table_conversions;
-	
-	@Override
-	public void addConfig(Configuration config, String category) {
-		enable_compressor_conversions = config.getBoolean("enable_compressor_conversions", category, true, "Enable Compressor Recipe Conversions?");
-		enable_combination_conversions = config.getBoolean("enable_combination_conversions", category, true, "Enable Combination Recipe Conversions?");
-		enable_ender_conversions = config.getBoolean("enable_ender_conversions", category, true, "Enable Ender Crafting Table Recipe Conversions?");
-		enable_table_conversions = config.getBoolean("enable_table_conversions", category, true, "Enable Tiered Crafting Table Recipe Conversions?");
+@RegPEIPlugin(modid="extendedcrafting")
+public class PluginExtendedCrafting extends PEIPlugin {
+	public PluginExtendedCrafting(String modid, Configuration config) {
+		super(modid, config);
 	}
-	
-	@Override
-	public void addEMC(IEMCProxy proxy) {}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addConversions(IConversionProxy proxy) {
-		if (enable_compressor_conversions) {
+	public void setupIntegration() {
+		addMapper(new ECCompressorMapper());
+		addMapper(new ECCombinationMapper());
+		addMapper(new ECTableMapper());
+	}
+	
+	private class ECCompressorMapper extends PEIMapper {
+		public ECCompressorMapper() {
+			super("compressor",
+				  "Enable Quantum Compressor recipe mapper?");
+		}
+
+		@Override
+		public void setup() {
 			for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
 				ItemStack output = recipe.getOutput();
 				if (output.isEmpty())
 					continue;
 				
 				Object input = recipe.getInput();
+				if (input == null)
+					continue;
 				
-				if (input instanceof NonNullList<?>)
-					input = Utils.createFromList(proxy, input);
+				if (input instanceof List<?>) {
+					if (((List<?>) input).isEmpty())
+						continue;
 					
-				proxy.addConversion(output.getCount(), output, ImmutableMap.of(input, recipe.getInputCount()));
-				//TODO: DEBUG RECIPE LOG
+					PEIApi.LOG.debug("Extended Crafting turning input into list {} -> {} for {}", input, (List<?>) input, output.getDisplayName());
+					input = PEIApi.getList((List<?>) input);
+					/*Object input_l = PEIApi.getList((List<?>) input);
+					if (input_l == null)
+						continue;
+					
+					input = input_l;*/
+				}
+				
+				PEIApi.LOG.debug("Extended Crafting Compressor: Turning {} into {}", input.getClass(), output.getDisplayName());
+					
+				addConversion(output.getCount(), output, ImmutableMap.of(input, recipe.getInputCount()));
 			}
 		}
-		
-		if (enable_combination_conversions) {
+	}
+	
+	private class ECCombinationMapper extends PEIMapper {
+		public ECCombinationMapper() {
+			super("combination",
+				  "Enable Conbination crafting recipe mapper?");
+		}
+
+		@Override
+		public void setup() {
 			for (CombinationRecipe recipe : CombinationRecipeManager.getInstance().getRecipes()) {
 				ItemStack output = recipe.getOutput();
 				ItemStack input = recipe.getInput();
 				if (output.isEmpty() || input.isEmpty())
 					continue;
 				
-				IngredientMap ingredients = new IngredientMap();
+				IngredientMap<Object> ingredients = new IngredientMap<Object>();
 				
 				ingredients.addIngredient(input, input.getCount());
 				
 				for (Object pedestal : recipe.getPedestalItems()) {
 					if (pedestal instanceof NonNullList<?>)
-						ingredients.addIngredient(Utils.createFromList(proxy, pedestal), 1);
+						ingredients.addIngredient(PEIApi.getList((List<?>) pedestal), 1);
 					else
 						ingredients.addIngredient(pedestal, 1);
 				}
 				
-				proxy.addConversion(output.getCount(), output, ingredients.getMap());
-				//TODO: DEBUG RECIPE LOG
-			}
-		}
-		
-		if (enable_ender_conversions) {
-			for (Object obj : EnderCrafterRecipeManager.getInstance().getRecipes()) {
-				IRecipe recipe = (IRecipe) obj;
-				if (recipe.getRecipeOutput().isEmpty())
-					continue;
-				
-				Utils.addConversion(proxy, recipe);
-				//TODO: DEBUG RECIPE LOG
-			}
-		}
-		
-		if (enable_table_conversions) {
-			for (Object obj : TableRecipeManager.getInstance().getRecipes()) {
-				IRecipe recipe = (IRecipe) obj;
-				if (recipe.getRecipeOutput().isEmpty())
-					continue;
-				
-				Utils.addConversion(proxy, recipe);
-				//TODO: DEBUG RECIPE LOG
+				addConversion(output.getCount(), output, ingredients.getMap());
 			}
 		}
 	}
+	
+	private class ECTableMapper extends PEIMapper {
+		public ECTableMapper() {
+			super("table",
+				  "Enable Ender and Tiered crafting recipe mapper?");
+		}
 
-	@Override
-	public void addBlacklist(IBlacklistProxy proxy) {}
-
-	@Override
-	public void addTransmutation(ITransmutationProxy proxy) {}
+		@Override
+		public void setup() {
+			for (Object recipe : EnderCrafterRecipeManager.getInstance().getRecipes()) {
+				addRecipe((IRecipe) recipe);
+			}
+			
+			for (Object recipe : TableRecipeManager.getInstance().getRecipes()) {
+				addRecipe((IRecipe) recipe);
+			}
+		}
+	}
 }

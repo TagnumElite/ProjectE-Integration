@@ -1,44 +1,47 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.IPlugin;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.other.Utils;
-
+import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.EmpowererRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
-import moze_intel.projecte.api.proxy.IBlacklistProxy;
-import moze_intel.projecte.api.proxy.IConversionProxy;
-import moze_intel.projecte.api.proxy.IEMCProxy;
-import moze_intel.projecte.api.proxy.ITransmutationProxy;
+import de.ellpeck.actuallyadditions.mod.items.InitItems;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.config.Configuration;
 
-@PEIPlugin(modid="actuallyadditions")
-public class PluginActuallyAdditions implements IPlugin {
-	private static boolean enable_empowerer;
-	private static boolean enable_reconstructor;
-	private static boolean enable_crusher;
+@RegPEIPlugin(modid="actuallyadditions")
+public class PluginActuallyAdditions extends PEIPlugin {
+	public PluginActuallyAdditions(String modid, Configuration config) {
+		super(modid, config);
+	}
 	
 	@Override
-	public void addConfig(Configuration config, String category) {
-		enable_empowerer = config.getBoolean("enable_empowerer_conversion", category, true, "Enable Automated EMC conversions for the Empowerer");
-		enable_reconstructor = config.getBoolean("enable_reconstructor_conversion", category, true, "Enable Automated EMC conversions for the Atomic Reconstructor");
-		enable_crusher = config.getBoolean("enable_crusher_conversion", category, true, "Enable Automated EMC conversions for the Crusher");
+	public void setupIntegration() {
+		addEMC(InitItems.itemMisc, 13, 64);
+		addEMC(InitItems.itemCoffeeBean, 64);
+		addEMC(InitItems.itemFoods, 16, 64);
+		addEMC(InitItems.itemMisc, 15, 480);
+		addEMC(InitItems.itemSolidifiedExperience, 863);
+		
+		addMapper(new EmpowererMapper());
+		addMapper(new ReconstructorMapper());
+		addMapper(new CrusherMapper());
 	}
+	
+	private class EmpowererMapper extends PEIMapper {
+		public EmpowererMapper() {
+			super("empowerer",
+				  "");
+		}
 
-	@Override
-	public void addEMC(IEMCProxy proxy) {}
-
-	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addConversions(IConversionProxy proxy) {
-		// Empowerer Recipes
-		if (enable_empowerer) {
+		@Override
+		public void setup() {
 			for (EmpowererRecipe recipe : ActuallyAdditionsAPI.EMPOWERER_RECIPES) {
 				ItemStack output = recipe.getOutput();
 				if (output.isEmpty())
@@ -47,63 +50,81 @@ public class PluginActuallyAdditions implements IPlugin {
 				if (input == Ingredient.EMPTY)
 					continue;
 				
-				IngredientMap ingredients = new IngredientMap();
-				ingredients.addIngredient(Utils.createFromIngredient(proxy, input), 1);
+				IngredientMap<Object> ingredients = new IngredientMap<Object>();
+				ingredients.addIngredient(PEIApi.getIngredient(input), 1);
 				
 				Ingredient stand1 = recipe.getStandOne();
 				if (stand1 != Ingredient.EMPTY)
-					ingredients.addIngredient(Utils.createFromIngredient(proxy, stand1), 1);
+					ingredients.addIngredient(PEIApi.getIngredient(stand1), 1);
 				Ingredient stand2 = recipe.getStandTwo();
 				if (stand2 != Ingredient.EMPTY)
-					ingredients.addIngredient(Utils.createFromIngredient(proxy, stand2), 1);
+					ingredients.addIngredient(PEIApi.getIngredient(stand2), 1);
 				Ingredient stand3 = recipe.getStandThree();
 				if (stand3 != Ingredient.EMPTY)
-					ingredients.addIngredient(Utils.createFromIngredient(proxy, stand3), 1);
+					ingredients.addIngredient(PEIApi.getIngredient(stand3), 1);
 				Ingredient stand4 = recipe.getStandFour();
 				if (stand4 != Ingredient.EMPTY)
-					ingredients.addIngredient(Utils.createFromIngredient(proxy, stand4), 1);
+					ingredients.addIngredient(PEIApi.getIngredient(stand4), 1);
 				
-				proxy.addConversion(output.getCount(), output, ingredients.getMap());
-				Utils.debugRecipe("Empowerer", output, ingredients);
-			}
-		}
-		
-		//Reconstructor Recipes
-		if (enable_reconstructor) {
-			for (LensConversionRecipe recipe : ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES) {
-				ItemStack output = recipe.getOutput();
-				if (output.isEmpty())
-					continue;
-				
-				Ingredient input = recipe.getInput();
-				if (input == Ingredient.EMPTY)
-					continue;
-				
-				proxy.addConversion(output.getCount(), output, ImmutableMap.of(Utils.createFromIngredient(proxy, input), 1));
-				Utils.debugRecipe("Atomic Reconstructor", output, input);
-			}
-		}
-		
-		//Crusher Recipes
-		if (enable_crusher) {
-			for (CrusherRecipe recipe : ActuallyAdditionsAPI.CRUSHER_RECIPES) {
-				ItemStack output = recipe.getOutputOne();
-				if (output.isEmpty())
-					continue;
-				
-				Ingredient input = recipe.getInput();
-				if (input == Ingredient.EMPTY)
-					continue;
-				
-				proxy.addConversion(output.getCount(), output, ImmutableMap.of(Utils.createFromIngredient(proxy, input), 1));
-				Utils.debugRecipe("Crusher", output, input);
+				addConversion(output.getCount(), output, ingredients.getMap());
 			}
 		}
 	}
+		
+	private class ReconstructorMapper extends PEIMapper {
 
-	@Override
-	public void addBlacklist(IBlacklistProxy proxy) {}
+		public ReconstructorMapper() {
+			super("reconstructor",
+				  "");
+		}
 
-	@Override
-	public void addTransmutation(ITransmutationProxy proxy) {}
+		@Override
+		public void setup() {
+			for (LensConversionRecipe recipe : ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES) {
+				ItemStack output = recipe.getOutput();
+				if (output == null || output.isEmpty())
+					continue;
+				
+				Ingredient input = recipe.getInput();
+				if (input == null || input == Ingredient.EMPTY)
+					continue;
+				
+				addConversion(output.getCount(), output, ImmutableMap.of(PEIApi.getIngredient(input), 1));
+			}
+		}
+		
+	}
+	
+	private class CrusherMapper extends PEIMapper {
+	
+		public CrusherMapper() {
+			super("crusher",
+				  "");
+		}
+	
+		@Override
+		public void setup() {
+			for (CrusherRecipe recipe : ActuallyAdditionsAPI.CRUSHER_RECIPES) {
+				ItemStack output = recipe.getOutputOne();
+				if (output == null || output.isEmpty())
+					continue;
+				
+				Ingredient input = recipe.getInput();
+				if (input == null || input == Ingredient.EMPTY)
+					continue;
+				
+				ImmutableMap<Object, Integer> map = ImmutableMap.of(PEIApi.getIngredient(input), 1);
+				
+				addConversion(output.getCount(), output, map);
+				
+				ItemStack output_2 = recipe.getOutputTwo();
+				
+				if (output_2 == null || output_2.isEmpty() || recipe.getSecondChance() < 100)
+					continue;
+				
+				addConversion(output_2.getCount(), output_2, map);
+			}
+		}
+		
+	}
 }

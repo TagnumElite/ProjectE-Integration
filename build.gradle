@@ -18,7 +18,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "${version}"
 group = "com.tagnumelite.projecteintegration"
-archivesBaseName = "ProjectEIntegration-1.12.2"
+archivesBaseName = "ProjectEIntegration ${mc_version}"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -26,7 +26,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2811"
+    version = "${mc_version}-${forge_version}"
     runDir = "run"
     
     mappings = "snapshot_${mcp_version}"
@@ -57,6 +57,8 @@ repositories {
 
 dependencies {
     deobfCompile "projecte:ProjectE:1.12.2:${pe_version}"
+    
+    runtime "mezz.jei:jei_1.12.2:4.14.4.264"
 	
 	deobfCompile "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
@@ -96,19 +98,28 @@ processResources {
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
+	from sourceSets.main.java
     classifier = 'deobf'
 }
 
-task srcJar(type: Jar, dependsOn: classes) {
-    from sourceSets.main.allSource
+task apiJar(type: Jar) {
+    from sourceSets.main.output
+	from sourceSets.main.java
+    classifier = 'api'
+	include 'com/tagnumelite/projecteintegration/api/**'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java
     classifier = 'sources'
 }
 
 jar {}
 
 artifacts {
+    archives apiJar
+    archives sourcesJar
     archives deobfJar
-	archives srcJar
 }
 
 curseforge {
@@ -117,14 +128,17 @@ curseforge {
 		id = "${cf_project}"
 		changelog = "See https://github.com/TagnumElite/ProjectE-Integration/releases"
 		releaseType = "${release_type}"
-		addGameVersion "1.12.2"
+		addGameVersion "${mc_version}"
 		mainArtifact(jar) {
 		  displayName = "ProjectE Integration - ${version}"
 		}
 		addArtifact(deobfJar) {
 		  displayName = "ProjectE Integration (Deobfuscated) - ${version}"
 		}
-		addArtifact(srcJar) {
+		addArtifact(apiJar) {
+		  displayName = "ProjectE Integration (API) - ${version}"
+		}
+		addArtifact(sourcesJar) {
 		  displayName = "ProjectE Integration (Sources) - ${version}"
 		}
 		relations {
@@ -167,7 +181,7 @@ task signDeobfJar(type: SignJar, dependsOn: deobfJar) {
     outputFile = deobfJar.archivePath
 }
 
-task signSrcJar(type: SignJar, dependsOn: srcJar) {
+task signApiJar(type: SignJar, dependsOn: apiJar) {
     onlyIf {
         project.hasProperty('keyStore')
     }
@@ -175,16 +189,30 @@ task signSrcJar(type: SignJar, dependsOn: srcJar) {
     alias = project.findProperty('keyStoreAlias')
     storePass = project.findProperty('keyStorePass')
     keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = srcJar.archivePath
-    outputFile = srcJar.archivePath
+    inputFile = apiJar.archivePath
+    outputFile = apiJar.archivePath
+}
+
+task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = sourcesJar.archivePath
+    outputFile = sourcesJar.archivePath
 }
 
 build.dependsOn signJar
 build.dependsOn signDeobfJar
 build.dependsOn signSrcJar
+build.dependsOn signApiJar
 
 afterEvaluate {
 	tasks["curseforge${cf_project}"].dependsOn.add(signJar)
 	tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
+	tasks["curseforge${cf_project}"].dependsOn.add(signApiJar)
 	tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
 }

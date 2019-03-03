@@ -3,53 +3,36 @@ package com.tagnumelite.projecteintegration.plugins;
 import java.util.Optional;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.IPlugin;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.other.Utils;
-
+import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import appeng.api.AEApi;
 import appeng.api.features.IGrinderRecipe;
 import appeng.api.features.IInscriberRecipe;
 import appeng.api.features.InscriberProcessType;
-import moze_intel.projecte.api.proxy.IBlacklistProxy;
-import moze_intel.projecte.api.proxy.IConversionProxy;
-import moze_intel.projecte.api.proxy.IEMCProxy;
-import moze_intel.projecte.api.proxy.ITransmutationProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@PEIPlugin(modid="appliedenergistics2")
-public class PluginAppliedEnergistics implements IPlugin {
-	private boolean enable_grinder_conversions;
-	private boolean enable_inscriber_conversions;
-	
-	@Override
-	public void addConfig(Configuration config, String category) {
-		enable_grinder_conversions = config.getBoolean("enable_grinder_conversions", category, true, "Enable Grindstone Recipe Conversions");
-		enable_inscriber_conversions = config.getBoolean("enable_inscriber_conversions", category, true, "Enable Inscriber Recipe Conversions");
-	}
-	
-	@Override
-	public void addEMC(IEMCProxy proxy) {}
+@RegPEIPlugin(modid="appliedenergistics2")
+public class PluginAppliedEnergistics extends PEIPlugin {
+	public PluginAppliedEnergistics(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addConversions(IConversionProxy proxy) {
-		if (enable_grinder_conversions) {
-			for (IGrinderRecipe recipe : AEApi.instance().registries().grinder().getRecipes()) {
-				ItemStack output = recipe.getOutput();
-				ItemStack input = recipe.getInput();
-				if (output.isEmpty() || input.isEmpty())
-					continue;
-				
-				proxy.addConversion(output.getCount(), output, ImmutableMap.of((Object) input, input.getCount()));
-				Utils.debugRecipe("Grindstone", output, input);
-			}
+	public void setupIntegration() {
+		addMapper(new InscriberMapper());
+		addMapper(new GrindstoneMapper());
+	}
+	
+	private class InscriberMapper extends PEIMapper {
+
+		public InscriberMapper() {
+			super("inscriber",
+					"");
 		}
-		
-		if (enable_inscriber_conversions) {
+
+		@Override
+		public void setup() {
 			for (IInscriberRecipe recipe : AEApi.instance().registries().inscriber().getRecipes()) {
 				ItemStack output = recipe.getOutput();
 				if (output == null || output.isEmpty())
@@ -59,7 +42,7 @@ public class PluginAppliedEnergistics implements IPlugin {
 				if (input == null || input.isEmpty())
 					continue;
 				
-				IngredientMap ingredients = new IngredientMap();
+				IngredientMap<Object> ingredients = new IngredientMap<Object>();
 				
 				ingredients.addIngredient(input, input.getCount());
 				
@@ -73,15 +56,29 @@ public class PluginAppliedEnergistics implements IPlugin {
 						ingredients.addIngredient(input_bottom.get(), input_bottom.get().getCount());
 				}
 				
-				proxy.addConversion(output.getCount(), output, ingredients.getMap());
-				Utils.debugRecipe("Inscriber", output, ingredients);
+				addConversion(output.getCount(), output, ingredients.getMap());
+			}
+		}	
+	}
+	
+	private class GrindstoneMapper extends PEIMapper {
+
+		public GrindstoneMapper() {
+			super("grindstone",
+					"");
+		}
+
+		@Override
+		public void setup() {
+			for (IGrinderRecipe recipe : AEApi.instance().registries().grinder().getRecipes()) {
+				ItemStack output = recipe.getOutput();
+				ItemStack input = recipe.getInput();
+				if (output.isEmpty() || input.isEmpty())
+					continue;
+				
+				addConversion(output.getCount(), output, ImmutableMap.of((Object) input, input.getCount()));
 			}
 		}
+		
 	}
-
-	@Override
-	public void addBlacklist(IBlacklistProxy proxy) {}
-
-	@Override
-	public void addTransmutation(ITransmutationProxy proxy) {}
 }
