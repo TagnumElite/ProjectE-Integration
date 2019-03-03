@@ -72,6 +72,12 @@ dependencies {
         exclude group: 'codechicken', module: 'CodeChickenLib'
     }
     runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
+	deobfCompile ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+	    exclude group: 'mezz.jei'
+        exclude group: 'codechicken', module: 'CodeChickenLib'
+        exclude group: 'cofh', module: 'RedstoneFlux'
+	}
+    deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
     
     // CurseForge
     deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
