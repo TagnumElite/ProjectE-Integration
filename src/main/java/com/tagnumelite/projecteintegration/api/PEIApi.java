@@ -18,6 +18,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
+/**
+ * ProjectE Integeration API
+ * @author TagnumElite (Tagan Hoyle https://tagnumelite.com)
+ */
 public class PEIApi {
     public static final String MODID = "projecteintegration";
     public static final String APIID = MODID + "api";
@@ -33,9 +37,14 @@ public class PEIApi {
 	public static final ITransmutationProxy transmutation_proxy = ProjectEAPI.getTransmutationProxy();
 
     public static final Logger LOG = LogManager.getLogger(APIID);
+    /**
 	
+    /**
+     * @param ingredient {@code Ingredient} The ingredient to Object from
+     * @return Returns {@code null} if the Ingredient is empty or null
+     */
 	public static Object getIngredient(Ingredient ingredient) {
-		if (ingredient == Ingredient.EMPTY)
+		if (ingredient == null || ingredient == Ingredient.EMPTY)
 			return null;
 		
 		if (INGREDIENT_CACHE.containsKey(ingredient))
