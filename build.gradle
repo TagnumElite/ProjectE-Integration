@@ -81,6 +81,7 @@ dependencies {
     deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
     
     // CurseForge
+	deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
     deobfCompile "armorplus:armorplus:1.12.2:${version_armorplus}"
     runtime "cucumber:Cucumber:1.12.2:${version_cucumber}" //ExtendedCrafting Dependency
     runtime "thedragonlib:thedragonlib:1.12.2:${version_thedragonlib}" //ArmorPlus Dependency

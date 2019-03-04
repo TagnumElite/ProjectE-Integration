@@ -15,16 +15,26 @@ import net.minecraftforge.fluids.FluidStack;
 public abstract class PEIMapper {
 	public final String name;
 	public final String desc;
+	public final boolean disabled_by_default;
 	protected final IConversionProxy conversion_proxy;
-	
+
 	/**
-	 * 
 	 * @param name {@code String} The name of the recipe type
 	 * @param description {@code String} The config comment
 	 */
 	public PEIMapper(String name, String description) {
+		this(name, description, false);
+	}
+
+	/**
+	 * @param name {@code String} The name of the recipe type
+	 * @param description {@code String} The config comment
+	 * @param disableByDefault {@code boolean} Disable by default
+	 */
+	protected PEIMapper(String name, String description, boolean disableByDefault) {
 		this.name = name;
 		this.desc = description;
+		this.disabled_by_default = disableByDefault;
 		this.conversion_proxy = ProjectEAPI.getConversionProxy();
 	}
 	

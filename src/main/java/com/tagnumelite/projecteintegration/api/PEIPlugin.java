@@ -72,7 +72,7 @@ public abstract class PEIPlugin {
 	}
 	
 	protected void addMapper(PEIMapper mapper) {
-		if (config.getBoolean("enable_" + mapper.name.toLowerCase().replace(' ', '_') + "_mapper", category, true, mapper.desc))
+		if (config.getBoolean("enable_" + mapper.name.toLowerCase().replace(' ', '_') + "_mapper", category, !mapper.disabled_by_default, mapper.desc))
 			mapper.setup();
 	}
 }
