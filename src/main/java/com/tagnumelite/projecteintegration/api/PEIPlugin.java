@@ -65,10 +65,16 @@ public abstract class PEIPlugin {
 	}
 	
 	private void setEMC(Object obj, long emc) {
+		if (emc <= 0)
+			return;
+		
 		PEIApi.emc_proxy.registerCustomEMC(obj, emc);
 	}
 	
 	private void setEMC(ItemStack item, long emc) {
+		if (emc <= 0)
+			return;
+		
 		PEIApi.emc_proxy.registerCustomEMC(item, emc);
 	}
 	
