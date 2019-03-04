@@ -78,7 +78,11 @@ dependencies {
         exclude group: 'codechicken', module: 'CodeChickenLib'
         exclude group: 'cofh', module: 'RedstoneFlux'
 	}
+	deobfCompile ("RebornCore:RebornCore-1.12.2:${version_reborncore}:universal") {
+	    exclude group: 'mezz.jei'
+    }
     deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
+	//deobfCompile ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
     
     // CurseForge
 	deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"

@@ -42,8 +42,9 @@ public abstract class PEIPlugin {
 	}
 	
 	/**
-	 * @param item
-	 * @param base_emc
+	 * @param item {@code ItemStack} The item that will be given an EMC value
+	 * @param base_emc {@code int} The Base EMC value, will be overwritten from the config
+	 * @param extra {@code String} Extra text to go into the comment;
 	 */
 	protected void addEMC(ItemStack item, int base_emc, String extra) {
 		setEMC(item, config.getInt("emc_item_" + item.getUnlocalizedName(), category, base_emc, -1, Integer.MAX_VALUE, "Set the EMC for the item '" + item.getDisplayName() + "' " + extra));

@@ -11,5 +11,7 @@ public class Reference {
     		                                         + "after:draconicevolution;"
     		                                         + "after:enderio;"
     		                                         + "after:extendedcrafting;"
-    		                                         + "after:nuclearcraft;";
+    		                                         + "after:nuclearcraft;"
+    		                                         + "after:reborncore;"
+    		                                         + "after:techreborn;";
 }

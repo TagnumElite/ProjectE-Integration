@@ -15,4 +15,12 @@ public class ConfigHelper {
 	public static String getPluginCategory(String modid) {
 		return CATEGORY_PLUGINS + Configuration.CATEGORY_SPLITTER + modid;
 	}
+	
+	public static String getConversionName(String name) {
+		return "enable_" + ConfigHelper.prepareForConfig(name) + "_conversions";
+	}
+	
+	public static String prepareForConfig(String txt) {
+		return txt.toLowerCase().replace(' ', '_');
+	}
 }
