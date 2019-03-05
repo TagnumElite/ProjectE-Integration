@@ -82,7 +82,7 @@ dependencies {
 	    exclude group: 'mezz.jei'
     }
     deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-	//deobfCompile ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
+    deobfCompile "TechReborn:TechReborn-1.12.2:${version_techreborn}:universal"
     
     // CurseForge
 	deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
