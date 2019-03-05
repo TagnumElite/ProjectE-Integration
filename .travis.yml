@@ -4,6 +4,11 @@ dist: trusty
 language: java
 jdk: oraclejdk8
 
+branches:
+  only:
+  - 1.12.x
+  - 1.13.x
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
