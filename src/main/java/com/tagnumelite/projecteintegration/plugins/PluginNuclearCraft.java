@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
@@ -25,18 +24,34 @@ public class PluginNuclearCraft extends PEIPlugin {
 	public PluginNuclearCraft(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		for (Type recipe_type: NCRecipes.Type.values()) {
-			addMapper(new NCRecipeMapper(recipe_type.toString(), recipe_type));
+			addMapper(new NCRecipeMapper(recipe_type));
 		}
 	}
 	
 	private class NCRecipeMapper extends PEIMapper {
 		private Type recipe_type;
 
-		public NCRecipeMapper(String name, Type recipe_type) {
-			super(name, "Enable Recipe mapper for this machine?");
+		public NCRecipeMapper(Type recipe_type) {
+			super(recipe_type.toString(), "Enable Recipe mapper for this machine?");
 			this.recipe_type = recipe_type;
+		}
+		
+		private Object getObjectFromItemIngredient(IItemIngredient item) {
+			Object obj = new Object();
+			for (ItemStack input : item.getInputStackList()) {
+				addConversion(1, obj, ImmutableMap.of((Object) input, input.getCount()));
+			}
+			return obj;
+		}
+		
+		private Object getObjectFromFluidIngredient(IFluidIngredient fluid) {
+			Object obj = new Object();
+			for (FluidStack input : fluid.getInputStackList()) {
+				addConversion(1, obj, ImmutableMap.of((Object) input, input.amount));
+			}
+			return obj;
 		}
 
 		@Override
@@ -91,26 +106,5 @@ public class PluginNuclearCraft extends PEIPlugin {
 				}
 			}
 		}
-		
-	}
-	
-	private Object getObjectFromItemIngredient(IItemIngredient item) {
-		Object obj = new Object();
-		
-		for (ItemStack input : item.getInputStackList()) {
-			PEIApi.conversion_proxy.addConversion(1, obj, ImmutableMap.of((Object) input, input.getCount()));
-		}
-		
-		return obj;
-	}
-	
-	private Object getObjectFromFluidIngredient(IFluidIngredient fluid) {
-		Object obj = new Object();
-		
-		for (FluidStack input : fluid.getInputStackList()) {
-			PEIApi.conversion_proxy.addConversion(1, obj, ImmutableMap.of((Object) input, input.amount));
-		}
-		
-		return obj;
 	}
 }

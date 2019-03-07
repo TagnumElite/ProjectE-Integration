@@ -1,6 +1,5 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,7 @@ import java.util.Map;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-import com.tagnumelite.projecteintegration.utils.ConfigHelper;
+import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
@@ -23,7 +22,7 @@ public class PluginRebornCore extends PEIPlugin {
 	public PluginRebornCore(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new RebornCoreMapper());
 	}
 	

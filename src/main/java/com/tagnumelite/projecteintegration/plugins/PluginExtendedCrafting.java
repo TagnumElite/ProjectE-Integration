@@ -26,7 +26,7 @@ public class PluginExtendedCrafting extends PEIPlugin {
 	}
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new ECCompressorMapper());
 		addMapper(new ECCombinationMapper());
 		addMapper(new ECTableMapper());

@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.api;
 
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-import com.tagnumelite.projecteintegration.utils.ConfigHelper;
+import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public abstract class PEIPlugin {
 	/**
 	 * addEMC and addMapper should be run here
 	 */
-	public abstract void setupIntegration();
+	public abstract void setup();
 	
 	/**
 	 * 
@@ -64,22 +64,15 @@ public abstract class PEIPlugin {
 		setEMC(obj, config.getInt("emc_" + name.toLowerCase(), category, base_emc, -1, Integer.MAX_VALUE, "Set the EMC value for " + name + ' ' + extra));
 	}
 	
-	private void setEMC(Object obj, long emc) {
+	private void setEMC(Object obj, int emc) {
 		if (emc <= 0)
 			return;
 		
-		PEIApi.emc_proxy.registerCustomEMC(obj, emc);
-	}
-	
-	private void setEMC(ItemStack item, long emc) {
-		if (emc <= 0)
-			return;
-		
-		PEIApi.emc_proxy.registerCustomEMC(item, emc);
+		PEIApi.addEMCObject(obj, emc);
 	}
 	
 	protected void addMapper(PEIMapper mapper) {
 		if (config.getBoolean("enable_" + mapper.name.toLowerCase().replace(' ', '_') + "_mapper", category, !mapper.disabled_by_default, mapper.desc))
-			mapper.setup();
+			PEIApi.addMapper(mapper);
 	}
 }

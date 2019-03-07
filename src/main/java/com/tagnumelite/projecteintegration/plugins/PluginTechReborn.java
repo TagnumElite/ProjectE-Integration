@@ -14,7 +14,7 @@ public class PluginTechReborn extends PEIPlugin {
 	public PluginTechReborn(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new RollingMachineMapper());
 	}
 	

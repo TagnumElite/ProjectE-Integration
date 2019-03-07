@@ -18,7 +18,7 @@ public class PluginDraconicEvolution extends PEIPlugin {
 	public PluginDraconicEvolution(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addEMC(DEFeatures.draconiumDust, 8192);
 		addEMC(DEFeatures.dragonHeart, 262144);
 		addEMC(DEFeatures.chaosShard, 1024000);

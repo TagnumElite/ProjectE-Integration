@@ -24,7 +24,7 @@ public class PluginAstralSorcery extends PEIPlugin {
 	public PluginAstralSorcery(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new AltarMapper());
 		addMapper(new GrindstoneMapper());
 		addMapper(new StarlightInfusionMapper());

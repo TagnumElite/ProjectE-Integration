@@ -13,5 +13,6 @@ public class Reference {
     		                                         + "after:extendedcrafting;"
     		                                         + "after:nuclearcraft;"
     		                                         + "after:reborncore;"
-    		                                         + "after:techreborn;";
+    		                                         + "after:techreborn;"
+    		                                         + "after:tconstruct;";
 }

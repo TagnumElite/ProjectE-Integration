@@ -26,7 +26,7 @@ public class PluginAvaritia extends PEIPlugin {
 	}
 	
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addEMC(ModItems.neutron_pile, 128);
 		
 		addMapper(new ExtremeMapper());

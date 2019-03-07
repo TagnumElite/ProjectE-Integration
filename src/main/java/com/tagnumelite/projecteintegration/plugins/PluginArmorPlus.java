@@ -23,7 +23,7 @@ public class PluginArmorPlus extends PEIPlugin {
 	public PluginArmorPlus(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new BenchMapper(BaseCraftingManager.getWBInstance()));
 		addMapper(new BenchMapper(BaseCraftingManager.getUTBInstance()));
 		addMapper(new BenchMapper(BaseCraftingManager.getHTBInstance()));

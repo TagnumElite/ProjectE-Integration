@@ -1,11 +1,16 @@
-package com.tagnumelite.projecteintegration.utils;
+package com.tagnumelite.projecteintegration.api.utils;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHelper {
 	public static final String CATEGORY_GENERAL = "general";
 	public static final String CATEGORY_PLUGINS = "plugins";
 	public static final String CATEGORY_MISC = "misc";
+	
+	public static String getCategory(String...txts) {
+		return String.join(Configuration.CATEGORY_SPLITTER, txts);
+	}
 
 	/**
 	 * 
@@ -14,6 +19,14 @@ public class ConfigHelper {
 	 */
 	public static String getPluginCategory(String modid) {
 		return CATEGORY_PLUGINS + Configuration.CATEGORY_SPLITTER + modid;
+	}
+	
+	public static String getResourceCategory() {
+		return CATEGORY_GENERAL + Configuration.CATEGORY_SPLITTER + "resources";
+	}
+	
+	public static String resourceIntoCFGName(ResourceLocation resource) {
+		return resource.getResourceDomain() + '-' + resource.getResourcePath();
 	}
 	
 	public static String getConversionName(String name) {

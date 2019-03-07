@@ -1,7 +1,6 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +21,6 @@ import crazypants.enderio.base.recipe.RecipeOutput;
 import crazypants.enderio.base.recipe.alloysmelter.AlloyRecipeManager;
 import crazypants.enderio.base.recipe.sagmill.SagMillRecipeManager;
 import crazypants.enderio.base.recipe.slicensplice.SliceAndSpliceRecipeManager;
-import crazypants.enderio.base.recipe.soul.BasicSoulBinderRecipe;
 import crazypants.enderio.base.recipe.soul.ISoulBinderRecipe;
 import crazypants.enderio.base.recipe.vat.VatRecipeManager;
 import moze_intel.projecte.emc.IngredientMap;
@@ -34,9 +32,25 @@ import net.minecraftforge.fluids.FluidStack;
 @RegPEIPlugin(modid="enderio")
 public class PluginEnderIO extends PEIPlugin {
 	public PluginEnderIO(String modid, Configuration config) { super(modid, config); }
+	private List<IMachineRecipe> SOULBINDER_RECIPES;
 	
 	@Override
-	public void setupIntegration() {
+	public void setup() {
+		SOULBINDER_RECIPES = MachineRecipeRegistry.instance.getRecipesForMachine(MachineRecipeRegistry.SOULBINDER).values().stream()
+		.filter(r -> r instanceof ISoulBinderRecipe).collect(Collectors.toList());
+		
+		for (IMachineRecipe sbr : SOULBINDER_RECIPES) {
+			if (sbr instanceof ISoulBinderRecipe) {
+				for (ResourceLocation resource : ((ISoulBinderRecipe) sbr).getSupportedSouls()) {
+					Object soul = PEIApi.getResource(resource);
+					if (soul == null) {
+						int emc = config.getInt("emc_soul_" + resource.getResourcePath(), category, 0, 0, Integer.MAX_VALUE, "EMC for " + resource.toString());
+						PEIApi.addResource(resource, emc);
+					}
+				}
+			}
+		}
+		
 		addMapper(new AlloySmelterMapper());
 		addMapper(new SagMillMapper());
 		addMapper(new SliceAndSpliceMapper());
@@ -175,8 +189,6 @@ public class PluginEnderIO extends PEIPlugin {
 	}
 	
 	private class SoulBinderMapper extends PEIMapper {
-		private final Map<String, Object> ENTITY_MAP = new HashMap<String, Object>();
-		
 		public SoulBinderMapper() {
 			super("Soul Binder",
 				  "");
@@ -184,45 +196,24 @@ public class PluginEnderIO extends PEIPlugin {
 		
 		private Object getObjectFromSoulList(NNList<ResourceLocation> souls) {
 			List<Object> mapped_souls = new ArrayList<Object>();
-			List<Integer> mapped_emc = new ArrayList<Integer>();
 			
-			for (ResourceLocation soul: souls) {
-				String soul_name = soul.getResourcePath();
-				
-				PEIApi.LOG.debug("EnderIO Soul Found: {}", soul_name);
-				
-				if (ENTITY_MAP.containsKey(name)) {
-					mapped_souls.add(ENTITY_MAP.get(soul_name));
+			for (ResourceLocation resource: souls) {
+				Object soul = PEIApi.getResource(resource);
+				if (soul == null)
 					continue;
-				}
-				
-				Object soul_obj = new Object();
-				final int emc = config.getInt("emc_soul_" + soul_name, category, 0, 0, Integer.MAX_VALUE, "EMC value for this entity's soul");
-				mapped_emc.add(emc);
-					
-				PEIApi.emc_proxy.registerCustomEMC(soul_obj, (long) emc);	
-				ENTITY_MAP.put(soul_name, soul_obj);
-			}
-			boolean non = true;
-			for (int emc : mapped_emc) {
-				if (emc > 0)
-					non = false;
 			}
 			
-			if (non)
-				return null; // Return Null when all emc values are 0 or below because the souls haven't been given an emc value
+			if (mapped_souls.isEmpty())
+				return null;
 			else			
 				return PEIApi.getList(mapped_souls);
 		}
 
 		@Override
 		public void setup() {
-			List<IMachineRecipe> recipes = MachineRecipeRegistry.instance.getRecipesForMachine(MachineRecipeRegistry.SOULBINDER).values().stream()
-			.filter(r -> r instanceof ISoulBinderRecipe).collect(Collectors.toList());
-			
-			for (IMachineRecipe machine_recipe : recipes) {
-				if (machine_recipe instanceof BasicSoulBinderRecipe) {
-					BasicSoulBinderRecipe recipe = (BasicSoulBinderRecipe) machine_recipe;
+			for (IMachineRecipe machine_recipe : SOULBINDER_RECIPES) {
+				if (machine_recipe instanceof ISoulBinderRecipe) {
+					ISoulBinderRecipe recipe = (ISoulBinderRecipe) machine_recipe;
 					
 					ItemStack output = recipe.getOutputStack();
 					if (output == null || output.isEmpty())

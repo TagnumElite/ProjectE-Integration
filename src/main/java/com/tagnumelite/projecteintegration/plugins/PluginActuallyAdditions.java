@@ -22,7 +22,7 @@ public class PluginActuallyAdditions extends PEIPlugin {
 	}
 	
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addEMC(InitItems.itemMisc, 13, 64);
 		addEMC(InitItems.itemCoffeeBean, 64);
 		addEMC(InitItems.itemFoods, 16, 64);

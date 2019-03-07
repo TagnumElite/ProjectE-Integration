@@ -19,7 +19,7 @@ public class PluginAppliedEnergistics extends PEIPlugin {
 	public PluginAppliedEnergistics(String modid, Configuration config) { super(modid, config); }
 
 	@Override
-	public void setupIntegration() {
+	public void setup() {
 		addMapper(new InscriberMapper());
 		addMapper(new GrindstoneMapper());
 	}
