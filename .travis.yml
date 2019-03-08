@@ -36,8 +36,8 @@ before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "$GIT_NAME"
   - git config --local user.email "$GIT_EMAIL"
-  - ./gradlew storeVersion && source version.txt
-  - git tag $MOD_VERSION
+  #- ./gradlew storeVersion && source version.txt
+  #- git tag $MOD_VERSION
 
 deploy:
   - provider: pages
