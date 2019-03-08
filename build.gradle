@@ -107,6 +107,7 @@ dependencies {
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
+    deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:1.12.2"
 }
 
@@ -207,6 +208,7 @@ curseforge {
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
+            optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
         }
     }
