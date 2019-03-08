@@ -54,6 +54,7 @@ deploy:
     file: build/libs/*
     skip_cleanup: true
     name: ProjectE Integration v$MOD_VERSION
+    prerelease: true
     on:
       repo: TagnumElite/ProjectE-Integration
       branch: 1.12.x
