@@ -24,20 +24,20 @@ install:
   - "./gradlew setupCIWorkspace -S"
 
 script:
-- "./gradlew build"
+  - "./gradlew build"
 
 after_success:
-- "./gradlew javadoc"
+  - "./gradlew javadoc"
 
 notifications: 
   email: false
 
- before_deploy:
-    # Set up git user name and tag this commit
-    - git config --local user.name "$GIT_NAME"
-    - git config --local user.email "$GIT_EMAIL"
-    - ./gradlew storeVersion && source version.txt
-    - git tag $MOD_VERSION
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "$GIT_NAME"
+  - git config --local user.email "$GIT_EMAIL"
+  - ./gradlew storeVersion && source version.txt
+  - git tag $MOD_VERSION
 
 deploy:
   - provider: pages
