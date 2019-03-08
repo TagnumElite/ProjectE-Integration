@@ -28,6 +28,8 @@ script:
 
 after_success:
   - "./gradlew javadoc"
+  - ./gradlew storeVersion && source version.txt
+  - git tag $MOD_VERSION
 
 notifications: 
   email: false
@@ -36,8 +38,6 @@ before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "$GIT_NAME"
   - git config --local user.email "$GIT_EMAIL"
-  #- ./gradlew storeVersion && source version.txt
-  #- git tag $MOD_VERSION
 
 deploy:
   - provider: pages
@@ -53,6 +53,7 @@ deploy:
     file_glob: true
     file: build/libs/*
     skip_cleanup: true
+    name: ProjectE Integration v$MOD_VERSION
     on:
       repo: TagnumElite/ProjectE-Integration
       branch: 1.12.x
