@@ -7,7 +7,6 @@ jdk: oraclejdk8
 branches:
   only:
   - 1.12.x
-  - 1.13.x
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -22,14 +21,23 @@ cache:
 
 before_install: chmod +x gradlew
 install:
-  - ./gradlew setupCIWorkspace -S
-script:
-  - ./gradlew build
-after_success:
-  - ./gradlew javadoc
+  - "./gradlew setupCIWorkspace -S"
 
-notifications:
-email: false
+script:
+- "./gradlew build"
+
+after_success:
+- "./gradlew javadoc"
+
+notifications: 
+  email: false
+
+ before_deploy:
+    # Set up git user name and tag this commit
+    - git config --local user.name "$GIT_NAME"
+    - git config --local user.email "$GIT_EMAIL"
+    - ./gradlew storeVersion && source version.txt
+    - git tag $MOD_VERSION
 
 deploy:
   - provider: pages
@@ -38,4 +46,13 @@ deploy:
     keep-history: true
     local-dir: ./build/docs/javadoc
     on:
+      repo: TagnumElite/ProjectE-Integration
+      branch: 1.12.x
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: build/libs/*
+    skip_cleanup: true
+    on:
+      repo: TagnumElite/ProjectE-Integration
       branch: 1.12.x
