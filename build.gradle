@@ -102,6 +102,7 @@ dependencies {
     // CurseForge
     deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
     deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
+    deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
@@ -206,6 +207,7 @@ curseforge {
             // From CurseForge Maven
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
+            optionalLibrary 'Compact-Machines'
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'Mystical-Agriculture'

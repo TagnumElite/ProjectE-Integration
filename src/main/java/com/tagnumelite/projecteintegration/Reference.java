@@ -8,6 +8,7 @@ public class Reference {
     		                                         + "after:astralsorcery;"
     		                                         + "after:avaritia;"
     		                                         + "after:botania;"
+    		                                         + "after:compactmachines3;"
     		                                         + "after:draconicevolution;"
     		                                         + "after:enderio;"
     		                                         + "after:extendedcrafting;"
