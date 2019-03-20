@@ -95,7 +95,22 @@ dependencies {
         exclude group: 'mezz.jei'
     }
     deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
+    runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'cofh', module: 'RedstoneFlux'
+    }
+    runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'cofh', module: 'RedstoneFlux'
+    }
     deobfCompile "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
+    deobfCompile ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'codechicken', module: 'CodeChickenLib'
+    }
+    runtime ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
+        exclude group: 'mezz.jei'
+    }
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
     runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
     
@@ -202,6 +217,7 @@ curseforge {
             optionalLibrary 'Draconic-Evolution'
             optionalLibrary 'RebornCore'
             optionalLibrary 'TechReborn'
+            optionalLibrary 'ThermalExpansion'
             optionalLibrary 'Tinkers-Construct'
             
             // From CurseForge Maven
