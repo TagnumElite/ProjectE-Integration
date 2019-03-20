@@ -1,7 +1,5 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import java.util.List;
-
 import com.sofodev.armorplus.api.crafting.IRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseCraftingManager;
 import com.sofodev.armorplus.api.crafting.base.BaseShapedOreRecipe;
@@ -13,14 +11,18 @@ import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
+import java.util.List;
+
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid="armorplus")
+@RegPEIPlugin(modid = "armorplus")
 public class PluginArmorPlus extends PEIPlugin {
-	public PluginArmorPlus(String modid, Configuration config) { super(modid, config); }
+	public PluginArmorPlus(String modid, Configuration config) {
+		super(modid, config);
+	}
 
 	@Override
 	public void setup() {
@@ -29,13 +31,12 @@ public class PluginArmorPlus extends PEIPlugin {
 		addMapper(new BenchMapper(BaseCraftingManager.getHTBInstance()));
 		addMapper(new BenchMapper(BaseCraftingManager.getCBInstance()));
 	}
-	
+
 	private class BenchMapper extends PEIMapper {
 		private final BaseCraftingManager bench;
 
 		public BenchMapper(BaseCraftingManager bench) {
-			super(bench.getName(),
-					"");
+			super(bench.getName(), "");
 			this.bench = bench;
 		}
 
@@ -43,15 +44,15 @@ public class PluginArmorPlus extends PEIPlugin {
 		public void setup() {
 			for (IRecipe raw : bench.getRecipeList()) {
 				ItemStack output = raw.getRecipeOutput();
-				
+
 				if (output == null || output.isEmpty())
 					continue;
-					
+
 				IngredientMap<Object> ingredients = new IngredientMap<Object>();
-				
+
 				boolean oreShaped = raw instanceof BaseShapedOreRecipe;
 				boolean oreShapeless = raw instanceof BaseShapelessOreRecipe;
-					
+
 				if (oreShaped || oreShapeless) {
 					NonNullList<Object> input = NonNullList.create();
 					if (oreShaped) {
@@ -62,7 +63,7 @@ public class PluginArmorPlus extends PEIPlugin {
 					} else if (oreShapeless) {
 						input = ((BaseShapelessOreRecipe) raw).getInput();
 					}
-					
+
 					for (Object i : input) {
 						if (i instanceof NonNullList<?>) {
 							ingredients.addIngredient(PEIApi.getList((List<?>) i), 1);
@@ -72,31 +73,31 @@ public class PluginArmorPlus extends PEIPlugin {
 					}
 				} else if (raw instanceof BaseShapedRecipe) {
 					BaseShapedRecipe recipe = (BaseShapedRecipe) raw;
-						
+
 					NonNullList<ItemStack> input = recipe.getInput();
-						
+
 					addIngredientsFromNonNullList(input, ingredients);
 				} else if (raw instanceof BaseShapelessRecipe) {
 					BaseShapelessRecipe recipe = (BaseShapelessRecipe) raw;
-						
+
 					NonNullList<ItemStack> input = recipe.getInput();
-						
+
 					addIngredientsFromNonNullList(input, ingredients);
 				} else {
 					continue;
 				}
-				
+
 				addConversion(output, ingredients.getMap());
 			}
 		}
-		
 	}
-	
-	private static void addIngredientsFromNonNullList(NonNullList<ItemStack> input, IngredientMap<Object> ingredientMap ) {
+
+	private static void addIngredientsFromNonNullList(NonNullList<ItemStack> input,
+			IngredientMap<Object> ingredientMap) {
 		for (ItemStack item : input) {
 			if (item == null || item.isEmpty())
 				continue;
-			
+
 			ingredientMap.addIngredient(item, item.getCount());
 		}
 	}
