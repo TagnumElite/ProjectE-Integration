@@ -6,7 +6,6 @@ import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraftforge.common.config.Configuration;
 
-@SuppressWarnings("unused")
 @RegPEIPlugin(modid = "thermalexpansion")
 public class PluginThermalExpansion extends PEIPlugin {
 	public PluginThermalExpansion(String modid, Configuration config) {
@@ -48,13 +47,16 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class CentrifugeMapper extends PEIMapper {
 		public CentrifugeMapper() {
-			super("Centrifuge", "!!!TODO!!!");
+			super("Centrifuge", "");
 		}
 
 		@Override
 		public void setup() {
 			for (CentrifugeManager.CentrifugeRecipe recipe : CentrifugeManager.getRecipeList()) {
-				// TODO: TODO
+				if (recipe.getFluid() == null)
+					continue; // TODO: Do this properly
+
+				addRecipe(recipe.getFluid(), recipe.getInput());
 			}
 		}
 	}
@@ -102,13 +104,15 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class EnchanterMapper extends PEIMapper {
 		public EnchanterMapper() {
-			super("Enchanter", "!!!TODO!!!");
+			super("Enchanter", "");
 		}
 
 		@Override
 		public void setup() {
 			for (EnchanterManager.EnchanterRecipe recipe : EnchanterManager.getRecipeList()) {
-				// TODO: TODO
+				addRecipe(recipe.getOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO: Add
+																										// recipe.getExperience()
+																										// EMC
 			}
 		}
 	}
@@ -142,20 +146,32 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (FurnaceManager.FurnaceRecipe recipe : FurnaceManager.getRecipeList(false)) {
-				addRecipe(recipe.getOutput(), recipe.getInput()); // TODO: FurnaceManager.getRecipeList(true)
+				addRecipe(recipe.getOutput(), recipe.getInput());
+			}
+
+			for (FurnaceManager.FurnaceRecipe recipe : FurnaceManager.getRecipeList(true)) {
+				addRecipe(recipe.getOutput(), recipe.getInput()); // TODO: Add Cresoulte output
 			}
 		}
 	}
 
 	private class InsolatorMapper extends PEIMapper {
 		public InsolatorMapper() {
-			super("Insolator", "!!!TODO!!!");
+			super("Insolator", "");
 		}
 
 		@Override
 		public void setup() {
 			for (InsolatorManager.InsolatorRecipe recipe : InsolatorManager.getRecipeList()) {
-				// recipe.getType().STANDARD //TODO: TODO
+				if (recipe.getType() == InsolatorManager.Type.TREE)
+					continue;
+
+				if (recipe.hasFertilizer())
+					continue; // Most recipes with fertilizer is dupe recipes
+
+				addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO:
+																											// Secondary
+																											// outputs
 			}
 		}
 	}
@@ -239,7 +255,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (TransposerManager.TransposerRecipe recipe : TransposerManager.getExtractRecipeList()) {
-				// TODO: Need to figure this one out
+				addRecipe(recipe.getFluid(), recipe.getInput()); //TODO: Make sure, this doesn't contain the bucket recipes
 			}
 
 			for (TransposerManager.TransposerRecipe recipe : TransposerManager.getFillRecipeList()) {
