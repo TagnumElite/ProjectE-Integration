@@ -1,10 +1,13 @@
 package com.tagnumelite.projecteintegration.plugins;
 
 import cofh.thermalexpansion.util.managers.machine.*;
+import cofh.thermalfoundation.init.TFFluids;
+
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.FluidStack;
 
 @RegPEIPlugin(modid = "thermalexpansion")
 public class PluginThermalExpansion extends PEIPlugin {
@@ -29,7 +32,6 @@ public class PluginThermalExpansion extends PEIPlugin {
 		addMapper(new SawmillMapper());
 		addMapper(new SmelterMapper());
 		addMapper(new TransposerMapper());
-
 	}
 
 	private class BrewerMapper extends PEIMapper {
@@ -110,9 +112,8 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (EnchanterManager.EnchanterRecipe recipe : EnchanterManager.getRecipeList()) {
-				addRecipe(recipe.getOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO: Add
-																										// recipe.getExperience()
-																										// EMC
+				addRecipe(recipe.getOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput(),
+						new FluidStack(TFFluids.fluidExperience, recipe.getExperience()));
 			}
 		}
 	}
@@ -150,7 +151,10 @@ public class PluginThermalExpansion extends PEIPlugin {
 			}
 
 			for (FurnaceManager.FurnaceRecipe recipe : FurnaceManager.getRecipeList(true)) {
-				addRecipe(recipe.getOutput(), recipe.getInput()); // TODO: Add Cresoulte output
+				addRecipe(recipe.getOutput(), recipe.getInput());
+
+				if (recipe.getCreosote() > 0)
+					addRecipe(new FluidStack(TFFluids.fluidCreosote, recipe.getCreosote()), recipe.getInput());
 			}
 		}
 	}
@@ -167,7 +171,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 					continue;
 
 				if (recipe.hasFertilizer())
-					continue; // Most recipes with fertilizer is dupe recipes
+					continue; // Most recipes with fertilizer is dupe recipes, ignore those
 
 				addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO:
 																											// Secondary
@@ -255,7 +259,8 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (TransposerManager.TransposerRecipe recipe : TransposerManager.getExtractRecipeList()) {
-				addRecipe(recipe.getFluid(), recipe.getInput()); //TODO: Make sure, this doesn't contain the bucket recipes
+				addRecipe(recipe.getFluid(), recipe.getInput()); // TODO: Make sure, this doesn't contain the bucket
+																	// recipes
 			}
 
 			for (TransposerManager.TransposerRecipe recipe : TransposerManager.getFillRecipeList()) {
