@@ -13,6 +13,7 @@ public class Reference {
                                                      + "after:embers;"
                                                      + "after:enderio;"
                                                      + "after:extendedcrafting;"
+                                                     + "after:forestry;"
                                                      + "after:mysticalagriculture;"
                                                      + "after:nuclearcraft;"
                                                      + "after:reborncore;"
