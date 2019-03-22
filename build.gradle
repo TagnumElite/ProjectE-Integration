@@ -114,7 +114,7 @@ dependencies {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken', module: 'CodeChickenLib'
     }
-    runtime ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
+    deobfCompile ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
@@ -240,6 +240,7 @@ curseforge {
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
+            optionalLibrary 'Thaumcraft'
         }
     }
 }
