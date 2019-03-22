@@ -120,6 +120,7 @@ dependencies {
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
+    deobfCompile "embers-rekindled:EmbersRekindled:${version_embers}"
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
@@ -224,6 +225,7 @@ curseforge {
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Compact-Machines'
+            optionalLibrary 'Embers-Rekindled'
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'Mystical-Agriculture'

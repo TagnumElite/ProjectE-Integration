@@ -10,6 +10,7 @@ public class Reference {
                                                      + "after:botania;"
                                                      + "after:compactmachines3;"
                                                      + "after:draconicevolution;"
+                                                     + "after:embers;"
                                                      + "after:enderio;"
                                                      + "after:extendedcrafting;"
                                                      + "after:mysticalagriculture;"
