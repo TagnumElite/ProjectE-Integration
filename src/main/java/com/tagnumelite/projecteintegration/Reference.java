@@ -19,6 +19,7 @@ public class Reference {
                                                      + "after:nuclearcraft;"
                                                      + "after:reborncore;"
                                                      + "after:techreborn;"
+                                                     + "after:thaumcraft;"
                                                      + "after:thermalexpansion;"
                                                      + "after:tconstruct;";
 }

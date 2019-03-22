@@ -123,6 +123,7 @@ dependencies {
     // CurseForge
     deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
     deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
+    runtime "baubles:Baubles:1.12:1.5.2"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
@@ -132,6 +133,7 @@ dependencies {
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:1.12.2"
+    deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
 }
 
 processResources {
