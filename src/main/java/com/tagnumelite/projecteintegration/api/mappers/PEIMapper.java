@@ -124,7 +124,7 @@ public abstract class PEIMapper {
 
 		Map<Object, Integer> map = ingredients.getMap();
 
-		if (map.isEmpty())
+		if (map == null || map.isEmpty())
 			return;
 
 		addConversion(output_amount, output, map);
@@ -171,7 +171,7 @@ public abstract class PEIMapper {
 	 *            {@code Map<Object, Integer>} The ingredient map
 	 */
 	protected void addConversion(int output_amount, Object output, Map<Object, Integer> input) {
-		if (output_amount <= 0)
+		if (output_amount <= 0 || output == null)
 			return; // TODO: Log Failed output amount
 
 		conversion_proxy.addConversion(output_amount, output, input);

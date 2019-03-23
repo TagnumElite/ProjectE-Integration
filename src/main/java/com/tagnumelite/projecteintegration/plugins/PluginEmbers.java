@@ -21,9 +21,13 @@
  */
 package com.tagnumelite.projecteintegration.plugins;
 
+import java.util.List;
+
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import teamroots.embers.recipe.AlchemyRecipe;
 import teamroots.embers.recipe.DawnstoneAnvilRecipe;
@@ -70,7 +74,11 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (DawnstoneAnvilRecipe recipe : RecipeRegistry.dawnstoneAnvilRecipes) {
-				addRecipe(recipe.result.get(0), recipe.bottom, recipe.top); // TODO: Figure out how todo mutiple output
+				List<ItemStack> outputs = recipe.getOutputs();
+				if (outputs.isEmpty() || outputs.get(0) == null || outputs.get(0) == ItemStack.EMPTY)
+					continue;
+				
+				addRecipe(outputs.get(0), recipe.bottom, recipe.top); // TODO: Figure out how todo mutiple output
 																			// recipes
 			}
 		}
@@ -84,7 +92,11 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (HeatCoilRecipe recipe : RecipeRegistry.heatCoilRecipes) {
-				addRecipe(recipe.getOutputs().get(0), recipe.getInputs()); //TODO: Tell mod author to make input and output public
+				List<ItemStack> outputs = recipe.getOutputs();
+				if (outputs.isEmpty() || outputs.get(0) == null || outputs.get(0) == ItemStack.EMPTY)
+					continue;
+				
+				addRecipe(outputs.get(0), recipe.getInputs()); //TODO: Tell mod author to make input and output public
 			}
 		}
 	}
@@ -110,7 +122,7 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (FluidMixingRecipe recipe : RecipeRegistry.mixingRecipes) {
-				addRecipe(recipe.output, recipe.inputs.toArray());
+				addRecipe(recipe.output.copy(), recipe.inputs.toArray());
 			}
 		}
 	}
@@ -123,7 +135,7 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
-				addRecipe(recipe.result, recipe.input, recipe.fluid);
+				addRecipe(recipe.result.copy(), recipe.input, recipe.fluid);
 			}
 		}
 	}

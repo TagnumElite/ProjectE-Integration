@@ -14,6 +14,7 @@ public class Reference {
                                                      + "after:enderio;"
                                                      + "after:extendedcrafting;"
                                                      + "after:forestry;"
+                                                     + "after:ic2;"
                                                      + "after:immersiveengineering;"
                                                      + "after:mysticalagriculture;"
                                                      + "after:nuclearcraft;"

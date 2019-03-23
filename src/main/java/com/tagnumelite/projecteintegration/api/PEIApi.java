@@ -164,7 +164,7 @@ public class PEIApi {
 	 *
 	 * @param resource
 	 *            {@code ResourceLocation} The resource location of the entity
-	 * @return
+	 * @return The object linked to the resouce
 	 */
 	public static Object getResource(ResourceLocation resource) {
 		return RESOURCE_MAP.get(resource);

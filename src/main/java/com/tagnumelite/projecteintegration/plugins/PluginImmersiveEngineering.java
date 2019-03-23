@@ -9,6 +9,8 @@ import blusunrize.immersiveengineering.api.crafting.IngredientStack;
 import blusunrize.immersiveengineering.api.crafting.MetalPressRecipe;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.common.IEContent;
+import moze_intel.projecte.emc.IngredientMap;
+
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
@@ -17,13 +19,17 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.ClassUtils;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 @RegPEIPlugin(modid = "immersiveengineering")
 public class PluginImmersiveEngineering extends PEIPlugin {
@@ -86,20 +92,26 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 					continue;
 
 				Object input = recipe.input;
-				if (input == null)
+				if (input == null) {
 					continue;
-				else if (input instanceof ItemStack)
+				} else if (input instanceof ItemStack) {
 					if (((ItemStack) input).isEmpty())
 						continue;
-					else if (input instanceof String)
-						input = PEIApi.getList(OreDictionary.getOres((String) input));
-					else if (input instanceof Ingredient)
-						input = PEIApi.getIngredient((Ingredient) input);
-					else
-						continue; // TODO: Log Unknown Input
+				} else if (input instanceof String || input instanceof Item || input instanceof Block) {
+					//DO NOTHING!
+				} else if (input instanceof Ingredient) {
+					input = PEIApi.getIngredient((Ingredient) input);
+				} else if (input instanceof List) {
+					input = PEIApi.getList((List<?>) input);
+				} else {
+					PEIApi.LOG.debug("Coke Oven Mapper: Unknown Input: {}, ({})", input, ClassUtils.getPackageCanonicalName(input.getClass()));
+					continue;
+				}
 
 				if (recipe.creosoteOutput > 0)
-					addConversion(recipe.creosoteOutput, IEContent.fluidCreosote, ImmutableMap.of());
+					addRecipe(recipe.creosoteOutput, IEContent.fluidCreosote, ImmutableMap.of(input, 1));
+
+				PEIApi.LOG.debug("Coke Oven Input: {}", ClassUtils.getPackageCanonicalName(input.getClass()));
 
 				addConversion(output, ImmutableMap.of(input, 1));
 			}
@@ -144,15 +156,45 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 			NonNullList<ItemStack> item_outputs = recipe.getItemOutputs();
 			List<FluidStack> fluid_outputs = recipe.getFluidOutputs();
 
+			IngredientMap<Object> ingredients = new IngredientMap<Object>();
+
+			if (item_inputs != null && !item_inputs.isEmpty()) {
+				for (Ingredient input : item_inputs) {
+					if (input == null || input == Ingredient.EMPTY)
+						continue;
+					
+					ingredients.addIngredient(PEIApi.getIngredient(input), 1);
+				}
+			}
+
+			if (fluid_inputs != null && !fluid_inputs.isEmpty()) {
+				for (FluidStack input : fluid_inputs) {
+					if (input.amount <= 0)
+						continue;
+
+					ingredients.addIngredient(input, input.amount);
+				}
+			}
+
+			Map<Object, Integer> input_map = ingredients.getMap();
+			if (input_map == null || input_map.isEmpty())
+				return;
+
 			if (item_outputs != null && !item_outputs.isEmpty()) {
 				for (ItemStack output : item_outputs) {
-					addRecipe(output, fluid_inputs.toArray(), item_inputs.toArray());
+					if (output == null || output.isEmpty())
+						continue;
+
+					addConversion(output, input_map);
 				}
 			}
 
 			if (fluid_outputs != null && !fluid_outputs.isEmpty()) {
 				for (FluidStack output : fluid_outputs) {
-					addRecipe(output, fluid_inputs.toArray(), item_inputs.toArray());
+					if (output == null || output.amount == 0)
+						continue;
+
+					addConversion(output, input_map);
 				}
 			}
 		}
