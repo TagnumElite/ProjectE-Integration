@@ -7,6 +7,7 @@ public class Reference {
                                                      + "after:armorplus;"
                                                      + "after:astralsorcery;"
                                                      + "after:avaritia;"
+                                                     + "after:bloodmagic;"
                                                      + "after:botania;"
                                                      + "after:compactmachines3;"
                                                      + "after:draconicevolution;"

@@ -127,6 +127,7 @@ dependencies {
     deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
     deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
     runtime "baubles:Baubles:1.12:1.5.2"
+    deobfCompile "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     deobfCompile "embers-rekindled:EmbersRekindled:${version_embers}"
@@ -134,6 +135,7 @@ dependencies {
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
     deobfCompile "extrabotany:ExtraBotany:${version_extrabotany}"
+    runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic Dependency
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:${mc_version}"
     deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
@@ -239,10 +241,12 @@ curseforge {
             // From CurseForge Maven
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
+            optionalLibrary 'Blood-Magic'
             optionalLibrary 'Compact-Machines'
             optionalLibrary 'Embers-Rekindled'
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
+            optionalLibrary 'ExtraBotany'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
             optionalLibrary 'Thaumcraft'
