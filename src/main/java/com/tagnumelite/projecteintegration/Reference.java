@@ -13,6 +13,7 @@ public class Reference {
                                                      + "after:embers;"
                                                      + "after:enderio;"
                                                      + "after:extendedcrafting;"
+                                                     + "after:extrabotany;"
                                                      + "after:forestry;"
                                                      + "after:ic2;"
                                                      + "after:immersiveengineering;"

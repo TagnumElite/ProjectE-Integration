@@ -129,14 +129,15 @@ dependencies {
     runtime "baubles:Baubles:1.12:1.5.2"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
-    runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
     deobfCompile "embers-rekindled:EmbersRekindled:${version_embers}"
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
+    deobfCompile "extrabotany:ExtraBotany:${version_extrabotany}"
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
-    deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:1.12.2"
+    deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:${mc_version}"
     deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
+    runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
 }
 
 processResources {
@@ -196,7 +197,7 @@ artifacts {
 }
 
 runClient {
-    jvmArgs "-Xmx4G", "-Xms4G"
+    jvmArgs "-Xmx6G", "-Xms6G"
 }
 
 curseforge {
