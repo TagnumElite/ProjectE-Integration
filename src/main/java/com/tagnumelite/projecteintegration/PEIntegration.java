@@ -124,7 +124,7 @@ public class PEIntegration {
 		final long startTime = System.currentTimeMillis();
 
 		for (PEIMapper mapper : PEIApi.getMappers()) {
-			PEIApi.LOG.debug("Running Mapper: {} ()", mapper.name, mapper);
+			PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
 			mapper.setup();
 		}
 
