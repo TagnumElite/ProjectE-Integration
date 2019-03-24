@@ -135,7 +135,7 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
-				addRecipe(recipe.result.copy(), recipe.input, recipe.fluid);
+				addRecipe(recipe.result.copy(), recipe.getInputs(), recipe.getFluid());
 			}
 		}
 	}

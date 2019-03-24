@@ -128,6 +128,7 @@ dependencies {
     deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
     runtime "baubles:Baubles:1.12:1.5.2"
     deobfCompile "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
+    deobfCompile "calculator:calculator-${mc_version}:${version_calculator}"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     deobfCompile "embers-rekindled:EmbersRekindled:${version_embers}"
@@ -138,6 +139,7 @@ dependencies {
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic Dependency
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:${mc_version}"
+    deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
     deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
 }
@@ -242,6 +244,7 @@ curseforge {
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Blood-Magic'
+            optionalLibrary 'Calculator'
             optionalLibrary 'Compact-Machines'
             optionalLibrary 'Embers-Rekindled'
             optionalLibrary 'Ender-IO'

@@ -9,6 +9,7 @@ public class Reference {
                                                      + "after:avaritia;"
                                                      + "after:bloodmagic;"
                                                      + "after:botania;"
+                                                     + "after:calculator;"
                                                      + "after:compactmachines3;"
                                                      + "after:draconicevolution;"
                                                      + "after:embers;"

@@ -34,8 +34,8 @@ public class PEIApi {
 	public static final String NAME = "ProjectE Integration";
 	public static final String VERSION = "@VERSION@";
 
-	public static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<Ingredient, Object>();
-	public static final Map<List<?>, Object> LIST_CACHE = new HashMap<List<?>, Object>();
+	private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<Ingredient, Object>();
+	private static final Map<List<?>, Object> LIST_CACHE = new HashMap<List<?>, Object>();
 
 	public static final Logger LOG = LogManager.getLogger(APIID);
 

@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -123,6 +124,7 @@ public class PEIntegration {
 		final long startTime = System.currentTimeMillis();
 
 		for (PEIMapper mapper : PEIApi.getMappers()) {
+			PEIApi.LOG.debug("Running Mapper: {} ()", mapper.name, mapper);
 			mapper.setup();
 		}
 

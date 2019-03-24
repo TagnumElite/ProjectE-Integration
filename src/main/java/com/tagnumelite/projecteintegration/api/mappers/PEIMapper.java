@@ -5,6 +5,8 @@ import com.tagnumelite.projecteintegration.api.PEIApi;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ClassUtils;
+
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.emc.IngredientMap;
@@ -101,7 +103,8 @@ public abstract class PEIMapper {
 					continue;
 
 				ingredients.addIngredient(input, ((ItemStack) input).getCount());
-			} else if (input instanceof Item || input instanceof Block || input instanceof String) {
+			} else if (input instanceof Item || input instanceof Block || input instanceof String
+					|| input.getClass().equals(Object.class)) {
 				ingredients.addIngredient(input, 1);
 			} else if (input instanceof FluidStack) {
 				if (((FluidStack) input).amount <= 0)
@@ -118,16 +121,13 @@ public abstract class PEIMapper {
 
 				ingredients.addIngredient(PEIApi.getIngredient((Ingredient) input), 1);
 			} else {
-				continue; // TODO: Log Unknown Item
+				PEIApi.LOG.warn("Unknown Input: {} () for {}", input,
+						ClassUtils.getPackageCanonicalName(input.getClass()), output);
+				continue;
 			}
 		}
 
-		Map<Object, Integer> map = ingredients.getMap();
-
-		if (map == null || map.isEmpty())
-			return;
-
-		addConversion(output_amount, output, map);
+		addConversion(output_amount, output, ingredients.getMap());
 	}
 
 	/**
@@ -139,8 +139,10 @@ public abstract class PEIMapper {
 	 *            The {@code Map<Object, Integer>} that contains the ingredients
 	 */
 	protected void addConversion(ItemStack item, Map<Object, Integer> input) {
-		if (item == null || item.isEmpty())
-			return; // TODO: Log Failed Item
+		if (item == null || item.isEmpty()) {
+			PEIApi.LOG.warn("Output Item is either null or Empty: {} from {}", item, input);
+			return;
+		}
 
 		addConversion(item.getCount(), item, input);
 	}
@@ -154,8 +156,10 @@ public abstract class PEIMapper {
 	 *            The {@code Map} that contains the ingredients
 	 */
 	protected void addConversion(FluidStack fluid, Map<Object, Integer> input) {
-		if (fluid == null || fluid.amount == 0)
-			return; // TODO: Log Failed Fluid
+		if (fluid == null || fluid.amount == 0) {
+			PEIApi.LOG.warn("Output Fluid is either null or Empty: {} from {}", fluid, input);
+			return;
+		}
 
 		addConversion(fluid.amount, fluid, input);
 	}
@@ -171,8 +175,11 @@ public abstract class PEIMapper {
 	 *            {@code Map<Object, Integer>} The ingredient map
 	 */
 	protected void addConversion(int output_amount, Object output, Map<Object, Integer> input) {
-		if (output_amount <= 0 || output == null)
-			return; // TODO: Log Failed output amount
+		if (output_amount <= 0 || output == null || input == null || input.isEmpty()) {
+			PEIApi.LOG.warn("Invalid Conversion: [{} ({})]*{} from {}", output,
+					ClassUtils.getPackageCanonicalName(output.getClass()), output_amount, input);
+			return;
+		}
 
 		conversion_proxy.addConversion(output_amount, output, input);
 	}
