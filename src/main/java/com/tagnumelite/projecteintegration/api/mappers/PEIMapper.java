@@ -1,8 +1,8 @@
 package com.tagnumelite.projecteintegration.api.mappers;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.utils.Utils;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ClassUtils;
@@ -10,8 +10,6 @@ import org.apache.commons.lang3.ClassUtils;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -76,7 +74,7 @@ public abstract class PEIMapper {
 
 	protected void addRecipe(ItemStack output, Object... inputs) {
 		if (output == null || output.isEmpty())
-			return;
+			return; // TODO: Logging
 
 		addRecipe(output.getCount(), output, inputs);
 	}
@@ -89,45 +87,11 @@ public abstract class PEIMapper {
 	}
 
 	protected void addRecipe(int output_amount, Object output, Object... inputs) {
-		if (output_amount <= 0 || output == null || inputs == null || inputs.length <= 0)
-			return;
-
-		IngredientMap<Object> ingredients = new IngredientMap<Object>();
-
-		for (Object input : inputs) {
-			if (input == null)
-				continue;
-
-			if (input instanceof ItemStack) {
-				if (((ItemStack) input).isEmpty())
-					continue;
-
-				ingredients.addIngredient(input, ((ItemStack) input).getCount());
-			} else if (input instanceof Item || input instanceof Block || input instanceof String
-					|| input.getClass().equals(Object.class)) {
-				ingredients.addIngredient(input, 1);
-			} else if (input instanceof FluidStack) {
-				if (((FluidStack) input).amount <= 0)
-					continue;
-				ingredients.addIngredient(input, ((FluidStack) input).amount);
-			} else if (input instanceof List) {
-				if (((List<?>) input).isEmpty())
-					continue;
-
-				ingredients.addIngredient(PEIApi.getList((List<?>) input), 1);
-			} else if (input instanceof Ingredient) {
-				if (input == Ingredient.EMPTY)
-					continue;
-
-				ingredients.addIngredient(PEIApi.getIngredient((Ingredient) input), 1);
-			} else {
-				PEIApi.LOG.warn("Unknown Input: {} () for {}", input,
-						ClassUtils.getPackageCanonicalName(input.getClass()), output);
-				continue;
-			}
+		if (output_amount <= 0 || output == null || inputs == null || inputs.length <= 0) {
+			return; // TODO: Logging
 		}
 
-		addConversion(output_amount, output, ingredients.getMap());
+		addConversion(output_amount, output, Utils.createInputs(inputs).getMap());
 	}
 
 	/**
@@ -176,11 +140,16 @@ public abstract class PEIMapper {
 	 */
 	protected void addConversion(int output_amount, Object output, Map<Object, Integer> input) {
 		if (output_amount <= 0 || output == null || input == null || input.isEmpty()) {
-			PEIApi.LOG.warn("Invalid Conversion: [{} ({})]*{} from {}", output,
+			Object output_l = output;
+			if (output instanceof FluidStack)
+				output_l = ((FluidStack) output).getFluid().getName();
+
+			PEIApi.LOG.warn("Invalid Conversion: [{} ({})]*{} from {}", output_l,
 					ClassUtils.getPackageCanonicalName(output.getClass()), output_amount, input);
 			return;
 		}
 
 		conversion_proxy.addConversion(output_amount, output, input);
+		PEIApi.mapped_conversions += 1;
 	}
 }

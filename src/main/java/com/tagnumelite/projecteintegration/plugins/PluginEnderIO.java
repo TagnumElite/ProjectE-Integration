@@ -20,14 +20,11 @@ import crazypants.enderio.base.recipe.vat.VatRecipeManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.FluidStack;
 
 @RegPEIPlugin(modid = "enderio")
 public class PluginEnderIO extends PEIPlugin {
@@ -62,62 +59,21 @@ public class PluginEnderIO extends PEIPlugin {
 		addMapper(new SoulBinderMapper());
 	}
 
-	private IngredientMap<Object> getIngredientsFromNNList(NNList<List<ItemStack>> list) {
-		if (list == null || list.isEmpty())
-			return null;
-
-		IngredientMap<Object> ingredients = new IngredientMap<Object>();
-
-		list.forEach(input -> {
-			ingredients.addIngredient(PEIApi.getList(input), 1);
-		});
-
-		return ingredients;
-	}
-
 	private abstract class IRecipeMapper extends PEIMapper {
 		public IRecipeMapper(String name, String description) {
 			super(name, description);
 		}
 
 		protected void addRecipe(IRecipe recipe) {
-			RecipeOutput[] outputs = recipe.getOutputs();
-			if (outputs == null || outputs.length == 0)
-				return;
-
-			List<ItemStack> items_out = new ArrayList<ItemStack>();
-			List<FluidStack> fluids_out = new ArrayList<FluidStack>();
-
-			for (RecipeOutput output : outputs) {
-				if (output.getChance() < 1F)
+			for (RecipeOutput output : recipe.getOutputs()) {
+				if (output.getChance() < 1F || !output.isValid())
 					continue;
-
-				if (!output.isValid())
-					continue;
-
-				if (!output.isFluid())
-					fluids_out.add(output.getFluidOutput());
-				else
-					items_out.add(output.getOutput());
-			}
-
-			recipe.getInputFluidStacks();
-			recipe.getInputs();
-
-			IngredientMap<Object> ingredients = getIngredientsFromNNList(recipe.getInputStackAlternatives());
-			Map<Object, Integer> ing_map = ingredients.getMap();
-			if (ingredients == null || ing_map.isEmpty())
-				return;
-
-			if (items_out.isEmpty() && fluids_out.isEmpty())
-				return; // TODO: Log Incorrect Recipe
-
-			for (ItemStack item : items_out) {
-				addConversion(item, ing_map);
-			}
-
-			for (FluidStack fluid : fluids_out) {
-				addConversion(fluid, ing_map);
+				
+				if (output.getFluidOutput() != null)
+					addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+				
+				if (output.getOutput() != null)
+					addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
 			}
 		}
 	}
@@ -128,15 +84,7 @@ public class PluginEnderIO extends PEIPlugin {
 		}
 
 		protected void addRecipe(IManyToOneRecipe recipe) {
-			ItemStack output = recipe.getOutput();
-			if (output == null || output.isEmpty())
-				return;
-
-			IngredientMap<Object> ingredients = getIngredientsFromNNList(recipe.getInputStackAlternatives());
-			if (ingredients == null || ingredients.getMap().isEmpty())
-				return;
-
-			addConversion(output, ingredients.getMap());
+			addRecipe(recipe.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
 		}
 	}
 

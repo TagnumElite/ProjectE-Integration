@@ -16,22 +16,20 @@ public class PluginSonarCore {
 		}
 
 		protected void addRecipe(DefaultSonarRecipe recipe) {
-			List<Object> inputs = new ArrayList<Object>();
-			List<List<ItemStack>> inputt = new ArrayList<>();
+			List<Object> inputs = new ArrayList<>();
 
 			for (ISonarRecipeObject input : recipe.inputs()) {
-				inputs.add(PEIApi.getList(input.getJEIValue()));
-				inputt.add(input.getJEIValue());
+				if (input.getJEIValue().size() == 1)
+					inputs.add(input.getJEIValue().get(0));
+				else
+					inputs.add(input.getJEIValue());
 			}
 
-			for (ISonarRecipeObject object_output : recipe.outputs()) {
-				ItemStack output = object_output.getJEIValue().stream().findFirst().orElse(ItemStack.EMPTY);
-				if (output.isEmpty())
-					continue;
+			for (ISonarRecipeObject outputs : recipe.outputs()) {
+				for (ItemStack output : outputs.getJEIValue()) {
+					addRecipe(output, inputs.stream().toArray());
 
-				addRecipe(output, inputt.stream().toArray());
-				
-				PEIApi.LOG.debug("Default Sonar Recipe: {} -> {}", inputt, output);
+				}
 			}
 		}
 	}

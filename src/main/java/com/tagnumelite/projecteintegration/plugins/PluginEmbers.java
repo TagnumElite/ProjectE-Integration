@@ -21,8 +21,6 @@
  */
 package com.tagnumelite.projecteintegration.plugins;
 
-import java.util.List;
-
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
@@ -74,16 +72,12 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (DawnstoneAnvilRecipe recipe : RecipeRegistry.dawnstoneAnvilRecipes) {
-				List<ItemStack> outputs = recipe.getOutputs();
-				if (outputs.isEmpty() || outputs.get(0) == null || outputs.get(0) == ItemStack.EMPTY)
-					continue;
-				
-				addRecipe(outputs.get(0), recipe.bottom, recipe.top); // TODO: Figure out how todo mutiple output
-																			// recipes
+				addRecipe(recipe.getOutputs().stream().findFirst().orElse(ItemStack.EMPTY), recipe.bottom, recipe.top);
+				// TODO: Figure out how to do multiple output recipes
 			}
 		}
 	}
-	
+
 	private class HeatingCoilMapper extends PEIMapper {
 		public HeatingCoilMapper() {
 			super("Heating Coil", "");
@@ -92,11 +86,8 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (HeatCoilRecipe recipe : RecipeRegistry.heatCoilRecipes) {
-				List<ItemStack> outputs = recipe.getOutputs();
-				if (outputs.isEmpty() || outputs.get(0) == null || outputs.get(0) == ItemStack.EMPTY)
-					continue;
-				
-				addRecipe(outputs.get(0), recipe.getInputs()); //TODO: Tell mod author to make input and output public
+				addRecipe(recipe.getOutputs().stream().findFirst().orElse(ItemStack.EMPTY), recipe.getInputs());
+				// TODO: Tell mod author to make input and output public
 			}
 		}
 	}
@@ -109,7 +100,7 @@ public class PluginEmbers extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (ItemMeltingRecipe recipe : RecipeRegistry.meltingRecipes) {
-				addRecipe(recipe.fluid, recipe.input);
+				addRecipe(recipe.getFluid(), recipe.getInput());
 			}
 		}
 	}

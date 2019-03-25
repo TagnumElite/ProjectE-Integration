@@ -12,10 +12,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import moze_intel.projecte.api.ProjectEAPI;
-import moze_intel.projecte.api.proxy.IBlacklistProxy;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
-import moze_intel.projecte.api.proxy.ITransmutationProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -39,19 +37,19 @@ public class PEIApi {
 
 	public static final Logger LOG = LogManager.getLogger(APIID);
 
-	@SuppressWarnings("unused")
-	private static final IBlacklistProxy blacklist_proxy = ProjectEAPI.getBlacklistProxy();
-
+	// private static final IBlacklistProxy blacklist_proxy =
+	// ProjectEAPI.getBlacklistProxy();
 	private static final IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
 	public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
-
-	@SuppressWarnings("unused")
-	private static final ITransmutationProxy transmutation_proxy = ProjectEAPI.getTransmutationProxy();
+	// private static final ITransmutationProxy transmutation_proxy =
+	// ProjectEAPI.getTransmutationProxy();
 
 	private static final Set<PEIMapper> MAPPERS = new HashSet<>();
 	private static boolean LOCK_EMC_MAPPER = false;
 	private static final Map<Object, Integer> EMC_MAPPERS = new HashMap<>();
 	private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
+
+	public static int mapped_conversions = 0;
 
 	/**
 	 * @param mapper

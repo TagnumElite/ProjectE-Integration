@@ -107,6 +107,7 @@ public class PEIntegration {
 		}
 
 		PEIApi.registerEMCObjects();
+		LOG.info("Added {} Mappers", PEIApi.getMappers().size());
 
 		if (config.hasChanged())
 			config.save();
@@ -127,6 +128,8 @@ public class PEIntegration {
 			PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
 			mapper.setup();
 		}
+		
+		LOG.info("Added {} Conversions", PEIApi.mapped_conversions);
 
 		if (config.hasChanged())
 			config.save();
