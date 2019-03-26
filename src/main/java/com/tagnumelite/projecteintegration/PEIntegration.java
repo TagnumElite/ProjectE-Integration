@@ -103,7 +103,12 @@ public class PEIntegration {
 		final long startTime = System.currentTimeMillis();
 
 		for (PEIPlugin plugin : PLUGINS) {
-			plugin.setup();
+			PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
+			try {
+				plugin.setup();
+			} catch (Exception e) {
+				LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, e);
+			}
 		}
 
 		PEIApi.registerEMCObjects();
@@ -126,7 +131,11 @@ public class PEIntegration {
 
 		for (PEIMapper mapper : PEIApi.getMappers()) {
 			PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
-			mapper.setup();
+			try {
+				mapper.setup();
+			} catch (Exception e) {
+				LOG.error("Mapper '{}' Failed to run: {}", mapper.desc, e);
+			}
 		}
 		
 		LOG.info("Added {} Conversions", PEIApi.mapped_conversions);
