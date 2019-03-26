@@ -149,7 +149,11 @@ public abstract class PEIMapper {
 			return;
 		}
 
-		conversion_proxy.addConversion(output_amount, output, input);
-		PEIApi.mapped_conversions += 1;
+		try {
+			conversion_proxy.addConversion(output_amount, output, input);
+			PEIApi.mapped_conversions += 1;
+		} catch (Exception e) {
+			PEIApi.LOG.error("Failed to add conversion: {}*{} from {}; {}", output, output_amount, input, e);
+		}
 	}
 }

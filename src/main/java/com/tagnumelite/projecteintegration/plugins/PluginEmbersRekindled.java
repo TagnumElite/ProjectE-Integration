@@ -36,8 +36,8 @@ import teamroots.embers.recipe.ItemStampingRecipe;
 import teamroots.embers.recipe.RecipeRegistry;
 
 @RegPEIPlugin(modid = "embers")
-public class PluginEmbers extends PEIPlugin {
-	public PluginEmbers(String modid, Configuration config) {
+public class PluginEmbersRekindled extends PEIPlugin {
+	public PluginEmbersRekindled(String modid, Configuration config) {
 		super(modid, config);
 	}
 
