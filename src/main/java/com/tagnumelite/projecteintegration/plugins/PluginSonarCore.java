@@ -2,7 +2,6 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraft.item.ItemStack;

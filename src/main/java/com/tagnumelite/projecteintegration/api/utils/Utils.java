@@ -16,6 +16,20 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
 public class Utils {
+	/**
+	 * Compare {@code ItemStack}s against each other
+	 * 
+	 * @param stack1
+	 *            {@code ItemStack} The stack to compare against
+	 * @param stack2
+	 *            {@code ItemStack} The stack to compare with
+	 * @return {@code boolean} Wether or not they are the same item
+	 */
+	public static boolean isSameItem(ItemStack stack1, ItemStack stack2) {
+		return stack2.getItem() == stack1.getItem()
+				&& (stack2.getItemDamage() == 32767 || stack2.getItemDamage() == stack1.getItemDamage());
+	}
+
 	public static IngredientMap<Object> createInputs(Object... inputs) {
 		return getInputsFirst(new IngredientMap<Object>(), inputs);
 	}
