@@ -76,14 +76,14 @@ public abstract class PEIMapper {
 		if (output == null || output.isEmpty())
 			return; // TODO: Logging
 
-		addRecipe(output.getCount(), output, inputs);
+		addRecipe(output.getCount(), output.copy(), inputs);
 	}
 
 	protected void addRecipe(FluidStack output, Object... inputs) {
 		if (output == null || output.amount <= 0)
 			return;
 
-		addRecipe(output.amount, output, inputs);
+		addRecipe(output.amount, output.copy(), inputs);
 	}
 
 	protected void addRecipe(int output_amount, Object output, Object... inputs) {
@@ -108,7 +108,7 @@ public abstract class PEIMapper {
 			return;
 		}
 
-		addConversion(item.getCount(), item, input);
+		addConversion(item.getCount(), item.copy(), input);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class PEIMapper {
 			return;
 		}
 
-		addConversion(fluid.amount, fluid, input);
+		addConversion(fluid.amount, fluid.copy(), input);
 	}
 
 	/**

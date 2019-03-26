@@ -5,6 +5,7 @@ import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 
 public abstract class PEIPlugin {
 	public final String modid;
@@ -19,6 +20,13 @@ public abstract class PEIPlugin {
 
 	/** addEMC and addMapper should be run here */
 	public abstract void setup();
+	
+	protected void addEMC(String ore, int base_emc, String extra) {
+		int emc = config.getInt("emc_ore_" + ore, category, base_emc, -1, Integer.MAX_VALUE, extra);
+		for (ItemStack item : OreDictionary.getOres(ore)) {
+			setEMC(item, emc);
+		}
+	}
 
 	/**
 	 * @param item
@@ -50,6 +58,9 @@ public abstract class PEIPlugin {
 	 *            {@code String} Extra text to go into the comment;
 	 */
 	protected void addEMC(ItemStack item, int base_emc, String extra) {
+		if (item == null)
+			return;
+		
 		setEMC(item, config.getInt("emc_item_" + item.getUnlocalizedName(), category, base_emc, -1, Integer.MAX_VALUE,
 				"Set the EMC for the item '" + item.getDisplayName() + "' " + extra));
 	}
@@ -69,12 +80,15 @@ public abstract class PEIPlugin {
 	 *            {@code String} Extra information to be added to the comment.
 	 */
 	protected void addEMC(String name, Object obj, int base_emc, String extra) {
+		if (obj == null)
+			return;
+		
 		setEMC(obj, config.getInt("emc_" + name.toLowerCase(), category, base_emc, -1, Integer.MAX_VALUE,
 				"Set the EMC value for " + name + ' ' + extra));
 	}
 
 	private void setEMC(Object obj, int emc) {
-		if (emc <= 0)
+		if (emc <= 0 || obj == null)
 			return;
 
 		PEIApi.addEMCObject(obj, emc);

@@ -252,6 +252,7 @@ curseforge {
             optionalLibrary 'ExtraBotany'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
+            optionalLibrary 'Pams-HarvestCraft'
             optionalLibrary 'Thaumcraft'
         }
     }
