@@ -215,13 +215,13 @@ curseforge {
           displayName = "ProjectE Integration - ${version}"
         }
         addArtifact(deobfJar) {
-          displayName = "ProjectE Integration (Deobfuscated) - ${version}"
+          displayName = "ProjectE Integration - ${version} - deobf"
         }
         addArtifact(apiJar) {
-          displayName = "ProjectE Integration (API) - ${version}"
+          displayName = "ProjectE Integration - ${version} - api"
         }
         addArtifact(sourcesJar) {
-          displayName = "ProjectE Integration (Sources) - ${version}"
+          displayName = "ProjectE Integration - ${version} - sources"
         }
         relations {
             requiredDependency 'ProjectE'
