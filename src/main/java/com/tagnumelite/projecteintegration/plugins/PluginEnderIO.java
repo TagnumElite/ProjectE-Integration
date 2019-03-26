@@ -152,6 +152,8 @@ public class PluginEnderIO extends PEIPlugin {
 				Object soul = PEIApi.getResource(resource);
 				if (soul == null)
 					continue;
+				
+				mapped_souls.add(soul);
 			}
 
 			if (mapped_souls.isEmpty())
