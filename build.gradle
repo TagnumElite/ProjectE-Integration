@@ -129,6 +129,7 @@ dependencies {
     runtime "baubles:Baubles:1.12:1.5.2"
     deobfCompile "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
     deobfCompile "calculator:calculator-${mc_version}:${version_calculator}"
+	deobfCompile "charset-lib:Charset:Lib:${version_charsetlib}"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
     //deobfCompile "embers-rekindled:EmbersRekindled:${version_embersrekindled}" //Switch to embers
