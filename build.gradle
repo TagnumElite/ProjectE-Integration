@@ -131,7 +131,7 @@ dependencies {
     deobfCompile "calculator:calculator-${mc_version}:${version_calculator}"
     deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
-    deobfCompile "embers-rekindled:EmbersRekindled:${version_embers}"
+    //deobfCompile "embers-rekindled:EmbersRekindled:${version_embersrekindled}" //Switch to embers
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
@@ -142,6 +142,7 @@ dependencies {
     deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
     deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
+	deobfCompile "embers:embers:${version_embers}"
 }
 
 processResources {
@@ -246,7 +247,7 @@ curseforge {
             optionalLibrary 'Blood-Magic'
             optionalLibrary 'Calculator'
             optionalLibrary 'Compact-Machines'
-            optionalLibrary 'Embers-Rekindled'
+            optionalLibrary 'Embers'
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'ExtraBotany'

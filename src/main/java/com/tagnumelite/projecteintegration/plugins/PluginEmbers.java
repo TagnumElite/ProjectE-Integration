@@ -25,27 +25,22 @@ import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import teamroots.embers.recipe.AlchemyRecipe;
-import teamroots.embers.recipe.DawnstoneAnvilRecipe;
 import teamroots.embers.recipe.FluidMixingRecipe;
-import teamroots.embers.recipe.HeatCoilRecipe;
 import teamroots.embers.recipe.ItemMeltingRecipe;
 import teamroots.embers.recipe.ItemStampingRecipe;
 import teamroots.embers.recipe.RecipeRegistry;
 
 @RegPEIPlugin(modid = "embers")
-public class PluginEmbersRekindled extends PEIPlugin {
-	public PluginEmbersRekindled(String modid, Configuration config) {
+public class PluginEmbers extends PEIPlugin {
+	public PluginEmbers(String modid, Configuration config) {
 		super(modid, config);
 	}
 
 	@Override
 	public void setup() {
 		addMapper(new AlchemyMapper());
-		addMapper(new DawnstoneAnvilMapper());
-		addMapper(new HeatingCoilMapper());
 		addMapper(new MeltingMapper());
 		addMapper(new MixingMapper());
 		addMapper(new StamperMapper());
@@ -59,35 +54,7 @@ public class PluginEmbersRekindled extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (AlchemyRecipe recipe : RecipeRegistry.alchemyRecipes) {
-				addRecipe(recipe.result.copy(), recipe.centerIngredient, recipe.outsideIngredients.toArray());
-			}
-		}
-	}
-
-	private class DawnstoneAnvilMapper extends PEIMapper {
-		public DawnstoneAnvilMapper() {
-			super("Dawnstone Anvil", "");
-		}
-
-		@Override
-		public void setup() {
-			for (DawnstoneAnvilRecipe recipe : RecipeRegistry.dawnstoneAnvilRecipes) {
-				addRecipe(recipe.getOutputs().stream().findFirst().orElse(ItemStack.EMPTY), recipe.bottom, recipe.top);
-				// TODO: Figure out how to do multiple output recipes
-			}
-		}
-	}
-
-	private class HeatingCoilMapper extends PEIMapper {
-		public HeatingCoilMapper() {
-			super("Heating Coil", "");
-		}
-
-		@Override
-		public void setup() {
-			for (HeatCoilRecipe recipe : RecipeRegistry.heatCoilRecipes) {
-				addRecipe(recipe.getOutputs().stream().findFirst().orElse(ItemStack.EMPTY), recipe.getInputs());
-				// TODO: Tell mod author to make input and output public
+				addRecipe(recipe.result.copy(), recipe.centerInput, recipe.inputs.toArray());
 			}
 		}
 	}
@@ -100,7 +67,7 @@ public class PluginEmbersRekindled extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (ItemMeltingRecipe recipe : RecipeRegistry.meltingRecipes) {
-				addRecipe(recipe.getFluid(), recipe.getInput());
+				addRecipe(recipe.getFluid(), recipe.getStack());
 			}
 		}
 	}
@@ -126,7 +93,7 @@ public class PluginEmbersRekindled extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
-				addRecipe(recipe.result.copy(), recipe.getInputs(), recipe.getFluid());
+				addRecipe(recipe.result.copy(), recipe.getStack(), recipe.getFluid());
 			}
 		}
 	}

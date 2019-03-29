@@ -6,6 +6,8 @@ import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+
+import crazypants.enderio.base.material.material.Material;
 import crazypants.enderio.base.recipe.IMachineRecipe;
 import crazypants.enderio.base.recipe.IManyToOneRecipe;
 import crazypants.enderio.base.recipe.IRecipe;
@@ -36,6 +38,11 @@ public class PluginEnderIO extends PEIPlugin {
 
 	@Override
 	public void setup() {
+		addEMC(Material.POWDER_INFINITY.getStack(), 32);
+		addEMC(Material.PLANT_BROWN.getStack(), 1);
+		addEMC(Material.PLANT_GREEN.getStack(), 1);
+		//TODO: Add EMC for Enderman Skull
+		
 		SOULBINDER_RECIPES = MachineRecipeRegistry.instance.getRecipesForMachine(MachineRecipeRegistry.SOULBINDER)
 				.values().stream().filter(r -> r instanceof ISoulBinderRecipe).collect(Collectors.toList());
 
