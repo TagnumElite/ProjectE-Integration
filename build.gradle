@@ -246,6 +246,7 @@ curseforge {
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Blood-Magic'
             optionalLibrary 'Calculator'
+            optionalLibrary 'Charset-Lib'
             optionalLibrary 'Compact-Machines'
             optionalLibrary 'Embers'
             optionalLibrary 'Ender-IO'

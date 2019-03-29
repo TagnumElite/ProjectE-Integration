@@ -11,6 +11,7 @@ public class Reference {
                                                      + "after:botania;"
                                                      + "after:calculator;"
                                                      + "after:compactmachines3;"
+                                                     + "after:charset;"
                                                      + "after:draconicevolution;"
                                                      + "after:embers;"
                                                      + "after:enderio;"
