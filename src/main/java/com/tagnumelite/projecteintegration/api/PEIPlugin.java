@@ -18,9 +18,12 @@ public abstract class PEIPlugin {
 		this.category = ConfigHelper.getPluginCategory(modid);
 	}
 
-	/** addEMC and addMapper should be run here */
-	public abstract void setup();
-	
+	/**
+	 * addEMC and addMapper should be run here
+	 * @throws Exception If the setup fails
+	 */
+	public abstract void setup() throws Exception;
+
 	protected void addEMC(String ore, int base_emc, String extra) {
 		int emc = config.getInt("emc_ore_" + ore, category, base_emc, -1, Integer.MAX_VALUE, extra);
 		for (ItemStack item : OreDictionary.getOres(ore)) {
@@ -60,7 +63,7 @@ public abstract class PEIPlugin {
 	protected void addEMC(ItemStack item, int base_emc, String extra) {
 		if (item == null)
 			return;
-		
+
 		setEMC(item, config.getInt("emc_item_" + item.getUnlocalizedName(), category, base_emc, -1, Integer.MAX_VALUE,
 				"Set the EMC for the item '" + item.getDisplayName() + "' " + extra));
 	}
@@ -82,7 +85,7 @@ public abstract class PEIPlugin {
 	protected void addEMC(String name, Object obj, int base_emc, String extra) {
 		if (obj == null)
 			return;
-		
+
 		setEMC(obj, config.getInt("emc_" + name.toLowerCase(), category, base_emc, -1, Integer.MAX_VALUE,
 				"Set the EMC value for " + name + ' ' + extra));
 	}

@@ -26,5 +26,6 @@ public class Reference {
                                                      + "after:techreborn;"
                                                      + "after:thaumcraft;"
                                                      + "after:thermalexpansion;"
-                                                     + "after:tconstruct;";
+                                                     + "after:tconstruct;"
+                                                     + "after:woot;";
 }
