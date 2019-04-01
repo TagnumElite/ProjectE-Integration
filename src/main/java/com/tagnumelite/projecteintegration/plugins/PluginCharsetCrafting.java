@@ -7,7 +7,6 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
-import pl.asie.charset.ModCharset;
 import pl.asie.charset.lib.recipe.RecipeCharset;
 
 @RegPEIPlugin(modid = "charset")

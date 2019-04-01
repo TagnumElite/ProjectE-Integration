@@ -20,6 +20,7 @@ public class Reference {
                                                      + "after:forestry;"
                                                      + "after:ic2;"
                                                      + "after:immersiveengineering;"
+                                                     + "after:mekanism;"
                                                      + "after:mysticalagriculture;"
                                                      + "after:nuclearcraft;"
                                                      + "after:reborncore;"

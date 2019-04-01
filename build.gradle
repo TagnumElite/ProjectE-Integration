@@ -11,15 +11,16 @@ buildscript {
 
 plugins {
   id "com.matthewprenger.cursegradle" version "1.1.2"
+  id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.32"
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "${version}"
 if (System.getenv("BUILD_NUMBER") != null) {
-    version = version + "+b" + System.getenv("BUILD_NUMBER");
+    version += ".${System.getenv().BUILD_NUMBER}"
 } else if (System.getenv("TRAVIS_BUILD_NUMBER") != null) {
-    version = version + "+b" + System.getenv("TRAVIS_BUILD_NUMBER");
+    version += ".${System.getenv().TRAVIS_BUILD_NUMBER}"
 }
 
 if (System.getenv("TRAVIS_PULL_REQUEST") != null) {
@@ -139,6 +140,7 @@ dependencies {
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
     deobfCompile "extrabotany:ExtraBotany:${version_extrabotany}"
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
+    deobfCompile "mekanism:Mekanism:${mc_version}:${version_mekansim}"
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:${mc_version}"
     deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
@@ -211,7 +213,8 @@ curseforge {
     apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
     project {
         id = "${cf_project}"
-        changelog = "See https://github.com/TagnumElite/ProjectE-Integration/releases"
+        changelog = file('changelog.html')
+        changelogType = 'html'
         releaseType = "${release_type}"
         addGameVersion "${mc_version}"
         mainArtifact(jar) {
@@ -254,6 +257,7 @@ curseforge {
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'ExtraBotany'
+            optionalLibrary 'Mekanism'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
             optionalLibrary 'Pams-HarvestCraft'
@@ -311,6 +315,23 @@ task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
     outputFile = sourcesJar.archivePath
 }
 
+task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    filePath = "changelog.html"
+    untaggedName = "Current release ${project.version}"
+    fromCommit = "939adc1b1975da6b89486d1e5f02e9e18027f0c2"
+    toRef =  "HEAD"
+    templateContent = """
+{{#tags}}
+  <h3>{{name}}</h3>
+  <ul>
+    {{#commits}}
+    <li>{{{message}}}</li>
+    {{/commits}}
+  </ul>
+{{/tags}}
+"""
+}
+
 build.dependsOn signJar
 build.dependsOn signDeobfJar
 build.dependsOn signSrcJar
@@ -321,4 +342,5 @@ afterEvaluate {
     tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
     tasks["curseforge${cf_project}"].dependsOn.add(signApiJar)
     tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
+    tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
 }
