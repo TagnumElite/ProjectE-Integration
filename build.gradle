@@ -83,6 +83,9 @@ dependencies {
     }
     deobfCompile "vazkii.botania:Botania:${version_botania}"
     runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
+    deobfCompile ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
+        exclude group: 'mezz.jei'
+    }
     deobfCompile ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken', module: 'CodeChickenLib'
@@ -237,6 +240,7 @@ curseforge {
             optionalLibrary 'Applied-Energistics-2'
             optionalLibrary 'Avaritia-1-10'
             optionalLibrary 'Botania'
+            optionalLibrary 'CraftTweaker'
             optionalLibrary 'Draconic-Evolution'
             optionalLibrary 'Forestry'
             optionalLibrary 'Immersive-Engineering'
