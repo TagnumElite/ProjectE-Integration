@@ -134,7 +134,7 @@ public class PEIntegration {
 			try {
 				mapper.setup();
 			} catch (Exception e) {
-				LOG.error("Mapper '{}' Failed to run: {}", mapper.desc, e);
+				LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, e);
 			}
 		}
 		
