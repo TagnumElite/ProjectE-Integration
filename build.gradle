@@ -46,11 +46,13 @@ minecraft {
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
     replace '@VERSION@', "${version}"
     
-    replace 'after:actuallyadditions', "after:actuallyadditions@[${version_actuallyadditions},)"
-    replace 'after:appliedenergistics2', "after:appliedenergistics2@[${version_appliedenergistics},)"
+    //replace 'after:actuallyadditions', "after:actuallyadditions@[${version_actuallyadditions},)"
+    //replace 'after:appliedenergistics2', "after:appliedenergistics2@[${version_appliedenergistics},)"
     //replace 'after:armorplus', "after:armorplus@[${version_armorplus},)"
-    replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
-    replace 'after:mekanism', "after:mekanism@[${mc_version}-${version_mekanism},)"
+    //replace 'after:avaritia', "after:avaritia@[${version_avaritia},)"
+    //replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
+    //replace 'after:extrautils2', "after:extrautils2"
+    //replace 'after:mekanism', "after:mekanism@[${mc_version}-${version_mekanism},)"
 }
 
 repositories {
