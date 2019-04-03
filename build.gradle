@@ -50,6 +50,7 @@ minecraft {
     replace 'after:appliedenergistics2', "after:appliedenergistics2@[${version_appliedenergistics},)"
     //replace 'after:armorplus', "after:armorplus@[${version_armorplus},)"
     replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
+    replace 'after:mekanism', "after:mekanism@[${mc_version}-${version_mekanism},)"
 }
 
 repositories {
@@ -143,7 +144,7 @@ dependencies {
     deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
     deobfCompile "extrabotany:ExtraBotany:${version_extrabotany}"
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
-    deobfCompile "mekanism:Mekanism:${mc_version}:${version_mekansim}"
+    deobfCompile "mekanism:Mekanism:${mc_version}:${version_mekanism}"
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft-${version_nuclearcraft}-:${mc_version}"
     deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency

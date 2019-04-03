@@ -153,96 +153,84 @@ public class PluginMekanism extends PEIPlugin {
 
 		if (MachineType.ENERGIZED_SMELTER.isEnabled())
 			addMapper(new BasicMachineMapper(Recipe.ENERGIZED_SMELTER));
-		
+
 		GAS_MAP.clear();
 		INFUSE_MAP.clear();
 	}
 
 	private class BasicMachineMapper extends PEIMapper {
-		private final Recipe recipe_type;
+		private final Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type;
 
-		public BasicMachineMapper(Recipe recipe_type) {
-			super(recipe_type.toString(), "");
+		public BasicMachineMapper(Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type) {
+			super(recipe_type.getRecipeName(), "");
 			this.recipe_type = recipe_type;
 		}
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : recipe_type.get().values()) {
-				if (recipe_raw instanceof BasicMachineRecipe) {
-					BasicMachineRecipe<?> recipe = (BasicMachineRecipe<?>) recipe_raw;
-					addRecipe(recipe.getOutput().output, recipe.getInput().ingredient);
-				}
+			for (BasicMachineRecipe<?> recipe : recipe_type.get().values()) {
+				addRecipe(recipe.getOutput().output, recipe.getInput().ingredient);
 			}
 		}
 	}
 
 	private class DoubleMachineMapper extends PEIMapper {
-		private final Recipe recipe_type;
+		private final Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type;
 
-		public DoubleMachineMapper(Recipe recipe_type) {
-			super(recipe_type.toString(), "");
+		public DoubleMachineMapper(Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type) {
+			super(recipe_type.getRecipeName(), "");
 			this.recipe_type = recipe_type;
 		}
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : recipe_type.get().values()) {
-				if (recipe_raw instanceof DoubleMachineRecipe) {
-					DoubleMachineRecipe<?> recipe = (DoubleMachineRecipe<?>) recipe_raw;
-					addRecipe(recipe.getOutput().output, recipe.getInput().itemStack, recipe.getInput().extraStack);
-				}
+			for (DoubleMachineRecipe<?> recipe : recipe_type.get().values()) {
+				addRecipe(recipe.getOutput().output, recipe.getInput().itemStack, recipe.getInput().extraStack);
 			}
 		}
 	}
 
 	private class AdvancedMachineMapper extends PEIMapper {
-		private final Recipe recipe_type;
+		private final Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type;
 
-		public AdvancedMachineMapper(Recipe recipe_type) {
-			super(recipe_type.toString(), "");
+		public AdvancedMachineMapper(Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type) {
+			super(recipe_type.getRecipeName(), "");
 			this.recipe_type = recipe_type;
 		}
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : recipe_type.get().values()) {
-				if (recipe_raw instanceof AdvancedMachineRecipe) {
-					AdvancedMachineRecipe<?> recipe = (AdvancedMachineRecipe<?>) recipe_raw;
-					if (GAS_MAP.containsKey(recipe.getInput().gasType))
-						addRecipe(recipe.getOutput().output, recipe.getInput().itemStack,
-								GAS_MAP.get(recipe.getInput().gasType));
-					else
-						addRecipe(recipe.getOutput().output, recipe.getInput().itemStack);
-				}
+			for (AdvancedMachineRecipe<?> recipe : recipe_type.get().values()) {
+				if (GAS_MAP.containsKey(recipe.getInput().gasType))
+					addRecipe(recipe.getOutput().output, recipe.getInput().itemStack,
+							GAS_MAP.get(recipe.getInput().gasType));
+				else
+					addRecipe(recipe.getOutput().output, recipe.getInput().itemStack);
 			}
 		}
 	}
 
 	private class ChanceMachineMapper extends PEIMapper {
-		private final Recipe recipe_type;
+		private final Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type;
 
-		public ChanceMachineMapper(Recipe recipe_type) {
-			super(recipe_type.toString(), "");
+		public ChanceMachineMapper(Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type) {
+			super(recipe_type.getRecipeName(), "");
 			this.recipe_type = recipe_type;
 		}
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : recipe_type.get().values()) {
-				if (recipe_raw instanceof ChanceMachineRecipe) {
-					ChanceMachineRecipe<?> recipe = (ChanceMachineRecipe<?>) recipe_raw;
-					ChanceOutput output = recipe.getOutput();
-					if (output.hasPrimary()) {
-						addRecipe(output.primaryOutput, recipe.getInput().ingredient);
-					}
+			for (ChanceMachineRecipe<?> recipe : recipe_type.get().values()) {
+				ChanceOutput output = recipe.getOutput();
+				if (output.hasPrimary()) {
+					addRecipe(output.primaryOutput, recipe.getInput().ingredient);
+				}
 
-					if (output.hasSecondary()) {
-						if (output.secondaryChance != 100)
-							continue;
+				if (output.hasSecondary()) {
+					if (output.secondaryChance != 100)
+						continue;
 
-						addRecipe(output.secondaryOutput, recipe.getInput().ingredient);
-					}
+					addRecipe(output.secondaryOutput, recipe.getInput().ingredient);
 				}
 			}
 		}
@@ -255,19 +243,16 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.METALLURGIC_INFUSER.get().values()) {
-				if (recipe_raw instanceof MetallurgicInfuserRecipe) {
-					MetallurgicInfuserRecipe recipe = (MetallurgicInfuserRecipe) recipe_raw;
-					ItemStack output = recipe.getOutput().output.copy();
-					ItemStack input = recipe.getInput().inputStack.copy();
-					InfuseStorage infuse = recipe.getInput().infuse;
+			for (MetallurgicInfuserRecipe recipe : Recipe.METALLURGIC_INFUSER.get().values()) {
+				ItemStack output = recipe.getOutput().output.copy();
+				ItemStack input = recipe.getInput().inputStack.copy();
+				InfuseStorage infuse = recipe.getInput().infuse;
 
-					if (!INFUSE_MAP.containsKey(infuse.type))
-						addConversion(output,
-								ImmutableMap.of(input, input.getCount(), INFUSE_MAP.get(infuse.type), infuse.amount));
-					else
-						addRecipe(output, input);
-				}
+				if (!INFUSE_MAP.containsKey(infuse.type))
+					addConversion(output,
+							ImmutableMap.of(input, input.getCount(), INFUSE_MAP.get(infuse.type), infuse.amount));
+				else
+					addRecipe(output, input);
 			}
 		}
 	}
@@ -279,15 +264,12 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.CHEMICAL_CRYSTALLIZER.get().values()) {
-				if (recipe_raw instanceof CrystallizerRecipe) {
-					CrystallizerRecipe recipe = (CrystallizerRecipe) recipe_raw;
-					GasStack input = recipe.getInput().ingredient;
+			for (CrystallizerRecipe recipe : Recipe.CHEMICAL_CRYSTALLIZER.get().values()) {
+				GasStack input = recipe.getInput().ingredient;
 
-					if (GAS_MAP.containsKey(input.getGas()))
-						addConversion(recipe.getOutput().output.copy(),
-								ImmutableMap.of(GAS_MAP.get(input.getGas()), input.amount));
-				}
+				if (GAS_MAP.containsKey(input.getGas()))
+					addConversion(recipe.getOutput().output.copy(),
+							ImmutableMap.of(GAS_MAP.get(input.getGas()), input.amount));
 			}
 		}
 	}
@@ -328,13 +310,10 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.CHEMICAL_DISSOLUTION_CHAMBER.get().values()) {
-				if (recipe_raw instanceof DissolutionRecipe) {
-					DissolutionRecipe recipe = (DissolutionRecipe) recipe_raw;
-					ItemStack input = recipe.getInput().ingredient;
+			for (DissolutionRecipe recipe : Recipe.CHEMICAL_DISSOLUTION_CHAMBER.get().values()) {
+				ItemStack input = recipe.getInput().ingredient;
 
-					addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
-				}
+				addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
 			}
 		}
 	}
@@ -346,12 +325,9 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.CHEMICAL_INFUSER.get().values()) {
-				if (recipe_raw instanceof ChemicalInfuserRecipe) {
-					ChemicalInfuserRecipe recipe = (ChemicalInfuserRecipe) recipe_raw;
-					ChemicalPairInput input = recipe.getInput();
-					addConversion(recipe.getOutput().output, input.leftGas, input.rightGas);
-				}
+			for (ChemicalInfuserRecipe recipe : Recipe.CHEMICAL_INFUSER.get().values()) {
+				ChemicalPairInput input = recipe.getInput();
+				addConversion(recipe.getOutput().output, input.leftGas, input.rightGas);
 			}
 		}
 	}
@@ -363,12 +339,9 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.CHEMICAL_OXIDIZER.get().values()) {
-				if (recipe_raw instanceof OxidationRecipe) {
-					OxidationRecipe recipe = (OxidationRecipe) recipe_raw;
-					ItemStack input = recipe.getInput().ingredient;
-					addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
-				}
+			for (OxidationRecipe recipe : Recipe.CHEMICAL_OXIDIZER.get().values()) {
+				ItemStack input = recipe.getInput().ingredient;
+				addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
 			}
 		}
 	}
@@ -380,17 +353,13 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.CHEMICAL_WASHER.get().values()) {
-				if (recipe_raw instanceof WasherRecipe) {
-					WasherRecipe recipe = (WasherRecipe) recipe_raw;
+			for (WasherRecipe recipe : Recipe.CHEMICAL_WASHER.get().values()) {
+				GasStack gas_input = recipe.getInput().ingredient;
+				FluidStack fluid_input = recipe.waterInput.ingredient;
 
-					GasStack gas_input = recipe.getInput().ingredient;
-					FluidStack fluid_input = recipe.waterInput.ingredient;
-
-					if (GAS_MAP.containsKey(gas_input.getGas()))
-						addConversion(recipe.getOutput().output, ImmutableMap.of(GAS_MAP.get(gas_input.getGas()),
-								gas_input.amount, fluid_input, fluid_input.amount));
-				}
+				if (GAS_MAP.containsKey(gas_input.getGas()))
+					addConversion(recipe.getOutput().output, ImmutableMap.of(GAS_MAP.get(gas_input.getGas()),
+							gas_input.amount, fluid_input, fluid_input.amount));
 			}
 		}
 	}
@@ -402,11 +371,8 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.SOLAR_NEUTRON_ACTIVATOR.get().values()) {
-				if (recipe_raw instanceof SolarNeutronRecipe) {
-					SolarNeutronRecipe recipe = (SolarNeutronRecipe) recipe_raw;
-					addConversion(recipe.getOutput().output, recipe.getInput().ingredient);
-				}
+			for (SolarNeutronRecipe recipe : Recipe.SOLAR_NEUTRON_ACTIVATOR.get().values()) {
+				addConversion(recipe.getOutput().output, recipe.getInput().ingredient);
 			}
 		}
 	}
@@ -418,17 +384,14 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.ELECTROLYTIC_SEPARATOR.get().values()) {
-				if (recipe_raw instanceof SeparatorRecipe) {
-					SeparatorRecipe recipe = (SeparatorRecipe) recipe_raw;
-					FluidStack input = recipe.recipeInput.ingredient;
-					addConversion(recipe.getOutput().leftGas, ImmutableMap.of(input, input.amount));
-					addConversion(recipe.getOutput().rightGas, ImmutableMap.of(input, input.amount));
-				}
+			for (SeparatorRecipe recipe : Recipe.ELECTROLYTIC_SEPARATOR.get().values()) {
+				FluidStack input = recipe.recipeInput.ingredient;
+				addConversion(recipe.getOutput().leftGas, ImmutableMap.of(input, input.amount));
+				addConversion(recipe.getOutput().rightGas, ImmutableMap.of(input, input.amount));
 			}
 		}
 	}
-	
+
 	private class ThermalEvaporationMapper extends PEIMapper {
 		public ThermalEvaporationMapper() {
 			super("Thermal Evaporation", "");
@@ -436,16 +399,13 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.THERMAL_EVAPORATION_PLANT.get().values()) {
-				if (recipe_raw instanceof ThermalEvaporationRecipe) {
-					ThermalEvaporationRecipe recipe = (ThermalEvaporationRecipe) recipe_raw;
-					FluidStack input = recipe.recipeInput.ingredient;
-					addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.amount));
-				}
+			for (ThermalEvaporationRecipe recipe : Recipe.THERMAL_EVAPORATION_PLANT.get().values()) {
+				FluidStack input = recipe.recipeInput.ingredient;
+				addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.amount));
 			}
 		}
 	}
-	
+
 	private class PressurizedReactionChamberMapper extends MekanismMapper {
 		public PressurizedReactionChamberMapper() {
 			super("Pressurized Reaction Chamber", "");
@@ -453,29 +413,25 @@ public class PluginMekanism extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			for (Object recipe_raw : Recipe.PRESSURIZED_REACTION_CHAMBER.get().values()) {
-				if (recipe_raw instanceof PressurizedRecipe) {
-					PressurizedRecipe recipe = (PressurizedRecipe) recipe_raw;
-					
-					PressurizedInput input = recipe.getInput();
-					PressurizedOutput output = recipe.getOutput();
-					
-					Map<Object, Integer> ingredients = new HashMap<Object, Integer>();
-					ingredients.put(input.getFluid(), input.getFluid().amount);
-					ingredients.put(input.getSolid(), input.getSolid().getCount());
-					
-					if (GAS_MAP.containsKey(input.getGas().getGas()))
-						ingredients.put(GAS_MAP.get(input.getGas().getGas()), input.getGas().amount);
-					
-					if (GAS_MAP.containsKey(output.getGasOutput().getGas()))
-						addConversion(output.getGasOutput(), ingredients);
-					
-					addConversion(output.getItemOutput(), ingredients);
-				}
+			for (PressurizedRecipe recipe : Recipe.PRESSURIZED_REACTION_CHAMBER.get().values()) {
+				PressurizedInput input = recipe.getInput();
+				PressurizedOutput output = recipe.getOutput();
+
+				Map<Object, Integer> ingredients = new HashMap<Object, Integer>();
+				ingredients.put(input.getFluid(), input.getFluid().amount);
+				ingredients.put(input.getSolid(), input.getSolid().getCount());
+
+				if (GAS_MAP.containsKey(input.getGas().getGas()))
+					ingredients.put(GAS_MAP.get(input.getGas().getGas()), input.getGas().amount);
+
+				if (GAS_MAP.containsKey(output.getGasOutput().getGas()))
+					addConversion(output.getGasOutput(), ingredients);
+
+				addConversion(output.getItemOutput(), ingredients);
 			}
 		}
 	}
-	
+
 	private class RotaryCondensentratorMapper extends MekanismMapper {
 		public RotaryCondensentratorMapper() {
 			super("Rotary Condensentrator", "");
