@@ -106,8 +106,8 @@ public class PEIntegration {
 			PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
 			try {
 				plugin.setup();
-			} catch (Exception e) {
-				LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, e);
+			} catch (Throwable t) {
+				LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
 			}
 		}
 
@@ -133,8 +133,8 @@ public class PEIntegration {
 			PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
 			try {
 				mapper.setup();
-			} catch (Exception e) {
-				LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, e);
+			} catch (Throwable t) {
+				LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
 			}
 		}
 		
