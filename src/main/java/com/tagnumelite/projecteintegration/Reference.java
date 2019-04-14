@@ -23,6 +23,7 @@ public class Reference {
                                                      + "after:mekanism;"
                                                      + "after:mysticalagriculture;"
                                                      + "after:nuclearcraft;"
+                                                     + "after:psi;"
                                                      + "after:reborncore;"
                                                      + "after:techreborn;"
                                                      + "after:thaumcraft;"
