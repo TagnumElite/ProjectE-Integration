@@ -249,6 +249,7 @@ curseforge {
             optionalLibrary 'Forestry'
             optionalLibrary 'Immersive-Engineering'
             optionalLibrary 'Industrial-Craft'
+            optionalLibrary 'Psi'
             optionalLibrary 'RebornCore'
             optionalLibrary 'TechReborn'
             optionalLibrary 'ThermalExpansion'
