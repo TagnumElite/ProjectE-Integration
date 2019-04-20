@@ -52,7 +52,7 @@ minecraft {
     //replace 'after:avaritia', "after:avaritia@[${version_avaritia},)"
     //replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
     //replace 'after:extrautils2', "after:extrautils2"
-    replace 'after:mekanism', "after:mekanism@[1.0.0,1.2.0],[${mc_version}-${version_mekanism},)"
+    replace 'after:mekanism', "after:mekanism@[${mc_version}-1.0.0,${mc_version}-1.2.0],[${mc_version}-${version_mekanism},)"
 }
 
 repositories {
