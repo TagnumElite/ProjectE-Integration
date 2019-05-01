@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.ClassUtils;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.internal.SizedIngredient;
 
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
@@ -67,6 +68,12 @@ public class Utils {
 					continue;
 
 				ingredients.addIngredient(PEIApi.getIngredient((Ingredient) input), 1);
+			} else if (input instanceof SizedIngredient) {
+				SizedIngredient inp = (SizedIngredient) input;
+				if (inp.object == Ingredient.EMPTY)
+					continue;
+				
+				ingredients.addIngredient(PEIApi.getIngredient(inp.object), inp.amount);
 			} else if (input instanceof Object[]) {
 				PEIApi.LOG.debug("Found Array within Array: {} within {}", input, inputs);
 				getInputsSecond(ingredients, (Object[]) input);

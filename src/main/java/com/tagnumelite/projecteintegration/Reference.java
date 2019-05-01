@@ -5,6 +5,7 @@ public class Reference {
                                                      + "after:actuallyadditions;"
                                                      + "after:appliedenergistics2;"
                                                      + "after:armorplus;"
+                                                     + "after:artisanworktables;"
                                                      + "after:astralsorcery;"
                                                      + "after:avaritia;"
                                                      + "after:bloodmagic;"

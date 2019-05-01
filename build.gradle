@@ -134,6 +134,8 @@ dependencies {
     // CurseForge
     deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
     deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
+    deobfCompile "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
+    runtime "athenaeum:athenaeum:${mc_version}:${version_athenaeum}" //Artisan Worktables dependency
     runtime "baubles:Baubles:1.12:1.5.2"
     deobfCompile "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
     deobfCompile "calculator:calculator-${mc_version}:${version_calculator}"
@@ -258,6 +260,7 @@ curseforge {
             // From CurseForge Maven
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
+            optionalLibrary 'Artisan-Worktables'
             optionalLibrary 'Blood-Magic'
             optionalLibrary 'Calculator'
             optionalLibrary 'Charset-Lib'
