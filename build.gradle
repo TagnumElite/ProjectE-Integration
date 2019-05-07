@@ -78,6 +78,7 @@ dependencies {
     runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
         exclude group: 'mezz.jei'
     }
+	runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
     deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
     runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
         exclude group: 'mezz.jei'
