@@ -248,9 +248,9 @@ public class PluginMekanism extends PEIPlugin {
 				ItemStack input = recipe.getInput().inputStack.copy();
 				InfuseStorage infuse = recipe.getInput().infuse;
 
-				if (!INFUSE_MAP.containsKey(infuse.getType()))
-					addConversion(output,
-							ImmutableMap.of(input, input.getCount(), INFUSE_MAP.get(infuse.getType()), infuse.getAmount()));
+				if (INFUSE_MAP.containsKey(infuse.getType()))
+					addConversion(output, ImmutableMap.of(input, input.getCount(), INFUSE_MAP.get(infuse.getType()),
+							infuse.getAmount()));
 				else
 					addRecipe(output, input);
 			}
