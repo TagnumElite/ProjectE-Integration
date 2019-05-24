@@ -36,6 +36,7 @@ public class PEIntegration {
 	private static boolean DISABLE = false;
 	private static boolean LOADED = false;
 	public static final Logger LOG = LogManager.getLogger(PEIApi.MODID);
+	private static boolean MAPPER_ERRORED = false;
 
 	private final List<PEIPlugin> PLUGINS = new ArrayList<PEIPlugin>();
 
@@ -81,8 +82,9 @@ public class PEIntegration {
 							Configuration.class);
 					PLUGINS.add(plugin.newInstance(modid, config));
 				}
-			} catch (Throwable e) {
-				LOG.error("Failed to load: {}", asm_data.getClassName(), e);
+			} catch (Throwable t) {
+				LOG.error("Failed to load: {}", asm_data.getClassName(), t);
+				t.printStackTrace();
 			}
 		}
 
@@ -108,6 +110,7 @@ public class PEIntegration {
 				plugin.setup();
 			} catch (Throwable t) {
 				LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
+				t.printStackTrace();
 			}
 		}
 
@@ -134,7 +137,9 @@ public class PEIntegration {
 			try {
 				mapper.setup();
 			} catch (Throwable t) {
+				MAPPER_ERRORED = true;
 				LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+				t.printStackTrace();
 			}
 		}
 		

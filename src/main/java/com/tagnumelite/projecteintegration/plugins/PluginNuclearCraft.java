@@ -60,7 +60,7 @@ public class PluginNuclearCraft extends PEIPlugin {
 		public void setup() {
 			final ProcessorRecipeHandler recipe_handler = recipe_type.getRecipeHandler();
 
-			for (ProcessorRecipe recipe : recipe_handler.recipes) {
+			for (ProcessorRecipe recipe : recipe_handler.getRecipes()) {
 				final int fluid_input_size = recipe_handler.fluidInputSize;
 				final int fluid_output_size = recipe_handler.fluidOutputSize;
 				final int item_input_size = recipe_handler.itemInputSize;
@@ -82,11 +82,11 @@ public class PluginNuclearCraft extends PEIPlugin {
 				IngredientMap<Object> ingredients = new IngredientMap<Object>();
 
 				for (IItemIngredient input : item_inputs) {
-					ingredients.addIngredient(getObjectFromItemIngredient(input), input.getMaxStackSize());
+					ingredients.addIngredient(getObjectFromItemIngredient(input), input.getMaxStackSize(0));
 				}
 
 				for (IFluidIngredient input : fluid_inputs) {
-					ingredients.addIngredient(getObjectFromFluidIngredient(input), input.getMaxStackSize());
+					ingredients.addIngredient(getObjectFromFluidIngredient(input), input.getMaxStackSize(0));
 				}
 
 				for (IItemIngredient output : item_outputs) {
