@@ -153,13 +153,13 @@ dependencies {
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
     deobfCompile "mekanism:Mekanism:${mc_version}:${version_mekanism}"
     //deobfCompile "modular-diversity:Modular+Diversity:1.1"
-    deobfCompile "modular-machinery:modularmachinery:1.9.5"
     deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
     deobfCompile "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
     deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
     deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
     runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
     deobfCompile "woot:woot:${mc_version}:${version_woot}"
+    deobfProvided "modular-machinery:modularmachinery:${version_modularmachinery}"
 }
 
 processResources {
@@ -274,6 +274,7 @@ curseforge {
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'ExtraBotany'
             optionalLibrary 'Mekanism'
+            optionalLibrary 'Modular-Machinery'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'NuclearCraft-mod'
             optionalLibrary 'Pams-HarvestCraft'
