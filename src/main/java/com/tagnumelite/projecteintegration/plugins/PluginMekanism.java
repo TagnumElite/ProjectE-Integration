@@ -162,7 +162,7 @@ public class PluginMekanism extends PEIPlugin {
 		private final Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type;
 
 		public BasicMachineMapper(Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type) {
-			super(recipe_type.getRecipeName(), "");
+			super(recipe_type.getRecipeName());
 			this.recipe_type = recipe_type;
 		}
 
@@ -178,7 +178,7 @@ public class PluginMekanism extends PEIPlugin {
 		private final Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type;
 
 		public DoubleMachineMapper(Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type) {
-			super(recipe_type.getRecipeName(), "");
+			super(recipe_type.getRecipeName());
 			this.recipe_type = recipe_type;
 		}
 
@@ -194,7 +194,7 @@ public class PluginMekanism extends PEIPlugin {
 		private final Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type;
 
 		public AdvancedMachineMapper(Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type) {
-			super(recipe_type.getRecipeName(), "");
+			super(recipe_type.getRecipeName());
 			this.recipe_type = recipe_type;
 		}
 
@@ -214,7 +214,7 @@ public class PluginMekanism extends PEIPlugin {
 		private final Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type;
 
 		public ChanceMachineMapper(Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type) {
-			super(recipe_type.getRecipeName(), "");
+			super(recipe_type.getRecipeName());
 			this.recipe_type = recipe_type;
 		}
 
@@ -238,7 +238,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class MetallurgicInfuserMapper extends PEIMapper {
 		public MetallurgicInfuserMapper() {
-			super("Metallurgic Infuser", "");
+			super("Metallurgic Infuser");
 		}
 
 		@Override
@@ -259,7 +259,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class CrystallizerMapper extends PEIMapper {
 		public CrystallizerMapper() {
-			super("Crystallizer", "");
+			super("Crystallizer");
 		}
 
 		@Override
@@ -275,8 +275,8 @@ public class PluginMekanism extends PEIPlugin {
 	}
 
 	public abstract class MekanismMapper extends PEIMapper {
-		public MekanismMapper(String name, String description) {
-			super(name, description);
+		public MekanismMapper(String name) {
+			super(name);
 		}
 
 		protected void addConversion(GasStack gas, Map<Object, Integer> map) {
@@ -305,7 +305,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class DissolutionMapper extends MekanismMapper {
 		public DissolutionMapper() {
-			super("Dissolution", "");
+			super("Dissolution");
 		}
 
 		@Override
@@ -320,7 +320,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class ChemicalInfuserMapper extends MekanismMapper {
 		public ChemicalInfuserMapper() {
-			super("Chemical Infuser", "");
+			super("Chemical Infuser");
 		}
 
 		@Override
@@ -334,7 +334,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class ChemicalOxidizerMapper extends MekanismMapper {
 		public ChemicalOxidizerMapper() {
-			super("Chemical Oxidizer", "");
+			super("Chemical Oxidizer");
 		}
 
 		@Override
@@ -348,7 +348,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class ChemicalWasherMapper extends MekanismMapper {
 		public ChemicalWasherMapper() {
-			super("Chemical Washer", "");
+			super("Chemical Washer");
 		}
 
 		@Override
@@ -366,7 +366,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class SolarNeutronActivatorMapper extends MekanismMapper {
 		public SolarNeutronActivatorMapper() {
-			super("Solar Neutron Activator", "");
+			super("Solar Neutron Activator");
 		}
 
 		@Override
@@ -379,7 +379,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class ElectrolyticSeparatorMapper extends MekanismMapper {
 		public ElectrolyticSeparatorMapper() {
-			super("Electrolytic Separator", "");
+			super("Electrolytic Separator");
 		}
 
 		@Override
@@ -394,7 +394,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class ThermalEvaporationMapper extends PEIMapper {
 		public ThermalEvaporationMapper() {
-			super("Thermal Evaporation", "");
+			super("Thermal Evaporation");
 		}
 
 		@Override
@@ -408,7 +408,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class PressurizedReactionChamberMapper extends MekanismMapper {
 		public PressurizedReactionChamberMapper() {
-			super("Pressurized Reaction Chamber", "");
+			super("Pressurized Reaction Chamber");
 		}
 
 		@Override
@@ -434,7 +434,7 @@ public class PluginMekanism extends PEIPlugin {
 
 	private class RotaryCondensentratorMapper extends MekanismMapper {
 		public RotaryCondensentratorMapper() {
-			super("Rotary Condensentrator", "");
+			super("Rotary Condensentrator");
 		}
 
 		@Override

@@ -49,7 +49,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class BlastFurnaceMapper extends PEIMapper {
 		public BlastFurnaceMapper() {
-			super("Blast Furnace", "");
+			super("Blast Furnace");
 		}
 
 		@Override
@@ -81,7 +81,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class CokeOvenMapper extends PEIMapper {
 		public CokeOvenMapper() {
-			super("Coke Oven", "");
+			super("Coke Oven");
 		}
 
 		@Override
@@ -120,7 +120,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class KilnMapper extends PEIMapper {
 		public KilnMapper() {
-			super("Kiln", "");
+			super("Kiln");
 		}
 
 		@Override
@@ -142,8 +142,8 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 	}
 
 	private abstract class MultiblockRecipeMapper extends PEIMapper {
-		public MultiblockRecipeMapper(String name, String description) {
-			super(name, description);
+		public MultiblockRecipeMapper(String name) {
+			super(name);
 		}
 
 		protected void addRecipe(MultiblockRecipe recipe) {
@@ -202,7 +202,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class CrusherMapper extends MultiblockRecipeMapper {
 		public CrusherMapper() {
-			super("Crusher", "");
+			super("Crusher");
 		}
 
 		@Override
@@ -215,7 +215,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class EnginnerWorkbenchMapper extends MultiblockRecipeMapper {
 		public EnginnerWorkbenchMapper() {
-			super("Enginner Workbench", "");
+			super("Enginner Workbench");
 		}
 
 		@Override
@@ -228,7 +228,7 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 
 	private class MetalPressMapper extends MultiblockRecipeMapper {
 		public MetalPressMapper() {
-			super("Metal Press", "");
+			super("Metal Press");
 		}
 
 		@Override

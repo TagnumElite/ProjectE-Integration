@@ -36,7 +36,7 @@ public class PluginNuclearCraft extends PEIPlugin {
 		private Type recipe_type;
 
 		public NCRecipeMapper(Type recipe_type) {
-			super(recipe_type.toString(), "Enable Recipe mapper for this machine?");
+			super(recipe_type.toString());
 			this.recipe_type = recipe_type;
 		}
 

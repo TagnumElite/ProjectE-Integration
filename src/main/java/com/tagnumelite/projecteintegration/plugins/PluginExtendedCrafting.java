@@ -28,7 +28,7 @@ public class PluginExtendedCrafting extends PEIPlugin {
 
 	private class ECCompressorMapper extends PEIMapper {
 		public ECCompressorMapper() {
-			super("compressor", "Enable Quantum Compressor recipe mapper?");
+			super("compressor");
 		}
 
 		@Override
@@ -41,7 +41,7 @@ public class PluginExtendedCrafting extends PEIPlugin {
 
 	private class ECCombinationMapper extends PEIMapper {
 		public ECCombinationMapper() {
-			super("combination", "Enable Conbination crafting recipe mapper?");
+			super("combination");
 		}
 
 		@Override

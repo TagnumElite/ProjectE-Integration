@@ -20,7 +20,7 @@ public class PluginTechReborn extends PEIPlugin {
 
 	private class RollingMachineMapper extends PEIMapper {
 		public RollingMachineMapper() {
-			super("Rolling Machine", "");
+			super("Rolling Machine");
 		}
 
 		@Override

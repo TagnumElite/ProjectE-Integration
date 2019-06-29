@@ -68,8 +68,8 @@ public class PluginThaumcraft extends PEIPlugin {
 	}
 
 	private abstract class ThaumcraftMapper extends PEIMapper {
-		public ThaumcraftMapper(String name, String description) {
-			super(name, description);
+		public ThaumcraftMapper(String name) {
+			super(name);
 		}
 
 		protected void addRecipe(Object recipe_output, Object recipe_input, AspectList recipe_aspects) {
@@ -105,7 +105,7 @@ public class PluginThaumcraft extends PEIPlugin {
 
 	private class ArcaneMapper extends ThaumcraftMapper {
 		public ArcaneMapper() {
-			super("Arcane", "");
+			super("Arcane");
 		}
 
 		@Override
@@ -120,7 +120,7 @@ public class PluginThaumcraft extends PEIPlugin {
 
 	private class CrucibleMapper extends ThaumcraftMapper {
 		public CrucibleMapper() {
-			super("Crucible", "");
+			super("Crucible");
 		}
 
 		@Override
@@ -135,7 +135,7 @@ public class PluginThaumcraft extends PEIPlugin {
 
 	private class InfusionMapper extends ThaumcraftMapper {
 		public InfusionMapper() {
-			super("Infusion", "");
+			super("Infusion");
 		}
 
 		@Override

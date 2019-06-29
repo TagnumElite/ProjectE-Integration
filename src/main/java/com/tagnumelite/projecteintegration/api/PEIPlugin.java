@@ -31,6 +31,13 @@ public abstract class PEIPlugin {
 		}
 	}
 
+	protected void addEMC(String ore, int base_emc) {
+		int emc = config.getInt("emc_ore_" + ore, category, base_emc, -1, Integer.MAX_VALUE, "EMC Value for all items in oredict '" + ore + '\'');
+		for (ItemStack item : OreDictionary.getOres(ore)) {
+			setEMC(item, emc);
+		}
+	}
+
 	/**
 	 * @param item
 	 *            {@code Item} The item to add

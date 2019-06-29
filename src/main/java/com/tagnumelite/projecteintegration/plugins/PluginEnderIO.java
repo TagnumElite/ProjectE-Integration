@@ -67,8 +67,8 @@ public class PluginEnderIO extends PEIPlugin {
 	}
 
 	private abstract class IRecipeMapper extends PEIMapper {
-		public IRecipeMapper(String name, String description) {
-			super(name, description);
+		public IRecipeMapper(String name) {
+			super(name);
 		}
 
 		protected void addRecipe(IRecipe recipe) {
@@ -86,8 +86,8 @@ public class PluginEnderIO extends PEIPlugin {
 	}
 
 	private abstract class ManyToOneRecipeMapper extends PEIMapper {
-		public ManyToOneRecipeMapper(String name, String description) {
-			super(name, description);
+		public ManyToOneRecipeMapper(String name) {
+			super(name);
 		}
 
 		protected void addRecipe(IManyToOneRecipe recipe) {
@@ -97,7 +97,7 @@ public class PluginEnderIO extends PEIPlugin {
 
 	private class AlloySmelterMapper extends ManyToOneRecipeMapper {
 		public AlloySmelterMapper() {
-			super("Alloy Smelter", "");
+			super("Alloy Smelter");
 		}
 
 		@Override
@@ -110,7 +110,7 @@ public class PluginEnderIO extends PEIPlugin {
 
 	private class SagMillMapper extends IRecipeMapper {
 		public SagMillMapper() {
-			super("Sag Mill", "");
+			super("Sag Mill");
 		}
 
 		@Override
@@ -123,7 +123,7 @@ public class PluginEnderIO extends PEIPlugin {
 
 	private class SliceAndSpliceMapper extends ManyToOneRecipeMapper {
 		public SliceAndSpliceMapper() {
-			super("Slice And Splice", "");
+			super("Slice And Splice");
 		}
 
 		@Override
@@ -136,7 +136,7 @@ public class PluginEnderIO extends PEIPlugin {
 
 	private class VatMapper extends IRecipeMapper {
 		public VatMapper() {
-			super("Vat", "");
+			super("Vat");
 		}
 
 		@Override
@@ -149,7 +149,7 @@ public class PluginEnderIO extends PEIPlugin {
 
 	private class SoulBinderMapper extends PEIMapper {
 		public SoulBinderMapper() {
-			super("Soul Binder", "");
+			super("Soul Binder");
 		}
 
 		private Object getObjectFromSoulList(NNList<ResourceLocation> souls) {

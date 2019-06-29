@@ -26,14 +26,14 @@ public class PluginPamsHarvestCraft extends PEIPlugin {
 
 	@Override
 	public void setup() {
-		addEMC("listAllfruit", 128, "");
-		addEMC("listAllgrain", 24, "");
-		addEMC("listAllmeatraw", 64, "");
-		addEMC("listAllveggie", 64, "");
-		addEMC("listAllnut", 64, "");
-		addEMC("listAllgreenveggie", 64, "");
-		addEMC("listAllseed", 16, "");
-		addEMC("listAllberry", 16, "");
+		addEMC("listAllfruit", 128);
+		addEMC("listAllgrain", 24);
+		addEMC("listAllmeatraw", 64);
+		addEMC("listAllveggie", 64);
+		addEMC("listAllnut", 64);
+		addEMC("listAllgreenveggie", 64);
+		addEMC("listAllseed", 16);
+		addEMC("listAllberry", 16);
 		
 		addMapper(new MarketMapper());
 		addMapper(new MachineMapper("Grinder", GrinderRecipes.class, "grindingList"));
@@ -43,7 +43,7 @@ public class PluginPamsHarvestCraft extends PEIPlugin {
 
 	private class MarketMapper extends PEIMapper {
 		protected MarketMapper() {
-			super("Market", "", true);
+			super("Market", "Enable mapper for the market?", true);
 		}
 
 		@Override

@@ -33,7 +33,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class CarpenterMapper extends PEIMapper {
 		public CarpenterMapper() {
-			super("Carpenter", "");
+			super("Carpenter");
 		}
 
 		@Override
@@ -46,7 +46,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class FabricatorMapper extends PEIMapper {
 		public FabricatorMapper() {
-			super("Fabricator", "");
+			super("Fabricator");
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class FermenterMapper extends PEIMapper {
 		public FermenterMapper() {
-			super("Fermenter", "");
+			super("Fermenter");
 		}
 
 		@Override
@@ -72,7 +72,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class MoistenerMapper extends PEIMapper {
 		public MoistenerMapper() {
-			super("Moistener", "");
+			super("Moistener");
 		}
 
 		@Override
@@ -85,7 +85,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class SqueezerMapper extends PEIMapper {
 		public SqueezerMapper() {
-			super("Squeezer", "");
+			super("Squeezer");
 		}
 
 		@Override
@@ -98,7 +98,7 @@ public class PluginForestry extends PEIPlugin {
 	
 	private class StillMapper extends PEIMapper {
 		public StillMapper() {
-			super("Still", "");
+			super("Still");
 		}
 
 		@Override

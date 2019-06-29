@@ -21,7 +21,7 @@ public class PluginPsi extends PEIPlugin {
 
 	private class TrickMapper extends PEIMapper {
 		public TrickMapper() {
-			super("Trick", "");
+			super("Trick");
 		}
 
 		@Override

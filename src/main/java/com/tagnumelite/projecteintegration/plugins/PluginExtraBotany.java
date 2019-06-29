@@ -21,7 +21,7 @@ public class PluginExtraBotany extends PEIPlugin {
 
 	private class PedestalMapper extends PEIMapper {
 		public PedestalMapper() {
-			super("Pedestal", "");
+			super("Pedestal");
 		}
 
 		@Override

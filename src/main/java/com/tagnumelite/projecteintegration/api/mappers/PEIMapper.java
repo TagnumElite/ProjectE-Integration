@@ -30,6 +30,14 @@ public abstract class PEIMapper {
 	public PEIMapper(String name, String description) {
 		this(name, description, false);
 	}
+	
+	public PEIMapper(String name, boolean disabledByDefault) {
+		this(name, "Enable mapper for " + name + '?', disabledByDefault);
+	}
+	
+	public PEIMapper(String name) {
+		this(name, "Enable mapper for " + name + '?');
+	}
 
 	/**
 	 * @param name

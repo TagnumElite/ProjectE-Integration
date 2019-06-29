@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.ClassUtils;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.internal.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.internal.input.SizedIngredient;
 
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;

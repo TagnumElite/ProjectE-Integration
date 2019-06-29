@@ -32,7 +32,7 @@ public class PluginRebornCore extends PEIPlugin {
 		private final Map<String, Boolean> RECIPE_CFG_MAP = new HashMap<>();
 
 		public RebornCoreMapper() {
-			super("Reborn Core", "");
+			super("Reborn Core");
 		}
 
 		@Override

@@ -22,7 +22,7 @@ public class PluginCompactMachines extends PEIPlugin {
 
 	private class MiniaturizationMapper extends PEIMapper {
 		public MiniaturizationMapper() {
-			super("Miniaturization", "");
+			super("Miniaturization");
 		}
 
 		@Override

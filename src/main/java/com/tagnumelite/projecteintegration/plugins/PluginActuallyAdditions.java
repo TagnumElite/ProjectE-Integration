@@ -31,7 +31,7 @@ public class PluginActuallyAdditions extends PEIPlugin {
 
 	private class EmpowererMapper extends PEIMapper {
 		public EmpowererMapper() {
-			super("Empowerer", "");
+			super("Empowerer");
 		}
 
 		@Override
@@ -45,7 +45,7 @@ public class PluginActuallyAdditions extends PEIPlugin {
 
 	private class ReconstructorMapper extends PEIMapper {
 		public ReconstructorMapper() {
-			super("Reconstructor", "");
+			super("Reconstructor");
 		}
 
 		@Override
@@ -58,7 +58,7 @@ public class PluginActuallyAdditions extends PEIPlugin {
 
 	private class CrusherMapper extends PEIMapper {
 		public CrusherMapper() {
-			super("crusher", "");
+			super("crusher");
 		}
 
 		@Override

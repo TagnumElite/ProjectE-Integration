@@ -84,7 +84,7 @@ public class PEIntegration {
 				}
 			} catch (Throwable t) {
 				LOG.error("Failed to load: {}", asm_data.getClassName(), t);
-				t.printStackTrace();
+				//t.printStackTrace();
 			}
 		}
 

@@ -36,7 +36,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class BrewerMapper extends PEIMapper {
 		public BrewerMapper() {
-			super("Brewer", "");
+			super("Brewer");
 		}
 
 		@Override
@@ -49,7 +49,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class CentrifugeMapper extends PEIMapper {
 		public CentrifugeMapper() {
-			super("Centrifuge", "");
+			super("Centrifuge");
 		}
 
 		@Override
@@ -65,7 +65,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class ChargerMapper extends PEIMapper {
 		public ChargerMapper() {
-			super("Charger", "");
+			super("Charger");
 		}
 
 		@Override
@@ -78,7 +78,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class CompactorMapper extends PEIMapper {
 		public CompactorMapper() {
-			super("Compactor", "");
+			super("Compactor");
 		}
 
 		@Override
@@ -93,7 +93,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class CrucibleMapper extends PEIMapper {
 		public CrucibleMapper() {
-			super("Crucible", "");
+			super("Crucible");
 		}
 
 		@Override
@@ -106,7 +106,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class EnchanterMapper extends PEIMapper {
 		public EnchanterMapper() {
-			super("Enchanter", "");
+			super("Enchanter");
 		}
 
 		@Override
@@ -120,7 +120,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class ExtruderMapper extends PEIMapper {
 		public ExtruderMapper() {
-			super("Extruder", "");
+			super("Extruder");
 		}
 
 		private void addRecipe(ExtruderManager.ExtruderRecipe recipe) {
@@ -141,7 +141,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class FurnaceMapper extends PEIMapper {
 		public FurnaceMapper() {
-			super("Furnace", "");
+			super("Furnace");
 		}
 
 		@Override
@@ -161,7 +161,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class InsolatorMapper extends PEIMapper {
 		public InsolatorMapper() {
-			super("Insolator", "");
+			super("Insolator");
 		}
 
 		@Override
@@ -182,7 +182,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class PrecipitatorMapper extends PEIMapper {
 		public PrecipitatorMapper() {
-			super("Precipitator", "");
+			super("Precipitator");
 		}
 
 		@Override
@@ -195,7 +195,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class PulverizerMapper extends PEIMapper {
 		public PulverizerMapper() {
-			super("Pulverizer", "");
+			super("Pulverizer");
 		}
 
 		@Override
@@ -208,7 +208,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class RefineryMapper extends PEIMapper {
 		public RefineryMapper() {
-			super("Refinery", "");
+			super("Refinery");
 		}
 
 		@Override
@@ -225,7 +225,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class SawmillMapper extends PEIMapper {
 		public SawmillMapper() {
-			super("Sawmill", "");
+			super("Sawmill");
 		}
 
 		@Override
@@ -238,7 +238,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class SmelterMapper extends PEIMapper {
 		public SmelterMapper() {
-			super("Smelter", "");
+			super("Smelter");
 		}
 
 		@Override
@@ -253,7 +253,7 @@ public class PluginThermalExpansion extends PEIPlugin {
 
 	private class TransposerMapper extends PEIMapper {
 		public TransposerMapper() {
-			super("Transposer", "");
+			super("Transposer");
 		}
 
 		@Override

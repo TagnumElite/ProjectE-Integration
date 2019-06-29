@@ -36,7 +36,7 @@ public class PluginArmorPlus extends PEIPlugin {
 		private final BaseCraftingManager bench;
 
 		public BenchMapper(BaseCraftingManager bench) {
-			super(bench.getName(), "");
+			super(bench.getName());
 			this.bench = bench;
 		}
 

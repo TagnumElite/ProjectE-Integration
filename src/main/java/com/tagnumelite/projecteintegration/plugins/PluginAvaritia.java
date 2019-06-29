@@ -33,7 +33,7 @@ public class PluginAvaritia extends PEIPlugin {
 
 	private class ExtremeMapper extends PEIMapper {
 		public ExtremeMapper() {
-			super("Extreme Crafting Table", "");
+			super("Extreme Crafting Table");
 		}
 
 		@Override
@@ -46,7 +46,7 @@ public class PluginAvaritia extends PEIPlugin {
 
 	private class CompressorMapper extends PEIMapper {
 		public CompressorMapper() {
-			super("Compressor", "");
+			super("Compressor");
 		}
 
 		@Override

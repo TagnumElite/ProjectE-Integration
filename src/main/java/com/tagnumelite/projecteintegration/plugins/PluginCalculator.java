@@ -46,7 +46,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class AlgorithmSeparatorMapper extends SonarMapper {
 		public AlgorithmSeparatorMapper() {
-			super("Algorithm Separator", "");
+			super("Algorithm Separator");
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class AtomicCalculatorMapper extends SonarMapper {
 		public AtomicCalculatorMapper() {
-			super("Atomic Calculator", "");
+			super("Atomic Calculator");
 		}
 
 		@Override
@@ -72,7 +72,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class ConductorMastMapper extends SonarMapper {
 		public ConductorMastMapper() {
-			super("Conductor Mast", "");
+			super("Conductor Mast");
 		}
 
 		@Override
@@ -85,7 +85,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class CalculatorMapper extends SonarMapper {
 		public CalculatorMapper() {
-			super("Calculator", "");
+			super("Calculator");
 		}
 
 		@Override
@@ -98,7 +98,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class ExtractionChamberMapper extends SonarMapper {
 		public ExtractionChamberMapper() {
-			super("Extraction Chamber", "");
+			super("Extraction Chamber");
 		}
 
 		@Override
@@ -111,7 +111,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class FabricationChamberMapper extends SonarMapper {
 		public FabricationChamberMapper() {
-			super("Fabrication Chamber", "");
+			super("Fabrication Chamber");
 		}
 
 		@Override
@@ -124,7 +124,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class FlawlessCalculatorMapper extends SonarMapper {
 		public FlawlessCalculatorMapper() {
-			super("Flawless Calculator", "");
+			super("Flawless Calculator");
 		}
 
 		@Override
@@ -137,7 +137,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class PrecisionChamberMapper extends SonarMapper {
 		public PrecisionChamberMapper() {
-			super("Precision Chamber", "");
+			super("Precision Chamber");
 		}
 
 		@Override
@@ -150,7 +150,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class ProcessingChamberMapper extends SonarMapper {
 		public ProcessingChamberMapper() {
-			super("Processing Chamber", "");
+			super("Processing Chamber");
 		}
 
 		@Override
@@ -163,7 +163,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class ReassemblyChamberMapper extends SonarMapper {
 		public ReassemblyChamberMapper() {
-			super("Reassembly Chamber", "");
+			super("Reassembly Chamber");
 		}
 
 		@Override
@@ -176,7 +176,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class RestorationChamberMapper extends SonarMapper {
 		public RestorationChamberMapper() {
-			super("Restoration Chamber", "");
+			super("Restoration Chamber");
 		}
 
 		@Override
@@ -189,7 +189,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class ScientificCalculatorMapper extends SonarMapper {
 		public ScientificCalculatorMapper() {
-			super("Scientific Calculator", "");
+			super("Scientific Calculator");
 		}
 
 		@Override
@@ -202,7 +202,7 @@ public class PluginCalculator extends PEIPlugin {
 
 	private class StoneSeparatorMapper extends SonarMapper {
 		public StoneSeparatorMapper() {
-			super("Stone Separator", "");
+			super("Stone Separator");
 		}
 
 		@Override

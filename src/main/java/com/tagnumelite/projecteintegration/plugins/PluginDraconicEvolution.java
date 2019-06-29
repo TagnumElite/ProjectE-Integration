@@ -27,7 +27,7 @@ public class PluginDraconicEvolution extends PEIPlugin {
 
 	private class FusionMapper extends PEIMapper {
 		public FusionMapper() {
-			super("fusion", "Draconic Evolution Fusion Crafting");
+			super("fusion", "Enable mapper for Draconic Evolution Fusion Crafting?");
 		}
 
 		@Override

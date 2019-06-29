@@ -10,6 +10,10 @@ import sonar.core.recipes.ISonarRecipeObject;
 
 public class PluginSonarCore {
 	public static abstract class SonarMapper extends PEIMapper {
+		public SonarMapper(String name) {
+			super(name);
+		}
+		
 		public SonarMapper(String name, String description) {
 			super(name, description);
 		}

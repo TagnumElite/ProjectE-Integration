@@ -20,7 +20,7 @@ public class PluginMysticalAgriculture extends PEIPlugin {
 
 	private class SeedProcessorMapper extends PEIMapper {
 		public SeedProcessorMapper() {
-			super("Seed Processor", "");
+			super("Seed Processor");
 		}
 
 		@Override

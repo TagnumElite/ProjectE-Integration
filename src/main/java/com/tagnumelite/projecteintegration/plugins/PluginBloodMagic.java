@@ -27,7 +27,7 @@ public class PluginBloodMagic extends PEIPlugin {
 
 	private class AlchemyArrayMapper extends PEIMapper {
 		public AlchemyArrayMapper() {
-			super("Alchemy Array", "");
+			super("Alchemy Array");
 		}
 
 		@Override
@@ -40,7 +40,7 @@ public class PluginBloodMagic extends PEIPlugin {
 
 	private class AlchemyTableMapper extends PEIMapper {
 		public AlchemyTableMapper() {
-			super("Alchemy Table", "");
+			super("Alchemy Table");
 		}
 
 		@Override
@@ -53,7 +53,7 @@ public class PluginBloodMagic extends PEIPlugin {
 
 	private class BloodAltarMapper extends PEIMapper {
 		public BloodAltarMapper() {
-			super("Blood Altar", "");
+			super("Blood Altar");
 		}
 
 		@Override
@@ -66,7 +66,7 @@ public class PluginBloodMagic extends PEIPlugin {
 
 	private class TartaricForgeMapper extends PEIMapper {
 		public TartaricForgeMapper() {
-			super("Tartaric Forge", "");
+			super("Tartaric Forge");
 		}
 
 		@Override

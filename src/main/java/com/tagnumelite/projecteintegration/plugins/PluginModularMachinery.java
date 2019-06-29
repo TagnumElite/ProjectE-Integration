@@ -36,7 +36,7 @@ public class PluginModularMachinery extends PEIPlugin {
 		private final DynamicMachine machine;
 
 		public MachineMapper(DynamicMachine machine) {
-			super(machine.getLocalizedName(), "");
+			super(machine.getLocalizedName());
 			this.machine = machine;
 		}
 

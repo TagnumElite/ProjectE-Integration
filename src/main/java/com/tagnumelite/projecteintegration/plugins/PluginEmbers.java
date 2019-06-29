@@ -48,7 +48,7 @@ public class PluginEmbers extends PEIPlugin {
 
 	private class AlchemyMapper extends PEIMapper {
 		public AlchemyMapper() {
-			super("Alchemy", "");
+			super("Alchemy");
 		}
 
 		@Override
@@ -61,7 +61,7 @@ public class PluginEmbers extends PEIPlugin {
 
 	private class MeltingMapper extends PEIMapper {
 		public MeltingMapper() {
-			super("Melting", "");
+			super("Melting");
 		}
 
 		@Override
@@ -74,7 +74,7 @@ public class PluginEmbers extends PEIPlugin {
 
 	private class MixingMapper extends PEIMapper {
 		public MixingMapper() {
-			super("Mixing", "");
+			super("Mixing");
 		}
 
 		@Override
@@ -87,7 +87,7 @@ public class PluginEmbers extends PEIPlugin {
 
 	private class StamperMapper extends PEIMapper {
 		public StamperMapper() {
-			super("Stamper", "");
+			super("Stamper");
 		}
 
 		@Override

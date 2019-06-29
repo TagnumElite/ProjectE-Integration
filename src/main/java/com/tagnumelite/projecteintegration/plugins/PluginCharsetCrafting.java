@@ -22,7 +22,7 @@ public class PluginCharsetCrafting extends PEIPlugin {
 	
 	private class CharsetLibRecipeMapper extends PEIMapper {
 		public CharsetLibRecipeMapper() {
-			super("Charset Lib Recipe", "");
+			super("Charset Lib Recipe");
 		}
 
 		@Override

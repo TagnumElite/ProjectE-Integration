@@ -30,7 +30,7 @@ public class PluginAstralSorcery extends PEIPlugin {
 
 	private class AltarMapper extends PEIMapper {
 		public AltarMapper() {
-			super("Altar", "");
+			super("Altar");
 		}
 
 		@Override
@@ -64,7 +64,7 @@ public class PluginAstralSorcery extends PEIPlugin {
 
 	private class StarlightInfusionMapper extends PEIMapper {
 		public StarlightInfusionMapper() {
-			super("Starlight Infusion", "");
+			super("Starlight Infusion");
 		}
 
 		@Override

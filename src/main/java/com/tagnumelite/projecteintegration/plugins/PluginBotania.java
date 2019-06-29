@@ -35,7 +35,7 @@ public class PluginBotania extends PEIPlugin {
 
 	@Override
 	public void setup() {
-		addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIED}");
+		addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIRED}");
 
 		addMapper(new ElvenTradeMapper());
 		addMapper(new PetalMapper());
@@ -66,7 +66,7 @@ public class PluginBotania extends PEIPlugin {
 
 	private class ElvenTradeMapper extends PEIMapper {
 		public ElvenTradeMapper() {
-			super("Elven Trade", "");
+			super("Elven Trade");
 		}
 
 		@Override
@@ -89,7 +89,7 @@ public class PluginBotania extends PEIPlugin {
 
 	private class PetalMapper extends PEIMapper {
 		public PetalMapper() {
-			super("Petal", "");
+			super("Petal");
 		}
 
 		@Override
@@ -110,7 +110,7 @@ public class PluginBotania extends PEIPlugin {
 
 	private class PureDaisyMapper extends PEIMapper {
 		public PureDaisyMapper() {
-			super("Pure Daisy", "");
+			super("Pure Daisy");
 		}
 
 		@Override
@@ -142,7 +142,7 @@ public class PluginBotania extends PEIPlugin {
 
 	private class ManaInfusionMapper extends PEIMapper {
 		public ManaInfusionMapper() {
-			super("Mana Infusion", "");
+			super("Mana Infusion");
 		}
 
 		@Override
@@ -168,7 +168,7 @@ public class PluginBotania extends PEIPlugin {
 
 	private class RuneAlterMapper extends PEIMapper {
 		public RuneAlterMapper() {
-			super("Rune Alter", "");
+			super("Rune Alter");
 		}
 
 		@Override

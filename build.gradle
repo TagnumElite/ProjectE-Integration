@@ -74,32 +74,35 @@ repositories {
 dependencies {
     deobfCompile "projecte:ProjectE:${mc_version}:${pe_version}"
     
-    deobfCompile "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
+    deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
-    runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
-        exclude group: 'mezz.jei'
-    }
-	runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
+    //runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
+    //    exclude group: 'mezz.jei'
+    //}
+	//runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
     deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
-    runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
+    //runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
+    //    exclude group: 'mezz.jei'
+    //    exclude group: 'CraftTweaker2'
+    //    exclude group: 'codechicken', module: 'CodeChickenLib'
+    //}
+    deobfProvided "vazkii.botania:Botania:${version_botania}"
+    deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
+    deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
+    //runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
+    //runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
+    deobfProvided ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
         exclude group: 'mezz.jei'
-        exclude group: 'CraftTweaker2'
-        exclude group: 'codechicken', module: 'CodeChickenLib'
     }
-    deobfCompile "vazkii.botania:Botania:${version_botania}"
-    runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
-    deobfCompile ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
-        exclude group: 'mezz.jei'
-    }
-    deobfCompile ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+    deobfProvided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken', module: 'CodeChickenLib'
         exclude group: 'cofh', module: 'RedstoneFlux'
     }
-    deobfCompile ("net.sengir.forestry:forestry_${mc_version}:${version_forestry}") {
+    deobfProvided ("net.sengir.forestry:forestry_${mc_version}:${version_forestry}") {
         exclude group: 'mezz.jei'
     }
-    deobfCompile ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
+    deobfProvided ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
     }
     deobfProvided ("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}") {
@@ -108,58 +111,61 @@ dependencies {
     deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
     runtime "mezz.jei:jei_${mc_version}:${version_jei}"
     provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
-    runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
-    deobfCompile "vazkii.psi:Psi:${version_psi}"
-    deobfCompile ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+    //runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
+    deobfProvided "vazkii.psi:Psi:${version_psi}"
+    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
         exclude group: 'mezz.jei'
     }
-    deobfCompile "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
-    runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
-    deobfCompile "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
-    deobfCompile ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
+    deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
+    //runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
+    //    exclude group: 'mezz.jei'
+    //    exclude group: 'cofh', module: 'RedstoneFlux'
+    //}
+    //runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
+    //    exclude group: 'mezz.jei'
+    //    exclude group: 'cofh', module: 'RedstoneFlux'
+    //}
+    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
+    deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken', module: 'CodeChickenLib'
     }
-    deobfCompile ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
+    deobfProvided ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
-    runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
+    //runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
     
     // CurseForge
-    deobfCompile "astral-sorcery:astralsorcery:${version_astralsorcery}"
-    deobfCompile "armorplus:armorplus:${mc_version}:${version_armorplus}"
-    deobfCompile "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
+    deobfProvided "advanced-rocketry:AdvancedRocketry-${mc_version}-${version_advancedrocketry}:universal"
+    deobfProvided "astral-sorcery:astralsorcery:${version_astralsorcery}"
+    deobfProvided "armorplus:armorplus:${mc_version}:${version_armorplus}"
+    deobfProvided "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
     runtime "athenaeum:athenaeum:${mc_version}:${version_athenaeum}" //Artisan Worktables dependency
     runtime "baubles:Baubles:1.12:1.5.2"
-    deobfCompile "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
-    deobfCompile "calculator:calculator-${mc_version}:${version_calculator}"
-	deobfCompile "charset-lib:Charset:Lib:${version_charsetlib}"
-    deobfCompile "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
+    deobfProvided "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
+    deobfProvided "calculator:calculator-${mc_version}:${version_calculator}"
+	deobfProvided "charset-lib:Charset:Lib:${version_charsetlib}"
+    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
     runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
-	deobfCompile "embers:embers:${version_embers}"
-    //deobfCompile "embers-rekindled:EmbersRekindled:${version_embersrekindled}" //Switch to embers
+	deobfProvided "embers:embers:${version_embers}"
+    //deobfProvided "embers-rekindled:EmbersRekindled:${version_embersrekindled}" //Switch to embers
     deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
     deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
-    deobfCompile "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
-    deobfCompile "extrabotany:ExtraBotany:${version_extrabotany}"
+    deobfProvided "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
+    deobfProvided "extrabotany:ExtraBotany:${version_extrabotany}"
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
-    deobfCompile "mekanism:Mekanism:${mc_version}:${version_mekanism}"
-    //deobfCompile "modular-diversity:Modular+Diversity:1.1"
-    deobfCompile "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
-    deobfCompile "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
-    deobfCompile "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
-    deobfCompile "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
-    runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
-    deobfCompile "woot:woot:${mc_version}:${version_woot}"
+    //deobfProvided "ic2-classic:IC2Classic%201.12:${version_ic2classic}"
+    deobfProvided "libvulpes:LibVulpes-${mc_version}-${version_libvulpes}:universal" //Advanced Rocketry Dependency
+    deobfProvided "mekanism:Mekanism:${mc_version}:${version_mekanism}"
+    //deobfProvided "modular-diversity:Modular%20Diversity:${version_modulardiversity}"
     deobfProvided "modular-machinery:modularmachinery:${version_modularmachinery}"
+    deobfProvided "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
+    deobfProvided "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
+    deobfProvided "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
+    deobfProvided "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
+    runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
+    deobfProvided "woot:woot:${mc_version}:${version_woot}"
 }
 
 processResources {
@@ -273,6 +279,7 @@ curseforge {
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'ExtraBotany'
+            optionalLibrary 'LibVulpes'
             optionalLibrary 'Mekanism'
             optionalLibrary 'Modular-Machinery'
             optionalLibrary 'Mystical-Agriculture'

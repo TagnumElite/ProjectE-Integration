@@ -21,7 +21,7 @@ public class PluginWoot extends PEIPlugin {
 
 	private class AnvilMapper extends PEIMapper {
 		public AnvilMapper() {
-			super("Anvil", "");
+			super("Anvil");
 		}
 
 		@Override

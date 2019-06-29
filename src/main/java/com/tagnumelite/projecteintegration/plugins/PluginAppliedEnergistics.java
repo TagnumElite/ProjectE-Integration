@@ -28,7 +28,7 @@ public class PluginAppliedEnergistics extends PEIPlugin {
 
 	private class InscriberMapper extends PEIMapper {
 		public InscriberMapper() {
-			super("Inscriber", "");
+			super("Inscriber");
 		}
 
 		@Override
@@ -63,7 +63,7 @@ public class PluginAppliedEnergistics extends PEIPlugin {
 
 	private class GrindstoneMapper extends PEIMapper {
 		public GrindstoneMapper() {
-			super("Grindstone", "");
+			super("Grindstone");
 		}
 
 		@Override
