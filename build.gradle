@@ -87,9 +87,6 @@ dependencies {
     //    exclude group: 'codechicken', module: 'CodeChickenLib'
     //}
     deobfProvided "vazkii.botania:Botania:${version_botania}"
-    deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
-    deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
-    //runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
     //runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
     deobfProvided ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
         exclude group: 'mezz.jei'
