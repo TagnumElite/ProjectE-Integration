@@ -261,7 +261,7 @@ curseforge {
             optionalLibrary 'Psi'
             optionalLibrary 'RebornCore'
             optionalLibrary 'TechReborn'
-            optionalLibrary 'ThermalExpansion'
+            optionalLibrary 'Thermal-Expansion'
             optionalLibrary 'Tinkers-Construct'
             
             // From CurseForge Maven
