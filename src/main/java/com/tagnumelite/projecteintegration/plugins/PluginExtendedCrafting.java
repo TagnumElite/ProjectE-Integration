@@ -10,6 +10,7 @@ import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
+import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
 
@@ -34,7 +35,8 @@ public class PluginExtendedCrafting extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe.getOutput(), recipe.getInput());
+				
+				addConversion(recipe.getOutput(), ingredients.getMap());
 			}
 		}
 	}
