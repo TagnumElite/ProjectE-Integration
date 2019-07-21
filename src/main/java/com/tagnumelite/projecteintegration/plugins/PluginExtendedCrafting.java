@@ -35,6 +35,13 @@ public class PluginExtendedCrafting extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
+				IngredientMap<Object> ingredients = new IngredientMap<>();
+				
+				ingredients.addIngredient(recipe.getInput(), recipe.getInputCount());
+				
+				if (recipe.consumeCatalyst()) {
+					ingredients.addIngredient(recipe.getCatalyst(), recipe.getCatalyst().getCount());
+				}
 				
 				addConversion(recipe.getOutput(), ingredients.getMap());
 			}
