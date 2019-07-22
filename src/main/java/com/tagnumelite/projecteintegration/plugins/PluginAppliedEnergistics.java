@@ -55,8 +55,8 @@ public class PluginAppliedEnergistics extends PEIPlugin {
 					if (input_bottom.isPresent() && input_bottom.get() != ItemStack.EMPTY)
 						ingredients.addIngredient(input_bottom.get(), input_bottom.get().getCount());
 				}
-
-				addConversion(output.getCount(), output, ingredients.getMap());
+				
+				addConversion(output, ingredients.getMap());
 			}
 		}
 	}

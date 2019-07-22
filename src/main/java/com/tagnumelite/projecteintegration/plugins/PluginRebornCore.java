@@ -5,6 +5,7 @@ import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class PluginRebornCore extends PEIPlugin {
 							category, true, "Enable conversions for machine " + recipe_name));
 				}
 
-				List<ItemStack> outputs = recipe.getOutputs();
+				List<Object> outputs = new ArrayList<>(recipe.getOutputs());
 				if (outputs == null || outputs.isEmpty())
 					continue;
 
@@ -65,11 +66,13 @@ public class PluginRebornCore extends PEIPlugin {
 				Map<Object, Integer> map = ingredients.getMap();
 				if (map == null || map.isEmpty())
 					continue;
-
+				
+				addConversion(outputs, map);
+				/*
 				outputs.forEach(output -> {
 					if (output != null && !output.isEmpty())
 						addConversion(output, map);
-				});
+				});*/
 			}
 
 			RECIPE_CFG_MAP.clear();

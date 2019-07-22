@@ -101,13 +101,18 @@ public class PluginModularMachinery extends PEIPlugin {
 				
 				Map<Object, Integer> map = ingredients.getMap();
 				
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.addAll(item_outputs);
+				outputs.addAll(fluid_outputs);
+				addConversion(outputs, map);
+				/*
 				for (ItemStack output : item_outputs) {
 					addConversion(output, map);
 				}
 				
 				for (FluidStack output : fluid_outputs) {
 					addConversion(output, map);
-				}
+				}*/
 			}
 		}
 	}

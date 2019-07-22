@@ -1,5 +1,6 @@
 package com.tagnumelite.projecteintegration.plugins;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
@@ -22,7 +23,7 @@ public class PluginLibVulpes extends PEIPlugin {
 
 	@Override
 	public void setup(){
-		PEIApi.LOG.debug("RECIPE LIST SIZE: %i", RecipesMachine.getInstance().recipeList.size());
+		PEIApi.LOG.debug("RECIPE LIST SIZE: {}", RecipesMachine.getInstance().recipeList.size());
 		for (Class<? extends TileMultiblockMachine> clazz : RecipesMachine.getInstance().recipeList.keySet()) {
 			PEIApi.LOG.debug("Adding new mapper from libvuples");
 			addMapper(new RecipeMapper(clazz));
@@ -48,17 +49,23 @@ public class PluginLibVulpes extends PEIPlugin {
 				if (no_item_out || no_fluid_out)
 					continue;
 				
+				ArrayList<Object> outputs = new ArrayList<>();
+				
 				if (!no_item_out) {
+					outputs.addAll(item_outputs);/*
 					for (ItemStack item : item_outputs) {
 						addRecipe(item, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
-					}
+					}*/
 				}
 				
 				if (!no_fluid_out) {
+					outputs.addAll(fluid_outputs);/*
 					for (FluidStack fluid : fluid_outputs) {
 						addRecipe(fluid, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
-					}
+					}*/
 				}
+				
+				addRecipe(outputs, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
 			}
 		}
 	}

@@ -76,11 +76,19 @@ public class PluginEnderIO extends PEIPlugin {
 				if (output.getChance() < 1F || !output.isValid())
 					continue;
 				
-				if (output.getFluidOutput() != null)
-					addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+				ArrayList<Object> outputs = new ArrayList<>();
 				
-				if (output.getOutput() != null)
-					addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+				if (output.getFluidOutput() != null) {
+					outputs.add(output.getFluidOutput());
+					//addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+				}
+				
+				if (output.getOutput() != null) {
+					outputs.add(output.getOutput());
+					//addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+				}
+				
+				addRecipe(outputs, recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
 			}
 		}
 	}

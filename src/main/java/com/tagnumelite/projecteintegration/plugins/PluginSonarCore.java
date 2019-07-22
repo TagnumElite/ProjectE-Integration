@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
-import net.minecraft.item.ItemStack;
 import sonar.core.recipes.DefaultSonarRecipe;
 import sonar.core.recipes.ISonarRecipeObject;
 
@@ -27,13 +26,18 @@ public class PluginSonarCore {
 				else
 					inputs.add(input.getJEIValue());
 			}
-
-			for (ISonarRecipeObject outputs : recipe.outputs()) {
-				for (ItemStack output : outputs.getJEIValue()) {
+			
+			ArrayList<Object> outputs = new ArrayList<>();
+			
+			for (ISonarRecipeObject out : recipe.outputs()) {
+				outputs.addAll(out.getJEIValue());
+				/*for (ItemStack output : out.getJEIValue()) {
 					addRecipe(output, inputs.stream().toArray());
 
-				}
+				}*/
 			}
+			
+			addRecipe(outputs, inputs.stream().toArray());
 		}
 	}
 }

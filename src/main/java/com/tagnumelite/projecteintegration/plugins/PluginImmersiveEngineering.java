@@ -137,6 +137,8 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 				IngredientStack input2 = recipe.input1;
 				if (input2 == null || input2.inputSize <= 0)
 					continue;
+				
+				//addRecipe(output.copy(), input1.) TODO: Output for kiln mapper
 			}
 		}
 	}
@@ -179,24 +181,30 @@ public class PluginImmersiveEngineering extends PEIPlugin {
 			Map<Object, Integer> input_map = ingredients.getMap();
 			if (input_map == null || input_map.isEmpty())
 				return;
+			
+			ArrayList<Object> outputs = new ArrayList<>();
 
 			if (item_outputs != null && !item_outputs.isEmpty()) {
 				for (ItemStack output : item_outputs) {
 					if (output == null || output.isEmpty())
 						continue;
 
-					addConversion(output, input_map);
+					//addConversion(output, input_map);
+					outputs.add(output);
 				}
 			}
 
 			if (fluid_outputs != null && !fluid_outputs.isEmpty()) {
 				for (FluidStack output : fluid_outputs) {
-					if (output == null || output.amount == 0)
+					if (output == null || output.amount <= 0)
 						continue;
 
-					addConversion(output, input_map);
+					//addConversion(output, input_map);
+					outputs.add(output);
 				}
 			}
+			
+			addConversion(outputs, input_map);
 		}
 	}
 

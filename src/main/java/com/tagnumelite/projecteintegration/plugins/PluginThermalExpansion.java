@@ -3,9 +3,13 @@ package com.tagnumelite.projecteintegration.plugins;
 import cofh.thermalexpansion.util.managers.machine.*;
 import cofh.thermalfoundation.init.TFFluids;
 
+import java.util.ArrayList;
+
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+import com.tagnumelite.projecteintegration.api.utils.Utils;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -171,11 +175,19 @@ public class PluginThermalExpansion extends PEIPlugin {
 					continue;
 
 				if (recipe.hasFertilizer())
-					continue; // Most recipes with fertilizer is dupe recipes, ignore those
+					continue; // Most, if not all, recipes with fertilizer is dupe recipes, ignore those
 
-				addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO:
-																											// Secondary
-																											// outputs
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.add(recipe.getPrimaryOutput());
+				
+				if (recipe.getSecondaryOutputChance() >= 100) {
+					outputs.add(recipe.getSecondaryOutput());
+				}
+				
+				addRecipe(outputs, recipe.getPrimaryInput(), recipe.getSecondaryInput());
+
+				// addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(),
+				// recipe.getSecondaryInput());
 			}
 		}
 	}
@@ -201,7 +213,15 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (PulverizerManager.PulverizerRecipe recipe : PulverizerManager.getRecipeList()) {
-				addRecipe(recipe.getPrimaryOutput(), recipe.getInput()); // TODO: Maybe, the secondary outputs?
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.add(recipe.getPrimaryOutput());
+				
+				if (recipe.getSecondaryOutputChance() >= 100) {
+					outputs.add(recipe.getSecondaryOutput());
+				} 
+				
+				addRecipe(outputs, recipe.getInput());
+				//addRecipe(recipe.getPrimaryOutput(), recipe.getInput());
 			}
 		}
 	}
@@ -217,8 +237,14 @@ public class PluginThermalExpansion extends PEIPlugin {
 				if (recipe.getChance() != 100)
 					continue;
 
-				addRecipe(recipe.getOutputItem(), recipe.getInput());
-				addRecipe(recipe.getOutputFluid(), recipe.getInput()); // TODO: Combine this into one
+				//addRecipe(recipe.getOutputItem(), recipe.getInput());
+				//addRecipe(recipe.getOutputFluid(), recipe.getInput());
+				
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.add(recipe.getOutputFluid());
+				outputs.add(recipe.getOutputItem());
+				
+				addRecipe(outputs, recipe.getInput());
 			}
 		}
 	}
@@ -231,7 +257,15 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (SawmillManager.SawmillRecipe recipe : SawmillManager.getRecipeList()) {
-				addRecipe(recipe.getPrimaryOutput(), recipe.getInput()); // TODO: Maybe the secondary outputs
+				//addRecipe(recipe.getPrimaryOutput(), recipe.getInput());
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.add(recipe.getPrimaryOutput());
+				
+				if (recipe.getSecondaryOutputChance() >= 100) {
+					outputs.add(recipe.getSecondaryOutput());
+				}
+				
+				addRecipe(outputs, recipe.getInput());
 			}
 		}
 	}
@@ -244,9 +278,15 @@ public class PluginThermalExpansion extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (SmelterManager.SmelterRecipe recipe : SmelterManager.getRecipeList()) {
-				addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput()); // TODO:
-																											// Secondary
-																											// Outputs
+				//addRecipe(recipe.getPrimaryOutput(), recipe.getPrimaryInput(), recipe.getSecondaryInput());
+				ArrayList<Object> outputs = new ArrayList<>();
+				outputs.add(recipe.getPrimaryOutput());
+				
+				if (recipe.getSecondaryOutputChance() >= 100) {
+					outputs.add(recipe.getSecondaryOutput());
+				}
+				
+				addRecipe(outputs, recipe.getPrimaryInput(), recipe.getSecondaryInput());
 			}
 		}
 	}

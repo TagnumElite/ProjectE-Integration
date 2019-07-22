@@ -1,5 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
+import java.util.ArrayList;
+
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
@@ -64,7 +66,14 @@ public class PluginActuallyAdditions extends PEIPlugin {
 		@Override
 		public void setup() {
 			for (CrusherRecipe recipe : ActuallyAdditionsAPI.CRUSHER_RECIPES) {
-				addRecipe(recipe.getOutputOne(), recipe.getInput()); // TODO: Secondary Output
+				if (recipe.getSecondChance() >= 100) {
+					ArrayList<Object> output = new ArrayList<>();
+					output.add(recipe.getOutputOne());
+					output.add(recipe.getOutputTwo());
+					addRecipe(output, recipe.getInput());
+				} else {
+					addRecipe(recipe.getOutputOne(), recipe.getInput());
+				}
 			}
 		}
 	}

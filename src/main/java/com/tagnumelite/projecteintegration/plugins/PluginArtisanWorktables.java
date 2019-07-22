@@ -55,23 +55,28 @@ public class PluginArtisanWorktables extends PEIPlugin {
 				recipe.getSecondaryIngredients().forEach(ing -> {ingredients.add(new SizedIngredient(ing.getAmount(), ing.toIngredient()));});
 				FluidStack fluid_input = recipe.getFluidIngredient();
 				
-				
+				ArrayList<Object> outputs = new ArrayList<>();
 				for (OutputWeightPair output : recipe.getOutputWeightPairList()) {
-					addRecipe(output.getOutput().toItemStack(), fluid_input, ingredients.toArray());
+					outputs.add(output.getOutput().toItemStack());
+					//addRecipe(output.getOutput().toItemStack(), fluid_input, ingredients.toArray());
 				}
-
 				
 				if (recipe.getSecondaryOutputChance() >= 1f) {
-					addRecipe(recipe.getSecondaryOutput().toItemStack(), fluid_input, ingredients.toArray());
+					outputs.add(recipe.getSecondaryOutput().toItemStack());
+					//addRecipe(recipe.getSecondaryOutput().toItemStack(), fluid_input, ingredients.toArray());
 				}
 				
 				if (recipe.getTertiaryOutputChance() >= 1f) {
-					addRecipe(recipe.getTertiaryOutput().toItemStack(), fluid_input, ingredients.toArray());
+					outputs.add(recipe.getTertiaryOutput().toItemStack());
+					//addRecipe(recipe.getTertiaryOutput().toItemStack(), fluid_input, ingredients.toArray());
 				}
 				
 				if (recipe.getQuaternaryOutputChance() >= 1f) {
-					addRecipe(recipe.getQuaternaryOutput().toItemStack(), fluid_input, ingredients.toArray());
+					outputs.add(recipe.getQuaternaryOutput().toItemStack());
+					//addRecipe(recipe.getQuaternaryOutput().toItemStack(), fluid_input, ingredients.toArray());
 				}
+				
+				addRecipe(outputs, fluid_input, ingredients.toArray());
 			}
 		}
 	}

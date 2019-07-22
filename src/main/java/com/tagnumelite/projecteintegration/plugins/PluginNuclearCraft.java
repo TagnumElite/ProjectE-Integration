@@ -2,10 +2,12 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import moze_intel.projecte.emc.IngredientMap;
@@ -89,23 +91,32 @@ public class PluginNuclearCraft extends PEIPlugin {
 					ingredients.addIngredient(getObjectFromFluidIngredient(input), input.getMaxStackSize(0));
 				}
 
-				for (IItemIngredient output : item_outputs) {
-					for (ItemStack output_item : output.getInputStackList()) {
-						if (output_item == null || output_item.isEmpty())
-							continue;
+				ArrayList<Object> output = new ArrayList<>();
+				item_outputs.forEach(item -> {
+					PEIApi.LOG.debug("Item Input: {}; Output {};", item.getInputStackList(), item.getOutputStackList());
+					output.addAll(item.getOutputStackList());
+				});
+				fluid_outputs.forEach(fluid -> {
+					PEIApi.LOG.debug("Fluid Input: {}; Output {};", fluid.getInputStackList(), fluid.getOutputStackList());
+					output.addAll(fluid.getInputStackList());
+				});
+				
 
-						addConversion(output_item, ingredients.getMap());
-					}
-				}
+				addConversion(output, ingredients.getMap());
 
-				for (IFluidIngredient output : fluid_outputs) {
-					for (FluidStack output_fluid : output.getInputStackList()) {
-						if (output_fluid == null || output_fluid.amount == 0)
-							continue;
-
-						addConversion(output_fluid, ingredients.getMap());
-					}
-				}
+				/*
+				 * for (IItemIngredient output : item_outputs) { for (ItemStack output_item :
+				 * output.getInputStackList()) { if (output_item == null ||
+				 * output_item.isEmpty()) continue;
+				 * 
+				 * addConversion(output_item, ingredients.getMap()); } }
+				 * 
+				 * for (IFluidIngredient output : fluid_outputs) { for (FluidStack output_fluid
+				 * : output.getInputStackList()) { if (output_fluid == null ||
+				 * output_fluid.amount == 0) continue;
+				 * 
+				 * addConversion(output_fluid, ingredients.getMap()); } }
+				 */
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package com.tagnumelite.projecteintegration.api.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang3.ClassUtils;
@@ -19,15 +21,44 @@ public class Utils {
 	/**
 	 * Compare {@code ItemStack}s against each other
 	 * 
-	 * @param stack1
-	 *            {@code ItemStack} The stack to compare against
-	 * @param stack2
-	 *            {@code ItemStack} The stack to compare with
-	 * @return {@code boolean} Wether or not they are the same item
+	 * @param stack1 {@code ItemStack} The stack to compare against
+	 * @param stack2 {@code ItemStack} The stack to compare with
+	 * @return {@code boolean} Whether or not they are the same item
 	 */
 	public static boolean isSameItem(ItemStack stack1, ItemStack stack2) {
 		return stack2.getItem() == stack1.getItem()
 				&& (stack2.getItemDamage() == 32767 || stack2.getItemDamage() == stack1.getItemDamage());
+	}
+
+	/**
+	 * 
+	 * @param outputs
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Object> createOutputs(Object output, Object... outputs) {
+		ArrayList<Object> ret = new ArrayList<>();
+		ArrayList<Object> l = new ArrayList<>();
+
+		l.add(output);
+
+		if (outputs != null && outputs.length > 0) {
+			l.addAll(Arrays.asList(outputs));
+		}
+		
+		for (Object t : l) {
+			if (t instanceof List) {
+				ret.addAll((Collection<? extends Object>) t);
+			} else if (t instanceof Object[]) {
+				ret.addAll(Arrays.asList(t));
+			} else {
+				ret.add(t);
+			}
+		}
+		
+		l.clear();
+
+		return ret;
 	}
 
 	public static IngredientMap<Object> createInputs(Object... inputs) {
@@ -72,7 +103,7 @@ public class Utils {
 				SizedIngredient inp = (SizedIngredient) input;
 				if (inp.object == Ingredient.EMPTY)
 					continue;
-				
+
 				ingredients.addIngredient(PEIApi.getIngredient(inp.object), inp.amount);
 			} else if (input instanceof Object[]) {
 				PEIApi.LOG.debug("Found Array within Array: {} within {}", input, inputs);

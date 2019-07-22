@@ -84,10 +84,12 @@ public class PluginPamsHarvestCraft extends PEIPlugin {
 							continue;
 						}
 					}
-
+					
+					addRecipe(Utils.createOutputs(outputs), input);
+					/*
 					for (ItemStack output : outputs) {
 						addRecipe(output, input);
-					}
+					}*/
 				}
 			} catch (Exception e) {
 				PEIApi.LOG.error("Failed to get HarvestCraft machine '{}' recipes: {}", name, e);

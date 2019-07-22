@@ -21,6 +21,7 @@
  */
 package com.tagnumelite.projecteintegration.plugins;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -222,16 +223,21 @@ public class PluginMekanism extends PEIPlugin {
 		public void setup() {
 			for (ChanceMachineRecipe<?> recipe : recipe_type.get().values()) {
 				ChanceOutput output = recipe.getOutput();
+				
+				ArrayList<Object> outputs = new ArrayList<>();
 				if (output.hasPrimary()) {
-					addRecipe(output.primaryOutput, recipe.getInput().ingredient);
+					//addRecipe(output.primaryOutput, recipe.getInput().ingredient);
+					outputs.add(output.primaryOutput);
 				}
 
 				if (output.hasSecondary()) {
-					if (output.secondaryChance != 100)
-						continue;
-
-					addRecipe(output.secondaryOutput, recipe.getInput().ingredient);
+					if (output.secondaryChance >= 100) {
+						 //addRecipe(output.secondaryOutput, recipe.getInput().ingredient);
+						outputs.add(output.secondaryOutput);
+					}
 				}
+				
+				addRecipe(outputs, recipe.getInput().ingredient);
 			}
 		}
 	}
@@ -423,9 +429,11 @@ public class PluginMekanism extends PEIPlugin {
 
 				if (GAS_MAP.containsKey(input.getGas().getGas()))
 					ingredients.put(GAS_MAP.get(input.getGas().getGas()), input.getGas().amount);
-
-				if (GAS_MAP.containsKey(output.getGasOutput().getGas()))
+				
+				//ArrayList<Object> outputs = new ArrayList<>(); TODO: GasStack support for output
+				if (GAS_MAP.containsKey(output.getGasOutput().getGas())) {
 					addConversion(output.getGasOutput(), ingredients);
+				}
 
 				addConversion(output.getItemOutput(), ingredients);
 			}
