@@ -30,7 +30,7 @@ import org.apache.logging.log4j.Logger;
  * @author TagnumElite
  * @version 2.0.0
  */
-@Mod(modid = PEIApi.MODID, name = PEIApi.NAME, version = PEIApi.VERSION, dependencies = Reference.DEPENDENCIES, certificateFingerprint = "342c9251777bda1ef9b9f1cb1387c2bd4d06cd78")
+@Mod(modid = PEIApi.MODID, name = PEIApi.NAME, version = PEIApi.VERSION, dependencies = Reference.DEPENDENCIES, certificateFingerprint = "342c9251777bda1ef9b9f1cb1387c2bd4d06cd78", acceptableRemoteVersions = "*")
 public class PEIntegration {
 	public static Configuration config;
 	private static boolean DISABLE = false;
