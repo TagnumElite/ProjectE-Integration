@@ -80,6 +80,7 @@ public class PluginNuclearCraft extends PEIPlugin {
 				if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0)
 						|| (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
 					PEIntegration.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
+					continue;
 				}
 
 				IngredientMap<Object> ingredients = new IngredientMap<Object>();
