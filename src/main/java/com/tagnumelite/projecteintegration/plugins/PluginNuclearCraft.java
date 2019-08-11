@@ -8,13 +8,13 @@ import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import moze_intel.projecte.emc.IngredientMap;
+import nc.recipe.AbstractRecipeHandler;
+import nc.recipe.IRecipe;
 import nc.recipe.NCRecipes;
-import nc.recipe.NCRecipes.Type;
-import nc.recipe.ProcessorRecipe;
-import nc.recipe.ProcessorRecipeHandler;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 import net.minecraft.item.ItemStack;
@@ -29,17 +29,27 @@ public class PluginNuclearCraft extends PEIPlugin {
 
 	@Override
 	public void setup() {
-		for (Type recipe_type : NCRecipes.Type.values()) {
-			addMapper(new NCRecipeMapper(recipe_type));
+		ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();
+		Collections.addAll(handlers, NCRecipes.active_cooler, NCRecipes.alloy_furnace, NCRecipes.centrifuge,
+				NCRecipes.chemical_reactor, NCRecipes.collector, NCRecipes.condenser, NCRecipes.coolant_heater,
+				NCRecipes.crystallizer, NCRecipes.decay_generator, NCRecipes.decay_hastener, NCRecipes.dissolver,
+				NCRecipes.electrolyser, NCRecipes.extractor, NCRecipes.fission, NCRecipes.fuel_reprocessor,
+				NCRecipes.fusion, NCRecipes.heat_exchanger, NCRecipes.infuser, NCRecipes.ingot_former,
+				NCRecipes.irradiator, NCRecipes.isotope_separator, NCRecipes.manufactory, NCRecipes.melter,
+				NCRecipes.pressurizer, NCRecipes.rock_crusher, NCRecipes.salt_fission, NCRecipes.salt_mixer,
+				NCRecipes.supercooler, NCRecipes.turbine);
+
+		for (AbstractRecipeHandler<? extends IRecipe> handler : handlers) {
+			addMapper(new AbstractRecipeMapper(handler));
 		}
 	}
 
-	private class NCRecipeMapper extends PEIMapper {
-		private Type recipe_type;
+	private class AbstractRecipeMapper extends PEIMapper {
+		private AbstractRecipeHandler<? extends IRecipe> handler;
 
-		public NCRecipeMapper(Type recipe_type) {
-			super(recipe_type.toString());
-			this.recipe_type = recipe_type;
+		public AbstractRecipeMapper(AbstractRecipeHandler<? extends IRecipe> handler) {
+			super(handler.getRecipeName());
+			this.handler = handler;
 		}
 
 		private Object getObjectFromItemIngredient(IItemIngredient item) {
@@ -60,25 +70,16 @@ public class PluginNuclearCraft extends PEIPlugin {
 
 		@Override
 		public void setup() {
-			final ProcessorRecipeHandler recipe_handler = recipe_type.getRecipeHandler();
-
-			for (ProcessorRecipe recipe : recipe_handler.getRecipes()) {
-				final int fluid_input_size = recipe_handler.fluidInputSize;
-				final int fluid_output_size = recipe_handler.fluidOutputSize;
-				final int item_input_size = recipe_handler.itemInputSize;
-				final int item_output_size = recipe_handler.itemOutputSize;
-
+			for (IRecipe recipe : handler.getRecipes()) {
 				List<IItemIngredient> item_inputs = recipe.itemIngredients();
 				List<IFluidIngredient> fluid_inputs = recipe.fluidIngredients();
 
 				List<IItemIngredient> item_outputs = recipe.itemProducts();
 				List<IFluidIngredient> fluid_outputs = recipe.fluidProducts();
 
-				if ((item_output_size == 0 && fluid_output_size == 0) || (fluid_input_size == 0 && item_input_size == 0)
-						|| (item_outputs.size() != item_output_size) || (fluid_outputs.size() != fluid_output_size)
-						|| (item_inputs.size() != item_input_size) || (fluid_inputs.size() != fluid_input_size)) {
-					PEIntegration.LOG.warn("Invalid Recipe: {}", recipe_handler.getRecipeName());
-					continue;
+				if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0)
+						|| (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
+					PEIntegration.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
 				}
 
 				IngredientMap<Object> ingredients = new IngredientMap<Object>();
@@ -97,10 +98,10 @@ public class PluginNuclearCraft extends PEIPlugin {
 					output.addAll(item.getOutputStackList());
 				});
 				fluid_outputs.forEach(fluid -> {
-					PEIApi.LOG.debug("Fluid Input: {}; Output {};", fluid.getInputStackList(), fluid.getOutputStackList());
+					PEIApi.LOG.debug("Fluid Input: {}; Output {};", fluid.getInputStackList(),
+							fluid.getOutputStackList());
 					output.addAll(fluid.getInputStackList());
 				});
-				
 
 				addConversion(output, ingredients.getMap());
 

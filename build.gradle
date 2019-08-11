@@ -3,6 +3,7 @@ buildscript {
         mavenCentral()
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -12,6 +13,7 @@ buildscript {
 plugins {
   id "com.matthewprenger.cursegradle" version "1.1.2"
   id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.32"
+  id "com.wynprice.cursemaven" version "1.2.0"
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -152,7 +154,7 @@ dependencies {
     deobfProvided "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
     deobfProvided "extrabotany:ExtraBotany:${version_extrabotany}"
     runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
-    //deobfProvided "ic2-classic:IC2Classic%201.12:${version_ic2classic}"
+    deobfProvided curse.resolve("ic2-classic", "${version_ic2classic}")
     deobfProvided "libvulpes:LibVulpes-${mc_version}-${version_libvulpes}:universal" //Advanced Rocketry Dependency
     deobfProvided "mekanism:Mekanism:${mc_version}:${version_mekanism}"
     //deobfProvided "modular-diversity:Modular%20Diversity:${version_modulardiversity}"
