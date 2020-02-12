@@ -13,11 +13,13 @@ buildscript {
 plugins {
     id "com.matthewprenger.cursegradle" version "1.1.2"
     id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.32"
-    id "com.wynprice.cursemaven" version "1.2.0"
+    id "com.wynprice.cursemaven" version "2.1.1"
     id 'maven-publish'
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
 
 version = "${version}"
 if (System.getenv("BUILD_NUMBER") != null) {
@@ -65,6 +67,9 @@ repositories {
         url "https://maven.tterrag.com"
     }
     maven {
+        name "TehNuuuuuuuuuuuut"
+        url 'http://tehnut.info/maven/' }
+    maven {
         name "ModMaven"
         url "https://modmaven.k-4u.nl"
     }
@@ -83,8 +88,8 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "projecte:ProjectE:${mc_version}:${pe_version}"
-    
+    deobfCompile "curse.maven:projecte:${pe_id}"
+
     deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
     //runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
@@ -97,6 +102,7 @@ dependencies {
     //    exclude group: 'CraftTweaker2'
     //    exclude group: 'codechicken', module: 'CodeChickenLib'
     //}
+    deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
     deobfProvided "vazkii.botania:Botania:${version_botania}"
     //runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
     deobfProvided ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
@@ -110,6 +116,7 @@ dependencies {
     deobfProvided ("net.sengir.forestry:forestry_${mc_version}:${version_forestry}") {
         exclude group: 'mezz.jei'
     }
+    runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Blood Magic & Woot Dependency
     deobfProvided ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
     }
@@ -145,35 +152,41 @@ dependencies {
     //runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
     
     // CurseForge
-    deobfProvided "advanced-rocketry:AdvancedRocketry-${mc_version}-${version_advancedrocketry}:universal"
-    deobfProvided "astral-sorcery:astralsorcery:${version_astralsorcery}"
-    deobfProvided "armorplus:armorplus:${mc_version}:${version_armorplus}"
-    deobfProvided "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
-    runtime "athenaeum:athenaeum:${mc_version}:${version_athenaeum}" //Artisan Worktables dependency
-    runtime "baubles:Baubles:1.12:1.5.2"
-    deobfProvided "blood-magic:BloodMagic-${mc_version}:${version_bloodmagic}"
-    deobfProvided "calculator:calculator-${mc_version}:${version_calculator}"
-	deobfProvided "charset-lib:Charset:Lib:${version_charsetlib}"
-    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
-    runtime "cucumber:Cucumber:${mc_version}:${version_cucumber}" //ExtendedCrafting & Mystical-Agriculture Dependency
-	deobfProvided "embers:embers:${version_embers}"
-    //deobfProvided "embers-rekindled:EmbersRekindled:${version_embersrekindled}" //Switch to embers
-    deobfProvided "endercore:EnderCore:${mc_version}:${version_endercore}"
-    deobfProvided "ender-io:EnderIO:${mc_version}:${version_enderio}"
-    deobfProvided "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
-    deobfProvided "extrabotany:ExtraBotany:${version_extrabotany}"
-    runtime "guide-api:Guide-API-1.12:${version_guideapi}" //Blood Magic & Woot Dependency
-    deobfProvided curse.resolve("ic2-classic", "${version_ic2classic}")
-    deobfProvided "libvulpes:LibVulpes-${mc_version}-${version_libvulpes}:universal" //Advanced Rocketry Dependency
-    deobfProvided "mekanism:Mekanism:${mc_version}:${version_mekanism}"
-    //deobfProvided "modular-diversity:Modular%20Diversity:${version_modulardiversity}"
-    deobfProvided "modular-machinery:modularmachinery:${version_modularmachinery}"
-    deobfProvided "mystical-agriculture:MysticalAgriculture:${mc_version}:${version_mysticalagriculture}"
-    deobfProvided "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
-    deobfProvided "sonar-core:sonarcore-${mc_version}:${version_sonarcore}" //Calculator Dependency
-    deobfProvided "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
-    runtime "thedragonlib:thedragonlib:${mc_version}:${version_thedragonlib}" //ArmorPlus Dependency
-    deobfProvided "woot:woot:${mc_version}:${version_woot}"
+    compile "curse.maven:advancedrocketry:${curse_advancedrocketry}"
+    deobfCompile "curse.maven:armorplus:${curse_armorplus}"
+    deobfCompile "curse.maven:artisanworktables:${curse_artisanworktables}"
+    runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
+    deobfCompile "curse.maven:astralsorcery:${curse_astralsorcery}"
+    runtime "curse.maven:athenaeum:${curse_athenaeum}"
+    deobfCompile "curse.maven:calculator:${curse_calculator}"
+    deobfCompile "curse.maven:charsetlib:${curse_charsetlib}"
+    deobfCompile "curse.maven:compactmachines:${curse_compactmachines}"
+    deobfCompile "curse.maven:cucumber:${curse_cucumber}"
+    deobfCompile "curse.maven:embers:${curse_embers}"
+    //deobfCompile "curse.maven:embersrekindled:${curse_embersrekindled}"
+    deobfCompile "curse.maven:endercore:${curse_endercore}"
+    deobfCompile "curse.maven:enderio:${curse_enderio}"
+    deobfCompile "curse.maven:extendedcrafting:${curse_extendedcrafting}"
+    deobfCompile "curse.maven:extrabotany:${curse_extrabotany}"
+    deobfCompile "curse.maven:extrautilities:${curse_extrautilities}"
+    //deobfCompile "curse.maven:gregtechce:${curse_gregtechce}"
+    runtime "curse.maven:baubles:${curse_baubles}"
+    deobfCompile "curse.maven:harvestcraft:${curse_harvestcraft}"
+    //deobfCompile "curse.maven:ic2classic:${curse_ic2classic}"
+    compile "curse.maven:libvulpes:${curse_libvulpes}"
+    deobfCompile "curse.maven:mekanism:${curse_mekanism}"
+    runtime "curse.maven:mekanismgen:${curse_mekanismgen}"
+    runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
+    deobfCompile "curse.maven:modularmachinery:${curse_modularmachinery}"
+    runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
+    deobfCompile "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
+    runtime "curse.maven:mysticalagridations:${curse_mysticalagridations}"
+    deobfCompile "curse.maven:nuclearcraft:${curse_nuclearcraft}"
+    //deobfCompile "curse.maven:nuclearcraftoverhauled:${curse_nuclearcraftoverhauled}"
+    deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
+    deobfCompile "curse.maven:thaumcraft:${curse_thaumcraft}"
+    runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
+    deobfCompile "curse.maven:woot:${curse_woot}"
 }
 
 processResources {
