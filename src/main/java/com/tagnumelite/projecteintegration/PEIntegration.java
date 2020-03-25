@@ -38,7 +38,7 @@ public class PEIntegration {
 	public static final Logger LOG = LogManager.getLogger(PEIApi.MODID);
 	private static boolean MAPPER_ERRORED = false;
 
-	private final List<PEIPlugin> PLUGINS = new ArrayList<PEIPlugin>();
+	private final List<PEIPlugin> PLUGINS = new ArrayList<>();
 
 	public boolean isLoaded() {
 		return LOADED;

@@ -27,10 +27,9 @@ if (System.getenv("BUILD_NUMBER") != null) {
 } else if (System.getenv("TRAVIS_BUILD_NUMBER") != null) {
     version += ".${System.getenv().TRAVIS_BUILD_NUMBER}"
 }
-
 if (System.getenv("TRAVIS_PULL_REQUEST") != null) {
     if (System.getenv("TRAVIS_PULL_REQUEST") != "false") {
-    version = version + "+p" + System.getenv("TRAVIS_PULL_REQUEST");
+        version = version + "+p" + System.getenv("TRAVIS_PULL_REQUEST");
     }
 }
 
@@ -48,15 +47,10 @@ minecraft {
     
     mappings = "snapshot_${mcp_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
     replace '@VERSION@', "${version}"
-    
-    //replace 'after:actuallyadditions', "after:actuallyadditions@[${version_actuallyadditions},)"
-    //replace 'after:appliedenergistics2', "after:appliedenergistics2@[${version_appliedenergistics},)"
-    //replace 'after:armorplus', "after:armorplus@[${version_armorplus},)"
-    //replace 'after:avaritia', "after:avaritia@[${version_avaritia},)"
-    //replace 'after:extendedcrafting', "after:extendedcrafting@[${version_extendedcrafting},)"
-    //replace 'after:extrautils2', "after:extrautils2"
+
     replace 'after:mekanism', "after:mekanism@[${mc_version}-1.0.0,${mc_version}-1.2.0],[${mc_version}-${version_mekanism},)"
     replace 'after:nuclearcraft', "after:nuclearcraft@[${version_nuclearcraft},)"
 }
@@ -88,34 +82,41 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "curse.maven:projecte:${pe_id}"
+    deobfProvided "curse.maven:projecte:${pe_id}"
 
     deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
-    //runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
-    //    exclude group: 'mezz.jei'
-    //}
-	//runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
+    runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
+        exclude group: 'mezz.jei'
+    }
+    //runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
     deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
-    //runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
+    runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'CraftTweaker2'
+        exclude group: 'codechicken'
+    }
+    //deobfProvided ("binnie:binnie-mods-${mc_version}:${version_binniemods}") {
     //    exclude group: 'mezz.jei'
-    //    exclude group: 'CraftTweaker2'
-    //    exclude group: 'codechicken', module: 'CodeChickenLib'
+    //    exclude group: 'jei-bees'
+    //    exclude group: 'net.industrial-craft'
     //}
     deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
     deobfProvided "vazkii.botania:Botania:${version_botania}"
-    //runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
-    deobfProvided ("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}") {
-        exclude group: 'mezz.jei'
-    }
+    deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
+    deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
+    runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
+    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
+    runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
+    deobfProvided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
     deobfProvided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
-        exclude group: 'codechicken', module: 'CodeChickenLib'
-        exclude group: 'cofh', module: 'RedstoneFlux'
+        exclude group: 'codechicken'
+        exclude group: 'cofh'
+        exclude group: 'li.cil.oc'
     }
-    deobfProvided ("net.sengir.forestry:forestry_${mc_version}:${version_forestry}") {
-        exclude group: 'mezz.jei'
-    }
+    deobfProvided "team.chisel.ctm:CTM:MC${mc_version}-${version_ctm}"
+    //deobfProvided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}"
     runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Blood Magic & Woot Dependency
     deobfProvided ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
@@ -126,20 +127,21 @@ dependencies {
     deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
     runtime "mezz.jei:jei_${mc_version}:${version_jei}"
     provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
-    //runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
+    runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
     deobfProvided "vazkii.psi:Psi:${version_psi}"
+    deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
     deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
         exclude group: 'mezz.jei'
     }
     deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    //runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
-    //    exclude group: 'mezz.jei'
-    //    exclude group: 'cofh', module: 'RedstoneFlux'
-    //}
-    //runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
-    //    exclude group: 'mezz.jei'
-    //    exclude group: 'cofh', module: 'RedstoneFlux'
-    //}
+    runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'cofh', module: 'RedstoneFlux'
+    }
+    runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
+        exclude group: 'mezz.jei'
+        exclude group: 'cofh', module: 'RedstoneFlux'
+    }
     deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
     deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
         exclude group: 'mezz.jei'
@@ -149,44 +151,46 @@ dependencies {
         exclude group: 'mezz.jei'
     }
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
-    //runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
-    
+    runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
+
     // CurseForge
-    compile "curse.maven:advancedrocketry:${curse_advancedrocketry}"
-    deobfCompile "curse.maven:armorplus:${curse_armorplus}"
-    deobfCompile "curse.maven:artisanworktables:${curse_artisanworktables}"
+    provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
+    deobfProvided "curse.maven:armorplus:${curse_armorplus}"
+    deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
     runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
-    deobfCompile "curse.maven:astralsorcery:${curse_astralsorcery}"
+    deobfProvided "curse.maven:astralsorcery:${curse_astralsorcery}"
     runtime "curse.maven:athenaeum:${curse_athenaeum}"
-    deobfCompile "curse.maven:calculator:${curse_calculator}"
-    deobfCompile "curse.maven:charsetlib:${curse_charsetlib}"
-    deobfCompile "curse.maven:compactmachines:${curse_compactmachines}"
-    deobfCompile "curse.maven:cucumber:${curse_cucumber}"
-    deobfCompile "curse.maven:embers:${curse_embers}"
-    //deobfCompile "curse.maven:embersrekindled:${curse_embersrekindled}"
-    deobfCompile "curse.maven:endercore:${curse_endercore}"
-    deobfCompile "curse.maven:enderio:${curse_enderio}"
-    deobfCompile "curse.maven:extendedcrafting:${curse_extendedcrafting}"
-    deobfCompile "curse.maven:extrabotany:${curse_extrabotany}"
-    deobfCompile "curse.maven:extrautilities:${curse_extrautilities}"
-    //deobfCompile "curse.maven:gregtechce:${curse_gregtechce}"
+    deobfProvided "curse.maven:calculator:${curse_calculator}"
+    deobfProvided "curse.maven:charsetlib:${curse_charsetlib}"
+    deobfProvided "curse.maven:compactmachines:${curse_compactmachines}"
+    deobfProvided "curse.maven:cucumber:${curse_cucumber}"
+    deobfProvided "curse.maven:embers:${curse_embers}"
+    //deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
+    deobfProvided "curse.maven:endercore:${curse_endercore}"
+    deobfProvided "curse.maven:enderio:${curse_enderio}"
+    deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
+    deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
+    deobfProvided "curse.maven:extrautilities:${curse_extrautilities}"
+    //deobfProvided "curse.maven:gregtechce:${curse_gregtechce}"
     runtime "curse.maven:baubles:${curse_baubles}"
-    deobfCompile "curse.maven:harvestcraft:${curse_harvestcraft}"
-    //deobfCompile "curse.maven:ic2classic:${curse_ic2classic}"
-    compile "curse.maven:libvulpes:${curse_libvulpes}"
-    deobfCompile "curse.maven:mekanism:${curse_mekanism}"
+    // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
+    //deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
+    //deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
+    provided "curse.maven:libvulpes:${curse_libvulpes}"
+    deobfProvided "curse.maven:mekanism:${curse_mekanism}"
     runtime "curse.maven:mekanismgen:${curse_mekanismgen}"
     runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
-    deobfCompile "curse.maven:modularmachinery:${curse_modularmachinery}"
+    deobfProvided "curse.maven:modularmachinery:${curse_modularmachinery}"
     runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
-    deobfCompile "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
+    // --- deobfProvided "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
+    //deobfProvided "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
     runtime "curse.maven:mysticalagridations:${curse_mysticalagridations}"
-    deobfCompile "curse.maven:nuclearcraft:${curse_nuclearcraft}"
-    //deobfCompile "curse.maven:nuclearcraftoverhauled:${curse_nuclearcraftoverhauled}"
+    //deobfProvided "curse.maven:nuclearcraft:${curse_nuclearcraft}"
+    deobfProvided "curse.maven:nuclearcraftoverhauled:${curse_nuclearcraftoverhauled}"
     deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
-    deobfCompile "curse.maven:thaumcraft:${curse_thaumcraft}"
+    deobfProvided "curse.maven:thaumcraft:${curse_thaumcraft}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
-    deobfCompile "curse.maven:woot:${curse_woot}"
+    deobfProvided "curse.maven:woot:${curse_woot}"
 }
 
 processResources {
@@ -195,18 +199,14 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-
+                
+        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-    
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-task storeVersion {
-    ext.version_file = new File("version.txt")
-    ext.version_file.text = "MOD_VERSION=" + version
 }
 
 task deobfJar(type: Jar) {
@@ -250,6 +250,9 @@ runClient {
 }
 
 curseforge {
+    options {
+        debug = true
+    }
     apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
     project {
         id = "${cf_project}"
@@ -258,25 +261,26 @@ curseforge {
         releaseType = "${release_type}"
         addGameVersion "${mc_version}"
         mainArtifact(jar) {
-          displayName = "ProjectE Integration - ${version}"
+            displayName = "ProjectE Integration - ${version}"
         }
         addArtifact(deobfJar) {
-          displayName = "ProjectE Integration - ${version} - deobf"
+            displayName = "ProjectE Integration - ${version} - deobf"
         }
         addArtifact(apiJar) {
-          displayName = "ProjectE Integration - ${version} - api"
+            displayName = "ProjectE Integration - ${version} - api"
         }
         addArtifact(sourcesJar) {
-          displayName = "ProjectE Integration - ${version} - sources"
+            displayName = "ProjectE Integration - ${version} - sources"
         }
         relations {
             requiredDependency 'ProjectE'
-            
+
             // From Other Mavens
             optionalLibrary 'Actually-Additions'
             optionalLibrary 'Applied-Energistics-2'
             optionalLibrary 'Avaritia-1-10'
             optionalLibrary 'Botania'
+            //optionalLibrary 'Buildcraft'
             optionalLibrary 'CraftTweaker'
             optionalLibrary 'Draconic-Evolution'
             optionalLibrary 'Forestry'
@@ -284,11 +288,13 @@ curseforge {
             optionalLibrary 'Industrial-Craft'
             optionalLibrary 'Psi'
             optionalLibrary 'RebornCore'
+            //optionalLibrary 'Redstone-Flux'
             optionalLibrary 'TechReborn'
             optionalLibrary 'Thermal-Expansion'
             optionalLibrary 'Tinkers-Construct'
-            
+
             // From CurseForge Maven
+            optionalLibrary 'Advanced-Rocketry'
             optionalLibrary 'Astral-Sorcery'
             optionalLibrary 'ArmorPlus'
             optionalLibrary 'Artisan-Worktables'
@@ -300,6 +306,7 @@ curseforge {
             optionalLibrary 'Ender-IO'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'ExtraBotany'
+            //optionalLibrary 'Extra-Utilities'
             optionalLibrary 'LibVulpes'
             optionalLibrary 'Mekanism'
             optionalLibrary 'Modular-Machinery'

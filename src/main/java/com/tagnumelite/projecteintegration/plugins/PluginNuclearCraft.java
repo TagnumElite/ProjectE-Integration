@@ -30,14 +30,14 @@ public class PluginNuclearCraft extends PEIPlugin {
 	@Override
 	public void setup() {
 		ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();
-		Collections.addAll(handlers, NCRecipes.active_cooler, NCRecipes.alloy_furnace, NCRecipes.centrifuge,
-				NCRecipes.chemical_reactor, NCRecipes.collector, NCRecipes.condenser, NCRecipes.coolant_heater,
-				NCRecipes.crystallizer, NCRecipes.decay_generator, NCRecipes.decay_hastener, NCRecipes.dissolver,
-				NCRecipes.electrolyser, NCRecipes.extractor, NCRecipes.fission, NCRecipes.fuel_reprocessor,
-				NCRecipes.fusion, NCRecipes.heat_exchanger, NCRecipes.infuser, NCRecipes.ingot_former,
-				NCRecipes.irradiator, NCRecipes.isotope_separator, NCRecipes.manufactory, NCRecipes.melter,
-				NCRecipes.pressurizer, NCRecipes.rock_crusher, NCRecipes.salt_fission, NCRecipes.salt_mixer,
-				NCRecipes.supercooler, NCRecipes.turbine);
+		Collections.addAll(handlers, NCRecipes.alloy_furnace, NCRecipes.centrifuge, NCRecipes.chemical_reactor,
+				NCRecipes.collector, NCRecipes.condenser, NCRecipes.coolant_heater, NCRecipes.crystallizer,
+				NCRecipes.decay_generator, NCRecipes.decay_hastener, NCRecipes.dissolver, NCRecipes.electrolyser,
+				NCRecipes.extractor, NCRecipes.fission, NCRecipes.fuel_reprocessor, NCRecipes.fusion,
+				NCRecipes.heat_exchanger, NCRecipes.infuser, NCRecipes.ingot_former, NCRecipes.irradiator,
+				NCRecipes.isotope_separator, NCRecipes.manufactory, NCRecipes.melter, NCRecipes.pressurizer,
+				NCRecipes.rock_crusher, NCRecipes.salt_fission, NCRecipes.salt_mixer, NCRecipes.supercooler,
+				NCRecipes.turbine);
 
 		for (AbstractRecipeHandler<? extends IRecipe> handler : handlers) {
 			addMapper(new AbstractRecipeMapper(handler));
