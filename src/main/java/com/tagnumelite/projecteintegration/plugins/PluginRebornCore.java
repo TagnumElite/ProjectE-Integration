@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 
@@ -17,8 +17,8 @@ import reborncore.api.recipe.IBaseRecipeType;
 import reborncore.api.recipe.RecipeHandler;
 import reborncore.common.recipes.RecipeTranslator;
 
-@RegPEIPlugin(modid = "reborncore")
-public class PluginRebornCore extends PEIPlugin {
+@PEIPlugin("reborncore")
+public class PluginRebornCore extends APEIPlugin {
 
 	public PluginRebornCore(String modid, Configuration config) {
 		super(modid, config);

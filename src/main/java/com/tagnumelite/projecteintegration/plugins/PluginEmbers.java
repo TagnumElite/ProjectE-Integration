@@ -21,8 +21,8 @@
  */
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraftforge.common.config.Configuration;
@@ -32,8 +32,8 @@ import teamroots.embers.recipe.ItemMeltingRecipe;
 import teamroots.embers.recipe.ItemStampingRecipe;
 import teamroots.embers.recipe.RecipeRegistry;
 
-@RegPEIPlugin(modid = "embers")
-public class PluginEmbers extends PEIPlugin {
+@PEIPlugin("embers")
+public class PluginEmbers extends APEIPlugin {
 	public PluginEmbers(String modid, Configuration config) {
 		super(modid, config);
 	}

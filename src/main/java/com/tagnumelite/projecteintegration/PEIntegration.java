@@ -1,8 +1,8 @@
 package com.tagnumelite.projecteintegration;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 
@@ -38,7 +38,7 @@ public class PEIntegration {
 	public static final Logger LOG = LogManager.getLogger(PEIApi.MODID);
 	private static boolean MAPPER_ERRORED = false;
 
-	private final List<PEIPlugin> PLUGINS = new ArrayList<>();
+	private final List<APEIPlugin> PLUGINS = new ArrayList<>();
 
 	public boolean isLoaded() {
 		return LOADED;
@@ -64,21 +64,20 @@ public class PEIntegration {
 			return;
 		}
 
-		Set<ASMData> ASM_DATA_SET = event.getAsmData().getAll(RegPEIPlugin.class.getCanonicalName());
 
 		for (ASMData asm_data : ASM_DATA_SET) {
 			try {
 				Class<?> asmClass = Class.forName(asm_data.getClassName());
-				RegPEIPlugin plugin_register = asmClass.getAnnotation(RegPEIPlugin.class);
-				if (plugin_register != null && PEIPlugin.class.isAssignableFrom(asmClass)) {
-					String modid = plugin_register.modid().toLowerCase();
+				PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
+				if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
+					String modid = plugin_register.value().toLowerCase();
 
 					if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin")
 							|| !Loader.isModLoaded(modid))
 						continue;
 
-					Class<? extends PEIPlugin> asm_instance = asmClass.asSubclass(PEIPlugin.class);
-					Constructor<? extends PEIPlugin> plugin = asm_instance.getConstructor(String.class,
+					Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
+					Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class,
 							Configuration.class);
 					PLUGINS.add(plugin.newInstance(modid, config));
 				}
@@ -104,7 +103,7 @@ public class PEIntegration {
 		LOG.info("Starting Phase: Post Initialization");
 		final long startTime = System.currentTimeMillis();
 
-		for (PEIPlugin plugin : PLUGINS) {
+		for (APEIPlugin plugin : PLUGINS) {
 			PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
 			try {
 				plugin.setup();
@@ -129,7 +128,7 @@ public class PEIntegration {
 		if (DISABLE || LOADED) // If mod is disabled or has already loaded, then return
 			return;
 
-		LOG.info("Starting Phase: Server About To Start");
+		LOG.info("Starting Phase: Recipe Mapping");
 		final long startTime = System.currentTimeMillis();
 
 		for (PEIMapper mapper : PEIApi.getMappers()) {
@@ -152,7 +151,7 @@ public class PEIntegration {
 		PLUGINS.clear();
 
 		final long endTime = System.currentTimeMillis();
-		LOG.info("Finished Phase: Server About To Start. Took {}ms", (endTime - startTime));
+		LOG.info("Finished Phase: Recipe Mapping. Took {}ms", (endTime - startTime));
 		LOADED = true;
 	}
 }

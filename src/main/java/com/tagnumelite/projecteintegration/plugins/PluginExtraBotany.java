@@ -2,14 +2,14 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import com.meteor.extrabotany.api.ExtraBotanyAPI;
 import com.meteor.extrabotany.common.crafting.recipe.RecipePedestal;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "extrabotany")
-public class PluginExtraBotany extends PEIPlugin {
+@PEIPlugin("extrabotany")
+public class PluginExtraBotany extends APEIPlugin {
 	public PluginExtraBotany(String modid, Configuration config) {
 		super(modid, config);
 	}

@@ -2,11 +2,10 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraft.item.ItemStack;
@@ -15,8 +14,8 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
-@RegPEIPlugin(modid="chisel")
-public class PluginChisel extends PEIPlugin {
+@PEIPlugin("chisel")
+public class PluginChisel extends APEIPlugin {
 	public PluginChisel(String modid, Configuration config) {
 		super(modid, config);
 	}

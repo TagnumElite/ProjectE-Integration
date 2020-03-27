@@ -13,8 +13,8 @@ import moze_intel.projecte.emc.IngredientMap;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@RegPEIPlugin(modid = "immersiveengineering")
-public class PluginImmersiveEngineering extends PEIPlugin {
+@PEIPlugin("immersiveengineering")
+public class PluginImmersiveEngineering extends APEIPlugin {
 	public PluginImmersiveEngineering(String modid, Configuration config) {
 		super(modid, config);
 	}

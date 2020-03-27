@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.plugins.PluginSonarCore.SonarMapper;
 
 import net.minecraftforge.common.config.Configuration;
@@ -21,8 +21,8 @@ import sonar.calculator.mod.common.recipes.ScientificRecipes;
 import sonar.calculator.mod.common.recipes.StoneSeparatorRecipes;
 import sonar.core.recipes.DefaultSonarRecipe;
 
-@RegPEIPlugin(modid = "calculator")
-public class PluginCalculator extends PEIPlugin {
+@PEIPlugin("calculator")
+public class PluginCalculator extends APEIPlugin {
 	public PluginCalculator(String modid, Configuration config) {
 		super(modid, config);
 	}

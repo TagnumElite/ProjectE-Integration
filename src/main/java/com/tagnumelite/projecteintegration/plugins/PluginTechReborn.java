@@ -1,14 +1,14 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
 import techreborn.api.RollingMachineRecipe;
 
-@RegPEIPlugin(modid = "techreborn")
-public class PluginTechReborn extends PEIPlugin {
+@PEIPlugin("techreborn")
+public class PluginTechReborn extends APEIPlugin {
 	public PluginTechReborn(String modid, Configuration config) {
 		super(modid, config);
 	}

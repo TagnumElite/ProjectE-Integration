@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import hellfirepvp.astralsorcery.common.crafting.altar.AbstractAltarRecipe;
 import hellfirepvp.astralsorcery.common.crafting.altar.AltarRecipeRegistry;
@@ -15,8 +15,8 @@ import java.util.Set;
 
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "astralsorcery")
-public class PluginAstralSorcery extends PEIPlugin {
+@PEIPlugin( "astralsorcery")
+public class PluginAstralSorcery extends APEIPlugin {
 	public PluginAstralSorcery(String modid, Configuration config) {
 		super(modid, config);
 	}

@@ -2,8 +2,8 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
@@ -12,8 +12,8 @@ import morph.avaritia.recipe.extreme.IExtremeRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "avaritia")
-public class PluginAvaritia extends PEIPlugin {
+@PEIPlugin("avaritia")
+public class PluginAvaritia extends APEIPlugin {
 	private final float compressor_cost_multiplier;
 
 	public PluginAvaritia(String modid, Configuration config) {

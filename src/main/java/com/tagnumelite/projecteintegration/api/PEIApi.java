@@ -32,17 +32,13 @@ public class PEIApi {
 	public static final String NAME = "ProjectE Integration";
 	public static final String VERSION = "@VERSION@";
 
-	private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<Ingredient, Object>();
-	private static final Map<List<?>, Object> LIST_CACHE = new HashMap<List<?>, Object>();
+	private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
+	private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
 
 	public static final Logger LOG = LogManager.getLogger(APIID);
 
-	// private static final IBlacklistProxy blacklist_proxy =
-	// ProjectEAPI.getBlacklistProxy();
 	private static final IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
 	public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
-	// private static final ITransmutationProxy transmutation_proxy =
-	// ProjectEAPI.getTransmutationProxy();
 
 	private static final Set<PEIMapper> MAPPERS = new HashSet<>();
 	private static boolean LOCK_EMC_MAPPER = false;
@@ -142,6 +138,12 @@ public class PEIApi {
 		return obj;
 	}
 
+	/**
+	 *
+	 * @param resource The Resource to add EMC for
+	 * @param emc EMC
+	 * @return An object to be used in EMC calculation
+	 */
 	public static Object addResource(ResourceLocation resource, long emc) {
 		if (RESOURCE_MAP.containsKey(resource))
 			return RESOURCE_MAP.get(resource);
@@ -169,6 +171,7 @@ public class PEIApi {
 	}
 
 	public static void clearCache() {
+		RESOURCE_MAP.clear();
 		INGREDIENT_CACHE.clear();
 		LIST_CACHE.clear();
 		MAPPERS.clear();

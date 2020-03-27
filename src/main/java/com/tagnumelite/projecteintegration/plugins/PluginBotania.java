@@ -2,8 +2,8 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.List;
@@ -22,8 +22,8 @@ import vazkii.botania.api.recipe.RecipePetals;
 import vazkii.botania.api.recipe.RecipePureDaisy;
 import vazkii.botania.api.recipe.RecipeRuneAltar;
 
-@RegPEIPlugin(modid = "botania")
-public class PluginBotania extends PEIPlugin {
+@PEIPlugin("botania")
+public class PluginBotania extends APEIPlugin {
 	private final Object mana = new Object();
 	private final boolean add_emc_to_mana;
 

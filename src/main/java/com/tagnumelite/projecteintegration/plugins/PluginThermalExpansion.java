@@ -5,16 +5,15 @@ import cofh.thermalfoundation.init.TFFluids;
 
 import java.util.ArrayList;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-import com.tagnumelite.projecteintegration.api.utils.Utils;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@RegPEIPlugin(modid = "thermalexpansion")
-public class PluginThermalExpansion extends PEIPlugin {
+@PEIPlugin("thermalexpansion")
+public class PluginThermalExpansion extends APEIPlugin {
 	public PluginThermalExpansion(String modid, Configuration config) {
 		super(modid, config);
 	}

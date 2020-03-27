@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.HashMap;
@@ -27,8 +27,8 @@ import thaumcraft.api.crafting.IArcaneRecipe;
 import thaumcraft.api.crafting.IThaumcraftRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
 
-@RegPEIPlugin(modid = "thaumcraft")
-public class PluginThaumcraft extends PEIPlugin {
+@PEIPlugin("thaumcraft")
+public class PluginThaumcraft extends APEIPlugin {
 	public PluginThaumcraft(String modid, Configuration config) {
 		super(modid, config);
 	}

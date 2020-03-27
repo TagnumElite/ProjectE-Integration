@@ -3,8 +3,8 @@ package com.tagnumelite.projecteintegration.plugins;
 import com.enderio.core.common.util.NNList;
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import crazypants.enderio.base.material.material.Material;
@@ -28,8 +28,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "enderio")
-public class PluginEnderIO extends PEIPlugin {
+@PEIPlugin("enderio")
+public class PluginEnderIO extends APEIPlugin {
 	public PluginEnderIO(String modid, Configuration config) {
 		super(modid, config);
 	}

@@ -7,8 +7,8 @@ import com.sofodev.armorplus.api.crafting.base.BaseShapedRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseShapelessOreRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseShapelessRecipe;
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import java.util.List;
@@ -18,8 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "armorplus")
-public class PluginArmorPlus extends PEIPlugin {
+@PEIPlugin( "armorplus")
+public class PluginArmorPlus extends APEIPlugin {
 	public PluginArmorPlus(String modid, Configuration config) {
 		super(modid, config);
 	}

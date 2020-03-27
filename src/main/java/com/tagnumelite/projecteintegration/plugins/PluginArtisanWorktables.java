@@ -8,16 +8,16 @@ import com.codetaylor.mc.artisanworktables.api.internal.recipe.OutputWeightPair;
 import com.codetaylor.mc.artisanworktables.api.internal.reference.EnumTier;
 import com.codetaylor.mc.artisanworktables.api.recipe.IArtisanRecipe;
 import com.codetaylor.mc.artisanworktables.modules.worktables.ModuleWorktablesConfig;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.internal.input.SizedIngredient;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@RegPEIPlugin(modid = "artisanworktables")
-public class PluginArtisanWorktables extends PEIPlugin {
+@PEIPlugin( "artisanworktables")
+public class PluginArtisanWorktables extends APEIPlugin {
 	public PluginArtisanWorktables(String modid, Configuration config) {
 		super(modid, config);
 	}

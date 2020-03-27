@@ -1,15 +1,15 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraftforge.common.config.Configuration;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.recipe.TrickRecipe;
 
-@RegPEIPlugin(modid = "psi")
-public class PluginPsi extends PEIPlugin {
+@PEIPlugin("psi")
+public class PluginPsi extends APEIPlugin {
 	public PluginPsi(String modid, Configuration config) {
 		super(modid, config);
 	}

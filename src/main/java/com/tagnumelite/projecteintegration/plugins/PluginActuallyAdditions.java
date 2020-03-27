@@ -2,8 +2,8 @@ package com.tagnumelite.projecteintegration.plugins;
 
 import java.util.ArrayList;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
@@ -12,8 +12,8 @@ import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
 import de.ellpeck.actuallyadditions.mod.items.InitItems;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "actuallyadditions")
-public class PluginActuallyAdditions extends PEIPlugin {
+@PEIPlugin("actuallyadditions")
+public class PluginActuallyAdditions extends APEIPlugin {
 	public PluginActuallyAdditions(String modid, Configuration config) {
 		super(modid, config);
 	}

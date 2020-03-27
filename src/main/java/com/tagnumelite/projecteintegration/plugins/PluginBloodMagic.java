@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import WayofTime.bloodmagic.api.impl.BloodMagicAPI;
@@ -11,8 +11,8 @@ import WayofTime.bloodmagic.api.impl.recipe.RecipeBloodAltar;
 import WayofTime.bloodmagic.api.impl.recipe.RecipeTartaricForge;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "bloodmagic")
-public class PluginBloodMagic extends PEIPlugin {
+@PEIPlugin("bloodmagic")
+public class PluginBloodMagic extends APEIPlugin {
 	public PluginBloodMagic(String modid, Configuration config) {
 		super(modid, config);
 	}

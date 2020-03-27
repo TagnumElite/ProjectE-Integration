@@ -1,5 +1,6 @@
-package com.tagnumelite.projecteintegration.api;
+package com.tagnumelite.projecteintegration.api.plugin;
 
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import net.minecraft.item.Item;
@@ -7,12 +8,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
-public abstract class PEIPlugin {
+import java.util.List;
+import java.util.ArrayList;
+
+public abstract class APEIPlugin {
 	public final String modid;
 	public final Configuration config;
 	public final String category;
 
-	public PEIPlugin(String modid, Configuration config) {
+	public APEIPlugin(String modid, Configuration config) {
 		this.modid = modid;
 		this.config = config;
 		this.category = ConfigHelper.getPluginCategory(modid);

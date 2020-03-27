@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraft.item.ItemStack;
@@ -15,8 +15,8 @@ import zmaster587.libVulpes.interfaces.IRecipe;
 import zmaster587.libVulpes.recipe.RecipesMachine;
 import zmaster587.libVulpes.tile.multiblock.TileMultiblockMachine;
 
-@RegPEIPlugin(modid="libVulpes")
-public class PluginLibVulpes extends PEIPlugin {
+@PEIPlugin("libVulpes")
+public class PluginLibVulpes extends APEIPlugin {
 	public PluginLibVulpes(String modid, Configuration config) {
 		super(modid, config);
 	}

@@ -3,15 +3,15 @@ package com.tagnumelite.projecteintegration.plugins;
 import com.brandon3055.draconicevolution.DEFeatures;
 import com.brandon3055.draconicevolution.api.fusioncrafting.FusionRecipeAPI;
 import com.brandon3055.draconicevolution.api.fusioncrafting.IFusionRecipe;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "draconicevolution")
-public class PluginDraconicEvolution extends PEIPlugin {
+@PEIPlugin("draconicevolution")
+public class PluginDraconicEvolution extends APEIPlugin {
 	public PluginDraconicEvolution(String modid, Configuration config) {
 		super(modid, config);
 	}

@@ -27,8 +27,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import mekanism.api.gas.Gas;
@@ -65,8 +65,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@RegPEIPlugin(modid = "mekanism")
-public class PluginMekanism extends PEIPlugin {
+@PEIPlugin("mekanism")
+public class PluginMekanism extends APEIPlugin {
 	private final Map<Gas, Object> GAS_MAP = new HashMap<Gas, Object>();
 	private final Map<InfuseType, Object> INFUSE_MAP = new HashMap<InfuseType, Object>();
 

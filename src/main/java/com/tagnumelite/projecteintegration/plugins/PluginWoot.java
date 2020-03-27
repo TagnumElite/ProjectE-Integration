@@ -1,15 +1,15 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import ipsis.Woot;
 import ipsis.woot.crafting.IAnvilRecipe;
 import net.minecraftforge.common.config.Configuration;
 
-@RegPEIPlugin(modid = "woot")
-public class PluginWoot extends PEIPlugin {
+@PEIPlugin("woot")
+public class PluginWoot extends APEIPlugin {
 	public PluginWoot(String modid, Configuration config) {
 		super(modid, config);
 	}

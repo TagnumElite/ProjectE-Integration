@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraftforge.common.config.Configuration;
@@ -10,8 +10,8 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 
-@RegPEIPlugin(modid = "tconstruct")
-public class PluginTConstruct extends PEIPlugin {
+@PEIPlugin("tconstruct")
+public class PluginTConstruct extends APEIPlugin {
 	public PluginTConstruct(String modid, Configuration config) {
 		super(modid, config);
 	}

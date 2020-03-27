@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.plugins;
 
-import com.tagnumelite.projecteintegration.api.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.RegPEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import net.minecraft.item.crafting.CraftingManager;
@@ -9,8 +9,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
 import pl.asie.charset.lib.recipe.RecipeCharset;
 
-@RegPEIPlugin(modid = "charset")
-public class PluginCharsetCrafting extends PEIPlugin {
+@PEIPlugin("charset")
+public class PluginCharsetCrafting extends APEIPlugin {
 	public PluginCharsetCrafting(String modid, Configuration config) {
 		super(modid, config);
 	}
