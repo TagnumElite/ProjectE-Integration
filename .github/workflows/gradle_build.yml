@@ -22,4 +22,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Build with Gradle
-        run: gradle setupCiWorkspace build
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: setupCiWorkspace build
+          gradle-version: 2.14
