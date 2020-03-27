@@ -19,18 +19,14 @@ plugins {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
 
 version = "${version}"
-if (System.getenv("BUILD_NUMBER") != null) {
-    version += ".${System.getenv().BUILD_NUMBER}"
-} else if (System.getenv("TRAVIS_BUILD_NUMBER") != null) {
-    version += ".${System.getenv().TRAVIS_BUILD_NUMBER}"
-}
-if (System.getenv("TRAVIS_PULL_REQUEST") != null) {
-    if (System.getenv("TRAVIS_PULL_REQUEST") != "false") {
-        version = version + "+p" + System.getenv("TRAVIS_PULL_REQUEST");
-    }
+if (System.getenv("GITHUB_ACTIONS") != null && System.getenv("GITHUB_EVENT_NAME") != 'release') {
+    version += "+${System.getenv("GITHUB_SHA").substring(0, 7)}"
 }
 
 group = "com.tagnumelite.projecteintegration"
@@ -46,7 +42,6 @@ minecraft {
     runDir = "run"
     
     mappings = "snapshot_${mcp_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
     replace '@VERSION@', "${version}"
