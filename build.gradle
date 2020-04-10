@@ -1,390 +1,76 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+
+apply plugin: 'base' // To add "clean" task to the root project.
+/*
     }
 }
-
-plugins {
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-    id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.32"
-    id "com.wynprice.cursemaven" version "2.1.1"
-    id 'maven-publish'
-}
-
-apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'idea'
-
+*/
 version = "${version}"
 if (System.getenv("GITHUB_ACTIONS") != null && System.getenv("GITHUB_EVENT_NAME") != 'release') {
     version += "+${System.getenv("GITHUB_SHA").substring(0, 7)}"
 }
 
-group = "com.tagnumelite.projecteintegration"
-archivesBaseName = "ProjectEIntegration-${mc_version}"
+subprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name = "CurseForge"
+            url = "https://minecraft.curseforge.com/api/maven/"
+        }
+        maven {
+            name = "ModMaven"
+            url = "https://modmaven.k-4u.nl"
+        }
+    }
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
+    ext.version = "${version}"
+    ext.mc_version="${mc_version}"
+    ext.pe_version="${pe_version}"
+    ext.mcp_version="${mcp_version}"
+    ext.forgeVersion="${forge_version}"
 
-minecraft {
-    version = "${mc_version}-${forge_version}"
-    runDir = "run"
-    
-    mappings = "snapshot_${mcp_version}"
-
-    replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
-    replace '@VERSION@', "${version}"
-
-    replace 'after:mekanism', "after:mekanism@[${mc_version}-1.0.0,${mc_version}-1.2.0],[${mc_version}-${version_mekanism},)"
-    replace 'after:nuclearcraft', "after:nuclearcraft@[${version_nuclearcraft},)"
 }
 
 repositories {
-    maven {
-        name "TTerrag"
-        url "https://maven.tterrag.com"
-    }
-    maven {
-        name "TehNuuuuuuuuuuuut"
-        url 'http://tehnut.info/maven/' }
-    maven {
-        name "ModMaven"
-        url "https://modmaven.k-4u.nl"
-    }
-    maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
-    maven {
-        name = "CoFH Maven"
-        url = "http://maven.covers1624.net"
-    }
-    maven {
-        name "BuildCraft"
-        url = "https://mod-buildcraft.com/maven"
+    mavenLocal()
+    mavenCentral()
+}
+
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '4.9'
+}
+
+def all_addons = ["PEI-Addon-Alpha", "PEI-Addon-Beta"]
+
+subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+
+task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + all_addons.collect { ':' + it + ':setupDecompWorkspace' }) {
+    doFirst {
+        print("Setting up Decomp Workspace for all projects")
     }
 }
 
-dependencies {
-    deobfProvided "curse.maven:projecte:${pe_id}"
-
-    deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
-    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
-    runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
-        exclude group: 'mezz.jei'
-    }
-    //runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
-    deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
-    runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'CraftTweaker2'
-        exclude group: 'codechicken'
-    }
-    //deobfProvided ("binnie:binnie-mods-${mc_version}:${version_binniemods}") {
-    //    exclude group: 'mezz.jei'
-    //    exclude group: 'jei-bees'
-    //    exclude group: 'net.industrial-craft'
-    //}
-    deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
-    deobfProvided "vazkii.botania:Botania:${version_botania}"
-    deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
-    deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
-    runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
-    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
-    runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
-    deobfProvided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
-    deobfProvided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
-        exclude group: 'mezz.jei'
-        exclude group: 'codechicken'
-        exclude group: 'cofh'
-        exclude group: 'li.cil.oc'
-    }
-    deobfProvided "team.chisel.ctm:CTM:MC${mc_version}-${version_ctm}"
-    //deobfProvided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}"
-    runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Blood Magic & Woot Dependency
-    deobfProvided ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided ("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
-    runtime "mezz.jei:jei_${mc_version}:${version_jei}"
-    provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
-    runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
-    deobfProvided "vazkii.psi:Psi:${version_psi}"
-    deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
-    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
-    runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
-    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
-    deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'codechicken', module: 'CodeChickenLib'
-    }
-    deobfProvided ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
-        exclude group: 'mezz.jei'
-    }
-    provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
-    runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
-
-    // CurseForge
-    provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
-    deobfProvided "curse.maven:armorplus:${curse_armorplus}"
-    deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
-    runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
-    deobfProvided "curse.maven:astralsorcery:${curse_astralsorcery}"
-    runtime "curse.maven:athenaeum:${curse_athenaeum}"
-    deobfProvided "curse.maven:calculator:${curse_calculator}"
-    deobfProvided "curse.maven:charsetlib:${curse_charsetlib}"
-    deobfProvided "curse.maven:compactmachines:${curse_compactmachines}"
-    deobfProvided "curse.maven:cucumber:${curse_cucumber}"
-    deobfProvided "curse.maven:embers:${curse_embers}"
-    //deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
-    deobfProvided "curse.maven:endercore:${curse_endercore}"
-    deobfProvided "curse.maven:enderio:${curse_enderio}"
-    deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
-    deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
-    deobfProvided "curse.maven:extrautilities:${curse_extrautilities}"
-    //deobfProvided "curse.maven:gregtechce:${curse_gregtechce}"
-    runtime "curse.maven:baubles:${curse_baubles}"
-    // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
-    //deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
-    //deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
-    provided "curse.maven:libvulpes:${curse_libvulpes}"
-    deobfProvided "curse.maven:mekanism:${curse_mekanism}"
-    runtime "curse.maven:mekanismgen:${curse_mekanismgen}"
-    runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
-    deobfProvided "curse.maven:modularmachinery:${curse_modularmachinery}"
-    runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
-    // --- deobfProvided "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
-    //deobfProvided "curse.maven:mysticalagriculture:${curse_mysticalagriculture}"
-    runtime "curse.maven:mysticalagridations:${curse_mysticalagridations}"
-    //deobfProvided "curse.maven:nuclearcraft:${curse_nuclearcraft}"
-    deobfProvided "curse.maven:nuclearcraftoverhauled:${curse_nuclearcraftoverhauled}"
-    deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
-    deobfProvided "curse.maven:thaumcraft:${curse_thaumcraft}"
-    runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
-    deobfProvided "curse.maven:woot:${curse_woot}"
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + all_addons.collect { ':' + it + ':setupCIWorkspace' }) {
+    doFirst {
+        print("Setting up CI Workspace for all projects")
     }
 }
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.main.java
-    classifier = 'deobf'
-}
+task assembleAll(type: Jar, dependsOn: [':ProjectE-Integration:build'] + all_addons.collect { ':' + it + ":build" }) {
+    archiveName = "ProjectEIntegration-${mc_version}-${version}.jar"
 
-task apiJar(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.main.java
-    classifier = 'api'
-    include 'com/tagnumelite/projecteintegration/api/**'
-}
-
-javadoc {
-    include 'com/tagnumelite/projecteintegration/api/**'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    from 'build/docs/javadoc'
-    classifier 'javadoc'
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.java
-    classifier = 'sources'
-}
-
-jar {}
-
-artifacts {
-    archives apiJar
-    archives javadocJar
-    archives sourcesJar
-    archives deobfJar
-}
-
-runClient {
-    jvmArgs "-Xmx6G", "-Xms6G"
-}
-
-curseforge {
-    options {
-        debug = true
-    }
-    apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
-    project {
-        id = "${cf_project}"
-        changelog = file('changelog.html')
-        changelogType = 'html'
-        releaseType = "${release_type}"
-        addGameVersion "${mc_version}"
-        mainArtifact(jar) {
-            displayName = "ProjectE Integration - ${version}"
-        }
-        addArtifact(deobfJar) {
-            displayName = "ProjectE Integration - ${version} - deobf"
-        }
-        addArtifact(apiJar) {
-            displayName = "ProjectE Integration - ${version} - api"
-        }
-        addArtifact(sourcesJar) {
-            displayName = "ProjectE Integration - ${version} - sources"
-        }
-        relations {
-            requiredDependency 'ProjectE'
-
-            // From Other Mavens
-            optionalLibrary 'Actually-Additions'
-            optionalLibrary 'Applied-Energistics-2'
-            optionalLibrary 'Avaritia-1-10'
-            optionalLibrary 'Botania'
-            //optionalLibrary 'Buildcraft'
-            optionalLibrary 'CraftTweaker'
-            optionalLibrary 'Draconic-Evolution'
-            optionalLibrary 'Forestry'
-            optionalLibrary 'Immersive-Engineering'
-            optionalLibrary 'Industrial-Craft'
-            optionalLibrary 'Psi'
-            optionalLibrary 'RebornCore'
-            //optionalLibrary 'Redstone-Flux'
-            optionalLibrary 'TechReborn'
-            optionalLibrary 'Thermal-Expansion'
-            optionalLibrary 'Tinkers-Construct'
-
-            // From CurseForge Maven
-            optionalLibrary 'Advanced-Rocketry'
-            optionalLibrary 'Astral-Sorcery'
-            optionalLibrary 'ArmorPlus'
-            optionalLibrary 'Artisan-Worktables'
-            optionalLibrary 'Blood-Magic'
-            optionalLibrary 'Calculator'
-            optionalLibrary 'Charset-Lib'
-            optionalLibrary 'Compact-Machines'
-            optionalLibrary 'Embers'
-            optionalLibrary 'Ender-IO'
-            optionalLibrary 'Extended-Crafting'
-            optionalLibrary 'ExtraBotany'
-            //optionalLibrary 'Extra-Utilities'
-            optionalLibrary 'LibVulpes'
-            optionalLibrary 'Mekanism'
-            optionalLibrary 'Modular-Machinery'
-            optionalLibrary 'Mystical-Agriculture'
-            optionalLibrary 'NuclearCraft-mod'
-            optionalLibrary 'Pams-HarvestCraft'
-            optionalLibrary 'Thaumcraft'
-            optionalLibrary 'Woot'
-        }
+    from zipTree(project(':ProjectE-Integration').jar.archivePath)
+    for (addon in all_addons) {
+        from zipTree(project(addon).jar.archivePath)
     }
 }
 
-task signJar(type: SignJar, dependsOn: reobfJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
-}
 
-task signDeobfJar(type: SignJar, dependsOn: deobfJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = deobfJar.archivePath
-    outputFile = deobfJar.archivePath
-}
 
-task signApiJar(type: SignJar, dependsOn: apiJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = apiJar.archivePath
-    outputFile = apiJar.archivePath
-}
-
-task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = sourcesJar.archivePath
-    outputFile = sourcesJar.archivePath
-}
-
-task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    filePath = "changelog.html"
-    untaggedName = "Current release ${project.version}"
-    fromCommit = "939adc1b1975da6b89486d1e5f02e9e18027f0c2"
-    toRef =  "HEAD"
-    templateContent = """
-{{#tags}}
-  <h3>{{name}}</h3>
-  <ul>
-    {{#commits}}
-    <li>{{{message}}}</li>
-    {{/commits}}
-  </ul>
-{{/tags}}
-"""
-}
-
-build.dependsOn signJar
-build.dependsOn signDeobfJar
-build.dependsOn signSrcJar
-build.dependsOn signApiJar
-
-afterEvaluate {
-    tasks["curseforge${cf_project}"].dependsOn.add(signJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signApiJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
-}
