@@ -1,3 +1,21 @@
 rootProject.name = 'ProjectE Integration'
 
 include 'ProjectE-Integration'
+
+def sub_mods_dir = new File(rootDir, 'Sub-Mods')
+
+def sub_mods = sub_mods_dir.listFiles(new FileFilter() {
+    @Override
+    boolean accept(File pathname) {
+        if (!pathname.isDirectory()) {
+            return false
+        }
+        if (pathname.name == 'buildSrc') {
+            return false
+        }
+        return new File(pathname, 'build.gradle').isFile()
+    }
+})
+
+sub_mods.each { File mod -> include ":${mod.name}"; project(":${mod.name}").projectDir = new File(sub_mods_dir, mod.name) }
+
