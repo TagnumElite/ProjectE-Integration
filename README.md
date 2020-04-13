@@ -73,8 +73,24 @@ Mod Support is split into seperate sub mods:
 - Any comments with issues and/or suggestions will be ignored. (In fact. Comments have been disabled for this reason)    
     
 #### Known (Currently) Unfixable Bugs:    
- - Some items with subtypes don't seem to be working properly    
-    
+ - Some items with subtypes don't seem to be working properly
+ 
+
+## Development
+
+I do not have a proper maven setup yet (just don't think I will need one).
+I do support JitPack though.
+
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    provided 'com.tagnumelite:ProjectE-Integration:2.5.0.73'
+}
+```
+   
 ## Permissions:    
  I don't really care unless used for malicious purposes then I will request it to be removed.    
 ~~Redistribution is forbidden unless used for modpacks by Curseforge/ATLauncher/Technic.~~    

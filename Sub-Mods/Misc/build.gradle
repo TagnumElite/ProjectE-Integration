@@ -71,24 +71,8 @@ dependencies {
     runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
 
     // CurseMaven
-    // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
+    // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}" ForgeGradle doesn't like the jar files.
     //deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
+    provided "com.github.MatrexsVigil:harvestcraft:8f0a903a94"
     deobfProvided "curse.maven:woot:${curse_woot}"
 }
-
-task download_libraries {
-    description = 'Download required libraries'
-    doFirst {
-        def lib = new File(projectDir, 'lib')
-        lib.mkdir()
-        println('Downloading Pam\'s HarvestCraft')
-        def harvestcraft = new File(lib, 'harvestcraft.jar')
-        if (!harvestcraft.exists()) {
-            new URL('https://media.forgecdn.net/files/2904/825/Pam%27s+HarvestCraft+1.12.2zg.jar').withInputStream{ i -> harvestcraft.withOutputStream{ it << i }}
-        }
-    }
-}
-
-tasks['setupDecompWorkspace'].dependsOn(download_libraries)
-tasks['setupDevWorkspace'].dependsOn(download_libraries)
-tasks['setupCiWorkspace'].dependsOn(download_libraries)
