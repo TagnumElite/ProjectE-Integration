@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.misc.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -23,7 +23,7 @@ public class PluginTConstruct extends APEIPlugin {
 		addMapper(new MeltingMapper());
 	}
 
-	private class AlloyMapper extends PEIMapper {
+	private static class AlloyMapper extends PEIMapper {
 		public AlloyMapper() {
 			super("Alloy", "Tinkers Smelter Alloying recipe support");
 		}
@@ -36,7 +36,7 @@ public class PluginTConstruct extends APEIPlugin {
 		}
 	}
 
-	private class DryingMapper extends PEIMapper {
+	private static class DryingMapper extends PEIMapper {
 		public DryingMapper() {
 			super("Drying", "");
 		}
@@ -49,7 +49,7 @@ public class PluginTConstruct extends APEIPlugin {
 		}
 	}
 
-	private class MeltingMapper extends PEIMapper {
+	private static class MeltingMapper extends PEIMapper {
 		public MeltingMapper() {
 			super("Melting", "");
 		}

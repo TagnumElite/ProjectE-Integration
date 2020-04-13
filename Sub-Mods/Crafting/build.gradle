@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+plugins {
+    id "com.wynprice.cursemaven" version "2.1.1"
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+version = mc_version + '-' + ext.version
+archivesBaseName = project.projectDir.name
+
+minecraft {
+    version = mc_version + '-' + forge_version
+    runDir = "eclipse"
+    mappings = "snapshot_${mcp_version}"
+}
+
+repositories {
+}
+
+dependencies {
+    deobfProvided "curse.maven:projecte:${pe_id}"
+    compile(project(':ProjectE-Integration'))
+
+    // CurseForge
+    deobfProvided "curse.maven:armorplus:${curse_armorplus}"
+    deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
+    runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
+    runtime "curse.maven:athenaeum:${curse_athenaeum}" // Artisan Worktables Requirement
+    deobfProvided "curse.maven:cucumber:${curse_cucumber}" // Extended Crafting Requirement
+    deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
+    runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
+}

@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.misc.plugins;
 
 import java.util.Comparator;
 import java.util.List;

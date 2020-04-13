@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import appeng.api.AEApi;
 import appeng.api.features.IGrinderRecipe;
@@ -26,7 +26,7 @@ public class PluginAppliedEnergistics extends APEIPlugin {
 		addMapper(new GrindstoneMapper());
 	}
 
-	private class InscriberMapper extends PEIMapper {
+	private static class InscriberMapper extends PEIMapper {
 		public InscriberMapper() {
 			super("Inscriber");
 		}
@@ -61,7 +61,7 @@ public class PluginAppliedEnergistics extends APEIPlugin {
 		}
 	}
 
-	private class GrindstoneMapper extends PEIMapper {
+	private static class GrindstoneMapper extends PEIMapper {
 		public GrindstoneMapper() {
 			super("Grindstone");
 		}

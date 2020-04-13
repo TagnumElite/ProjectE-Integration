@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -20,7 +20,7 @@ public class PluginCompactMachines extends APEIPlugin {
 		addMapper(new MiniaturizationMapper());
 	}
 
-	private class MiniaturizationMapper extends PEIMapper {
+	private static class MiniaturizationMapper extends PEIMapper {
 		public MiniaturizationMapper() {
 			super("Miniaturization");
 		}

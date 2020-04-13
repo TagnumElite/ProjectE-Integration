@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
@@ -60,11 +60,11 @@ public class PluginBotania extends APEIPlugin {
 		return map.getMap();
 	}
 
-	private static final ItemStack getItemStackFromBlockState(IBlockState state) {
+	private static ItemStack getItemStackFromBlockState(IBlockState state) {
 		return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
 	}
 
-	private class ElvenTradeMapper extends PEIMapper {
+	private static class ElvenTradeMapper extends PEIMapper {
 		public ElvenTradeMapper() {
 			super("Elven Trade");
 		}
@@ -87,7 +87,7 @@ public class PluginBotania extends APEIPlugin {
 		}
 	}
 
-	private class PetalMapper extends PEIMapper {
+	private static class PetalMapper extends PEIMapper {
 		public PetalMapper() {
 			super("Petal");
 		}
@@ -108,7 +108,7 @@ public class PluginBotania extends APEIPlugin {
 		}
 	}
 
-	private class PureDaisyMapper extends PEIMapper {
+	private static class PureDaisyMapper extends PEIMapper {
 		public PureDaisyMapper() {
 			super("Pure Daisy");
 		}

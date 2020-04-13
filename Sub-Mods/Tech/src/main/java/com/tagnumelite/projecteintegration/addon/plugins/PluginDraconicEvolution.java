@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.brandon3055.draconicevolution.DEFeatures;
 import com.brandon3055.draconicevolution.api.fusioncrafting.FusionRecipeAPI;
@@ -25,7 +25,7 @@ public class PluginDraconicEvolution extends APEIPlugin {
 		addMapper(new FusionMapper());
 	}
 
-	private class FusionMapper extends PEIMapper {
+	private static class FusionMapper extends PEIMapper {
 		public FusionMapper() {
 			super("fusion", "Enable mapper for Draconic Evolution Fusion Crafting?");
 		}

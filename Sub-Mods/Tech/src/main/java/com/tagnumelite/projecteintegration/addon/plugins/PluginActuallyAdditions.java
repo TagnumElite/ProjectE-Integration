@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class PluginActuallyAdditions extends APEIPlugin {
 		addMapper(new CrusherMapper());
 	}
 
-	private class EmpowererMapper extends PEIMapper {
+	private static class EmpowererMapper extends PEIMapper {
 		public EmpowererMapper() {
 			super("Empowerer");
 		}
@@ -45,7 +45,7 @@ public class PluginActuallyAdditions extends APEIPlugin {
 		}
 	}
 
-	private class ReconstructorMapper extends PEIMapper {
+	private static class ReconstructorMapper extends PEIMapper {
 		public ReconstructorMapper() {
 			super("Reconstructor");
 		}
@@ -58,7 +58,7 @@ public class PluginActuallyAdditions extends APEIPlugin {
 		}
 	}
 
-	private class CrusherMapper extends PEIMapper {
+	private static class CrusherMapper extends PEIMapper {
 		public CrusherMapper() {
 			super("crusher");
 		}

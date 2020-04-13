@@ -1,32 +1,47 @@
-
-apply plugin: 'base' // To add "clean" task to the root project.
-/*
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
     }
 }
-*/
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    //id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.32'
+}
+
+apply plugin: 'base' // To add 'clean' task to the root project.
+
 version = "${version}"
-if (System.getenv("GITHUB_ACTIONS") != null && System.getenv("GITHUB_EVENT_NAME") != 'release') {
-    version += "+${System.getenv("GITHUB_SHA").substring(0, 7)}"
+if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME') != 'release') {
+    version += "+${System.getenv('GITHUB_SHA').substring(0, 7)}"
 }
 
 subprojects {
+    apply plugin: 'java'
+
     repositories {
+        mavenLocal()
         mavenCentral()
         maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            name = 'MinecraftForge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+        /*maven {
+            name = 'sonatype'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }*/
+        //maven { CurseForge Maven is trash
+        //    name = 'CurseForge'
+        //    url = 'https://minecraft.curseforge.com/api/maven/'
+        //}
+        maven {
+            name = 'ModMaven'
+            url = 'https://modmaven.k-4u.nl'
         }
         maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            name = "CurseForge"
-            url = "https://minecraft.curseforge.com/api/maven/"
-        }
-        maven {
-            name = "ModMaven"
-            url = "https://modmaven.k-4u.nl"
+            name = 'JitPack'
+            url = 'https://jitpack.io'
         }
     }
 
@@ -35,40 +50,26 @@ subprojects {
     ext.pe_version="${pe_version}"
     ext.mcp_version="${mcp_version}"
     ext.forgeVersion="${forge_version}"
-
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
 }
 
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
     gradleVersion = '4.9'
 }
 
-def all_addons = ["PEI-Addon-Alpha", "PEI-Addon-Beta"]
+def sub_mods = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
 
-subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+//subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
-task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + all_addons.collect { ':' + it + ':setupDecompWorkspace' }) {
-    doFirst {
-        print("Setting up Decomp Workspace for all projects")
-    }
-}
+task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + sub_mods.collect { ':' + it + ':setupDecompWorkspace' }) { }
 
-task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + all_addons.collect { ':' + it + ':setupCIWorkspace' }) {
-    doFirst {
-        print("Setting up CI Workspace for all projects")
-    }
-}
+task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + sub_mods.collect { ':' + it + ':setupCIWorkspace' }) { }
 
-task assembleAll(type: Jar, dependsOn: [':ProjectE-Integration:build'] + all_addons.collect { ':' + it + ":build" }) {
+task assembleAll(type: Jar, dependsOn: [':ProjectE-Integration:build'] + sub_mods.collect { ':' + it + ":build" }) {
     archiveName = "ProjectEIntegration-${mc_version}-${version}.jar"
 
     from zipTree(project(':ProjectE-Integration').jar.archivePath)
-    for (addon in all_addons) {
-        from zipTree(project(addon).jar.archivePath)
+    for (mod in sub_mods) {
+        from zipTree(project(mod).jar.archivePath)
     }
 }
 

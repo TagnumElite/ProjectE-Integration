@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import java.util.Collection;
 import com.google.common.collect.ImmutableMap;
@@ -63,7 +63,7 @@ public class PluginIC2 extends APEIPlugin {
 		}
 	}
 
-	private class AdvanceRecipeMapper extends PEIMapper {
+	private static class AdvanceRecipeMapper extends PEIMapper {
 		public AdvanceRecipeMapper() {
 			super("Advance Recipe");
 		}
@@ -78,7 +78,7 @@ public class PluginIC2 extends APEIPlugin {
 		}
 	}
 
-	private class MachineMapper extends PEIMapper {
+	private static class MachineMapper extends PEIMapper {
 		private final IBasicMachineRecipeManager manager;
 
 		public MachineMapper(IBasicMachineRecipeManager manager, String name) {
@@ -97,7 +97,7 @@ public class PluginIC2 extends APEIPlugin {
 		}
 	}
 
-	private class ClassicRecipeMapper extends PEIMapper {
+	private static class ClassicRecipeMapper extends PEIMapper {
 		private final IMachineRecipeList recipe_list;
 
 		public ClassicRecipeMapper(IMachineRecipeList recipe_list, String name) {

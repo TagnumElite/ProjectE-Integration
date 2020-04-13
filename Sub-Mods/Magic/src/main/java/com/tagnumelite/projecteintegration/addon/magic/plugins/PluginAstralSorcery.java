@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -28,7 +28,7 @@ public class PluginAstralSorcery extends APEIPlugin {
 		addMapper(new StarlightInfusionMapper());
 	}
 
-	private class AltarMapper extends PEIMapper {
+	private static class AltarMapper extends PEIMapper {
 		public AltarMapper() {
 			super("Altar");
 		}
@@ -45,7 +45,7 @@ public class PluginAstralSorcery extends APEIPlugin {
 		}
 	}
 
-	private class GrindstoneMapper extends PEIMapper {
+	private static class GrindstoneMapper extends PEIMapper {
 		public GrindstoneMapper() {
 			super("Grindstone", "These recipes contain chances, so it is disabled by default", true);
 		}
@@ -62,7 +62,7 @@ public class PluginAstralSorcery extends APEIPlugin {
 		}
 	}
 
-	private class StarlightInfusionMapper extends PEIMapper {
+	private static class StarlightInfusionMapper extends PEIMapper {
 		public StarlightInfusionMapper() {
 			super("Starlight Infusion");
 		}

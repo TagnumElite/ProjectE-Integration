@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -46,12 +46,10 @@ public class PluginThaumcraft extends APEIPlugin {
 			ASPECT_MAP.put(aspect, obj);
 		}
 
-		Iterator<IRecipe> recipes = CraftingManager.REGISTRY.iterator();
-		while (recipes.hasNext()) {
-			IRecipe recipe = recipes.next();
-			if (recipe instanceof IArcaneRecipe)
-				ARCANE_RECIPES.add((IArcaneRecipe) recipe);
-		}
+        for (IRecipe recipe : CraftingManager.REGISTRY) {
+            if (recipe instanceof IArcaneRecipe)
+                ARCANE_RECIPES.add((IArcaneRecipe) recipe);
+        }
 
 		for (IThaumcraftRecipe recipe : ThaumcraftApi.getCraftingRecipes().values()) {
 			if (recipe instanceof IArcaneRecipe)

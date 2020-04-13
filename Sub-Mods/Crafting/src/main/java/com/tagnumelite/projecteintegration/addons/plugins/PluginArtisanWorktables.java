@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addons.plugins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class PluginArtisanWorktables extends APEIPlugin {
 		}
 	}
 	
-	private class WorktableMapper extends PEIMapper {
+	private static class WorktableMapper extends PEIMapper {
 		private final String name;
 		private final EnumTier tier;
 

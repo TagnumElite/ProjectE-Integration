@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import blusunrize.immersiveengineering.api.crafting.AlloyRecipe;
 import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
@@ -47,7 +47,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		addMapper(new MetalPressMapper());
 	}
 
-	private class BlastFurnaceMapper extends PEIMapper {
+	private static class BlastFurnaceMapper extends PEIMapper {
 		public BlastFurnaceMapper() {
 			super("Blast Furnace");
 		}
@@ -79,7 +79,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private class CokeOvenMapper extends PEIMapper {
+	private static class CokeOvenMapper extends PEIMapper {
 		public CokeOvenMapper() {
 			super("Coke Oven");
 		}
@@ -118,7 +118,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private class KilnMapper extends PEIMapper {
+	private static class KilnMapper extends PEIMapper {
 		public KilnMapper() {
 			super("Kiln");
 		}
@@ -143,7 +143,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private abstract class MultiblockRecipeMapper extends PEIMapper {
+	private abstract static class MultiblockRecipeMapper extends PEIMapper {
 		public MultiblockRecipeMapper(String name) {
 			super(name);
 		}
@@ -208,7 +208,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private class CrusherMapper extends MultiblockRecipeMapper {
+	private static class CrusherMapper extends MultiblockRecipeMapper {
 		public CrusherMapper() {
 			super("Crusher");
 		}
@@ -221,7 +221,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private class EnginnerWorkbenchMapper extends MultiblockRecipeMapper {
+	private static class EnginnerWorkbenchMapper extends MultiblockRecipeMapper {
 		public EnginnerWorkbenchMapper() {
 			super("Enginner Workbench");
 		}
@@ -234,7 +234,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 		}
 	}
 
-	private class MetalPressMapper extends MultiblockRecipeMapper {
+	private static class MetalPressMapper extends MultiblockRecipeMapper {
 		public MetalPressMapper() {
 			super("Metal Press");
 		}

@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.library.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -20,7 +20,7 @@ public class PluginCharsetCrafting extends APEIPlugin {
 		addMapper(new CharsetLibRecipeMapper());
 	}
 	
-	private class CharsetLibRecipeMapper extends PEIMapper {
+	private static class CharsetLibRecipeMapper extends PEIMapper {
 		public CharsetLibRecipeMapper() {
 			super("Charset Lib Recipe");
 		}

@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import cofh.thermalexpansion.util.managers.machine.*;
 import cofh.thermalfoundation.init.TFFluids;
@@ -37,7 +37,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		addMapper(new TransposerMapper());
 	}
 
-	private class BrewerMapper extends PEIMapper {
+	private static class BrewerMapper extends PEIMapper {
 		public BrewerMapper() {
 			super("Brewer");
 		}
@@ -50,7 +50,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class CentrifugeMapper extends PEIMapper {
+	private static class CentrifugeMapper extends PEIMapper {
 		public CentrifugeMapper() {
 			super("Centrifuge");
 		}
@@ -66,7 +66,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class ChargerMapper extends PEIMapper {
+	private static class ChargerMapper extends PEIMapper {
 		public ChargerMapper() {
 			super("Charger");
 		}
@@ -79,7 +79,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class CompactorMapper extends PEIMapper {
+	private static class CompactorMapper extends PEIMapper {
 		public CompactorMapper() {
 			super("Compactor");
 		}
@@ -94,7 +94,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class CrucibleMapper extends PEIMapper {
+	private static class CrucibleMapper extends PEIMapper {
 		public CrucibleMapper() {
 			super("Crucible");
 		}
@@ -107,7 +107,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class EnchanterMapper extends PEIMapper {
+	private static class EnchanterMapper extends PEIMapper {
 		public EnchanterMapper() {
 			super("Enchanter");
 		}
@@ -121,7 +121,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class ExtruderMapper extends PEIMapper {
+	private static class ExtruderMapper extends PEIMapper {
 		public ExtruderMapper() {
 			super("Extruder");
 		}
@@ -142,7 +142,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class FurnaceMapper extends PEIMapper {
+	private static class FurnaceMapper extends PEIMapper {
 		public FurnaceMapper() {
 			super("Furnace");
 		}
@@ -162,7 +162,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class InsolatorMapper extends PEIMapper {
+	private static class InsolatorMapper extends PEIMapper {
 		public InsolatorMapper() {
 			super("Insolator");
 		}
@@ -191,7 +191,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class PrecipitatorMapper extends PEIMapper {
+	private static class PrecipitatorMapper extends PEIMapper {
 		public PrecipitatorMapper() {
 			super("Precipitator");
 		}
@@ -204,7 +204,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class PulverizerMapper extends PEIMapper {
+	private static class PulverizerMapper extends PEIMapper {
 		public PulverizerMapper() {
 			super("Pulverizer");
 		}
@@ -225,7 +225,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class RefineryMapper extends PEIMapper {
+	private static class RefineryMapper extends PEIMapper {
 		public RefineryMapper() {
 			super("Refinery");
 		}
@@ -248,7 +248,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class SawmillMapper extends PEIMapper {
+	private static class SawmillMapper extends PEIMapper {
 		public SawmillMapper() {
 			super("Sawmill");
 		}
@@ -269,7 +269,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class SmelterMapper extends PEIMapper {
+	private static class SmelterMapper extends PEIMapper {
 		public SmelterMapper() {
 			super("Smelter");
 		}
@@ -290,7 +290,7 @@ public class PluginThermalExpansion extends APEIPlugin {
 		}
 	}
 
-	private class TransposerMapper extends PEIMapper {
+	private static class TransposerMapper extends PEIMapper {
 		public TransposerMapper() {
 			super("Transposer");
 		}

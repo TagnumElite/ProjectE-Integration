@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+plugins {
+    id "com.wynprice.cursemaven" version "2.1.1"
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+version = mc_version + '-' + ext.version
+archivesBaseName = project.projectDir.name
+
+minecraft {
+    version = mc_version + '-' + forge_version
+    runDir = "eclipse"
+    mappings = "snapshot_${mcp_version}"
+}
+
+repositories {
+    maven {
+        name 'Modmuss'
+        url 'https://maven.modmuss50.me/'
+    }
+}
+
+dependencies {
+    deobfProvided "curse.maven:projecte:${pe_id}"
+    compile(project(':ProjectE-Integration'))
+
+    // Modmuss Maven
+    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+        exclude group: 'mezz.jei'
+    }
+
+    // CurseMaven
+    deobfProvided "curse.maven:charsetlib:${curse_charsetlib}"
+    deobfProvided "curse.maven:libvulpes:${curse_libvulpes}"
+    deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
+}

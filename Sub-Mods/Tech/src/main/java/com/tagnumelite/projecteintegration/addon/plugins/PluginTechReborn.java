@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -18,7 +18,7 @@ public class PluginTechReborn extends APEIPlugin {
 		addMapper(new RollingMachineMapper());
 	}
 
-	private class RollingMachineMapper extends PEIMapper {
+	private static class RollingMachineMapper extends PEIMapper {
 		public RollingMachineMapper() {
 			super("Rolling Machine");
 		}

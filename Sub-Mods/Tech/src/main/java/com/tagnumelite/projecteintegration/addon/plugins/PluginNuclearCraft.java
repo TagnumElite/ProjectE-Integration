@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
@@ -44,7 +44,7 @@ public class PluginNuclearCraft extends APEIPlugin {
 		}
 	}
 
-	private class AbstractRecipeMapper extends PEIMapper {
+	private static class AbstractRecipeMapper extends PEIMapper {
 		private AbstractRecipeHandler<? extends IRecipe> handler;
 
 		public AbstractRecipeMapper(AbstractRecipeHandler<? extends IRecipe> handler) {

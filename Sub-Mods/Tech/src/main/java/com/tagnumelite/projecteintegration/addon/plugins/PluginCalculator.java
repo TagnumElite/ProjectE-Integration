@@ -1,8 +1,8 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.plugins.PluginSonarCore.SonarMapper;
+import com.tagnumelite.projecteintegration.addon.library.plugins.PluginSonarCore.SonarMapper;
 
 import net.minecraftforge.common.config.Configuration;
 import sonar.calculator.mod.common.recipes.AlgorithmSeparatorRecipes;
@@ -44,7 +44,7 @@ public class PluginCalculator extends APEIPlugin {
 		addMapper(new StoneSeparatorMapper());
 	}
 
-	private class AlgorithmSeparatorMapper extends SonarMapper {
+	private static class AlgorithmSeparatorMapper extends SonarMapper {
 		public AlgorithmSeparatorMapper() {
 			super("Algorithm Separator");
 		}
@@ -57,7 +57,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class AtomicCalculatorMapper extends SonarMapper {
+	private static class AtomicCalculatorMapper extends SonarMapper {
 		public AtomicCalculatorMapper() {
 			super("Atomic Calculator");
 		}
@@ -70,7 +70,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class ConductorMastMapper extends SonarMapper {
+	private static class ConductorMastMapper extends SonarMapper {
 		public ConductorMastMapper() {
 			super("Conductor Mast");
 		}
@@ -83,7 +83,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class CalculatorMapper extends SonarMapper {
+	private static class CalculatorMapper extends SonarMapper {
 		public CalculatorMapper() {
 			super("Calculator");
 		}
@@ -96,7 +96,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class ExtractionChamberMapper extends SonarMapper {
+	private static class ExtractionChamberMapper extends SonarMapper {
 		public ExtractionChamberMapper() {
 			super("Extraction Chamber");
 		}
@@ -109,7 +109,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class FabricationChamberMapper extends SonarMapper {
+	private static class FabricationChamberMapper extends SonarMapper {
 		public FabricationChamberMapper() {
 			super("Fabrication Chamber");
 		}
@@ -122,7 +122,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class FlawlessCalculatorMapper extends SonarMapper {
+	private static class FlawlessCalculatorMapper extends SonarMapper {
 		public FlawlessCalculatorMapper() {
 			super("Flawless Calculator");
 		}
@@ -135,7 +135,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class PrecisionChamberMapper extends SonarMapper {
+	private static class PrecisionChamberMapper extends SonarMapper {
 		public PrecisionChamberMapper() {
 			super("Precision Chamber");
 		}
@@ -148,7 +148,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class ProcessingChamberMapper extends SonarMapper {
+	private static class ProcessingChamberMapper extends SonarMapper {
 		public ProcessingChamberMapper() {
 			super("Processing Chamber");
 		}
@@ -161,7 +161,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class ReassemblyChamberMapper extends SonarMapper {
+	private static class ReassemblyChamberMapper extends SonarMapper {
 		public ReassemblyChamberMapper() {
 			super("Reassembly Chamber");
 		}
@@ -174,7 +174,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class RestorationChamberMapper extends SonarMapper {
+	private static class RestorationChamberMapper extends SonarMapper {
 		public RestorationChamberMapper() {
 			super("Restoration Chamber");
 		}
@@ -187,7 +187,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class ScientificCalculatorMapper extends SonarMapper {
+	private static class ScientificCalculatorMapper extends SonarMapper {
 		public ScientificCalculatorMapper() {
 			super("Scientific Calculator");
 		}
@@ -200,7 +200,7 @@ public class PluginCalculator extends APEIPlugin {
 		}
 	}
 
-	private class StoneSeparatorMapper extends SonarMapper {
+	private static class StoneSeparatorMapper extends SonarMapper {
 		public StoneSeparatorMapper() {
 			super("Stone Separator");
 		}

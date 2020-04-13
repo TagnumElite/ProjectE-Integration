@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addons.plugins;
 
 import com.sofodev.armorplus.api.crafting.IRecipe;
 import com.sofodev.armorplus.api.crafting.base.BaseCraftingManager;
@@ -32,7 +32,7 @@ public class PluginArmorPlus extends APEIPlugin {
 		addMapper(new BenchMapper(BaseCraftingManager.getCBInstance()));
 	}
 
-	private class BenchMapper extends PEIMapper {
+	private static class BenchMapper extends PEIMapper {
 		private final BaseCraftingManager bench;
 
 		public BenchMapper(BaseCraftingManager bench) {

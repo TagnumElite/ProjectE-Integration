@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.enderio.core.common.util.NNList;
 import com.google.common.collect.ImmutableMap;
@@ -66,7 +66,7 @@ public class PluginEnderIO extends APEIPlugin {
 		addMapper(new SoulBinderMapper());
 	}
 
-	private abstract class IRecipeMapper extends PEIMapper {
+	private abstract static class IRecipeMapper extends PEIMapper {
 		public IRecipeMapper(String name) {
 			super(name);
 		}
@@ -93,7 +93,7 @@ public class PluginEnderIO extends APEIPlugin {
 		}
 	}
 
-	private abstract class ManyToOneRecipeMapper extends PEIMapper {
+	private abstract static class ManyToOneRecipeMapper extends PEIMapper {
 		public ManyToOneRecipeMapper(String name) {
 			super(name);
 		}
@@ -103,7 +103,7 @@ public class PluginEnderIO extends APEIPlugin {
 		}
 	}
 
-	private class AlloySmelterMapper extends ManyToOneRecipeMapper {
+	private static class AlloySmelterMapper extends ManyToOneRecipeMapper {
 		public AlloySmelterMapper() {
 			super("Alloy Smelter");
 		}
@@ -116,7 +116,7 @@ public class PluginEnderIO extends APEIPlugin {
 		}
 	}
 
-	private class SagMillMapper extends IRecipeMapper {
+	private static class SagMillMapper extends IRecipeMapper {
 		public SagMillMapper() {
 			super("Sag Mill");
 		}
@@ -129,7 +129,7 @@ public class PluginEnderIO extends APEIPlugin {
 		}
 	}
 
-	private class SliceAndSpliceMapper extends ManyToOneRecipeMapper {
+	private static class SliceAndSpliceMapper extends ManyToOneRecipeMapper {
 		public SliceAndSpliceMapper() {
 			super("Slice And Splice");
 		}
@@ -142,7 +142,7 @@ public class PluginEnderIO extends APEIPlugin {
 		}
 	}
 
-	private class VatMapper extends IRecipeMapper {
+	private static class VatMapper extends IRecipeMapper {
 		public VatMapper() {
 			super("Vat");
 		}

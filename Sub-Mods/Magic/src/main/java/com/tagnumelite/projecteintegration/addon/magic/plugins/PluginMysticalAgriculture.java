@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.blakebr0.mysticalagriculture.crafting.ReprocessorManager;
 import com.blakebr0.mysticalagriculture.crafting.ReprocessorRecipe;
@@ -18,7 +18,7 @@ public class PluginMysticalAgriculture extends APEIPlugin {
 		addMapper(new SeedProcessorMapper());
 	}
 
-	private class SeedProcessorMapper extends PEIMapper {
+	private static class SeedProcessorMapper extends PEIMapper {
 		public SeedProcessorMapper() {
 			super("Seed Processor");
 		}

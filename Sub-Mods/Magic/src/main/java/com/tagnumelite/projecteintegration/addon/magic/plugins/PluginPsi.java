@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -19,7 +19,7 @@ public class PluginPsi extends APEIPlugin {
 		addMapper(new TrickMapper());
 	}
 
-	private class TrickMapper extends PEIMapper {
+	private static class TrickMapper extends PEIMapper {
 		public TrickMapper() {
 			super("Trick");
 		}

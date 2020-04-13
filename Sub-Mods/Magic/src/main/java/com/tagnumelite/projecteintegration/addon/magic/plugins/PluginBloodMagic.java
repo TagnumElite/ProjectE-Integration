@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -25,7 +25,7 @@ public class PluginBloodMagic extends APEIPlugin {
 		addMapper(new TartaricForgeMapper());
 	}
 
-	private class AlchemyArrayMapper extends PEIMapper {
+	private static class AlchemyArrayMapper extends PEIMapper {
 		public AlchemyArrayMapper() {
 			super("Alchemy Array");
 		}
@@ -38,7 +38,7 @@ public class PluginBloodMagic extends APEIPlugin {
 		}
 	}
 
-	private class AlchemyTableMapper extends PEIMapper {
+	private static class AlchemyTableMapper extends PEIMapper {
 		public AlchemyTableMapper() {
 			super("Alchemy Table");
 		}
@@ -51,7 +51,7 @@ public class PluginBloodMagic extends APEIPlugin {
 		}
 	}
 
-	private class BloodAltarMapper extends PEIMapper {
+	private static class BloodAltarMapper extends PEIMapper {
 		public BloodAltarMapper() {
 			super("Blood Altar");
 		}
@@ -64,7 +64,7 @@ public class PluginBloodMagic extends APEIPlugin {
 		}
 	}
 
-	private class TartaricForgeMapper extends PEIMapper {
+	private static class TartaricForgeMapper extends PEIMapper {
 		public TartaricForgeMapper() {
 			super("Tartaric Forge");
 		}

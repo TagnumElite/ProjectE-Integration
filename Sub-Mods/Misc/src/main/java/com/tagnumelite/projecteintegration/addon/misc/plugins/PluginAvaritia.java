@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.misc.plugins;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
@@ -20,7 +20,7 @@ public class PluginAvaritia extends APEIPlugin {
 		super(modid, config);
 
 		this.compressor_cost_multiplier = config.getFloat("compressor_cost_multiplier", this.category, 1F, 0.00001F, 1F,
-				"Mupltier to the EMC calulation");
+				"Multiplier to the EMC calculation");
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class PluginAvaritia extends APEIPlugin {
 		addMapper(new CompressorMapper());
 	}
 
-	private class ExtremeMapper extends PEIMapper {
+	private static class ExtremeMapper extends PEIMapper {
 		public ExtremeMapper() {
 			super("Extreme Crafting Table");
 		}

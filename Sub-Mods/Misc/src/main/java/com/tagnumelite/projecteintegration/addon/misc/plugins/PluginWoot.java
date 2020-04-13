@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.misc.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -19,7 +19,7 @@ public class PluginWoot extends APEIPlugin {
 		addMapper(new AnvilMapper());
 	}
 
-	private class AnvilMapper extends PEIMapper {
+	private static class AnvilMapper extends PEIMapper {
 		public AnvilMapper() {
 			super("Anvil");
 		}

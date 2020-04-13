@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.meteor.extrabotany.api.ExtraBotanyAPI;
 import com.meteor.extrabotany.common.crafting.recipe.RecipePedestal;
@@ -19,7 +19,7 @@ public class PluginExtraBotany extends APEIPlugin {
 		addMapper(new PedestalMapper());
 	}
 
-	private class PedestalMapper extends PEIMapper {
+	private static class PedestalMapper extends PEIMapper {
 		public PedestalMapper() {
 			super("Pedestal");
 		}

@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.misc.plugins;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class PluginPamsHarvestCraft extends APEIPlugin {
 		addMapper(new MachineMapper("Water Filter", WaterFilterRecipes.class, "waterfilterList"));
 	}
 
-	private class MarketMapper extends PEIMapper {
+	private static class MarketMapper extends PEIMapper {
 		protected MarketMapper() {
 			super("Market", "Enable mapper for the market?", true);
 		}
@@ -57,7 +57,7 @@ public class PluginPamsHarvestCraft extends APEIPlugin {
 		}
 	}
 
-	private class MachineMapper extends PEIMapper {
+	private static class MachineMapper extends PEIMapper {
 		private final Class<?> machine;
 		private final String field;
 

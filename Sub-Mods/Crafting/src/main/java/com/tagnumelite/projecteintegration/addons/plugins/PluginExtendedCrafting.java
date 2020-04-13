@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addons.plugins;
 
 import com.blakebr0.extendedcrafting.crafting.CombinationRecipe;
 import com.blakebr0.extendedcrafting.crafting.CombinationRecipeManager;
@@ -27,7 +27,7 @@ public class PluginExtendedCrafting extends APEIPlugin {
 		addMapper(new ECTableMapper());
 	}
 
-	private class ECCompressorMapper extends PEIMapper {
+	private static class ECCompressorMapper extends PEIMapper {
 		public ECCompressorMapper() {
 			super("compressor");
 		}
@@ -48,7 +48,7 @@ public class PluginExtendedCrafting extends APEIPlugin {
 		}
 	}
 
-	private class ECCombinationMapper extends PEIMapper {
+	private static class ECCombinationMapper extends PEIMapper {
 		public ECCombinationMapper() {
 			super("combination");
 		}
@@ -61,7 +61,7 @@ public class PluginExtendedCrafting extends APEIPlugin {
 		}
 	}
 
-	private class ECTableMapper extends PEIMapper {
+	private static class ECTableMapper extends PEIMapper {
 		public ECTableMapper() {
 			super("table", "Enable Ender and Tiered crafting recipe mapper?");
 		}

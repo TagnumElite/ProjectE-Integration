@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,7 +159,7 @@ public class PluginMekanism extends APEIPlugin {
 		INFUSE_MAP.clear();
 	}
 
-	private class BasicMachineMapper extends PEIMapper {
+	private static class BasicMachineMapper extends PEIMapper {
 		private final Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type;
 
 		public BasicMachineMapper(Recipe<?, ?, ? extends BasicMachineRecipe<?>> recipe_type) {
@@ -175,7 +175,7 @@ public class PluginMekanism extends APEIPlugin {
 		}
 	}
 
-	private class DoubleMachineMapper extends PEIMapper {
+	private static class DoubleMachineMapper extends PEIMapper {
 		private final Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type;
 
 		public DoubleMachineMapper(Recipe<?, ?, ? extends DoubleMachineRecipe<?>> recipe_type) {
@@ -211,7 +211,7 @@ public class PluginMekanism extends APEIPlugin {
 		}
 	}
 
-	private class ChanceMachineMapper extends PEIMapper {
+	private static class ChanceMachineMapper extends PEIMapper {
 		private final Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type;
 
 		public ChanceMachineMapper(Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type) {
@@ -398,7 +398,7 @@ public class PluginMekanism extends APEIPlugin {
 		}
 	}
 
-	private class ThermalEvaporationMapper extends PEIMapper {
+	private static class ThermalEvaporationMapper extends PEIMapper {
 		public ThermalEvaporationMapper() {
 			super("Thermal Evaporation");
 		}

@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -31,7 +31,7 @@ public class PluginForestry extends APEIPlugin {
 		addMapper(new StillMapper());
 	}
 	
-	private class CarpenterMapper extends PEIMapper {
+	private static class CarpenterMapper extends PEIMapper {
 		public CarpenterMapper() {
 			super("Carpenter");
 		}
@@ -44,7 +44,7 @@ public class PluginForestry extends APEIPlugin {
 		}
 	}
 	
-	private class FabricatorMapper extends PEIMapper {
+	private static class FabricatorMapper extends PEIMapper {
 		public FabricatorMapper() {
 			super("Fabricator");
 		}
@@ -57,7 +57,7 @@ public class PluginForestry extends APEIPlugin {
 		}
 	}
 	
-	private class FermenterMapper extends PEIMapper {
+	private static class FermenterMapper extends PEIMapper {
 		public FermenterMapper() {
 			super("Fermenter");
 		}
@@ -70,7 +70,7 @@ public class PluginForestry extends APEIPlugin {
 		}
 	}
 	
-	private class MoistenerMapper extends PEIMapper {
+	private static class MoistenerMapper extends PEIMapper {
 		public MoistenerMapper() {
 			super("Moistener");
 		}
@@ -83,7 +83,7 @@ public class PluginForestry extends APEIPlugin {
 		}
 	}
 	
-	private class SqueezerMapper extends PEIMapper {
+	private static class SqueezerMapper extends PEIMapper {
 		public SqueezerMapper() {
 			super("Squeezer");
 		}
@@ -96,7 +96,7 @@ public class PluginForestry extends APEIPlugin {
 		}
 	}
 	
-	private class StillMapper extends PEIMapper {
+	private static class StillMapper extends PEIMapper {
 		public StillMapper() {
 			super("Still");
 		}

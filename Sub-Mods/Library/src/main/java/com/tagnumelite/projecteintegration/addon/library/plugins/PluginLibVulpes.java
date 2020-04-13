@@ -1,4 +1,4 @@
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.library.plugins;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.tagnumelite.projecteintegration.plugins;
+package com.tagnumelite.projecteintegration.addon.magic.plugins;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -46,7 +46,7 @@ public class PluginEmbers extends APEIPlugin {
 		addMapper(new StamperMapper());
 	}
 
-	private class AlchemyMapper extends PEIMapper {
+	private static class AlchemyMapper extends PEIMapper {
 		public AlchemyMapper() {
 			super("Alchemy");
 		}
@@ -59,7 +59,7 @@ public class PluginEmbers extends APEIPlugin {
 		}
 	}
 
-	private class MeltingMapper extends PEIMapper {
+	private static class MeltingMapper extends PEIMapper {
 		public MeltingMapper() {
 			super("Melting");
 		}
@@ -72,7 +72,7 @@ public class PluginEmbers extends APEIPlugin {
 		}
 	}
 
-	private class MixingMapper extends PEIMapper {
+	private static class MixingMapper extends PEIMapper {
 		public MixingMapper() {
 			super("Mixing");
 		}
@@ -85,7 +85,7 @@ public class PluginEmbers extends APEIPlugin {
 		}
 	}
 
-	private class StamperMapper extends PEIMapper {
+	private static class StamperMapper extends PEIMapper {
 		public StamperMapper() {
 			super("Stamper");
 		}
