@@ -62,7 +62,7 @@ def sub_mods = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
 
 task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + sub_mods.collect { ':' + it + ':setupDecompWorkspace' }) { }
 
-task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + sub_mods.collect { ':' + it + ':setupCIWorkspace' }) { }
+task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + sub_mods.collect { ':' + it + ':setupCiWorkspace' }) { }
 
 task assembleAll(type: Jar, dependsOn: [':ProjectE-Integration:build'] + sub_mods.collect { ':' + it + ":build" }) {
     archiveName = "ProjectEIntegration-${mc_version}-${version}.jar"
