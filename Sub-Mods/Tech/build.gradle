@@ -134,7 +134,7 @@ dependencies {
     runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
     deobfProvided "curse.maven:modularmachinery:${curse_modularmachinery}"
     runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
-    //deobfProvided "curse.maven:nuclearcraft:${curse_nuclearcraft}"
+    deobfProvided "curse.maven:nuclearcraft:${curse_nuclearcraft}"
     deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
 }

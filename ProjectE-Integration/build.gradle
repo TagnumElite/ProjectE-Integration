@@ -15,13 +15,12 @@ plugins {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'idea'
 apply plugin: 'maven-publish'
 
 version = ext.version
-
-group = "com.tagnumelite.projecteintegration"
-archivesBaseName = "ProjectEIntegration-${mc_version}"
+//group = "com.tagnumelite.projecteintegration"
+//archivesBaseName = "ProjectEIntegration-${mc_version}"
+archivesBaseName = project.projectDir.name
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {

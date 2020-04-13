@@ -70,7 +70,7 @@ public class PluginNuclearCraft extends APEIPlugin {
 
 		@Override
 		public void setup() {
-			for (IRecipe recipe : handler.getRecipes()) {
+			for (IRecipe recipe : handler.getRecipeList()) {
 				List<IItemIngredient> item_inputs = recipe.itemIngredients();
 				List<IFluidIngredient> fluid_inputs = recipe.fluidIngredients();
 
