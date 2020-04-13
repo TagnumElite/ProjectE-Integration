@@ -55,7 +55,7 @@ dependencies {
     //deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
     deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
     //deobfProvided "com.github.BlakeBr0:MysticalAgriculture:5b1e05cebb" -- Srsly? Can't blame you
-    provided ("com.github.Tagnum-Mods:MysticalAgriculture:1878d17460") {
+    provided ("com.github.Tagnum-Mods:MysticalAgriculture:${commit_mysticalagriculture}") {
         exclude group: 'com.github.BlakeBr0'
         exclude group: 'mezz.jei'
         exclude group: 'mcp.mobius.waila'

@@ -73,6 +73,6 @@ dependencies {
     // CurseMaven
     // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}" ForgeGradle doesn't like the jar files.
     //deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
-    provided "com.github.MatrexsVigil:harvestcraft:8f0a903a94"
+    provided "com.github.MatrexsVigil:harvestcraft:${commit_harvestcraft}"
     deobfProvided "curse.maven:woot:${curse_woot}"
 }
