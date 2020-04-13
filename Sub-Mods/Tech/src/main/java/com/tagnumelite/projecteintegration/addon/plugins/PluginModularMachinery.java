@@ -1,5 +1,6 @@
 package com.tagnumelite.projecteintegration.addon.plugins;
 
+/* TODO FIX THIS CRAP
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -9,16 +10,16 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
 import hellfirepvp.modularmachinery.common.crafting.MachineRecipe;
 import hellfirepvp.modularmachinery.common.crafting.helper.ComponentRequirement;
-import hellfirepvp.modularmachinery.common.crafting.requirements.RequirementEnergy;
-import hellfirepvp.modularmachinery.common.crafting.requirements.RequirementFluid;
-import hellfirepvp.modularmachinery.common.crafting.requirements.RequirementItem;
+import hellfirepvp.modularmachinery.common.crafting.requirement.type.RequirementType;
+import hellfirepvp.modularmachinery.common.crafting.requirement.type.RequirementTypeEnergy;
+import hellfirepvp.modularmachinery.common.crafting.requirement.type.RequirementTypeFluid;
+import hellfirepvp.modularmachinery.common.crafting.requirement.type.RequirementTypeItem;
 import hellfirepvp.modularmachinery.common.machine.DynamicMachine;
 import hellfirepvp.modularmachinery.common.machine.MachineRegistry;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
-
 @PEIPlugin("modularmachinery")
 public class PluginModularMachinery extends APEIPlugin {
 	public PluginModularMachinery(String modid, Configuration config) {
@@ -46,15 +47,15 @@ public class PluginModularMachinery extends APEIPlugin {
 				IngredientMap<Object> ingredients = new IngredientMap<Object>();
 				ArrayList<ItemStack> item_outputs = new ArrayList<ItemStack>();
 				ArrayList<FluidStack> fluid_outputs = new ArrayList<FluidStack>();
-
-				for (ComponentRequirement<?> req : recipe.getCraftingRequirements()) {
-					if (req instanceof RequirementEnergy) {
+				for (ComponentRequirement<?, ?> req : recipe.getCraftingRequirements()) {
+                    RequirementType<?, ? extends ComponentRequirement<?, ?>> req_type = req.getRequirementType();
+                    if (req_type instanceof RequirementTypeEnergy) {
 						continue;
-					} else if (req instanceof RequirementItem) {
-						RequirementItem req_t = (RequirementItem) req;
-						switch (req_t.getActionType()) {
+					} else if (req_type instanceof RequirementTypeItem) {
+                        RequirementTypeItem req_t = (RequirementTypeItem) req_type;
+						switch (req.getActionType()) {
 						case INPUT:
-							if (req_t.requirementType == RequirementItem.ItemRequirementType.ITEMSTACKS) {
+							if (req_t.requirementType == RequirementTypeItem.ItemRequirementType.ITEMSTACKS) {
 								if (req_t.required == null || req_t.required == ItemStack.EMPTY)
 									continue;
 
@@ -112,8 +113,9 @@ public class PluginModularMachinery extends APEIPlugin {
 				
 				for (FluidStack output : fluid_outputs) {
 					addConversion(output, map);
-				}*/
+				}*//*
 			}
 		}
 	}
 }
+*/

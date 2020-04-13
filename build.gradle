@@ -19,6 +19,7 @@ if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME'
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
     repositories {
         mavenLocal()
@@ -58,7 +59,7 @@ task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper
 
 def sub_mods = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
 
-//subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
 task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + sub_mods.collect { ':' + it + ':setupDecompWorkspace' }) { }
 

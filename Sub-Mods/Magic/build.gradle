@@ -59,3 +59,20 @@ dependencies {
     runtime "curse.maven:mysticalagridations:${curse_mysticalagridations}"
     deobfProvided "curse.maven:thaumcraft:${curse_thaumcraft}"
 }
+
+task download_libraries {
+    description = 'Download required libraries'
+    doFirst {
+        def lib = new File(projectDir, 'lib')
+        lib.mkdirs()
+        println('Downloading Mystical Aggriculture')
+        def mystical_aggriculture = new File(lib, 'mystical_aggriculture.jar')
+        if (!mystical_aggriculture.exists()) {
+            new URL('https://media.forgecdn.net/files/2704/562/MysticalAgriculture-1.12.2-1.7.5.jar').withInputStream{ i -> mystical_aggriculture.withOutputStream{ it << i }}
+        }
+    }
+}
+
+tasks['setupDecompWorkspace'].dependsOn(download_libraries)
+tasks['setupDevWorkspace'].dependsOn(download_libraries)
+tasks['setupCiWorkspace'].dependsOn(download_libraries)

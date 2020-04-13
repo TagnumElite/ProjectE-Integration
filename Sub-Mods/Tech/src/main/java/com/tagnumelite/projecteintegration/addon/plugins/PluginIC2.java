@@ -7,8 +7,8 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
-import ic2.api.classic.recipe.ClassicRecipes;
-import ic2.api.classic.recipe.machine.IMachineRecipeList;
+//import ic2.api.classic.recipe.ClassicRecipes;
+//import ic2.api.classic.recipe.machine.IMachineRecipeList;
 import ic2.api.recipe.IBasicMachineRecipeManager;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.MachineRecipe;
@@ -47,7 +47,7 @@ public class PluginIC2 extends APEIPlugin {
 			addMapper(new MachineMapper(Recipes.metalformerRolling, "Metal Former Rolling"));
 			addMapper(new MachineMapper(Recipes.oreWashing, "Ore Washing"));
 		} catch (ClassNotFoundException e1) {
-			PEIApi.LOG.info("IC2 Experimental not found, checking for IC2 Classic");
+			/*PEIApi.LOG.info("IC2 Experimental not found, checking for IC2 Classic");
 			try {
 				Class.forName("ic2.api.classic.recipe.ClassicRecipes");
 
@@ -59,7 +59,7 @@ public class PluginIC2 extends APEIPlugin {
 				addMapper(new ClassicRecipeMapper(ClassicRecipes.massfabAmplifier, "Classic Mass Fab Amplifier"));
 			} catch (ClassNotFoundException e2) {
 				PEIApi.LOG.error("IC2 Exp and IC2 Classic not found, this IC2 edition not recognised", e2);
-			}
+			}*/
 		}
 	}
 
@@ -97,7 +97,7 @@ public class PluginIC2 extends APEIPlugin {
 		}
 	}
 
-	private static class ClassicRecipeMapper extends PEIMapper {
+	/*private static class ClassicRecipeMapper extends PEIMapper {
 		private final IMachineRecipeList recipe_list;
 
 		public ClassicRecipeMapper(IMachineRecipeList recipe_list, String name) {
@@ -115,5 +115,5 @@ public class PluginIC2 extends APEIPlugin {
 						.of(PEIApi.getIngredient(recipe.getInput().getIngredient()), recipe.getInput().getAmount()));
 			}
 		}
-	}
+	}*/
 }

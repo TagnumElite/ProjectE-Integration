@@ -13,7 +13,6 @@ plugins {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'maven-publish'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -25,9 +24,6 @@ minecraft {
     version = mc_version + '-' + forge_version
     runDir = "eclipse"
     mappings = "snapshot_${mcp_version}"
-}
-
-repositories {
 }
 
 dependencies {
