@@ -27,9 +27,7 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
-jar {
-
-}
+jar {}
 
 minecraft {
     version = "${mc_version}-${forge_version}"
@@ -39,9 +37,6 @@ minecraft {
 
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
     replace '@VERSION@', "${version}"
-
-    replace 'after:mekanism', "after:mekanism@[${mc_version}-1.0.0,${mc_version}-1.2.0],[${mc_version}-${version_mekanism},)"
-    replace 'after:nuclearcraft', "after:nuclearcraft@[${version_nuclearcraft},)"
 }
 
 repositories {

@@ -2,9 +2,9 @@ rootProject.name = 'ProjectE Integration'
 
 include 'ProjectE-Integration'
 
-def sub_mods_dir = new File(rootDir, 'Sub-Mods')
+def plugins_dir = new File(rootDir, 'Plugins')
 
-def sub_mods = sub_mods_dir.listFiles(new FileFilter() {
+def plugins = plugins_dir.listFiles(new FileFilter() {
     @Override
     boolean accept(File pathname) {
         if (!pathname.isDirectory()) {
@@ -17,5 +17,5 @@ def sub_mods = sub_mods_dir.listFiles(new FileFilter() {
     }
 })
 
-sub_mods.each { File mod -> include ":${mod.name}"; project(":${mod.name}").projectDir = new File(sub_mods_dir, mod.name) }
+plugins.each { File plugin -> include ":${plugin.name}"; project(":${plugin.name}").projectDir = new File(plugins_dir, plugin.name) }
 
