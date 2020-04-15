@@ -79,9 +79,9 @@ These mods won't be supported or not currently.
  - Issues and Suggestions must be made on the GitHub Repo Issue tracker    
 - Any comments with issues and/or suggestions will be ignored. (In fact. Comments have been disabled for this reason)    
     
-#### Known (Currently) Unfixable Bugs:    
+#### Known (Currently) Unfixable Bugs:
  - Some items with subtypes don't seem to be working properly
- 
+
 
 ## Development
 
@@ -97,7 +97,13 @@ dependencies {
     provided 'com.tagnumelite:ProjectE-Integration:2.5.0.73'
 }
 ```
-   
+
+## Info:
+
+- 1.13.X: Support isn't planned
+- 1.14.X: I may release a version at some point
+- 1.15.X: I will start working on this version after ProjectE finalises their API and releases a 'release' build
+
 ## Permissions:    
  I don't really care unless used for malicious purposes then I will request it to be removed.    
 ~~Redistribution is forbidden unless used for modpacks by Curseforge/ATLauncher/Technic.~~    
