@@ -55,7 +55,7 @@ public class PluginNuclearCraft extends APEIPlugin {
 		private Object getObjectFromItemIngredient(IItemIngredient item) {
 			Object obj = new Object();
 			for (ItemStack input : item.getInputStackList()) {
-				addConversion(1, obj, ImmutableMap.of((Object) input, input.getCount()));
+				addConversion(1, obj, ImmutableMap.of(input, input.getCount()));
 			}
 			return obj;
 		}

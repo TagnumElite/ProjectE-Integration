@@ -62,6 +62,13 @@ Mod Support is split into seperate sub mods:
 - [Modular Machinery](https://www.curseforge.com/minecraft/mc-mods/modular-machinery)  
 - [Tech Reborn](https://www.curseforge.com/minecraft/mc-mods/techreborn): Rolling Machine
     
+### Not Supported
+
+These mods won't be supported or not currently.
+
+- Galaticraft (It would help if it was buildable on JitPack)
+
+
 ## Planned Features:    
  - CraftTweaker: This will allow modpack devs to add their own custom conversion to the ProjectE.    
     

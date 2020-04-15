@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
@@ -27,11 +23,9 @@ minecraft {
     mappings = "snapshot_${mcp_version}"
 }
 
-repositories {
-}
-
 dependencies {
-    compile(project(':ProjectE-Integration'))
-
     // CurseForge
+
+    // JitPack
+    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
 }

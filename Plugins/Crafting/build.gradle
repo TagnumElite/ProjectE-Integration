@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -28,10 +24,11 @@ minecraft {
 
 dependencies {
     deobfProvided "curse.maven:projecte:${pe_id}"
-    compile(project(':ProjectE-Integration'))
+
+    // JitPack
+    provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
 
     // CurseForge
-    deobfProvided "curse.maven:armorplus:${curse_armorplus}"
     deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
     runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
     runtime "curse.maven:athenaeum:${curse_athenaeum}" // Artisan Worktables Requirement

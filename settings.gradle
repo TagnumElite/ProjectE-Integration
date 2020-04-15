@@ -1,7 +1,5 @@
 rootProject.name = 'ProjectE Integration'
 
-include 'ProjectE-Integration'
-
 def plugins_dir = new File(rootDir, 'Plugins')
 
 def plugins = plugins_dir.listFiles(new FileFilter() {

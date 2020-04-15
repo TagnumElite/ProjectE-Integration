@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
@@ -56,7 +52,6 @@ repositories {
 
 dependencies {
     deobfProvided "curse.maven:projecte:${pe_id}"
-    compile(project(':ProjectE-Integration'))
     compile(project(':Library'))
 
     // Other
@@ -96,7 +91,7 @@ dependencies {
 
     // CoFH Maven
     runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
-    deobfProvided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+    provided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
         exclude group: 'cofh'
@@ -121,6 +116,9 @@ dependencies {
     deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
     runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
 
+    // JitPack
+    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft}") { exclude group: '*' }
+
     // CurseMaven
     provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
     deobfProvided "curse.maven:calculator:${curse_calculator}"
@@ -134,7 +132,6 @@ dependencies {
     runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
     deobfProvided "curse.maven:modularmachinery:${curse_modularmachinery}"
     runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
-    deobfProvided "curse.maven:nuclearcraft:${curse_nuclearcraft}"
     deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
 }

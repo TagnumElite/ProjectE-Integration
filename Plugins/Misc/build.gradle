@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
@@ -47,8 +43,6 @@ repositories {
 }
 
 dependencies {
-    compile(project(':ProjectE-Integration'))
-
     // Tehnut
     runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Woot Dependency
 

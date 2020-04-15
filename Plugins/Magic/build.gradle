@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
@@ -40,7 +36,6 @@ repositories {
 
 dependencies {
     deobfProvided "curse.maven:projecte:${pe_id}"
-    compile(project(':ProjectE-Integration'))
 
     // Maven
     runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Blood Magic Dependency

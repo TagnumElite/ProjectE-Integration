@@ -21,6 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
+import net.minecraftforge.fml.common.versioning.ArtifactVersion;
+import net.minecraftforge.fml.common.versioning.VersionParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.MessageFactory;
@@ -76,6 +78,10 @@ public class PEIntegration {
 				PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
 				if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
 					String modid = plugin_register.value().toLowerCase();
+					if (modid.indexOf('@') != -1) {
+                        ArtifactVersion version = VersionParser.parseVersionReference(modid);
+                        LOG.warn("Plugin {} requires {}", modid, version.getVersionString());
+                    }
 
 					if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin")
 							|| !Loader.isModLoaded(modid))

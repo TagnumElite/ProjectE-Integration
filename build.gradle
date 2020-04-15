@@ -1,7 +1,13 @@
 buildscript {
     repositories {
+        jcenter()
         mavenLocal()
         mavenCentral()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'com.wynprice.cursemaven:CurseMaven:2.1.1'
     }
 }
 
@@ -10,16 +16,33 @@ plugins {
     //id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.32'
 }
 
-apply plugin: 'base' // To add 'clean' task to the root project.
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "${version}"
 if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME') != 'release') {
     version += "+${System.getenv('GITHUB_SHA').substring(0, 7)}"
 }
 
-subprojects {
-    apply plugin: 'java'
+group = "com.tagnumelite.projecteintegration"
+archivesBaseName = "ProjectEIntegration-${mc_version}-${version}.jar"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '4.9'
+}
+
+def plugins = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
+
+allprojects {
+    apply plugin: 'com.wynprice.cursemaven'
     apply plugin: 'maven-publish'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'java'
 
     repositories {
         mavenLocal()
@@ -45,6 +68,13 @@ subprojects {
             url = 'https://jitpack.io'
         }
     }
+}
+
+subprojects {
+    dependencies {
+        compile project(':')
+        compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+    }
 
     ext.version = "${version}"
     ext.mc_version="${mc_version}"
@@ -53,26 +83,188 @@ subprojects {
     ext.forgeVersion="${forge_version}"
 }
 
-task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '4.9'
-}
-
-def plugins = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
-
 subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
-task setupDecompWorkspaceAll(dependsOn: [':ProjectE-Integration:setupDecompWorkspace'] + plugins.collect { ':' + it + ':setupDecompWorkspace' }) { }
-
-task setupCIWorkspaceAll(dependsOn: [':ProjectE-Integration:setupCiWorkspace'] + plugins.collect { ':' + it + ':setupCiWorkspace' }) { }
-
-task assembleAll(type: Jar, dependsOn: [':ProjectE-Integration:build'] + plugins.collect { ':' + it + ":build" }) {
-    archiveName = "ProjectEIntegration-${mc_version}-${version}.jar"
-
-    from zipTree(project(':ProjectE-Integration').jar.archivePath)
+jar {
     for (plugin in plugins) {
         from zipTree(project(plugin).jar.archivePath)
     }
 }
 
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
 
+    mappings = "snapshot_${mcp_version}"
 
+    replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
+    replace '@VERSION@', "${version}"
+}
+
+repositories {
+    maven {
+        name "TTerrag"
+        url "https://maven.tterrag.com"
+    }
+    maven {
+        name "TehNuuuuuuuuuuuut"
+        url 'http://tehnut.info/maven/'
+    }
+}
+
+dependencies {
+    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+    //deobfProvided "curse.maven:projecte:${pe_id}"
+
+    deobfProvided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
+    deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
+    runtime "mezz.jei:jei_${mc_version}:${version_jei}"
+    //provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
+    //runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
+
+    // CurseForge
+    //deobfProvided "curse.maven:extrautilities:${curse_extrautilities}"
+    runtime "curse.maven:baubles:${curse_baubles}"
+    //deobfProvided "curse.maven:nuclearcraftoverhauled:${curse_nuclearcraftoverhauled}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    description = 'Creates a JAR containing the source code.'
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task deobfJar(type: Jar) {
+    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.main.output
+    classifier = "deobf"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = 'Creates a JAR containing the JavaDocs.'
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourcesJar
+    archives deobfJar
+    archives javadocJar
+}
+runClient {
+    jvmArgs "-Xmx6G", "-Xms6G"
+}
+
+build.dependsOn(plugins.collect { ':' + it + ':build' })
+setupDecompWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDecompWorkspace' })
+setupCiWorkspace.dependsOn(plugins.collect { ':' + it + ':setupCiWorkspace' })
+setupDevWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDevWorkspace' })
+
+/*
+curseforge {
+    options {
+        debug = true
+    }
+    apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
+    project {
+        id = "${cf_project}"
+        changelog = file('changelog.html')
+        changelogType = 'html'
+        releaseType = "${release_type}"
+        addGameVersion "${mc_version}"
+        mainArtifact(jar) {
+            displayName = "ProjectE Integration - ${version}"
+        }
+        addArtifact(deobfJar) {
+            displayName = "ProjectE Integration - ${version} - deobf"
+        }
+        addArtifact(apiJar) {
+            displayName = "ProjectE Integration - ${version} - api"
+        }
+        addArtifact(sourcesJar) {
+            displayName = "ProjectE Integration - ${version} - sources"
+        }
+        relations {
+            requiredDependency 'ProjectE'
+
+            // From Other Mavens
+            optionalLibrary 'Actually-Additions'
+            optionalLibrary 'Applied-Energistics-2'
+            optionalLibrary 'Avaritia-1-10'
+            optionalLibrary 'Botania'
+            //optionalLibrary 'Buildcraft'
+            optionalLibrary 'CraftTweaker'
+            optionalLibrary 'Draconic-Evolution'
+            optionalLibrary 'Forestry'
+            optionalLibrary 'Immersive-Engineering'
+            optionalLibrary 'Industrial-Craft'
+            optionalLibrary 'Psi'
+            optionalLibrary 'RebornCore'
+            //optionalLibrary 'Redstone-Flux'
+            optionalLibrary 'TechReborn'
+            optionalLibrary 'Thermal-Expansion'
+            optionalLibrary 'Tinkers-Construct'
+
+            // From CurseForge Maven
+            optionalLibrary 'Advanced-Rocketry'
+            optionalLibrary 'Astral-Sorcery'
+            optionalLibrary 'ArmorPlus'
+            optionalLibrary 'Artisan-Worktables'
+            optionalLibrary 'Blood-Magic'
+            optionalLibrary 'Calculator'
+            optionalLibrary 'Charset-Lib'
+            optionalLibrary 'Compact-Machines'
+            optionalLibrary 'Embers'
+            optionalLibrary 'Ender-IO'
+            optionalLibrary 'Extended-Crafting'
+            optionalLibrary 'ExtraBotany'
+            //optionalLibrary 'Extra-Utilities'
+            optionalLibrary 'LibVulpes'
+            optionalLibrary 'Mekanism'
+            optionalLibrary 'Modular-Machinery'
+            optionalLibrary 'Mystical-Agriculture'
+            optionalLibrary 'NuclearCraft-mod'
+            optionalLibrary 'Pams-HarvestCraft'
+            optionalLibrary 'Thaumcraft'
+            optionalLibrary 'Woot'
+        }
+    }
+}
+
+task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    filePath = "changelog.html"
+    untaggedName = "Current release ${project.version}"
+    fromCommit = "939adc1b1975da6b89486d1e5f02e9e18027f0c2"
+    toRef =  "HEAD"
+    templateContent = """
+{{#tags}}
+  <h3>{{name}}</h3>
+  <ul>
+    {{#commits}}
+    <li>{{{message}}}</li>
+    {{/commits}}
+  </ul>
+{{/tags}}
+"""
+}
+
+afterEvaluate {
+    tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
+}
+*/
