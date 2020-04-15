@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+    mappings = "snapshot_${mcp_version}"
+}
+
+dependencies {
+    compile project(':')
+    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+}
+
+ext.version = "${version}"
+ext.mc_version="${mc_version}"
+ext.pe_version="${pe_version}"
+ext.mcp_version="${mcp_version}"
+ext.forgeVersion="${forge_version}"
