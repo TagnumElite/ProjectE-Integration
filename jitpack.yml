@@ -1,7 +1,6 @@
 jdk:
   - openjdk8
 before_install:
-  - ./gradlew clean setupCiWorkspaceAll
+  - ./gradlew clean setupCiWorkspace
 install:
-  - echo "Running a custom install command"
-  - ./gradlew assembleAll
+  - ./gradlew build deobfJar sourcesJar javadocJar

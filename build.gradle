@@ -24,11 +24,7 @@ if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME'
 }
 
 group = "com.tagnumelite.projecteintegration"
-archivesBaseName = "ProjectEIntegration-${mc_version}-${version}.jar"
-
-task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '4.9'
-}
+archivesBaseName = "ProjectEIntegration-${mc_version}"
 
 def plugins = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
 
@@ -40,7 +36,7 @@ subprojects {
     apply from: rootProject.file('plugin.gradle')
 }
 
-subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+//subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
 jar {
     for (plugin in plugins) {
@@ -101,21 +97,30 @@ processResources {
     }
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
+task sourcesJar(type: Jar, dependsOn: [classes] + plugins.collect { ':' + it + ':sourcesJar' }) {
     description = 'Creates a JAR containing the source code.'
     from sourceSets.main.allSource
+    for (plugin in plugins) {
+        from zipTree(project(plugin).sourcesJar.archivePath)
+    }
     classifier = 'sources'
 }
 
-task deobfJar(type: Jar) {
+task deobfJar(type: Jar, dependsOn: plugins.collect { ':' + it + ':deobfJar' }) {
     description = 'Creates a JAR containing the non-obfuscated compiled code.'
     from sourceSets.main.output
+    for (plugin in plugins) {
+        from zipTree(project(plugin).deobfJar.archivePath)
+    }
     classifier = "deobf"
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: [javadoc] + plugins.collect { ':' + it + ':javadocJar' }) {
     description = 'Creates a JAR containing the JavaDocs.'
     from javadoc.destinationDir
+    for (plugin in plugins) {
+        from zipTree(project(plugin).javadocJar.archivePath)
+    }
     classifier = 'javadoc'
 }
 
@@ -124,6 +129,7 @@ artifacts {
     archives deobfJar
     archives javadocJar
 }
+
 runClient {
     jvmArgs "-Xmx6G", "-Xms6G"
 }
@@ -132,7 +138,25 @@ build.dependsOn(plugins.collect { ':' + it + ':build' })
 setupDecompWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDecompWorkspace' })
 setupCiWorkspace.dependsOn(plugins.collect { ':' + it + ':setupCiWorkspace' })
 setupDevWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDevWorkspace' })
+/* Borken
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            from components.java
 
+            // Adds the various artifacts
+            artifact sourcesJar { classifier 'sources' }
+            artifact deobfJar { classifier 'deobf' }
+            artifact javadocJar { classifier 'javadoc' }
+        }
+    }
+
+    repositories { maven { url "file://" + System.getenv("local_maven") }}
+}
+*/
 /*
 curseforge {
     options {
@@ -225,3 +249,51 @@ afterEvaluate {
     tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
 }
 */
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '4.9'
+}
+/*
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+task signDeobfJar(type: SignJar, dependsOn: deobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = deobfJar.archivePath
+    outputFile = deobfJar.archivePath
+}
+
+task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = sourcesJar.archivePath
+    outputFile = sourcesJar.archivePath
+}
+*/
+
+//build.dependsOn signJar
+//build.dependsOn signSrcJar
+build.dependsOn sourcesJar
+//build.dependsOn signDeobfJar
+build.dependsOn deobfJar
+//build.dependsOn javadocJar
+build.dependsOn javadocJar
