@@ -247,59 +247,18 @@ task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
 }
 
 afterEvaluate {
-    tasks["curseforge${cf_project}"].dependsOn.add(signJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signDeobfJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signApiJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(signSrcJar)
+    tasks["curseforge${cf_project}"].dependsOn.add(assembleJar)
+    tasks["curseforge${cf_project}"].dependsOn.add(sourcesJar)
+    tasks["curseforge${cf_project}"].dependsOn.add(deobfJar)
+    tasks["curseforge${cf_project}"].dependsOn.add(javadocJar)
     tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
 }
 */
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
     gradleVersion = '4.9'
 }
-/*
-task signJar(type: SignJar, dependsOn: reobfJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
-}
-
-task signDeobfJar(type: SignJar, dependsOn: deobfJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = deobfJar.archivePath
-    outputFile = deobfJar.archivePath
-}
-
-task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
-    keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = sourcesJar.archivePath
-    outputFile = sourcesJar.archivePath
-}
-*/
 
 jar.finalizedBy assembleJar
-//build.dependsOn signJar
-//build.dependsOn signSrcJar
-build.dependsOn sourcesJar
-//build.dependsOn signDeobfJar
-build.dependsOn deobfJar
-//build.dependsOn javadocJar
-build.dependsOn javadocJar
+assembleJar.finalizedBy sourcesJar
+assembleJar.finalizedBy deobfJar
+assembleJar.finalizedBy javadocJar
