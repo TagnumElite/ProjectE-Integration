@@ -92,6 +92,8 @@ processResources {
 }
 
 task assembleJar(type: Jar, dependsOn: [jar] + plugins.collect { ':' + it + ':build' }) {
+    description = 'Creates a JAR containing the mod with plugins'
+    from jar.archivePath
     for (plugin in plugins) {
         from zipTree(project(plugin).jar.archivePath)
     }
