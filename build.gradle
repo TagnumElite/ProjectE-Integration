@@ -36,13 +36,7 @@ subprojects {
     apply from: rootProject.file('plugin.gradle')
 }
 
-//subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
-
-jar {
-    for (plugin in plugins) {
-        from zipTree(project(plugin).jar.archivePath)
-    }
-}
+jar { }
 
 minecraft {
     version = "${mc_version}-${forge_version}"
@@ -97,6 +91,12 @@ processResources {
     }
 }
 
+task assembleJar(type: Jar, dependsOn: [jar] + plugins.collect { ':' + it + ':build' }) {
+    for (plugin in plugins) {
+        from zipTree(project(plugin).jar.archivePath)
+    }
+}
+
 task sourcesJar(type: Jar, dependsOn: [classes] + plugins.collect { ':' + it + ':sourcesJar' }) {
     description = 'Creates a JAR containing the source code.'
     from sourceSets.main.allSource
@@ -134,7 +134,6 @@ runClient {
     jvmArgs "-Xmx6G", "-Xms6G"
 }
 
-build.dependsOn(plugins.collect { ':' + it + ':build' })
 setupDecompWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDecompWorkspace' })
 setupCiWorkspace.dependsOn(plugins.collect { ':' + it + ':setupCiWorkspace' })
 setupDevWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDevWorkspace' })
@@ -294,6 +293,7 @@ task signSrcJar(type: SignJar, dependsOn: sourcesJar) {
 }
 */
 
+jar.finalizedBy assembleJar
 //build.dependsOn signJar
 //build.dependsOn signSrcJar
 build.dependsOn sourcesJar
