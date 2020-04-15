@@ -1,27 +1,5 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
-}
-
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'maven-publish'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 version = mc_version + '-' + ext.version
 archivesBaseName = project.projectDir.name
-
-minecraft {
-    version = mc_version + '-' + forge_version
-    runDir = "eclipse"
-    mappings = "snapshot_${mcp_version}"
-}
 
 repositories {
     maven {
@@ -51,7 +29,6 @@ repositories {
 }
 
 dependencies {
-    deobfProvided "curse.maven:projecte:${pe_id}"
     compile(project(':Library'))
 
     // Other

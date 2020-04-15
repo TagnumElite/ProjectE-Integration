@@ -1,30 +1,7 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
-}
-
-apply plugin: 'net.minecraftforge.gradle.forge'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 version = mc_version + '-' + ext.version
 archivesBaseName = project.projectDir.name
 
-minecraft {
-    version = mc_version + '-' + forge_version
-    runDir = "eclipse"
-    mappings = "snapshot_${mcp_version}"
-}
-
 dependencies {
-    deobfProvided "curse.maven:projecte:${pe_id}"
-
     // JitPack
     provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
 
