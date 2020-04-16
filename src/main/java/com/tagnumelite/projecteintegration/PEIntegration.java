@@ -78,10 +78,11 @@ public class PEIntegration {
 				PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
 				if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
 					String modid = plugin_register.value().toLowerCase();
-					if (modid.indexOf('@') != -1) {
+					// TODO: Make special version handler, for now. Just log errors and skip to next mapper
+					/*if (modid.indexOf('@') != -1) {
                         ArtifactVersion version = VersionParser.parseVersionReference(modid);
                         LOG.warn("Plugin {} requires {}", modid, version.getVersionString());
-                    }
+                    }*/
 
 					if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin")
 							|| !Loader.isModLoaded(modid))
