@@ -57,6 +57,7 @@ Mod Support is split into separate plugin categories:
 - [Draconic Evolution](https://www.curseforge.com/minecraft/mc-mods/draconic-evolution): Fusion
 - [EnderIO](https://www.curseforge.com/minecraft/mc-mods/ender-io): Alloy Smelter, Sag Mill, Slice and Splice, Vat and Soul Binder
 - [Forestry](https://www.curseforge.com/minecraft/mc-mods/forestry): Carpenter, Fabricator, Fermenter, Moistener, Squezzer and Still
+- [GregTechCE](https://www.curseforge.com/minecraft/mc-mods/gregtechce)
 - [Immersive Engineering](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering): Blast Furnace, Coke Oven, Crusher, Enginner Workbench, Kiln and Metal Press
 - [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
 - [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)

@@ -36,7 +36,7 @@ subprojects {
     apply from: rootProject.file('plugin.gradle')
 }
 
-jar { }
+jar {}
 
 minecraft {
     version = "${mc_version}-${forge_version}"
@@ -255,3 +255,6 @@ jar.finalizedBy assembleJar
 assembleJar.finalizedBy sourcesJar
 assembleJar.finalizedBy deobfJar
 assembleJar.finalizedBy javadocJar
+build.dependsOn sourcesJar
+build.dependsOn deobfJar
+build.dependsOn javadocJar
