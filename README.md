@@ -1,6 +1,5 @@
 # ProjectE-Integration   
     
-This mod will be the bridge between ProjectE and all ~~your~~ my favourite mods!    
 This mod will be the bridge between ProjectE and all ~~my~~ your favourite mods!    
     
 PEI will be adding ProjectE conversion mapping support to these mods crafting mechanics.    
@@ -22,12 +21,13 @@ Mod Support is split into separate plugin categories:
   
 ### Legacy: Old Mod Support
 
+- [NuclearCraft](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-mod)
  
 ### Library:
-  
-- [Charset Lib](https://www.curseforge.com/minecraft/mc-mods/charset-lib)  
-- [LibVulpes](https://www.curseforge.com/minecraft/mc-mods/libvulpes)  
-- [Reborn Core](https://www.curseforge.com/minecraft/mc-mods/reborncore)  
+
+- [Charset Lib](https://www.curseforge.com/minecraft/mc-mods/charset-lib)
+- [LibVulpes](https://www.curseforge.com/minecraft/mc-mods/libvulpes)
+- [Reborn Core](https://www.curseforge.com/minecraft/mc-mods/reborncore)
   
 ### Magic:  
 
