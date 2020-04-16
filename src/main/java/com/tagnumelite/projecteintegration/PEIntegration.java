@@ -1,32 +1,30 @@
 package com.tagnumelite.projecteintegration;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
-import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-
-import net.minecraftforge.fml.common.versioning.ArtifactVersion;
-import net.minecraftforge.fml.common.versioning.VersionParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.MessageFactory;
-import org.apache.logging.log4j.message.MessageFormatMessageFactory;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.tagnumelite.projecteintegration.api.PEIApi.*;
 
@@ -63,41 +61,45 @@ public class PEIntegration {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		DISABLE = config.getBoolean("disable", ConfigHelper.CATEGORY_GENERAL, false,
-				"Disable the mod outright? Why though?");
+				"Disable the mod outright? Why download it though?");
 
 		if (DISABLE) {
 			LOG.info("Finished Phase: Pre Initialization. Mod Disabled");
 			return;
 		}
 
-		Set<ASMData> ASM_DATA_SET = event.getAsmData().getAll(PEIPlugin.class.getCanonicalName());
+		// TODO: Move logic into own class
+		event.getAsmData().getAll(PEIPlugin.class.getCanonicalName()).forEach(asm_data -> {
+            try {
+                Class<?> asmClass = Class.forName(asm_data.getClassName());
+                PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
+                if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
+                    String modid = plugin_register.value().toLowerCase();
 
-		for (ASMData asm_data : ASM_DATA_SET) {
-			try {
-				Class<?> asmClass = Class.forName(asm_data.getClassName());
-				PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
-				if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
-					String modid = plugin_register.value().toLowerCase();
-					// TODO: Make special version handler, for now. Just log errors and skip to next mapper
-					/*if (modid.indexOf('@') != -1) {
-                        ArtifactVersion version = VersionParser.parseVersionReference(modid);
-                        LOG.warn("Plugin {} requires {}", modid, version.getVersionString());
-                    }*/
+                    if (!Loader.isModLoaded(modid)) return;
 
-					if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin")
-							|| !Loader.isModLoaded(modid))
-						continue;
+                    if (asmClass.isAnnotationPresent(OnlyIf.class)) {
+                        OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
+                        if (!StringUtils.isNullOrEmpty(onlyIf.versionStartsWith().trim())) {
+                            ModContainer modcontainer = Loader.instance().getModList().stream().filter(modContainer -> modContainer.getModId().equals(modid)).collect(Collectors.toList()).get(0);
+                            if (!modcontainer.getVersion().startsWith(onlyIf.versionStartsWith())) return;
+                            //TODO: Move OnlyIf Logic into own class
+                        }
+                    }
 
-					Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
-					Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class,
-							Configuration.class);
-					PLUGINS.add(plugin.newInstance(modid, config));
-				}
-			} catch (Throwable t) {
-				LOG.error("Failed to load: {}", asm_data.getClassName(), t);
-				//t.printStackTrace();
-			}
-		}
+                    if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin"))
+                        return;
+
+                    Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
+                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class,
+                        Configuration.class);
+                    PLUGINS.add(plugin.newInstance(modid, config));
+                }
+            } catch (Throwable t) {
+                LOG.error("Failed to load: {}", asm_data.getClassName(), t);
+                //t.printStackTrace();
+            }
+        });
 
 		if (config.hasChanged())
 			config.save();

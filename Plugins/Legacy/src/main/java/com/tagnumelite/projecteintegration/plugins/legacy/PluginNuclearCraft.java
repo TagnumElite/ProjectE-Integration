@@ -1,9 +1,10 @@
-package com.tagnumelite.projecteintegration.plugins.tech;
+package com.tagnumelite.projecteintegration.plugins.legacy;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 
@@ -21,7 +22,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@PEIPlugin("nuclearcraft@[2.+)")
+@PEIPlugin("nuclearcraft")
+@OnlyIf(versionStartsWith="2.")
 public class PluginNuclearCraft extends APEIPlugin {
 	public PluginNuclearCraft(String modid, Configuration config) {
 		super(modid, config);

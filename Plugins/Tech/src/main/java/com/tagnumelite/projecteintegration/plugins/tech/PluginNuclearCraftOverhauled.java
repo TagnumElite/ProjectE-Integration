@@ -27,6 +27,7 @@ import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import moze_intel.projecte.emc.IngredientMap;
 import nc.recipe.AbstractRecipeHandler;
@@ -43,6 +44,7 @@ import java.util.Collections;
 import java.util.List;
 
 @PEIPlugin("nuclearcraft")
+@OnlyIf(versionStartsWith="2o.")
 public class PluginNuclearCraftOverhauled extends APEIPlugin {
     public PluginNuclearCraftOverhauled(String modid, Configuration config) { super(modid, config); }
 
