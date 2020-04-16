@@ -21,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
-@PEIPlugin("nuclearcraft")
+@PEIPlugin("nuclearcraft@[2.+)")
 public class PluginNuclearCraft extends APEIPlugin {
 	public PluginNuclearCraft(String modid, Configuration config) {
 		super(modid, config);
@@ -30,6 +30,7 @@ public class PluginNuclearCraft extends APEIPlugin {
 	@Override
 	public void setup() {
 		ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();
+
 		Collections.addAll(handlers, NCRecipes.alloy_furnace, NCRecipes.centrifuge, NCRecipes.chemical_reactor,
 				NCRecipes.collector, NCRecipes.condenser, NCRecipes.coolant_heater, NCRecipes.crystallizer,
 				NCRecipes.decay_generator, NCRecipes.decay_hastener, NCRecipes.dissolver, NCRecipes.electrolyser,
@@ -83,7 +84,7 @@ public class PluginNuclearCraft extends APEIPlugin {
 					continue;
 				}
 
-				IngredientMap<Object> ingredients = new IngredientMap<Object>();
+				IngredientMap<Object> ingredients = new IngredientMap<>();
 
 				for (IItemIngredient input : item_inputs) {
 					ingredients.addIngredient(getObjectFromItemIngredient(input), input.getMaxStackSize(0));
@@ -105,20 +106,6 @@ public class PluginNuclearCraft extends APEIPlugin {
 				});
 
 				addConversion(output, ingredients.getMap());
-
-				/*
-				 * for (IItemIngredient output : item_outputs) { for (ItemStack output_item :
-				 * output.getInputStackList()) { if (output_item == null ||
-				 * output_item.isEmpty()) continue;
-				 * 
-				 * addConversion(output_item, ingredients.getMap()); } }
-				 * 
-				 * for (IFluidIngredient output : fluid_outputs) { for (FluidStack output_fluid
-				 * : output.getInputStackList()) { if (output_fluid == null ||
-				 * output_fluid.amount == 0) continue;
-				 * 
-				 * addConversion(output_fluid, ingredients.getMap()); } }
-				 */
 			}
 		}
 	}

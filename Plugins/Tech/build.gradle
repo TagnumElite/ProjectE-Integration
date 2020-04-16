@@ -94,7 +94,7 @@ dependencies {
     runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
 
     // JitPack
-    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft}") { exclude group: '*' }
+    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
 
     // CurseMaven
     provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
@@ -107,8 +107,6 @@ dependencies {
     deobfProvided "curse.maven:mekanism:${curse_mekanism}"
     runtime "curse.maven:mekanismgen:${curse_mekanismgen}"
     runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
-    deobfProvided "curse.maven:modularmachinery:${curse_modularmachinery}"
-    runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
     deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
 }

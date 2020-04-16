@@ -1,4 +1,4 @@
-# ProjectE-Integration    
+# ProjectE-Integration   
     
 This mod will be the bridge between ProjectE and all ~~your~~ my favourite mods!    
     
@@ -9,16 +9,20 @@ PEI will later on also be adding EMC to the mods Items that don't have emc assig
     
 ## Mod Support:  
   
-Mod Support is split into seperate sub mods:  
+Mod Support is split into separate plugin categories:  
   
 ### Crafting:  
   
 - [ArmorPlus](https://www.curseforge.com/minecraft/mc-mods/armorplus): Workbench (Normal, High-Tech, Ultimate and Champion)  
-- [Artisan Worktables](https://www.curseforge.com/minecraft/mc-mods/artisan-worktables)  
-- [Artisan Integrations]()  
+- [Artisan Worktables](https://www.curseforge.com/minecraft/mc-mods/artisan-worktables)
 - [Extended Crafting](https://www.curseforge.com/minecraft/mc-mods/extended-crafting): Combination, Compressor, Ender Crafting Table and Tiered Crafting Table
+- [Modular Machinery](https://www.curseforge.com/minecraft/mc-mods/modular-machinery): All machines, only supports Item and Fluids for now
   
-### Library:  
+### Legacy: Old Mod Support
+
+- [NuclearCraft](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-mod)  
+ 
+### Library:
   
 - [Charset Lib](https://www.curseforge.com/minecraft/mc-mods/charset-lib)  
 - [LibVulpes](https://www.curseforge.com/minecraft/mc-mods/libvulpes)  
@@ -52,14 +56,12 @@ Mod Support is split into seperate sub mods:
 - [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
 - IC2 Classic    
 - [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines): Miniaturization
-- [NuclearCraft](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-mod)  
 - [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)  
 - [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Grindstone and Inscriber  
 - [Calculator](https://www.curseforge.com/minecraft/mc-mods/calculator)  
 - [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)
 - [Immersive Engineering](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering): Blast Furnace, Coke Oven, Crusher, Enginner Workbench, Kiln and Metal Press
 - [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion): All Machines
-- [Modular Machinery](https://www.curseforge.com/minecraft/mc-mods/modular-machinery)  
 - [Tech Reborn](https://www.curseforge.com/minecraft/mc-mods/techreborn): Rolling Machine
     
 ### Not Supported

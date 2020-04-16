@@ -2,6 +2,4 @@ version = mc_version + '-' + ext.version
 archivesBaseName = project.projectDir.name
 
 dependencies {
-    // JitPack
-    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
 }

@@ -26,7 +26,7 @@ if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME'
 group = "com.tagnumelite.projecteintegration"
 archivesBaseName = "ProjectEIntegration-${mc_version}"
 
-def plugins = ['Crafting', 'Duplicate', 'Library', 'Magic', 'Misc', 'Tech']
+def plugins = ['Crafting', 'Duplicate', 'Legacy', 'Library', 'Magic', 'Misc', 'Tech']
 
 allprojects {
     apply from: rootProject.file('global.gradle')

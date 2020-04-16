@@ -1,9 +1,19 @@
 version = mc_version + '-' + ext.version
 archivesBaseName = project.projectDir.name
 
+repositories {
+    maven {
+        name 'HellFire'
+        url 'https://maven.hellfiredev.net'
+    }
+}
+
 dependencies {
     // JitPack
     provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
+
+    // HellFire
+    provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
 
     // CurseForge
     deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
@@ -12,4 +22,5 @@ dependencies {
     deobfProvided "curse.maven:cucumber:${curse_cucumber}" // Extended Crafting Requirement
     deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
+    runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
 }
