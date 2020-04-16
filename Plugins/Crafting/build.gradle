@@ -6,9 +6,17 @@ repositories {
         name 'HellFire'
         url 'https://maven.hellfiredev.net'
     }
+    maven {
+        name 'TTerrag'
+        url 'https://maven.tterrag.com'
+    }
 }
 
 dependencies {
+    // TTerrag
+    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
+    runtime "team.chisel.ctm:CTM:MC${mc_version}-${version_ctm}"
+
     // JitPack
     provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
 

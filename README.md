@@ -15,6 +15,7 @@ Mod Support is split into separate plugin categories:
   
 - [ArmorPlus](https://www.curseforge.com/minecraft/mc-mods/armorplus): Workbench (Normal, High-Tech, Ultimate and Champion)  
 - [Artisan Worktables](https://www.curseforge.com/minecraft/mc-mods/artisan-worktables)
+- [Chisel](https://www.curseforge.com/minecraft/mc-mods/chisel): Group Variants
 - [Extended Crafting](https://www.curseforge.com/minecraft/mc-mods/extended-crafting): Combination, Compressor, Ender Crafting Table and Tiered Crafting Table
 - [Modular Machinery](https://www.curseforge.com/minecraft/mc-mods/modular-machinery): All machines, only supports Item and Fluids for now
   
