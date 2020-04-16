@@ -54,7 +54,6 @@ Mod Support is split into separate plugin categories:
 - [EnderIO](https://www.curseforge.com/minecraft/mc-mods/ender-io): Alloy Smelter, Sag Mill, Slice and Splice, Vat and Soul Binder
 - [Forestry](https://www.curseforge.com/minecraft/mc-mods/forestry): Carpenter, Fabricator, Fermenter, Moistener, Squezzer and Still
 - [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
-- IC2 Classic    
 - [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines): Miniaturization
 - [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)  
 - [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Grindstone and Inscriber  
