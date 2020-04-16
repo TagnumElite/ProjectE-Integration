@@ -6,6 +6,5 @@ dependencies {
     provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft}") { exclude group: '*' }
 
     // CurseMaven
-    // Unable to be resolved
-    //deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
+    deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
 }

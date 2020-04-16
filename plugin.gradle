@@ -20,7 +20,6 @@ minecraft {
 
 dependencies {
     compile project(':')
-    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
 }
 
 ext.version = "${version}"
