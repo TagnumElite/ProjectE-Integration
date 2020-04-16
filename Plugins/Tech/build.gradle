@@ -7,29 +7,36 @@ repositories {
         url 'https://maven.blamejared.com/'
     }
     maven {
-        name = "BuildCraft"
-        url = "https://mod-buildcraft.com/maven"
+        name = 'BuildCraft'
+        url = 'https://mod-buildcraft.com/maven'
     }
     maven {
-        name = "CoFH Maven"
-        url = "http://maven.covers1624.net"
+        name = 'CoFH Maven'
+        url = 'http://maven.covers1624.net'
     }
     maven {
         name 'Player'
         url 'http://maven.ic2.player.to'
     }
     maven {
-        name "TTerrag"
-        url "https://maven.tterrag.com"
+        name 'TTerrag'
+        url 'https://maven.tterrag.com'
     }
     maven {
-        name "TehNuuuuuuuuuuuut"
+        name 'TehNuuuuuuuuuuuut'
         url 'http://tehnut.info/maven/'
+    }
+    maven {
+        name 'GregTech'
+        url  'https://dl.bintray.com/gregtech/dev'
     }
 }
 
 dependencies {
     compile(project(':Library'))
+
+    // GregTech Maven
+    deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
 
     // Other
     deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"

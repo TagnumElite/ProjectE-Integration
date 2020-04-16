@@ -1,6 +1,7 @@
 # ProjectE-Integration   
     
 This mod will be the bridge between ProjectE and all ~~your~~ my favourite mods!    
+This mod will be the bridge between ProjectE and all ~~my~~ your favourite mods!    
     
 PEI will be adding ProjectE conversion mapping support to these mods crafting mechanics.    
 This means you will not have to manually set EMC for these mods recipes, instead, this mod will tell ProjectE about these recipes and what they mean. This means you can use ProjectE built-in commands to setEMC and reloadEMC on the fly without having to worry about having to manually set the EMC for all items affected.    
@@ -21,7 +22,6 @@ Mod Support is split into separate plugin categories:
   
 ### Legacy: Old Mod Support
 
-- [NuclearCraft](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-mod)  
  
 ### Library:
   
@@ -30,15 +30,15 @@ Mod Support is split into separate plugin categories:
 - [Reborn Core](https://www.curseforge.com/minecraft/mc-mods/reborncore)  
   
 ### Magic:  
-  
-- [Astral Sorcery](https://www.curseforge.com/minecraft/mc-mods/astral-sorcery): Altar, Grindstone, Starlight Infusion  
-- [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic): Alchemy Array, Alchemy Table, Blood Altar and Tartaric Forge  
-- [Botania](https://www.curseforge.com/minecraft/mc-mods/botania): Elven Trade, Petal Apothacary, Pure Daisy, Mana Infusion and Rune Altar  
+
+- [Astral Sorcery](https://www.curseforge.com/minecraft/mc-mods/astral-sorcery): Altar, Grindstone, Starlight Infusion
+- [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic): Alchemy Array, Alchemy Table, Blood Altar and Tartaric Forge
+- [Botania](https://www.curseforge.com/minecraft/mc-mods/botania): Elven Trade, Petal Apothacary, Pure Daisy, Mana Infusion and Rune Altar
 - [Embers](https://www.curseforge.com/minecraft/mc-mods/embers): Alchemy, Melting, Mixing and Stamper
-- [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled)  
-- [ExtraBotany](https://www.curseforge.com/minecraft/mc-mods/extrabotany): Pedestal  
+- [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled)
+- [ExtraBotany](https://www.curseforge.com/minecraft/mc-mods/extrabotany): Pedestal
 - [Mystical Agriculture](https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture): Seed Reprocessor
-- [Psi](https://www.curseforge.com/minecraft/mc-mods/psi)  
+- [Psi](https://www.curseforge.com/minecraft/mc-mods/psi)
 - [Thaumcraft](https://www.curseforge.com/minecraft/mc-mods/thaumcraft): Arcane, Crucible and Infusion
   
 ### Misc:  
@@ -50,19 +50,19 @@ Mod Support is split into separate plugin categories:
   
 ### Tech:  
   
-- [Actually Additions](https://www.curseforge.com/minecraft/mc-mods/actually-additions): Crusher, Atomic Reconstructor, Empowerer  
+- [Actually Additions](https://www.curseforge.com/minecraft/mc-mods/actually-additions): Crusher, Atomic Reconstructor, Empowerer
+- [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Grindstone and Inscriber
+- [Calculator](https://www.curseforge.com/minecraft/mc-mods/calculator)
+- [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines): Miniaturization  
 - [Draconic Evolution](https://www.curseforge.com/minecraft/mc-mods/draconic-evolution): Fusion
 - [EnderIO](https://www.curseforge.com/minecraft/mc-mods/ender-io): Alloy Smelter, Sag Mill, Slice and Splice, Vat and Soul Binder
 - [Forestry](https://www.curseforge.com/minecraft/mc-mods/forestry): Carpenter, Fabricator, Fermenter, Moistener, Squezzer and Still
-- [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
-- [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines): Miniaturization
-- [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)  
-- [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Grindstone and Inscriber  
-- [Calculator](https://www.curseforge.com/minecraft/mc-mods/calculator)  
-- [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)
 - [Immersive Engineering](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering): Blast Furnace, Coke Oven, Crusher, Enginner Workbench, Kiln and Metal Press
-- [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion): All Machines
+- [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
+- [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)
+- [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)
 - [Tech Reborn](https://www.curseforge.com/minecraft/mc-mods/techreborn): Rolling Machine
+- [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion): All Machines
     
 ### Not Supported
 
