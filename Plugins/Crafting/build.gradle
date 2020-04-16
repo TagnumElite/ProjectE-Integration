@@ -25,7 +25,6 @@ dependencies {
 
     // CurseForge
     deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
-    runtime "curse.maven:artisanintegrations:${curse_aristanintegrations}"
     runtime "curse.maven:athenaeum:${curse_athenaeum}" // Artisan Worktables Requirement
     deobfProvided "curse.maven:cucumber:${curse_cucumber}" // Extended Crafting Requirement
     deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
