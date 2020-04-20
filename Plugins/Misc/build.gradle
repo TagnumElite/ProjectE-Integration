@@ -3,10 +3,6 @@ archivesBaseName = project.projectDir.name
 
 repositories {
     maven {
-        name "TehNuuuuuuuuuuuut"
-        url 'http://tehnut.info/maven/'
-    }
-    maven {
         name "TTerrag"
         url "https://maven.tterrag.com"
     }
@@ -21,9 +17,6 @@ repositories {
 }
 
 dependencies {
-    // Tehnut
-    runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Woot Dependency
-
     //CoFH Maven
     deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
 
