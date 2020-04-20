@@ -28,9 +28,7 @@ dependencies {
     provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
 
-    // CurseMaven
-    // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}" ForgeGradle doesn't like the jar files.
-    //deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}"
+    // JitPack
     provided "com.github.MatrexsVigil:harvestcraft:${commit_harvestcraft}"
-    deobfProvided "curse.maven:woot:${curse_woot}"
+    provided ("com.github.Ipsis:Woot:${mc_version}-${version_woot}") { exclude group: '*' }
 }
