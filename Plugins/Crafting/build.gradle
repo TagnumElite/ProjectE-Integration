@@ -1,6 +1,3 @@
-version = mc_version + '-' + ext.version
-archivesBaseName = project.projectDir.name
-
 repositories {
     maven {
         name 'HellFire'
@@ -17,17 +14,18 @@ dependencies {
     deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
     runtime "team.chisel.ctm:CTM:MC${mc_version}-${version_ctm}"
 
-    // JitPack
-    provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
-
     // HellFire
     provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
+
+    // JitPack
+    provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
+    provided "com.github.BlakeBr0:Cucumber:${commit_cucumber}:deobf" // Extended Crafting Requirement
 
     // CurseForge
     deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
     runtime "curse.maven:athenaeum:${curse_athenaeum}" // Artisan Worktables Requirement
-    deobfProvided "curse.maven:cucumber:${curse_cucumber}" // Extended Crafting Requirement
     deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
     runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
     runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
 }
+
