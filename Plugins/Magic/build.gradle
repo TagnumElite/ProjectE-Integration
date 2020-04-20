@@ -10,6 +10,10 @@ repositories {
         name 'BlameJared'
         url 'https://maven.blamejared.com/'
     }
+    maven {
+        name 'HellFire'
+        url 'https://maven.hellfiredev.net'
+    }
 }
 
 dependencies {
@@ -18,8 +22,10 @@ dependencies {
     deobfProvided "vazkii.botania:Botania:${version_botania}"
     deobfProvided "vazkii.psi:Psi:${version_psi}"
 
+    // HellFire
+    deobfProvided "hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}"
+
     // CurseMaven
-    deobfProvided "curse.maven:astralsorcery:${curse_astralsorcery}"
     deobfProvided "curse.maven:embers:${curse_embers}"
     //deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
     deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
