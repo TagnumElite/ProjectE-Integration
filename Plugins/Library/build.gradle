@@ -1,10 +1,11 @@
-version = mc_version + '-' + ext.version
-archivesBaseName = project.projectDir.name
-
 repositories {
     maven {
-        name 'Modmuss'
-        url 'https://maven.modmuss50.me/'
+        name = 'Modmuss'
+        url = 'https://maven.modmuss50.me/'
+    }
+    maven {
+        name = 'Elytra'
+        url = 'http://repo.elytradev.com'
     }
 }
 
@@ -14,8 +15,12 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
+    // Elytra
+    provided "pl.asie.charset:charset:${version_charset}:api"
+
+    // JitPack
+    provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
+
     // CurseMaven
-    deobfProvided "curse.maven:charsetlib:${curse_charsetlib}"
     deobfProvided "curse.maven:libvulpes:${curse_libvulpes}"
-    deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
 }
