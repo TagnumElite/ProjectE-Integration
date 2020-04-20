@@ -14,8 +14,6 @@ repositories {
 
 dependencies {
     // Maven
-    runtime "info.amerifrance.guideapi:Guide-API:1.12-${version_guideapi}" //Blood Magic Dependency
-    runtime "vazkii.autoreglib:AutoRegLib:${version_autoreglib}" // Psi Dependency
     deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
     deobfProvided "vazkii.botania:Botania:${version_botania}"
     deobfProvided "vazkii.psi:Psi:${version_psi}"
@@ -31,6 +29,5 @@ dependencies {
         exclude group: 'mezz.jei'
         exclude group: 'mcp.mobius.waila'
     }
-    runtime "curse.maven:mysticalagridations:${curse_mysticalagridations}"
     deobfProvided "curse.maven:thaumcraft:${curse_thaumcraft}"
 }

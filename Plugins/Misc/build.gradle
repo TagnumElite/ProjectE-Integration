@@ -26,11 +26,6 @@ dependencies {
 
     //CoFH Maven
     deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
-    runtime ("morph.avaritia:Avaritia:${version_avaritia}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'CraftTweaker2'
-        exclude group: 'codechicken'
-    }
 
     // TTerrag Maven
     deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
@@ -38,9 +33,7 @@ dependencies {
 
     // DVS1 Maven FS
     provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
-    runtime "slimeknights.mantle:Mantle:1.12-1.3.3.42"
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
-    runtime "slimeknights:TConstruct:${mc_version}-${version_tconstruct}"
 
     // CurseMaven
     // --- deobfProvided "curse.maven:harvestcraft:${curse_harvestcraft}" ForgeGradle doesn't like the jar files.

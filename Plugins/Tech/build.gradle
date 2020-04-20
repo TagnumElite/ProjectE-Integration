@@ -48,14 +48,6 @@ dependencies {
         exclude group: 'mezz.jei'
     }
     deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    runtime ("cofh:CoFHCore:${version_cofhcore}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
-    runtime ("cofh:CoFHWorld:${version_cofhworld}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'cofh', module: 'RedstoneFlux'
-    }
     provided ("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
         exclude group: 'mezz.jei'
         exclude group: 'jei-bees'
@@ -69,12 +61,8 @@ dependencies {
 
     // MinecraftForge Maven
     deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
-    runtime ("appeng:appliedenergistics2:${version_appliedenergistics}") {
-        exclude group: 'mezz.jei'
-    }
 
     // CoFH Maven
-    runtime "codechicken:CodeChickenLib:${version_codechickenlib}:universal"
     provided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
@@ -98,7 +86,6 @@ dependencies {
     // Buildcraft Maven
     deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
     deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
-    runtime "com.mod-buildcraft:buildcraft:${version_buildcraft}"
 
     // JitPack
     provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
@@ -112,8 +99,5 @@ dependencies {
     //deobfProvided "curse.maven:gregtechce:${curse_gregtechce}"
     //deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
     deobfProvided "curse.maven:mekanism:${curse_mekanism}"
-    runtime "curse.maven:mekanismgen:${curse_mekanismgen}"
-    runtime "curse.maven:mekanismtools:${curse_mekanismtools}"
     deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
-    runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
 }

@@ -12,7 +12,6 @@ repositories {
 dependencies {
     // TTerrag
     deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
-    runtime "team.chisel.ctm:CTM:MC${mc_version}-${version_ctm}"
 
     // HellFire
     provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
@@ -23,9 +22,6 @@ dependencies {
 
     // CurseForge
     deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
-    runtime "curse.maven:athenaeum:${curse_athenaeum}" // Artisan Worktables Requirement
     deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
-    runtime "curse.maven:thedragonlib:${curse_thedragonlib}"
-    runtime "curse.maven:modulardiversity:${curse_modulardiversity}"
 }
 
