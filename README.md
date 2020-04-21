@@ -62,6 +62,7 @@ Mod Support is split into separate plugin categories:
 - [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
 - [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)
 - [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)
+- [PneumaticCraft: Repressurized](https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized): Assembly, Thermopneumatic Processing Plant, Explosion Crafting, Heat Frame Cooling, Pressure Chamber, Refinery
 - [Tech Reborn](https://www.curseforge.com/minecraft/mc-mods/techreborn): Rolling Machine
 - [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion): All Machines
     
