@@ -6,24 +6,22 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
-import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.tagnumelite.projecteintegration.api.PEIApi.*;
@@ -80,7 +78,7 @@ public class PEIntegration {
 
                     if (asmClass.isAnnotationPresent(OnlyIf.class)) {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
-                        if (!StringUtils.isNullOrEmpty(onlyIf.versionStartsWith().trim())) {
+                        if (!StringUtils.isEmpty(onlyIf.versionStartsWith().trim())) {
                             ModContainer modcontainer = Loader.instance().getModList().stream().filter(modContainer -> modContainer.getModId().equals(modid)).collect(Collectors.toList()).get(0);
                             if (!modcontainer.getVersion().startsWith(onlyIf.versionStartsWith())) return;
                             //TODO: Move OnlyIf Logic into own class

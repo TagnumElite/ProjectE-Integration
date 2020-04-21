@@ -1,5 +1,2 @@
-version = mc_version + '-' + ext.version
-archivesBaseName = project.projectDir.name
-
 dependencies {
 }

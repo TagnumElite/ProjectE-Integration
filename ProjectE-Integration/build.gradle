@@ -1,0 +1,109 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.wynprice.cursemaven'
+
+jar {}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    description = 'Creates a JAR containing the source code.'
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task deobfJar(type: Jar) {
+    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.main.output
+    classifier = "deobf"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = 'Creates a JAR containing the JavaDocs.'
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourcesJar
+    archives deobfJar
+    archives javadocJar
+}
+
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+
+    mappings = "snapshot_${mcp_version}"
+
+    replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
+    replace '@VERSION@', "${version}"
+}
+
+repositories {
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'Progwml6 maven'
+        url = 'https://dvs1.progwml6.com/files/maven/'
+    }
+}
+
+dependencies {
+    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+
+    // BlameJared Maven
+    provided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}:deobf"
+
+    // Progwml6 Maven
+    deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+runClient {
+    jvmArgs "-Xmx6G", "-Xms6G"
+}
+
+/* Borken
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            from components.java
+
+            // Adds the various artifacts
+            artifact sourcesJar { classifier 'sources' }
+            artifact deobfJar { classifier 'deobf' }
+            artifact javadocJar { classifier 'javadoc' }
+        }
+    }
+
+    repositories { maven { url "file://" + System.getenv("local_maven") }}
+}
+*/

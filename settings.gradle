@@ -1,4 +1,9 @@
-rootProject.name = 'ProjectE Integration'
+rootProject.name = 'ProjectE-Integration'
+
+include 'ProjectE-Integration'
+include 'Plugins'
+
+def pei_plugins = []
 
 def plugins_dir = new File(rootDir, 'Plugins')
 
@@ -15,5 +20,10 @@ def plugins = plugins_dir.listFiles(new FileFilter() {
     }
 })
 
-plugins.each { File plugin -> include ":${plugin.name}"; project(":${plugin.name}").projectDir = new File(plugins_dir, plugin.name) }
+plugins.each { File plugin ->
+    include "Plugins:${plugin.name}";
+    project(":Plugins:${plugin.name}").projectDir = new File(plugins_dir, plugin.name);
+    pei_plugins += plugin.name
+}
 
+gradle.ext.pei_plugins = pei_plugins

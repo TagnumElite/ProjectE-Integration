@@ -1,22 +1,41 @@
+/*
+ * Copyright (c) 2019-2020 TagnumElite
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 buildscript {
     repositories {
         jcenter()
-        mavenLocal()
-        mavenCentral()
         maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'com.wynprice.cursemaven:CurseMaven:2.1.1'
     }
 }
 
 plugins {
+    id 'com.wynprice.cursemaven' version '2.1.1' apply false
     id 'com.matthewprenger.cursegradle' version '1.4.0'
-    //id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.32'
+    id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.32'
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'java'
 
 version = "${version}"
 if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME') != 'release') {
@@ -26,94 +45,73 @@ if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME'
 group = "com.tagnumelite.projecteintegration"
 archivesBaseName = "ProjectEIntegration-${mc_version}"
 
-def plugins = ['Crafting', 'Duplicate', 'Legacy', 'Library', 'Magic', 'Misc', 'Tech']
-
-allprojects {
-    apply from: rootProject.file('global.gradle')
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '4.9'
 }
+
+def projects = ['ProjectE-Integration', 'Plugins']
 
 subprojects {
-    apply from: rootProject.file('plugin.gradle')
-}
+    //apply from: rootProject.file('global.gradle')
 
-jar {}
-
-minecraft {
-    version = "${mc_version}-${forge_version}"
-    runDir = "run"
-
-    mappings = "snapshot_${mcp_version}"
-
-    replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
-    replace '@VERSION@', "${version}"
-}
-
-repositories {
-    maven {
-        name "TTerrag"
-        url "https://maven.tterrag.com"
-    }
-    maven {
-        name "TehNuuuuuuuuuuuut"
-        url 'http://tehnut.info/maven/'
-    }
-}
-
-dependencies {
-    deobfProvided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
-    deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
-    runtime "mezz.jei:jei_${mc_version}:${version_jei}"
-
-    // CurseForge
-    runtime "curse.maven:baubles:${curse_baubles}"
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+    sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+    compileJava {
+        sourceCompatibility = targetCompatibility = '1.8'
     }
 
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            name = 'MinecraftForge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+        maven {
+            name = 'CurseForge'
+            url = 'https://minecraft.curseforge.com/api/maven/'
+        }
+        maven {
+            name = 'ModMaven'
+            url = 'https://modmaven.k-4u.nl'
+        }
+        maven {
+            name = 'JitPack'
+            url = 'https://jitpack.io'
+        }
     }
 }
 
-task assembleJar(type: Jar, dependsOn: [jar] + plugins.collect { ':' + it + ':build' }) {
-    description = 'Creates a JAR containing the mod with plugins'
-    from jar.archivePath
-    for (plugin in plugins) {
+subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+
+task setupDecompWorkspace (dependsOn: projects.collect { ':' + it + ':setupDecompWorkspace' }) {}
+task setupCiWorkspace (dependsOn: projects.collect { ':' + it + ':setupCiWorkspace' }) {}
+task setupDevWorkspace (dependsOn: projects.collect { ':' + it + ':setupDevWorkspace' }) {}
+
+task build(overwrite: true,type: Jar, dependsOn: projects.collect { ':' + it + ':build' }) {
+    for (plugin in projects) {
         from zipTree(project(plugin).jar.archivePath)
     }
 }
 
-task sourcesJar(type: Jar, dependsOn: [classes] + plugins.collect { ':' + it + ':sourcesJar' }) {
+task sourcesJar(type: Jar, dependsOn: projects.collect { ':' + it + ':sourcesJar' }) {
     description = 'Creates a JAR containing the source code.'
-    from sourceSets.main.allSource
-    for (plugin in plugins) {
+    for (plugin in projects) {
         from zipTree(project(plugin).sourcesJar.archivePath)
     }
     classifier = 'sources'
 }
 
-task deobfJar(type: Jar, dependsOn: plugins.collect { ':' + it + ':deobfJar' }) {
+task deobfJar(type: Jar, dependsOn: projects.collect { ':' + it + ':deobfJar' }) {
     description = 'Creates a JAR containing the non-obfuscated compiled code.'
-    from sourceSets.main.output
-    for (plugin in plugins) {
+    for (plugin in projects) {
         from zipTree(project(plugin).deobfJar.archivePath)
     }
     classifier = "deobf"
 }
 
-task javadocJar(type: Jar, dependsOn: [javadoc] + plugins.collect { ':' + it + ':javadocJar' }) {
+task javadocJar(type: Jar, dependsOn: projects.collect { ':' + it + ':javadocJar' }) {
     description = 'Creates a JAR containing the JavaDocs.'
-    from javadoc.destinationDir
-    for (plugin in plugins) {
+    for (plugin in projects) {
         from zipTree(project(plugin).javadocJar.archivePath)
     }
     classifier = 'javadoc'
@@ -125,32 +123,16 @@ artifacts {
     archives javadocJar
 }
 
-runClient {
-    jvmArgs "-Xmx6G", "-Xms6G"
-}
-
-setupDecompWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDecompWorkspace' })
-setupCiWorkspace.dependsOn(plugins.collect { ':' + it + ':setupCiWorkspace' })
-setupDevWorkspace.dependsOn(plugins.collect { ':' + it + ':setupDevWorkspace' })
-/* Borken
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
-
-            // Adds the various artifacts
-            artifact sourcesJar { classifier 'sources' }
-            artifact deobfJar { classifier 'deobf' }
-            artifact javadocJar { classifier 'javadoc' }
-        }
+task printEnd {
+    doLast {
+        println "End Build"
     }
-
-    repositories { maven { url "file://" + System.getenv("local_maven") }}
 }
-*/
+
+jar.finalizedBy printEnd
+build.dependsOn sourcesJar
+build.dependsOn deobfJar
+build.dependsOn javadocJar
 /*
 curseforge {
     options {
@@ -240,21 +222,9 @@ task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
 }
 
 afterEvaluate {
-    tasks["curseforge${cf_project}"].dependsOn.add(assembleJar)
     tasks["curseforge${cf_project}"].dependsOn.add(sourcesJar)
     tasks["curseforge${cf_project}"].dependsOn.add(deobfJar)
     tasks["curseforge${cf_project}"].dependsOn.add(javadocJar)
     tasks["curseforge${cf_project}"].dependsOn.add(makeChangelog)
 }
 */
-task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '4.9'
-}
-
-jar.finalizedBy assembleJar
-assembleJar.finalizedBy sourcesJar
-assembleJar.finalizedBy deobfJar
-assembleJar.finalizedBy javadocJar
-build.dependsOn sourcesJar
-build.dependsOn deobfJar
-build.dependsOn javadocJar

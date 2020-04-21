@@ -66,8 +66,7 @@ public abstract class PEIMapper {
 	 */
 	protected void addRecipe(IRecipe recipe) {
 		ItemStack output = recipe.getRecipeOutput();
-		if (output == null || output.isEmpty())
-			return;
+		if (output.isEmpty()) return;
 
 		IngredientMap<Object> ingredients = new IngredientMap<Object>();
 
