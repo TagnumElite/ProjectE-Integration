@@ -83,11 +83,11 @@ subprojects {
 
 subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
-task setupDecompWorkspace (dependsOn: projects.collect { ':' + it + ':setupDecompWorkspace' }) {}
-task setupCiWorkspace (dependsOn: projects.collect { ':' + it + ':setupCiWorkspace' }) {}
-task setupDevWorkspace (dependsOn: projects.collect { ':' + it + ':setupDevWorkspace' }) {}
+task setupDecompWorkspace(dependsOn: projects.collect { ':' + it + ':setupDecompWorkspace' }) {}
+task setupCiWorkspace(dependsOn: projects.collect { ':' + it + ':setupCiWorkspace' }) {}
+task setupDevWorkspace(dependsOn: projects.collect { ':' + it + ':setupDevWorkspace' }) {}
 
-task build(overwrite: true,type: Jar, dependsOn: projects.collect { ':' + it + ':build' }) {
+task build(overwrite: true, type: Jar, dependsOn: projects.collect { ':' + it + ':build' }) {
     for (plugin in projects) {
         from zipTree(project(plugin).jar.archivePath)
     }

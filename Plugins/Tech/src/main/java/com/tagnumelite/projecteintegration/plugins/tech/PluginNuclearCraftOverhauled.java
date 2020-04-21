@@ -44,9 +44,11 @@ import java.util.Collections;
 import java.util.List;
 
 @PEIPlugin("nuclearcraft")
-@OnlyIf(versionStartsWith="2o.")
+@OnlyIf(versionStartsWith = "2o.")
 public class PluginNuclearCraftOverhauled extends APEIPlugin {
-    public PluginNuclearCraftOverhauled(String modid, Configuration config) { super(modid, config); }
+    public PluginNuclearCraftOverhauled(String modid, Configuration config) {
+        super(modid, config);
+    }
 
     @Override
     public void setup() {
@@ -78,7 +80,7 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
         private Object getObjectFromFluidIngredient(IFluidIngredient fluid) {
             Object obj = new Object();
             for (FluidStack input : fluid.getInputStackList()) {
-                addConversion(1, obj, ImmutableMap.of((Object) input, input.amount));
+                addConversion(1, obj, ImmutableMap.of(input, input.amount));
             }
             return obj;
         }

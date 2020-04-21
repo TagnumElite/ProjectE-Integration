@@ -5,13 +5,13 @@ version = mc_version + '-' + "${version}"
 archivesBaseName = project.projectDir.name
 
 ext.version = "${version}"
-ext.mc_version="${mc_version}"
-ext.pe_version="${pe_version}"
-ext.mcp_version="${mcp_version}"
-ext.forgeVersion="${forge_version}"
+ext.mc_version = "${mc_version}"
+ext.pe_version = "${pe_version}"
+ext.mcp_version = "${mcp_version}"
+ext.forgeVersion = "${forge_version}"
 
 dependencies {
-    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+    compile("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
 }
 
 publishing {

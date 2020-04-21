@@ -11,27 +11,27 @@ import pl.asie.charset.lib.recipe.RecipeCharset;
 
 @PEIPlugin("charset")
 public class PluginCharsetCrafting extends APEIPlugin {
-	public PluginCharsetCrafting(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginCharsetCrafting(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new CharsetLibRecipeMapper());
-	}
-	
-	private static class CharsetLibRecipeMapper extends PEIMapper {
-		public CharsetLibRecipeMapper() {
-			super("Charset Lib Recipe");
-		}
+    @Override
+    public void setup() {
+        addMapper(new CharsetLibRecipeMapper());
+    }
 
-		@Override
-		public void setup() {
-			for (IRecipe recipe : CraftingManager.REGISTRY) {
-				if (recipe instanceof RecipeCharset) {
-					addRecipe(recipe);
-				}
-			}
-		}
-	}
+    private static class CharsetLibRecipeMapper extends PEIMapper {
+        public CharsetLibRecipeMapper() {
+            super("Charset Lib Recipe");
+        }
+
+        @Override
+        public void setup() {
+            for (IRecipe recipe : CraftingManager.REGISTRY) {
+                if (recipe instanceof RecipeCharset) {
+                    addRecipe(recipe);
+                }
+            }
+        }
+    }
 }

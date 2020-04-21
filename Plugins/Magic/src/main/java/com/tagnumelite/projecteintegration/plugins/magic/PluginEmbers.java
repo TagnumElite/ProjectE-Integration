@@ -34,67 +34,67 @@ import teamroots.embers.recipe.RecipeRegistry;
 
 @PEIPlugin("embers")
 public class PluginEmbers extends APEIPlugin {
-	public PluginEmbers(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginEmbers(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new AlchemyMapper());
-		addMapper(new MeltingMapper());
-		addMapper(new MixingMapper());
-		addMapper(new StamperMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new AlchemyMapper());
+        addMapper(new MeltingMapper());
+        addMapper(new MixingMapper());
+        addMapper(new StamperMapper());
+    }
 
-	private static class AlchemyMapper extends PEIMapper {
-		public AlchemyMapper() {
-			super("Alchemy");
-		}
+    private static class AlchemyMapper extends PEIMapper {
+        public AlchemyMapper() {
+            super("Alchemy");
+        }
 
-		@Override
-		public void setup() {
-			for (AlchemyRecipe recipe : RecipeRegistry.alchemyRecipes) {
-				addRecipe(recipe.result.copy(), recipe.centerInput, recipe.inputs.toArray());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (AlchemyRecipe recipe : RecipeRegistry.alchemyRecipes) {
+                addRecipe(recipe.result.copy(), recipe.centerInput, recipe.inputs.toArray());
+            }
+        }
+    }
 
-	private static class MeltingMapper extends PEIMapper {
-		public MeltingMapper() {
-			super("Melting");
-		}
+    private static class MeltingMapper extends PEIMapper {
+        public MeltingMapper() {
+            super("Melting");
+        }
 
-		@Override
-		public void setup() {
-			for (ItemMeltingRecipe recipe : RecipeRegistry.meltingRecipes) {
-				addRecipe(recipe.getFluid(), recipe.getStack());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (ItemMeltingRecipe recipe : RecipeRegistry.meltingRecipes) {
+                addRecipe(recipe.getFluid(), recipe.getStack());
+            }
+        }
+    }
 
-	private static class MixingMapper extends PEIMapper {
-		public MixingMapper() {
-			super("Mixing");
-		}
+    private static class MixingMapper extends PEIMapper {
+        public MixingMapper() {
+            super("Mixing");
+        }
 
-		@Override
-		public void setup() {
-			for (FluidMixingRecipe recipe : RecipeRegistry.mixingRecipes) {
-				addRecipe(recipe.output.copy(), recipe.inputs.toArray());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (FluidMixingRecipe recipe : RecipeRegistry.mixingRecipes) {
+                addRecipe(recipe.output.copy(), recipe.inputs.toArray());
+            }
+        }
+    }
 
-	private static class StamperMapper extends PEIMapper {
-		public StamperMapper() {
-			super("Stamper");
-		}
+    private static class StamperMapper extends PEIMapper {
+        public StamperMapper() {
+            super("Stamper");
+        }
 
-		@Override
-		public void setup() {
-			for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
-				addRecipe(recipe.result.copy(), recipe.getStack(), recipe.getFluid());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
+                addRecipe(recipe.result.copy(), recipe.getStack(), recipe.getFluid());
+            }
+        }
+    }
 }

@@ -9,25 +9,25 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("mysticalagriculture")
 public class PluginMysticalAgriculture extends APEIPlugin {
-	public PluginMysticalAgriculture(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginMysticalAgriculture(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new SeedProcessorMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new SeedProcessorMapper());
+    }
 
-	private static class SeedProcessorMapper extends PEIMapper {
-		public SeedProcessorMapper() {
-			super("Seed Processor");
-		}
+    private static class SeedProcessorMapper extends PEIMapper {
+        public SeedProcessorMapper() {
+            super("Seed Processor");
+        }
 
-		@Override
-		public void setup() {
-			for (ReprocessorRecipe recipe : ReprocessorManager.getRecipes()) {
-				addRecipe(recipe.getOutput(), recipe.getInput()); //TODO: Improve, to support ore dict and other
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (ReprocessorRecipe recipe : ReprocessorManager.getRecipes()) {
+                addRecipe(recipe.getOutput(), recipe.getInput()); //TODO: Improve, to support ore dict and other
+            }
+        }
+    }
 }

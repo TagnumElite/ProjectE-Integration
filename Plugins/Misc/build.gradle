@@ -27,5 +27,5 @@ dependencies {
 
     // JitPack
     provided "com.github.MatrexsVigil:harvestcraft:${commit_harvestcraft}"
-    provided ("com.github.Ipsis:Woot:${mc_version}-${version_woot}") { exclude group: '*' }
+    provided("com.github.Ipsis:Woot:${mc_version}-${version_woot}") { exclude group: '*' }
 }

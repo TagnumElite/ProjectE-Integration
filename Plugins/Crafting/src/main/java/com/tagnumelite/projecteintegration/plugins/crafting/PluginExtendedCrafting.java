@@ -16,65 +16,65 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("extendedcrafting")
 public class PluginExtendedCrafting extends APEIPlugin {
-	public PluginExtendedCrafting(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginExtendedCrafting(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new ECCompressorMapper());
-		addMapper(new ECCombinationMapper());
-		addMapper(new ECTableMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new ECCompressorMapper());
+        addMapper(new ECCombinationMapper());
+        addMapper(new ECTableMapper());
+    }
 
-	private static class ECCompressorMapper extends PEIMapper {
-		public ECCompressorMapper() {
-			super("compressor");
-		}
+    private static class ECCompressorMapper extends PEIMapper {
+        public ECCompressorMapper() {
+            super("compressor");
+        }
 
-		@Override
-		public void setup() {
-			for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
-				IngredientMap<Object> ingredients = new IngredientMap<>();
-				
-				ingredients.addIngredient(recipe.getInput(), recipe.getInputCount());
-				
-				if (recipe.consumeCatalyst()) {
-					ingredients.addIngredient(recipe.getCatalyst(), recipe.getCatalyst().getCount());
-				}
-				
-				addConversion(recipe.getOutput(), ingredients.getMap());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
+                IngredientMap<Object> ingredients = new IngredientMap<>();
 
-	private static class ECCombinationMapper extends PEIMapper {
-		public ECCombinationMapper() {
-			super("combination");
-		}
+                ingredients.addIngredient(recipe.getInput(), recipe.getInputCount());
 
-		@Override
-		public void setup() {
-			for (CombinationRecipe recipe : CombinationRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe.getOutput(), recipe.getInput(), recipe.getPedestalItems().toArray());
-			}
-		}
-	}
+                if (recipe.consumeCatalyst()) {
+                    ingredients.addIngredient(recipe.getCatalyst(), recipe.getCatalyst().getCount());
+                }
 
-	private static class ECTableMapper extends PEIMapper {
-		public ECTableMapper() {
-			super("table", "Enable Ender and Tiered crafting recipe mapper?");
-		}
+                addConversion(recipe.getOutput(), ingredients.getMap());
+            }
+        }
+    }
 
-		@Override
-		public void setup() {
-			for (Object recipe : EnderCrafterRecipeManager.getInstance().getRecipes()) {
-				addRecipe((IRecipe) recipe);
-			}
+    private static class ECCombinationMapper extends PEIMapper {
+        public ECCombinationMapper() {
+            super("combination");
+        }
 
-			for (Object recipe : TableRecipeManager.getInstance().getRecipes()) {
-				addRecipe((IRecipe) recipe);
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (CombinationRecipe recipe : CombinationRecipeManager.getInstance().getRecipes()) {
+                addRecipe(recipe.getOutput(), recipe.getInput(), recipe.getPedestalItems().toArray());
+            }
+        }
+    }
+
+    private static class ECTableMapper extends PEIMapper {
+        public ECTableMapper() {
+            super("table", "Enable Ender and Tiered crafting recipe mapper?");
+        }
+
+        @Override
+        public void setup() {
+            for (Object recipe : EnderCrafterRecipeManager.getInstance().getRecipes()) {
+                addRecipe((IRecipe) recipe);
+            }
+
+            for (Object recipe : TableRecipeManager.getInstance().getRecipes()) {
+                addRecipe((IRecipe) recipe);
+            }
+        }
+    }
 }

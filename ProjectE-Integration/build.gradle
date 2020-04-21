@@ -59,7 +59,7 @@ repositories {
 }
 
 dependencies {
-    compile ("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
+    compile("com.github.sinkillerj:ProjectE:${pe_commit}:dev") { exclude group: '*' }
 
     // BlameJared Maven
     provided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}:deobf"
@@ -76,7 +76,7 @@ processResources {
         include 'mcmod.info'
 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {

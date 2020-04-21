@@ -12,53 +12,53 @@ import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 
 @PEIPlugin("tconstruct")
 public class PluginTConstruct extends APEIPlugin {
-	public PluginTConstruct(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginTConstruct(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new AlloyMapper());
-		addMapper(new DryingMapper());
-		addMapper(new MeltingMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new AlloyMapper());
+        addMapper(new DryingMapper());
+        addMapper(new MeltingMapper());
+    }
 
-	private static class AlloyMapper extends PEIMapper {
-		public AlloyMapper() {
-			super("Alloy", "Tinkers Smelter Alloying recipe support");
-		}
+    private static class AlloyMapper extends PEIMapper {
+        public AlloyMapper() {
+            super("Alloy", "Tinkers Smelter Alloying recipe support");
+        }
 
-		@Override
-		public void setup() {
-			for (AlloyRecipe recipe : TinkerRegistry.getAlloys()) {
-				addRecipe(recipe.getResult(), recipe.getFluids().toArray());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (AlloyRecipe recipe : TinkerRegistry.getAlloys()) {
+                addRecipe(recipe.getResult(), recipe.getFluids().toArray());
+            }
+        }
+    }
 
-	private static class DryingMapper extends PEIMapper {
-		public DryingMapper() {
-			super("Drying", "");
-		}
+    private static class DryingMapper extends PEIMapper {
+        public DryingMapper() {
+            super("Drying", "");
+        }
 
-		@Override
-		public void setup() {
-			for (DryingRecipe recipe : TinkerRegistry.getAllDryingRecipes()) {
-				addRecipe(recipe.getResult(), recipe.input.getInputs());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (DryingRecipe recipe : TinkerRegistry.getAllDryingRecipes()) {
+                addRecipe(recipe.getResult(), recipe.input.getInputs());
+            }
+        }
+    }
 
-	private static class MeltingMapper extends PEIMapper {
-		public MeltingMapper() {
-			super("Melting", "");
-		}
+    private static class MeltingMapper extends PEIMapper {
+        public MeltingMapper() {
+            super("Melting", "");
+        }
 
-		@Override
-		public void setup() {
-			for (MeltingRecipe recipe : TinkerRegistry.getAllMeltingRecipies()) {
-				addRecipe(recipe.getResult(), recipe.input.getInputs());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (MeltingRecipe recipe : TinkerRegistry.getAllMeltingRecipies()) {
+                addRecipe(recipe.getResult(), recipe.input.getInputs());
+            }
+        }
+    }
 }

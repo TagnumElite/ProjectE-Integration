@@ -21,8 +21,8 @@ def plugins = plugins_dir.listFiles(new FileFilter() {
 })
 
 plugins.each { File plugin ->
-    include "Plugins:${plugin.name}";
-    project(":Plugins:${plugin.name}").projectDir = new File(plugins_dir, plugin.name);
+    include "Plugins:${plugin.name}"
+    project(":Plugins:${plugin.name}").projectDir = new File(plugins_dir, plugin.name)
     pei_plugins += plugin.name
 }
 

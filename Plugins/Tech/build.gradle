@@ -29,7 +29,7 @@ repositories {
     }
     maven {
         name = 'GregTech'
-        url  = 'https://dl.bintray.com/gregtech/dev'
+        url = 'https://dl.bintray.com/gregtech/dev'
     }
 }
 
@@ -40,7 +40,7 @@ dependencies {
     deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
 
     // Other
-    provided ("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
+    provided("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
         exclude group: 'mezz.jei'
         exclude group: 'jei-bees'
         exclude group: 'net.industrial-craft'
@@ -52,14 +52,14 @@ dependencies {
 
     // CoFH Maven
     deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") { 
+    deobfProvided("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken', module: 'CodeChickenLib'
     }
-    deobfProvided ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
+    deobfProvided("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
-    provided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
         exclude group: 'cofh'
@@ -67,12 +67,12 @@ dependencies {
     }
 
     // BlameJared Maven
-    deobfProvided ("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
+    deobfProvided("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
     }
 
     // Player Maven
-    deobfProvided ("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}") {
+    deobfProvided("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}") {
         exclude group: 'mezz.jei'
     }
 
@@ -80,13 +80,13 @@ dependencies {
     provided "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
 
     // TTerrag 2
-    deobfProvided ("com.enderio:EnderIO:${mc_version}-${version_enderio}")  { exclude group: '*' }
+    deobfProvided("com.enderio:EnderIO:${mc_version}-${version_enderio}") { exclude group: '*' }
 
     // Mod Maven
     deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
     deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
-    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+    deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
         exclude group: 'mezz.jei'
     }
 
@@ -95,7 +95,7 @@ dependencies {
     deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
 
     // JitPack
-    provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
+    provided("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
     provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
 
     // CurseForge

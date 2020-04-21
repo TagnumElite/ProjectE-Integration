@@ -17,7 +17,7 @@ dependencies {
     provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
 
     // JitPack
-    provided ("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
+    provided("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
     provided "com.github.BlakeBr0:Cucumber:${commit_cucumber}:deobf" // Extended Crafting Requirement
 
     // CurseForge

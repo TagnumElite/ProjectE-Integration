@@ -15,67 +15,67 @@ import java.util.Set;
 
 import net.minecraftforge.common.config.Configuration;
 
-@PEIPlugin( "astralsorcery")
+@PEIPlugin("astralsorcery")
 public class PluginAstralSorcery extends APEIPlugin {
-	public PluginAstralSorcery(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginAstralSorcery(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new AltarMapper());
-		addMapper(new GrindstoneMapper());
-		addMapper(new StarlightInfusionMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new AltarMapper());
+        addMapper(new GrindstoneMapper());
+        addMapper(new StarlightInfusionMapper());
+    }
 
-	private static class AltarMapper extends PEIMapper {
-		public AltarMapper() {
-			super("Altar");
-		}
+    private static class AltarMapper extends PEIMapper {
+        public AltarMapper() {
+            super("Altar");
+        }
 
-		@Override
-		public void setup() {
-			Set<AbstractAltarRecipe> recipes = new HashSet<>();
-			AltarRecipeRegistry.recipes.values().forEach(recipes::addAll);
-			AltarRecipeRegistry.mtRecipes.values().forEach(recipes::addAll);
+        @Override
+        public void setup() {
+            Set<AbstractAltarRecipe> recipes = new HashSet<>();
+            AltarRecipeRegistry.recipes.values().forEach(recipes::addAll);
+            AltarRecipeRegistry.mtRecipes.values().forEach(recipes::addAll);
 
-			for (AbstractAltarRecipe recipe : recipes) {
-				addRecipe(recipe.getNativeRecipe());
-			}
-		}
-	}
+            for (AbstractAltarRecipe recipe : recipes) {
+                addRecipe(recipe.getNativeRecipe());
+            }
+        }
+    }
 
-	private static class GrindstoneMapper extends PEIMapper {
-		public GrindstoneMapper() {
-			super("Grindstone", "These recipes contain chances, so it is disabled by default", true);
-		}
+    private static class GrindstoneMapper extends PEIMapper {
+        public GrindstoneMapper() {
+            super("Grindstone", "These recipes contain chances, so it is disabled by default", true);
+        }
 
-		@Override
-		public void setup() {
-			Set<GrindstoneRecipe> recipes = new HashSet<>();
-			recipes.addAll(GrindstoneRecipeRegistry.recipes);
-			recipes.addAll(GrindstoneRecipeRegistry.mtRecipes);
+        @Override
+        public void setup() {
+            Set<GrindstoneRecipe> recipes = new HashSet<>();
+            recipes.addAll(GrindstoneRecipeRegistry.recipes);
+            recipes.addAll(GrindstoneRecipeRegistry.mtRecipes);
 
-			for (GrindstoneRecipe recipe : recipes) {
-				addRecipe(recipe.getOutputForMatching(), recipe.getInputForRender().getApplicableItems());
-			}
-		}
-	}
+            for (GrindstoneRecipe recipe : recipes) {
+                addRecipe(recipe.getOutputForMatching(), recipe.getInputForRender().getApplicableItems());
+            }
+        }
+    }
 
-	private static class StarlightInfusionMapper extends PEIMapper {
-		public StarlightInfusionMapper() {
-			super("Starlight Infusion");
-		}
+    private static class StarlightInfusionMapper extends PEIMapper {
+        public StarlightInfusionMapper() {
+            super("Starlight Infusion");
+        }
 
-		@Override
-		public void setup() {
-			Set<AbstractInfusionRecipe> recipes = new HashSet<>();
-			recipes.addAll(InfusionRecipeRegistry.recipes);
-			recipes.addAll(InfusionRecipeRegistry.mtRecipes);
+        @Override
+        public void setup() {
+            Set<AbstractInfusionRecipe> recipes = new HashSet<>();
+            recipes.addAll(InfusionRecipeRegistry.recipes);
+            recipes.addAll(InfusionRecipeRegistry.mtRecipes);
 
-			for (AbstractInfusionRecipe recipe : recipes) {
-				addRecipe(recipe.getOutputForMatching(), recipe.getInput().getApplicableItems());
-			}
-		}
-	}
+            for (AbstractInfusionRecipe recipe : recipes) {
+                addRecipe(recipe.getOutputForMatching(), recipe.getInput().getApplicableItems());
+            }
+        }
+    }
 }

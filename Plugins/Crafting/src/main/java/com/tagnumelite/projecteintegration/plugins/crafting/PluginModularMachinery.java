@@ -22,35 +22,35 @@ import java.util.Map;
 
 @PEIPlugin("modularmachinery")
 public class PluginModularMachinery extends APEIPlugin {
-	public PluginModularMachinery(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginModularMachinery(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
+    @Override
+    public void setup() {
         PEIntegration.LOG.info("Requirement Types: {}", RegistriesMM.REQUIREMENT_TYPE_REGISTRY.getEntries());
-		for (DynamicMachine machine : MachineRegistry.getRegistry()) {
-			addMapper(new MachineMapper(machine));
-		}
-	}
+        for (DynamicMachine machine : MachineRegistry.getRegistry()) {
+            addMapper(new MachineMapper(machine));
+        }
+    }
 
-	private static class MachineMapper extends PEIMapper {
-		private final DynamicMachine machine;
+    private static class MachineMapper extends PEIMapper {
+        private final DynamicMachine machine;
 
-		public MachineMapper(DynamicMachine machine) {
-			super(machine.getLocalizedName());
-			this.machine = machine;
-		}
+        public MachineMapper(DynamicMachine machine) {
+            super(machine.getLocalizedName());
+            this.machine = machine;
+        }
 
-		@Override
-		public void setup() {
-			for (MachineRecipe recipe : RecipeRegistry.getRegistry().getRecipesFor(machine)) {
-				IngredientMap<Object> ingredients = new IngredientMap<>();
-				ArrayList<ItemStack> item_outputs = new ArrayList<>();
-				ArrayList<FluidStack> fluid_outputs = new ArrayList<>();
+        @Override
+        public void setup() {
+            for (MachineRecipe recipe : RecipeRegistry.getRegistry().getRecipesFor(machine)) {
+                IngredientMap<Object> ingredients = new IngredientMap<>();
+                ArrayList<ItemStack> item_outputs = new ArrayList<>();
+                ArrayList<FluidStack> fluid_outputs = new ArrayList<>();
 
-				for (ComponentRequirement<?, ?> requirement : recipe.getCraftingRequirements()) {
-				    if (requirement instanceof RequirementItem) {
+                for (ComponentRequirement<?, ?> requirement : recipe.getCraftingRequirements()) {
+                    if (requirement instanceof RequirementItem) {
                         RequirementItem item_req = (RequirementItem) requirement;
                         // We don't do chanced outputs/inputs
                         if (item_req.chance < 1.0) continue;
@@ -84,15 +84,15 @@ public class PluginModularMachinery extends APEIPlugin {
                                 break;
                         }
                     } //Todo: else if (requirement instanceof RequirementGas) {}
-				}
-				
-				Map<Object, Integer> map = ingredients.getMap();
-				
-				ArrayList<Object> outputs = new ArrayList<>();
-				outputs.addAll(item_outputs);
-				outputs.addAll(fluid_outputs);
-				addConversion(outputs, map);
-			}
-		}
-	}
+                }
+
+                Map<Object, Integer> map = ingredients.getMap();
+
+                ArrayList<Object> outputs = new ArrayList<>();
+                outputs.addAll(item_outputs);
+                outputs.addAll(fluid_outputs);
+                addConversion(outputs, map);
+            }
+        }
+    }
 }

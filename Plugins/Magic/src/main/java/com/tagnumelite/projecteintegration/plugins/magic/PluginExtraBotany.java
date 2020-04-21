@@ -10,25 +10,25 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("extrabotany")
 public class PluginExtraBotany extends APEIPlugin {
-	public PluginExtraBotany(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginExtraBotany(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addMapper(new PedestalMapper());
-	}
+    @Override
+    public void setup() {
+        addMapper(new PedestalMapper());
+    }
 
-	private static class PedestalMapper extends PEIMapper {
-		public PedestalMapper() {
-			super("Pedestal");
-		}
+    private static class PedestalMapper extends PEIMapper {
+        public PedestalMapper() {
+            super("Pedestal");
+        }
 
-		@Override
-		public void setup() {
-			for (RecipePedestal recipe : ExtraBotanyAPI.pedestalRecipes) {
-				addRecipe(recipe.getOutput(), recipe.getInput());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (RecipePedestal recipe : ExtraBotanyAPI.pedestalRecipes) {
+                addRecipe(recipe.getOutput(), recipe.getInput());
+            }
+        }
+    }
 }

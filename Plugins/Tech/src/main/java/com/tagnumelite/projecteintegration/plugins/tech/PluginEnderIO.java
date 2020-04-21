@@ -30,174 +30,174 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("enderio")
 public class PluginEnderIO extends APEIPlugin {
-	public PluginEnderIO(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginEnderIO(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	private List<IMachineRecipe> SOULBINDER_RECIPES;
+    private List<IMachineRecipe> SOULBINDER_RECIPES;
 
-	@Override
-	public void setup() {
-		addEMC(Material.POWDER_INFINITY.getStack(), 32);
-		addEMC(Material.PLANT_BROWN.getStack(), 1);
-		addEMC(Material.PLANT_GREEN.getStack(), 1);
-		//TODO: Add EMC for Enderman Skull
-		
-		SOULBINDER_RECIPES = MachineRecipeRegistry.instance.getRecipesForMachine(MachineRecipeRegistry.SOULBINDER)
-				.values().stream().filter(r -> r instanceof ISoulBinderRecipe).collect(Collectors.toList());
+    @Override
+    public void setup() {
+        addEMC(Material.POWDER_INFINITY.getStack(), 32);
+        addEMC(Material.PLANT_BROWN.getStack(), 1);
+        addEMC(Material.PLANT_GREEN.getStack(), 1);
+        //TODO: Add EMC for Enderman Skull
 
-		for (IMachineRecipe sbr : SOULBINDER_RECIPES) {
-			if (sbr instanceof ISoulBinderRecipe) {
-				for (ResourceLocation resource : ((ISoulBinderRecipe) sbr).getSupportedSouls()) {
-					Object soul = PEIApi.getResource(resource);
-					if (soul == null) {
-						int emc = config.getInt("emc_soul_" + resource.getResourcePath(), category, 0, 0,
-								Integer.MAX_VALUE, "EMC for " + resource.toString());
-						PEIApi.addResource(resource, emc);
-					}
-				}
-			}
-		}
+        SOULBINDER_RECIPES = MachineRecipeRegistry.instance.getRecipesForMachine(MachineRecipeRegistry.SOULBINDER)
+            .values().stream().filter(r -> r instanceof ISoulBinderRecipe).collect(Collectors.toList());
 
-		addMapper(new AlloySmelterMapper());
-		addMapper(new SagMillMapper());
-		addMapper(new SliceAndSpliceMapper());
-		addMapper(new VatMapper());
-		addMapper(new SoulBinderMapper());
-	}
+        for (IMachineRecipe sbr : SOULBINDER_RECIPES) {
+            if (sbr instanceof ISoulBinderRecipe) {
+                for (ResourceLocation resource : ((ISoulBinderRecipe) sbr).getSupportedSouls()) {
+                    Object soul = PEIApi.getResource(resource);
+                    if (soul == null) {
+                        int emc = config.getInt("emc_soul_" + resource.getResourcePath(), category, 0, 0,
+                            Integer.MAX_VALUE, "EMC for " + resource.toString());
+                        PEIApi.addResource(resource, emc);
+                    }
+                }
+            }
+        }
 
-	private abstract static class IRecipeMapper extends PEIMapper {
-		public IRecipeMapper(String name) {
-			super(name);
-		}
+        addMapper(new AlloySmelterMapper());
+        addMapper(new SagMillMapper());
+        addMapper(new SliceAndSpliceMapper());
+        addMapper(new VatMapper());
+        addMapper(new SoulBinderMapper());
+    }
 
-		protected void addRecipe(IRecipe recipe) {
-			for (RecipeOutput output : recipe.getOutputs()) {
-				if (output.getChance() < 1F || !output.isValid())
-					continue;
-				
-				ArrayList<Object> outputs = new ArrayList<>();
-				
-				if (output.getFluidOutput() != null) {
-					outputs.add(output.getFluidOutput());
-					//addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
-				}
-				
-				if (output.getOutput() != null) {
-					outputs.add(output.getOutput());
-					//addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
-				}
-				
-				addRecipe(outputs, recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
-			}
-		}
-	}
+    private abstract static class IRecipeMapper extends PEIMapper {
+        public IRecipeMapper(String name) {
+            super(name);
+        }
 
-	private abstract static class ManyToOneRecipeMapper extends PEIMapper {
-		public ManyToOneRecipeMapper(String name) {
-			super(name);
-		}
+        protected void addRecipe(IRecipe recipe) {
+            for (RecipeOutput output : recipe.getOutputs()) {
+                if (output.getChance() < 1F || !output.isValid())
+                    continue;
 
-		protected void addRecipe(IManyToOneRecipe recipe) {
-			addRecipe(recipe.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
-		}
-	}
+                ArrayList<Object> outputs = new ArrayList<>();
 
-	private static class AlloySmelterMapper extends ManyToOneRecipeMapper {
-		public AlloySmelterMapper() {
-			super("Alloy Smelter");
-		}
+                if (output.getFluidOutput() != null) {
+                    outputs.add(output.getFluidOutput());
+                    //addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+                }
 
-		@Override
-		public void setup() {
-			for (IManyToOneRecipe recipe : AlloyRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe);
-			}
-		}
-	}
+                if (output.getOutput() != null) {
+                    outputs.add(output.getOutput());
+                    //addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+                }
 
-	private static class SagMillMapper extends IRecipeMapper {
-		public SagMillMapper() {
-			super("Sag Mill");
-		}
+                addRecipe(outputs, recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+            }
+        }
+    }
 
-		@Override
-		public void setup() {
-			for (Recipe recipe : SagMillRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe);
-			}
-		}
-	}
+    private abstract static class ManyToOneRecipeMapper extends PEIMapper {
+        public ManyToOneRecipeMapper(String name) {
+            super(name);
+        }
 
-	private static class SliceAndSpliceMapper extends ManyToOneRecipeMapper {
-		public SliceAndSpliceMapper() {
-			super("Slice And Splice");
-		}
+        protected void addRecipe(IManyToOneRecipe recipe) {
+            addRecipe(recipe.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
+        }
+    }
 
-		@Override
-		public void setup() {
-			for (IManyToOneRecipe recipe : SliceAndSpliceRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe);
-			}
-		}
-	}
+    private static class AlloySmelterMapper extends ManyToOneRecipeMapper {
+        public AlloySmelterMapper() {
+            super("Alloy Smelter");
+        }
 
-	private static class VatMapper extends IRecipeMapper {
-		public VatMapper() {
-			super("Vat");
-		}
+        @Override
+        public void setup() {
+            for (IManyToOneRecipe recipe : AlloyRecipeManager.getInstance().getRecipes()) {
+                addRecipe(recipe);
+            }
+        }
+    }
 
-		@Override
-		public void setup() {
-			for (IRecipe recipe : VatRecipeManager.getInstance().getRecipes()) {
-				addRecipe(recipe);
-			}
-		}
-	}
+    private static class SagMillMapper extends IRecipeMapper {
+        public SagMillMapper() {
+            super("Sag Mill");
+        }
 
-	private class SoulBinderMapper extends PEIMapper {
-		public SoulBinderMapper() {
-			super("Soul Binder");
-		}
+        @Override
+        public void setup() {
+            for (Recipe recipe : SagMillRecipeManager.getInstance().getRecipes()) {
+                addRecipe(recipe);
+            }
+        }
+    }
 
-		private Object getObjectFromSoulList(NNList<ResourceLocation> souls) {
-			List<Object> mapped_souls = new ArrayList<Object>();
+    private static class SliceAndSpliceMapper extends ManyToOneRecipeMapper {
+        public SliceAndSpliceMapper() {
+            super("Slice And Splice");
+        }
 
-			for (ResourceLocation resource : souls) {
-				Object soul = PEIApi.getResource(resource);
-				if (soul == null)
-					continue;
-				
-				mapped_souls.add(soul);
-			}
+        @Override
+        public void setup() {
+            for (IManyToOneRecipe recipe : SliceAndSpliceRecipeManager.getInstance().getRecipes()) {
+                addRecipe(recipe);
+            }
+        }
+    }
 
-			if (mapped_souls.isEmpty())
-				return null;
-			else
-				return PEIApi.getList(mapped_souls);
-		}
+    private static class VatMapper extends IRecipeMapper {
+        public VatMapper() {
+            super("Vat");
+        }
 
-		@Override
-		public void setup() {
-			for (IMachineRecipe machine_recipe : SOULBINDER_RECIPES) {
-				if (machine_recipe instanceof ISoulBinderRecipe) {
-					ISoulBinderRecipe recipe = (ISoulBinderRecipe) machine_recipe;
+        @Override
+        public void setup() {
+            for (IRecipe recipe : VatRecipeManager.getInstance().getRecipes()) {
+                addRecipe(recipe);
+            }
+        }
+    }
 
-					ItemStack output = recipe.getOutputStack();
-					if (output == null || output.isEmpty())
-						continue;
+    private class SoulBinderMapper extends PEIMapper {
+        public SoulBinderMapper() {
+            super("Soul Binder");
+        }
 
-					ItemStack input = recipe.getInputStack();
-					if (input == null || input.isEmpty())
-						continue;
+        private Object getObjectFromSoulList(NNList<ResourceLocation> souls) {
+            List<Object> mapped_souls = new ArrayList<Object>();
 
-					Object soul_emc = getObjectFromSoulList(recipe.getSupportedSouls());
-					if (soul_emc == null)
-						addConversion(output, ImmutableMap.of(input, input.getCount()));
-					else
-						addConversion(output, ImmutableMap.of(input, input.getCount(), soul_emc, 1));
-				}
-			}
-		}
-	}
+            for (ResourceLocation resource : souls) {
+                Object soul = PEIApi.getResource(resource);
+                if (soul == null)
+                    continue;
+
+                mapped_souls.add(soul);
+            }
+
+            if (mapped_souls.isEmpty())
+                return null;
+            else
+                return PEIApi.getList(mapped_souls);
+        }
+
+        @Override
+        public void setup() {
+            for (IMachineRecipe machine_recipe : SOULBINDER_RECIPES) {
+                if (machine_recipe instanceof ISoulBinderRecipe) {
+                    ISoulBinderRecipe recipe = (ISoulBinderRecipe) machine_recipe;
+
+                    ItemStack output = recipe.getOutputStack();
+                    if (output == null || output.isEmpty())
+                        continue;
+
+                    ItemStack input = recipe.getInputStack();
+                    if (input == null || input.isEmpty())
+                        continue;
+
+                    Object soul_emc = getObjectFromSoulList(recipe.getSupportedSouls());
+                    if (soul_emc == null)
+                        addConversion(output, ImmutableMap.of(input, input.getCount()));
+                    else
+                        addConversion(output, ImmutableMap.of(input, input.getCount(), soul_emc, 1));
+                }
+            }
+        }
+    }
 }

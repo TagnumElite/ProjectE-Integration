@@ -36,7 +36,9 @@ import java.util.Objects;
 
 @PEIPlugin("chisel")
 public class PluginChisel extends APEIPlugin {
-    public PluginChisel(String modid, Configuration config) { super(modid, config); }
+    public PluginChisel(String modid, Configuration config) {
+        super(modid, config);
+    }
 
     @Override
     public void setup() {
@@ -48,6 +50,7 @@ public class PluginChisel extends APEIPlugin {
 
     private static class GroupMapper extends PEIMapper {
         private final String group;
+
         public GroupMapper(String name) {
             super("group_" + name);
             group = name;

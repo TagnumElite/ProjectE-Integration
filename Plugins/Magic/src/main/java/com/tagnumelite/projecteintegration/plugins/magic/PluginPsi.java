@@ -10,25 +10,25 @@ import vazkii.psi.api.recipe.TrickRecipe;
 
 @PEIPlugin("psi")
 public class PluginPsi extends APEIPlugin {
-	public PluginPsi(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginPsi(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() throws Exception {
-		addMapper(new TrickMapper());
-	}
+    @Override
+    public void setup() throws Exception {
+        addMapper(new TrickMapper());
+    }
 
-	private static class TrickMapper extends PEIMapper {
-		public TrickMapper() {
-			super("Trick");
-		}
+    private static class TrickMapper extends PEIMapper {
+        public TrickMapper() {
+            super("Trick");
+        }
 
-		@Override
-		public void setup() {
-			for (TrickRecipe recipe : PsiAPI.trickRecipes) {
-				addRecipe(recipe.getOutput(), recipe.getInput());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (TrickRecipe recipe : PsiAPI.trickRecipes) {
+                addRecipe(recipe.getOutput(), recipe.getInput());
+            }
+        }
+    }
 }

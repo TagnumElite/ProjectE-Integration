@@ -12,29 +12,29 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("draconicevolution")
 public class PluginDraconicEvolution extends APEIPlugin {
-	public PluginDraconicEvolution(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginDraconicEvolution(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addEMC(DEFeatures.draconiumDust, 8192);
-		addEMC(DEFeatures.dragonHeart, 262144);
-		addEMC(DEFeatures.chaosShard, 1024000);
+    @Override
+    public void setup() {
+        addEMC(DEFeatures.draconiumDust, 8192);
+        addEMC(DEFeatures.dragonHeart, 262144);
+        addEMC(DEFeatures.chaosShard, 1024000);
 
-		addMapper(new FusionMapper());
-	}
+        addMapper(new FusionMapper());
+    }
 
-	private static class FusionMapper extends PEIMapper {
-		public FusionMapper() {
-			super("fusion", "Enable mapper for Draconic Evolution Fusion Crafting?");
-		}
+    private static class FusionMapper extends PEIMapper {
+        public FusionMapper() {
+            super("fusion", "Enable mapper for Draconic Evolution Fusion Crafting?");
+        }
 
-		@Override
-		public void setup() {
-			for (IFusionRecipe recipe : FusionRecipeAPI.getRecipes()) {
-				addRecipe(recipe.getRecipeOutput(ItemStack.EMPTY), recipe.getRecipeIngredients().toArray());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (IFusionRecipe recipe : FusionRecipeAPI.getRecipes()) {
+                addRecipe(recipe.getRecipeOutput(ItemStack.EMPTY), recipe.getRecipeIngredients().toArray());
+            }
+        }
+    }
 }

@@ -14,67 +14,67 @@ import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("actuallyadditions")
 public class PluginActuallyAdditions extends APEIPlugin {
-	public PluginActuallyAdditions(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginActuallyAdditions(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		addEMC(InitItems.itemMisc, 13, 64);
-		addEMC(InitItems.itemCoffeeBean, 64);
-		addEMC(InitItems.itemFoods, 16, 64);
-		addEMC(InitItems.itemMisc, 15, 480);
-		addEMC(InitItems.itemSolidifiedExperience, 863);
+    @Override
+    public void setup() {
+        addEMC(InitItems.itemMisc, 13, 64);
+        addEMC(InitItems.itemCoffeeBean, 64);
+        addEMC(InitItems.itemFoods, 16, 64);
+        addEMC(InitItems.itemMisc, 15, 480);
+        addEMC(InitItems.itemSolidifiedExperience, 863);
 
-		addMapper(new EmpowererMapper());
-		addMapper(new ReconstructorMapper());
-		addMapper(new CrusherMapper());
-	}
+        addMapper(new EmpowererMapper());
+        addMapper(new ReconstructorMapper());
+        addMapper(new CrusherMapper());
+    }
 
-	private static class EmpowererMapper extends PEIMapper {
-		public EmpowererMapper() {
-			super("Empowerer");
-		}
+    private static class EmpowererMapper extends PEIMapper {
+        public EmpowererMapper() {
+            super("Empowerer");
+        }
 
-		@Override
-		public void setup() {
-			for (EmpowererRecipe recipe : ActuallyAdditionsAPI.EMPOWERER_RECIPES) {
-				addRecipe(recipe.getOutput(), recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(),
-						recipe.getStandThree(), recipe.getStandFour());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (EmpowererRecipe recipe : ActuallyAdditionsAPI.EMPOWERER_RECIPES) {
+                addRecipe(recipe.getOutput(), recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(),
+                    recipe.getStandThree(), recipe.getStandFour());
+            }
+        }
+    }
 
-	private static class ReconstructorMapper extends PEIMapper {
-		public ReconstructorMapper() {
-			super("Reconstructor");
-		}
+    private static class ReconstructorMapper extends PEIMapper {
+        public ReconstructorMapper() {
+            super("Reconstructor");
+        }
 
-		@Override
-		public void setup() {
-			for (LensConversionRecipe recipe : ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES) {
-				addRecipe(recipe.getOutput(), recipe.getInput());
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (LensConversionRecipe recipe : ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES) {
+                addRecipe(recipe.getOutput(), recipe.getInput());
+            }
+        }
+    }
 
-	private static class CrusherMapper extends PEIMapper {
-		public CrusherMapper() {
-			super("crusher");
-		}
+    private static class CrusherMapper extends PEIMapper {
+        public CrusherMapper() {
+            super("crusher");
+        }
 
-		@Override
-		public void setup() {
-			for (CrusherRecipe recipe : ActuallyAdditionsAPI.CRUSHER_RECIPES) {
-				if (recipe.getSecondChance() >= 100) {
-					ArrayList<Object> output = new ArrayList<>();
-					output.add(recipe.getOutputOne());
-					output.add(recipe.getOutputTwo());
-					addRecipe(output, recipe.getInput());
-				} else {
-					addRecipe(recipe.getOutputOne(), recipe.getInput());
-				}
-			}
-		}
-	}
+        @Override
+        public void setup() {
+            for (CrusherRecipe recipe : ActuallyAdditionsAPI.CRUSHER_RECIPES) {
+                if (recipe.getSecondChance() >= 100) {
+                    ArrayList<Object> output = new ArrayList<>();
+                    output.add(recipe.getOutputOne());
+                    output.add(recipe.getOutputTwo());
+                    addRecipe(output, recipe.getInput());
+                } else {
+                    addRecipe(recipe.getOutputOne(), recipe.getInput());
+                }
+            }
+        }
+    }
 }

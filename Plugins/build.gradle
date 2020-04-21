@@ -27,9 +27,9 @@ subprojects {
 
 def plugins = gradle.ext.pei_plugins
 
-task setupDecompWorkspace (dependsOn: plugins.collect { it + ':setupDecompWorkspace' }) {}
-task setupCiWorkspace (dependsOn: plugins.collect { it + ':setupCiWorkspace' }) {}
-task setupDevWorkspace (dependsOn: plugins.collect { it + ':setupDevWorkspace' }) {}
+task setupDecompWorkspace(dependsOn: plugins.collect { it + ':setupDecompWorkspace' }) {}
+task setupCiWorkspace(dependsOn: plugins.collect { it + ':setupCiWorkspace' }) {}
+task setupDevWorkspace(dependsOn: plugins.collect { it + ':setupDevWorkspace' }) {}
 
 task build(overwrite: true, type: Jar, dependsOn: plugins.collect { it + ':build' }) {
     for (plugin in plugins) {

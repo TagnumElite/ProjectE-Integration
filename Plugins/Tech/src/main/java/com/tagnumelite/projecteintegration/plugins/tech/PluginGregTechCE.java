@@ -39,51 +39,51 @@ import net.minecraftforge.fluids.FluidStack;
 
 @PEIPlugin("gregtech")
 public class PluginGregTechCE extends APEIPlugin {
-	public PluginGregTechCE(String modid, Configuration config) {
-		super(modid, config);
-	}
+    public PluginGregTechCE(String modid, Configuration config) {
+        super(modid, config);
+    }
 
-	@Override
-	public void setup() {
-		for (RecipeMap<?> map : RecipeMap.getRecipeMaps()) {
-			addMapper(new RecipeMapper(map));
-		}
-	}
-	
-	private static class RecipeMapper extends PEIMapper {
-		private final RecipeMap<?> map;
+    @Override
+    public void setup() {
+        for (RecipeMap<?> map : RecipeMap.getRecipeMaps()) {
+            addMapper(new RecipeMapper(map));
+        }
+    }
 
-		public RecipeMapper(RecipeMap<?> map) {
-			super(map.unlocalizedName);
-			this.map = map;
-		}
+    private static class RecipeMapper extends PEIMapper {
+        private final RecipeMap<?> map;
 
-		@Override
-		public void setup() {
-			for (Recipe recipe : map.getRecipeList()) {
-				ArrayList<Object> inputs = new ArrayList<>();
-				for (CountableIngredient input : recipe.getInputs()) {
-					inputs.add(new SizedIngredient(input.getCount(), input.getIngredient()));
-				}
+        public RecipeMapper(RecipeMap<?> map) {
+            super(map.unlocalizedName);
+            this.map = map;
+        }
 
-				if (!recipe.getFluidInputs().isEmpty()) inputs.addAll(recipe.getFluidInputs());
-				
-				ArrayList<Object> outputs = new ArrayList<>();
+        @Override
+        public void setup() {
+            for (Recipe recipe : map.getRecipeList()) {
+                ArrayList<Object> inputs = new ArrayList<>();
+                for (CountableIngredient input : recipe.getInputs()) {
+                    inputs.add(new SizedIngredient(input.getCount(), input.getIngredient()));
+                }
+
+                if (!recipe.getFluidInputs().isEmpty()) inputs.addAll(recipe.getFluidInputs());
+
+                ArrayList<Object> outputs = new ArrayList<>();
                 if (!recipe.getFluidOutputs().isEmpty()) outputs.addAll(recipe.getFluidOutputs());
                 if (!recipe.getOutputs().isEmpty()) outputs.addAll(recipe.getOutputs());
-				
-				for (ChanceEntry output : recipe.getChancedOutputs()) {
-					if (output.getChance() >= 20000) {
-						ItemStack item = output.getItemStack().copy();
-						item.setCount(item.getCount() * 2);
-						outputs.add(item);
-					} else if (output.getChance() >= 10000) {
-						outputs.add(output.getItemStack());
-					}
-				}
-				
-				addRecipe(outputs, inputs.toArray(), recipe.getFluidInputs().toArray());
-			}
-		}
-	}
+
+                for (ChanceEntry output : recipe.getChancedOutputs()) {
+                    if (output.getChance() >= 20000) {
+                        ItemStack item = output.getItemStack().copy();
+                        item.setCount(item.getCount() * 2);
+                        outputs.add(item);
+                    } else if (output.getChance() >= 10000) {
+                        outputs.add(output.getItemStack());
+                    }
+                }
+
+                addRecipe(outputs, inputs.toArray(), recipe.getFluidInputs().toArray());
+            }
+        }
+    }
 }

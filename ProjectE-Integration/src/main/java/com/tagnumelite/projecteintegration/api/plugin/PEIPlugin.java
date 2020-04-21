@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface PEIPlugin {
-	/** @return {@code String} The modid of the registered plugin */
-	String value();
+    /**
+     * @return {@code String} The modid of the registered plugin
+     */
+    String value();
 }

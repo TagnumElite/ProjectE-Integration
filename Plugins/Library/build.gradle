@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     // Modmuss Maven
-    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+    deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
         exclude group: 'mezz.jei'
     }
 
