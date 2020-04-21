@@ -16,7 +16,7 @@ dependencies {
     }
 
     // Elytra
-    provided "pl.asie.charset:charset:${version_charset}:api"
+    deobfProvided "pl.asie.charset:charset:${version_charset}:full"
 
     // JitPack
     provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
