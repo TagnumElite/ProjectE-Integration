@@ -1,7 +1,7 @@
 repositories {
     maven {
-        name 'BlameJared'
-        url 'https://maven.blamejared.com/'
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com/'
     }
     maven {
         name = 'BuildCraft'
@@ -12,20 +12,24 @@ repositories {
         url = 'http://maven.covers1624.net'
     }
     maven {
-        name 'Player'
-        url 'http://maven.ic2.player.to'
+        name = 'Player'
+        url = 'http://maven.ic2.player.to'
     }
     maven {
-        name 'TTerrag'
-        url 'https://maven.tterrag.com'
+        name = 'TTerrag'
+        url = 'https://maven.tterrag.com'
     }
     maven {
-        name 'TehNuuuuuuuuuuuut'
-        url 'http://tehnut.info/maven/'
+        name = 'TTerrag 2'
+        url = 'https://maven2.tterrag.com'
     }
     maven {
-        name 'GregTech'
-        url  'https://dl.bintray.com/gregtech/dev'
+        name = 'TehNuuuuuuuuuuuut'
+        url = 'http://tehnut.info/maven/'
+    }
+    maven {
+        name = 'GregTech'
+        url  = 'https://dl.bintray.com/gregtech/dev'
     }
 }
 
@@ -36,30 +40,25 @@ dependencies {
     deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
 
     // Other
-    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
-    deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'codechicken', module: 'CodeChickenLib'
-    }
-    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
     provided ("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
         exclude group: 'mezz.jei'
         exclude group: 'jei-bees'
         exclude group: 'net.industrial-craft'
     }
     provided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
+
+    // MinecraftForge Maven
+    provided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
+
+    // CoFH Maven
+    deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
+    deobfProvided ("cofh:ThermalExpansion:${version_thermalexpansion}:universal") { 
+        exclude group: 'mezz.jei'
+        exclude group: 'codechicken', module: 'CodeChickenLib'
+    }
     deobfProvided ("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
-    deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
-
-    // MinecraftForge Maven
-    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
-
-    // CoFH Maven
     provided ("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
@@ -77,8 +76,19 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
+    // TTerrag
+    provided "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
+
+    // TTerrag 2
+    deobfProvided ("com.enderio:EnderIO:${mc_version}-${version_enderio}")  { exclude group: '*' }
+
     // Mod Maven
     deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
+    deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
+    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
+    deobfProvided ("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+        exclude group: 'mezz.jei'
+    }
 
     // Buildcraft Maven
     deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
@@ -86,15 +96,12 @@ dependencies {
 
     // JitPack
     provided ("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
+    provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
+
+    // CurseForge
+    provided "calculator:calculator-${mc_version}-${version_calculator}:deobf"
+    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
 
     // CurseMaven
-    provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
-    deobfProvided "curse.maven:calculator:${curse_calculator}"
-    deobfProvided "curse.maven:compactmachines:${curse_compactmachines}"
-    deobfProvided "curse.maven:endercore:${curse_endercore}"
-    deobfProvided "curse.maven:enderio:${curse_enderio}"
-    //deobfProvided "curse.maven:gregtechce:${curse_gregtechce}"
-    //deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"
     deobfProvided "curse.maven:mekanism:${curse_mekanism}"
-    deobfProvided "curse.maven:sonarcore:${curse_sonarcore}"
 }

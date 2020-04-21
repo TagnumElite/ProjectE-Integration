@@ -1,2 +1,3 @@
 dependencies {
+    deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
 }

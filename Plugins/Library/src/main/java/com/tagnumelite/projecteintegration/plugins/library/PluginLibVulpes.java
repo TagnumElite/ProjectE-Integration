@@ -23,9 +23,9 @@ public class PluginLibVulpes extends APEIPlugin {
 
 	@Override
 	public void setup(){
-		PEIApi.LOG.debug("RECIPE LIST SIZE: {}", RecipesMachine.getInstance().recipeList.size());
+		PEIApi.LOG.debug("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());
 		for (Class<? extends TileMultiblockMachine> clazz : RecipesMachine.getInstance().recipeList.keySet()) {
-			PEIApi.LOG.debug("Adding new mapper from libvuples");
+			PEIApi.LOG.debug("Adding new mapper from libvuples {}", clazz.getSimpleName());
 			addMapper(new RecipeMapper(clazz));
 		}
 	}
@@ -44,27 +44,27 @@ public class PluginLibVulpes extends APEIPlugin {
 			for (IRecipe recipe : RecipesMachine.getInstance().getRecipes(clazz)) {
 				List<ItemStack> item_outputs = recipe.getOutput();
 				List<FluidStack> fluid_outputs = recipe.getFluidOutputs();
-				final boolean no_item_out = (item_outputs == null) || (item_outputs.isEmpty());
-				final boolean no_fluid_out = (fluid_outputs == null) || (fluid_outputs.isEmpty());
-				if (no_item_out || no_fluid_out)
+				final boolean no_item_out = item_outputs == null || item_outputs.isEmpty();
+				final boolean no_fluid_out = fluid_outputs == null || fluid_outputs.isEmpty();
+				if (no_item_out && no_fluid_out)
 					continue;
 				
 				ArrayList<Object> outputs = new ArrayList<>();
-				
+
 				if (!no_item_out) {
 					outputs.addAll(item_outputs);/*
 					for (ItemStack item : item_outputs) {
 						addRecipe(item, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
 					}*/
 				}
-				
+
 				if (!no_fluid_out) {
 					outputs.addAll(fluid_outputs);/*
 					for (FluidStack fluid : fluid_outputs) {
 						addRecipe(fluid, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
 					}*/
 				}
-				
+
 				addRecipe(outputs, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
 			}
 		}

@@ -22,9 +22,10 @@ dependencies {
     // HellFire
     deobfProvided "hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}"
 
+    // JitPack
+    deobfProvided ("com.github.MysticMods:Embers:${commit_embers}") { exclude group: '*' }
+
     // CurseMaven
-    deobfProvided "curse.maven:embers:${curse_embers}"
-    //deobfProvided "curse.maven:embersrekindled:${curse_embersrekindled}"
     deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
     //deobfProvided "com.github.BlakeBr0:MysticalAgriculture:5b1e05cebb" -- Srsly? Can't blame you
     provided ("com.github.Tagnum-Mods:MysticalAgriculture:${commit_mysticalagriculture}") {
