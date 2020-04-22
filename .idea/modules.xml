@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Crafting/ProjectE-Integration.Plugins.Crafting.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Duplicate/ProjectE-Integration.Plugins.Duplicate.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Legacy/ProjectE-Integration.Plugins.Legacy.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Library/ProjectE-Integration.Plugins.Library.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Magic/ProjectE-Integration.Plugins.Magic.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Misc/ProjectE-Integration.Plugins.Misc.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Rocketry/ProjectE-Integration.Plugins.Rocketry.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.api.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/Tech/ProjectE-Integration.Plugins.Tech.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Plugins/ProjectE-Integration.Plugins.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.api.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration/ProjectE-Integration.ProjectE-Integration.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectE-Integration.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectE-Integration.test.iml" />
+    </modules>
+  </component>
+</project>
