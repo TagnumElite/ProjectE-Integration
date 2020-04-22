@@ -52,8 +52,6 @@ task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper
 def projects = ['ProjectE-Integration', 'Plugins']
 
 subprojects {
-    //apply from: rootProject.file('global.gradle')
-
     sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
     compileJava {
         sourceCompatibility = targetCompatibility = '1.8'
