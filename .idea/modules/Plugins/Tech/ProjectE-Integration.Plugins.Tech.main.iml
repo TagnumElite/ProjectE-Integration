@@ -73,13 +73,14 @@
     <orderEntry type="library" name="Gradle: binnie:binnie-mods-1.12.2:sources:2.5.1.188" level="project" />
     <orderEntry type="library" name="Gradle: net.sengir.forestry:forestry_1.12.2:api:5.8.2.418" level="project" />
     <orderEntry type="library" name="Gradle: appeng:appliedenergistics2:api:rv6-stable-6" level="project" />
-    <orderEntry type="library" name="Gradle: com.brandon3055.draconicevolution:Draconic-Evolution:deobf:1.12.2-2.3.18.329" level="project" />
+    <orderEntry type="library" name="Gradle: com.brandon3055.draconicevolution:Draconic-Evolution:deobf:1.12.2-2.3.25.351" level="project" />
     <orderEntry type="library" name="Gradle: com.enderio.core:EnderCore:deobf:1.12.2-0.5.73" level="project" />
     <orderEntry type="library" name="Gradle: com.github.turbodiesel4598:NuclearCraft:03c920cdb1" level="project" />
     <orderEntry type="library" name="Gradle: com.github.SonarSonic:Sonar-Core:deobf:062c22d5c4" level="project" />
     <orderEntry type="library" name="Gradle: calculator:calculator-1.12.2-5.0.12:deobf:15" level="project" />
     <orderEntry type="library" name="Gradle: mezz.jei:jei_1.12.2:4.13.0.219" level="project" />
     <orderEntry type="library" name="Gradle: com.brandon3055.projectintelligence:ProjectIntelligence:deobf:1.12.2-1.0.1.8" level="project" />
-    <orderEntry type="library" name="Gradle: com.brandon3055.brandonscore:BrandonsCore:deobf:1.12.2-2.4.9.197" level="project" />
+    <orderEntry type="library" name="Gradle: com.brandon3055.brandonscore:BrandonsCore:deobf:1.12.2-2.4.18.210" level="project" />
+    <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
   </component>
 </module>

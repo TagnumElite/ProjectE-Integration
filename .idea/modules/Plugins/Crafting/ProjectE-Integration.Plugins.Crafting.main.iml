@@ -72,5 +72,6 @@
     <orderEntry type="library" name="Gradle: hellfirepvp.modularmachinery:modularmachinery:deobf:1.12.2-1.11.1-v53" level="project" />
     <orderEntry type="library" name="Gradle: com.github.sokratis12GR:ArmorPlus:1.12.2-11.26.3.67" level="project" />
     <orderEntry type="library" name="Gradle: com.github.BlakeBr0:Cucumber:deobf:8513ff3dfe" level="project" />
+    <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
   </component>
 </module>

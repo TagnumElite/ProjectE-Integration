@@ -11,11 +11,15 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.wynprice.cursemaven'
 
-jar {}
+jar {
+    from sourceSets.main.output
+    from sourceSets.api.output
+}
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     description = 'Creates a JAR containing the source code.'
     from sourceSets.main.allSource
+    from sourceSets.api.allSource
     classifier = 'sources'
 }
 
@@ -31,10 +35,18 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
 }
 
+task apiJar(type: Jar) {
+    description = 'Creates a JAR containing the API'
+    from sourceSets.api.output
+    from sourceSets.api.allJava
+    classifier = 'api'
+}
+
 artifacts {
     archives sourcesJar
     archives deobfJar
     archives javadocJar
+    archives apiJar
 }
 
 minecraft {
@@ -101,6 +113,7 @@ publishing {
             artifact sourcesJar { classifier 'sources' }
             artifact deobfJar { classifier 'deobf' }
             artifact javadocJar { classifier 'javadoc' }
+            artifact apiJar { classifier 'api' }
         }
     }
 

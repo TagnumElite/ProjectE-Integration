@@ -73,5 +73,6 @@
     <orderEntry type="library" name="Gradle: slimeknights:TConstruct:deobf:1.12.2-2.10.0.81" level="project" />
     <orderEntry type="library" name="Gradle: com.github.MatrexsVigil:harvestcraft:8f0a903a94" level="project" />
     <orderEntry type="library" name="Gradle: com.github.Ipsis:Woot:1.12.2-1.4.11" level="project" />
+    <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
   </component>
 </module>

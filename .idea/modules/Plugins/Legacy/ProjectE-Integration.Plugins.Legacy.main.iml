@@ -70,5 +70,6 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: com.github.turbodiesel4598:NuclearCraft:0145ca2cef" level="project" />
+    <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
   </component>
 </module>

@@ -115,10 +115,17 @@ task javadocJar(type: Jar, dependsOn: projects.collect { ':' + it + ':javadocJar
     classifier = 'javadoc'
 }
 
+task apiJar(type: Jar, dependsOn: ':ProjectE-Integration:apiJar') {
+    description = 'Creates a JAR containing the API'
+    from zipTree(project(':ProjectE-Integration').apiJar.archivePath)
+    classifier = 'api'
+}
+
 artifacts {
     archives sourcesJar
     archives deobfJar
     archives javadocJar
+    archives apiJar
 }
 
 task printEnd {
@@ -131,6 +138,7 @@ jar.finalizedBy printEnd
 build.dependsOn sourcesJar
 build.dependsOn deobfJar
 build.dependsOn javadocJar
+build.dependsOn apiJar
 /*
 curseforge {
     options {
