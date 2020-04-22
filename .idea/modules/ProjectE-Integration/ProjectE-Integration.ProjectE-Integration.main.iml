@@ -8,6 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
     <orderEntry type="library" name="Gradle: com.github.sinkillerj:ProjectE:dev:7436b7f6c0" level="project" />
     <orderEntry type="library" name="Gradle: com.mojang:authlib:1.5.25" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.1" level="project" />
