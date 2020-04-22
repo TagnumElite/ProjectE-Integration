@@ -59,7 +59,7 @@ Mod Support is split into separate plugin categories:
 - [Forestry](https://www.curseforge.com/minecraft/mc-mods/forestry): Carpenter, Fabricator, Fermenter, Moistener, Squezzer and Still
 - [GregTechCE](https://www.curseforge.com/minecraft/mc-mods/gregtechce)
 - [Immersive Engineering](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering): Blast Furnace, Coke Oven, Crusher, Enginner Workbench, Kiln and Metal Press
-- [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former and Ore Washer
+- [Industrial Craft](https://www.curseforge.com/minecraft/mc-mods/industrial-craft): Blast Furnace, Block Cutter, Centrifuge, Compressor, Extractor, Macerator, Metal Former, Ore Washer, Electrolyzer and Fermenter
 - [Mekanism](https://www.curseforge.com/minecraft/mc-mods/mekanism)
 - [NuclearCraft: Overhauled](https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-overhauled)
 - [PneumaticCraft: Repressurized](https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized): Assembly, Thermopneumatic Processing Plant, Explosion Crafting, Heat Frame Cooling, Pressure Chamber, Refinery

@@ -72,7 +72,7 @@ dependencies {
     }
 
     // Player Maven
-    deobfProvided("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}") {
+    deobfProvided("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
         exclude group: 'mezz.jei'
     }
 

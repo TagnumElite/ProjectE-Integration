@@ -12,9 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @PEIPlugin("ic2")
 public class PluginIndustrialCraft extends APEIPlugin {
@@ -36,6 +39,8 @@ public class PluginIndustrialCraft extends APEIPlugin {
         addMapper(new BasicMachineMapper(Recipes.metalformerRolling, "Metal Former Rolling"));
         addMapper(new BasicMachineMapper(Recipes.oreWashing, "Ore Washing"));
         addMapper(new BasicMachineMapper(Recipes.recycler, "Recycler"));
+        addMapper(new ElectrolyzerMapper());
+        addMapper(new FermenterMapper());
     }
 
     private static class AdvanceRecipeMapper extends PEIMapper {
@@ -69,6 +74,43 @@ public class PluginIndustrialCraft extends APEIPlugin {
                 addConversion(recipe.getOutput().stream().findFirst().orElse(ItemStack.EMPTY), ImmutableMap
                     .of(PEIApi.getIngredient(recipe.getInput().getIngredient()), recipe.getInput().getAmount()));
             }
+        }
+    }
+
+    private static class ElectrolyzerMapper extends PEIMapper {
+        public ElectrolyzerMapper() {
+            super("Electrolyzer");
+        }
+
+        @Override
+        public void setup() {
+            Recipes.electrolyzer.getRecipeMap().forEach((fluidName, recipe) -> {
+                // Skip invalid fluid
+                if (FluidRegistry.getFluid(fluidName) == null) return;
+
+                List<Object> outputs = new ArrayList<>(recipe.outputs.length);
+                for (IElectrolyzerRecipeManager.ElectrolyzerOutput output : recipe.outputs) {
+                    // Skip invalid fluid
+                    if (FluidRegistry.getFluid(output.fluidName) == null) continue;
+                    outputs.add(new FluidStack(FluidRegistry.getFluid(output.fluidName), output.fluidAmount));
+                }
+                addRecipe(outputs, new FluidStack(FluidRegistry.getFluid(fluidName), recipe.inputAmount));
+            });
+        }
+    }
+
+    private static class FermenterMapper extends PEIMapper {
+        public FermenterMapper() {
+            super("Fermenter");
+        }
+
+        @Override
+        public void setup() {
+            Recipes.fermenter.getRecipeMap().forEach((fluidName, recipe) -> {
+                // Skip invalid fluids
+                if (FluidRegistry.getFluid(fluidName) == null || FluidRegistry.getFluid(recipe.output) == null) return;
+                addRecipe(new FluidStack(FluidRegistry.getFluid(recipe.output), recipe.outputAmount), new FluidStack(FluidRegistry.getFluid(fluidName), recipe.inputAmount));
+            });
         }
     }
 }
