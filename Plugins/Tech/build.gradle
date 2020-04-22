@@ -59,7 +59,7 @@ dependencies {
     deobfProvided("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
-    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
         exclude group: 'cofh'

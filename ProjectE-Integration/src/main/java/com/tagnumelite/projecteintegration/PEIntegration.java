@@ -32,7 +32,7 @@ import static com.tagnumelite.projecteintegration.api.PEIApi.*;
  * @author TagnumElite
  * @version 2.0.0
  */
-@Mod(modid = MODID, name = NAME, version = VERSION, dependencies = "required-after:projecte;", certificateFingerprint = "342c9251777bda1ef9b9f1cb1387c2bd4d06cd78", acceptableRemoteVersions = "*")
+@Mod(modid = MODID, name = NAME, version = VERSION, dependencies = "required-after:projecte;after:*", acceptableRemoteVersions = "*")
 public class PEIntegration {
     public static Configuration config;
     private static boolean DISABLE = false;
@@ -44,11 +44,6 @@ public class PEIntegration {
 
     public boolean isLoaded() {
         return LOADED;
-    }
-
-    @EventHandler
-    public void fingerprintViolation(FMLFingerprintViolationEvent event) {
-        LOG.warn("Somebody has been tampering with ProjectE Integration jar!");
     }
 
     @EventHandler

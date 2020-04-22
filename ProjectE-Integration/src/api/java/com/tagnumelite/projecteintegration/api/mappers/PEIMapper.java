@@ -66,7 +66,7 @@ public abstract class PEIMapper {
         ItemStack output = recipe.getRecipeOutput();
         if (output.isEmpty()) return;
 
-        IngredientMap<Object> ingredients = new IngredientMap<Object>();
+        IngredientMap<Object> ingredients = new IngredientMap<>();
 
         for (Ingredient ingredient : recipe.getIngredients()) {
             if (ingredient == Ingredient.EMPTY)

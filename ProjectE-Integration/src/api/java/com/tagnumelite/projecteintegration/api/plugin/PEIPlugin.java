@@ -34,6 +34,4 @@ public @interface PEIPlugin {
      * @return {@code String} The modid of the registered plugin
      */
     String value();
-
-    String name() default "";
 }

@@ -48,6 +48,10 @@ Mod Support is split into separate plugin categories:
 - [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct): Alloying, Drying and Melting
 - [Woot](https://www.curseforge.com/minecraft/mc-mods/woot)  
   
+### Rocketry:
+
+- [Galacticraft](https://micdoodle8.com/mods/galacticraft): Circuit Fabricator, Compressor and NASA workbench.
+  
 ### Tech:  
   
 - [Actually Additions](https://www.curseforge.com/minecraft/mc-mods/actually-additions): Crusher, Atomic Reconstructor, Empowerer
