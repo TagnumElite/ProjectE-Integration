@@ -6,7 +6,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ProjectE-Integration.Plugins.Duplicate.main" />
-    <orderEntry type="module" module-name="ProjectE-Integration.Plugins.Duplicate.api" />
     <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.main" />
     <orderEntry type="library" name="Gradle: com.github.sinkillerj:ProjectE:dev:7436b7f6c0" level="project" />
     <orderEntry type="library" name="Gradle: com.mojang:authlib:1.5.25" level="project" />

@@ -10,6 +10,8 @@ minecraft {
     mappings = "snapshot_${mcp_version}"
 }
 
+sourceSets.remove(sourceSets.api)
+
 dependencies {
     compile project(':ProjectE-Integration')
 }
