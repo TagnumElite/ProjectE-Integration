@@ -27,9 +27,7 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import micdoodle8.mods.galacticraft.api.recipe.CircuitFabricatorRecipes;
-import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
-import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
+import micdoodle8.mods.galacticraft.api.recipe.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
@@ -94,8 +92,16 @@ public class PluginGalaticraft extends APEIPlugin {
         @Override
         public void setup() {
             for (IRecipe iRecipe : CompressorRecipes.getRecipeList()) {
-                // This seems to be broken, needs bug testing
-                addRecipe(iRecipe);
+                if (iRecipe instanceof ShapelessOreRecipeGC) {
+                    ShapelessOreRecipeGC recipe = (ShapelessOreRecipeGC) iRecipe;
+                    addRecipe(recipe.getRecipeOutput(), recipe.getInput().toArray());
+                } else if (iRecipe instanceof ShapedRecipesGC) {
+                    ShapedRecipesGC recipe = (ShapedRecipesGC) iRecipe;
+                    addRecipe(recipe.getRecipeOutput(), (Object[]) recipe.recipeItems);
+                } else {
+                    //This should never be called, but is there as a last case scenario
+                    addRecipe(iRecipe);
+                }
             }
         }
     }
