@@ -27,11 +27,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This tells the mod that the class is a plugin and should be loaded
+ * All plugins should extend {@link APEIPlugin} otherwise it is just ignored.
+ * @see APEIPlugin
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface PEIPlugin {
     /**
-     * @return {@code String} The modid of the registered plugin
+     * @return The modid of the registered plugin
      */
     String value();
 }

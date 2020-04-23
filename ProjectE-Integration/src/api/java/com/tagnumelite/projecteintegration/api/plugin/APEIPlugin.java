@@ -33,11 +33,23 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the abstract class all {@link PEIPlugin} should extend.
+ * @see PEIPlugin
+ * @see PEIMapper
+ */
 public abstract class APEIPlugin {
     public final String modid;
     public final Configuration config;
     public final String category;
 
+    /**
+     * This is called by the {@link PEIApi} and should not be called anywhere else.
+     * This may be used to fetch required configs values.
+     * This is only called if the modid from {@link PEIPlugin#value()} is loaded
+     * @param modid  The modid that the plugin is registered to
+     * @param config The config used by the mod
+     */
     public APEIPlugin(String modid, Configuration config) {
         this.modid = modid;
         this.config = config;
@@ -45,20 +57,22 @@ public abstract class APEIPlugin {
     }
 
     /**
-     * addEMC and addMapper should be run here
+     * This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_PLUGINS}
+     * by the {@link PEIApi} and should not be called anywhere else.
      *
-     * @throws Exception If the setup fails
+     * {@link #addEMC} and {@link #addMapper(PEIMapper)} should be called during this setup.
+     *
+     * @implNote The exception is only there for logging and can be ignored.
      */
     public abstract void setup() throws Exception;
 
     /**
-     * @return Always return a list, it may empty if the plugin has no mappers.
-     * @see PEIMapper
+     * Calls {@link #addEMC(ItemStack, int)} on each value returned from {@link OreDictionary#getOres(String)}
+     * @param ore      The {@link OreDictionary} string to fetch {@link List} of {@link ItemStack} from
+     * @param base_emc The default EMC value that will be assigned to the {@link OreDictionary#getOres(String)} values,
+     *                 may be overwritten from the config.
+     * @param extra    The comment that will be added the config option
      */
-    public List<PEIMapper> getMappers() {
-        return new ArrayList<>(0);
-    }
-
     protected void addEMC(String ore, int base_emc, String extra) {
         int emc = config.getInt("emc_ore_" + ore, category, base_emc, -1, Integer.MAX_VALUE, extra);
         for (ItemStack item : OreDictionary.getOres(ore)) {
@@ -66,6 +80,12 @@ public abstract class APEIPlugin {
         }
     }
 
+    /**
+     * Calls {@link #addEMC(ItemStack, int)} on each value returned from {@link OreDictionary#getOres(String)}
+     * @param ore      The {@link OreDictionary} string to fetch {@link List} of {@link ItemStack} from
+     * @param base_emc The default EMC value that will be assigned to the {@link OreDictionary#getOres(String)} values,
+     *                 may be overwritten from the config.
+     */
     protected void addEMC(String ore, int base_emc) {
         int emc = config.getInt("emc_ore_" + ore, category, base_emc, -1, Integer.MAX_VALUE, "EMC Value for all items in oredict '" + ore + '\'');
         for (ItemStack item : OreDictionary.getOres(ore)) {
@@ -74,27 +94,38 @@ public abstract class APEIPlugin {
     }
 
     /**
-     * @param item     {@code Item} The item to add
-     * @param meta     {@code int} Metadata value of the item
-     * @param base_emc {@code int} The Base EMC Value
+     * Gets {@link ItemStack} from the {@link Item} and metadata.
+     * Calls {@link #addEMC(ItemStack, int)} using the {@link ItemStack}.
+     * @param item     The item to be converted to {@link ItemStack}
+     * @param meta     Metadata value of the item
+     * @param base_emc The Base EMC Value
      */
     protected void addEMC(Item item, int meta, int base_emc) {
         addEMC(new ItemStack(item, 1, meta), base_emc);
     }
 
+    /**
+     * Gets {@link ItemStack} from the {@link Item} and calls {@link #addEMC(ItemStack, int)} using the {@link ItemStack}
+     * @param item     The {@link Item} to be converted into {@link ItemStack}
+     * @param base_emc The default EMC value for the {@link Item}
+     */
     protected void addEMC(Item item, int base_emc) {
         addEMC(new ItemStack(item), base_emc);
     }
 
+    /**
+     * Alias for {@code #addEMC(item, base_emc, "")}
+     * @see #addEMC(ItemStack, int, String)
+     */
     protected void addEMC(ItemStack item, int base_emc) {
         addEMC(item, base_emc, "");
     }
 
     /**
-     * @param item     {@code ItemStack} The item that will be given an EMC value
-     * @param base_emc {@code int} The Base EMC value, will be overwritten from the
-     *                 config
-     * @param extra    {@code String} Extra text to go into the comment;
+     * Calls {@link #setEMC(Object, int)} on the {@link ItemStack} with the EMC value from the config or default EMC.
+     * @param item     The {@link ItemStack} that will have EMC assigned to
+     * @param base_emc The Base EMC value, will be overwritten from the config
+     * @param extra    Comment string that will along side the emc config option.
      */
     protected void addEMC(ItemStack item, int base_emc, String extra) {
         if (item == null)
@@ -104,24 +135,34 @@ public abstract class APEIPlugin {
             "Set the EMC for the item '" + item.getDisplayName() + "' " + extra));
     }
 
-    protected void addEMC(String name, Object obj, int base_emc) {
+    /**
+     * Alias for {@link #addEMC(String, Object, int, String)}
+     * @see #addEMC(String, Object, int, String)
+     */
+    protected void addEMC(final String name, Object obj, int base_emc) {
         addEMC(name, obj, base_emc, "");
     }
 
     /**
-     * @param name     {@code String} The name of the object
-     * @param obj      {@code Object} The object that will have the emc attached to it.
-     * @param base_emc {@code int} The Base emc of the object
-     * @param extra    {@code String} Extra information to be added to the comment.
+     * Calls {@link #setEMC(Object, int)} on the object with the EMC acquired from the config.
+     * @param name     The name of the object in the config, changing the name will change the config option.
+     * @param obj      The object that will have EMC applied to it.
+     * @param base_emc The default EMC value that will be applied, unless overwritten by the config.
+     * @param extra    Extra comment string that will along side the config option.
      */
-    protected void addEMC(String name, Object obj, int base_emc, String extra) {
+    protected void addEMC(final String name, Object obj, int base_emc, String extra) {
         if (obj == null)
             return;
 
         setEMC(obj, config.getInt("emc_" + name.toLowerCase(), category, base_emc, -1, Integer.MAX_VALUE,
-            "Set the EMC value for " + name + ' ' + extra));
+            "Set the EMC value for " + name + ". " + extra));
     }
 
+    /**
+     * Calls {@link PEIApi#addEMCObject(Object, int)}. Silently fails if EMC is below/equal to 0 or if obj is null.
+     * @param obj The object that will EMC applied to
+     * @param emc The EMC to apply to the object
+     */
     private void setEMC(Object obj, int emc) {
         if (emc <= 0 || obj == null)
             return;
@@ -129,6 +170,10 @@ public abstract class APEIPlugin {
         PEIApi.addEMCObject(obj, emc);
     }
 
+    /**
+     * Calls {@link PEIApi#addMapper(PEIMapper)} if the mapper is enabled.
+     * @param mapper The mapper to be added to the {@link PEIApi}
+     */
     protected void addMapper(PEIMapper mapper) {
         if (config.getBoolean("enable_" + mapper.name.toLowerCase().replace(' ', '_') + "_mapper", category,
             !mapper.disabled_by_default, mapper.desc))
