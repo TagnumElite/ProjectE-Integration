@@ -38,7 +38,7 @@ public class PluginIndustrialCraft extends APEIPlugin {
         addMapper(new BasicMachineMapper(Recipes.metalformerExtruding, "Metal Former Extruding"));
         addMapper(new BasicMachineMapper(Recipes.metalformerRolling, "Metal Former Rolling"));
         addMapper(new BasicMachineMapper(Recipes.oreWashing, "Ore Washing"));
-        addMapper(new BasicMachineMapper(Recipes.recycler, "Recycler"));
+        //addMapper(new BasicMachineMapper(Recipes.recycler, "Recycler")); Don't Firgging Wark!
         addMapper(new ElectrolyzerMapper());
         addMapper(new FermenterMapper());
     }
