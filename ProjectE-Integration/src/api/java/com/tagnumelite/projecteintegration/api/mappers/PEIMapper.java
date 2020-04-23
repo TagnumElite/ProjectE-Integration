@@ -1,6 +1,7 @@
 package com.tagnumelite.projecteintegration.api.mappers;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.utils.Utils;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
@@ -90,6 +91,16 @@ public abstract class PEIMapper {
             return;
 
         addRecipe(output.amount, output.copy(), inputs);
+    }
+
+    /**
+     * Shortcut for turning {@link SizedObject} into a conversion map
+     *
+     * @param output A sized object of any type and amount
+     * @param inputs A list of objects to convert into inputs
+     */
+    protected void addRecipe(SizedObject<?> output, Object... inputs) {
+        addRecipe(output.amount, output.object, inputs);
     }
 
     protected void addRecipe(int output_amount, Object output, Object... inputs) {
