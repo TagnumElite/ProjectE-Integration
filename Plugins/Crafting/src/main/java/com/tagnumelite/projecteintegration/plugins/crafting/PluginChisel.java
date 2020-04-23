@@ -28,10 +28,10 @@ import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @PEIPlugin("chisel")
@@ -59,19 +59,10 @@ public class PluginChisel extends APEIPlugin {
         @Override
         public void setup() {
             assert CarvingUtils.getChiselRegistry() != null;
-            ICarvingGroup carving_group = Objects.requireNonNull(CarvingUtils.getChiselRegistry().getGroup(group));
-            ItemStack primary_item = null;
-            ArrayList<ItemStack> variants = new ArrayList<>(carving_group.getVariations().size());
-
-            //TODO: Is this in order, if so we can just use O(n) instead of O2(n)
-            for (ICarvingVariation variation : carving_group) {
-                if (variation.getOrder() == 0) {
-                    primary_item = variation.getStack();
-                } else {
-                    variants.add(variation.getStack());
-                }
-            }
-
+            List<ICarvingVariation> variations = Objects.requireNonNull(CarvingUtils.getChiselRegistry().getGroup(group)).getVariations();
+            ArrayList<ItemStack> variants = new ArrayList<>(variations.size());
+            variations.forEach(iCarvingVariation -> variants.add(iCarvingVariation.getStack()));
+            ItemStack primary_item = variants.remove(0);
             for (ItemStack variation : variants) {
                 addRecipe(variation, primary_item);
             }
