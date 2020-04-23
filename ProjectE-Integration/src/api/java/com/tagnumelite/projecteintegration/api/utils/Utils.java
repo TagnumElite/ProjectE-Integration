@@ -1,7 +1,7 @@
 package com.tagnumelite.projecteintegration.api.utils;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
-import com.tagnumelite.projecteintegration.api.internal.input.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

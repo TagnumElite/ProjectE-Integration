@@ -2,13 +2,9 @@ package com.tagnumelite.projecteintegration.plugins.magic;
 
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
-import java.util.List;
-import java.util.Map;
-
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -16,11 +12,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.recipe.RecipeElvenTrade;
-import vazkii.botania.api.recipe.RecipeManaInfusion;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.api.recipe.RecipePureDaisy;
-import vazkii.botania.api.recipe.RecipeRuneAltar;
+import vazkii.botania.api.recipe.*;
+
+import java.util.List;
+import java.util.Map;
 
 @PEIPlugin("botania")
 public class PluginBotania extends APEIPlugin {

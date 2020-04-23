@@ -21,16 +21,11 @@
  */
 package com.tagnumelite.projecteintegration.plugins.magic;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraftforge.common.config.Configuration;
-import teamroots.embers.recipe.AlchemyRecipe;
-import teamroots.embers.recipe.FluidMixingRecipe;
-import teamroots.embers.recipe.ItemMeltingRecipe;
-import teamroots.embers.recipe.ItemStampingRecipe;
-import teamroots.embers.recipe.RecipeRegistry;
+import teamroots.embers.recipe.*;
 
 @PEIPlugin("embers")
 public class PluginEmbers extends APEIPlugin {

@@ -1,12 +1,11 @@
 package com.tagnumelite.projecteintegration.plugins.library;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import sonar.core.recipes.DefaultSonarRecipe;
 import sonar.core.recipes.ISonarRecipeObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PluginSonarCore {
     public static abstract class SonarMapper extends PEIMapper {

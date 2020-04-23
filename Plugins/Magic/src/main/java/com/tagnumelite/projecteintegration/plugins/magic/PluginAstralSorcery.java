@@ -1,19 +1,18 @@
 package com.tagnumelite.projecteintegration.plugins.magic;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import hellfirepvp.astralsorcery.common.crafting.altar.AbstractAltarRecipe;
 import hellfirepvp.astralsorcery.common.crafting.altar.AltarRecipeRegistry;
 import hellfirepvp.astralsorcery.common.crafting.grindstone.GrindstoneRecipe;
 import hellfirepvp.astralsorcery.common.crafting.grindstone.GrindstoneRecipeRegistry;
 import hellfirepvp.astralsorcery.common.crafting.infusion.AbstractInfusionRecipe;
 import hellfirepvp.astralsorcery.common.crafting.infusion.InfusionRecipeRegistry;
+import net.minecraftforge.common.config.Configuration;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("astralsorcery")
 public class PluginAstralSorcery extends APEIPlugin {

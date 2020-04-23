@@ -3,15 +3,10 @@ package com.tagnumelite.projecteintegration.plugins.legacy;
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import moze_intel.projecte.emc.IngredientMap;
 import nc.recipe.AbstractRecipeHandler;
 import nc.recipe.IRecipe;
@@ -21,6 +16,10 @@ import nc.recipe.ingredient.IItemIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @PEIPlugin("nuclearcraft")
 @OnlyIf(versionStartsWith = "2.")

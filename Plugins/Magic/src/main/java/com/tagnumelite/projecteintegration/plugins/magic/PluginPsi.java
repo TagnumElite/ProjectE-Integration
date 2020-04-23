@@ -1,9 +1,8 @@
 package com.tagnumelite.projecteintegration.plugins.magic;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraftforge.common.config.Configuration;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.recipe.TrickRecipe;

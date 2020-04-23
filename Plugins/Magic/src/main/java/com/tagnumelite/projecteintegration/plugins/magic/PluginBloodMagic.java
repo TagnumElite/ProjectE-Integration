@@ -1,14 +1,13 @@
 package com.tagnumelite.projecteintegration.plugins.magic;
 
-import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
-import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import WayofTime.bloodmagic.api.impl.BloodMagicAPI;
 import WayofTime.bloodmagic.api.impl.recipe.RecipeAlchemyArray;
 import WayofTime.bloodmagic.api.impl.recipe.RecipeAlchemyTable;
 import WayofTime.bloodmagic.api.impl.recipe.RecipeBloodAltar;
 import WayofTime.bloodmagic.api.impl.recipe.RecipeTartaricForge;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("bloodmagic")

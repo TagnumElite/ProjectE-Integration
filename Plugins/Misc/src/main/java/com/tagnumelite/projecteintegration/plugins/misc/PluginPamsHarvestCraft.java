@@ -1,22 +1,20 @@
 package com.tagnumelite.projecteintegration.plugins.misc;
 
-import java.util.Map;
-
-import org.apache.commons.lang3.reflect.FieldUtils;
-
 import com.pam.harvestcraft.item.GrinderRecipes;
 import com.pam.harvestcraft.item.PresserRecipes;
 import com.pam.harvestcraft.item.WaterFilterRecipes;
 import com.pam.harvestcraft.tileentities.MarketData;
 import com.pam.harvestcraft.tileentities.MarketItems;
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.Utils;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.commons.lang3.reflect.FieldUtils;
+
+import java.util.Map;
 
 @PEIPlugin("harvestcraft")
 public class PluginPamsHarvestCraft extends APEIPlugin {

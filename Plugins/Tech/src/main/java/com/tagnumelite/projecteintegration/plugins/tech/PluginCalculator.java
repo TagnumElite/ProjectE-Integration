@@ -3,22 +3,8 @@ package com.tagnumelite.projecteintegration.plugins.tech;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.plugins.library.PluginSonarCore.SonarMapper;
-
 import net.minecraftforge.common.config.Configuration;
-import sonar.calculator.mod.common.recipes.AlgorithmSeparatorRecipes;
-import sonar.calculator.mod.common.recipes.AtomicCalculatorRecipes;
-import sonar.calculator.mod.common.recipes.CalculatorRecipes;
-import sonar.calculator.mod.common.recipes.ConductorMastRecipes;
-import sonar.calculator.mod.common.recipes.ExtractionChamberRecipes;
-import sonar.calculator.mod.common.recipes.FabricationChamberRecipes;
-import sonar.calculator.mod.common.recipes.FabricationSonarRecipe;
-import sonar.calculator.mod.common.recipes.FlawlessCalculatorRecipes;
-import sonar.calculator.mod.common.recipes.PrecisionChamberRecipes;
-import sonar.calculator.mod.common.recipes.ProcessingChamberRecipes;
-import sonar.calculator.mod.common.recipes.ReassemblyChamberRecipes;
-import sonar.calculator.mod.common.recipes.RestorationChamberRecipes;
-import sonar.calculator.mod.common.recipes.ScientificRecipes;
-import sonar.calculator.mod.common.recipes.StoneSeparatorRecipes;
+import sonar.calculator.mod.common.recipes.*;
 import sonar.core.recipes.DefaultSonarRecipe;
 
 @PEIPlugin("calculator")

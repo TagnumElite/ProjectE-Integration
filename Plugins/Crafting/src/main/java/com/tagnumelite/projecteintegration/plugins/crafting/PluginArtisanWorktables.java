@@ -1,20 +1,19 @@
 package com.tagnumelite.projecteintegration.plugins.crafting;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.codetaylor.mc.artisanworktables.api.ArtisanAPI;
 import com.codetaylor.mc.artisanworktables.api.internal.recipe.OutputWeightPair;
 import com.codetaylor.mc.artisanworktables.api.internal.reference.EnumTier;
 import com.codetaylor.mc.artisanworktables.api.recipe.IArtisanRecipe;
 import com.codetaylor.mc.artisanworktables.modules.worktables.ModuleWorktablesConfig;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.internal.input.SizedIngredient;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @PEIPlugin("artisanworktables")
 public class PluginArtisanWorktables extends APEIPlugin {

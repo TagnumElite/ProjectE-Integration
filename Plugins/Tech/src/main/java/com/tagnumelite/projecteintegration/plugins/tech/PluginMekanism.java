@@ -21,16 +21,10 @@
  */
 package com.tagnumelite.projecteintegration.plugins.tech;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.ImmutableMap;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import mekanism.api.gas.GasStack;
@@ -42,20 +36,7 @@ import mekanism.common.block.states.BlockStateMachine.MachineType;
 import mekanism.common.recipe.RecipeHandler.Recipe;
 import mekanism.common.recipe.inputs.ChemicalPairInput;
 import mekanism.common.recipe.inputs.PressurizedInput;
-import mekanism.common.recipe.machines.AdvancedMachineRecipe;
-import mekanism.common.recipe.machines.BasicMachineRecipe;
-import mekanism.common.recipe.machines.ChanceMachineRecipe;
-import mekanism.common.recipe.machines.ChemicalInfuserRecipe;
-import mekanism.common.recipe.machines.CrystallizerRecipe;
-import mekanism.common.recipe.machines.DissolutionRecipe;
-import mekanism.common.recipe.machines.DoubleMachineRecipe;
-import mekanism.common.recipe.machines.MetallurgicInfuserRecipe;
-import mekanism.common.recipe.machines.OxidationRecipe;
-import mekanism.common.recipe.machines.PressurizedRecipe;
-import mekanism.common.recipe.machines.SeparatorRecipe;
-import mekanism.common.recipe.machines.SolarNeutronRecipe;
-import mekanism.common.recipe.machines.ThermalEvaporationRecipe;
-import mekanism.common.recipe.machines.WasherRecipe;
+import mekanism.common.recipe.machines.*;
 import mekanism.common.recipe.outputs.ChanceOutput;
 import mekanism.common.recipe.outputs.PressurizedOutput;
 import moze_intel.projecte.api.ProjectEAPI;
@@ -64,6 +45,11 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @PEIPlugin("mekanism")
 public class PluginMekanism extends APEIPlugin {

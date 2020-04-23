@@ -1,19 +1,18 @@
 package com.tagnumelite.projecteintegration.plugins.library;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 import zmaster587.libVulpes.interfaces.IRecipe;
 import zmaster587.libVulpes.recipe.RecipesMachine;
 import zmaster587.libVulpes.tile.multiblock.TileMultiblockMachine;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @PEIPlugin("libVulpes")
 public class PluginLibVulpes extends APEIPlugin {

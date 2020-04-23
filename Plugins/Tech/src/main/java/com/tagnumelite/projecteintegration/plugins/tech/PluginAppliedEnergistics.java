@@ -6,13 +6,11 @@ import appeng.api.features.IInscriberRecipe;
 import appeng.api.features.InscriberProcessType;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
-import java.util.Optional;
-
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+
+import java.util.Optional;
 
 @PEIPlugin("appliedenergistics2")
 public class PluginAppliedEnergistics extends APEIPlugin {

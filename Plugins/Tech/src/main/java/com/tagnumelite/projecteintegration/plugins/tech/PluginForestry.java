@@ -1,16 +1,9 @@
 package com.tagnumelite.projecteintegration.plugins.tech;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
-import forestry.api.recipes.ICarpenterRecipe;
-import forestry.api.recipes.IFabricatorRecipe;
-import forestry.api.recipes.IFermenterRecipe;
-import forestry.api.recipes.IMoistenerRecipe;
-import forestry.api.recipes.ISqueezerRecipe;
-import forestry.api.recipes.IStillRecipe;
-import forestry.api.recipes.RecipeManagers;
+import forestry.api.recipes.*;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 

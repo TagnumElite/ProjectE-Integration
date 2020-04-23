@@ -1,9 +1,8 @@
 package com.tagnumelite.projecteintegration.plugins.tech;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.dave.compactmachines3.miniaturization.MultiblockRecipe;

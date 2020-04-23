@@ -2,15 +2,13 @@ package com.tagnumelite.projecteintegration.plugins.tech;
 
 import cofh.thermalexpansion.util.managers.machine.*;
 import cofh.thermalfoundation.init.TFFluids;
-
-import java.util.ArrayList;
-
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
 
 @PEIPlugin("thermalexpansion")
 public class PluginThermalExpansion extends APEIPlugin {

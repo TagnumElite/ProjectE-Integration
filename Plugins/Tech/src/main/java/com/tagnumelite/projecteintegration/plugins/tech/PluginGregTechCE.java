@@ -22,20 +22,18 @@
 
 package com.tagnumelite.projecteintegration.plugins.tech;
 
-import java.util.ArrayList;
-
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import com.tagnumelite.projecteintegration.api.internal.input.SizedIngredient;
-import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
-
 import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.Recipe.ChanceEntry;
 import gregtech.api.recipes.RecipeMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
 
 @PEIPlugin("gregtech")
 public class PluginGregTechCE extends APEIPlugin {

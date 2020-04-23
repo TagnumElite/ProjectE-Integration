@@ -30,7 +30,6 @@ import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.recipe.CircuitFabricatorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
-import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
@@ -121,7 +120,7 @@ public class PluginGalaticraft extends APEIPlugin {
         @Override
         public void setup() {
             List<INasaWorkbenchRecipe> recipes;
-            switch(workbench) {
+            switch (workbench) {
                 case ROCKET_BENCH_T1:
                     recipes = GalacticraftRegistry.getRocketT1Recipes();
                     break;
