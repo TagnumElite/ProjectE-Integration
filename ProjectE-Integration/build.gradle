@@ -64,10 +64,6 @@ repositories {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
     }
-    maven {
-        name = 'Progwml6 maven'
-        url = 'https://dvs1.progwml6.com/files/maven/'
-    }
 }
 
 dependencies {
@@ -75,9 +71,6 @@ dependencies {
 
     // BlameJared Maven
     provided "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}:deobf"
-
-    // Progwml6 Maven
-    deobfProvided "mezz.jei:jei_${mc_version}:${version_jei}:api"
 }
 
 processResources {
