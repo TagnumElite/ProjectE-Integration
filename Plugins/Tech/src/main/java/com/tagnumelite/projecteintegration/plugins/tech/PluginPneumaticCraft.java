@@ -48,6 +48,7 @@ public class PluginPneumaticCraft extends APEIPlugin {
 
     @Override
     public void setup() {
+        addMapper(new AmadronMapper());
         addMapper(new AssemblyMapper(AssemblyMapper.AssemblyType.DRILL));
         addMapper(new AssemblyMapper(AssemblyMapper.AssemblyType.LAZER));
         addMapper(new BasicThermopneumaticProcessingPlantMapper());
@@ -55,6 +56,23 @@ public class PluginPneumaticCraft extends APEIPlugin {
         addMapper(new HeatFrameCoolingMapper());
         addMapper(new PressureChamberMapper());
         addMapper(new RefineryMapper());
+    }
+
+    private static class AmadronMapper extends PEIMapper {
+        public AmadronMapper() {
+            super("Amadron", "Runs only on static offers, ignores player made offers and villager trades.");
+        }
+
+        @Override
+        public void setup() {
+            for (AmadronOffer offer : AmadronOfferManager.getInstance().getStaticOffers()) {
+                Object output = offer.getOutput();
+                if (output instanceof ItemStack)
+                    addRecipe((ItemStack) output, offer.getInput());
+                else
+                    addRecipe((FluidStack) output, offer.getInput());
+            }
+        }
     }
 
     private static class AssemblyMapper extends PEIMapper {
