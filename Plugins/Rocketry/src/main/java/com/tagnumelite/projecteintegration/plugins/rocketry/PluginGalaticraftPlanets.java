@@ -20,21 +20,28 @@
  * SOFTWARE.
  */
 
-repositories {
-    ivy {
-        name = "Galacticraft"
-        artifactPattern "https://ci.micdoodle8.com/job/Galacticraft-1.12/174/artifact/Forge/build/libs/[module]-[revision].[ext]"
+package com.tagnumelite.projecteintegration.plugins.rocketry;
+
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
+import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
+import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
+
+@PEIPlugin("galacticraftplanets")
+public class PluginGalaticraftPlanets extends APEIPlugin {
+    public PluginGalaticraftPlanets(String modid, Configuration config) {
+        super(modid, config);
     }
-}
 
-dependencies {
-    compile(project(':Plugins:Library'))
-
-    // Galacticraft
-    deobfProvided name: 'Galacticraft-Planets', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
-    deobfProvided name: 'GalacticraftCore', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
-    deobfProvided name: 'MicdoodleCore', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
-
-    // CurseMaven
-    provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
+    @Override
+    public void setup() {
+        // Set Desh Ore EMC to 256
+        addEMC(new ItemStack(MarsBlocks.marsBlock, 1, 2), 256);
+        // Set Dense Ice EMC to 1
+        addEMC(new ItemStack(AsteroidBlocks.blockDenseIce), 1);
+        // Set Ilmenite Ore EMC to 1024
+        addEMC(new ItemStack(AsteroidBlocks.blockBasic, 1, 4), 1024);
+    }
 }

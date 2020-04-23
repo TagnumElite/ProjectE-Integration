@@ -69,6 +69,7 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.4-nightly-20150209" level="project" />
+    <orderEntry type="library" name="Gradle: Galacticraft-Planets:1.12.2-4.0.1.174:74497d774407c78be2f320ee612e95b79382810a" level="project" />
     <orderEntry type="library" name="Gradle: GalacticraftCore:1.12.2-4.0.1.174:1667f2fef14b54ded637dd831097ca4ae57ce334" level="project" />
     <orderEntry type="library" name="Gradle: MicdoodleCore:1.12.2-4.0.1.174:d66d260bcd20600b4544dc0311b1bab1a7a688e4" level="project" />
     <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />

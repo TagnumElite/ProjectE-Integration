@@ -28,6 +28,7 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.recipe.*;
+import micdoodle8.mods.galacticraft.core.GCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
@@ -44,6 +45,9 @@ public class PluginGalaticraft extends APEIPlugin {
 
     @Override
     public void setup() {
+        // Set Meteoric Iron Raw EMC to 512
+        addEMC(GCItems.meteoricIronRaw, 512);
+
         addMapper(new CircuitFabricatorMapper());
         addMapper(new CompressorMapper());
         for (NasaWorkbenchMapper.Workbench bench : NasaWorkbenchMapper.Workbench.values()) {
