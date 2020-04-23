@@ -69,19 +69,15 @@ Mod Support is split into separate plugin categories:
 - [PneumaticCraft: Repressurized](https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized): Amardon, Assembly, Explosion Crafting, Heat Frame Cooling, Pressure Chamber, Refinery, Thermopneumatic Processing Plant
 - [Tech Reborn](https://www.curseforge.com/minecraft/mc-mods/techreborn): Rolling Machine
 - [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion): All Machines
+   
+## Compatibility: Special support for other mods
+
+- [CraftTweaker](https://www.curseforge.com/minecraft/mc-mods/crafttweaker) See the [wiki](https://github.com/TagnumElite/ProjectE-Integration/wiki) for more info
     
-### Not Supported
+## Lore:
 
-These mods won't be supported or not currently.
-
-- Galaticraft (It would help if it was buildable on JitPack)
-
-
-## Planned Features:    
- - CraftTweaker: This will allow modpack devs to add their own custom conversion to the ProjectE.    
-    
-## Lore:    
- This mod was inspired by Expanded Equivalence and was started because I tried to work on Expanded Equivalence by decided it would be better to make a separate mod that does everything without Core Modding.    
+This mod was inspired by [Expanded Equivalence] and was started because I tried to work on [Expanded Equivalence] by
+decided it would be better to make a separate mod that does everything without Core Modding.    
     
 ## Issues/Suggestions:    
  - Issues and Suggestions must be made on the GitHub Repo Issue tracker    

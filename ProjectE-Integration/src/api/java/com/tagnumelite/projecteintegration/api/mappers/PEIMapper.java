@@ -26,42 +26,55 @@ public abstract class PEIMapper {
     protected final IConversionProxy conversion_proxy;
 
     /**
-     * @param name        {@code String} The name of the recipe type
-     * @param description {@code String} The config comment
+     * Alias for {@code PEIMapper(name, 'default description')}
+     *
+     * @param name The name of the mapper
      */
-    public PEIMapper(String name, String description) {
-        this(name, description, false);
-    }
-
-    public PEIMapper(String name, boolean disabledByDefault) {
-        this(name, "Enable mapper for " + name + '?', disabledByDefault);
-    }
-
     public PEIMapper(String name) {
         this(name, "Enable mapper for " + name + '?');
     }
 
     /**
-     * @param name             {@code String} The name of the recipe type
-     * @param description      {@code String} The config comment
-     * @param disableByDefault {@code boolean} Disable by default
+     * Alias for {@code PEIMapper(name, description, false)}
+     *
+     * @param name        The name of the mapper
+     * @param description The config comment
      */
-    protected PEIMapper(String name, String description, boolean disableByDefault) {
+    public PEIMapper(String name, String description) {
+        this(name, description, false);
+    }
+
+    /**
+     * Alias for {@code PEIMapper(name, 'default description', disabledByDefault)}
+     *
+     * @param name              The name of the mapper
+     * @param disabledByDefault Should this mapper be disabled by default
+     */
+    public PEIMapper(String name, boolean disabledByDefault) {
+        this(name, "Enable mapper for " + name + '?', disabledByDefault);
+    }
+
+    /**
+     * @param name              The name of the mapper
+     * @param description       The comment display by the config
+     * @param disabledByDefault Should this mapper be disabled by default
+     */
+    protected PEIMapper(String name, String description, boolean disabledByDefault) {
         this.name = name;
         this.desc = description;
-        this.disabled_by_default = disableByDefault;
+        this.disabled_by_default = disabledByDefault;
         this.conversion_proxy = ProjectEAPI.getConversionProxy();
     }
 
     /**
-     * You setup conversions and call {@code addConversion} here!
+     *  This is called during
      */
     public abstract void setup();
 
     /**
-     * This is a shortcut if the recipe extends IRecipe
+     * Shortcut to converting an {@link IRecipe} into a conversion map
      *
-     * @param recipe {@code IRecipe} The recipe to convert
+     * @param recipe {@link IRecipe} The recipe to convert
      */
     protected void addRecipe(IRecipe recipe) {
         ItemStack output = recipe.getRecipeOutput();
@@ -79,13 +92,25 @@ public abstract class PEIMapper {
         addConversion(output, ingredients.getMap());
     }
 
+    /**
+     * A shortcut for turning an {@link ItemStack} into a conversion map
+     *
+     * @param output A {@link ItemStack} to convert into an output
+     * @param inputs A list of objects to convert into inputs
+     */
     protected void addRecipe(ItemStack output, Object... inputs) {
         if (output == null || output.isEmpty())
-            return; // TODO: Logging
+            return;
 
         addRecipe(output.getCount(), output.copy(), inputs);
     }
 
+    /**
+     * Shortcut for turning {@link FluidStack} into a conversion map
+     *
+     * @param output A {@link FluidStack} to turn into a conversion map
+     * @param inputs A list of objects to convert into inputs
+     */
     protected void addRecipe(FluidStack output, Object... inputs) {
         if (output == null || output.amount <= 0)
             return;
@@ -103,23 +128,37 @@ public abstract class PEIMapper {
         addRecipe(output.amount, output.object, inputs);
     }
 
+    /**
+     * We turn the inputs into a usable {@link Map} using {@link Utils#createInputs(Object...)}.
+     * Using this map we call {@link #addConversion(int, Object, Map)} using output_amount,
+     * output, inputs.
+     *
+     * @param output_amount The amount of output there will be
+     * @param output        The object that will be converted to
+     * @param inputs        The inputs that will turn into the output
+     */
     protected void addRecipe(int output_amount, Object output, Object... inputs) {
-        if (output_amount <= 0 || output == null || inputs == null || inputs.length <= 0) {
-            return; // TODO: Logging
-        }
+        if (output_amount <= 0 || output == null || inputs == null || inputs.length <= 0)
+            return;
 
         addConversion(output_amount, output, Utils.createInputs(inputs).getMap());
     }
 
-    protected void addRecipe(List<Object> output, Object... inputs) {
-        if (output == null || output.size() <= 0 || inputs == null || inputs.length <= 0) {
-            return; // TODO: Logging
-        }
+    /**
+     * Alias for {@link #addConversion(List, Map)} were we convert the inputs
+     * to a {@link Map} using {@link Utils#createInputs(Object...)}
+     *
+     * @param outputs The outputs that the inputs will be converted to
+     * @param inputs  The inputs that will converted to the outputs
+     */
+    protected void addRecipe(List<Object> outputs, Object... inputs) {
+        if (outputs == null || outputs.size() <= 0 || inputs == null || inputs.length <= 0)
+            return;
 
-        addConversion(output, Utils.createInputs(inputs).getMap());
+        addConversion(outputs, Utils.createInputs(inputs).getMap());
     }
 
-    protected void addConversion(List<Object> output, Map<Object, Integer> input) {
+    protected void addConversion(List<Object> output, Map<Object, Integer> inputs) {
         final long startTime = System.currentTimeMillis();
         IngredientMap<Object> out_ing = new IngredientMap<>();
 
@@ -151,7 +190,7 @@ public abstract class PEIMapper {
             return;
         } else if (outputs.size() == 1) {
             Entry<Object, Integer> out = outputs.entrySet().iterator().next();
-            addConversion(out.getValue(), out.getKey(), input);
+            addConversion(out.getValue(), out.getKey(), inputs);
             PEIApi.LOG.debug("Multi-Output: Only one output {}*{}", out.getKey(), out.getValue());
             return;
         }
@@ -161,7 +200,7 @@ public abstract class PEIMapper {
             output_count += count;
         }
         Object obj = new Object();
-        addConversion(output_count, obj, input);
+        addConversion(output_count, obj, inputs);
 
         for (Entry<Object, Integer> out : outputs.entrySet()) {
             HashMap<Object, Integer> ing = new HashMap<>();
@@ -205,7 +244,7 @@ public abstract class PEIMapper {
     }
 
     /**
-     * This mimicks ProjectEApi IConversionProxy addConversion
+     * This mimics ProjectEApi IConversionProxy addConversion
      *
      * @param output_amount {@code int} The output amount
      * @param output        {@code Object} The output

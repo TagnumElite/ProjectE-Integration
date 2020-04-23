@@ -2,19 +2,31 @@ package com.tagnumelite.projecteintegration.api;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.tagnumelite.projecteintegration.api.internal.Phase;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
+import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
+import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
+import com.tagnumelite.projecteintegration.api.utils.ApplyOnlyIf;
+import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * ProjectE Integeration API
@@ -41,6 +53,131 @@ public class PEIApi {
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
 
     public static int mapped_conversions = 0;
+
+    private final List<APEIPlugin> PLUGINS = new ArrayList<>();
+    private static Phase PHASE = Phase.STARTING_UP;
+
+    /**
+     *
+     * @return The current phase of the api
+     */
+    public static Phase getPhase() {
+        return PHASE;
+    }
+
+
+    private boolean LOADED = false;
+    public final Configuration CONFIG;
+
+    private static PEIApi INSTANCE;
+
+    /**
+     * @return Returns the current {@link PEIApi} Instance
+     */
+    public static PEIApi getInstance() {
+        return INSTANCE;
+    }
+
+    /**
+     *  If you need to instance, use {@link #getInstance()}.
+     * @param config  The {@link Configuration} to use during initialization
+     * @param asmData The {@link ASMDataTable} to be used for fetching plugins
+     * @throws IllegalStateException Tried to create an Instance of the API when one existed already
+     */
+    public PEIApi(Configuration config, ASMDataTable asmData) {
+        if (INSTANCE != null)
+            throw new IllegalStateException("Tried to create an instance of the API when one existed already!");
+
+        PHASE = Phase.INITIALIZING;
+        CONFIG = config;
+        LOG.info("Starting Phase: Initialization");
+        final long startTime = System.currentTimeMillis();
+        // TODO: Move logic into own class
+        asmData.getAll(PEIPlugin.class.getCanonicalName()).forEach(asm_data -> {
+            try {
+                Class<?> asmClass = Class.forName(asm_data.getClassName());
+                PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
+                if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
+                    String modid = plugin_register.value().toLowerCase();
+
+                    if (!Loader.isModLoaded(modid)) return;
+
+                    if (asmClass.isAnnotationPresent(OnlyIf.class)) {
+                        OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
+                        ModContainer modcontainer = Loader.instance().getModList().stream().filter(modContainer -> modContainer.getModId().equals(modid)).collect(Collectors.toList()).get(0);
+                        if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) return;
+                    }
+
+                    if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin"))
+                        return;
+
+                    Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
+                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class,
+                        Configuration.class);
+                    PLUGINS.add(plugin.newInstance(modid, config));
+                }
+            } catch (Throwable t) {
+                LOG.error("Failed to load: {}", asm_data.getClassName(), t);
+                //t.printStackTrace();
+            }
+        });
+        PHASE = Phase.WAITING;
+        final long endTime = System.currentTimeMillis();
+        LOG.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
+    }
+
+    /**
+     *
+     */
+    public void setupPlugins() {
+        PHASE = Phase.SETTING_UP_PLUGINS;
+        LOG.info("Starting Phase: Setting up plugins");
+        final long startTime = System.currentTimeMillis();
+        for (APEIPlugin plugin : PLUGINS) {
+            PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
+            try {
+                plugin.setup();
+            } catch (Throwable t) {
+                LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
+                t.printStackTrace();
+            }
+        }
+
+        registerEMCObjects();
+        LOG.info("Added {} Mappers", getMappers().size());
+        PHASE = Phase.WAITING;
+        final long endTime = System.currentTimeMillis();
+        LOG.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
+    }
+
+    /**
+     *
+     */
+    public void setupMappers() {
+        if (LOADED) return;
+        PHASE = Phase.SETTING_UP_MAPPERS;
+        LOG.info("Starting Phase: Setting Up Mappers");
+        final long startTime = System.currentTimeMillis();
+        for (PEIMapper mapper : getMappers()) {
+            PEIApi.LOG.info("Running Mapper: {} ({})", mapper.name, mapper);
+            try {
+                mapper.setup();
+            } catch (Throwable t) {
+                LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+                t.printStackTrace();
+            }
+        }
+
+        LOG.info("Added {} Conversions", mapped_conversions);
+
+        clearCache();
+        PLUGINS.clear();
+        LOADED=true;
+
+        final long endTime = System.currentTimeMillis();
+        LOG.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
+        PHASE = Phase.FINISHED;
+    }
 
     /**
      * @param mapper {@code PEIMapper} The mapper to add
@@ -152,10 +289,10 @@ public class PEIApi {
 
     /**
      * Gets the resource location from the map, returns null if doesn't exist You
-     * need to {@link addResource} to add the resource to the map
+     * need to {@link #addResource(ResourceLocation, long)} to add the resource to the map
      *
      * @param resource {@code ResourceLocation} The resource location of the entity
-     * @return The object linked to the resouce
+     * @return The object linked to the resource
      */
     public static Object getResource(ResourceLocation resource) {
         return RESOURCE_MAP.get(resource);
