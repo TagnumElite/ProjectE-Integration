@@ -1,9 +1,9 @@
 # ProjectE-Integration (PEI)
-This mod will be the bridge between [ProjectE][PE] and all ~~my~~ your favourite mods!    
+This mod will be the bridge between [ProjectE] and all ~~my~~ your favourite mods!    
     
-PEI will be adding [ProjectE][PE] conversion mapping support to these mods crafting mechanics.    
-This means you will not have to manually set EMC for these mods recipes, instead, this mod will tell [ProjectE][PE] about
-these recipes and what they mean. This means you can use [ProjectE][PE] built-in commands to setEMC and reloadEMC on the
+PEI will be adding [ProjectE] conversion mapping support to these mods crafting mechanics.    
+This means you will not have to manually set EMC for these mods recipes, instead, this mod will tell [ProjectE] about
+these recipes and what they mean. This means you can use [ProjectE] built-in commands to setEMC and reloadEMC on the
 fly without having to worry about having to manually set the EMC for all items affected.    
     
 PEI will later on also be adding EMC to the mods Items that don't have emc assigned to it.    
@@ -72,10 +72,10 @@ Mod Support is split into separate plugin categories:
    
 ## Compatibility: Special support for other mods
 
-- [CraftTweaker](https://www.curseforge.com/minecraft/mc-mods/crafttweaker) See the [wiki][wiki] for more info
+- [CraftTweaker](https://www.curseforge.com/minecraft/mc-mods/crafttweaker) See the [wiki] for more info
     
 ## Lore:
-This mod was inspired by [Expanded Equivalence][EE] and was started because I tried to work on [Expanded Equivalence][EE] by
+This mod was inspired by [Expanded Equivalence] and was started because I tried to work on [Expanded Equivalence] by
 decided it would be better to make a separate mod that does everything without Core Modding.    
     
 ## Issues/Suggestions:    
@@ -112,5 +112,5 @@ You may include this in a private or public modpack as long as you give credit.
 You don't need to ask for permission.
 
 [wiki]: https://github.com/TagnumElite/ProjectE-Integration/wiki
-[PE]: https://www.curseforge.com/minecraft/mc-mods/projecte
-[EE]: https://www.curseforge.com/minecraft/mc-mods/expanded-equivalence
+[ProjectE]: https://www.curseforge.com/minecraft/mc-mods/projecte
+[Expanded Equivalence]: https://www.curseforge.com/minecraft/mc-mods/expanded-equivalence
