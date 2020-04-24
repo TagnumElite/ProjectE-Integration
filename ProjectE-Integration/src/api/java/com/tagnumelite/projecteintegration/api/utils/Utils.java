@@ -7,6 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentBase;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
 
@@ -158,5 +162,20 @@ public class Utils {
         }
 
         return ingredients;
+    }
+
+    /**
+     * @param component ITextComponent to {@link ITextComponent#appendSibling(ITextComponent)} with the component from {@link #prefixComponent()}.
+     * @return Returns the {@link ITextComponent} from {@link #prefixComponent()} with sibling 'component'
+     */
+    public static ITextComponent prefixComponent(ITextComponent component) {
+        return prefixComponent().appendSibling(component);
+    }
+
+    /**
+     * @return A text component with msg {@code [ProjectE Integration]: } and extra formatting
+     */
+    public static TextComponentString prefixComponent() {
+        return new TextComponentString("[" + TextFormatting.DARK_AQUA + PEIApi.NAME + TextFormatting.RESET + "]: ");
     }
 }

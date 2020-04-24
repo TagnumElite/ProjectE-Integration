@@ -76,7 +76,7 @@ Mod Support is split into separate plugin categories:
     
 ## Lore:
 
-This mod was inspired by [Expanded Equivalence] and was started because I tried to work on [Expanded Equivalence] by
+This mod was inspired by [Expanded Equivalence][EE] and was started because I tried to work on [Expanded Equivalence][EE] by
 decided it would be better to make a separate mod that does everything without Core Modding.    
     
 ## Issues/Suggestions:    
@@ -112,3 +112,5 @@ dependencies {
  I don't really care unless used for malicious purposes then I will request it to be removed.    
 ~~Redistribution is forbidden unless used for modpacks by Curseforge/ATLauncher/Technic.~~    
 Redistribute however you want, as long as you don't ask for payment to access the mod.
+
+[EE]: https://www.curseforge.com/minecraft/mc-mods/expanded-equivalence

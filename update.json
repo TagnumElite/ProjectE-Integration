@@ -1,0 +1,38 @@
+{
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
+    "promos": {
+        "1.12.2-latest": "3.0.0",
+        "1.12.2-recommended": "3.0.0"
+    },
+    "1.12.2": {
+        "3.0.0": "Unreleased",
+        "2.5.0": "",
+        "2.4.0": "",
+        "2.3.1": "",
+        "2.3.0": "",
+        "2.2.13": "",
+        "2.2.12": "",
+        "2.2.11": "",
+        "2.2.10": "",
+        "2.2.9": "",
+        "2.2.7": "",
+        "2.2.6": "",
+        "2.2.5": "",
+        "2.2.4": "",
+        "2.2.3": "",
+        "2.2.2": "",
+        "2.2.1": "",
+        "2.2.0": "Unknown",
+        "2.1.1": "Unknown",
+        "2.1.0": "Added support for Pam's HarvestCraft",
+        "2.0.2": "Unknown",
+        "2.0.1": "Prevent crashes when plugins and mappers fail.",
+        "2.0.0": "Added support for 18 more mods.",
+        "1.5.0": "Added support for Avaritia 1.1.x",
+        "1.4.0": "Added support for NuclearCraft.",
+        "1.3.0": "Added support for Applied Enegistics 2 Grindstone and Inscriber.",
+        "1.2.0": "Added support for ArmorPlus",
+        "1.1.0": "Added config support for all plugins",
+        "1.0.0": "Added support Extended Crafting and Actually Additions"
+    }
+}

@@ -128,13 +128,9 @@ artifacts {
     archives apiJar
 }
 
-task printEnd {
-    doLast {
-        println "End Build"
-    }
+task updateJSON() {
 }
 
-jar.finalizedBy printEnd
 build.dependsOn sourcesJar
 build.dependsOn deobfJar
 build.dependsOn javadocJar

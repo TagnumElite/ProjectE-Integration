@@ -30,11 +30,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This is the abstract class all {@link PEIPlugin} should extend.
+ *
  * @see PEIPlugin
  * @see PEIMapper
  */
@@ -47,6 +47,7 @@ public abstract class APEIPlugin {
      * This is called by the {@link PEIApi} and should not be called anywhere else.
      * This may be used to fetch required configs values.
      * This is only called if the modid from {@link PEIPlugin#value()} is loaded
+     *
      * @param modid  The modid that the plugin is registered to
      * @param config The config used by the mod
      */
@@ -68,6 +69,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link #addEMC(ItemStack, int)} on each value returned from {@link OreDictionary#getOres(String)}
+     *
      * @param ore      The {@link OreDictionary} string to fetch {@link List} of {@link ItemStack} from
      * @param base_emc The default EMC value that will be assigned to the {@link OreDictionary#getOres(String)} values,
      *                 may be overwritten from the config.
@@ -82,6 +84,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link #addEMC(ItemStack, int)} on each value returned from {@link OreDictionary#getOres(String)}
+     *
      * @param ore      The {@link OreDictionary} string to fetch {@link List} of {@link ItemStack} from
      * @param base_emc The default EMC value that will be assigned to the {@link OreDictionary#getOres(String)} values,
      *                 may be overwritten from the config.
@@ -96,6 +99,7 @@ public abstract class APEIPlugin {
     /**
      * Gets {@link ItemStack} from the {@link Item} and metadata.
      * Calls {@link #addEMC(ItemStack, int)} using the {@link ItemStack}.
+     *
      * @param item     The item to be converted to {@link ItemStack}
      * @param meta     Metadata value of the item
      * @param base_emc The Base EMC Value
@@ -106,6 +110,7 @@ public abstract class APEIPlugin {
 
     /**
      * Gets {@link ItemStack} from the {@link Item} and calls {@link #addEMC(ItemStack, int)} using the {@link ItemStack}
+     *
      * @param item     The {@link Item} to be converted into {@link ItemStack}
      * @param base_emc The default EMC value for the {@link Item}
      */
@@ -115,6 +120,7 @@ public abstract class APEIPlugin {
 
     /**
      * Alias for {@code #addEMC(item, base_emc, "")}
+     *
      * @see #addEMC(ItemStack, int, String)
      */
     protected void addEMC(ItemStack item, int base_emc) {
@@ -123,6 +129,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link #setEMC(Object, int)} on the {@link ItemStack} with the EMC value from the config or default EMC.
+     *
      * @param item     The {@link ItemStack} that will have EMC assigned to
      * @param base_emc The Base EMC value, will be overwritten from the config
      * @param extra    Comment string that will along side the emc config option.
@@ -137,6 +144,7 @@ public abstract class APEIPlugin {
 
     /**
      * Alias for {@link #addEMC(String, Object, int, String)}
+     *
      * @see #addEMC(String, Object, int, String)
      */
     protected void addEMC(final String name, Object obj, int base_emc) {
@@ -145,6 +153,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link #setEMC(Object, int)} on the object with the EMC acquired from the config.
+     *
      * @param name     The name of the object in the config, changing the name will change the config option.
      * @param obj      The object that will have EMC applied to it.
      * @param base_emc The default EMC value that will be applied, unless overwritten by the config.
@@ -160,6 +169,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link PEIApi#addEMCObject(Object, int)}. Silently fails if EMC is below/equal to 0 or if obj is null.
+     *
      * @param obj The object that will EMC applied to
      * @param emc The EMC to apply to the object
      */
@@ -172,6 +182,7 @@ public abstract class APEIPlugin {
 
     /**
      * Calls {@link PEIApi#addMapper(PEIMapper)} if the mapper is enabled.
+     *
      * @param mapper The mapper to be added to the {@link PEIApi}
      */
     protected void addMapper(PEIMapper mapper) {

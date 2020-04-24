@@ -67,8 +67,8 @@ public abstract class PEIMapper {
     }
 
     /**
-     *  This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_MAPPERS}
-     *  This setup should be calling {@link #addRecipe} and/or {@link #addConversion}
+     * This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_MAPPERS}
+     * This setup should be calling {@link #addRecipe} and/or {@link #addConversion}
      */
     public abstract void setup();
 

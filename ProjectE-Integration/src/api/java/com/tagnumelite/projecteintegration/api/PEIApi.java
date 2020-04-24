@@ -26,7 +26,6 @@ import org.apache.logging.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * ProjectE Integeration API
@@ -38,6 +37,7 @@ public class PEIApi {
     public static final String APIID = MODID + "api";
     public static final String NAME = "ProjectE Integration";
     public static final String VERSION = "@VERSION@";
+    public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.12.x/update.json";
 
     private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
     private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
@@ -51,6 +51,16 @@ public class PEIApi {
     private static boolean LOCK_EMC_MAPPER = false;
     private static final Map<Object, Integer> EMC_MAPPERS = new HashMap<>();
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
+    private final Set<String> FAILED_PLUGINS = new HashSet<>();
+    private final Map<String, String> FAILED_MAPPERS = new HashMap<>();
+
+    public Map<String, String> getFailedMappers() {
+        return ImmutableMap.copyOf(FAILED_MAPPERS);
+    }
+
+    public Set<String> getFailedPlugins() {
+        return ImmutableSet.copyOf(FAILED_PLUGINS);
+    }
 
     public static int mapped_conversions = 0;
 
@@ -58,7 +68,6 @@ public class PEIApi {
     private static Phase PHASE = Phase.STARTING_UP;
 
     /**
-     *
      * @return The current phase of the api
      */
     public static Phase getPhase() {
@@ -79,7 +88,8 @@ public class PEIApi {
     }
 
     /**
-     *  If you need to instance, use {@link #getInstance()}.
+     * If you need to instance, use {@link #getInstance()}.
+     *
      * @param config  The {@link Configuration} to use during initialization
      * @param asmData The {@link ASMDataTable} to be used for fetching plugins
      * @throws IllegalStateException Tried to create an Instance of the API when one existed already
@@ -104,7 +114,7 @@ public class PEIApi {
 
                     if (asmClass.isAnnotationPresent(OnlyIf.class)) {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
-                        ModContainer modcontainer = Loader.instance().getModList().stream().filter(modContainer -> modContainer.getModId().equals(modid)).collect(Collectors.toList()).get(0);
+                        ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
                         if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) return;
                     }
 
@@ -139,6 +149,7 @@ public class PEIApi {
                 plugin.setup();
             } catch (Throwable t) {
                 LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
+                FAILED_PLUGINS.add(plugin.modid);
                 t.printStackTrace();
             }
         }
@@ -164,6 +175,7 @@ public class PEIApi {
                 mapper.setup();
             } catch (Throwable t) {
                 LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+                FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
                 t.printStackTrace();
             }
         }
@@ -172,7 +184,7 @@ public class PEIApi {
 
         clearCache();
         PLUGINS.clear();
-        LOADED=true;
+        LOADED = true;
 
         final long endTime = System.currentTimeMillis();
         LOG.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));

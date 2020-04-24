@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
 /**
  * This tells the mod that the class is a plugin and should be loaded
  * All plugins should extend {@link APEIPlugin} otherwise it is just ignored.
+ *
  * @see APEIPlugin
  */
 @Retention(RetentionPolicy.RUNTIME)
