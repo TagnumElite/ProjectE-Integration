@@ -72,13 +72,9 @@ public class PluginGalaticraft extends APEIPlugin {
                         inputs.add(((List<ItemStack>) o).get(0));
                 });
 
-                PEIApi.LOG.info("Searching circuit recipe for {}", inputList);
-
                 //Use input array to fetch output
                 ItemStack output = CircuitFabricatorRecipes.getOutputForInput(inputs);
                 if (output == null || output.isEmpty()) continue;
-
-                PEIApi.LOG.info("Found circuit recipe for {} -> {}", inputList, output.getDisplayName());
 
                 // We use inputList to make conversion
                 addRecipe(output, inputList.toArray());
