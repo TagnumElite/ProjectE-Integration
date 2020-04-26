@@ -1,4 +1,50 @@
 # Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+### TODO
+- Fix Draconic Evolution plugin
+
+### Added
+- Added Intellij files
+- Support for Chisel
+    - Maps all groups registered, takes the first item in group as the primary
+- Support for Galaticraft and Galaticraft-Planets
+    - Circuit Fabricator, Compressor and NASA workbench
+    - Set EMC for Meteoric Iron Raw (512), Desh Ore (256), Dense Ice (1) Ilmenite Ore (1024)
+- Support for GregTechCE
+    - All recipe maps
+- Support for NuclearCraft Overhauled
+    - All machines I could find
+- Support for PneumaticCraft
+    - Amadron (Static Only), Assembly (Drill, Laser), Basic Thermopneumatic Processing Plant, Explosion, Heat Frame Cooling,
+    Pressure Chamber, Refinery
+- Proper API and javadoc jars for publishing
+- Added loads of javadocs to api
+- Added message of server join/world load to notify of updates and failed plugins and mappers
+- Added support for JitPack build and mapped my domain `tagnumelite.com`
+- Added `update.json` for version fetching
+
+### Changed
+- Moved from Travis to GitHub Actions
+- Updated the gitignore
+- Split the Mod into two projects: `ProjectE-Integration` and `Plugins`
+- Mod logic and the API were moved into `ProjectE-Integration`
+- Plugins were moved into their own category inside `Plugins`
+- Renamed IC plugin to IndustrialCraft
+- Moved all API files into the api source set
+- Moved lots of mod logic into the api
+- Updated README
+
+### Removed
+- Harvestcraft jar, we fetch from jitpack now
+
+### Fixed
+- Fixed plugins
+    - Modular Machinery, NuclearCraft
 
 ## [2.5.0] - 2019-08-11
 ### Fixed
@@ -280,6 +326,7 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.5.0...HEAD
 [2.5.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.3.1...2.4.0
 [2.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.3.0...2.3.1
