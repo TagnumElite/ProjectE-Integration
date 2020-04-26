@@ -30,6 +30,9 @@ import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.Recipe.ChanceEntry;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipes.CokeOvenRecipe;
+import gregtech.api.recipes.recipes.PrimitiveBlastFurnaceRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
@@ -43,8 +46,41 @@ public class PluginGregTechCE extends APEIPlugin {
 
     @Override
     public void setup() {
+        addMapper(new CokeOvenMapper());
+        addMapper(new PrimitiveBlastFurnaceMapper());
         for (RecipeMap<?> map : RecipeMap.getRecipeMaps()) {
             addMapper(new RecipeMapper(map));
+        }
+    }
+
+    private static class CokeOvenMapper extends PEIMapper {
+        public CokeOvenMapper() {
+            super("Coke Oven");
+        }
+
+        @Override
+        public void setup() {
+            for (CokeOvenRecipe recipe : RecipeMaps.COKE_OVEN_RECIPES) {
+                CountableIngredient rInput = recipe.getInput();
+                ArrayList<Object> outputs = new ArrayList<>(2);
+                outputs.add(recipe.getFluidOutput());
+                outputs.add(recipe.getOutput());
+                addRecipe(outputs, new SizedIngredient(rInput.getCount(), rInput.getIngredient()));
+            }
+        }
+    }
+
+    private static class PrimitiveBlastFurnaceMapper extends PEIMapper {
+        public PrimitiveBlastFurnaceMapper() {
+            super("Primitive Blast Furnace");
+        }
+
+        @Override
+        public void setup() {
+            for (PrimitiveBlastFurnaceRecipe recipe : RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES) {
+                CountableIngredient input = recipe.getInput();
+                addRecipe(recipe.getOutput(), new SizedIngredient(input.getCount(), input.getIngredient()));
+            }
         }
     }
 

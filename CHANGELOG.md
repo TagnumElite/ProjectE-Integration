@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Circuit Fabricator, Compressor and NASA workbench
     - Set EMC for Meteoric Iron Raw (512), Desh Ore (256), Dense Ice (1) Ilmenite Ore (1024)
 - Support for GregTechCE
-    - All recipe maps
+    - All recipe maps, Coke Oven and Primitive Blast Furnace
 - Support for NuclearCraft Overhauled
     - All machines I could find
 - Support for PneumaticCraft
