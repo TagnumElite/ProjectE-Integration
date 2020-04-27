@@ -116,13 +116,13 @@ public class PEIntegration {
                 }
             }
             if (doMapperCheck && PermissionAPI.hasPermission(player, errorNotifierPerm)) {
-                Set<String> failedPlugins = API.getFailedPlugins();
-                if (!failedPlugins.isEmpty()) {
-                    player.sendMessage(Utils.prefixComponent(new TextComponentString("" + failedPlugins.size() + TextFormatting.RED + " plugin(s) that have failed!")));
+                int failedPlugins = API.getFailedPlugins().size();
+                if (failedPlugins > 0) {
+                    player.sendMessage(Utils.prefixComponent(new TextComponentString("" + failedPlugins + TextFormatting.RED + " plugin(s) that have failed!")));
                 }
-                Map<String, String> failedMappers = API.getFailedMappers();
-                if (!failedMappers.isEmpty()) {
-                    player.sendMessage(Utils.prefixComponent(new TextComponentString("" + failedMappers.size() + TextFormatting.RED + " mapper(s) that have failed!")));
+                int failedMappers = API.getFailedMappers().size();
+                if (failedMappers > 0) {
+                    player.sendMessage(Utils.prefixComponent(new TextComponentString("" + failedMappers + TextFormatting.RED + " mapper(s) that have failed!")));
                 }
             }
         }

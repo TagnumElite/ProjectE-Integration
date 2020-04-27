@@ -7,6 +7,7 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
+import com.tagnumelite.projecteintegration.api.utils.ASMHandler;
 import com.tagnumelite.projecteintegration.api.utils.ApplyOnlyIf;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import moze_intel.projecte.api.ProjectEAPI;
@@ -51,15 +52,15 @@ public class PEIApi {
     private static boolean LOCK_EMC_MAPPER = false;
     private static final Map<Object, Integer> EMC_MAPPERS = new HashMap<>();
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
-    private final Set<String> FAILED_PLUGINS = new HashSet<>();
+    private final Map<String, String> FAILED_PLUGINS = new HashMap<>();
     private final Map<String, String> FAILED_MAPPERS = new HashMap<>();
 
     public Map<String, String> getFailedMappers() {
         return ImmutableMap.copyOf(FAILED_MAPPERS);
     }
 
-    public Set<String> getFailedPlugins() {
-        return ImmutableSet.copyOf(FAILED_PLUGINS);
+    public Map<String, String> getFailedPlugins() {
+        return ImmutableMap.copyOf(FAILED_PLUGINS);
     }
 
     public static int mapped_conversions = 0;
@@ -102,38 +103,12 @@ public class PEIApi {
         CONFIG = config;
         LOG.info("Starting Phase: Initialization");
         final long startTime = System.currentTimeMillis();
-        // TODO: Move logic into own class
-        asmData.getAll(PEIPlugin.class.getCanonicalName()).forEach(asm_data -> {
-            try {
-                Class<?> asmClass = Class.forName(asm_data.getClassName());
-                PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
-                if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
-                    String modid = plugin_register.value().toLowerCase();
-
-                    if (!Loader.isModLoaded(modid)) return;
-
-                    if (asmClass.isAnnotationPresent(OnlyIf.class)) {
-                        OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
-                        ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
-                        if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) return;
-                    }
-
-                    if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin"))
-                        return;
-
-                    Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
-                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class,
-                        Configuration.class);
-                    PLUGINS.add(plugin.newInstance(modid, config));
-                }
-            } catch (Throwable t) {
-                LOG.error("Failed to load: {}", asm_data.getClassName(), t);
-                //t.printStackTrace();
-            }
-        });
-        PHASE = Phase.WAITING;
+        ASMHandler handler = new ASMHandler(config, asmData);
+        PLUGINS.addAll(handler.getPlugins());
+        FAILED_PLUGINS.putAll(handler.getFailed());
         final long endTime = System.currentTimeMillis();
         LOG.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
+        PHASE = Phase.WAITING;
     }
 
     /**
@@ -149,7 +124,7 @@ public class PEIApi {
                 plugin.setup();
             } catch (Throwable t) {
                 LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
-                FAILED_PLUGINS.add(plugin.modid);
+                FAILED_PLUGINS.put(plugin.modid, plugin.getClass().getCanonicalName());
                 t.printStackTrace();
             }
         }
