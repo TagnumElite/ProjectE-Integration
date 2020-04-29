@@ -56,7 +56,7 @@ minecraft {
     mappings = "snapshot_${mcp_version}"
 
     replace 'required-after:projecte', "required-after:projecte@[${pe_version},)"
-    replace '@VERSION@', "${version}"
+    replace '@VERSION@', project.version
 }
 
 repositories {
