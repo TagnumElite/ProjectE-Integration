@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added message of server join/world load to notify of updates and failed plugins and mappers
 - Added support for JitPack build and mapped my domain `tagnumelite.com`
 - Added `update.json` for version fetching
+- Added task to update `update.json` with current version
 
 ### Changed
 - Moved from Travis to GitHub Actions

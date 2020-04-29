@@ -19,6 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
 buildscript {
     repositories {
         jcenter()
@@ -128,6 +131,12 @@ artifacts {
 }
 
 task updateJSON() {
+    def jsonFile = file('update.json')
+    def parsedJson = new JsonSlurper().parse(jsonFile)
+    parsedJson."${mc_version}"."${version}" = "See https://github.com/TagnumElite/ProjectE-Integration/releases/${version} for more detail"
+    parsedJson.promos."${mc_version}-latest" = "${version}"
+    parsedJson.promos."${mc_version}-recommended" = "${version}"
+    jsonFile.write(JsonOutput.prettyPrint(JsonOutput.toJson(parsedJson)))
 }
 
 build.dependsOn sourcesJar
