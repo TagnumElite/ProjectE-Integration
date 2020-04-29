@@ -65,6 +65,7 @@ public class Utils {
         return getInputsFirst(new IngredientMap<>(), inputs);
     }
 
+    //TODO: Remove duplicated code, and look for performance improvements.
     public static IngredientMap<Object> getInputsFirst(IngredientMap<Object> ingredients, Object... inputs) {
         for (Object input : inputs) {
             if (input == null)
@@ -151,6 +152,12 @@ public class Utils {
                     continue;
 
                 ingredients.addIngredient(PEIApi.getIngredient((Ingredient) input), 1);
+            } else if (input instanceof SizedIngredient) {
+                SizedIngredient inp = (SizedIngredient) input;
+                if (inp.object == Ingredient.EMPTY)
+                    continue;
+
+                ingredients.addIngredient(PEIApi.getIngredient(inp.object), inp.amount);
             } else if (input instanceof Object[]) {
                 PEIApi.LOG.debug("Found Array within Array: {} within {}", input, inputs);
                 getInputsFirst(ingredients, Arrays.asList(input));
