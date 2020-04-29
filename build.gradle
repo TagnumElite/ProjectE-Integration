@@ -151,7 +151,7 @@ curseforge {
     apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
     project {
         id = "${cf_project}"
-        changelog = file('changelog.html')
+        changelog = ""
         changelogType = 'markdown'
         releaseType = "${release_type}"
         addGameVersion "${mc_version}"
