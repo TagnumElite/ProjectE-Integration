@@ -18,6 +18,8 @@ public class PluginDraconicEvolution extends APEIPlugin {
     @Override
     public void setup() {
         addEMC(DEFeatures.draconiumDust, 8192);
+        // TODO: Figure out why ItemPersitant crashes the plugin when Draconic Evolution isn't installed
+        // Raises classNotDefError
         addEMC(DEFeatures.dragonHeart, 262144);
         addEMC(DEFeatures.chaosShard, 1024000);
 
