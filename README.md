@@ -55,7 +55,7 @@ Mod Support is split into separate plugin categories:
 ### Tech:  
   
 - [Actually Additions](https://www.curseforge.com/minecraft/mc-mods/actually-additions): Crusher, Atomic Reconstructor, Empowerer
-- [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Grindstone and Inscriber
+- [Applied Energistics](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2): Condenser, Fluix Crystals, Grindstone, Inscriber and Purfication Crystals
 - [Calculator](https://www.curseforge.com/minecraft/mc-mods/calculator)
 - [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines): Miniaturization  
 - [Draconic Evolution](https://www.curseforge.com/minecraft/mc-mods/draconic-evolution): Fusion

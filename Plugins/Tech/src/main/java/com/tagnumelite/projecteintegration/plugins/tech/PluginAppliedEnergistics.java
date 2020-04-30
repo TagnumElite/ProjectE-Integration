@@ -30,10 +30,10 @@ public class PluginAppliedEnergistics extends APEIPlugin {
 
     @Override
     public void setup() {
-        addMapper(new CondenserMapper());
+        if (AEConfig.instance().isFeatureEnabled(AEFeature.CONDENSER)) addMapper(new CondenserMapper());
+        if (AEConfig.instance().isFeatureEnabled(AEFeature.GRIND_STONE)) addMapper(new GrindstoneMapper());
         addMapper(new GrowthMapper());
-        addMapper(new InscriberMapper());
-        addMapper(new GrindstoneMapper());
+        if (AEConfig.instance().isFeatureEnabled(AEFeature.INSCRIBER)) addMapper(new InscriberMapper());
     }
 
     private static class CondenserMapper extends PEIMapper {
@@ -43,19 +43,17 @@ public class PluginAppliedEnergistics extends APEIPlugin {
 
         @Override
         public void setup() {
-            if (AEConfig.instance().isFeatureEnabled(AEFeature.CONDENSER)) {
-                ItemStack cobble = new ItemStack(Blocks.COBBLESTONE);
-                AEApi.instance().definitions().materials().singularity().maybeStack(1).ifPresent(itemStack -> {
-                    Map<Object, Integer> map = new HashMap<>();
-                    map.put(cobble.copy(), CondenserOutput.SINGULARITY.requiredPower);
-                    addConversion(itemStack, map);
-                });
-                AEApi.instance().definitions().materials().matterBall().maybeStack(1).ifPresent(itemStack -> {
-                    Map<Object, Integer> map = new HashMap<>();
-                    map.put(cobble.copy(), CondenserOutput.MATTER_BALLS.requiredPower);
-                    addConversion(itemStack, map);
-                });
-            }
+            ItemStack cobble = new ItemStack(Blocks.COBBLESTONE);
+            AEApi.instance().definitions().materials().singularity().maybeStack(1).ifPresent(itemStack -> {
+                Map<Object, Integer> map = new HashMap<>();
+                map.put(cobble.copy(), CondenserOutput.SINGULARITY.requiredPower);
+                addConversion(itemStack, map);
+            });
+            AEApi.instance().definitions().materials().matterBall().maybeStack(1).ifPresent(itemStack -> {
+                Map<Object, Integer> map = new HashMap<>();
+                map.put(cobble.copy(), CondenserOutput.MATTER_BALLS.requiredPower);
+                addConversion(itemStack, map);
+            });
         }
     }
 
