@@ -22,7 +22,6 @@
 
 package com.tagnumelite.projecteintegration.api.utils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -34,7 +33,10 @@ import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A class for handling {@link ASMDataTable} to fetch {@link APEIPlugin}s
@@ -59,15 +61,11 @@ public final class ASMHandler {
     public List<APEIPlugin> getPlugins() {
         List<APEIPlugin> plugins = new ArrayList<>();
         for (ASMDataTable.ASMData asmData : asmDataTable.getAll(PEIPlugin.class.getCanonicalName())) {
-            String modid = "";
+            String modid = ((String) asmData.getAnnotationInfo().get("value")).toLowerCase();
+            if (!Loader.isModLoaded(modid)) continue;
             try {
                 Class<?> asmClass = Class.forName(asmData.getClassName());
-                PEIPlugin plugin_register = asmClass.getAnnotation(PEIPlugin.class);
-                if (plugin_register != null && APEIPlugin.class.isAssignableFrom(asmClass)) {
-                    modid = plugin_register.value().toLowerCase();
-
-                    if (!Loader.isModLoaded(modid)) continue;
-
+                if (APEIPlugin.class.isAssignableFrom(asmClass)) {
                     if (asmClass.isAnnotationPresent(OnlyIf.class)) {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
                         ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
