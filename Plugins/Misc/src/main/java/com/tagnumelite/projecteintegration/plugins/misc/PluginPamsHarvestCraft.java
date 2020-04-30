@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @PEIPlugin("harvestcraft")
@@ -83,11 +84,7 @@ public class PluginPamsHarvestCraft extends APEIPlugin {
                         }
                     }
 
-                    addRecipe(Utils.createOutputs(outputs), input);
-					/*
-					for (ItemStack output : outputs) {
-						addRecipe(output, input);
-					}*/
+                    addRecipe(Arrays.asList(outputs), input);
                 }
             } catch (Exception e) {
                 PEIApi.LOG.error("Failed to get HarvestCraft machine '{}' recipes: {}", name, e);

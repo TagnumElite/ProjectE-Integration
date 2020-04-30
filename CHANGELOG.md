@@ -45,12 +45,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
+- Utils.createOutputs: It was old and for something completely unknown now
 
 ### Fixed
 - Fixed plugins
     - Modular Machinery, NuclearCraft
 - API version was mc version not mod version
-- Fixed Extended Crafting - Some inputs were a list and couldn't be converted
+- Fixed Extended Crafting: Some inputs were a list and couldn't be converted
+- Fixed Pam's HarvestCraft plugin: The output list should work properly now. Old code was bogging it down
 
 ## [2.5.0] - 2019-08-11
 ### Fixed

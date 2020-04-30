@@ -31,36 +31,6 @@ public class Utils {
             && (stack2.getItemDamage() == 32767 || stack2.getItemDamage() == stack1.getItemDamage());
     }
 
-    /**
-     * @param outputs
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public static ArrayList<Object> createOutputs(Object output, Object... outputs) {
-        ArrayList<Object> ret = new ArrayList<>();
-        ArrayList<Object> l = new ArrayList<>();
-
-        l.add(output);
-
-        if (outputs != null && outputs.length > 0) {
-            l.addAll(Arrays.asList(outputs));
-        }
-
-        for (Object t : l) {
-            if (t instanceof List) {
-                ret.addAll((Collection<? extends Object>) t);
-            } else if (t instanceof Object[]) {
-                ret.addAll(Arrays.asList(t));
-            } else {
-                ret.add(t);
-            }
-        }
-
-        l.clear();
-
-        return ret;
-    }
-
     public static IngredientMap<Object> createInputs(Object... inputs) {
         return getInputsFirst(new IngredientMap<>(), inputs);
     }
