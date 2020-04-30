@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed plugins
     - Modular Machinery, NuclearCraft
 - API version was mc version not mod version
+- Fixed Extended Crafting - Some inputs were a list and couldn't be converted
 
 ## [2.5.0] - 2019-08-11
 ### Fixed

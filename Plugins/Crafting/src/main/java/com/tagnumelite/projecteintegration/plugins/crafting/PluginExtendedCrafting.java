@@ -6,12 +6,15 @@ import com.blakebr0.extendedcrafting.crafting.CompressorRecipe;
 import com.blakebr0.extendedcrafting.crafting.CompressorRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.endercrafter.EnderCrafterRecipeManager;
 import com.blakebr0.extendedcrafting.crafting.table.TableRecipeManager;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
+
+import java.util.List;
 
 @PEIPlugin("extendedcrafting")
 public class PluginExtendedCrafting extends APEIPlugin {
@@ -35,8 +38,12 @@ public class PluginExtendedCrafting extends APEIPlugin {
         public void setup() {
             for (CompressorRecipe recipe : CompressorRecipeManager.getInstance().getRecipes()) {
                 IngredientMap<Object> ingredients = new IngredientMap<>();
-
-                ingredients.addIngredient(recipe.getInput(), recipe.getInputCount());
+                Object input = recipe.getInput();
+                if (input instanceof List) {
+                    ingredients.addIngredient(PEIApi.getList((List<?>) input), recipe.getInputCount());
+                } else {
+                    ingredients.addIngredient(recipe.getInput(), recipe.getInputCount());
+                }
 
                 if (recipe.consumeCatalyst()) {
                     ingredients.addIngredient(recipe.getCatalyst(), recipe.getCatalyst().getCount());
