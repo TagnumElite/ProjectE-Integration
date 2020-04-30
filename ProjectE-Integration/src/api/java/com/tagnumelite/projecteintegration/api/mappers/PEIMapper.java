@@ -2,7 +2,7 @@ package com.tagnumelite.projecteintegration.api.mappers;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
-import com.tagnumelite.projecteintegration.api.utils.Utils;
+import com.tagnumelite.projecteintegration.api.utils.IngredientHandler;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.emc.IngredientMap;
@@ -130,7 +130,7 @@ public abstract class PEIMapper {
     }
 
     /**
-     * We turn the inputs into a usable {@link Map} using {@link Utils#createInputs(Object...)}.
+     * We turn the inputs into a usable {@link Map} using {@link IngredientHandler}.
      * Using this map we call {@link #addConversion(int, Object, Map)} using output_amount,
      * output, inputs.
      *
@@ -142,12 +142,15 @@ public abstract class PEIMapper {
         if (output_amount <= 0 || output == null || inputs == null || inputs.length <= 0)
             return;
 
-        addConversion(output_amount, output, Utils.createInputs(inputs).getMap());
+        IngredientHandler handler = new IngredientHandler();
+        handler.addAll(inputs);
+
+        addConversion(output_amount, output, handler.getMap());
     }
 
     /**
      * Alias for {@link #addConversion(List, Map)} were we convert the inputs
-     * to a {@link Map} using {@link Utils#createInputs(Object...)}
+     * to a {@link Map} using {@link IngredientHandler}
      *
      * @param outputs The outputs that the inputs will be converted to
      * @param inputs  The inputs that will converted to the outputs
@@ -156,7 +159,10 @@ public abstract class PEIMapper {
         if (outputs == null || outputs.size() <= 0 || inputs == null || inputs.length <= 0)
             return;
 
-        addConversion(outputs, Utils.createInputs(inputs).getMap());
+        IngredientHandler handler = new IngredientHandler();
+        handler.addAll(inputs);
+
+        addConversion(outputs, handler.getMap());
     }
 
     protected void addConversion(List<Object> output, Map<Object, Integer> inputs) {
@@ -179,7 +185,7 @@ public abstract class PEIMapper {
             } else if (out instanceof Item || out instanceof Block || out.getClass().equals(Object.class)) {
                 out_ing.addIngredient(out, 1);
             } else {
-                PEIApi.LOG.warn("Invalid Multi-Output item: {}", out);
+                PEIApi.LOG.warn("Invalid Multi-Output item: {}:({})", out, out.getClass());
             }
         }
 

@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skip plugin load before try catch
 - Updated Applied Energistics Plugin
     - Add in world fluid and seed crafting alongside condenser singularity and matter_ball
+- Moved Util input handling code to IngredientHandler
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
