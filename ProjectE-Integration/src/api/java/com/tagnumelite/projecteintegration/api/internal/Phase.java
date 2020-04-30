@@ -27,10 +27,16 @@ package com.tagnumelite.projecteintegration.api.internal;
  * {@link com.tagnumelite.projecteintegration.api.PEIApi}
  */
 public enum Phase {
-    STARTING_UP,
+    /** The API hasn't started yet, you shouldn't do anything during this phase. */
+    NULL,
+    /** The API is currently not doing anything and waiting for other things to happen. */
     WAITING,
+    /** The API is currently being initialized, it will be fetching plugins during this stage. */
     INITIALIZING,
+    /** This API is currently setting up plugins */
     SETTING_UP_PLUGINS,
+    /** The API is currently setting up mappers */
     SETTING_UP_MAPPERS,
+    /** The API is finished setting up everything and adding all EMC and recipes. */
     FINISHED
 }

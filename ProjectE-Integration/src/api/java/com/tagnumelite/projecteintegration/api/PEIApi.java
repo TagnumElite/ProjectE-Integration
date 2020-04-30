@@ -42,7 +42,7 @@ public class PEIApi {
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
     public static int mapped_conversions = 0;
     private static boolean LOCK_EMC_MAPPER = false;
-    private static Phase PHASE = Phase.STARTING_UP;
+    private static Phase PHASE = Phase.NULL;
     private static PEIApi INSTANCE;
     public final Configuration CONFIG;
     private final Map<String, String> FAILED_PLUGINS = new HashMap<>();
