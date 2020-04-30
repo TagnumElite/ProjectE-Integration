@@ -48,7 +48,7 @@ dependencies {
     provided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
 
     // MinecraftForge Maven
-    provided "appeng:appliedenergistics2:${version_appliedenergistics}:api"
+    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}"
 
     // CoFH Maven
     deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
