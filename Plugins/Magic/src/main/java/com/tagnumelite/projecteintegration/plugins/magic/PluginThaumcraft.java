@@ -23,14 +23,14 @@ import java.util.Map.Entry;
 
 @PEIPlugin("thaumcraft")
 public class PluginThaumcraft extends APEIPlugin {
-    public PluginThaumcraft(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     private final Map<Aspect, Object> ASPECT_MAP = new HashMap<>();
     private final Set<IArcaneRecipe> ARCANE_RECIPES = new HashSet<>();
     private final Set<CrucibleRecipe> CRUCIBLE_RECIPES = new HashSet<>();
     private final Set<InfusionRecipe> INFUSION_RECIPES = new HashSet<>();
+
+    public PluginThaumcraft(String modid, Configuration config) {
+        super(modid, config);
+    }
 
     @Override
     public void setup() {

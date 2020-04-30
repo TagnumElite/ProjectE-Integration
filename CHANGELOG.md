@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README
 - Moved Plugin annotation handling to its own class
 - Updated optional mods on cursegradle
+- Refactored some classes
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

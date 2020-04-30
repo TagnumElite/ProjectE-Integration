@@ -19,6 +19,16 @@ public class PluginArmorPlus extends APEIPlugin {
         super(modid, config);
     }
 
+    private static void addIngredientsFromNonNullList(NonNullList<ItemStack> input,
+                                                      IngredientMap<Object> ingredientMap) {
+        for (ItemStack item : input) {
+            if (item == null || item.isEmpty())
+                continue;
+
+            ingredientMap.addIngredient(item, item.getCount());
+        }
+    }
+
     @Override
     public void setup() {
         addMapper(new BenchMapper(BaseCraftingManager.getWBInstance()));
@@ -84,16 +94,6 @@ public class PluginArmorPlus extends APEIPlugin {
 
                 addConversion(output, ingredients.getMap());
             }
-        }
-    }
-
-    private static void addIngredientsFromNonNullList(NonNullList<ItemStack> input,
-                                                      IngredientMap<Object> ingredientMap) {
-        for (ItemStack item : input) {
-            if (item == null || item.isEmpty())
-                continue;
-
-            ingredientMap.addIngredient(item, item.getCount());
         }
     }
 }

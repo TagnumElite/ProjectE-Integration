@@ -22,7 +22,6 @@
 
 package com.tagnumelite.projecteintegration.plugins.rocketry;
 
-import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -109,15 +108,6 @@ public class PluginGalaticraft extends APEIPlugin {
     private static class NasaWorkbenchMapper extends PEIMapper {
         private final Workbench workbench;
 
-        public enum Workbench {
-            ROCKET_BENCH_T1,
-            ROCKET_BENCH_T2,
-            ROCKET_BENCH_T3,
-            CARGO_ROCKET_BENCH,
-            ASTRO_MINER_BENCH,
-            BUGGY_BENCH,
-        }
-
         public NasaWorkbenchMapper(Workbench workbench) {
             super("NASA Workbench " + workbench.name());
             this.workbench = workbench;
@@ -152,6 +142,15 @@ public class PluginGalaticraft extends APEIPlugin {
             for (INasaWorkbenchRecipe recipe : recipes) {
                 addRecipe(recipe.getRecipeOutput(), recipe.getRecipeInput().values().toArray());
             }
+        }
+
+        public enum Workbench {
+            ROCKET_BENCH_T1,
+            ROCKET_BENCH_T2,
+            ROCKET_BENCH_T3,
+            CARGO_ROCKET_BENCH,
+            ASTRO_MINER_BENCH,
+            BUGGY_BENCH,
         }
     }
 }

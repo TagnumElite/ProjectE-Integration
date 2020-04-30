@@ -28,17 +28,6 @@ public class PluginBotania extends APEIPlugin {
         add_emc_to_mana = config.getBoolean("add_emc_to_mana", this.category, true, "Should mana have an EMC?");
     }
 
-    @Override
-    public void setup() {
-        addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIRED}");
-
-        addMapper(new ElvenTradeMapper());
-        addMapper(new PetalMapper());
-        addMapper(new PureDaisyMapper());
-        addMapper(new ManaInfusionMapper());
-        addMapper(new RuneAlterMapper());
-    }
-
     private static Map<Object, Integer> createMapFromList(List<Object> list) {
         if (list.isEmpty())
             return null;
@@ -57,6 +46,17 @@ public class PluginBotania extends APEIPlugin {
 
     private static ItemStack getItemStackFromBlockState(IBlockState state) {
         return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+    }
+
+    @Override
+    public void setup() {
+        addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIRED}");
+
+        addMapper(new ElvenTradeMapper());
+        addMapper(new PetalMapper());
+        addMapper(new PureDaisyMapper());
+        addMapper(new ManaInfusionMapper());
+        addMapper(new RuneAlterMapper());
     }
 
     private static class ElvenTradeMapper extends PEIMapper {

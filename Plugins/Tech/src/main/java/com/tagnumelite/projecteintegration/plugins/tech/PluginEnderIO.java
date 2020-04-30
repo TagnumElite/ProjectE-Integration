@@ -23,11 +23,11 @@ import java.util.stream.Collectors;
 
 @PEIPlugin("enderio")
 public class PluginEnderIO extends APEIPlugin {
+    private List<IMachineRecipe> SOULBINDER_RECIPES;
+
     public PluginEnderIO(String modid, Configuration config) {
         super(modid, config);
     }
-
-    private List<IMachineRecipe> SOULBINDER_RECIPES;
 
     @Override
     public void setup() {

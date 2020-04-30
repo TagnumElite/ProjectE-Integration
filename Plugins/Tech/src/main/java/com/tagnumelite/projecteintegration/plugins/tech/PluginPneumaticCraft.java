@@ -76,11 +76,6 @@ public class PluginPneumaticCraft extends APEIPlugin {
     }
 
     private static class AssemblyMapper extends PEIMapper {
-        private enum AssemblyType {
-            DRILL,
-            LAZER
-        }
-
         private final AssemblyType assemblyType;
 
         public AssemblyMapper(AssemblyType assemblyType) {
@@ -106,6 +101,11 @@ public class PluginPneumaticCraft extends APEIPlugin {
                 addRecipe(recipe.getOutput(), recipe.getInput());
             }
         }
+
+        private enum AssemblyType {
+            DRILL,
+            LAZER
+        }
     }
 
     private static class BasicThermopneumaticProcessingPlantMapper extends PEIMapper {
@@ -119,24 +119,6 @@ public class PluginPneumaticCraft extends APEIPlugin {
                 if (iRecipe instanceof BasicThermopneumaticProcessingPlantRecipe) {
                     BasicThermopneumaticProcessingPlantRecipe recipe = (BasicThermopneumaticProcessingPlantRecipe) iRecipe;
                     addRecipe(recipe.getOutputLiquid(), recipe.getInputItem(), recipe.getInputLiquid());
-                }
-            }
-        }
-    }
-
-    private class ExplosionCraftingMapper extends PEIMapper {
-        public ExplosionCraftingMapper() {
-            super("Explosion Crafting");
-        }
-
-        @Override
-        public void setup() {
-            for (ExplosionCraftingRecipe recipe : ExplosionCraftingRecipe.recipes) {
-                Object input = recipe.getInput();
-                if (recipe.getInput().isEmpty() && recipe.getOreDictKey() != null) input = recipe.getOreDictKey();
-
-                if (ignore_loss_rate || recipe.getLossRate() <= 0) {
-                    addRecipe(recipe.getOutput(), input);
                 }
             }
         }
@@ -183,6 +165,24 @@ public class PluginPneumaticCraft extends APEIPlugin {
         public void setup() {
             for (RefineryRecipe recipe : RefineryRecipe.recipes) {
                 addRecipe(Collections.singletonList(recipe.outputs), recipe.input);
+            }
+        }
+    }
+
+    private class ExplosionCraftingMapper extends PEIMapper {
+        public ExplosionCraftingMapper() {
+            super("Explosion Crafting");
+        }
+
+        @Override
+        public void setup() {
+            for (ExplosionCraftingRecipe recipe : ExplosionCraftingRecipe.recipes) {
+                Object input = recipe.getInput();
+                if (recipe.getInput().isEmpty() && recipe.getOreDictKey() != null) input = recipe.getOreDictKey();
+
+                if (ignore_loss_rate || recipe.getLossRate() <= 0) {
+                    addRecipe(recipe.getOutput(), input);
+                }
             }
         }
     }
