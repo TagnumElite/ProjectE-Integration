@@ -43,9 +43,6 @@ import net.minecraftforge.server.permission.PermissionAPI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
-import java.util.Set;
-
 import static com.tagnumelite.projecteintegration.api.PEIApi.*;
 
 /**
@@ -55,14 +52,14 @@ import static com.tagnumelite.projecteintegration.api.PEIApi.*;
  */
 @Mod(modid = MODID, name = NAME, version = VERSION, dependencies = "required-after:projecte;after:*", acceptableRemoteVersions = "*", updateJSON = UPDATE_JSON)
 public class PEIntegration {
+    public static final Logger LOG = LogManager.getLogger(MODID);
+    private static final String updateNotifierPerm = MODID + ".update_notify";
+    private static final String errorNotifierPerm = MODID + ".error_notify";
     public static Configuration config;
     private static boolean DISABLE = false;
-    public static final Logger LOG = LogManager.getLogger(MODID);
     private static PEIApi API;
-    private static boolean doUpdateCheck = true;
-    private static final String updateNotifierPerm = MODID + ".update_notify";
-    private static boolean doMapperCheck = true;
-    private static final String errorNotifierPerm = MODID + ".error_notify";
+    private static boolean doUpdateCheck = false;
+    private static boolean doMapperCheck = false;
     private static ForgeVersion.CheckResult versionCheck;
 
     @EventHandler
@@ -105,7 +102,7 @@ public class PEIntegration {
     //TODO: Make translation files and keys instead of permanent english.
     public void playerJoined(PlayerEvent.PlayerLoggedInEvent event) {
         if (!DISABLE) {
-            //player.sendMessage(new TextComponentTranslation("text.altar_created.message"));
+            //player.sendMessage(new TextComponentTranslation("text.todo.message"));
             EntityPlayer player = event.player;
             if (doUpdateCheck && PermissionAPI.hasPermission(player, updateNotifierPerm)) {
                 LOG.info("PEI Version Status: {}", versionCheck.status);
