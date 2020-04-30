@@ -95,16 +95,13 @@ public class PluginGregTechCE extends APEIPlugin {
         @Override
         public void setup() {
             for (Recipe recipe : map.getRecipeList()) {
-                ArrayList<Object> inputs = new ArrayList<>();
+                ArrayList<Object> inputs = new ArrayList<>(recipe.getFluidInputs());
                 for (CountableIngredient input : recipe.getInputs()) {
                     inputs.add(new SizedIngredient(input.getCount(), input.getIngredient()));
                 }
 
-                if (!recipe.getFluidInputs().isEmpty()) inputs.addAll(recipe.getFluidInputs());
-
-                ArrayList<Object> outputs = new ArrayList<>();
-                if (!recipe.getFluidOutputs().isEmpty()) outputs.addAll(recipe.getFluidOutputs());
-                if (!recipe.getOutputs().isEmpty()) outputs.addAll(recipe.getOutputs());
+                ArrayList<Object> outputs = new ArrayList<>(recipe.getOutputs());
+                outputs.addAll(recipe.getFluidOutputs());
 
                 for (ChanceEntry output : recipe.getChancedOutputs()) {
                     if (output.getChance() >= 20000) {
@@ -116,7 +113,7 @@ public class PluginGregTechCE extends APEIPlugin {
                     }
                 }
 
-                addRecipe(outputs, inputs.toArray(), recipe.getFluidInputs().toArray());
+                addRecipe(outputs, inputs.toArray());
             }
         }
     }
