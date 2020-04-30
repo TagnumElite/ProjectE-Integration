@@ -5,11 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.tagnumelite.projecteintegration.api.internal.Phase;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
-import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
-import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ASMHandler;
-import com.tagnumelite.projecteintegration.api.utils.ApplyOnlyIf;
-import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
@@ -18,13 +14,10 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -39,54 +32,24 @@ public class PEIApi {
     public static final String NAME = "ProjectE Integration";
     public static final String VERSION = "@VERSION@";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.12.x/update.json";
-
+    public static final Logger LOG = LogManager.getLogger(APIID);
+    public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
     private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
     private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
-
-    public static final Logger LOG = LogManager.getLogger(APIID);
-
     private static final IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
-    public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
-
     private static final Set<PEIMapper> MAPPERS = new HashSet<>();
-    private static boolean LOCK_EMC_MAPPER = false;
     private static final Map<Object, Integer> EMC_MAPPERS = new HashMap<>();
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
+    public static int mapped_conversions = 0;
+    private static boolean LOCK_EMC_MAPPER = false;
+    private static Phase PHASE = Phase.STARTING_UP;
+    private static PEIApi INSTANCE;
+    public final Configuration CONFIG;
     private final Map<String, String> FAILED_PLUGINS = new HashMap<>();
     private final Map<String, String> FAILED_MAPPERS = new HashMap<>();
-
-    public Map<String, String> getFailedMappers() {
-        return ImmutableMap.copyOf(FAILED_MAPPERS);
-    }
-
-    public Map<String, String> getFailedPlugins() {
-        return ImmutableMap.copyOf(FAILED_PLUGINS);
-    }
-
-    public static int mapped_conversions = 0;
-
     private final List<APEIPlugin> PLUGINS = new ArrayList<>();
-    private static Phase PHASE = Phase.STARTING_UP;
-
-    /**
-     * @return The current phase of the api
-     */
-    public static Phase getPhase() {
-        return PHASE;
-    }
-
-
     private boolean LOADED = false;
-    public final Configuration CONFIG;
 
-    private static PEIApi INSTANCE;
-
-    /**
-     * @return Returns the current {@link PEIApi} Instance
-     */
-    public static PEIApi getInstance() {
-        return INSTANCE;
-    }
 
     /**
      * If you need to instance, use {@link #getInstance()}.
@@ -112,58 +75,17 @@ public class PEIApi {
     }
 
     /**
-     *
+     * @return The current phase of the api
      */
-    public void setupPlugins() {
-        PHASE = Phase.SETTING_UP_PLUGINS;
-        LOG.info("Starting Phase: Setting up plugins");
-        final long startTime = System.currentTimeMillis();
-        for (APEIPlugin plugin : PLUGINS) {
-            PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
-            try {
-                plugin.setup();
-            } catch (Throwable t) {
-                LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
-                FAILED_PLUGINS.put(plugin.modid, plugin.getClass().getCanonicalName());
-                t.printStackTrace();
-            }
-        }
-
-        registerEMCObjects();
-        LOG.info("Added {} Mappers", getMappers().size());
-        PHASE = Phase.WAITING;
-        final long endTime = System.currentTimeMillis();
-        LOG.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
+    public static Phase getPhase() {
+        return PHASE;
     }
 
     /**
-     *
+     * @return Returns the current {@link PEIApi} Instance
      */
-    public void setupMappers() {
-        if (LOADED) return;
-        PHASE = Phase.SETTING_UP_MAPPERS;
-        LOG.info("Starting Phase: Setting Up Mappers");
-        final long startTime = System.currentTimeMillis();
-        for (PEIMapper mapper : getMappers()) {
-            PEIApi.LOG.info("Running Mapper: {} ({})", mapper.name, mapper);
-            try {
-                mapper.setup();
-            } catch (Throwable t) {
-                LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
-                FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
-                t.printStackTrace();
-            }
-        }
-
-        LOG.info("Added {} Conversions", mapped_conversions);
-
-        clearCache();
-        PLUGINS.clear();
-        LOADED = true;
-
-        final long endTime = System.currentTimeMillis();
-        LOG.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
-        PHASE = Phase.FINISHED;
+    public static PEIApi getInstance() {
+        return INSTANCE;
     }
 
     /**
@@ -290,5 +212,68 @@ public class PEIApi {
         INGREDIENT_CACHE.clear();
         LIST_CACHE.clear();
         MAPPERS.clear();
+    }
+
+    public Map<String, String> getFailedMappers() {
+        return ImmutableMap.copyOf(FAILED_MAPPERS);
+    }
+
+    public Map<String, String> getFailedPlugins() {
+        return ImmutableMap.copyOf(FAILED_PLUGINS);
+    }
+
+    /**
+     *
+     */
+    public void setupPlugins() {
+        PHASE = Phase.SETTING_UP_PLUGINS;
+        LOG.info("Starting Phase: Setting up plugins");
+        final long startTime = System.currentTimeMillis();
+        for (APEIPlugin plugin : PLUGINS) {
+            PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
+            try {
+                plugin.setup();
+            } catch (Throwable t) {
+                LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
+                FAILED_PLUGINS.put(plugin.modid, plugin.getClass().getCanonicalName());
+                t.printStackTrace();
+            }
+        }
+
+        registerEMCObjects();
+        LOG.info("Added {} Mappers", getMappers().size());
+        PHASE = Phase.WAITING;
+        final long endTime = System.currentTimeMillis();
+        LOG.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
+    }
+
+    /**
+     *
+     */
+    public void setupMappers() {
+        if (LOADED) return;
+        PHASE = Phase.SETTING_UP_MAPPERS;
+        LOG.info("Starting Phase: Setting Up Mappers");
+        final long startTime = System.currentTimeMillis();
+        for (PEIMapper mapper : getMappers()) {
+            PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
+            try {
+                mapper.setup();
+            } catch (Throwable t) {
+                LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+                FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
+                t.printStackTrace();
+            }
+        }
+
+        LOG.info("Added {} Conversions", mapped_conversions);
+
+        clearCache();
+        PLUGINS.clear();
+        LOADED = true;
+
+        final long endTime = System.currentTimeMillis();
+        LOG.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
+        PHASE = Phase.FINISHED;
     }
 }
