@@ -8,11 +8,13 @@ import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
+import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
 
 import java.util.ArrayList;
@@ -39,34 +41,29 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         return new SizedIngredient(stack.inputSize, stack.toRecipeIngredient());
     }
 
-    private static class BlastFurnaceMapper extends PEIMapper {
+    private class BlastFurnaceMapper extends PEIMapper {
+        private final boolean ignore_slag;
+
         public BlastFurnaceMapper() {
             super("Blast Furnace");
+            ignore_slag = config.getBoolean(ConfigHelper.getConfigName(name+" ignore_slag"), category, true,
+                "Should the EMC be split up with the slag in the Blast Furnace");
         }
 
         @Override
         public void setup() {
             for (BlastFurnaceRecipe recipe : BlastFurnaceRecipe.recipeList) {
-                ItemStack output = recipe.output;
-                if (output == null || output.isEmpty())
-                    continue;
-
                 Object input = recipe.input;
-                if (input == null)
-                    continue;
-
                 if (input instanceof List)
                     input = PEIApi.getList((List<?>) input);
-                else if (!(input instanceof ItemStack) && !(input instanceof String))
-                    continue;
-
-                addConversion(output, ImmutableMap.of(input, 1));
-
-                ItemStack slag = recipe.slag;
-                if (slag == null || slag.isEmpty())
-                    continue;
-
-                addConversion(slag, ImmutableMap.of(input, 1));
+                if (ignore_slag) {
+                    addRecipe(recipe.output, input);
+                } else {
+                    ArrayList<Object> outputs = new ArrayList<>(2);
+                    outputs.add(recipe.output);
+                    outputs.add(recipe.slag);
+                    addRecipe(outputs, input);
+                }
             }
         }
     }
@@ -79,33 +76,17 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         @Override
         public void setup() {
             for (CokeOvenRecipe recipe : CokeOvenRecipe.recipeList) {
-                ItemStack output = recipe.output;
-                if (output == null || output.isEmpty())
-                    continue;
-
                 Object input = recipe.input;
-                if (input == null) {
-                    continue;
-                } else if (input instanceof ItemStack) {
-                    if (((ItemStack) input).isEmpty())
-                        continue;
-                } else if (input instanceof String || input instanceof Item || input instanceof Block) {
-                    //DO NOTHING!
-                } else if (input instanceof Ingredient) {
-                    input = PEIApi.getIngredient((Ingredient) input);
-                } else if (input instanceof List) {
-                    input = PEIApi.getList((List<?>) input);
+                if (input instanceof List) input = PEIApi.getList((List<?>) input);
+
+                if (recipe.creosoteOutput > 0) {
+                    ArrayList<Object> outputs = new ArrayList<>();
+                    outputs.add(recipe.output);
+                    outputs.add(new FluidStack(IEContent.fluidCreosote, recipe.creosoteOutput));
+                    addRecipe(outputs, input);
                 } else {
-                    PEIApi.LOG.debug("Coke Oven Mapper: Unknown Input: {}, ({})", input, ClassUtils.getPackageCanonicalName(input.getClass()));
-                    continue;
+                    addRecipe(recipe.output, input);
                 }
-
-                if (recipe.creosoteOutput > 0)
-                    addRecipe(recipe.creosoteOutput, IEContent.fluidCreosote, ImmutableMap.of(input, 1));
-
-                PEIApi.LOG.debug("Coke Oven Input: {}", ClassUtils.getPackageCanonicalName(input.getClass()));
-
-                addConversion(output, ImmutableMap.of(input, 1));
             }
         }
     }
