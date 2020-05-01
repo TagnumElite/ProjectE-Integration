@@ -35,6 +35,10 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         addMapper(new MetalPressMapper());
     }
 
+    public static SizedIngredient toSizedIng(IngredientStack stack) {
+        return new SizedIngredient(stack.inputSize, stack.toRecipeIngredient());
+    }
+
     private static class BlastFurnaceMapper extends PEIMapper {
         public BlastFurnaceMapper() {
             super("Blast Furnace");
@@ -137,10 +141,11 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         }
 
         protected void addRecipe(MultiblockRecipe recipe) {
-            List<SizedIngredient> item_inputs = recipe.getItemInputs().stream().map(r -> new SizedIngredient(r.inputSize, r.toRecipeIngredient())).collect(Collectors.toList());
+            List<SizedIngredient> item_inputs = recipe.getItemInputs().stream().map(PluginImmersiveEngineering::toSizedIng).collect(Collectors.toList());
 
-            ArrayList<Object> outputs = new ArrayList<>(recipe.getItemOutputs());
-            outputs.addAll(recipe.getFluidOutputs());
+            ArrayList<Object> outputs = new ArrayList<>();
+            if (recipe.getItemOutputs() != null) outputs.addAll(recipe.getItemOutputs());
+            if (recipe.getFluidOutputs() != null) outputs.addAll(recipe.getFluidOutputs());
 
             addRecipe(outputs, item_inputs, recipe.getFluidInputs());
         }
