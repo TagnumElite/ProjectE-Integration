@@ -35,7 +35,7 @@ Mod Support is split into separate plugin categories:
 - [Blood Magic](https://www.curseforge.com/minecraft/mc-mods/blood-magic): Alchemy Array, Alchemy Table, Blood Altar and Tartaric Forge
 - [Botania](https://www.curseforge.com/minecraft/mc-mods/botania): Elven Trade, Petal Apothacary, Pure Daisy, Mana Infusion and Rune Altar
 - [Embers](https://www.curseforge.com/minecraft/mc-mods/embers): Alchemy, Melting, Mixing and Stamper
-- [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled)
+- [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled): Uses the same plugin for normal embers
 - [ExtraBotany](https://www.curseforge.com/minecraft/mc-mods/extrabotany): Pedestal
 - [Mystical Agriculture](https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture): Seed Reprocessor
 - [Psi](https://www.curseforge.com/minecraft/mc-mods/psi)

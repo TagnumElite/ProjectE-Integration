@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change the order mappers are added in Artisan Worktables
 - Change Chisel Group Name
 - Split the tables into two for Extended Crafting
+- Rename Mixer to FluidMixer in Embers plugin
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

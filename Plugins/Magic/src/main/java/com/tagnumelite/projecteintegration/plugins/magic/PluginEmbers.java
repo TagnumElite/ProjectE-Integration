@@ -37,7 +37,7 @@ public class PluginEmbers extends APEIPlugin {
     public void setup() {
         addMapper(new AlchemyMapper());
         addMapper(new MeltingMapper());
-        addMapper(new MixingMapper());
+        addMapper(new FluidMixingMapper());
         addMapper(new StamperMapper());
     }
 
@@ -67,9 +67,9 @@ public class PluginEmbers extends APEIPlugin {
         }
     }
 
-    private static class MixingMapper extends PEIMapper {
-        public MixingMapper() {
-            super("Mixing");
+    private static class FluidMixingMapper extends PEIMapper {
+        public FluidMixingMapper() {
+            super("Fluid Mixing");
         }
 
         @Override

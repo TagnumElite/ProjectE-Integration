@@ -1,5 +1,6 @@
 package com.tagnumelite.projecteintegration.api.utils;
 
+import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
