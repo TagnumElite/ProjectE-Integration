@@ -52,7 +52,7 @@ public class PEIApi {
 
 
     /**
-     * If you need to instance, use {@link #getInstance()}.
+     * If you need the instance, use {@link #getInstance()}.
      *
      * @param config  The {@link Configuration} to use during initialization
      * @param asmData The {@link ASMDataTable} to be used for fetching plugins
@@ -72,6 +72,7 @@ public class PEIApi {
         final long endTime = System.currentTimeMillis();
         LOG.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
         PHASE = Phase.WAITING;
+        INSTANCE = this;
     }
 
     /**
