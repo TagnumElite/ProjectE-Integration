@@ -3,7 +3,7 @@ package com.tagnumelite.projecteintegration.api.utils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
-public class ConfigHelper {
+public final class ConfigHelper {
     public static final String CATEGORY_GENERAL = "general";
     public static final String CATEGORY_PLUGINS = "plugins";
     public static final String CATEGORY_MISC = "misc";
@@ -17,11 +17,11 @@ public class ConfigHelper {
      * @return String CATEGORY_PLUGINS + CATEGORY_SPLITTER + key
      */
     public static String getPluginCategory(String modid) {
-        return CATEGORY_PLUGINS + Configuration.CATEGORY_SPLITTER + modid;
+        return getCategory(CATEGORY_PLUGINS, modid);
     }
 
     public static String getResourceCategory() {
-        return CATEGORY_GENERAL + Configuration.CATEGORY_SPLITTER + "resources";
+        return getCategory(CATEGORY_GENERAL, "resources");
     }
 
     public static String resourceIntoCFGName(ResourceLocation resource) {
