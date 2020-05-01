@@ -46,6 +46,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved Util input handling code to IngredientHandler
 - Config category uses getCategory function
 - Config names now escape extra characters
+- Change ArmorPlus Plugin to use addRecipe not AddConversion
+- Change the order mappers are added in Artisan Worktables
+- Change Chisel Group Name
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

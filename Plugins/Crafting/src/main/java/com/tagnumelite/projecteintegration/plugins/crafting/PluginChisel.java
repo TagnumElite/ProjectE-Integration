@@ -52,7 +52,7 @@ public class PluginChisel extends APEIPlugin {
         private final String group;
 
         public GroupMapper(String name) {
-            super("group_" + name);
+            super("Group('" + name + "')");
             group = name;
         }
 

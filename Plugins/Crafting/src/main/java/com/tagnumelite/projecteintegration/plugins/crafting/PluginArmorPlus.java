@@ -2,31 +2,19 @@ package com.tagnumelite.projecteintegration.plugins.crafting;
 
 import com.sofodev.armorplus.api.crafting.IRecipe;
 import com.sofodev.armorplus.api.crafting.base.*;
-import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @PEIPlugin("armorplus")
 public class PluginArmorPlus extends APEIPlugin {
     public PluginArmorPlus(String modid, Configuration config) {
         super(modid, config);
-    }
-
-    private static void addIngredientsFromNonNullList(NonNullList<ItemStack> input,
-                                                      IngredientMap<Object> ingredientMap) {
-        for (ItemStack item : input) {
-            if (item == null || item.isEmpty())
-                continue;
-
-            ingredientMap.addIngredient(item, item.getCount());
-        }
     }
 
     @Override
@@ -49,50 +37,22 @@ public class PluginArmorPlus extends APEIPlugin {
         public void setup() {
             for (IRecipe raw : bench.getRecipeList()) {
                 ItemStack output = raw.getRecipeOutput();
+                if (output == null || output.isEmpty()) continue;
 
-                if (output == null || output.isEmpty())
-                    continue;
-
-                IngredientMap<Object> ingredients = new IngredientMap<Object>();
-
-                boolean oreShaped = raw instanceof BaseShapedOreRecipe;
-                boolean oreShapeless = raw instanceof BaseShapelessOreRecipe;
-
-                if (oreShaped || oreShapeless) {
-                    NonNullList<Object> input = NonNullList.create();
-                    if (oreShaped) {
-                        for (Object in : ((BaseShapedOreRecipe) raw).getInput())
-                            if (in != null)
-                                input.add(in);
-
-                    } else if (oreShapeless) {
-                        input = ((BaseShapelessOreRecipe) raw).getInput();
-                    }
-
-                    for (Object i : input) {
-                        if (i instanceof NonNullList<?>) {
-                            ingredients.addIngredient(PEIApi.getList((List<?>) i), 1);
-                        } else {
-                            ingredients.addIngredient(i, 1);
-                        }
-                    }
+                ArrayList<Object> inputs = new ArrayList<>();
+                if (raw instanceof BaseShapedOreRecipe) {
+                    inputs.addAll(Arrays.asList(((BaseShapedOreRecipe) raw).getInput()));
+                } else if (raw instanceof BaseShapelessOreRecipe) {
+                    inputs.addAll(((BaseShapelessOreRecipe) raw).getInput());
                 } else if (raw instanceof BaseShapedRecipe) {
-                    BaseShapedRecipe recipe = (BaseShapedRecipe) raw;
-
-                    NonNullList<ItemStack> input = recipe.getInput();
-
-                    addIngredientsFromNonNullList(input, ingredients);
+                    inputs.addAll(((BaseShapedRecipe) raw).getInput());
                 } else if (raw instanceof BaseShapelessRecipe) {
-                    BaseShapelessRecipe recipe = (BaseShapelessRecipe) raw;
-
-                    NonNullList<ItemStack> input = recipe.getInput();
-
-                    addIngredientsFromNonNullList(input, ingredients);
+                    inputs.addAll(((BaseShapelessRecipe) raw).getInput());
                 } else {
                     continue;
                 }
 
-                addConversion(output, ingredients.getMap());
+                addRecipe(output, inputs.toArray());
             }
         }
     }
