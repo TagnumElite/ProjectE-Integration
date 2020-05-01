@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `update.json` for version fetching
 - Added task to update `update.json` with current version
 - Added getMapperName to ConfigHelper
+- Add Kiln support to Immersive Engineering
 
 ### Changed
 - Moved from Travis to GitHub Actions

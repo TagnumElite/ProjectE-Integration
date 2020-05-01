@@ -118,19 +118,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         @Override
         public void setup() {
             for (AlloyRecipe recipe : AlloyRecipe.recipeList) {
-                ItemStack output = recipe.output;
-                if (output == null || output.isEmpty())
-                    continue;
-
-                IngredientStack input1 = recipe.input0;
-                if (input1 == null || input1.inputSize <= 0)
-                    continue;
-
-                IngredientStack input2 = recipe.input1;
-                if (input2 == null || input2.inputSize <= 0)
-                    continue;
-
-                //addRecipe(output.copy(), input1.) TODO: Output for kiln mapper
+                addRecipe(recipe.output, toSizedIng(recipe.input0), toSizedIng(recipe.input1));
             }
         }
     }
