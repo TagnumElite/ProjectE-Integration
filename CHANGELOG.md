@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change Chisel Group Name
 - Split the tables into two for Extended Crafting
 - Rename Mixer to FluidMixer in Embers plugin
+- ImmersiveEngineeringPlugin: Rename Multiblock to MultiBlock, fixed Enginner type
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
@@ -62,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API version was mc version not mod version
 - Fixed Extended Crafting: Some inputs were a list and couldn't be converted
 - Fixed Pam's HarvestCraft plugin: The output list should work properly now. Old code was bogging it down
+- Fixed Immersive Engineering: MultiBlock recipe didn't have correct output amounts
 
 ## [2.5.0] - 2019-08-11
 ### Fixed

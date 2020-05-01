@@ -4,22 +4,20 @@ import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
 import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @PEIPlugin("immersiveengineering")
 public class PluginImmersiveEngineering extends APEIPlugin {
@@ -32,7 +30,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         addMapper(new BlastFurnaceMapper());
         addMapper(new CokeOvenMapper());
         addMapper(new CrusherMapper());
-        addMapper(new EnginnerWorkbenchMapper());
+        addMapper(new EngineerWorkbenchMapper());
         addMapper(new KilnMapper());
         addMapper(new MetalPressMapper());
     }
@@ -133,72 +131,22 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         }
     }
 
-    private abstract static class MultiblockRecipeMapper extends PEIMapper {
-        public MultiblockRecipeMapper(String name) {
+    private abstract static class MultiBlockRecipeMapper extends PEIMapper {
+        public MultiBlockRecipeMapper(String name) {
             super(name);
         }
 
         protected void addRecipe(MultiblockRecipe recipe) {
-            List<Ingredient> item_inputs = new ArrayList<Ingredient>();
-            recipe.getItemInputs().forEach(r -> {
-                item_inputs.add(r.toRecipeIngredient());
-            });
-            List<FluidStack> fluid_inputs = recipe.getFluidInputs();
+            List<SizedIngredient> item_inputs = recipe.getItemInputs().stream().map(r -> new SizedIngredient(r.inputSize, r.toRecipeIngredient())).collect(Collectors.toList());
 
-            NonNullList<ItemStack> item_outputs = recipe.getItemOutputs();
-            List<FluidStack> fluid_outputs = recipe.getFluidOutputs();
+            ArrayList<Object> outputs = new ArrayList<>(recipe.getItemOutputs());
+            outputs.addAll(recipe.getFluidOutputs());
 
-            IngredientMap<Object> ingredients = new IngredientMap<Object>();
-
-            if (item_inputs != null && !item_inputs.isEmpty()) {
-                for (Ingredient input : item_inputs) {
-                    if (input == null || input == Ingredient.EMPTY)
-                        continue;
-
-                    ingredients.addIngredient(PEIApi.getIngredient(input), 1);
-                }
-            }
-
-            if (fluid_inputs != null && !fluid_inputs.isEmpty()) {
-                for (FluidStack input : fluid_inputs) {
-                    if (input.amount <= 0)
-                        continue;
-
-                    ingredients.addIngredient(input, input.amount);
-                }
-            }
-
-            Map<Object, Integer> input_map = ingredients.getMap();
-            if (input_map == null || input_map.isEmpty())
-                return;
-
-            ArrayList<Object> outputs = new ArrayList<>();
-
-            if (item_outputs != null && !item_outputs.isEmpty()) {
-                for (ItemStack output : item_outputs) {
-                    if (output == null || output.isEmpty())
-                        continue;
-
-                    //addConversion(output, input_map);
-                    outputs.add(output);
-                }
-            }
-
-            if (fluid_outputs != null && !fluid_outputs.isEmpty()) {
-                for (FluidStack output : fluid_outputs) {
-                    if (output == null || output.amount <= 0)
-                        continue;
-
-                    //addConversion(output, input_map);
-                    outputs.add(output);
-                }
-            }
-
-            addConversion(outputs, input_map);
+            addRecipe(outputs, item_inputs, recipe.getFluidInputs());
         }
     }
 
-    private static class CrusherMapper extends MultiblockRecipeMapper {
+    private static class CrusherMapper extends MultiBlockRecipeMapper {
         public CrusherMapper() {
             super("Crusher");
         }
@@ -211,9 +159,9 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         }
     }
 
-    private static class EnginnerWorkbenchMapper extends MultiblockRecipeMapper {
-        public EnginnerWorkbenchMapper() {
-            super("Enginner Workbench");
+    private static class EngineerWorkbenchMapper extends MultiBlockRecipeMapper {
+        public EngineerWorkbenchMapper() {
+            super("Engineer Workbench");
         }
 
         @Override
@@ -224,7 +172,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
         }
     }
 
-    private static class MetalPressMapper extends MultiblockRecipeMapper {
+    private static class MetalPressMapper extends MultiBlockRecipeMapper {
         public MetalPressMapper() {
             super("Metal Press");
         }
