@@ -190,6 +190,7 @@ curseforge {
             optionalLibrary 'Blood-Magic'
             optionalLibrary 'Botania'
             optionalLibrary 'Embers'
+            optionalLibrary 'Embers-Rekindled' //The embers plugin supports both
             optionalLibrary 'ExtraBotany'
             optionalLibrary 'Mystical-Agriculture'
             optionalLibrary 'Psi'
