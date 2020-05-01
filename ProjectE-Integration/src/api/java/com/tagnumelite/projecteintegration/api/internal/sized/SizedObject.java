@@ -30,4 +30,9 @@ public class SizedObject<T> {
         this.amount = amount;
         this.object = obj;
     }
+
+    @Override
+    public String toString() {
+        return "SizedObject{amount=" + amount + ", object=" + object + '}';
+    }
 }
