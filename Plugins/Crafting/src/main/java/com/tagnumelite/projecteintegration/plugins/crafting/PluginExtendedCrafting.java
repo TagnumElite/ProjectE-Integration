@@ -27,11 +27,12 @@ public class PluginExtendedCrafting extends APEIPlugin {
         addMapper(new ECCompressorMapper());
         addMapper(new ECCombinationMapper());
         addMapper(new ECTableMapper());
+        addMapper(new ECEnderTableMapper());
     }
 
     private static class ECCompressorMapper extends PEIMapper {
         public ECCompressorMapper() {
-            super("compressor");
+            super("Compressor");
         }
 
         @Override
@@ -56,7 +57,7 @@ public class PluginExtendedCrafting extends APEIPlugin {
 
     private static class ECCombinationMapper extends PEIMapper {
         public ECCombinationMapper() {
-            super("combination");
+            super("Combination");
         }
 
         @Override
@@ -69,16 +70,25 @@ public class PluginExtendedCrafting extends APEIPlugin {
 
     private static class ECTableMapper extends PEIMapper {
         public ECTableMapper() {
-            super("table", "Enable Ender and Tiered crafting recipe mapper?");
+            super("Table");
+        }
+
+        @Override
+        public void setup() {
+            for (Object recipe : TableRecipeManager.getInstance().getRecipes()) {
+                addRecipe((IRecipe) recipe);
+            }
+        }
+    }
+
+    private static class ECEnderTableMapper extends PEIMapper {
+        public ECEnderTableMapper() {
+            super("Ender Table");
         }
 
         @Override
         public void setup() {
             for (Object recipe : EnderCrafterRecipeManager.getInstance().getRecipes()) {
-                addRecipe((IRecipe) recipe);
-            }
-
-            for (Object recipe : TableRecipeManager.getInstance().getRecipes()) {
                 addRecipe((IRecipe) recipe);
             }
         }

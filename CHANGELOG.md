@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change ArmorPlus Plugin to use addRecipe not AddConversion
 - Change the order mappers are added in Artisan Worktables
 - Change Chisel Group Name
+- Split the tables into two for Extended Crafting
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
