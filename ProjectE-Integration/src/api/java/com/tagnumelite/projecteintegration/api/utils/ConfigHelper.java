@@ -29,10 +29,14 @@ public final class ConfigHelper {
     }
 
     public static String getConversionName(String name) {
-        return "enable_" + ConfigHelper.prepareForConfig(name) + "_conversions";
+        return "enable_" + ConfigHelper.getConfigName(name) + "_conversions";
     }
 
-    public static String prepareForConfig(String txt) {
-        return txt.toLowerCase().replace(' ', '_');
+    public static String getConfigName(String txt) {
+        return txt.toLowerCase().replaceAll("[ \\-~`\\[{}\\]+='\";:/?.>,<!@#$%^&*()]", "_");
+    }
+
+    public static String getMapperName(PEIMapper mapper) {
+        return "enable_" + getConfigName(mapper.name) + "_mapper";
     }
 }

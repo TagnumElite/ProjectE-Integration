@@ -186,8 +186,8 @@ public abstract class APEIPlugin {
      * @param mapper The mapper to be added to the {@link PEIApi}
      */
     protected void addMapper(PEIMapper mapper) {
-        if (config.getBoolean("enable_" + mapper.name.toLowerCase().replace(' ', '_') + "_mapper", category,
-            !mapper.disabled_by_default, mapper.desc))
+        if (config.getBoolean(ConfigHelper.getMapperName(mapper), category, !mapper.disabled_by_default, mapper.desc)) {
             PEIApi.addMapper(mapper);
+        }
     }
 }

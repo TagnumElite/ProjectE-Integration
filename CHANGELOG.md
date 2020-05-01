@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for JitPack build and mapped my domain `tagnumelite.com`
 - Added `update.json` for version fetching
 - Added task to update `update.json` with current version
+- Added getMapperName to ConfigHelper
 
 ### Changed
 - Moved from Travis to GitHub Actions
@@ -44,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Add in world fluid and seed crafting alongside condenser singularity and matter_ball
 - Moved Util input handling code to IngredientHandler
 - Config category uses getCategory function
+- Config names now escape extra characters
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
