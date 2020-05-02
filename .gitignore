@@ -246,4 +246,4 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,gradle,eclipse,intellij,archives,forgegradle,visualstudiocode
 *.jks
-
+!/Plugins/Magic/libs/*.jar

@@ -25,13 +25,11 @@ dependencies {
     // JitPack
     deobfProvided("com.github.MysticMods:Embers:${commit_embers}") { exclude group: '*' }
 
+    // CurseForge
+    // V - java.util.zip.ZipException: invalid entry compressed size (expected 133 but got 131 bytes)
+    //deobfProvided "mystical-agriculture:MysticalAgriculture:${mc_version}:1.7.5"
+    deobfProvided "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
+
     // CurseMaven
     deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
-    //deobfProvided "com.github.BlakeBr0:MysticalAgriculture:5b1e05cebb" -- Srsly? Can't blame you
-    provided("com.github.Tagnum-Mods:MysticalAgriculture:${commit_mysticalagriculture}") {
-        exclude group: 'com.github.BlakeBr0'
-        exclude group: 'mezz.jei'
-        exclude group: 'mcp.mobius.waila'
-    }
-    deobfProvided "curse.maven:thaumcraft:${curse_thaumcraft}"
 }
