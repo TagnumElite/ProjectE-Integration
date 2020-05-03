@@ -50,7 +50,6 @@ public class PEIApi {
     private final List<APEIPlugin> PLUGINS = new ArrayList<>();
     private boolean LOADED = false;
 
-
     /**
      * If you need the instance, use {@link #getInstance()}.
      *
