@@ -29,6 +29,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -186,6 +187,9 @@ public abstract class APEIPlugin {
      * @param mapper The mapper to be added to the {@link PEIApi}
      */
     protected void addMapper(PEIMapper mapper) {
+        if (mapper.name.trim().isEmpty()) {
+            throw new IllegalArgumentException(String.format("Mapper '%s' name may not be empty", mapper.getClass().getCanonicalName()));
+        }
         if (config.getBoolean(ConfigHelper.getMapperName(mapper), category, !mapper.disabled_by_default, mapper.desc)) {
             PEIApi.addMapper(mapper);
         }
