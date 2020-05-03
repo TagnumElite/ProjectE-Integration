@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public abstract class PEIMapper {
     public final String name;
@@ -170,17 +171,21 @@ public abstract class PEIMapper {
         IngredientMap<Object> out_ing = new IngredientMap<>();
 
         for (Object out : output) {
-            if (out == null)
+            if (Objects.isNull(out)) {
                 continue;
+            }
             if (out instanceof ItemStack) {
                 ItemStack item = (ItemStack) out;
-                if (item.isEmpty())
+                if (item.isEmpty()) {
                     continue;
+                }
                 out_ing.addIngredient(out, item.getCount());
             } else if (out instanceof FluidStack) {
                 FluidStack fluid = (FluidStack) out;
-                if (fluid.amount <= 0)
+                if (fluid.amount <= 0) {
+                    PEIApi.LOG.info("Empty FluidStack Output");
                     continue;
+                }
                 out_ing.addIngredient(out, fluid.amount);
             } else if (out instanceof Item || out instanceof Block || out.getClass().equals(Object.class)) {
                 out_ing.addIngredient(out, 1);
@@ -190,7 +195,6 @@ public abstract class PEIMapper {
         }
 
         final Map<Object, Integer> outputs = out_ing.getMap();
-        out_ing = null;
 
         if (outputs.isEmpty()) {
             PEIApi.LOG.warn("Multi-Output: Empty outputs");
@@ -215,9 +219,7 @@ public abstract class PEIMapper {
             PEIApi.LOG.debug("Adding multi-output for {}*{}", out.getKey(), out.getValue());
             addConversion(out.getValue(), out.getKey(), ing);
         }
-
-        final long endTime = System.currentTimeMillis();
-        PEIApi.LOG.debug("Multi-Output Took {}ms", (endTime - startTime));
+        PEIApi.LOG.debug("Multi-Output Took {}ms", (System.currentTimeMillis() - startTime));
     }
 
     /**
@@ -264,7 +266,7 @@ public abstract class PEIMapper {
                 output_l = ((FluidStack) output).getFluid().getName();
 
             PEIApi.LOG.warn("Invalid Conversion: [{} ({})]*{} from {}", output_l,
-                ClassUtils.getPackageCanonicalName(output.getClass()), output_amount, input);
+                ClassUtils.getPackageCanonicalName(output != null ? output.getClass() : null), output_amount, input);
             return;
         }
 
