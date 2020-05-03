@@ -68,6 +68,7 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.4-nightly-20150209" level="project" />
+    <orderEntry type="library" name="Gradle: libvulpes:LibVulpes-1.12.2-0.4.2:deobf:74" level="project" />
     <orderEntry type="library" name="Gradle: com.github.SonarSonic:Sonar-Core:deobf:062c22d5c4" level="project" />
     <orderEntry type="module" module-name="ProjectE-Integration.ProjectE-Integration.api" />
   </component>

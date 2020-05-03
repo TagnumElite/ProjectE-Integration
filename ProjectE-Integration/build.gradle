@@ -9,22 +9,22 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.wynprice.cursemaven'
 
 jar {
-    from sourceSets.main.output
     from sourceSets.api.output
+    from sourceSets.main.output
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     description = 'Creates a JAR containing the source code.'
-    from sourceSets.main.allSource
     from sourceSets.api.allSource
+    from sourceSets.main.allSource
     classifier = 'sources'
 }
 
 task deobfJar(type: Jar) {
     description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.api.output
     from sourceSets.main.output
     classifier = "deobf"
 }

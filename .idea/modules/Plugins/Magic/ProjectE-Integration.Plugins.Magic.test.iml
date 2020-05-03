@@ -67,7 +67,7 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.4-nightly-20150209" level="project" />
-    <orderEntry type="library" name="Gradle: com.github.Tagnum-Mods:MysticalAgriculture:1878d17460" level="project" />
+    <orderEntry type="library" name="Gradle: deobf.embers:embers:0.230" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="ProjectE-Integration.Plugins.Magic.main" />
 </module>

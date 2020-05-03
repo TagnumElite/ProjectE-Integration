@@ -1,9 +1,5 @@
 repositories {
     maven {
-        name "TehNuuuuuuuuuuuut"
-        url 'http://tehnut.info/maven/'
-    }
-    maven {
         name 'BlameJared'
         url 'https://maven.blamejared.com/'
     }
@@ -11,25 +7,27 @@ repositories {
         name 'HellFire'
         url 'https://maven.hellfiredev.net'
     }
+    maven {
+        name "TehNuuuuuuuuuuuut"
+        url 'http://tehnut.info/maven/'
+    }
 }
 
 dependencies {
-    // Maven
-    deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
-    deobfProvided "vazkii.botania:Botania:${version_botania}"
-    deobfProvided "vazkii.psi:Psi:${version_psi}"
-
-    // HellFire
-    deobfProvided "hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}"
-
-    // JitPack
-    deobfProvided("com.github.MysticMods:Embers:${commit_embers}") { exclude group: '*' }
-
-    // CurseForge
+    // CurseForge Maven
+    deobfProvided "embers:embers:${version_embers}"
+    deobfProvided "extrabotany:ExtraBotany:${version_extrabotany}"
     // V - java.util.zip.ZipException: invalid entry compressed size (expected 133 but got 131 bytes)
     //deobfProvided "mystical-agriculture:MysticalAgriculture:${mc_version}:1.7.5"
     deobfProvided "thaumcraft:Thaumcraft:${mc_version}:${version_thaumcraft}"
 
-    // CurseMaven
-    deobfProvided "curse.maven:extrabotany:${curse_extrabotany}"
+    // BlameJared Maven
+    deobfProvided "vazkii.botania:Botania:${version_botania}"
+    deobfProvided "vazkii.psi:Psi:${version_psi}"
+
+    // HellFire Maven
+    deobfProvided "hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}"
+
+    // Tehnut Maven
+    deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
 }

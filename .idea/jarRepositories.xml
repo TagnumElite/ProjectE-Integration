@@ -121,5 +121,10 @@
       <option name="name" value="TTerrag 2" />
       <option name="url" value="https://maven2.tterrag.com" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="ModMuss50" />
+      <option name="name" value="ModMuss50" />
+      <option name="url" value="https://maven.modmuss50.me" />
+    </remote-repository>
   </component>
 </project>

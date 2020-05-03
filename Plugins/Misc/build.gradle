@@ -4,20 +4,22 @@ repositories {
         url = "http://maven.covers1624.net"
     }
     maven {
-        name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
+        name = 'DVS1 Maven'
+        url = 'http://dvs1.progwml6.com/files/maven'
     }
 }
 
 dependencies {
     //CoFH Maven
-    deobfProvided "morph.avaritia:Avaritia:${version_avaritia}:deobf"
+    deobfProvided "morph.avaritia:Avaritia:${mc_version}-${version_avaritia}:deobf"
 
-    // DVS1 Maven FS
-    provided "slimeknights.mantle:Mantle:1.12-1.3.3.42:deobf"
+    // CurseForge Maven
+    deobfProvided "woot:woot:${mc_version}:${version_woot}"
+
+    // DVS1 Maven
+    provided "slimeknights.mantle:Mantle:1.12-${version_mantle}:deobf"
     provided "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
 
     // JitPack
     provided "com.github.MatrexsVigil:harvestcraft:${commit_harvestcraft}"
-    provided("com.github.Ipsis:Woot:${mc_version}-${version_woot}") { exclude group: '*' }
 }

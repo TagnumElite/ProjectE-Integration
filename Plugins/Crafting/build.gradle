@@ -10,18 +10,15 @@ repositories {
 }
 
 dependencies {
-    // TTerrag
-    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
+    // CurseForge Maven
+    deobfProvided "armorplus:ArmorPlus:${mc_version}:${version_armorplus}"
+    deobfProvided "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
+    deobfProvided "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
 
-    // HellFire
+    // HellFire Maven
     provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
 
-    // JitPack
-    provided("com.github.sokratis12GR:ArmorPlus:${mc_version}-${version_armorplus}") { exclude group: '*' }
-    provided "com.github.BlakeBr0:Cucumber:${commit_cucumber}:deobf" // Extended Crafting Requirement
-
-    // CurseForge
-    deobfProvided "curse.maven:artisanworktables:${curse_artisanworktables}"
-    deobfProvided "curse.maven:extendedcrafting:${curse_extendedcrafting}"
+    // TTerrag Maven
+    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
 }
 

@@ -19,10 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 repositories {
     ivy {
-        name = "Galacticraft"
+        name = "MicDoodle CI"
         artifactPattern "https://ci.micdoodle8.com/job/Galacticraft-1.12/174/artifact/Forge/build/libs/[module]-[revision].[ext]"
     }
 }
@@ -30,11 +29,11 @@ repositories {
 dependencies {
     compile(project(':Plugins:Library'))
 
-    // Galacticraft
+    // CurseForge Maven
+    provided "advanced-rocketry:AdvancedRocketry-${mc_version}-${version_advancedrocketry}:deobf"
+
+    // MicDoodle CI
     deobfProvided name: 'Galacticraft-Planets', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
     deobfProvided name: 'GalacticraftCore', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
     deobfProvided name: 'MicdoodleCore', version: "${mc_version}-${version_galacticraft}", ext: 'jar'
-
-    // CurseMaven
-    provided "curse.maven:advancedrocketry:${curse_advancedrocketry}"
 }

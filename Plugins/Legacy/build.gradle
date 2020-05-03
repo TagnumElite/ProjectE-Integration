@@ -1,6 +1,6 @@
 dependencies {
-    // JitPack
-    provided("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft}") { exclude group: '*' }
+    // CurseForge Maven
+    deobfProvided "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
 
     // CurseMaven
     deobfProvided "curse.maven:ic2classic:${curse_ic2classic}"

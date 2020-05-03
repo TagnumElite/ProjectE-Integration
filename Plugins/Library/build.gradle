@@ -1,19 +1,17 @@
 repositories {
     maven {
-        name = 'Modmuss'
-        url = 'https://maven.modmuss50.me/'
-    }
-    maven {
         name = 'Elytra'
         url = 'http://repo.elytradev.com'
+    }
+    maven {
+        name = 'Modmuss'
+        url = 'https://maven.modmuss50.me/'
     }
 }
 
 dependencies {
-    // Modmuss Maven
-    deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
-        exclude group: 'mezz.jei'
-    }
+    // CurseForge
+    provided "libvulpes:LibVulpes-${mc_version}-${version_libvulpes}:deobf"
 
     // Elytra
     deobfProvided "pl.asie.charset:charset:${version_charset}:full"
@@ -21,6 +19,8 @@ dependencies {
     // JitPack
     provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
 
-    // CurseMaven
-    deobfProvided "curse.maven:libvulpes:${curse_libvulpes}"
+    // Modmuss Maven
+    deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
+        exclude group: 'mezz.jei'
+    }
 }

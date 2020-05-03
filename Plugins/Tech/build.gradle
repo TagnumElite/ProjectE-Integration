@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2019-2020 TagnumElite
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 repositories {
     maven {
         name = 'BlameJared'
@@ -12,8 +33,20 @@ repositories {
         url = 'http://maven.covers1624.net'
     }
     maven {
+        name = 'GregTech'
+        url = 'https://dl.bintray.com/gregtech/dev'
+    }
+    maven {
         name = 'Player'
         url = 'http://maven.ic2.player.to'
+    }
+    maven {
+        name = 'ModMuss50'
+        url = 'https://maven.modmuss50.me'
+    }
+    maven {
+        name = 'TehNuuuuuuuuuuuut'
+        url = 'http://tehnut.info/maven/'
     }
     maven {
         name = 'TTerrag'
@@ -23,34 +56,24 @@ repositories {
         name = 'TTerrag 2'
         url = 'https://maven2.tterrag.com'
     }
-    maven {
-        name = 'TehNuuuuuuuuuuuut'
-        url = 'http://tehnut.info/maven/'
-    }
-    maven {
-        name = 'GregTech'
-        url = 'https://dl.bintray.com/gregtech/dev'
-    }
 }
 
 dependencies {
     compile(project(':Plugins:Library'))
 
-    // GregTech Maven
-    deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
-
-    // Other
-    provided("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
+    // BlameJared Maven
+    deobfProvided("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
-        exclude group: 'jei-bees'
-        exclude group: 'net.industrial-craft'
     }
-    provided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
 
-    // MinecraftForge Maven
-    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}"
 
     // CoFH Maven
+    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:deobf") {
+        exclude group: 'mezz.jei'
+        exclude group: 'codechicken'
+        exclude group: 'cofh'
+        exclude group: 'li.cil.oc'
+    }
     deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
     deobfProvided("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
         exclude group: 'mezz.jei'
@@ -59,19 +82,29 @@ dependencies {
     deobfProvided("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
         exclude group: 'mezz.jei'
     }
-    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:deobf") {
-        exclude group: 'mezz.jei'
-        exclude group: 'codechicken'
-        exclude group: 'cofh'
-        exclude group: 'li.cil.oc'
-    }
 
-    // BlameJared Maven
-    deobfProvided("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
-        exclude group: 'mezz.jei'
-    }
+    // CurseForge
+    provided "calculator:calculator-${mc_version}-${version_calculator}:deobf"
+    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
+    deobfProvided "mekanism:Mekanism:${mc_version}:${version_mekanism}"
+    deobfProvided "nuclearcraft-overhauled:NuclearCraft:${version_nuclearcraftoverhauled}:${mc_version}"
+
+    // GregTech Maven
+    deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
+
+    // JitPack
+    provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
+
+    // MinecraftForge Maven
+    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}"
 
     // Player Maven
+    provided("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
+        exclude group: 'mezz.jei'
+        exclude group: 'jei-bees'
+        exclude group: 'net.industrial-craft'
+    }
+    provided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
     deobfProvided("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
         exclude group: 'mezz.jei'
     }
@@ -85,23 +118,10 @@ dependencies {
     // Mod Maven
     deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
     deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
-    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
+
+    // ModMuss50 Maven
     deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
         exclude group: 'mezz.jei'
     }
-
-    // Buildcraft Maven
-    deobfProvided "com.mod-buildcraft:buildcraft-api:${version_buildcraft}"
-    deobfProvided "com.mod-buildcraft:buildcraft-lib:${version_buildcraft}"
-
-    // JitPack
-    provided("com.github.turbodiesel4598:NuclearCraft:${commit_nuclearcraft_overhauled}") { exclude group: '*' }
-    provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
-
-    // CurseForge
-    provided "calculator:calculator-${mc_version}-${version_calculator}:deobf"
-    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
-
-    // CurseMaven
-    deobfProvided "curse.maven:mekanism:${curse_mekanism}"
+    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
 }
