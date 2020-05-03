@@ -24,7 +24,6 @@ package com.tagnumelite.projecteintegration.api.utils;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.internal.lists.InputList;
-import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
 import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
@@ -34,9 +33,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class IngredientHandler {
     private final IngredientMap<Object> ingredients;
@@ -65,52 +64,72 @@ public class IngredientHandler {
      * @return {@code true} if the ingredient was successfully added or {@code false} if it failed
      */
     public boolean add(Object ingredient) {
-        if (ingredient == null) return false;
+        if (Objects.isNull(ingredient)) return false;
 
-        if (ingredient instanceof ItemStack) {
-            if (((ItemStack) ingredient).isEmpty()) return false;
-            ingredients.addIngredient(ingredient, ((ItemStack) ingredient).getCount());
-        } else if (ingredient instanceof Item || ingredient instanceof Block || ingredient instanceof String
-            || ingredient.getClass().equals(Object.class)) {
-            ingredients.addIngredient(ingredient, 1);
-        } else if (ingredient instanceof FluidStack) {
-            if (((FluidStack) ingredient).amount <= 0) return false;
-
-            ingredients.addIngredient(ingredient, ((FluidStack) ingredient).amount);
-        } else if (ingredient instanceof List) {
-            List<?> inputt = (List<?>) ingredient;
-            if (inputt.isEmpty()) return false;
-            if (inputt.size() == 1) return add(inputt.get(0));
-
-            if (inputt instanceof InputList) {
-                ingredients.addIngredient(PEIApi.getList(inputt), 1);
-            } else {
-                return addAll(inputt.toArray());
-            }
-        } else if (ingredient instanceof Ingredient) {
-            if (ingredient == Ingredient.EMPTY) return false;
-            ingredients.addIngredient(PEIApi.getIngredient((Ingredient) ingredient), 1);
-        } else if (ingredient instanceof SizedIngredient) {
-            SizedIngredient inp = (SizedIngredient) ingredient;
-            if (inp.object == Ingredient.EMPTY)
-                return false;
-
-            ingredients.addIngredient(PEIApi.getIngredient(inp.object), inp.amount);
-        } else if (ingredient instanceof SizedObject) {
-            SizedObject<?> sized = (SizedObject<?>) ingredient;
-            if (sized.object == null)
-                return false;
-
-            ingredients.addIngredient(sized.object, sized.amount);
-        } else if (ingredient instanceof Object[]) {
-            InputList<Object> inputList = new InputList<>();
-            inputList.addAll(Arrays.asList((Object[]) ingredient));
-            return add(inputList);
+        SizedObject<Object> object;
+        if (ingredient instanceof SizedObject) {
+            SizedObject<Object> converted = convert(((SizedObject<?>) ingredient).object);
+            if (Objects.isNull(converted)) return false;
+            object = new SizedObject<>(((SizedObject<?>) ingredient).amount, converted.object);
         } else {
-            PEIApi.LOG.warn("Unknown ingredient: {} ({})", ingredient, ClassUtils.getPackageCanonicalName(ingredient.getClass()));
-            return false;
+            object = convert(ingredient);
         }
+        if (Objects.isNull(object)) return false;
+        ingredients.addIngredient(object.object, object.amount);
         return true;
+    }
+
+    public SizedObject<Object> convert(Object obj) {
+        if (Objects.isNull(obj)) return null;
+        int amount;
+        if (obj instanceof ItemStack) {
+            if (((ItemStack) obj).isEmpty()) {
+                return null;
+            }
+
+            amount = ((ItemStack) obj).getCount();
+        } else if (obj instanceof Item || obj instanceof Block || obj instanceof String || obj.getClass().equals(Object.class)) {
+            amount = 1;
+        } else if (obj instanceof FluidStack) {
+            PEIApi.LOG.info("FluidStack");
+            if (((FluidStack) obj).amount <= 0) {
+                return null;
+            }
+
+            amount = ((FluidStack) obj).amount;
+        } else if (obj instanceof List) {
+            List<?> inputt = (List<?>) obj;
+            if (inputt.isEmpty()) {
+                return null;
+            }
+            if (inputt.size() == 1) {
+                return convert(inputt.get(0));
+            }
+
+            amount = 1;
+            if (inputt instanceof InputList) {
+                obj = PEIApi.getList(inputt);
+            } else {
+                addAll(inputt.toArray());
+                return null;
+            }
+        } else if (obj instanceof Ingredient) {
+            if (obj == Ingredient.EMPTY) {
+                return null;
+            }
+            amount = 1;
+            obj = PEIApi.getIngredient((Ingredient) obj);
+        } else if (obj instanceof Object[]) {
+            addAll((Object[]) obj);
+            return null;
+        } else if (obj instanceof SizedObject) {
+            add(obj);
+            return null;
+        } else {
+            PEIApi.LOG.warn("Unknown ingredient: {} ({})", obj, ClassUtils.getPackageCanonicalName(obj.getClass()));
+            return null;
+        }
+        return new SizedObject<>(amount, obj);
     }
 
     public Map<Object, Integer> getMap() {

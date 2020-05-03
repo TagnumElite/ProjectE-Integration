@@ -22,7 +22,7 @@
 
 package com.tagnumelite.projecteintegration.plugins.tech;
 
-import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -65,7 +65,7 @@ public class PluginGregTechCE extends APEIPlugin {
                 ArrayList<Object> outputs = new ArrayList<>(2);
                 outputs.add(recipe.getFluidOutput());
                 outputs.add(recipe.getOutput());
-                addRecipe(outputs, new SizedIngredient(rInput.getCount(), rInput.getIngredient()));
+                addRecipe(outputs, new SizedObject<>(rInput.getCount(), rInput.getIngredient()));
             }
         }
     }
@@ -79,7 +79,7 @@ public class PluginGregTechCE extends APEIPlugin {
         public void setup() {
             for (PrimitiveBlastFurnaceRecipe recipe : RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES) {
                 CountableIngredient input = recipe.getInput();
-                addRecipe(recipe.getOutput(), new SizedIngredient(input.getCount(), input.getIngredient()));
+                addRecipe(recipe.getOutput(), new SizedObject<>(input.getCount(), input.getIngredient()));
             }
         }
     }
@@ -97,7 +97,7 @@ public class PluginGregTechCE extends APEIPlugin {
             for (Recipe recipe : map.getRecipeList()) {
                 ArrayList<Object> inputs = new ArrayList<>(recipe.getFluidInputs());
                 for (CountableIngredient input : recipe.getInputs()) {
-                    inputs.add(new SizedIngredient(input.getCount(), input.getIngredient()));
+                    inputs.add(new SizedObject<>(input.getCount(), input.getIngredient()));
                 }
 
                 ArrayList<Object> outputs = new ArrayList<>(recipe.getOutputs());

@@ -5,7 +5,7 @@ import com.codetaylor.mc.artisanworktables.api.internal.recipe.OutputWeightPair;
 import com.codetaylor.mc.artisanworktables.api.internal.reference.EnumTier;
 import com.codetaylor.mc.artisanworktables.api.recipe.IArtisanRecipe;
 import com.codetaylor.mc.artisanworktables.modules.worktables.ModuleWorktablesConfig;
-import com.tagnumelite.projecteintegration.api.internal.sized.SizedIngredient;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -48,13 +48,9 @@ public class PluginArtisanWorktables extends APEIPlugin {
             recipe_list = ArtisanAPI.getWorktableRecipeRegistry(name).getRecipeListByTier(tier, recipe_list);
 
             for (IArtisanRecipe recipe : recipe_list) {
-                List<SizedIngredient> ingredients = new ArrayList<>();
-                recipe.getIngredientList().forEach(ing -> {
-                    ingredients.add(new SizedIngredient(ing.getAmount(), ing.toIngredient()));
-                });
-                recipe.getSecondaryIngredients().forEach(ing -> {
-                    ingredients.add(new SizedIngredient(ing.getAmount(), ing.toIngredient()));
-                });
+                List<SizedObject<Object>> ingredients = new ArrayList<>();
+                recipe.getIngredientList().forEach(ing -> ingredients.add(new SizedObject<>(ing.getAmount(), ing.toIngredient())));
+                recipe.getSecondaryIngredients().forEach(ing -> ingredients.add(new SizedObject<>(ing.getAmount(), ing.toIngredient())));
                 FluidStack fluid_input = recipe.getFluidIngredient();
 
                 ArrayList<Object> outputs = new ArrayList<>();
@@ -62,17 +58,9 @@ public class PluginArtisanWorktables extends APEIPlugin {
                     outputs.add(output.getOutput().toItemStack());
                 }
 
-                if (recipe.getSecondaryOutputChance() >= 1f) {
-                    outputs.add(recipe.getSecondaryOutput().toItemStack());
-                }
-
-                if (recipe.getTertiaryOutputChance() >= 1f) {
-                    outputs.add(recipe.getTertiaryOutput().toItemStack());
-                }
-
-                if (recipe.getQuaternaryOutputChance() >= 1f) {
-                    outputs.add(recipe.getQuaternaryOutput().toItemStack());
-                }
+                if (recipe.getSecondaryOutputChance() >= 1f) outputs.add(recipe.getSecondaryOutput().toItemStack());
+                if (recipe.getTertiaryOutputChance() >= 1f) outputs.add(recipe.getTertiaryOutput().toItemStack());
+                if (recipe.getQuaternaryOutputChance() >= 1f) outputs.add(recipe.getQuaternaryOutput().toItemStack());
 
                 addRecipe(outputs, fluid_input, ingredients.toArray());
             }
