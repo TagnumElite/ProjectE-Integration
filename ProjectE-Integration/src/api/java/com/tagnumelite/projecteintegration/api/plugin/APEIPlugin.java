@@ -29,7 +29,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ public abstract class APEIPlugin {
     /**
      * This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_PLUGINS}
      * by the {@link PEIApi} and should not be called anywhere else.
-     *
+     * <p>
      * {@link #addEMC} and {@link #addMapper(PEIMapper)} should be called during this setup.
      *
      * @implNote The exception is only there for logging and can be ignored.

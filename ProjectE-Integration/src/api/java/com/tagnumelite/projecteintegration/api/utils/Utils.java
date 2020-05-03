@@ -6,8 +6,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
-import java.util.List;
-
 public class Utils {
     /**
      * Compare {@code ItemStack}s against each other
