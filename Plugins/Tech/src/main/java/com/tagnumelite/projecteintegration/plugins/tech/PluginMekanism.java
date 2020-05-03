@@ -177,26 +177,6 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    private class AdvancedMachineMapper extends PEIMapper {
-        private final Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type;
-
-        public AdvancedMachineMapper(Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type) {
-            super(recipe_type.getRecipeName());
-            this.recipe_type = recipe_type;
-        }
-
-        @Override
-        public void setup() {
-            for (AdvancedMachineRecipe<?> recipe : recipe_type.get().values()) {
-                if (GAS_MAP.containsKey(recipe.getInput().gasType))
-                    addRecipe(recipe.getOutput().output, recipe.getInput().itemStack,
-                        GAS_MAP.get(recipe.getInput().gasType));
-                else
-                    addRecipe(recipe.getOutput().output, recipe.getInput().itemStack);
-            }
-        }
-    }
-
     private static class ChanceMachineMapper extends PEIMapper {
         private final Recipe<?, ?, ? extends ChanceMachineRecipe<?>> recipe_type;
 
@@ -224,6 +204,40 @@ public class PluginMekanism extends APEIPlugin {
                 }
 
                 addRecipe(outputs, recipe.getInput().ingredient);
+            }
+        }
+    }
+
+    private static class ThermalEvaporationMapper extends PEIMapper {
+        public ThermalEvaporationMapper() {
+            super("Thermal Evaporation");
+        }
+
+        @Override
+        public void setup() {
+            for (ThermalEvaporationRecipe recipe : Recipe.THERMAL_EVAPORATION_PLANT.get().values()) {
+                FluidStack input = recipe.recipeInput.ingredient;
+                addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.amount));
+            }
+        }
+    }
+
+    private class AdvancedMachineMapper extends PEIMapper {
+        private final Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type;
+
+        public AdvancedMachineMapper(Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type) {
+            super(recipe_type.getRecipeName());
+            this.recipe_type = recipe_type;
+        }
+
+        @Override
+        public void setup() {
+            for (AdvancedMachineRecipe<?> recipe : recipe_type.get().values()) {
+                if (GAS_MAP.containsKey(recipe.getInput().gasType))
+                    addRecipe(recipe.getOutput().output, recipe.getInput().itemStack,
+                        GAS_MAP.get(recipe.getInput().gasType));
+                else
+                    addRecipe(recipe.getOutput().output, recipe.getInput().itemStack);
             }
         }
     }
@@ -380,20 +394,6 @@ public class PluginMekanism extends APEIPlugin {
                 FluidStack input = recipe.recipeInput.ingredient;
                 addConversion(recipe.getOutput().leftGas, ImmutableMap.of(input, input.amount));
                 addConversion(recipe.getOutput().rightGas, ImmutableMap.of(input, input.amount));
-            }
-        }
-    }
-
-    private static class ThermalEvaporationMapper extends PEIMapper {
-        public ThermalEvaporationMapper() {
-            super("Thermal Evaporation");
-        }
-
-        @Override
-        public void setup() {
-            for (ThermalEvaporationRecipe recipe : Recipe.THERMAL_EVAPORATION_PLANT.get().values()) {
-                FluidStack input = recipe.recipeInput.ingredient;
-                addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.amount));
             }
         }
     }

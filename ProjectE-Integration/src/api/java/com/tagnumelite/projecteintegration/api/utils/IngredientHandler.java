@@ -80,46 +80,59 @@ public class IngredientHandler {
     }
 
     public SizedObject<Object> convert(Object obj) {
+        PEIApi.LOG.info("Convert Input: {}", obj);
         if (Objects.isNull(obj)) return null;
         int amount;
         if (obj instanceof ItemStack) {
+            PEIApi.LOG.info("ItemStack");
             if (((ItemStack) obj).isEmpty()) {
+                PEIApi.LOG.warn("Empty ItemStack");
                 return null;
             }
 
             amount = ((ItemStack) obj).getCount();
         } else if (obj instanceof Item || obj instanceof Block || obj instanceof String || obj.getClass().equals(Object.class)) {
+            PEIApi.LOG.info("Item|Block|String|Object");
             amount = 1;
         } else if (obj instanceof FluidStack) {
             PEIApi.LOG.info("FluidStack");
             if (((FluidStack) obj).amount <= 0) {
+                PEIApi.LOG.warn("Empty FluidStack");
                 return null;
             }
 
             amount = ((FluidStack) obj).amount;
         } else if (obj instanceof List) {
+            PEIApi.LOG.info("List");
             List<?> inputt = (List<?>) obj;
             if (inputt.isEmpty()) {
+                PEIApi.LOG.warn("Empty List");
                 return null;
             }
             if (inputt.size() == 1) {
+                PEIApi.LOG.warn("List size == 1");
                 return convert(inputt.get(0));
             }
 
             amount = 1;
             if (inputt instanceof InputList) {
+                PEIApi.LOG.info("InputList");
                 obj = PEIApi.getList(inputt);
             } else {
+                PEIApi.LOG.info("Normal List");
                 addAll(inputt.toArray());
                 return null;
             }
         } else if (obj instanceof Ingredient) {
+            PEIApi.LOG.info("Ingredient");
             if (obj == Ingredient.EMPTY) {
+                PEIApi.LOG.warn("Empty Ingredient");
                 return null;
             }
             amount = 1;
             obj = PEIApi.getIngredient((Ingredient) obj);
         } else if (obj instanceof Object[]) {
+            PEIApi.LOG.info("Array");
             addAll((Object[]) obj);
             return null;
         } else if (obj instanceof SizedObject) {
