@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added getMapperName to ConfigHelper
 - Add Kiln support to Immersive Engineering
 - Added option to ignore slag output in Blast Furnace for Immersive Engineering
+- Added support for the Fermenter, Mixer, Refinery and Squeezer to Immersive Engineering
+- Added option to ignore creosote output from Coke Oven
 
 ### Changed
 - Moved from Travis to GitHub Actions
