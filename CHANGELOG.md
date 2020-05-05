@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Split the Mod into two projects: `ProjectE-Integration` and `Plugins`
 - Mod logic and the API were moved into `ProjectE-Integration`
 - Plugins were moved into their own category inside `Plugins`
+- Moved IC2 Classic support from IC plugin into it's own plugin 
 - Renamed IC plugin to IndustrialCraft
 - Moved all API files into the api source set
 - Moved lots of mod logic into the api
