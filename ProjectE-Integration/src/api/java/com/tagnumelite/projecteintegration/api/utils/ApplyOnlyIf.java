@@ -36,9 +36,17 @@ public final class ApplyOnlyIf {
      * @return
      */
     public static boolean apply(OnlyIf onlyIf, ModContainer modContainer) {
+        String mod_version = modContainer.getVersion();
         if (!StringUtils.isEmpty(onlyIf.versionStartsWith().trim())) {
-            if (!modContainer.getVersion().startsWith(onlyIf.versionStartsWith()))
-                return false;
+            if (!mod_version.startsWith(onlyIf.versionStartsWith())) return false;
+        }
+        String versionEndsWith = onlyIf.versionEndsWith().trim();
+        if (!StringUtils.isEmpty(versionEndsWith)) {
+            if (versionEndsWith.charAt(0) == '!') {
+                return !mod_version.endsWith(versionEndsWith);
+            } else {
+                return mod_version.endsWith(versionEndsWith);
+            }
         }
         return true;
     }

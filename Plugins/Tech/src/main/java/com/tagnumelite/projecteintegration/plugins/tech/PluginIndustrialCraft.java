@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ic2.api.recipe.*;
 import ic2.core.recipe.AdvRecipe;
@@ -20,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 @PEIPlugin("ic2")
+@OnlyIf(versionEndsWith="-ex112")
 public class PluginIndustrialCraft extends APEIPlugin {
     public PluginIndustrialCraft(String modid, Configuration config) {
         super(modid, config);

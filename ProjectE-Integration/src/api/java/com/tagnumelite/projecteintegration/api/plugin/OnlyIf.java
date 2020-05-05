@@ -31,4 +31,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface OnlyIf {
     String versionStartsWith() default "";
+
+    String versionEndsWith() default "";
 }

@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.plugins.legacy;
 import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
+import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ic2.api.classic.recipe.ClassicRecipes;
 import ic2.api.classic.recipe.machine.IElectrolyzerRecipeList;
@@ -33,6 +34,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.util.ArrayList;
 
 @PEIPlugin("ic2")
+@OnlyIf(versionEndsWith="!-ex112")
 public class PluginIC2Classic extends APEIPlugin {
     public PluginIC2Classic(String modid, Configuration config) {
         super(modid, config);
