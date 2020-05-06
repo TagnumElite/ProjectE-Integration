@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 dependencies {
     // CurseForge Maven
     deobfProvided "nuclearcraft-mod:NuclearCraft:${version_nuclearcraft}:${mc_version}"
