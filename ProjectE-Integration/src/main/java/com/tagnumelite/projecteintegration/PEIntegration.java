@@ -86,8 +86,8 @@ public class PEIntegration {
         API.setupPlugins();
         versionCheck = ForgeVersion.getResult(Loader.instance().activeModContainer());
         if (config.hasChanged()) config.save();
-        PermissionAPI.registerNode(updateNotifierPerm, DefaultPermissionLevel.OP, "Should this user recieve update notifications");
-        PermissionAPI.registerNode(errorNotifierPerm, DefaultPermissionLevel.OP, "Should this user recieve notifications about failed mappers");
+        PermissionAPI.registerNode(updateNotifierPerm, DefaultPermissionLevel.OP, "Should this user receive update notifications");
+        PermissionAPI.registerNode(errorNotifierPerm, DefaultPermissionLevel.OP, "Should this user receive notifications about failed mappers");
     }
 
     @EventHandler
