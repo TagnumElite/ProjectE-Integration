@@ -30,7 +30,6 @@ import me.desht.pneumaticcraft.api.recipe.IThermopneumaticProcessingPlantRecipe;
 import me.desht.pneumaticcraft.api.recipe.ItemIngredient;
 import me.desht.pneumaticcraft.common.recipes.*;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -41,8 +40,7 @@ import java.util.List;
 public class PluginPneumaticCraft extends APEIPlugin {
     private final boolean ignore_loss_rate;
 
-    public PluginPneumaticCraft(String modid, Configuration config) {
-        super(modid, config);
+    public PluginPneumaticCraft() {
         ignore_loss_rate = config.getBoolean("ignore_explosion_loss_rate", ConfigHelper.getPluginCategory("pneumaticcraft"), false, "Ignore loss rate for explosion crafting");
     }
 

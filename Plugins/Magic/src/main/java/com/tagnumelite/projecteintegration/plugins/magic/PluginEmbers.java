@@ -24,15 +24,10 @@ package com.tagnumelite.projecteintegration.plugins.magic;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import net.minecraftforge.common.config.Configuration;
 import teamroots.embers.recipe.*;
 
 @PEIPlugin("embers")
 public class PluginEmbers extends APEIPlugin {
-    public PluginEmbers(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new AlchemyMapper());

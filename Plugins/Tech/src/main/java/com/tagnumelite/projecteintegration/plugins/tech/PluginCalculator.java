@@ -3,16 +3,11 @@ package com.tagnumelite.projecteintegration.plugins.tech;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.plugins.library.PluginSonarCore.SonarMapper;
-import net.minecraftforge.common.config.Configuration;
 import sonar.calculator.mod.common.recipes.*;
 import sonar.core.recipes.DefaultSonarRecipe;
 
 @PEIPlugin("calculator")
 public class PluginCalculator extends APEIPlugin {
-    public PluginCalculator(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new AlgorithmSeparatorMapper());

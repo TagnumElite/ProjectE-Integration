@@ -4,15 +4,10 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import forestry.api.recipes.*;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 @PEIPlugin("forestry")
 public class PluginForestry extends APEIPlugin {
-    public PluginForestry(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new CarpenterMapper());

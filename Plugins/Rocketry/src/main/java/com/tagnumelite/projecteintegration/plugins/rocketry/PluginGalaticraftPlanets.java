@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.plugins.rocketry;
 
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -27,14 +26,9 @@ import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("galacticraftplanets")
 public class PluginGalaticraftPlanets extends APEIPlugin {
-    public PluginGalaticraftPlanets(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         // Set Desh Ore EMC to 256

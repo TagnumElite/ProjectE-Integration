@@ -5,14 +5,9 @@ import com.meteor.extrabotany.common.crafting.recipe.RecipePedestal;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("extrabotany")
 public class PluginExtraBotany extends APEIPlugin {
-    public PluginExtraBotany(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new PedestalMapper());

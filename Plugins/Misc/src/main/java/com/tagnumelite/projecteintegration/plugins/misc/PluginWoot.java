@@ -5,14 +5,9 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ipsis.Woot;
 import ipsis.woot.crafting.IAnvilRecipe;
-import net.minecraftforge.common.config.Configuration;
 
 @PEIPlugin("woot")
 public class PluginWoot extends APEIPlugin {
-    public PluginWoot(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() throws Exception {
         addMapper(new AnvilMapper());

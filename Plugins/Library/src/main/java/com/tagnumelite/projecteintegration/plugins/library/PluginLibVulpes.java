@@ -5,7 +5,6 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 import zmaster587.libVulpes.interfaces.IRecipe;
 import zmaster587.libVulpes.recipe.RecipesMachine;
@@ -16,10 +15,6 @@ import java.util.List;
 
 @PEIPlugin("libVulpes")
 public class PluginLibVulpes extends APEIPlugin {
-    public PluginLibVulpes(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         PEIApi.LOG.debug("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());

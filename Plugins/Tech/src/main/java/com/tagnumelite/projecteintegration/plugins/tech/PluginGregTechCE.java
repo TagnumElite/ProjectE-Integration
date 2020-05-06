@@ -34,16 +34,11 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipes.CokeOvenRecipe;
 import gregtech.api.recipes.recipes.PrimitiveBlastFurnaceRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 
 @PEIPlugin("gregtech")
 public class PluginGregTechCE extends APEIPlugin {
-    public PluginGregTechCE(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new CokeOvenMapper());

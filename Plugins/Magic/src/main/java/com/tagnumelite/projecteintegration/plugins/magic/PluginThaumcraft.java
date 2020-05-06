@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.config.Configuration;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -27,10 +26,6 @@ public class PluginThaumcraft extends APEIPlugin {
     private final Set<IArcaneRecipe> ARCANE_RECIPES = new HashSet<>();
     private final Set<CrucibleRecipe> CRUCIBLE_RECIPES = new HashSet<>();
     private final Set<InfusionRecipe> INFUSION_RECIPES = new HashSet<>();
-
-    public PluginThaumcraft(String modid, Configuration config) {
-        super(modid, config);
-    }
 
     @Override
     public void setup() {

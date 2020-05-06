@@ -26,7 +26,6 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
 
@@ -36,10 +35,6 @@ import java.util.Objects;
 
 @PEIPlugin("chisel")
 public class PluginChisel extends APEIPlugin {
-    public PluginChisel(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         assert CarvingUtils.getChiselRegistry() != null;

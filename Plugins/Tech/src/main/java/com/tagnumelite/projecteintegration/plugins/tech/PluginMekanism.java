@@ -43,7 +43,6 @@ import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -53,12 +52,8 @@ import java.util.Map.Entry;
 
 @PEIPlugin("mekanism")
 public class PluginMekanism extends APEIPlugin {
-    private final Map<Gas, Object> GAS_MAP = new HashMap<Gas, Object>();
-    private final Map<InfuseType, Object> INFUSE_MAP = new HashMap<InfuseType, Object>();
-
-    public PluginMekanism(String modid, Configuration config) {
-        super(modid, config);
-    }
+    private final Map<Gas, Object> GAS_MAP = new HashMap<>();
+    private final Map<InfuseType, Object> INFUSE_MAP = new HashMap<>();
 
     @Override
     public void setup() {

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.plugin;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
@@ -39,22 +38,25 @@ import java.util.List;
  * @see PEIMapper
  */
 public abstract class APEIPlugin {
+    public final String name;
     public final String modid;
-    public final Configuration config;
     public final String category;
+    public final Configuration config;
 
     /**
-     * This is called by the {@link PEIApi} and should not be called anywhere else.
-     * This may be used to fetch required configs values.
-     * This is only called if the modid from {@link PEIPlugin#value()} is loaded
+     * Instantiate the Plugin and fetch modid, name, category and config.
      *
-     * @param modid  The modid that the plugin is registered to
-     * @param config The config used by the mod
+     * @throws IllegalStateException    Class doesn't have a {@link PEIPlugin} annotation
+     * @throws IllegalArgumentException {@link PEIPlugin#value()} is empty when it must not be
      */
-    public APEIPlugin(String modid, Configuration config) {
-        this.modid = modid;
-        this.config = config;
-        this.category = ConfigHelper.getPluginCategory(modid);
+    public APEIPlugin() {
+        PEIPlugin plugin = getClass().getAnnotation(PEIPlugin.class);
+        if (plugin == null) throw new IllegalStateException("Plugins must have a @PEIPlugin annotation");
+        modid = plugin.value();
+        if (modid.trim().isEmpty()) throw new IllegalArgumentException("@PEIPlugin modid may not be empty");
+        name = plugin.name().isEmpty() ? modid : plugin.name();
+        category = plugin.config().isEmpty() ? modid : plugin.config();
+        config = PEIApi.getInstance().CONFIG;
     }
 
     /**

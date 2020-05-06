@@ -14,7 +14,6 @@ import nc.recipe.NCRecipes;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -24,10 +23,6 @@ import java.util.List;
 @PEIPlugin("nuclearcraft")
 @OnlyIf(versionStartsWith = "2.")
 public class PluginNuclearCraft extends APEIPlugin {
-    public PluginNuclearCraft(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();

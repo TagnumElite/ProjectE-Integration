@@ -9,7 +9,6 @@ import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -17,10 +16,6 @@ import java.util.List;
 
 @PEIPlugin("artisanworktables")
 public class PluginArtisanWorktables extends APEIPlugin {
-    public PluginArtisanWorktables(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         for (String name : ArtisanAPI.getWorktableNames()) {

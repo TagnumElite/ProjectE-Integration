@@ -57,10 +57,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Split the tables into two for Extended Crafting
 - Rename Mixer to FluidMixer in Embers plugin
 - ImmersiveEngineeringPlugin: Rename Multiblock to MultiBlock, fixed Enginner type
+- APEIPlugin modid is fetched from PEIPlugin annotation and now throws an exception if not available
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
 - Utils.createOutputs: It was old and for something completely unknown now
+- Arguments from APEIPlugin constructor
 
 ### Fixed
 - Fixed plugins

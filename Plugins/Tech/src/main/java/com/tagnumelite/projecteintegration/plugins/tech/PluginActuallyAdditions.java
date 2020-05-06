@@ -8,16 +8,11 @@ import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.EmpowererRecipe;
 import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
 import de.ellpeck.actuallyadditions.mod.items.InitItems;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 
 @PEIPlugin("actuallyadditions")
 public class PluginActuallyAdditions extends APEIPlugin {
-    public PluginActuallyAdditions(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addEMC(InitItems.itemMisc, 13, 64);

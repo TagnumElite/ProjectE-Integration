@@ -15,7 +15,6 @@ import crazypants.enderio.base.recipe.soul.ISoulBinderRecipe;
 import crazypants.enderio.base.recipe.vat.VatRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +23,6 @@ import java.util.stream.Collectors;
 @PEIPlugin("enderio")
 public class PluginEnderIO extends APEIPlugin {
     private List<IMachineRecipe> SOULBINDER_RECIPES;
-
-    public PluginEnderIO(String modid, Configuration config) {
-        super(modid, config);
-    }
 
     @Override
     public void setup() {

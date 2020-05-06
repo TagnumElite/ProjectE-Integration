@@ -9,17 +9,12 @@ import hellfirepvp.astralsorcery.common.crafting.grindstone.GrindstoneRecipe;
 import hellfirepvp.astralsorcery.common.crafting.grindstone.GrindstoneRecipeRegistry;
 import hellfirepvp.astralsorcery.common.crafting.infusion.AbstractInfusionRecipe;
 import hellfirepvp.astralsorcery.common.crafting.infusion.InfusionRecipeRegistry;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @PEIPlugin("astralsorcery")
 public class PluginAstralSorcery extends APEIPlugin {
-    public PluginAstralSorcery(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new AltarMapper());

@@ -6,17 +6,12 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @PEIPlugin("armorplus")
 public class PluginArmorPlus extends APEIPlugin {
-    public PluginArmorPlus(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new BenchMapper(BaseCraftingManager.getWBInstance()));

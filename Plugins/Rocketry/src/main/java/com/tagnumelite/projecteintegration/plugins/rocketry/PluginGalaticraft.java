@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.plugins.rocketry;
 
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
@@ -31,17 +30,12 @@ import micdoodle8.mods.galacticraft.core.GCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @PEIPlugin("galacticraftcore")
 public class PluginGalaticraft extends APEIPlugin {
-    public PluginGalaticraft(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         // Set Meteoric Iron Raw EMC to 512

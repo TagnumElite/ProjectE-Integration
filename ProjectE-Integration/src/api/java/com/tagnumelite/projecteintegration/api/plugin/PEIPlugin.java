@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 
 /**
  * This tells the mod that the class is a plugin and should be loaded
- * All plugins should extend {@link APEIPlugin} otherwise it is just ignored.
+ * All plugins must extend {@link APEIPlugin} otherwise it is just ignored.
  *
  * @see APEIPlugin
  */
@@ -40,4 +40,14 @@ public @interface PEIPlugin {
      * @return The modid of the registered plugin
      */
     String value();
+
+    /**
+     * @return
+     */
+    String name() default "";
+
+    /**
+     * @return
+     */
+    String config() default "";
 }

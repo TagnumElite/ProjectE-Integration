@@ -16,7 +16,6 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,10 +23,6 @@ import java.util.Optional;
 
 @PEIPlugin("appliedenergistics2")
 public class PluginAppliedEnergistics extends APEIPlugin {
-    public PluginAppliedEnergistics(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         if (AEConfig.instance().isFeatureEnabled(AEFeature.CONDENSER)) addMapper(new CondenserMapper());

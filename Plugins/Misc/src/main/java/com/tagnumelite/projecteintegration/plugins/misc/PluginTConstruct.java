@@ -3,7 +3,6 @@ package com.tagnumelite.projecteintegration.plugins.misc;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import net.minecraftforge.common.config.Configuration;
 import slimeknights.tconstruct.library.DryingRecipe;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
@@ -11,10 +10,6 @@ import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 
 @PEIPlugin("tconstruct")
 public class PluginTConstruct extends APEIPlugin {
-    public PluginTConstruct(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new AlloyMapper());

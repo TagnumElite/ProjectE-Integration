@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.recipe.*;
 
@@ -22,9 +21,7 @@ public class PluginBotania extends APEIPlugin {
     private final Object mana = new Object();
     private final boolean add_emc_to_mana;
 
-    public PluginBotania(String modid, Configuration config) {
-        super(modid, config);
-
+    public PluginBotania() {
         add_emc_to_mana = config.getBoolean("add_emc_to_mana", this.category, true, "Should mana have an EMC?");
     }
 

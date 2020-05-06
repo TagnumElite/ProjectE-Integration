@@ -14,7 +14,6 @@ import hellfirepvp.modularmachinery.common.machine.DynamicMachine;
 import hellfirepvp.modularmachinery.common.machine.MachineRegistry;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -22,10 +21,6 @@ import java.util.Map;
 
 @PEIPlugin("modularmachinery")
 public class PluginModularMachinery extends APEIPlugin {
-    public PluginModularMachinery(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         PEIntegration.LOG.info("Requirement Types: {}", RegistriesMM.REQUIREMENT_TYPE_REGISTRY.getEntries());

@@ -29,17 +29,12 @@ import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ic2.api.classic.recipe.ClassicRecipes;
 import ic2.api.classic.recipe.machine.IElectrolyzerRecipeList;
 import ic2.api.classic.recipe.machine.IMachineRecipeList;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 
 @PEIPlugin("ic2")
-@OnlyIf(versionEndsWith="!-ex112")
+@OnlyIf(versionEndsWith = "!-ex112")
 public class PluginIC2Classic extends APEIPlugin {
-    public PluginIC2Classic(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new MachineMapper("Compressor", ClassicRecipes.compressor));

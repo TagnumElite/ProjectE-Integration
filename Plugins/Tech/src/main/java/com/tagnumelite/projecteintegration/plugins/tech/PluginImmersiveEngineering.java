@@ -9,7 +9,6 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -18,10 +17,6 @@ import java.util.stream.Collectors;
 
 @PEIPlugin("immersiveengineering")
 public class PluginImmersiveEngineering extends APEIPlugin {
-    public PluginImmersiveEngineering(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     public static Object convertIngredientStack(IngredientStack stack) {
         if (stack.stack != null && !stack.stack.isEmpty()) {
             ItemStack item = stack.stack.copy();

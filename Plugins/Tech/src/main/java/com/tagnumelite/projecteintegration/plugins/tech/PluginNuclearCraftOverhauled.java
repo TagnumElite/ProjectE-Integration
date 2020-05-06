@@ -19,11 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.plugins.tech;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -36,7 +34,6 @@ import nc.recipe.NCRecipes;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -46,10 +43,6 @@ import java.util.List;
 @PEIPlugin("nuclearcraft")
 @OnlyIf(versionStartsWith = "2o.")
 public class PluginNuclearCraftOverhauled extends APEIPlugin {
-    public PluginNuclearCraftOverhauled(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();
@@ -95,9 +88,8 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
                 List<IItemIngredient> item_outputs = recipe.getItemProducts();
                 List<IFluidIngredient> fluid_outputs = recipe.getFluidProducts();
 
-                if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0)
-                    || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
-                    PEIntegration.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
+                if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0) || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
+                    PEIApi.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
                     continue;
                 }
 
@@ -113,12 +105,9 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
 
                 ArrayList<Object> output = new ArrayList<>();
                 item_outputs.forEach(item -> {
-                    PEIApi.LOG.debug("Item Input: {}; Output {};", item.getInputStackList(), item.getOutputStackList());
                     output.addAll(item.getOutputStackList());
                 });
                 fluid_outputs.forEach(fluid -> {
-                    PEIApi.LOG.debug("Fluid Input: {}; Output {};", fluid.getInputStackList(),
-                        fluid.getOutputStackList());
                     output.addAll(fluid.getInputStackList());
                 });
 

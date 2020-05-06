@@ -12,16 +12,11 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.config.Configuration;
 
 import java.util.List;
 
 @PEIPlugin("extendedcrafting")
 public class PluginExtendedCrafting extends APEIPlugin {
-    public PluginExtendedCrafting(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new ECCompressorMapper());

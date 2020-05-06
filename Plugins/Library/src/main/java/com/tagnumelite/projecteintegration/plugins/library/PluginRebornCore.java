@@ -6,7 +6,6 @@ import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import reborncore.api.recipe.IBaseRecipeType;
 import reborncore.api.recipe.RecipeHandler;
 import reborncore.common.recipes.RecipeTranslator;
@@ -18,11 +17,6 @@ import java.util.Map;
 
 @PEIPlugin("reborncore")
 public class PluginRebornCore extends APEIPlugin {
-
-    public PluginRebornCore(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addMapper(new RebornCoreMapper());

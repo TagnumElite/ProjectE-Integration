@@ -11,7 +11,6 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.Utils;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.util.Arrays;
@@ -19,10 +18,6 @@ import java.util.Map;
 
 @PEIPlugin("harvestcraft")
 public class PluginPamsHarvestCraft extends APEIPlugin {
-    public PluginPamsHarvestCraft(String modid, Configuration config) {
-        super(modid, config);
-    }
-
     @Override
     public void setup() {
         addEMC("listAllfruit", 128);

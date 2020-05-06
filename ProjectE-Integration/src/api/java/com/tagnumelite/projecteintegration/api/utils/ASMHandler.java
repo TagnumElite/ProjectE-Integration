@@ -69,18 +69,21 @@ public final class ASMHandler {
                     if (asmClass.isAnnotationPresent(OnlyIf.class)) {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
                         ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
-                        if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) continue;
+                        if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) {
+                            PEIApi.LOG.debug("Skipping plugin '{}'", modid);
+                            continue;
+                        }
                     }
 
                     if (!config.getBoolean("enable", ConfigHelper.getPluginCategory(modid), true, "Enable the plugin"))
                         continue;
 
                     Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
-                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor(String.class, Configuration.class);
-                    plugins.add(plugin.newInstance(modid, config));
+                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor();
+                    plugins.add(plugin.newInstance());
                 }
             } catch (Throwable t) {
-                PEIApi.LOG.error("Failed to load: {}", asmData.getClassName(), t);
+                PEIApi.LOG.error("Failed to instantiate plugin {}:", asmData.getClassName(), t);
                 failed.put(modid, asmData.getClassName());
             }
         }
