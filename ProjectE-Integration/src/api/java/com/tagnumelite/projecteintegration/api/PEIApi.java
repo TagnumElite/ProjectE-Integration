@@ -79,8 +79,8 @@ public class PEIApi {
      * @throws IllegalStateException Tried to create an Instance of the API when one existed already
      */
     public PEIApi(Configuration config, ASMDataTable asmData) {
-        if (INSTANCE != null)
-            throw new IllegalStateException("Tried to create an instance of the API when one existed already!");
+        if (INSTANCE != null) throw new IllegalStateException("Tried to create an instance of the API when one existed already!");
+        INSTANCE = this;
 
         PHASE = Phase.INITIALIZING;
         CONFIG = config;
@@ -92,7 +92,6 @@ public class PEIApi {
         final long endTime = System.currentTimeMillis();
         LOG.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
         PHASE = Phase.WAITING;
-        INSTANCE = this;
     }
 
     /**
@@ -103,9 +102,11 @@ public class PEIApi {
     }
 
     /**
+     * @throws IllegalStateException The api hasn't been instantiated yet
      * @return Returns the current {@link PEIApi} Instance
      */
     public static PEIApi getInstance() {
+        if (INSTANCE == null) throw new IllegalStateException("PEIApi hasn't been instantiated yet");
         return INSTANCE;
     }
 
