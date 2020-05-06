@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.utils;
 
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
@@ -38,14 +37,18 @@ public final class ApplyOnlyIf {
     public static boolean apply(OnlyIf onlyIf, ModContainer modContainer) {
         String mod_version = modContainer.getVersion();
         if (!StringUtils.isEmpty(onlyIf.versionStartsWith().trim())) {
-            if (!mod_version.startsWith(onlyIf.versionStartsWith())) return false;
+            if (!mod_version.startsWith(onlyIf.versionStartsWith())) {
+                return false;
+            }
         }
         String versionEndsWith = onlyIf.versionEndsWith().trim();
         if (!StringUtils.isEmpty(versionEndsWith)) {
-            if (versionEndsWith.charAt(0) == '!') {
-                return !mod_version.endsWith(versionEndsWith);
-            } else {
-                return mod_version.endsWith(versionEndsWith);
+            // Is the version compare string starting with a '!'. Then we assume that we must invert the comparision
+            boolean invert = versionEndsWith.charAt(0) == '!';
+            // Remove the '!' from string if it starts with it
+            versionEndsWith = invert ? versionEndsWith.substring(1) : versionEndsWith;
+            if (invert == mod_version.endsWith(versionEndsWith)) {
+                return false;
             }
         }
         return true;
