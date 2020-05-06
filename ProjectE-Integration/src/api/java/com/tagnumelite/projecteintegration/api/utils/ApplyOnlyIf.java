@@ -26,13 +26,17 @@ import net.minecraftforge.fml.common.ModContainer;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * The class that contains the logic for {@link OnlyIf}
  *
+ * @see OnlyIf
  */
 public final class ApplyOnlyIf {
     /**
-     * @param onlyIf
-     * @param modContainer
-     * @return
+     * Check if the {@link ModContainer} is to the specification of {@link OnlyIf}
+     *
+     * @param onlyIf       Used to compare against the mod
+     * @param modContainer Mod container to compare against
+     * @return A boolean that denotes whether modContainer is to specification of onlyIf
      */
     public static boolean apply(OnlyIf onlyIf, ModContainer modContainer) {
         String mod_version = modContainer.getVersion();
