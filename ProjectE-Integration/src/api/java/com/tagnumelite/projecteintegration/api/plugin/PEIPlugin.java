@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.plugin;
 
 import java.lang.annotation.ElementType;
@@ -37,17 +36,23 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface PEIPlugin {
     /**
+     * The Mod ID of the mod that the plugin is made for.
+     *
      * @return The modid of the registered plugin
      */
     String value();
 
     /**
-     * @return
+     * Sets the name of the plugin, should default to {@link #value()} if empty.
+     *
+     * @return The name of the plugin
      */
     String name() default "";
 
     /**
-     * @return
+     * Sets the config category of the plugin, should default to {@link #value()} if empty.
+     *
+     * @return The config category of the plugin
      */
     String config() default "";
 }
