@@ -22,7 +22,6 @@
 package com.tagnumelite.projecteintegration.plugins.legacy;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -95,9 +94,8 @@ public class PluginNuclearCraft extends APEIPlugin {
                 List<IItemIngredient> item_outputs = recipe.itemProducts();
                 List<IFluidIngredient> fluid_outputs = recipe.fluidProducts();
 
-                if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0)
-                    || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
-                    PEIntegration.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
+                if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0) || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
+                    PEIApi.LOG.warn("Invalid NC IRecipe `{}`", name);
                     continue;
                 }
 
@@ -113,13 +111,10 @@ public class PluginNuclearCraft extends APEIPlugin {
 
                 ArrayList<Object> output = new ArrayList<>();
                 item_outputs.forEach(item -> {
-                    PEIApi.LOG.debug("Item Input: {}; Output {};", item.getInputStackList(), item.getOutputStackList());
                     output.addAll(item.getOutputStackList());
                 });
                 fluid_outputs.forEach(fluid -> {
-                    PEIApi.LOG.debug("Fluid Input: {}; Output {};", fluid.getInputStackList(),
-                        fluid.getOutputStackList());
-                    output.addAll(fluid.getInputStackList());
+                    output.addAll(fluid.getOutputStackList());
                 });
 
                 addConversion(output, ingredients.getMap());

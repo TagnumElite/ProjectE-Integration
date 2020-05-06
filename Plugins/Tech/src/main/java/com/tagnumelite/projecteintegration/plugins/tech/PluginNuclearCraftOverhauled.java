@@ -32,6 +32,7 @@ import nc.recipe.AbstractRecipeHandler;
 import nc.recipe.IRecipe;
 import nc.recipe.NCRecipes;
 import nc.recipe.ingredient.IFluidIngredient;
+import nc.recipe.ingredient.IIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -62,19 +63,9 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
             this.handler = handler;
         }
 
-        private Object getObjectFromItemIngredient(IItemIngredient item) {
+        private <S> Object getObjectFromIIngredient(IIngredient<S> ingredient) {
             Object obj = new Object();
-            for (ItemStack input : item.getInputStackList()) {
-                addConversion(1, obj, ImmutableMap.of(input, input.getCount()));
-            }
-            return obj;
-        }
-
-        private Object getObjectFromFluidIngredient(IFluidIngredient fluid) {
-            Object obj = new Object();
-            for (FluidStack input : fluid.getInputStackList()) {
-                addConversion(1, obj, ImmutableMap.of(input, input.amount));
-            }
+            ingredient.getInputStackList().forEach(ing -> addRecipe(1, obj, ing));
             return obj;
         }
 
@@ -96,11 +87,11 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
                 IngredientMap<Object> ingredients = new IngredientMap<>();
 
                 for (IItemIngredient input : item_inputs) {
-                    ingredients.addIngredient(getObjectFromItemIngredient(input), input.getMaxStackSize(0));
+                    ingredients.addIngredient(getObjectFromIIngredient(input), input.getMaxStackSize(0));
                 }
 
                 for (IFluidIngredient input : fluid_inputs) {
-                    ingredients.addIngredient(getObjectFromFluidIngredient(input), input.getMaxStackSize(0));
+                    ingredients.addIngredient(getObjectFromIIngredient(input), input.getMaxStackSize(0));
                 }
 
                 ArrayList<Object> output = new ArrayList<>();
@@ -108,7 +99,7 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
                     output.addAll(item.getOutputStackList());
                 });
                 fluid_outputs.forEach(fluid -> {
-                    output.addAll(fluid.getInputStackList());
+                    output.addAll(fluid.getOutputStackList());
                 });
 
                 addConversion(output, ingredients.getMap());
