@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename Mixer to FluidMixer in Embers plugin
 - ImmersiveEngineeringPlugin: Rename Multiblock to MultiBlock, fixed Enginner type
 - APEIPlugin modid is fetched from PEIPlugin annotation and now throws an exception if not available
+- Moved CraftTweaker compatiblity into own folder and removed debug messages
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

@@ -19,9 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.compat.crafttweaker;
 
-import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -44,13 +43,11 @@ import java.util.Arrays;
 public class CompatCraftTweaker {
     @ZenMethod
     public static void addConversion(IItemStack output, IIngredient[] input) {
-        PEIntegration.LOG.info("Testing CraftTweaker Support: {}", output.getDisplayName());
         CraftTweakerAPI.apply(new AddConversion(output, input));
     }
 
     @ZenMethod
     public static void addConversion(ILiquidStack output, IIngredient[] input) {
-        PEIntegration.LOG.info("Testing CraftTweaker Support: {}", output.getDisplayName());
         CraftTweakerAPI.apply(new AddConversion(output, input));
     }
 
