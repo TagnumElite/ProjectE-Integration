@@ -19,34 +19,79 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.utils;
 
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.internal.lists.InputList;
 import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-public class IngredientHandler {
-    private final IngredientMap<Object> ingredients;
+/**
+ * A utility class to handle recipe ingredients.
+ * <p>
+ * Uses a {@link ArrayList} of {@link Handler} to convert {@link Object} to ingredients that can be converted into a {@link IngredientMap}
+ * to be used for inputs in {@link moze_intel.projecte.api.proxy.IConversionProxy#addConversion(int, Object, Map)}.
+ * <p>
+ * To register a handler just use {@link #registerHandler(Handler)}.
+ */
+public final class IngredientHandler {
+    private static final List<Handler<?>> HANDLERS = new ArrayList<>();
+    private final IngredientMap<Object> ingredients = new IngredientMap<>();
 
+    /**
+     * Create an IngredientHandler that will convert objects into something that
+     * {@link moze_intel.projecte.api.proxy.IConversionProxy#addConversion(int, Object, Map)} can use to add conversions.
+     * <p>
+     * Uses {@link Handler}s for conversion.
+     */
     public IngredientHandler() {
-        this.ingredients = new IngredientMap<>();
+    }
+
+    /**
+     *
+     * @param handler The handler to register
+     * @return A boolean value whether the handler was registered
+     */
+    public static boolean registerHandler(Handler<?> handler) {
+        return HANDLERS.add(handler);
+    }
+
+    /**
+     * Clears the {@code HANDLERS} map of handlers, useful for memory cleanup
+     */
+    public static void clearHandlers() {
+        HANDLERS.clear();
+    }
+
+    /**
+     * If {@code obj} is null then return will be null.
+     *
+     * @param obj The object to be converted
+     * @return The SizedObject that contains the Class/Object that will be used by ProjectE
+     * @throws IllegalStateException There is not Handler registered for the object
+     */
+    public static SizedObject<Object> convert(Object obj) throws IllegalStateException {
+        if (obj == null) return null;
+
+        // TODO: Figure out a faster way to do this. This could be and probably is detrimental to performance.
+        for (Handler<?> handler : HANDLERS) {
+            if (handler.check(obj)) {
+                return handler.convert(obj);
+            }
+        }
+
+        throw new IllegalStateException("There is no Handler registered for: {" + obj.getClass() + "} " + obj);
     }
 
     /**
      * @param ingredients An array of objects to be added to the {@link IngredientMap}
      * @return {@code true} if all ingredients were added or {@code false} if one or all ingredients failed to be added.
+     * @see #add(Object)
      */
     public boolean addAll(Object[] ingredients) {
         boolean result = true;
@@ -64,88 +109,82 @@ public class IngredientHandler {
      * @return {@code true} if the ingredient was successfully added or {@code false} if it failed
      */
     public boolean add(Object ingredient) {
-        if (Objects.isNull(ingredient)) return false;
+        if (ingredient == null) return false;
 
         SizedObject<Object> object;
-        if (ingredient instanceof SizedObject) {
-            SizedObject<Object> converted = convert(((SizedObject<?>) ingredient).object);
-            if (Objects.isNull(converted)) return false;
-            object = new SizedObject<>(((SizedObject<?>) ingredient).amount, converted.object);
+        if (ingredient instanceof List<?>) {
+            // Lists are handled differently
+            List<?> list = (List<?>) ingredient;
+            // If list is empty, just return false
+            if (list.isEmpty()) return false;
+            // There is only one item in the list, just return that
+            if (list.size() == 1) return add(list.get(0));
+            if (list instanceof InputList) {
+                // List is InputList, that means it is a list of potential inputs for a single object
+                object = new SizedObject<>(1, PEIApi.getList(list));
+            } else {
+                // List is just normal, therefor just add everything.
+                return addAll(list.toArray());
+            }
+        } else if (ingredient instanceof Object[]) {
+            // We add everything from arrays as another ingredient
+            return addAll((Object[]) ingredient);
         } else {
-            object = convert(ingredient);
+            try {
+                // Convert everything else
+                object = convert(ingredient);
+            } catch (IllegalStateException e) {
+                PEIApi.LOGGER.warn("Ingredient '{}' ({}) doesn't have an handler", ingredient,
+                    ClassUtils.getPackageCanonicalName(ingredient.getClass()), e);
+                object = null;
+            }
         }
-        if (Objects.isNull(object)) return false;
+        if (object == null) {
+            PEIApi.LOGGER.warn("Unknown ingredient: {} ({})", ingredient, ClassUtils.getPackageCanonicalName(ingredient.getClass()));
+            return false;
+        } else if (object.object == null) {
+            PEIApi.LOGGER.warn("SizedObject ingredient is null: {} ({})", ingredient, ClassUtils.getPackageCanonicalName(ingredient.getClass()));
+            return false;
+        }
         ingredients.addIngredient(object.object, object.amount);
         return true;
     }
 
-    public SizedObject<Object> convert(Object obj) {
-        PEIApi.LOG.info("Convert Input: {}", obj);
-        if (Objects.isNull(obj)) return null;
-        int amount;
-        if (obj instanceof ItemStack) {
-            PEIApi.LOG.info("ItemStack");
-            if (((ItemStack) obj).isEmpty()) {
-                PEIApi.LOG.warn("Empty ItemStack");
-                return null;
-            }
-
-            amount = ((ItemStack) obj).getCount();
-        } else if (obj instanceof Item || obj instanceof Block || obj instanceof String || obj.getClass().equals(Object.class)) {
-            PEIApi.LOG.info("Item|Block|String|Object");
-            amount = 1;
-        } else if (obj instanceof FluidStack) {
-            PEIApi.LOG.info("FluidStack");
-            if (((FluidStack) obj).amount <= 0) {
-                PEIApi.LOG.warn("Empty FluidStack");
-                return null;
-            }
-
-            amount = ((FluidStack) obj).amount;
-        } else if (obj instanceof List) {
-            PEIApi.LOG.info("List");
-            List<?> inputt = (List<?>) obj;
-            if (inputt.isEmpty()) {
-                PEIApi.LOG.warn("Empty List");
-                return null;
-            }
-            if (inputt.size() == 1) {
-                PEIApi.LOG.warn("List size == 1");
-                return convert(inputt.get(0));
-            }
-
-            amount = 1;
-            if (inputt instanceof InputList) {
-                PEIApi.LOG.info("InputList");
-                obj = PEIApi.getList(inputt);
-            } else {
-                PEIApi.LOG.info("Normal List");
-                addAll(inputt.toArray());
-                return null;
-            }
-        } else if (obj instanceof Ingredient) {
-            PEIApi.LOG.info("Ingredient");
-            if (obj == Ingredient.EMPTY) {
-                PEIApi.LOG.warn("Empty Ingredient");
-                return null;
-            }
-            amount = 1;
-            obj = PEIApi.getIngredient((Ingredient) obj);
-        } else if (obj instanceof Object[]) {
-            PEIApi.LOG.info("Array");
-            addAll((Object[]) obj);
-            return null;
-        } else if (obj instanceof SizedObject) {
-            add(obj);
-            return null;
-        } else {
-            PEIApi.LOG.warn("Unknown ingredient: {} ({})", obj, ClassUtils.getPackageCanonicalName(obj.getClass()));
-            return null;
-        }
-        return new SizedObject<>(amount, obj);
-    }
-
+    /**
+     * @return The map of objects and their amounts for conversion input
+     */
     public Map<Object, Integer> getMap() {
         return ingredients.getMap();
+    }
+
+    /**
+     * An interface for handling ingredient conversion.
+     *
+     * @param <T> The class to be handled, allows for easy conversion.
+     */
+    public interface Handler<T> {
+        boolean check(Object obj);
+
+        /**
+         * @param obj The object to be converted into a {@link SizedObject}
+         * @return A SizedObject
+         * @throws ClassCastException The wrong class was handled by this handler.
+         */
+        @SuppressWarnings("unchecked")
+        default SizedObject<Object> convert(Object obj) throws ClassCastException {
+            return get((T) obj);
+        }
+
+        SizedObject<Object> get(T obj);
+    }
+
+    /**
+     * Default ingredient conversion, just results in a new {@link SizedObject} of amount '1' and input object.
+     */
+    public static abstract class DefaultHandler<T> implements Handler<T> {
+        @Override
+        public SizedObject<Object> get(T obj) {
+            return new SizedObject<>(1, obj);
+        }
     }
 }

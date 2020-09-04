@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added option to ignore slag output in Blast Furnace for Immersive Engineering
 - Added support for the Fermenter, Mixer, Refinery and Squeezer to Immersive Engineering
 - Added option to ignore creosote output from Coke Oven
+- Added `IngredientHandlers` for 'ItemStack', 'FluidStack', 'Item', 'Block', 'OreDict', 'IIngredient', 'BlockState' and 'SizedObject'.
+- Added `Debug` and `Multithreaded` options to PEIApi config
 
 ### Changed
 - Moved from Travis to GitHub Actions
@@ -61,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved CraftTweaker compatiblity into own folder and removed debug messages
 - Renamed `DISABLE` to `DISABLED` in PEIntegration.java
 - Renamed PEIApi `LOG` to `LOGGER`
+- Completely changed IngredientHandler internals
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

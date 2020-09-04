@@ -132,10 +132,7 @@ public class PluginGalaticraft extends APEIPlugin {
                 default:
                     throw new IllegalStateException("Unexpected value: " + workbench);
             }
-
-            for (INasaWorkbenchRecipe recipe : recipes) {
-                addRecipe(recipe.getRecipeOutput(), recipe.getRecipeInput().values().toArray());
-            }
+            recipes.forEach(r -> addRecipe(r.getRecipeOutput(), r.getRecipeInput().values()));
         }
 
         public enum Workbench {

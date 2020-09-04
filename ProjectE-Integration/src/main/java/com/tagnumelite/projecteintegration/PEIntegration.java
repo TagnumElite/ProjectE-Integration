@@ -83,6 +83,7 @@ public class PEIntegration {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         if (DISABLED) return;
+        IngredientHandlers.registerHandlers();
         API.setupPlugins();
         versionCheck = ForgeVersion.getResult(Loader.instance().activeModContainer());
         if (config.hasChanged()) config.save();

@@ -27,6 +27,7 @@ import com.tagnumelite.projecteintegration.api.internal.Phase;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ASMHandler;
+import com.tagnumelite.projecteintegration.api.utils.IngredientHandler;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.IEMCProxy;
@@ -72,6 +73,15 @@ public class PEIApi {
     private boolean LOADED = false;
 
     /**
+     * Is Debugging mode activated.
+     */
+    public final boolean DEBUG;
+    /**
+     * Is Multi-Threading mode activated.
+     */
+    public final boolean MULTITHREADED;
+
+    /**
      * If you need the instance, use {@link #getInstance()}.
      *
      * @param config  The {@link Configuration} to use during initialization
@@ -84,6 +94,8 @@ public class PEIApi {
 
         PHASE = Phase.INITIALIZING;
         CONFIG = config;
+        DEBUG = config.getBoolean("debug", "general", false, "Enable debugging mode");
+        MULTITHREADED = config.getBoolean("multithreaded", "general", false, "EXPERIMENTAL. Executes mappers in parallel.");
         LOGGER.info("Starting Phase: Initialization");
         final long startTime = System.currentTimeMillis();
         ASMHandler handler = new ASMHandler(config, asmData);
@@ -102,8 +114,8 @@ public class PEIApi {
     }
 
     /**
-     * @throws IllegalStateException The api hasn't been instantiated yet
      * @return Returns the current {@link PEIApi} Instance
+     * @throws IllegalStateException The api hasn't been instantiated yet
      */
     public static PEIApi getInstance() {
         if (INSTANCE == null) throw new IllegalStateException("PEIApi hasn't been instantiated yet");
@@ -229,11 +241,12 @@ public class PEIApi {
         return RESOURCE_MAP.get(resource);
     }
 
-    public static void clearCache() {
+    private static void clearCache() {
         RESOURCE_MAP.clear();
         INGREDIENT_CACHE.clear();
         LIST_CACHE.clear();
         MAPPERS.clear();
+        IngredientHandler.clearHandlers();
     }
 
     public Map<String, String> getFailedMappers() {
@@ -277,14 +290,17 @@ public class PEIApi {
         PHASE = Phase.SETTING_UP_MAPPERS;
         LOGGER.info("Starting Phase: Setting Up Mappers");
         final long startTime = System.currentTimeMillis();
-        for (PEIMapper mapper : getMappers()) {
-            PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
-            try {
-                mapper.setup();
-            } catch (Throwable t) {
-                LOG.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
-                FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
-                t.printStackTrace();
+        if (MULTITHREADED) {
+
+        } else {
+            for (PEIMapper mapper : getMappers()) {
+                try {
+                    mapper.setup();
+                } catch (Throwable t) {
+                    LOGGER.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+                    FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
+                    t.printStackTrace();
+                }
             }
         }
 

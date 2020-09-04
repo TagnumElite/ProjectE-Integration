@@ -170,20 +170,17 @@ public class PluginEnderIO extends APEIPlugin {
         }
 
         private Object getObjectFromSoulList(NNList<ResourceLocation> souls) {
-            List<Object> mapped_souls = new ArrayList<Object>();
+            List<Object> mapped_souls = new ArrayList<>();
 
             for (ResourceLocation resource : souls) {
                 Object soul = PEIApi.getResource(resource);
-                if (soul == null)
-                    continue;
+                if (soul == null) continue;
 
                 mapped_souls.add(soul);
             }
 
-            if (mapped_souls.isEmpty())
-                return null;
-            else
-                return PEIApi.getList(mapped_souls);
+            if (mapped_souls.isEmpty()) return null;
+            else return PEIApi.getList(mapped_souls);
         }
 
         @Override
@@ -193,12 +190,10 @@ public class PluginEnderIO extends APEIPlugin {
                     ISoulBinderRecipe recipe = (ISoulBinderRecipe) machine_recipe;
 
                     ItemStack output = recipe.getOutputStack();
-                    if (output == null || output.isEmpty())
-                        continue;
+                    if (output.isEmpty()) continue;
 
                     ItemStack input = recipe.getInputStack();
-                    if (input == null || input.isEmpty())
-                        continue;
+                    if (input.isEmpty()) continue;
 
                     Object soul_emc = getObjectFromSoulList(recipe.getSupportedSouls());
                     if (soul_emc == null)

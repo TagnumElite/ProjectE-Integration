@@ -25,12 +25,11 @@ import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ipsis.Woot;
-import ipsis.woot.crafting.IAnvilRecipe;
 
 @PEIPlugin("woot")
 public class PluginWoot extends APEIPlugin {
     @Override
-    public void setup() throws Exception {
+    public void setup() {
         addMapper(new AnvilMapper());
     }
 
@@ -41,13 +40,7 @@ public class PluginWoot extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IAnvilRecipe recipe : Woot.anvilManager.getRecipes()) {
-                if (recipe.shouldPreserveBase()) {
-                    addRecipe(recipe.getCopyOutput(), recipe.getInputs().toArray());
-                } else {
-                    addRecipe(recipe.getCopyOutput(), recipe.getBaseItem(), recipe.getInputs().toArray());
-                }
-            }
+            Woot.anvilManager.getRecipes().forEach(r -> addRecipe(r.getCopyOutput(), r.getInputs(), r.shouldPreserveBase() ? null : r.getBaseItem()));
         }
     }
 }

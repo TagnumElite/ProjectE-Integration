@@ -25,7 +25,6 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.plugins.library.PluginSonarCore.SonarMapper;
 import sonar.calculator.mod.common.recipes.*;
-import sonar.core.recipes.DefaultSonarRecipe;
 
 @PEIPlugin("calculator")
 public class PluginCalculator extends APEIPlugin {
@@ -53,9 +52,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : AlgorithmSeparatorRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            AlgorithmSeparatorRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -66,9 +63,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : AtomicCalculatorRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            AtomicCalculatorRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -79,9 +74,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : ConductorMastRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            ConductorMastRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -92,9 +85,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : CalculatorRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            CalculatorRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -105,9 +96,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : ExtractionChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            ExtractionChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -118,9 +107,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (FabricationSonarRecipe recipe : FabricationChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            FabricationChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -131,9 +118,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : FlawlessCalculatorRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            FlawlessCalculatorRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -144,9 +129,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : PrecisionChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            PrecisionChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -157,9 +140,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : ProcessingChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            ProcessingChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -170,9 +151,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : ReassemblyChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            ReassemblyChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -183,9 +162,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : RestorationChamberRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            RestorationChamberRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -196,9 +173,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : ScientificRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            ScientificRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 
@@ -209,9 +184,7 @@ public class PluginCalculator extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DefaultSonarRecipe recipe : StoneSeparatorRecipes.instance().getRecipes()) {
-                addRecipe(recipe);
-            }
+            StoneSeparatorRecipes.instance().getRecipes().forEach(this::addRecipe);
         }
     }
 }

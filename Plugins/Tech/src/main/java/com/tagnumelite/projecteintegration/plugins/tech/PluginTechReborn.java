@@ -24,7 +24,6 @@ package com.tagnumelite.projecteintegration.plugins.tech;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import net.minecraft.item.crafting.IRecipe;
 import techreborn.api.RollingMachineRecipe;
 
 @PEIPlugin("techreborn")
@@ -41,9 +40,7 @@ public class PluginTechReborn extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IRecipe recipe : RollingMachineRecipe.instance.getRecipeList().values()) {
-                addRecipe(recipe);
-            }
+            RollingMachineRecipe.instance.getRecipeList().values().forEach(this::addRecipe);
         }
     }
 }

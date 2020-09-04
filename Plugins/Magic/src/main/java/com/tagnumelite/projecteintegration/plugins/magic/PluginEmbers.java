@@ -24,7 +24,7 @@ package com.tagnumelite.projecteintegration.plugins.magic;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import teamroots.embers.recipe.*;
+import teamroots.embers.recipe.RecipeRegistry;
 
 @PEIPlugin("embers")
 public class PluginEmbers extends APEIPlugin {
@@ -43,9 +43,7 @@ public class PluginEmbers extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (AlchemyRecipe recipe : RecipeRegistry.alchemyRecipes) {
-                addRecipe(recipe.result.copy(), recipe.centerInput, recipe.inputs.toArray());
-            }
+            RecipeRegistry.alchemyRecipes.forEach(r -> addRecipe(r.result.copy(), r.centerInput, r.inputs.toArray()));
         }
     }
 
@@ -56,9 +54,7 @@ public class PluginEmbers extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (ItemMeltingRecipe recipe : RecipeRegistry.meltingRecipes) {
-                addRecipe(recipe.getFluid(), recipe.getStack());
-            }
+            RecipeRegistry.meltingRecipes.forEach(r -> addRecipe(r.getFluid(), r.getStack()));
         }
     }
 
@@ -69,9 +65,7 @@ public class PluginEmbers extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (FluidMixingRecipe recipe : RecipeRegistry.mixingRecipes) {
-                addRecipe(recipe.output.copy(), recipe.inputs.toArray());
-            }
+            RecipeRegistry.mixingRecipes.forEach(r -> addRecipe(r.output.copy(), r.inputs.toArray()));
         }
     }
 
@@ -82,9 +76,7 @@ public class PluginEmbers extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (ItemStampingRecipe recipe : RecipeRegistry.stampingRecipes) {
-                addRecipe(recipe.result.copy(), recipe.getStack(), recipe.getFluid());
-            }
+            RecipeRegistry.stampingRecipes.forEach(r -> addRecipe(r.result.copy(), r.getStack(), r.getFluid()));
         }
     }
 }

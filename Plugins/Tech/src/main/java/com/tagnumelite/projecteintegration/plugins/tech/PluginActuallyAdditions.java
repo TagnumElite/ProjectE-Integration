@@ -26,8 +26,6 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
 import de.ellpeck.actuallyadditions.api.recipe.CrusherRecipe;
-import de.ellpeck.actuallyadditions.api.recipe.EmpowererRecipe;
-import de.ellpeck.actuallyadditions.api.recipe.LensConversionRecipe;
 import de.ellpeck.actuallyadditions.mod.items.InitItems;
 
 import java.util.ArrayList;
@@ -54,10 +52,8 @@ public class PluginActuallyAdditions extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (EmpowererRecipe recipe : ActuallyAdditionsAPI.EMPOWERER_RECIPES) {
-                addRecipe(recipe.getOutput(), recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(),
-                    recipe.getStandThree(), recipe.getStandFour());
-            }
+            ActuallyAdditionsAPI.EMPOWERER_RECIPES.forEach(r -> addRecipe(r.getOutput(), r.getInput(),
+                r.getStandOne(), r.getStandTwo(), r.getStandThree(), r.getStandFour()));
         }
     }
 
@@ -68,9 +64,7 @@ public class PluginActuallyAdditions extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (LensConversionRecipe recipe : ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES) {
-                addRecipe(recipe.getOutput(), recipe.getInput());
-            }
+            ActuallyAdditionsAPI.RECONSTRUCTOR_LENS_CONVERSION_RECIPES.forEach(r -> addRecipe(r.getOutput(), r.getInput()));
         }
     }
 

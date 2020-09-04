@@ -60,9 +60,7 @@ public class PluginForestry extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IFabricatorRecipe recipe : RecipeManagers.fabricatorManager.recipes()) {
-                addRecipe(recipe.getRecipeOutput(), recipe.getPlan(), recipe.getLiquid(), recipe.getIngredients().toArray());
-            }
+            RecipeManagers.fabricatorManager.recipes().forEach(r -> addRecipe(r.getRecipeOutput(), r.getLiquid(), Utils.convertGrid(r.getIngredients())));
         }
     }
 
@@ -73,9 +71,10 @@ public class PluginForestry extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IFermenterRecipe recipe : RecipeManagers.fermenterManager.recipes()) {
-                addRecipe(new FluidStack(recipe.getOutput(), recipe.getFermentationValue()), recipe.getFluidResource(), recipe.getResource());
-            }
+            RecipeManagers.fermenterManager.recipes().forEach(r -> addRecipe(
+                new FluidStack(r.getOutput(), (int) (r.getFermentationValue() * r.getModifier())),
+                r.getFluidResource(), r.getResource(), r.getResourceOreName()
+            ));
         }
     }
 
@@ -86,9 +85,7 @@ public class PluginForestry extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IMoistenerRecipe recipe : RecipeManagers.moistenerManager.recipes()) {
-                addRecipe(recipe.getProduct(), recipe.getResource());
-            }
+            RecipeManagers.moistenerManager.recipes().forEach(r -> addRecipe(r.getProduct(), r.getResource()));
         }
     }
 
@@ -112,9 +109,7 @@ public class PluginForestry extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IStillRecipe recipe : RecipeManagers.stillManager.recipes()) {
-                addRecipe(recipe.getOutput(), recipe.getInput());
-            }
+            RecipeManagers.stillManager.recipes().forEach(r -> addRecipe(r.getOutput(), r.getInput()));
         }
     }
 }

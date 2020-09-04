@@ -82,9 +82,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (AlloyRecipe recipe : AlloyRecipe.recipeList) {
-                addRecipe(recipe.output, convertIngredientStack(recipe.input0), convertIngredientStack(recipe.input1));
-            }
+            AlloyRecipe.recipeList.forEach(r -> addRecipe(r.output, convertIngredientStack(r.input0), convertIngredientStack(r.input1)));
         }
     }
 
