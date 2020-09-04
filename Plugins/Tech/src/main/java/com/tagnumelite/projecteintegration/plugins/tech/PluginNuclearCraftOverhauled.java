@@ -21,7 +21,6 @@
  */
 package com.tagnumelite.projecteintegration.plugins.tech;
 
-import com.google.common.collect.ImmutableMap;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -34,8 +33,6 @@ import nc.recipe.NCRecipes;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IIngredient;
 import nc.recipe.ingredient.IItemIngredient;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,7 +77,7 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
                 List<IFluidIngredient> fluid_outputs = recipe.getFluidProducts();
 
                 if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0) || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
-                    PEIApi.LOG.warn("Invalid Recipe from `{}`", handler.getRecipeName());
+                    PEIApi.LOGGER.warn("Invalid Recipe from `{}`", handler.getRecipeName());
                     continue;
                 }
 

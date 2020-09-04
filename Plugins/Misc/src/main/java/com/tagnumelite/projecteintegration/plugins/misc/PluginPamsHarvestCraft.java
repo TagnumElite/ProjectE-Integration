@@ -65,7 +65,7 @@ public class PluginPamsHarvestCraft extends APEIPlugin {
         public void setup() {
             for (int i = 0; i < MarketItems.getSize(); i++) {
                 MarketData data = MarketItems.getData(i);
-                ItemStack input = data.getCurrency();
+                ItemStack input = data.getCurrency().copy();
                 input.setCount(data.getPrice());
                 addRecipe(data.getItem(), input);
             }
@@ -103,7 +103,7 @@ public class PluginPamsHarvestCraft extends APEIPlugin {
                     addRecipe(Arrays.asList(outputs), input);
                 }
             } catch (Exception e) {
-                PEIApi.LOG.error("Failed to get HarvestCraft machine '{}' recipes: {}", name, e);
+                PEIApi.LOGGER.error("Failed to get HarvestCraft machine '{}' recipes: {}", name, e);
             }
         }
     }

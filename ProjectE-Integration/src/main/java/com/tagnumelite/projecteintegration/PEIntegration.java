@@ -56,7 +56,7 @@ public class PEIntegration {
     private static final String updateNotifierPerm = MODID + ".update_notify";
     private static final String errorNotifierPerm = MODID + ".error_notify";
     public static Configuration config;
-    private static boolean DISABLE = false;
+    private static boolean DISABLED = false;
     private static PEIApi API;
     private static boolean doUpdateCheck = false;
     private static boolean doMapperCheck = false;
@@ -65,10 +65,10 @@ public class PEIntegration {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
-        DISABLE = config.getBoolean("disable", ConfigHelper.CATEGORY_GENERAL, false,
+        DISABLED = config.getBoolean("disable", ConfigHelper.CATEGORY_GENERAL, false,
             "Disable the mod outright? Why download it though?");
 
-        if (DISABLE) return;
+        if (DISABLED) return;
         MinecraftForge.EVENT_BUS.register(this);
 
         doUpdateCheck = config.getBoolean("update_check", ConfigHelper.CATEGORY_GENERAL, true,
@@ -82,7 +82,7 @@ public class PEIntegration {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (DISABLE) return;
+        if (DISABLED) return;
         API.setupPlugins();
         versionCheck = ForgeVersion.getResult(Loader.instance().activeModContainer());
         if (config.hasChanged()) config.save();
@@ -93,7 +93,7 @@ public class PEIntegration {
     @EventHandler
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {
         // If mod is disabled, then return and skip the rest
-        if (DISABLE) return;
+        if (DISABLED) return;
         API.setupMappers();
         if (config.hasChanged()) config.save();
     }
@@ -101,7 +101,7 @@ public class PEIntegration {
     @SubscribeEvent
     //TODO: Make translation files and keys instead of permanent english.
     public void playerJoined(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!DISABLE) {
+        if (!DISABLED) {
             //player.sendMessage(new TextComponentTranslation("text.todo.message"));
             EntityPlayer player = event.player;
             if (doUpdateCheck && PermissionAPI.hasPermission(player, updateNotifierPerm)) {

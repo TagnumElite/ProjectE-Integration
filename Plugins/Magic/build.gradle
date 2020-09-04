@@ -29,10 +29,10 @@ repositories {
         name 'HellFire'
         url 'https://maven.hellfiredev.net'
     }
-    maven {
-        name "TehNuuuuuuuuuuuut"
-        url 'http://tehnut.info/maven/'
-    }
+    //maven { // -- Currently Down
+    //    name "TehNuuuuuuuuuuuut"
+    //    url 'http://tehnut.info/maven/'
+    //}
 }
 
 dependencies {
@@ -51,5 +51,5 @@ dependencies {
     deobfProvided "hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}"
 
     // Tehnut Maven
-    deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
+    //deobfProvided "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${version_bloodmagic}"
 }

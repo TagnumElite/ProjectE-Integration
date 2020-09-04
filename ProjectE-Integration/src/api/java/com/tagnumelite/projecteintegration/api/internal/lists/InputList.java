@@ -22,6 +22,7 @@
 package com.tagnumelite.projecteintegration.api.internal.lists;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Denotes a list of {@code T} that is a single input
@@ -29,4 +30,12 @@ import java.util.ArrayList;
  * @inheritDoc
  */
 public final class InputList<T> extends ArrayList<T> {
+    /**
+     * Constructs an InputList from collection.
+     *
+     * @param c the collection whose elements are to be placed into this list
+     */
+    public InputList(Collection<? extends T> c) {
+        super(c);
+    }
 }

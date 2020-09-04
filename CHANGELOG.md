@@ -59,11 +59,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ImmersiveEngineeringPlugin: Rename Multiblock to MultiBlock, fixed Enginner type
 - APEIPlugin modid is fetched from PEIPlugin annotation and now throws an exception if not available
 - Moved CraftTweaker compatiblity into own folder and removed debug messages
+- Renamed `DISABLE` to `DISABLED` in PEIntegration.java
+- Renamed PEIApi `LOG` to `LOGGER`
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
 - Utils.createOutputs: It was old and for something completely unknown now
 - Arguments from APEIPlugin constructor
+- Debug log from Modular Machinery plugin
+- Misc Category from config, was never used.
 
 ### Fixed
 - Fixed plugins

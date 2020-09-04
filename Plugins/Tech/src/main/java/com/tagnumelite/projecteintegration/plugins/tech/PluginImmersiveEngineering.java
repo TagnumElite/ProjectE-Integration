@@ -57,7 +57,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
             return fluid;
         }
 
-        PEIApi.LOG.warn("Failed to convert ingredient stack: {}", stack);
+        PEIApi.LOGGER.warn("Failed to convert ingredient stack: {}", stack);
         return null;
     }
 
@@ -95,7 +95,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
 
         protected void addRecipe(MultiblockRecipe recipe) {
             if (recipe == null) {
-                PEIApi.LOG.warn("Invalid IE '{}' MultiBlock Recipe", name);
+                PEIApi.LOGGER.warn("Invalid IE '{}' MultiBlock Recipe", name);
                 return;
             }
             List<Object> item_inputs = recipe.getItemInputs().stream().map(PluginImmersiveEngineering::convertIngredientStack).collect(Collectors.toList());

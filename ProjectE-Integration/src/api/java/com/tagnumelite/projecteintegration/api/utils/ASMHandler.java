@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.utils;
 
 import com.google.common.collect.ImmutableMap;
@@ -70,7 +69,7 @@ public final class ASMHandler {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
                         ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
                         if (!ApplyOnlyIf.apply(onlyIf, modcontainer)) {
-                            PEIApi.LOG.debug("Skipping plugin '{}'", modid);
+                            PEIApi.LOGGER.debug("Skipping plugin '{}'", modid);
                             continue;
                         }
                     }
@@ -83,7 +82,7 @@ public final class ASMHandler {
                     plugins.add(plugin.newInstance());
                 }
             } catch (Throwable t) {
-                PEIApi.LOG.error("Failed to instantiate plugin {}:", asmData.getClassName(), t);
+                PEIApi.LOGGER.error("Failed to instantiate plugin {}:", asmData.getClassName(), t);
                 failed.put(modid, asmData.getClassName());
             }
         }

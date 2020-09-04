@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.tagnumelite.projecteintegration.api.internal.sized;
 
 public class SizedObject<T> {
@@ -29,6 +28,11 @@ public class SizedObject<T> {
     public SizedObject(int amount, T obj) {
         this.amount = amount;
         this.object = obj;
+    }
+
+    public SizedObject(int amount, SizedObject<T> obj) {
+        this.amount = amount;
+        this.object = obj.object;
     }
 
     @Override

@@ -204,26 +204,26 @@ public abstract class PEIMapper {
             } else if (out instanceof FluidStack) {
                 FluidStack fluid = (FluidStack) out;
                 if (fluid.amount <= 0) {
-                    PEIApi.LOG.info("Empty FluidStack Output");
+                    PEIApi.LOGGER.info("Empty FluidStack Output");
                     continue;
                 }
                 out_ing.addIngredient(out, fluid.amount);
             } else if (out instanceof Item || out instanceof Block || out.getClass().equals(Object.class)) {
                 out_ing.addIngredient(out, 1);
             } else {
-                PEIApi.LOG.warn("Invalid Multi-Output item: {}:({})", out, out.getClass());
+                PEIApi.LOGGER.warn("Invalid Multi-Output item: {}:({})", out, out.getClass());
             }
         }
 
         final Map<Object, Integer> outputs = out_ing.getMap();
 
         if (outputs.isEmpty()) {
-            PEIApi.LOG.warn("Multi-Output: Empty outputs");
+            PEIApi.LOGGER.warn("Multi-Output: Empty outputs");
             return;
         } else if (outputs.size() == 1) {
             Entry<Object, Integer> out = outputs.entrySet().iterator().next();
             addConversion(out.getValue(), out.getKey(), inputs);
-            PEIApi.LOG.debug("Multi-Output: Only one output {}*{}", out.getKey(), out.getValue());
+            PEIApi.LOGGER.debug("Multi-Output: Only one output {}*{}", out.getKey(), out.getValue());
             return;
         }
 
@@ -237,10 +237,10 @@ public abstract class PEIMapper {
         for (Entry<Object, Integer> out : outputs.entrySet()) {
             HashMap<Object, Integer> ing = new HashMap<>();
             ing.put(obj, out.getValue());
-            PEIApi.LOG.debug("Adding multi-output for {}*{}", out.getKey(), out.getValue());
+            PEIApi.LOGGER.debug("Adding multi-output for {}*{}", out.getKey(), out.getValue());
             addConversion(out.getValue(), out.getKey(), ing);
         }
-        PEIApi.LOG.debug("Multi-Output Took {}ms", (System.currentTimeMillis() - startTime));
+        PEIApi.LOGGER.debug("Multi-Output Took {}ms", (System.currentTimeMillis() - startTime));
     }
 
     /**
@@ -251,7 +251,7 @@ public abstract class PEIMapper {
      */
     protected void addConversion(ItemStack item, Map<Object, Integer> input) {
         if (item == null || item.isEmpty()) {
-            PEIApi.LOG.warn("Output Item is either null or Empty: {} from {}", item, input);
+            PEIApi.LOGGER.warn("Output Item is either null or Empty: {} from {}", item, input);
             return;
         }
 
@@ -266,7 +266,7 @@ public abstract class PEIMapper {
      */
     protected void addConversion(FluidStack fluid, Map<Object, Integer> input) {
         if (fluid == null || fluid.amount == 0) {
-            PEIApi.LOG.warn("Output Fluid is either null or Empty: {} from {}", fluid, input);
+            PEIApi.LOGGER.warn("Output Fluid is either null or Empty: {} from {}", fluid, input);
             return;
         }
 
@@ -286,7 +286,7 @@ public abstract class PEIMapper {
             if (output instanceof FluidStack)
                 output_l = ((FluidStack) output).getFluid().getName();
 
-            PEIApi.LOG.warn("Invalid Conversion: [{} ({})]*{} from {}", output_l,
+            PEIApi.LOGGER.warn("Invalid Conversion: [{} ({})]*{} from {}", output_l,
                 ClassUtils.getPackageCanonicalName(output != null ? output.getClass() : null), output_amount, input);
             return;
         }
@@ -295,7 +295,7 @@ public abstract class PEIMapper {
             conversion_proxy.addConversion(output_amount, output, input);
             PEIApi.mapped_conversions += 1;
         } catch (Exception e) {
-            PEIApi.LOG.error("Failed to add conversion: {}*{} from {}; {}", output, output_amount, input, e);
+            PEIApi.LOGGER.error("Failed to add conversion: {}*{} from {}; {}", output, output_amount, input, e);
         }
     }
 }

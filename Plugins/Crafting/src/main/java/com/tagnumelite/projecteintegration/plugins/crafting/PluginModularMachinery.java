@@ -21,7 +21,6 @@
  */
 package com.tagnumelite.projecteintegration.plugins.crafting;
 
-import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -30,7 +29,6 @@ import hellfirepvp.modularmachinery.common.crafting.RecipeRegistry;
 import hellfirepvp.modularmachinery.common.crafting.helper.ComponentRequirement;
 import hellfirepvp.modularmachinery.common.crafting.requirement.RequirementFluid;
 import hellfirepvp.modularmachinery.common.crafting.requirement.RequirementItem;
-import hellfirepvp.modularmachinery.common.lib.RegistriesMM;
 import hellfirepvp.modularmachinery.common.machine.DynamicMachine;
 import hellfirepvp.modularmachinery.common.machine.MachineRegistry;
 import moze_intel.projecte.emc.IngredientMap;
@@ -44,7 +42,6 @@ import java.util.Map;
 public class PluginModularMachinery extends APEIPlugin {
     @Override
     public void setup() {
-        PEIntegration.LOG.info("Requirement Types: {}", RegistriesMM.REQUIREMENT_TYPE_REGISTRY.getEntries());
         for (DynamicMachine machine : MachineRegistry.getRegistry()) {
             addMapper(new MachineMapper(machine));
         }

@@ -38,9 +38,9 @@ import java.util.List;
 public class PluginLibVulpes extends APEIPlugin {
     @Override
     public void setup() {
-        PEIApi.LOG.debug("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());
+        PEIApi.LOGGER.debug("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());
         for (Class<? extends TileMultiblockMachine> clazz : RecipesMachine.getInstance().recipeList.keySet()) {
-            PEIApi.LOG.debug("Adding new mapper from libvuples {}", clazz.getSimpleName());
+            PEIApi.LOGGER.debug("Adding new mapper from libvuples {}", clazz.getSimpleName());
             addMapper(new RecipeMapper(clazz));
         }
     }
@@ -67,20 +67,14 @@ public class PluginLibVulpes extends APEIPlugin {
                 ArrayList<Object> outputs = new ArrayList<>();
 
                 if (!no_item_out) {
-                    outputs.addAll(item_outputs);/*
-					for (ItemStack item : item_outputs) {
-						addRecipe(item, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
-					}*/
+                    outputs.addAll(item_outputs);
                 }
 
                 if (!no_fluid_out) {
-                    outputs.addAll(fluid_outputs);/*
-					for (FluidStack fluid : fluid_outputs) {
-						addRecipe(fluid, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
-					}*/
+                    outputs.addAll(fluid_outputs);
                 }
 
-                addRecipe(outputs, recipe.getFluidIngredients().toArray(), recipe.getIngredients().toArray());
+                addRecipe(outputs, recipe.getFluidIngredients(), recipe.getIngredients());
             }
         }
     }

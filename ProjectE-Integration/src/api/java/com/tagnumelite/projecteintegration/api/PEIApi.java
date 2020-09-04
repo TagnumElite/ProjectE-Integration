@@ -43,7 +43,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * ProjectE Integeration API
+ * ProjectE Integration API
  *
  * @author TagnumElite (Tagan Hoyle https://tagnumelite.com)
  */
@@ -53,7 +53,7 @@ public class PEIApi {
     public static final String NAME = "ProjectE Integration";
     public static final String VERSION = "@VERSION@";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.12.x/update.json";
-    public static final Logger LOG = LogManager.getLogger(APIID);
+    public static final Logger LOGGER = LogManager.getLogger(APIID);
     public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
     private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
     private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
@@ -84,13 +84,13 @@ public class PEIApi {
 
         PHASE = Phase.INITIALIZING;
         CONFIG = config;
-        LOG.info("Starting Phase: Initialization");
+        LOGGER.info("Starting Phase: Initialization");
         final long startTime = System.currentTimeMillis();
         ASMHandler handler = new ASMHandler(config, asmData);
         PLUGINS.addAll(handler.getPlugins());
         FAILED_PLUGINS.putAll(handler.getFailed());
         final long endTime = System.currentTimeMillis();
-        LOG.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
+        LOGGER.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
         PHASE = Phase.WAITING;
     }
 
@@ -249,24 +249,24 @@ public class PEIApi {
      */
     public void setupPlugins() {
         PHASE = Phase.SETTING_UP_PLUGINS;
-        LOG.info("Starting Phase: Setting up plugins");
+        LOGGER.info("Starting Phase: Setting up plugins");
         final long startTime = System.currentTimeMillis();
         for (APEIPlugin plugin : PLUGINS) {
-            PEIApi.LOG.debug("Running Plugin for Mod: {}", plugin.modid);
+            PEIApi.LOGGER.debug("Running Plugin for Mod: {}", plugin.modid);
             try {
                 plugin.setup();
             } catch (Throwable t) {
-                LOG.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
+                LOGGER.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
                 FAILED_PLUGINS.put(plugin.modid, plugin.getClass().getCanonicalName());
                 t.printStackTrace();
             }
         }
 
         registerEMCObjects();
-        LOG.info("Added {} Mappers", getMappers().size());
+        LOGGER.info("Added {} Mappers", getMappers().size());
         PHASE = Phase.WAITING;
         final long endTime = System.currentTimeMillis();
-        LOG.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
+        LOGGER.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
     }
 
     /**
@@ -275,7 +275,7 @@ public class PEIApi {
     public void setupMappers() {
         if (LOADED) return;
         PHASE = Phase.SETTING_UP_MAPPERS;
-        LOG.info("Starting Phase: Setting Up Mappers");
+        LOGGER.info("Starting Phase: Setting Up Mappers");
         final long startTime = System.currentTimeMillis();
         for (PEIMapper mapper : getMappers()) {
             PEIApi.LOG.debug("Running Mapper: {} ({})", mapper.name, mapper);
@@ -288,14 +288,14 @@ public class PEIApi {
             }
         }
 
-        LOG.info("Added {} Conversions", mapped_conversions);
+        LOGGER.info("Added {} Conversions", mapped_conversions);
 
         clearCache();
         PLUGINS.clear();
         LOADED = true;
 
         final long endTime = System.currentTimeMillis();
-        LOG.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
+        LOGGER.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
         PHASE = Phase.FINISHED;
     }
 }

@@ -95,7 +95,7 @@ public class PluginNuclearCraft extends APEIPlugin {
                 List<IFluidIngredient> fluid_outputs = recipe.fluidProducts();
 
                 if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0) || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
-                    PEIApi.LOG.warn("Invalid NC IRecipe `{}`", name);
+                    PEIApi.LOGGER.warn("Invalid NC IRecipe `{}`", name);
                     continue;
                 }
 
