@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="ProjectE-Integration.Crafting.api" target="1.8" />
       <module name="ProjectE-Integration.Crafting.main" target="1.8" />
       <module name="ProjectE-Integration.Crafting.test" target="1.8" />
@@ -23,29 +23,21 @@
       <module name="ProjectE-Integration.Misc.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Crafting.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Crafting.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Crafting.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Duplicate.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Duplicate.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Duplicate.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Legacy.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Legacy.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Legacy.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Library.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Library.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Library.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Magic.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Magic.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Magic.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.main" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Misc.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Misc.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Misc.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Rocketry.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Rocketry.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Rocketry.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Tech.api" target="1.8" />
       <module name="ProjectE-Integration.Plugins.Tech.main" target="1.8" />
-      <module name="ProjectE-Integration.Plugins.Tech.test" target="1.8" />
       <module name="ProjectE-Integration.Plugins.test" target="1.8" />
       <module name="ProjectE-Integration.ProjectE-Integration.api" target="1.8" />
       <module name="ProjectE-Integration.ProjectE-Integration.main" target="1.8" />
