@@ -71,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Arguments from APEIPlugin constructor
 - Debug log from Modular Machinery plugin
 - Misc Category from config, was never used.
+- TTerrag second maven, was removed
 
 ### Fixed
 - Fixed plugins

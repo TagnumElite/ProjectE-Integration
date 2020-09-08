@@ -52,10 +52,6 @@ repositories {
         name = 'TTerrag'
         url = 'https://maven.tterrag.com'
     }
-    maven {
-        name = 'TTerrag 2'
-        url = 'https://maven2.tterrag.com'
-    }
 }
 
 dependencies {
@@ -111,8 +107,6 @@ dependencies {
 
     // TTerrag
     provided "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
-
-    // TTerrag 2
     deobfProvided("com.enderio:EnderIO:${mc_version}-${version_enderio}") { exclude group: '*' }
 
     // Mod Maven
