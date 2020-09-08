@@ -64,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `DISABLE` to `DISABLED` in PEIntegration.java
 - Renamed PEIApi `LOG` to `LOGGER`
 - Completely changed IngredientHandler internals
+- Cleaned up forEach loop in legacy NuclearCraft plugin
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

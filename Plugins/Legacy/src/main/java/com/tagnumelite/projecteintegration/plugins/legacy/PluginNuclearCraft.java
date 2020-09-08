@@ -110,12 +110,8 @@ public class PluginNuclearCraft extends APEIPlugin {
                 }
 
                 ArrayList<Object> output = new ArrayList<>();
-                item_outputs.forEach(item -> {
-                    output.addAll(item.getOutputStackList());
-                });
-                fluid_outputs.forEach(fluid -> {
-                    output.addAll(fluid.getOutputStackList());
-                });
+                item_outputs.forEach(item -> output.addAll(item.getOutputStackList()));
+                fluid_outputs.forEach(fluid -> output.addAll(fluid.getOutputStackList()));
 
                 addConversion(output, ingredients.getMap());
             }
