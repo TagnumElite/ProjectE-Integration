@@ -22,7 +22,6 @@
 package com.tagnumelite.projecteintegration.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.tagnumelite.projecteintegration.api.internal.Phase;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -42,6 +41,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * ProjectE Integration API
@@ -59,7 +59,6 @@ public class PEIApi {
     private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
     private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
     private static final IConversionProxy conversion_proxy = ProjectEAPI.getConversionProxy();
-    private static final Set<PEIMapper> MAPPERS = new HashSet<>();
     private static final Map<Object, Integer> EMC_MAPPERS = new HashMap<>();
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
     public static int mapped_conversions = 0;
@@ -70,16 +69,13 @@ public class PEIApi {
     private final Map<String, String> FAILED_PLUGINS = new HashMap<>();
     private final Map<String, String> FAILED_MAPPERS = new HashMap<>();
     private final List<APEIPlugin> PLUGINS = new ArrayList<>();
+
     private boolean LOADED = false;
 
     /**
      * Is Debugging mode activated.
      */
     public final boolean DEBUG;
-    /**
-     * Is Multi-Threading mode activated.
-     */
-    public final boolean MULTITHREADED;
 
     /**
      * If you need the instance, use {@link #getInstance()}.
@@ -95,7 +91,6 @@ public class PEIApi {
         PHASE = Phase.INITIALIZING;
         CONFIG = config;
         DEBUG = config.getBoolean("debug", "general", false, "Enable debugging mode");
-        MULTITHREADED = config.getBoolean("multithreaded", "general", false, "EXPERIMENTAL. Executes mappers in parallel.");
         LOGGER.info("Starting Phase: Initialization");
         final long startTime = System.currentTimeMillis();
         ASMHandler handler = new ASMHandler(config, asmData);
@@ -120,17 +115,6 @@ public class PEIApi {
     public static PEIApi getInstance() {
         if (INSTANCE == null) throw new IllegalStateException("PEIApi hasn't been instantiated yet");
         return INSTANCE;
-    }
-
-    /**
-     * @param mapper {@code PEIMapper} The mapper to add
-     */
-    public static void addMapper(PEIMapper mapper) {
-        MAPPERS.add(mapper);
-    }
-
-    public static Set<PEIMapper> getMappers() {
-        return ImmutableSet.copyOf(MAPPERS);
     }
 
     public static void addEMCObject(Object object, int emc) {
@@ -245,7 +229,6 @@ public class PEIApi {
         RESOURCE_MAP.clear();
         INGREDIENT_CACHE.clear();
         LIST_CACHE.clear();
-        MAPPERS.clear();
         IngredientHandler.clearHandlers();
     }
 
@@ -264,6 +247,7 @@ public class PEIApi {
         PHASE = Phase.SETTING_UP_PLUGINS;
         LOGGER.info("Starting Phase: Setting up plugins");
         final long startTime = System.currentTimeMillis();
+
         for (APEIPlugin plugin : PLUGINS) {
             PEIApi.LOGGER.debug("Running Plugin for Mod: {}", plugin.modid);
             try {
@@ -276,7 +260,6 @@ public class PEIApi {
         }
 
         registerEMCObjects();
-        LOGGER.info("Added {} Mappers", getMappers().size());
         PHASE = Phase.WAITING;
         final long endTime = System.currentTimeMillis();
         LOGGER.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
@@ -288,19 +271,18 @@ public class PEIApi {
     public void setupMappers() {
         if (LOADED) return;
         PHASE = Phase.SETTING_UP_MAPPERS;
-        LOGGER.info("Starting Phase: Setting Up Mappers");
+        LOGGER.info("Starting Phase: Setting Up Mappers for {} plugins", PLUGINS.size());
         final long startTime = System.currentTimeMillis();
-        if (MULTITHREADED) {
 
-        } else {
-            for (PEIMapper mapper : getMappers()) {
-                try {
-                    mapper.setup();
-                } catch (Throwable t) {
-                    LOGGER.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
-                    FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
-                    t.printStackTrace();
-                }
+        List<PEIMapper> mappers = PLUGINS.stream().map(APEIPlugin::call).flatMap(List::stream).collect(Collectors.toList());
+        for (PEIMapper mapper : mappers) {
+            PEIApi.LOGGER.info("Running Mapper: {} ({})", mapper.name, mapper);
+            try {
+                mapper.setup();
+            } catch (Throwable t) {
+                LOGGER.error("Mapper '{}' ({}) Failed to run: {}", mapper.name, mapper, t);
+                FAILED_MAPPERS.put(mapper.name, mapper.getClass().getCanonicalName());
+                t.printStackTrace();
             }
         }
 

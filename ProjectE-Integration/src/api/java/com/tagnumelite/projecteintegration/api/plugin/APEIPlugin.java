@@ -21,6 +21,7 @@
  */
 package com.tagnumelite.projecteintegration.api.plugin;
 
+import com.google.common.collect.ImmutableList;
 import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
@@ -29,7 +30,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.concurrent.Immutable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * This is the abstract class all {@link PEIPlugin} should extend.
@@ -37,11 +41,12 @@ import java.util.List;
  * @see PEIPlugin
  * @see PEIMapper
  */
-public abstract class APEIPlugin {
+public abstract class APEIPlugin implements Callable<List<PEIMapper>> {
     public final String name;
     public final String modid;
     public final String category;
     public final Configuration config;
+    protected final List<PEIMapper> MAPPERS = new ArrayList<>();
 
     /**
      * Instantiate the Plugin and fetch modid, name, category and config.
@@ -192,7 +197,17 @@ public abstract class APEIPlugin {
             throw new IllegalArgumentException(String.format("Mapper '%s' name may not be empty", mapper.getClass().getCanonicalName()));
         }
         if (config.getBoolean(ConfigHelper.getMapperName(mapper), category, !mapper.disabled_by_default, mapper.desc)) {
-            PEIApi.addMapper(mapper);
+            MAPPERS.add(mapper);
         }
+    }
+
+    /**
+     * Computes a result, or throws an exception if unable to do so.
+     *
+     * @return computed result
+     */
+    @Override
+    public List<PEIMapper> call() {
+        return ImmutableList.copyOf(MAPPERS);
     }
 }
