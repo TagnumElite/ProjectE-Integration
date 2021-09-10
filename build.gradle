@@ -1,235 +1,187 @@
-/*
- * Copyright (c) 2019-2020 TagnumElite
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
-
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
-plugins {
-    id 'com.wynprice.cursemaven' version '2.1.1' apply false
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-}
-
-apply plugin: 'java'
-
-version = "${version}"
-if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME') != 'release') {
-    version += "+${System.getenv('GITHUB_SHA').substring(0, 7)}"
-}
-
-group = "com.tagnumelite.projecteintegration"
+version = "${mod_version}"
+group = 'com.tagnumelite.projecteintegration' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ProjectEIntegration-${mc_version}"
 
-task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '4.9'
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+minecraft {
+    // The mappings can be changed at any time, and must be in the following format.
+    // Channel:   Version:
+    // snapshot   YYYYMMDD   Snapshot are built nightly.
+    // stable     #          Stables are built at the discretion of the MCP team.
+    // official   MCVersion  Official field/method names from Mojang mapping files
+    //
+    // You must be aware of the Mojang license when using the 'official' mappings.
+    // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+    //
+    // Use non-default mappings at your own risk. they may not always work.
+    // Simply re-run your setup task after changing the mappings to update your workspace.
+    mappings channel: 'official', version: '1.16.5'
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // The markers can be changed as needed.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                projecteintegration {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // The markers can be changed as needed.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                projecteintegration {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // The markers can be changed as needed.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            property 'forge.logging.console.level', 'debug'
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            args '--mod', 'projecteintegration', '--all',
+                    '--existing', file('src/main/resources').toString(),
+                    '--existing', file('src/generated/resources').toString(),
+                    '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                projecteintegration {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
 
-def projects = ['ProjectE-Integration', 'Plugins']
+// Include resources generated by data generators.
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-subprojects {
-    sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-    compileJava {
-        sourceCompatibility = targetCompatibility = '1.8'
+repositories {
+    maven {
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
+    maven {
+        url "https://jitpack.io"
+        content {
+            includeGroup "com.github"
+        }
+    }
+    maven { url 'https://maven.blamejared.com' }
+    maven { url "https://dvs1.progwm16.com/files/maven" }
+    maven { url "https://modmaven.k-4u.nl" }
+}
 
+dependencies {
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    // Extra Mods for runtime to make life easier
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.+")
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
+
+    // ProjectE is required of course
+    implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
+
+    // All optional mods below
+    implementation fg.deobf("curse.maven:cucumber-272335:3349690")
+    implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
+    implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
+    //implementation fg.deobf('com.github.Ipsis:Woot:1.16.5-1.0.8.0')
+
+}
+
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "projecteintegration",
+            "Specification-Vendor": "tagnumelite",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"tagnumelite",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar') 
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
     repositories {
-        mavenLocal()
-        mavenCentral()
         maven {
-            name = 'MinecraftForge'
-            url = 'http://files.minecraftforge.net/maven'
-        }
-        maven {
-            name = 'CurseForge'
-            url = 'https://minecraft.curseforge.com/api/maven/'
-        }
-        maven {
-            name = 'ModMaven'
-            url = 'https://modmaven.k-4u.nl'
-        }
-        maven {
-            name = 'JitPack'
-            url = 'https://jitpack.io'
+            url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
 }
-
-subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
-
-task setupDecompWorkspace(dependsOn: projects.collect { ':' + it + ':setupDecompWorkspace' }) {}
-task setupCiWorkspace(dependsOn: projects.collect { ':' + it + ':setupCiWorkspace' }) {}
-task setupDevWorkspace(dependsOn: projects.collect { ':' + it + ':setupDevWorkspace' }) {}
-
-task build(overwrite: true, type: Jar, dependsOn: projects.collect { ':' + it + ':build' }) {
-    for (plugin in projects) {
-        from zipTree(project(plugin).jar.archivePath)
-    }
-}
-
-task sourcesJar(type: Jar, dependsOn: projects.collect { ':' + it + ':sourcesJar' }) {
-    description = 'Creates a JAR containing the source code.'
-    for (plugin in projects) {
-        from zipTree(project(plugin).sourcesJar.archivePath)
-    }
-    classifier = 'sources'
-}
-
-task deobfJar(type: Jar, dependsOn: projects.collect { ':' + it + ':deobfJar' }) {
-    description = 'Creates a JAR containing the non-obfuscated compiled code.'
-    for (plugin in projects) {
-        from zipTree(project(plugin).deobfJar.archivePath)
-    }
-    classifier = "deobf"
-}
-
-task javadocJar(type: Jar, dependsOn: projects.collect { ':' + it + ':javadocJar' }) {
-    description = 'Creates a JAR containing the JavaDocs.'
-    for (plugin in projects) {
-        from zipTree(project(plugin).javadocJar.archivePath)
-    }
-    classifier = 'javadoc'
-}
-
-task apiJar(type: Jar, dependsOn: ':ProjectE-Integration:apiJar') {
-    description = 'Creates a JAR containing the API'
-    from zipTree(project(':ProjectE-Integration').apiJar.archivePath)
-    classifier = 'api'
-}
-
-artifacts {
-    archives sourcesJar
-    archives deobfJar
-    archives javadocJar
-    archives apiJar
-}
-
-task updateJSON() {
-    def jsonFile = file('update.json')
-    def parsedJson = new JsonSlurper().parse(jsonFile)
-    parsedJson."${mc_version}"."${version}" = "See https://github.com/TagnumElite/ProjectE-Integration/releases/${version} for more detail"
-    parsedJson.promos."${mc_version}-latest" = "${version}"
-    parsedJson.promos."${mc_version}-recommended" = "${version}"
-    jsonFile.write(JsonOutput.prettyPrint(JsonOutput.toJson(parsedJson)))
-}
-
-build.dependsOn sourcesJar
-build.dependsOn deobfJar
-build.dependsOn javadocJar
-build.dependsOn apiJar
-
-curseforge {
-    options {
-        debug = true
-    }
-    apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
-    project {
-        id = "${cf_project}"
-        changelog = ""
-        changelogType = 'markdown'
-        releaseType = "${release_type}"
-        addGameVersion "${mc_version}"
-        mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
-        addArtifact(apiJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-api" }
-        addArtifact(deobfJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-deobf" }
-        addArtifact(javadocJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-javadoc" }
-        addArtifact(sourcesJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-sources" }
-        relations {
-            requiredDependency 'ProjectE'
-
-            // ProjectE-Integration Compact
-            optionalLibrary 'CraftTweaker'
-
-            // Crafting Plugins
-            optionalLibrary 'ArmorPlus'
-            optionalLibrary 'Artisan-Worktables'
-            optionalLibrary 'Chisel'
-            optionalLibrary 'Extended-Crafting'
-            optionalLibrary 'Modular-Machinery'
-
-            // Duplicate Plugins
-
-            // Legacy Plugins
-            //optionalLibrary 'IC2Classic'
-            optionalLibrary 'NuclearCraft-mod'
-
-            // Library Plugins
-            optionalLibrary 'Charset-Lib'
-            optionalLibrary 'LibVulpes'
-            optionalLibrary 'RebornCore'
-            optionalLibrary 'SonarCore'
-
-            // Magic Plugins
-            optionalLibrary 'Astral-Sorcery'
-            optionalLibrary 'Blood-Magic'
-            optionalLibrary 'Botania'
-            optionalLibrary 'Embers'
-            optionalLibrary 'Embers-Rekindled' //The embers plugin supports both
-            optionalLibrary 'ExtraBotany'
-            optionalLibrary 'Mystical-Agriculture'
-            optionalLibrary 'Psi'
-            optionalLibrary 'Thaumcraft'
-
-            // Misc Plugins
-            optionalLibrary 'Avaritia-1-10'
-            optionalLibrary 'Pams-HarvestCraft'
-            optionalLibrary 'Tinkers-Construct'
-            optionalLibrary 'Woot'
-
-            // Rocketry Plugins
-            optionalLibrary 'Advanced-Rocketry'
-
-            // Tech Plugins
-            optionalLibrary 'Actually-Additions'
-            optionalLibrary 'Applied-Energistics-2'
-            optionalLibrary 'Calculator'
-            optionalLibrary 'Compact-Machines'
-            optionalLibrary 'Draconic-Evolution'
-            optionalLibrary 'Ender-IO'
-            optionalLibrary 'Forestry'
-            optionalLibrary 'GregTechCE'
-            optionalLibrary 'Immersive-Engineering'
-            optionalLibrary 'Industrial-Craft'
-            optionalLibrary 'Mekanism'
-            optionalLibrary 'NuclearCraft-Overhauled'
-            optionalLibrary 'PneumaticCraft-Repressurized'
-            optionalLibrary 'TechReborn'
-            optionalLibrary 'Thermal-Expansion'
-        }
-    }
-}
-
-afterEvaluate {
-    tasks["curseforge${cf_project}"].dependsOn.add(apiJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(deobfJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(javadocJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(sourcesJar)
-    tasks["curseforge${cf_project}"].dependsOn.add(updateJSON)
-}
-

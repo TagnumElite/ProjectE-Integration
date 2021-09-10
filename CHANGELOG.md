@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+## [4.0.0]
+### Added
+- Support for [Extended Crafting]
+
+### Changed
+- Project was scrubbed clean and restarted
+
+### Removed
+- All mod support
+- All API
+- The seperated projects
+
+## [3.0.0-OLD]
+### Added
 - Added Intellij files
 - Support for Chisel
     - Maps all groups registered, takes the first item in group as the primary
@@ -363,7 +377,9 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.5.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/3.0.0...4.0.0
+[3.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.5.0...3.0.0
 [2.5.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.3.1...2.4.0
 [2.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.3.0...2.3.1
