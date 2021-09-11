@@ -148,8 +148,8 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // All optional mods below
-    implementation fg.deobf("curse.maven:compactcrafting-429735:3348414")
-    implementation fg.deobf("curse.maven:cucumber-272335:3349690")
+    implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
+    implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
     //implementation fg.deobf('com.github.Ipsis:Woot:1.16.5-1.0.8.0')
