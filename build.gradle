@@ -2,15 +2,18 @@ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'com.matthewprenger.cursegradle'
 
 version = "${mod_version}"
 group = 'com.tagnumelite.projecteintegration' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -145,6 +148,7 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // All optional mods below
+    implementation fg.deobf("curse.maven:compactcrafting-429735:3348414")
     implementation fg.deobf("curse.maven:cucumber-272335:3349690")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
@@ -184,4 +188,30 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+curseforge {
+    apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
+    project {
+        id = "${cf_project}"
+        changelog = ""
+        changelogType = 'markdown'
+        releaseType = "${release_type}"
+        addGameVersion "${mc_version}"
+        mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
+        relations {
+            requiredDependency 'ProjectE'
+
+            // ProjectE-Integration Compact
+            //optionalLibrary 'CraftTweaker'
+
+            // Crafting Plugins
+            optionalLibrary 'Extended-Crafting'
+            optionalLibrary 'Compact-Crafting'
+        }
+    }
+}
+
+afterEvaluate {
+    //tasks["curseforge${cf_project}"].dependsOn.add(updateJSON)
 }

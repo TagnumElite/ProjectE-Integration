@@ -3,8 +3,8 @@
     "promos": {
         "1.12.2-latest": "3.0.0",
         "1.12.2-recommended": "3.0.0",
-        "1.16.5-latest": "4.0.0",
-        "1.16.5-recommended": "4.0.0"
+        "1.16.5-latest": "4.0.1",
+        "1.16.5-recommended": "4.0.1"
     },
     "1.12.2": {
         "3.0.0": "See https://github.com/TagnumElite/ProjectE-Integration/releases/3.0.0 for more detail",
@@ -38,6 +38,7 @@
         "1.0.0": "See https://github.com/TagnumElite/ProjectE-Integration/releases/1.0.0 for more detail"
     },
     "1.16.5": {
+        "4.0.1": "Added support for Compact-Crafting miniaturization",
         "4.0.0": "See https://github.com/TagnumElite/ProjectE-Integration/releases/4.0.0 for more details"
     }
 }
