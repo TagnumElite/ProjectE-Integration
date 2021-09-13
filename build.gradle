@@ -142,7 +142,7 @@ dependencies {
 
     // Extra Mods for runtime to make life easier
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.+")
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1") // This is giving world loading problems for me
 
     // ProjectE is required of course
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
@@ -152,8 +152,6 @@ dependencies {
     implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
-    //implementation fg.deobf('com.github.Ipsis:Woot:1.16.5-1.0.8.0')
-
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -165,7 +163,6 @@ jar {
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"tagnumelite",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
