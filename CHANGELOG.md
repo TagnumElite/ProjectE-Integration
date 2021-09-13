@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+### Changed
+- Project icon was replace with placeholder
+
 ## [4.0.1]
 ### Added
 - Support for [Compact Crafting] miniaturization
