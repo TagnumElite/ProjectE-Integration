@@ -24,5 +24,5 @@ jobs:
             -   name: Build with Gradle
                 uses: eskatos/gradle-command-action@v1
                 with:
-                    arguments: setupCiWorkspace build sourcesJar deobfJar javadocJar
-                    gradle-version: 4.9
+                    arguments: build
+                    gradle-version: 7.1.1
