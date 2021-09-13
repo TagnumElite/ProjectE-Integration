@@ -1,3 +1,0 @@
-Some values seem to lose thier values thanks to ProjectE `Overwriting fixValueBeforeInherit for mod:item:23:0 to 0
-
-This seems to be causing problems for Calculator Enriched Gold conversion not registering
