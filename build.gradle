@@ -134,27 +134,35 @@ repositories {
     }
     maven { url 'https://maven.blamejared.com' }
     maven { url "https://dvs1.progwm16.com/files/maven" }
+    maven { url "https://chickenbones.net/maven/" }
     maven { url "https://modmaven.k-4u.nl" }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    // Extra Mods for runtime to make life easier
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.+")
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1") // This is giving world loading problems for me
-
-    // ProjectE is required of course
+    // ======================= [ Required Mods ] =======================
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
-    // All optional mods below
+    // ======================= [ Runtime Mods ] =======================
+    runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
+    // This is giving world loading problems for me
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
+    runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
+    runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+
+    // ======================= [ Optional Mods ] =======================
+    // compileOnly because of mixin problems
+    compileOnly fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
-    implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
+    implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
+    implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    // compileOnly because of mixin problems
+    compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
@@ -168,21 +176,50 @@ jar {
     }
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
+jar.finalizedBy('reobfJar')
+
+javadoc {
+    source = [sourceSets.main.allJava]
+    // prevent java 8's strict doclint for javadocs from failing builds
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveBaseName.set(project.archivesBaseName)
+    archiveVersion.set("${project.version}")
+    archiveClassifier.set('sources')
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+}
+
+artifacts {
+    archives jar, sourcesJar, javadocJar
+}
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
+        }
+        // GitHub Packages
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/TagnumElite/ProjectE-Integration"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
@@ -196,15 +233,17 @@ curseforge {
         releaseType = "${release_type}"
         addGameVersion "${mc_version}"
         mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
+        addArtifact sourcesJar
+        addArtifact javadocJar
         relations {
             requiredDependency 'ProjectE'
 
-            // ProjectE-Integration Compact
-            //optionalLibrary 'CraftTweaker'
-
             // Crafting Plugins
+            optionalLibrary 'Applied-Energistics-2'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'Compact-Crafting'
+            optionalLibrary 'Immersive-Engineering'
+            optionalLibrary 'Woot'
         }
     }
 }

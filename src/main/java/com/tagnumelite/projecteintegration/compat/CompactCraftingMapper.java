@@ -1,12 +1,32 @@
+/*
+ * Copyright (c) 2019-2021 TagnumElite
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.tagnumelite.projecteintegration.compat;
 
 import com.robotgryphon.compactcrafting.Registration;
 import com.robotgryphon.compactcrafting.api.components.IRecipeBlockComponent;
 import com.robotgryphon.compactcrafting.recipes.MiniaturizationRecipe;
 import com.robotgryphon.compactcrafting.recipes.components.BlockComponent;
-import moze_intel.projecte.api.mapper.collector.IMappingCollector;
-import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
-import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
+import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -14,7 +34,6 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Tuple;
 
@@ -24,7 +43,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RecipeTypeMapper(requiredMods = {"compactcrafting"}, priority = 1)
-public class CompactCraftingMapper implements IRecipeTypeMapper {
+public class CompactCraftingMapper extends APEIRecipeMapper<MiniaturizationRecipe> {
     @Override
     public String getName() {
         return "CompactCraftingMiniaturizationMapper";
@@ -41,8 +60,7 @@ public class CompactCraftingMapper implements IRecipeTypeMapper {
     }
 
     @Override
-    public boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, IRecipe<?> iRecipe, INSSFakeGroupManager _fgm) {
-        MiniaturizationRecipe recipe = (MiniaturizationRecipe) iRecipe;
+    public boolean convertRecipe(MiniaturizationRecipe recipe) {
         IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
 
         ItemStack catalyst = recipe.getCatalyst().copy();
@@ -80,7 +98,7 @@ public class CompactCraftingMapper implements IRecipeTypeMapper {
                     rawNSSMatches.add(NSSItem.createItem(output));
                 }
             }
-            Tuple<NormalizedSimpleStack, Boolean> group = _fgm.getOrCreateFakeGroup(rawNSSMatches);
+            Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
             NormalizedSimpleStack nssFake = group.getA();
             
             IngredientMap<NormalizedSimpleStack> outputInputIng = new IngredientMap<>();

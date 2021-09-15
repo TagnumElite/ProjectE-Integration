@@ -5,10 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.0.2]
 ### Added
+- Support for [Applied Energistics] (Grinder, Inscriber)
+- Support for [Draconic Evolution] (Fusion)
+- Support for [Immersive Engineering] (Alloy, Arc Furnace, Blast Furnace, Coke Oven, Crusher, Metal Press, Mixer, Sawmill, Squeezer)
+- Support for [Woot] (Anvil, Fluid Converter, Infuser) I will add Dye Squeezer later when brain no hurty anymore.
 
 ### Changed
 - Project icon was replace with placeholder
+
+### Removed
+- Support for [Extended Crafting] Compressor, for now. Just ironning some kinks out.
 
 ## [4.0.1]
 ### Added
@@ -385,7 +394,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.2...HEAD
+[4.0.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/3.0.0...4.0.0
 [3.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/2.5.0...3.0.0
@@ -418,3 +428,10 @@ Added support for 18 more mods
 [1.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
+
+<!-- MODS -->
+[Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
+[Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
+[Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
+[Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
+[Woot]: https://www.curseforge.com/minecraft/mc-mods/woot
