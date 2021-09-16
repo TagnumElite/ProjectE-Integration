@@ -143,6 +143,19 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
 
     /**
      *
+     * @param item
+     * @param amount
+     * @return
+     */
+    protected static ItemStack getStack(ItemStack item, int amount) {
+        if (amount > 0) {
+            return new ItemStack(item.getItem(), amount);
+        }
+        return item.copy();
+    }
+
+    /**
+     *
      * @param ingredient
      * @param ingredientMap
      * @param fakeGroupMap
@@ -150,9 +163,17 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
      */
     protected boolean convertIngredient(Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
                                          List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-        return convertIngredient(0, ingredient, ingredientMap, fakeGroupMap);
+        return convertIngredient(-1, ingredient, ingredientMap, fakeGroupMap);
     }
 
+    /**
+     *
+     * @param amount
+     * @param ingredient
+     * @param ingredientMap
+     * @param fakeGroupMap
+     * @return
+     */
     protected boolean convertIngredient(int amount, Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
                                                 List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         ItemStack[] matches = getMatchingStacks(ingredient);
@@ -160,7 +181,7 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
             return false;
         } else if (matches.length == 1) {
             //Handle this ingredient as a direct representation of the stack it represents
-            return !addIngredient(ingredientMap, matches[0].copy());
+            return !addIngredient(ingredientMap, getStack(matches[0], amount));
         } else if (matches.length > 0) {
             Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
             List<ItemStack> stacks = new ArrayList<>();
@@ -175,12 +196,12 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
 
             int count = stacks.size();
             if (count == 1) {
-                return !addIngredient(ingredientMap, stacks.get(0).copy());
+                return !addIngredient(ingredientMap, getStack(stacks.get(0), amount));
             } else if (count > 1) {
                 //Handle this ingredient as the representation of all the stacks it supports
                 Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
                 NormalizedSimpleStack dummy = group.getA();
-                ingredientMap.addIngredient(dummy, 1);
+                ingredientMap.addIngredient(dummy, amount);
                 if (group.getB()) {
                     //Only lookup the matching stacks for the group with conversion if we don't already have
                     // a group created for this dummy ingredient

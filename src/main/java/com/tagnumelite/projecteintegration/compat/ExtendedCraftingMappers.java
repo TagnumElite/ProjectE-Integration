@@ -27,8 +27,14 @@ import com.blakebr0.extendedcrafting.api.crafting.RecipeTypes;
 import com.blakebr0.extendedcrafting.config.ModConfigs;
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
+import moze_intel.projecte.emc.IngredientMap;
 import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.Tuple;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExtendedCraftingMappers {
     public static final String MODID = "extendedcrafting";
@@ -42,16 +48,21 @@ public class ExtendedCraftingMappers {
 
         @Override
         public String getDescription() {
-            return "Maps the Extended Crafting compressor recipes. NOTE: Currently broken";
+            return "Maps the Extended Crafting compressor recipes";
         }
 
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
-            //return iRecipeType == RecipeTypes.COMPRESSOR && ModConfigs.ENABLE_COMPRESSOR.get();
-            return false;
+            return iRecipeType == RecipeTypes.COMPRESSOR && ModConfigs.ENABLE_COMPRESSOR.get();
         }
 
-        // TODO: change Get input
+        @Override
+        protected NSSInput getInput(ICompressorRecipe recipe) {
+            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            convertIngredient(recipe.getInputCount(), recipe.getIngredients().get(0), ingredientMap, fakeGroupMap);
+            return new NSSInput(ingredientMap, fakeGroupMap, true);
+        }
     }
 
     @RecipeTypeMapper(requiredMods=MODID, priority = 1)
