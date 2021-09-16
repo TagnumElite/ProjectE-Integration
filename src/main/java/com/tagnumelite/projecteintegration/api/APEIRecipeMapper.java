@@ -201,7 +201,7 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
                 //Handle this ingredient as the representation of all the stacks it supports
                 Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
                 NormalizedSimpleStack dummy = group.getA();
-                ingredientMap.addIngredient(dummy, amount);
+                ingredientMap.addIngredient(dummy, Math.max(amount, 1));
                 if (group.getB()) {
                     //Only lookup the matching stacks for the group with conversion if we don't already have
                     // a group created for this dummy ingredient
