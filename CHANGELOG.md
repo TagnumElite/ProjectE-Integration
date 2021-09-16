@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.4]
+### Fixed
+- [Applied Energistics] inscriber mapper didn't know the deference between inscribing and pressing recipes.
+
+### Removed
+- Support for [Immersive Engineering] Squeezer and Arc Furnace,  these mappers were causing others to fail.
+
 ## [4.0.3]
 ### Added
 - Javadoc is now published to gh-pages branch
@@ -399,7 +406,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.3...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.4...HEAD
+[4.0.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.0...4.0.1

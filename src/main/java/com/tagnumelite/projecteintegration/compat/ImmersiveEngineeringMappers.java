@@ -72,7 +72,7 @@ public class ImmersiveEngineeringMappers {
         }
     }
 
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IEArcFurnaceMapper extends APEIRecipeMapper<ArcFurnaceRecipe> {
         @Override
         public String getName() {
@@ -301,7 +301,7 @@ public class ImmersiveEngineeringMappers {
         }
     }
 
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IESqueezerMapper extends APEIRecipeMapper<SqueezerRecipe> {
         @Override
         public String getName() {

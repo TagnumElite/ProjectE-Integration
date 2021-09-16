@@ -22,14 +22,20 @@
 
 package com.tagnumelite.projecteintegration.compat;
 
+import appeng.api.features.InscriberProcessType;
 import appeng.recipes.handlers.GrinderRecipe;
 import appeng.recipes.handlers.InscriberRecipe;
+import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
+
+import java.util.Collections;
+import java.util.List;
 
 public class AppliedEnergisticsMappers {
-    public static final String MODID = "appeng";
+    public static final String MODID = "appliedenergistics2";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEGrinderMapper extends BaseRecipeTypeMapper {
@@ -50,7 +56,7 @@ public class AppliedEnergisticsMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class AEInscriberMapper extends BaseRecipeTypeMapper {
+    public static class AEInscriberMapper extends APEIRecipeMapper<InscriberRecipe> {
         @Override
         public String getName() {
             return "AppliedEnergisticsInscriberMapper";
@@ -64,6 +70,15 @@ public class AppliedEnergisticsMappers {
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == InscriberRecipe.TYPE;
+        }
+
+        @Override
+        protected List<Ingredient> getIngredients(InscriberRecipe recipe) {
+            // Whoops, forgot that inscribing exists.
+            if (recipe.getProcessType() == InscriberProcessType.INSCRIBE) {
+                return Collections.singletonList(recipe.getMiddleInput());
+            }
+            return super.getIngredients(recipe);
         }
     }
 }
