@@ -1,25 +1,3 @@
-/*
- * Copyright (c) 2019-2020 TagnumElite
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 repositories {
     maven {
         name 'HellFire'
@@ -33,14 +11,14 @@ repositories {
 
 dependencies {
     // CurseForge Maven
-    deobfProvided "armorplus:ArmorPlus:${mc_version}:${version_armorplus}"
-    deobfProvided "artisan-worktables:artisanworktables:${mc_version}:${version_artisanworktables}"
-    deobfProvided "extended-crafting:ExtendedCrafting:${mc_version}:${version_extendedcrafting}"
+    compile fg.deobf("curse.maven:ArmorPlus-237366:${curse_armorplus}")
+    compile fg.deobf("curse.maven:ArtisanWorktables-284351:${curse_artisanworktables}")
+    compile fg.deobf("curse.maven:ExtendedCrafting-268387:${curse_extendedcrafting}")
 
     // HellFire Maven
-    provided "hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}:deobf"
+    compile fg.deobf("hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}")
 
     // TTerrag Maven
-    deobfProvided "team.chisel:Chisel:MC${mc_version}-${version_chisel}"
+    compile fg.deobf("team.chisel:Chisel:MC${mc_version}-${version_chisel}")
 }
 

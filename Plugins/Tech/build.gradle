@@ -1,24 +1,3 @@
-/*
- * Copyright (c) 2019-2020 TagnumElite
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 repositories {
     maven {
         name = 'BlameJared'
@@ -33,20 +12,8 @@ repositories {
         url = 'http://maven.covers1624.net'
     }
     maven {
-        name = 'GregTech'
-        url = 'https://dl.bintray.com/gregtech/dev'
-    }
-    maven {
         name = 'Player'
         url = 'http://maven.ic2.player.to'
-    }
-    maven {
-        name = 'ModMuss50'
-        url = 'https://maven.modmuss50.me'
-    }
-    maven {
-        name = 'TehNuuuuuuuuuuuut'
-        url = 'http://tehnut.info/maven/'
     }
     maven {
         name = 'TTerrag'
@@ -58,64 +25,52 @@ dependencies {
     compile(project(':Plugins:Library'))
 
     // BlameJared Maven
-    deobfProvided("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
+    compile fg.deobf("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
     }
 
+    // Buildcraft Maven
+    compile fg.deobf("com.mod-buildcraft:buildcraft-api:${version_buildcraft}")
+    compile fg.deobf("com.mod-buildcraft:buildcraft-lib:${version_buildcraft}")
 
     // CoFH Maven
-    provided("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:deobf") {
+    compile("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
         exclude group: 'cofh'
         exclude group: 'li.cil.oc'
     }
-    deobfProvided "cofh:RedstoneFlux:${version_redstoneflux}:universal"
-    deobfProvided("cofh:ThermalExpansion:${version_thermalexpansion}:universal") {
-        exclude group: 'mezz.jei'
-        exclude group: 'codechicken', module: 'CodeChickenLib'
-    }
-    deobfProvided("cofh:ThermalFoundation:${version_thermalfoundation}:universal") {
-        exclude group: 'mezz.jei'
-    }
+    compile "cofh:RedstoneFlux:${version_redstoneflux}:deobf"
+    compile("cofh:ThermalExpansion:${version_thermalexpansion}:deobf") { exclude group: 'mezz.jei' }
+    compile "cofh:ThermalFoundation:${version_thermalfoundation}:deobf"
 
-    // CurseForge
-    provided "calculator:calculator-${mc_version}-${version_calculator}:deobf"
-    deobfProvided "compact-machines:compactmachines3-${mc_version}:${version_compactmachines}"
-    deobfProvided "mekanism:Mekanism:${mc_version}:${version_mekanism}"
-    deobfProvided "nuclearcraft-overhauled:NuclearCraft:${version_nuclearcraftoverhauled}:${mc_version}"
+    // CurseMaven
+    compile fg.deobf("curse.maven:RebornCore-237903:${curse_reborncore}")
+    compile fg.deobf("curse.maven:TechReborn-233564:${curse_techreborn}")
 
-    // GregTech Maven
-    deobfProvided "gregtech:gregtech:${mc_version}-${version_gregtechce}"
-
-    // JitPack
-    provided "com.github.SonarSonic:Sonar-Core:${commit_sonarcore}:deobf"
-
-    // MinecraftForge Maven
-    deobfProvided "appeng:appliedenergistics2:${version_appliedenergistics}"
+    compile fg.deobf("curse.maven:ActuallyAdditions-228404:${curse_actuallyadditions}")
+    compile fg.deobf("curse.maven:appliedenergistics2-223794:${curse_appliedenergistics}")
+    compile fg.deobf("curse.maven:calculator-225104:${curse_calculator}")
+    //compile fg.deobf("curse.maven:compactmachines3-224218:${curse_compactmachines}")
+    compile fg.deobf("curse.maven:extrautils2-225561:${curse_extrautilities}")
+    compile fg.deobf("curse.maven:gregtech-293327:${curse_gregtechce}")
+    compile fg.deobf("curse.maven:Mekanism-268560:${curse_mekanism}")
+    compile fg.deobf("curse.maven:NuclearCraftOverhauled-336895:${curse_nuclearcraftoverhauled}")
+    compile fg.deobf("curse.maven:pneumaticcraft-281849:${curse_pneumaticcraft}")
+    compile fg.deobf("curse.maven:SonarCore-239418:${curse_sonarcore}")
 
     // Player Maven
-    provided("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
+    compile("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
         exclude group: 'mezz.jei'
         exclude group: 'jei-bees'
         exclude group: 'net.industrial-craft'
     }
-    provided "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
-    deobfProvided("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
+    compile "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
+    compile fg.deobf("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
         exclude group: 'mezz.jei'
     }
 
     // TTerrag
-    provided "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
-    deobfProvided("com.enderio:EnderIO:${mc_version}-${version_enderio}") { exclude group: '*' }
-
-    // Mod Maven
-    deobfProvided "de.ellpeck.actuallyadditions:ActuallyAdditions:${version_actuallyadditions}"
-    deobfProvided "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${mc_version}-${version_pneumaticcraft}"
-
-    // ModMuss50 Maven
-    deobfProvided("RebornCore:RebornCore-${mc_version}:${version_reborncore}:universal") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided "TechReborn:TechReborn-${mc_version}:${version_techreborn}:universal"
+    compile "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
+    compile fg.deobf("com.enderio:EnderIO:${mc_version}-${version_enderio}") { exclude group: '*' }
 }
