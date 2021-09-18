@@ -27,6 +27,7 @@ minecraft {
 
 repositories {
     maven { name 'CurseMaven'; url 'https://cursemaven.com' }
+    maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
 }
 
 dependencies {

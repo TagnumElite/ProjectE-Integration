@@ -28,11 +28,26 @@ archivesBaseName = "ProjectE-Integration-${mc_version}"
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
 
+sourceSets {
+    api
+    main {
+        compileClasspath += sourceSets.api.output
+        runtimeClasspath += sourceSets.api.output
+    }
+}
+
+configurations {
+    apiCompile.extendsFrom(compile)
+}
+
 minecraft {
     mappings channel: 'snapshot', version: "${mcp_version}"
 
     runs {
         client {
+            source sourceSets.main
+            source sourceSets.api
+
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -43,6 +58,8 @@ minecraft {
         }
 
         server {
+            source sourceSets.main
+            source sourceSets.api
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -62,10 +79,16 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     compile fg.deobf("curse.maven:ProjectE-226410:${curse_projecte}")
-    compile fg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}")
+    compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}:deobf"
+    //runtimeOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
 }
 
 jar {
+    from sourceSets.main.output.classesDirs
+    from sourceSets.api.output.classesDirs
+    from sourceSets.main.output.resourcesDir
+    from sourceSets.api.output.resourcesDir
+
     manifest {
         attributes([
             "Specification-Title": "projecteintegration",
@@ -75,6 +98,29 @@ jar {
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    classifier = "sources"
+    from sourceSets.main.allJava
+    from sourceSets.api.allJava
+}
+
+task apiJar(type: Jar) {
+    classifier = "api"
+    from sourceSets.api.output
+    from sourceSets.api.allJava
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+    archives apiJar
 }
 
 // Example configuration to allow publishing using the maven-publish task

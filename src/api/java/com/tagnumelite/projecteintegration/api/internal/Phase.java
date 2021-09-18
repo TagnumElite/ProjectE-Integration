@@ -22,9 +22,11 @@
 
 package com.tagnumelite.projecteintegration.api.internal;
 
+import com.tagnumelite.projecteintegration.api.PEIApi;
+
 /**
  * Used to determine the current phase of the
- * {@link com.tagnumelite.projecteintegration.api.PEIApi}
+ * {@link PEIApi}
  */
 public enum Phase {
     /**

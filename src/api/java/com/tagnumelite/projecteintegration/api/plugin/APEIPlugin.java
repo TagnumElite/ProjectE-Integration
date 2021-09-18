@@ -29,8 +29,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
+import com.tagnumelite.projecteintegration.api.internal.Phase;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -65,7 +65,7 @@ public abstract class APEIPlugin implements Callable<List<PEIMapper>> {
     }
 
     /**
-     * This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_PLUGINS}
+     * This is called during {@link Phase#SETTING_UP_PLUGINS}
      * by the {@link PEIApi} and should not be called anywhere else.
      * <p>
      * {@link #addEMC} and {@link #addMapper(PEIMapper)} should be called during this setup.

@@ -35,6 +35,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.ClassUtils;
+import com.tagnumelite.projecteintegration.api.internal.Phase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +94,7 @@ public abstract class PEIMapper {
     }
 
     /**
-     * This is called during {@link com.tagnumelite.projecteintegration.api.internal.Phase#SETTING_UP_MAPPERS}
+     * This is called during {@link Phase#SETTING_UP_MAPPERS}
      * This setup should be calling {@link #addRecipe} and/or {@link #addConversion}
      */
     public abstract void setup();
