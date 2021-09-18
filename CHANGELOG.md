@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added option to ignore creosote output from Coke Oven
 - Added `IngredientHandlers` for 'ItemStack', 'FluidStack', 'Item', 'Block', 'OreDict', 'IIngredient', 'BlockState' and 'SizedObject'.
 - Added `Debug` option to PEIApi config
+- Added `Minecraft Development` Intellij plugin as required
 
 ### Changed
 - Moved from Travis to GitHub Actions
@@ -67,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleaned up forEach loop in legacy NuclearCraft plugin
 - Implemented `Callable` interface for APEIPlugin.
 - Switched to ForgeGradle 3.+
+- Updated .gitignore
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
@@ -75,6 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Debug log from Modular Machinery plugin
 - Misc Category from config, was never used.
 - TTerrag second maven, was removed
+- .editorconfig
 
 ### Fixed
 - Fixed plugins
