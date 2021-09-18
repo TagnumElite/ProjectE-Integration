@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Completely changed IngredientHandler internals
 - Cleaned up forEach loop in legacy NuclearCraft plugin
 - Implemented `Callable` interface for APEIPlugin.
+- Switched to ForgeGradle 3.+
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

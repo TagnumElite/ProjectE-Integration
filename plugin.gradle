@@ -1,41 +1,37 @@
-/*
- * Copyright (c) 2019-2020 TagnumElite
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+    }
+}
 
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.wynprice.cursemaven'
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
 version = mc_version + '-' + "${version}"
 archivesBaseName = project.projectDir.name
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
-    //run = rootProject.rootDir + '/run'
-    mappings = "snapshot_${mcp_version}"
+    mappings channel: 'snapshot', version: "${mcp_version}"
+    
+    runs {
+    }
 }
 
-sourceSets.remove(sourceSets.api)
+//sourceSets.remove(sourceSets.api)
+
+repositories {
+    maven { name 'CurseMaven'; url 'https://cursemaven.com' }
+}
 
 dependencies {
-    compile project(':ProjectE-Integration')
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    compile project(':')
 }
 
 jar {}
