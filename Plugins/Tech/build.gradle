@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
     compile(project(':Plugins:Library'))
+    compile files("libs/compactmachines3-1.12.2-3.0.18-b278.jar")
 
     // BlameJared Maven
     compile fg.deobf("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {

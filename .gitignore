@@ -277,8 +277,8 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,eclipse,intellij,archives,forgegradle,visualstudiocode
 
 *.jks
-!libs/*.jar
 .idea/jenkinsSettings.xml
 .idea/discord.xml
 .idea/modules/Plugins/*/ProjectE-Integration.Plugins.*.test.iml
 .idea/runConfigurations/run*.xml
+!**/libs/*.jar

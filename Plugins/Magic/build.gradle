@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    compile files("libs/MysticalAgriculture-1.12.2-1.7.5.jar")
+
     // CurseMaven
     compile fg.deobf("curse.maven:BloodMagic-224791:${curse_bloodmagic}")
     compile fg.deobf("curse.maven:embers-251918:${curse_embers}")

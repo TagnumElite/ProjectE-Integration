@@ -7,6 +7,9 @@ repositories {
 
 dependencies {
     compile(project(':Plugins:Library'))
+    compile files("libs/MicdoodleCore-1.12.2-4.0.2.280.jar")
+    compile files("libs/GalacticraftCore-1.12.2-4.0.2.280.jar")
+    compile files("libs/Galacticraft-Planets-1.12.2-4.0.2.280.jar")
 
     // CurseMaven
     compile fg.deobf("curse.maven:AdvancedRocketry-236542:${curse_advancedrocketry}")

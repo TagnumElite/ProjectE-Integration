@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    compile files("libs/Pam's+HarvestCraft+1.12.2zg.jar")
+
     //CoFH Maven
     compile("morph.avaritia:Avaritia:${mc_version}-${version_avaritia}:deobf") {
         exclude group: '*', module: '*'
