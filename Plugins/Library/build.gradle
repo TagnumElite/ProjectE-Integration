@@ -7,10 +7,10 @@ repositories {
 
 dependencies {
     // CurseMaven
-    compile fg.deobf("curse.maven:LibVulpes-236541:${curse_libvulpes}")
-    compile fg.deobf("curse.maven:SonarCore-239418:${curse_sonarcore}")
-    compile fg.deobf("curse.maven:RebornCore-237903:${curse_reborncore}")
+    implementation fg.deobf("curse.maven:LibVulpes-236541:${curse_libvulpes}")
+    implementation fg.deobf("curse.maven:SonarCore-239418:${curse_sonarcore}")
+    implementation fg.deobf("curse.maven:RebornCore-237903:${curse_reborncore}")
 
     // Elytra
-    compile fg.deobf("pl.asie.charset:charset:${version_charset}:full")
+    implementation fg.deobf("pl.asie.charset:charset:${version_charset}:full")
 }

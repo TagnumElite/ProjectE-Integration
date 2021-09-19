@@ -23,55 +23,55 @@ repositories {
 
 dependencies {
     compile(project(':Plugins:Library'))
-    compile files("libs/compactmachines3-1.12.2-3.0.18-b278.jar")
+    implementation files("libs/compactmachines3-1.12.2-3.0.18-b278.jar")
 
     // BlameJared Maven
-    compile fg.deobf("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
+    implementation fg.deobf("blusunrize:ImmersiveEngineering:${version_immersiveengineering}") {
         exclude group: 'mezz.jei'
     }
 
     // Buildcraft Maven
-    compile fg.deobf("com.mod-buildcraft:buildcraft-api:${version_buildcraft}")
-    compile fg.deobf("com.mod-buildcraft:buildcraft-lib:${version_buildcraft}")
+    implementation fg.deobf("com.mod-buildcraft:buildcraft-api:${version_buildcraft}")
+    implementation fg.deobf("com.mod-buildcraft:buildcraft-lib:${version_buildcraft}")
 
     // CoFH Maven
-    compile("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
+    implementation("com.brandon3055.draconicevolution:Draconic-Evolution:${version_draconicevolution}:deobf") {
         exclude group: 'mezz.jei'
         exclude group: 'codechicken'
         exclude group: 'cofh'
         exclude group: 'li.cil.oc'
     }
-    compile "cofh:RedstoneFlux:${version_redstoneflux}:deobf"
-    compile("cofh:ThermalExpansion:${version_thermalexpansion}:deobf") { exclude group: 'mezz.jei' }
-    compile "cofh:ThermalFoundation:${version_thermalfoundation}:deobf"
+    implementation "cofh:RedstoneFlux:${version_redstoneflux}:deobf"
+    implementation("cofh:ThermalExpansion:${version_thermalexpansion}:deobf") { exclude group: 'mezz.jei' }
+    implementation "cofh:ThermalFoundation:${version_thermalfoundation}:deobf"
 
     // CurseMaven
-    compile fg.deobf("curse.maven:RebornCore-237903:${curse_reborncore}")
-    compile fg.deobf("curse.maven:TechReborn-233564:${curse_techreborn}")
+    implementation fg.deobf("curse.maven:RebornCore-237903:${curse_reborncore}")
+    implementation fg.deobf("curse.maven:TechReborn-233564:${curse_techreborn}")
 
-    compile fg.deobf("curse.maven:ActuallyAdditions-228404:${curse_actuallyadditions}")
-    compile fg.deobf("curse.maven:appliedenergistics2-223794:${curse_appliedenergistics}")
-    compile fg.deobf("curse.maven:calculator-225104:${curse_calculator}")
-    //compile fg.deobf("curse.maven:compactmachines3-224218:${curse_compactmachines}")
-    compile fg.deobf("curse.maven:extrautils2-225561:${curse_extrautilities}")
-    compile fg.deobf("curse.maven:gregtech-293327:${curse_gregtechce}")
-    compile fg.deobf("curse.maven:Mekanism-268560:${curse_mekanism}")
-    compile fg.deobf("curse.maven:NuclearCraftOverhauled-336895:${curse_nuclearcraftoverhauled}")
-    compile fg.deobf("curse.maven:pneumaticcraft-281849:${curse_pneumaticcraft}")
-    compile fg.deobf("curse.maven:SonarCore-239418:${curse_sonarcore}")
+    implementation fg.deobf("curse.maven:ActuallyAdditions-228404:${curse_actuallyadditions}")
+    implementation fg.deobf("curse.maven:appliedenergistics2-223794:${curse_appliedenergistics}")
+    implementation fg.deobf("curse.maven:calculator-225104:${curse_calculator}")
+    //implementation fg.deobf("curse.maven:compactmachines3-224218:${curse_compactmachines}")
+    implementation fg.deobf("curse.maven:extrautils2-225561:${curse_extrautilities}")
+    implementation fg.deobf("curse.maven:gregtech-293327:${curse_gregtechce}")
+    implementation fg.deobf("curse.maven:Mekanism-268560:${curse_mekanism}")
+    implementation fg.deobf("curse.maven:NuclearCraftOverhauled-336895:${curse_nuclearcraftoverhauled}")
+    implementation fg.deobf("curse.maven:pneumaticcraft-281849:${curse_pneumaticcraft}")
+    implementation fg.deobf("curse.maven:SonarCore-239418:${curse_sonarcore}")
 
     // Player Maven
-    compile("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
+    implementation("binnie:binnie-mods-${mc_version}:${version_binniemods}:sources") {
         exclude group: 'mezz.jei'
         exclude group: 'jei-bees'
         exclude group: 'net.industrial-craft'
     }
-    compile "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
-    compile fg.deobf("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
+    implementation "net.sengir.forestry:forestry_${mc_version}:${version_forestry}:api"
+    implementation fg.deobf("net.industrial-craft:industrialcraft-2:${version_idustrialcraft}:dev") {
         exclude group: 'mezz.jei'
     }
 
     // TTerrag
-    compile "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
-    compile fg.deobf("com.enderio:EnderIO:${mc_version}-${version_enderio}") { exclude group: '*' }
+    implementation "com.enderio.core:EnderCore:${mc_version}-${version_endercore}:deobf"
+    implementation fg.deobf("com.enderio:EnderIO:${mc_version}-${version_enderio}", { exclude group: '*' })
 }

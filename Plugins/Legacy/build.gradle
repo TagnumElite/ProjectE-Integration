@@ -1,5 +1,5 @@
 dependencies {
     // CurseMaven
-    compile fg.deobf("curse.maven:NuclearCraft-226254:${curse_nuclearcraft}")
-    compile fg.deobf("curse.maven:ic2classic-242942:${curse_ic2classic}")
+    implementation fg.deobf("curse.maven:NuclearCraft-226254:${curse_nuclearcraft}")
+    implementation fg.deobf("curse.maven:ic2classic-242942:${curse_ic2classic}")
 }

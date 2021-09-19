@@ -10,19 +10,19 @@ repositories {
 }
 
 dependencies {
-    compile files("libs/Pam's+HarvestCraft+1.12.2zg.jar")
+    implementation files("libs/Pam's+HarvestCraft+1.12.2zg.jar")
 
     //CoFH Maven
-    compile("morph.avaritia:Avaritia:${mc_version}-${version_avaritia}:deobf") {
+    implementation("morph.avaritia:Avaritia:${mc_version}-${version_avaritia}:deobf") {
         exclude group: '*', module: '*'
     }
 
     // CurseMaven
-    //compile fg.deobf("curse.maven:harvestcraft-221857:${curse_harvestcraft}")
-    compile fg.deobf("curse.maven:SecurityCraft-64760:${curse_securitycraft}")
-    compile fg.deobf("curse.maven:woot-244049:${curse_woot}")
+    //implementation fg.deobf("curse.maven:harvestcraft-221857:${curse_harvestcraft}")
+    implementation fg.deobf("curse.maven:SecurityCraft-64760:${curse_securitycraft}")
+    implementation fg.deobf("curse.maven:woot-244049:${curse_woot}")
 
     // DVS1 Maven
-    compile "slimeknights.mantle:Mantle:1.12-${version_mantle}:deobf"
-    compile "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
+    implementation "slimeknights.mantle:Mantle:1.12-${version_mantle}:deobf"
+    implementation "slimeknights:TConstruct:${mc_version}-${version_tconstruct}:deobf"
 }

@@ -7,12 +7,12 @@ repositories {
 
 dependencies {
     compile(project(':Plugins:Library'))
-    compile files("libs/MicdoodleCore-1.12.2-4.0.2.280.jar")
-    compile files("libs/GalacticraftCore-1.12.2-4.0.2.280.jar")
-    compile files("libs/Galacticraft-Planets-1.12.2-4.0.2.280.jar")
+    implementation files("libs/MicdoodleCore-1.12.2-4.0.2.280.jar")
+    implementation files("libs/GalacticraftCore-1.12.2-4.0.2.280.jar")
+    implementation files("libs/Galacticraft-Planets-1.12.2-4.0.2.280.jar")
 
     // CurseMaven
-    compile fg.deobf("curse.maven:AdvancedRocketry-236542:${curse_advancedrocketry}")
+    implementation fg.deobf("curse.maven:AdvancedRocketry-236542:${curse_advancedrocketry}")
 
     // MicDoodle CI
     //deobf name: 'Galacticraft-Planets', version: "${mc_version}-${version_galacticraft}", ext: 'jar'

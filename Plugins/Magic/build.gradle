@@ -10,20 +10,20 @@ repositories {
 }
 
 dependencies {
-    compile files("libs/MysticalAgriculture-1.12.2-1.7.5.jar")
+    implementation files("libs/MysticalAgriculture-1.12.2-1.7.5.jar")
 
     // CurseMaven
-    compile fg.deobf("curse.maven:BloodMagic-224791:${curse_bloodmagic}")
-    compile fg.deobf("curse.maven:embers-251918:${curse_embers}")
-    compile fg.deobf("curse.maven:ExtraBotany-299086:${curse_extrabotany}")
-    //compile fg.deobf("curse.maven:MysticalAgriculture-246640:${curse_mysticalagriculture}")
-    compile fg.deobf("curse.maven:Thaumcraft-223628:${curse_thaumcraft}")
-    compile fg.deobf("curse.maven:twilightforest-227639:${curse_twilightforest}")
+    implementation fg.deobf("curse.maven:BloodMagic-224791:${curse_bloodmagic}")
+    implementation fg.deobf("curse.maven:embers-251918:${curse_embers}")
+    implementation fg.deobf("curse.maven:ExtraBotany-299086:${curse_extrabotany}")
+    //implementation fg.deobf("curse.maven:MysticalAgriculture-246640:${curse_mysticalagriculture}")
+    implementation fg.deobf("curse.maven:Thaumcraft-223628:${curse_thaumcraft}")
+    implementation fg.deobf("curse.maven:twilightforest-227639:${curse_twilightforest}")
 
     // BlameJared Maven
-    compile fg.deobf("vazkii.botania:Botania:${version_botania}")
-    compile fg.deobf("vazkii.psi:Psi:${version_psi}")
+    implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
+    implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
 
     // HellFire Maven
-    compile fg.deobf("hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}")
+    implementation fg.deobf("hellfirepvp.astralsorcery:astralsorcery:${mc_version}-${version_astralsorcery}")
 }

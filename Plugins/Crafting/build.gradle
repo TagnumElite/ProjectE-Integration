@@ -11,14 +11,14 @@ repositories {
 
 dependencies {
     // CurseForge Maven
-    compile fg.deobf("curse.maven:ArmorPlus-237366:${curse_armorplus}")
-    compile fg.deobf("curse.maven:ArtisanWorktables-284351:${curse_artisanworktables}")
-    compile fg.deobf("curse.maven:ExtendedCrafting-268387:${curse_extendedcrafting}")
+    implementation fg.deobf("curse.maven:ArmorPlus-237366:${curse_armorplus}")
+    implementation fg.deobf("curse.maven:ArtisanWorktables-284351:${curse_artisanworktables}")
+    implementation fg.deobf("curse.maven:ExtendedCrafting-268387:${curse_extendedcrafting}")
 
     // HellFire Maven
-    compile fg.deobf("hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}")
+    implementation fg.deobf("hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}")
 
     // TTerrag Maven
-    compile fg.deobf("team.chisel:Chisel:MC${mc_version}-${version_chisel}")
+    implementation fg.deobf("team.chisel:Chisel:MC${mc_version}-${version_chisel}")
 }
 
