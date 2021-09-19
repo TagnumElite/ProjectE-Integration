@@ -1,6 +1,4 @@
 jdk:
     - openjdk8
-before_install:
-    - ./gradlew clean setupCiWorkspace
 install:
     - ./gradlew build deobfJar sourcesJar javadocJar apiJar
