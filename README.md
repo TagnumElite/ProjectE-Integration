@@ -100,15 +100,9 @@ repositories {
 }
 
 dependencies {
-    provided 'com.tagnumelite:ProjectE-Integration:2.5.0.73'
+    provided 'com.tagnumelite:ProjectE-Integration:3.0.0:api'
 }
 ```
-
-## Info:
-
-- 1.13.X: Support isn't planned
-- 1.14.X: I may release a version at some point
-- 1.15.X: I will start working on this version after ProjectE finalises their API and releases a 'release' build
 
 ## Permissions:    
 
