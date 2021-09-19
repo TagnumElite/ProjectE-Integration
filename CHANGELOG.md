@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented `Callable` interface for APEIPlugin.
 - Switched to ForgeGradle 3.+
 - Updated .gitignore
+- Moved Api sourceSet to Api subproject
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
@@ -86,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Extended Crafting: Some inputs were a list and couldn't be converted
 - Fixed Pam's HarvestCraft plugin: The output list should work properly now. Old code was bogging it down
 - Fixed Immersive Engineering: MultiBlock recipe didn't have correct output amounts
+- Fixed NuclearCraft: Overhauled recipe mapper names were failing.
 
 ## [2.5.0] - 2019-08-11
 ### Fixed

@@ -33,7 +33,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collection;
 import java.util.List;
 
 import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;

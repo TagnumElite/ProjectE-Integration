@@ -102,7 +102,7 @@ public class PEIApi {
     }
 
     /**
-     * @return The current phase of the api
+     * @return The current phase of the com.tagnumelite.projecteintegration.api
      */
     public static Phase getPhase() {
         return PHASE;
@@ -110,7 +110,7 @@ public class PEIApi {
 
     /**
      * @return Returns the current {@link PEIApi} Instance
-     * @throws IllegalStateException The api hasn't been instantiated yet
+     * @throws IllegalStateException The com.tagnumelite.projecteintegration.api hasn't been instantiated yet
      */
     public static PEIApi getInstance() {
         if (INSTANCE == null) throw new IllegalStateException("PEIApi hasn't been instantiated yet");

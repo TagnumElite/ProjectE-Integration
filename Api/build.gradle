@@ -18,14 +18,32 @@ minecraft {
     mappings channel: 'snapshot', version: "${mcp_version}"
 }
 
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.mc_version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand 'version': project.version, 'mcversion': project.mc_version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
 repositories {
     maven { name 'CurseMaven'; url 'https://cursemaven.com' }
-    maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    compile project(':Api')
+    compile fg.deobf("curse.maven:ProjectE-226410:${curse_projecte}")
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 jar {}

@@ -1,5 +1,6 @@
 rootProject.name = 'ProjectE-Integration'
 
+include 'Api'
 include 'Plugins'
 
 def pei_plugins = []

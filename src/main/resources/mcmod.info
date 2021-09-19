@@ -7,6 +7,7 @@
   "mcversion": "${mcversion}",
   "url": "https://minecraft.curseforge.com/projects/projecte-integration",
   "authorList": ["TagnumElite"],
-  "requiredMods": ["projecte"]
+  "requiredMods": ["projecte"],
+  "dependencies": ["projecte"]
 }
 ]

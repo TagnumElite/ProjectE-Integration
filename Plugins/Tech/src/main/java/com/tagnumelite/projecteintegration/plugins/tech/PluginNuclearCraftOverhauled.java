@@ -53,10 +53,10 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
     }
 
     private static class AbstractRecipeMapper extends PEIMapper {
-        private AbstractRecipeHandler<? extends IRecipe> handler;
+        private final AbstractRecipeHandler<? extends IRecipe> handler;
 
         public AbstractRecipeMapper(AbstractRecipeHandler<? extends IRecipe> handler) {
-            super(handler.getRecipeName());
+            super(handler.getName());
             this.handler = handler;
         }
 
@@ -77,7 +77,7 @@ public class PluginNuclearCraftOverhauled extends APEIPlugin {
                 List<IFluidIngredient> fluid_outputs = recipe.getFluidProducts();
 
                 if ((item_inputs.size() <= 0 && fluid_inputs.size() <= 0) || (item_outputs.size() <= 0 && fluid_outputs.size() <= 0)) {
-                    PEIApi.LOGGER.warn("Invalid Recipe from `{}`", handler.getRecipeName());
+                    PEIApi.LOGGER.warn("Invalid Recipe from `{}`", handler.getName());
                     continue;
                 }
 
