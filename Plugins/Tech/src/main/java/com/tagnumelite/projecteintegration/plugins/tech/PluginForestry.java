@@ -21,18 +21,26 @@
  */
 package com.tagnumelite.projecteintegration.plugins.tech;
 
+import com.tagnumelite.projecteintegration.api.internal.lists.InputList;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import forestry.api.recipes.*;
+import com.tagnumelite.projecteintegration.api.utils.Utils;
+import forestry.api.recipes.ICentrifugeRecipe;
+import forestry.api.recipes.ISqueezerRecipe;
+import forestry.api.recipes.RecipeManagers;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @PEIPlugin("forestry")
 public class PluginForestry extends APEIPlugin {
     @Override
     public void setup() {
         addMapper(new CarpenterMapper());
-        //addMapper(new CentrifugeMapper()); //INFO: Has multiple outputs, not doing for now
+        addMapper(new CentrifugeMapper());
         addMapper(new FabricatorMapper());
         addMapper(new FermenterMapper());
         addMapper(new MoistenerMapper());
@@ -47,8 +55,23 @@ public class PluginForestry extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (ICarpenterRecipe recipe : RecipeManagers.carpenterManager.recipes()) {
-                addRecipe(recipe.getBox(), recipe.getCraftingGridRecipe().getRawIngredients().toArray(), recipe.getFluidResource());
+            RecipeManagers.carpenterManager.recipes().forEach(r -> addRecipe(r.getBox(),
+                Utils.convertGrid(r.getCraftingGridRecipe().getRawIngredients()), r.getFluidResource()));
+        }
+    }
+
+    private static class CentrifugeMapper extends PEIMapper {
+        public CentrifugeMapper() {
+            super("Centrifuge");
+        }
+
+        @Override
+        public void setup() {
+            for (ICentrifugeRecipe recipe : RecipeManagers.centrifugeManager.recipes()) {
+                ArrayList<Object> outputs = new ArrayList<>(recipe.getAllProducts().entrySet().stream()
+                    .filter(x -> x.getValue() == 1f)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).keySet());
+                addRecipe(outputs, recipe.getInput());
             }
         }
     }
@@ -97,7 +120,14 @@ public class PluginForestry extends APEIPlugin {
         @Override
         public void setup() {
             for (ISqueezerRecipe recipe : RecipeManagers.squeezerManager.recipes()) {
-                addRecipe(recipe.getFluidOutput(), recipe.getResources());
+                if (recipe.getRemnantsChance() == 1f) {
+                    ArrayList<Object> outputs = new ArrayList<>(2);
+                    outputs.add(recipe.getRemnants());
+                    outputs.add(recipe.getFluidOutput());
+                    addRecipe(outputs, new InputList<>(recipe.getResources()));
+                } else {
+                    addRecipe(recipe.getFluidOutput(), new InputList<>(recipe.getResources()));
+                }
             }
         }
     }

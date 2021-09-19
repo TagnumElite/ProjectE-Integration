@@ -21,50 +21,26 @@
  */
 package com.tagnumelite.projecteintegration.plugins.magic;
 
-import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.recipe.*;
+import vazkii.botania.api.recipe.RecipePureDaisy;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+
+import static net.minecraftforge.fluids.Fluid.BUCKET_VOLUME;
 
 @PEIPlugin("botania")
 public class PluginBotania extends APEIPlugin {
     private final Object mana = new Object();
-    private final boolean add_emc_to_mana;
-
-    public PluginBotania() {
-        add_emc_to_mana = config.getBoolean("add_emc_to_mana", this.category, true, "Should mana have an EMC?");
-    }
-
-    private static Map<Object, Integer> createMapFromList(List<Object> list) {
-        if (list.isEmpty())
-            return null;
-
-        IngredientMap<Object> map = new IngredientMap<Object>();
-
-        list.forEach(item -> {
-            if (item instanceof ItemStack)
-                map.addIngredient(item, ((ItemStack) item).getCount());
-            else if (item instanceof String)
-                map.addIngredient(item, 1);
-        });
-
-        return map.getMap();
-    }
-
-    private static ItemStack getItemStackFromBlockState(IBlockState state) {
-        return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
-    }
 
     @Override
     public void setup() {
@@ -84,19 +60,7 @@ public class PluginBotania extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (RecipeElvenTrade recipe : BotaniaAPI.elvenTradeRecipes) {
-                List<ItemStack> outputs = recipe.getOutputs();
-                if (outputs.isEmpty())
-                    continue;
-
-                List<Object> inputs = recipe.getInputs();
-                if (inputs.isEmpty())
-                    continue;
-
-                outputs.forEach(output -> {
-                    addConversion(output.getCount(), output, createMapFromList(inputs));
-                });
-            }
+            BotaniaAPI.elvenTradeRecipes.forEach(r -> addRecipe(new ArrayList<>(r.getOutputs()), r.getInputs()));
         }
     }
 
@@ -107,17 +71,7 @@ public class PluginBotania extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (RecipePetals recipe : BotaniaAPI.petalRecipes) {
-                ItemStack output = recipe.getOutput();
-                if (output == null || output.isEmpty())
-                    continue;
-
-                List<Object> inputs = recipe.getInputs();
-                if (inputs.isEmpty())
-                    continue;
-
-                addConversion(output.getCount(), output, createMapFromList(inputs));
-            }
+            BotaniaAPI.petalRecipes.forEach(r -> addRecipe(r.getOutput(), r.getInputs()));
         }
     }
 
@@ -126,29 +80,31 @@ public class PluginBotania extends APEIPlugin {
             super("Pure Daisy");
         }
 
+        private static Object getStackFromBlockState(IBlockState state) {
+            Block block = state.getBlock();
+            Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
+            if (fluid == null) {
+                return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+            } else {
+                return new FluidStack(fluid, BUCKET_VOLUME);
+            }
+        }
+
+        private static Object castInput(Object input) {
+            if (input instanceof IBlockState)
+                return getStackFromBlockState((IBlockState) input);
+            else
+                return input;
+        }
+
         @Override
         public void setup() {
             for (RecipePureDaisy recipe : BotaniaAPI.pureDaisyRecipes) {
-                ItemStack output = getItemStackFromBlockState(recipe.getOutputState());
-                if (output == null || output.isEmpty())
-                    continue;
-
-                Object input = recipe.getInput();
-                if (input == null)
-                    continue;
-
-                if (input instanceof IBlockState) {
-                    input = getItemStackFromBlockState((IBlockState) input);
-                    if (input == null) {
-                        PEIApi.LOG.info("ItemStack is null when fetching from BlockState: {}", input);
-                        continue;
-                    }
-                } else if (input instanceof Block) {
-                    if (input instanceof BlockLiquid)
-                        continue; // TODO: Find a way to get the FluidStack from BlockLiquid
-                }
-
-                addConversion(output, ImmutableMap.of(input, 1));
+                Object output = getStackFromBlockState(recipe.getOutputState());
+                if (output instanceof ItemStack)
+                    addRecipe((ItemStack) output, castInput(recipe.getInput()));
+                else
+                    addRecipe((FluidStack) output, castInput(recipe.getInput()));
             }
         }
     }
@@ -160,22 +116,7 @@ public class PluginBotania extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (RecipeManaInfusion recipe : BotaniaAPI.manaInfusionRecipes) {
-                ItemStack output = recipe.getOutput();
-                if (output == null || output.isEmpty())
-                    continue;
-
-                Object input = recipe.getInput();
-                if (!(input instanceof ItemStack) && !(input instanceof String))
-                    continue;
-
-                final int manaConsumption = recipe.getManaToConsume();
-
-                if (add_emc_to_mana)
-                    addConversion(output, ImmutableMap.of(input, 1, mana, manaConsumption));
-                else
-                    addConversion(output, ImmutableMap.of(input, 1));
-            }
+            BotaniaAPI.manaInfusionRecipes.forEach(r -> addRecipe(r.getOutput(), r.getInput(), new SizedObject<>(r.getManaToConsume(), mana)));
         }
     }
 
@@ -186,31 +127,7 @@ public class PluginBotania extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (RecipeRuneAltar recipe : BotaniaAPI.runeAltarRecipes) {
-                ItemStack output = recipe.getOutput();
-                if (output == null || output.isEmpty())
-                    continue;
-
-                List<Object> inputs = recipe.getInputs();
-                if (inputs == null || inputs.isEmpty())
-                    continue;
-
-                int manaConsumption = recipe.getManaUsage();
-
-                IngredientMap<Object> ingredients = new IngredientMap<Object>();
-
-                inputs.forEach(input -> {
-                    if (input instanceof ItemStack)
-                        ingredients.addIngredient(input, ((ItemStack) input).getCount());
-                    else
-                        ingredients.addIngredient(input, 1);
-                });
-
-                if (add_emc_to_mana)
-                    ingredients.addIngredient(mana, manaConsumption);
-
-                addConversion(output, ingredients.getMap());
-            }
+            BotaniaAPI.runeAltarRecipes.forEach(r -> addRecipe(r.getOutput(), r.getInputs(), new SizedObject<>(r.getManaUsage(), mana)));
         }
     }
 }

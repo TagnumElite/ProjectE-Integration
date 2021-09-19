@@ -96,6 +96,7 @@ public class PluginImmersiveEngineering extends APEIPlugin {
                 PEIApi.LOGGER.warn("Invalid IE '{}' MultiBlock Recipe", name);
                 return;
             }
+            // Below from RefineryMapper causes null pointer exceptions, find out why
             List<Object> item_inputs = recipe.getItemInputs().stream().map(PluginImmersiveEngineering::convertIngredientStack).collect(Collectors.toList());
 
             ArrayList<Object> outputs = new ArrayList<>();

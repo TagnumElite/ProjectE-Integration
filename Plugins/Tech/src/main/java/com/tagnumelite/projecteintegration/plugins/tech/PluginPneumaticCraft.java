@@ -21,27 +21,39 @@
  */
 package com.tagnumelite.projecteintegration.plugins.tech;
 
+import com.tagnumelite.projecteintegration.api.PEIApi;
+import com.tagnumelite.projecteintegration.api.internal.lists.InputList;
+import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import com.tagnumelite.projecteintegration.api.utils.ConfigHelper;
-import me.desht.pneumaticcraft.api.recipe.IPressureChamberRecipe;
 import me.desht.pneumaticcraft.api.recipe.IThermopneumaticProcessingPlantRecipe;
 import me.desht.pneumaticcraft.api.recipe.ItemIngredient;
 import me.desht.pneumaticcraft.common.recipes.*;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @PEIPlugin("pneumaticcraft")
 public class PluginPneumaticCraft extends APEIPlugin {
-    private final boolean ignore_loss_rate;
-
-    public PluginPneumaticCraft() {
-        ignore_loss_rate = config.getBoolean("ignore_explosion_loss_rate", ConfigHelper.getPluginCategory("pneumaticcraft"), false, "Ignore loss rate for explosion crafting");
+    private static Object convertItemIngredient(ItemIngredient ingredient) {
+        try {
+            Field oredictField = ItemIngredient.class.getDeclaredField("oredictKey");
+            oredictField.setAccessible(true);
+            String oredict = (String) oredictField.get(ingredient);
+            if (oredict != null) {
+                return new SizedObject<>(ingredient.getItemAmount(), oredict);
+            }
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            PEIApi.LOGGER.error("Failed to convert PC ItemIngredient: {}", ingredient, e);
+        }
+        return new InputList<>(ingredient.getStacks());
     }
 
     @Override
@@ -129,10 +141,7 @@ public class PluginPneumaticCraft extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (HeatFrameCoolingRecipe recipe : HeatFrameCoolingRecipe.recipes) {
-                // TODO: Ask author to make the OreDict string publicly accessible
-                addRecipe(recipe.output, recipe.input.getSingleStack());
-            }
+            HeatFrameCoolingRecipe.recipes.forEach(r -> addRecipe(r.output, convertItemIngredient(r.input)));
         }
     }
 
@@ -143,14 +152,8 @@ public class PluginPneumaticCraft extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IPressureChamberRecipe recipe : PressureChamberRecipe.recipes) {
-                List<ItemStack> inputs = new ArrayList<>();
-                for (ItemIngredient input : recipe.getInput()) {
-                    inputs.add(input.getSingleStack());
-                }
-
-                addRecipe(new ArrayList<>(recipe.getResult()), inputs);
-            }
+            PressureChamberRecipe.recipes.forEach(r -> addRecipe(new ArrayList<>(r.getResult()),
+                r.getInput().stream().map(PluginPneumaticCraft::convertItemIngredient).collect(Collectors.toList())));
         }
     }
 
@@ -161,15 +164,17 @@ public class PluginPneumaticCraft extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (RefineryRecipe recipe : RefineryRecipe.recipes) {
-                addRecipe(Collections.singletonList(recipe.outputs), recipe.input);
-            }
+            RefineryRecipe.recipes.forEach(r -> addRecipe(Collections.singletonList(r.outputs), r.input));
         }
     }
 
     private class ExplosionCraftingMapper extends PEIMapper {
+        private final boolean ignore_loss_rate;
+
         public ExplosionCraftingMapper() {
             super("Explosion Crafting");
+            ignore_loss_rate = config.getBoolean("ignore_explosion_loss_rate", ConfigHelper.getPluginCategory("pneumaticcraft"),
+                false, "Ignore loss rate for explosion crafting");
         }
 
         @Override

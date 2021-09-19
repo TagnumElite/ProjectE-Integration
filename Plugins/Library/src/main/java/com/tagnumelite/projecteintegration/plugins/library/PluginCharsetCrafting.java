@@ -28,6 +28,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import pl.asie.charset.lib.recipe.RecipeCharset;
 
+//TODO: figure out if this still works
 @PEIPlugin("charset")
 public class PluginCharsetCrafting extends APEIPlugin {
     @Override

@@ -21,21 +21,25 @@
  */
 package com.tagnumelite.projecteintegration.plugins.misc;
 
+import com.tagnumelite.projecteintegration.api.internal.lists.InputList;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
-import slimeknights.tconstruct.library.DryingRecipe;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
-import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
+import slimeknights.tconstruct.library.smeltery.CastingRecipe;
+import slimeknights.tconstruct.library.smeltery.ICastingRecipe;
+
+import java.util.List;
 
 @PEIPlugin("tconstruct")
 public class PluginTConstruct extends APEIPlugin {
     @Override
     public void setup() {
         addMapper(new AlloyMapper());
+        addMapper(new CastingMapper(CastingMapper.CastingType.BASIN));
         addMapper(new DryingMapper());
         addMapper(new MeltingMapper());
+        addMapper(new CastingMapper(CastingMapper.CastingType.TABLE));
     }
 
     private static class AlloyMapper extends PEIMapper {
@@ -45,9 +49,42 @@ public class PluginTConstruct extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (AlloyRecipe recipe : TinkerRegistry.getAlloys()) {
-                addRecipe(recipe.getResult(), recipe.getFluids().toArray());
+            TinkerRegistry.getAlloys().forEach(r -> addRecipe(r.getResult(), r.getFluids()));
+        }
+    }
+
+    private static class CastingMapper extends PEIMapper {
+        private final CastingType castingType;
+
+        public CastingMapper(CastingType castingType) {
+            super(castingType == CastingType.BASIN ? "Basin" : "Table");
+            this.castingType = castingType;
+        }
+
+        @Override
+        public void setup() {
+            List<ICastingRecipe> recipes;
+            switch (castingType) {
+                case BASIN:
+                    recipes = TinkerRegistry.getAllBasinCastingRecipes();
+                    break;
+                case TABLE:
+                    recipes = TinkerRegistry.getAllTableCastingRecipes();
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + castingType);
             }
+            for (ICastingRecipe iRecipe : recipes) {
+                if (iRecipe instanceof CastingRecipe) {
+                    CastingRecipe recipe = (CastingRecipe) iRecipe;
+                    addRecipe(recipe.getResult(), recipe.getFluid(), recipe.consumesCast() ? new InputList<>(recipe.cast.getInputs()) : null);
+                }
+            }
+        }
+
+        public enum CastingType {
+            BASIN,
+            TABLE
         }
     }
 
@@ -58,22 +95,18 @@ public class PluginTConstruct extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DryingRecipe recipe : TinkerRegistry.getAllDryingRecipes()) {
-                addRecipe(recipe.getResult(), recipe.input.getInputs());
-            }
+            TinkerRegistry.getAllDryingRecipes().forEach(r -> addRecipe(r.getResult(), new InputList<>(r.input.getInputs())));
         }
     }
 
     private static class MeltingMapper extends PEIMapper {
         public MeltingMapper() {
-            super("Melting", "");
+            super("Melting");
         }
 
         @Override
         public void setup() {
-            for (MeltingRecipe recipe : TinkerRegistry.getAllMeltingRecipies()) {
-                addRecipe(recipe.getResult(), recipe.input.getInputs());
-            }
+            TinkerRegistry.getAllMeltingRecipies().forEach(r -> addRecipe(r.getResult(), new InputList<>(r.input.getInputs())));
         }
     }
 }

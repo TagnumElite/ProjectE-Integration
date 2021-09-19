@@ -22,9 +22,11 @@
 package com.tagnumelite.projecteintegration.plugins.tech;
 
 import com.google.common.collect.ImmutableMap;
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
+import com.tagnumelite.projecteintegration.api.utils.IngredientHandler;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import mekanism.api.gas.GasStack;
@@ -34,7 +36,6 @@ import mekanism.api.infuse.InfuseType;
 import mekanism.common.InfuseStorage;
 import mekanism.common.block.states.BlockStateMachine.MachineType;
 import mekanism.common.recipe.RecipeHandler.Recipe;
-import mekanism.common.recipe.inputs.ChemicalPairInput;
 import mekanism.common.recipe.inputs.PressurizedInput;
 import mekanism.common.recipe.machines.*;
 import mekanism.common.recipe.outputs.ChanceOutput;
@@ -47,23 +48,25 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 @PEIPlugin("mekanism")
 public class PluginMekanism extends APEIPlugin {
-    private final Map<Gas, Object> GAS_MAP = new HashMap<>();
-    private final Map<InfuseType, Object> INFUSE_MAP = new HashMap<>();
+    private static final Map<Gas, Object> GAS_MAP = new HashMap<>();
+    private static final Map<InfuseType, Object> INFUSE_MAP = new HashMap<>();
 
     @Override
     public void setup() {
+        PEIApi.addCachedMap(GAS_MAP);
+        PEIApi.addCachedMap(INFUSE_MAP);
         for (Gas gas : GasRegistry.getRegisteredGasses()) {
             Object obj = new Object();
             GAS_MAP.put(gas, obj);
 
             // For now, don't add EMC to gases. Gas should get EMC from inherited items
             // addEMC(gas.getName(), obj, 1, "EMC for Gas: " + gas.getName());
-
         }
 
         IConversionProxy proxy = ProjectEAPI.getConversionProxy();
@@ -135,9 +138,6 @@ public class PluginMekanism extends APEIPlugin {
 
         if (MachineType.ENERGIZED_SMELTER.isEnabled())
             addMapper(new BasicMachineMapper(Recipe.ENERGIZED_SMELTER));
-
-        GAS_MAP.clear();
-        INFUSE_MAP.clear();
     }
 
     private static class BasicMachineMapper extends PEIMapper {
@@ -150,9 +150,7 @@ public class PluginMekanism extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (BasicMachineRecipe<?> recipe : recipe_type.get().values()) {
-                addRecipe(recipe.getOutput().output, recipe.getInput().ingredient);
-            }
+            recipe_type.get().values().forEach(r -> addRecipe(r.getOutput().output, r.getInput().ingredient));
         }
     }
 
@@ -166,9 +164,7 @@ public class PluginMekanism extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (DoubleMachineRecipe<?> recipe : recipe_type.get().values()) {
-                addRecipe(recipe.getOutput().output, recipe.getInput().itemStack, recipe.getInput().extraStack);
-            }
+            recipe_type.get().values().forEach(r -> addRecipe(r.getOutput().output, r.getInput().itemStack, r.getInput().extraStack));
         }
     }
 
@@ -181,21 +177,15 @@ public class PluginMekanism extends APEIPlugin {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public void setup() {
             for (ChanceMachineRecipe<?> recipe : recipe_type.get().values()) {
                 ChanceOutput output = recipe.getOutput();
 
                 ArrayList<Object> outputs = new ArrayList<>();
-                if (output.hasPrimary()) {
-                    //addRecipe(output.primaryOutput, recipe.getInput().ingredient);
-                    outputs.add(output.primaryOutput);
-                }
-
+                if (output.hasPrimary()) outputs.add(output.primaryOutput);
                 if (output.hasSecondary()) {
-                    if (output.secondaryChance >= 100) {
-                        //addRecipe(output.secondaryOutput, recipe.getInput().ingredient);
-                        outputs.add(output.secondaryOutput);
-                    }
+                    if (output.secondaryChance == 1f) outputs.add(output.secondaryOutput);
                 }
 
                 addRecipe(outputs, recipe.getInput().ingredient);
@@ -210,14 +200,11 @@ public class PluginMekanism extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (ThermalEvaporationRecipe recipe : Recipe.THERMAL_EVAPORATION_PLANT.get().values()) {
-                FluidStack input = recipe.recipeInput.ingredient;
-                addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.amount));
-            }
+            Recipe.THERMAL_EVAPORATION_PLANT.get().values().forEach(r -> addRecipe(r.getOutput().output, r.getInput().ingredient));
         }
     }
 
-    private class AdvancedMachineMapper extends PEIMapper {
+    private static class AdvancedMachineMapper extends PEIMapper {
         private final Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type;
 
         public AdvancedMachineMapper(Recipe<?, ?, ? extends AdvancedMachineRecipe<?>> recipe_type) {
@@ -226,6 +213,7 @@ public class PluginMekanism extends APEIPlugin {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public void setup() {
             for (AdvancedMachineRecipe<?> recipe : recipe_type.get().values()) {
                 if (GAS_MAP.containsKey(recipe.getInput().gasType))
@@ -237,7 +225,7 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    private class MetallurgicInfuserMapper extends PEIMapper {
+    private static class MetallurgicInfuserMapper extends PEIMapper {
         public MetallurgicInfuserMapper() {
             super("Metallurgic Infuser");
         }
@@ -258,7 +246,7 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    private class CrystallizerMapper extends PEIMapper {
+    private static class CrystallizerMapper extends PEIMapper {
         public CrystallizerMapper() {
             super("Crystallizer");
         }
@@ -275,23 +263,41 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    public abstract class MekanismMapper extends PEIMapper {
+    public abstract static class MekanismMapper extends PEIMapper {
         public MekanismMapper(String name) {
             super(name);
         }
 
-        protected void addConversion(GasStack gas, Map<Object, Integer> map) {
-            if (!GAS_MAP.containsKey(gas.getGas()))
+        @Override
+        protected void addRecipe(List<Object> outputs, Object... inputs) {
+            if (outputs == null || outputs.size() <= 0 || inputs == null || inputs.length <= 0)
                 return;
 
-            addConversion(gas.amount, GAS_MAP.get(gas.getGas()), map);
+            IngredientHandler handler = new IngredientHandler();
+            handler.addAll(inputs);
+
+            for (Object output : outputs) {
+                if (output instanceof GasStack) {
+                    if (GAS_MAP.containsKey(((GasStack) output).getGas())) {
+                        outputs.remove(output);
+
+                    }
+                }
+            }
+
+            addConversion(outputs, handler.getMap());
+        }
+
+        protected void addRecipe(GasStack output, Object... inputs) {
+            if (!GAS_MAP.containsKey(output.getGas())) return;
+            addRecipe(output.amount, GAS_MAP.get(output.getGas()), inputs);
         }
 
         protected void addConversion(GasStack output, GasStack... inputs) {
             if (inputs.length == 0)
                 return;
 
-            IngredientMap<Object> ingredients = new IngredientMap<Object>();
+            IngredientMap<Object> ingredients = new IngredientMap<>();
 
             for (GasStack input : inputs) {
                 if (!GAS_MAP.containsKey(input.getGas()))
@@ -302,52 +308,48 @@ public class PluginMekanism extends APEIPlugin {
 
             addConversion(output, ingredients.getMap());
         }
+
+        protected void addConversion(GasStack gas, Map<Object, Integer> map) {
+            if (!GAS_MAP.containsKey(gas.getGas())) return;
+            addConversion(gas.amount, GAS_MAP.get(gas.getGas()), map);
+        }
     }
 
-    private class DissolutionMapper extends MekanismMapper {
+    private static class DissolutionMapper extends MekanismMapper {
         public DissolutionMapper() {
             super("Dissolution");
         }
 
         @Override
         public void setup() {
-            for (DissolutionRecipe recipe : Recipe.CHEMICAL_DISSOLUTION_CHAMBER.get().values()) {
-                ItemStack input = recipe.getInput().ingredient;
-
-                addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
-            }
+            Recipe.CHEMICAL_DISSOLUTION_CHAMBER.get().values().forEach(r -> addRecipe(r.getOutput().output, r.getInput().ingredient));
         }
     }
 
-    private class ChemicalInfuserMapper extends MekanismMapper {
+    private static class ChemicalInfuserMapper extends MekanismMapper {
         public ChemicalInfuserMapper() {
             super("Chemical Infuser");
         }
 
         @Override
         public void setup() {
-            for (ChemicalInfuserRecipe recipe : Recipe.CHEMICAL_INFUSER.get().values()) {
-                ChemicalPairInput input = recipe.getInput();
-                addConversion(recipe.getOutput().output, input.leftGas, input.rightGas);
-            }
+            Recipe.CHEMICAL_INFUSER.get().values().forEach(r -> addConversion(r.getOutput().output,
+                r.getInput().leftGas, r.getInput().rightGas));
         }
     }
 
-    private class ChemicalOxidizerMapper extends MekanismMapper {
+    private static class ChemicalOxidizerMapper extends MekanismMapper {
         public ChemicalOxidizerMapper() {
             super("Chemical Oxidizer");
         }
 
         @Override
         public void setup() {
-            for (OxidationRecipe recipe : Recipe.CHEMICAL_OXIDIZER.get().values()) {
-                ItemStack input = recipe.getInput().ingredient;
-                addConversion(recipe.getOutput().output, ImmutableMap.of(input, input.getCount()));
-            }
+            Recipe.CHEMICAL_OXIDIZER.get().values().forEach(r -> addRecipe(r.getOutput().output, r.getInput().ingredient));
         }
     }
 
-    private class ChemicalWasherMapper extends MekanismMapper {
+    private static class ChemicalWasherMapper extends MekanismMapper {
         public ChemicalWasherMapper() {
             super("Chemical Washer");
         }
@@ -365,20 +367,18 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    private class SolarNeutronActivatorMapper extends MekanismMapper {
+    private static class SolarNeutronActivatorMapper extends MekanismMapper {
         public SolarNeutronActivatorMapper() {
             super("Solar Neutron Activator");
         }
 
         @Override
         public void setup() {
-            for (SolarNeutronRecipe recipe : Recipe.SOLAR_NEUTRON_ACTIVATOR.get().values()) {
-                addConversion(recipe.getOutput().output, recipe.getInput().ingredient);
-            }
+            Recipe.SOLAR_NEUTRON_ACTIVATOR.get().values().forEach(r -> addConversion(r.getOutput().output, r.getInput().ingredient));
         }
     }
 
-    private class ElectrolyticSeparatorMapper extends MekanismMapper {
+    private static class ElectrolyticSeparatorMapper extends MekanismMapper {
         public ElectrolyticSeparatorMapper() {
             super("Electrolytic Separator");
         }
@@ -387,13 +387,17 @@ public class PluginMekanism extends APEIPlugin {
         public void setup() {
             for (SeparatorRecipe recipe : Recipe.ELECTROLYTIC_SEPARATOR.get().values()) {
                 FluidStack input = recipe.recipeInput.ingredient;
+                List<Object> outputs = new ArrayList<>(2);
+                outputs.add(recipe.getOutput().leftGas);
+                outputs.add(recipe.getOutput().rightGas);
+                addRecipe(outputs, recipe.getInput().ingredient);
                 addConversion(recipe.getOutput().leftGas, ImmutableMap.of(input, input.amount));
                 addConversion(recipe.getOutput().rightGas, ImmutableMap.of(input, input.amount));
             }
         }
     }
 
-    private class PressurizedReactionChamberMapper extends MekanismMapper {
+    private static class PressurizedReactionChamberMapper extends MekanismMapper {
         public PressurizedReactionChamberMapper() {
             super("Pressurized Reaction Chamber");
         }
@@ -404,14 +408,13 @@ public class PluginMekanism extends APEIPlugin {
                 PressurizedInput input = recipe.getInput();
                 PressurizedOutput output = recipe.getOutput();
 
-                Map<Object, Integer> ingredients = new HashMap<Object, Integer>();
+                Map<Object, Integer> ingredients = new HashMap<>();
                 ingredients.put(input.getFluid(), input.getFluid().amount);
                 ingredients.put(input.getSolid(), input.getSolid().getCount());
 
                 if (GAS_MAP.containsKey(input.getGas().getGas()))
                     ingredients.put(GAS_MAP.get(input.getGas().getGas()), input.getGas().amount);
 
-                //ArrayList<Object> outputs = new ArrayList<>(); TODO: GasStack support for output
                 if (GAS_MAP.containsKey(output.getGasOutput().getGas())) {
                     addConversion(output.getGasOutput(), ingredients);
                 }
@@ -421,7 +424,7 @@ public class PluginMekanism extends APEIPlugin {
         }
     }
 
-    private class RotaryCondensentratorMapper extends MekanismMapper {
+    private static class RotaryCondensentratorMapper extends MekanismMapper {
         public RotaryCondensentratorMapper() {
             super("Rotary Condensentrator");
         }

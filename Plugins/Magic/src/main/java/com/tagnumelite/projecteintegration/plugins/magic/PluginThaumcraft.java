@@ -21,6 +21,7 @@
  */
 package com.tagnumelite.projecteintegration.plugins.magic;
 
+import com.tagnumelite.projecteintegration.api.PEIApi;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
@@ -50,6 +51,7 @@ public class PluginThaumcraft extends APEIPlugin {
 
     @Override
     public void setup() {
+        PEIApi.addCachedMap(ASPECT_MAP);
         for (Aspect aspect : Aspect.aspects.values()) {
             Object obj = new Object();
             addEMC("aspect_" + aspect.getName(), obj, 10);

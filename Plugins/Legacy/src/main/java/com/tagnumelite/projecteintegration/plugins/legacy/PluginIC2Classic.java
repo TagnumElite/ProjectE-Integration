@@ -27,16 +27,17 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import ic2.api.classic.recipe.ClassicRecipes;
-import ic2.api.classic.recipe.machine.IElectrolyzerRecipeList;
 import ic2.api.classic.recipe.machine.IMachineRecipeList;
 
 import java.util.ArrayList;
 
-@PEIPlugin("ic2")
+@PEIPlugin(value = "ic2", name = "IC2 Classic", config = "ic2classic")
 @OnlyIf(versionEndsWith = "!-ex112")
 public class PluginIC2Classic extends APEIPlugin {
     @Override
     public void setup() {
+        //addMapper(new AdvancedCraftingMapper());
+        //addMapper(new CanningMapper());
         addMapper(new MachineMapper("Compressor", ClassicRecipes.compressor));
         addMapper(new ElectrolyzerMapper());
         addMapper(new MachineMapper("Extractor", ClassicRecipes.extractor));
@@ -45,6 +46,21 @@ public class PluginIC2Classic extends APEIPlugin {
         addMapper(new MachineMapper("Saw Mill", ClassicRecipes.sawMill));
     }
 
+    /*public static class AdvancedCraftingMapper extends PEIMapper {
+        public AdvancedCraftingMapper() {
+            super("Advanced Crafting");
+        }
+
+        @Override
+        public void setup() {
+            for (IAdvRecipe recipe : ClassicRecipes.advCrafting.getRecipes()) {
+                if (!recipe.getRecipeType().isRepair()) {
+
+                }
+            }
+        }
+    }*/
+
     public static class ElectrolyzerMapper extends PEIMapper {
         public ElectrolyzerMapper() {
             super("Electrolyzer");
@@ -52,9 +68,7 @@ public class PluginIC2Classic extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IElectrolyzerRecipeList.RecipeEntry recipe : ClassicRecipes.electrolyzer.getRecipeList()) {
-                addRecipe(recipe.getOutput(), recipe.getInput());
-            }
+            ClassicRecipes.electrolyzer.getRecipeList().forEach(r -> addRecipe(r.getOutput(), r.getInput()));
         }
     }
 

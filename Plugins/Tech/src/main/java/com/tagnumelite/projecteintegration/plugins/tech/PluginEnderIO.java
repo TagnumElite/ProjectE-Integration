@@ -92,10 +92,9 @@ public class PluginEnderIO extends APEIPlugin {
                     //addRecipe(output.getFluidOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
                 }
 
-                if (output.getOutput() != null) {
-                    outputs.add(output.getOutput());
-                    //addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
-                }
+                output.getOutput();
+                outputs.add(output.getOutput());
+                //addRecipe(output.getOutput(), recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
 
                 addRecipe(outputs, recipe.getInputFluidStacks().toArray(), recipe.getInputStackAlternatives().toArray());
             }

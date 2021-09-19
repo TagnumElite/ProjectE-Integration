@@ -28,19 +28,9 @@ import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
 import com.tagnumelite.projecteintegration.api.plugin.PEIPlugin;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.recipe.compressor.ICompressorRecipe;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import net.minecraft.item.ItemStack;
 
 @PEIPlugin("avaritia")
 public class PluginAvaritia extends APEIPlugin {
-    private final float compressor_cost_multiplier;
-
-    public PluginAvaritia() {
-        this.compressor_cost_multiplier = config.getFloat("compressor_cost_multiplier", this.category, 1F, 0.00001F, 1F,
-            "Multiplier to the EMC calculation");
-    }
-
     @Override
     public void setup() {
         addEMC(ModItems.neutron_pile, 128);
@@ -56,27 +46,20 @@ public class PluginAvaritia extends APEIPlugin {
 
         @Override
         public void setup() {
-            for (IExtremeRecipe recipe : AvaritiaRecipeManager.EXTREME_RECIPES.values()) {
-                addRecipe(recipe.getRecipeOutput(), recipe.getIngredients().toArray());
-            }
+            AvaritiaRecipeManager.EXTREME_RECIPES.values().forEach(r -> addRecipe(r.getRecipeOutput(), r.getIngredients()));
         }
     }
 
-    private class CompressorMapper extends PEIMapper {
+    private static class CompressorMapper extends PEIMapper {
         public CompressorMapper() {
             super("Compressor");
         }
 
         @Override
         public void setup() {
-            for (ICompressorRecipe recipe : AvaritiaRecipeManager.COMPRESSOR_RECIPES.values()) {
-                ItemStack output = recipe.getResult();
-                if (output.isEmpty())
-                    continue;
-
-                addConversion(output, ImmutableMap.of(PEIApi.getList(recipe.getIngredients()),
-                    Math.max(Math.round(recipe.getCost() * compressor_cost_multiplier), 1)));
-            }
+            AvaritiaRecipeManager.COMPRESSOR_RECIPES.values().forEach(
+                r -> addConversion(r.getResult(), ImmutableMap.of(PEIApi.getList(r.getIngredients()), r.getCost()))
+            );
         }
     }
 }

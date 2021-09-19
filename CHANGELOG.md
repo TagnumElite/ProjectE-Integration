@@ -89,6 +89,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Immersive Engineering: MultiBlock recipe didn't have correct output amounts
 - Fixed NuclearCraft: Overhauled recipe mapper names were failing.
 
+### Temp
+- IC2Classic - use multiple PEIPlugin arguments
+- CharsetCrafting - add todo to make sure still working
+- RebornCore - swap to new utility functions
+- SonarCore - swap to new utility functions
+- Botania - use new mapper api
+- Thaumcraft - huh? cached map. what was I doing a year ago...
+- Avaritia - woo, new api.
+- Tinkers Construct - huh, i wonder how long before I absolutely delete everything all over again.
+- Forestry - oh, chanced multi output, how fun.
+- Immersive Engineering - even in 1.16.5 you give me problems, still love your mod tho
+- IndustrialCraft - machine mapper, i said machine mapper ooohhhh.
+- Mekanism - what do you mean I'm going insane?
+- PneumaticCraft - are you telling me that look at code you haven't touched for a year durings it breaking changes causes sanity loss. Who couldve thunk it.
+
 ## [2.5.0] - 2019-08-11
 ### Fixed
 - NuclearCraft support was fixed and updated

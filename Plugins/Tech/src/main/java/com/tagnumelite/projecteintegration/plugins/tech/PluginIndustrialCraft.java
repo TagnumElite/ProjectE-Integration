@@ -46,6 +46,7 @@ public class PluginIndustrialCraft extends APEIPlugin {
     @Override
     public void setup() {
         addMapper(new AdvanceRecipeMapper());
+        addMapper(new MachineMapper(Recipes.furnace, "Furnace"));
         addMapper(new BasicMachineMapper(Recipes.compressor, "Compressor"));
         addMapper(new BasicMachineMapper(Recipes.extractor, "Extractor"));
         addMapper(new BasicMachineMapper(Recipes.macerator, "Macerator"));
@@ -57,8 +58,11 @@ public class PluginIndustrialCraft extends APEIPlugin {
         addMapper(new BasicMachineMapper(Recipes.metalformerRolling, "Metal Former Rolling"));
         addMapper(new BasicMachineMapper(Recipes.oreWashing, "Ore Washing"));
         //addMapper(new BasicMachineMapper(Recipes.recycler, "Recycler")); Don't Firgging Wark!
+        //Recipes.cannerBottle;
+        //Recipes.cannerEnrich;
         addMapper(new ElectrolyzerMapper());
         addMapper(new FermenterMapper());
+        //Recipes.matterAmplifier;
     }
 
     private static class AdvanceRecipeMapper extends PEIMapper {
@@ -92,6 +96,20 @@ public class PluginIndustrialCraft extends APEIPlugin {
                 addConversion(recipe.getOutput().stream().findFirst().orElse(ItemStack.EMPTY), ImmutableMap
                     .of(PEIApi.getIngredient(recipe.getInput().getIngredient()), recipe.getInput().getAmount()));
             }
+        }
+    }
+
+    private static class MachineMapper extends PEIMapper {
+        private final IMachineRecipeManager<ItemStack, ItemStack, ItemStack> manager;
+
+        public MachineMapper(IMachineRecipeManager<ItemStack, ItemStack, ItemStack> manager, String name) {
+            super(name);
+            this.manager = manager;
+        }
+
+        @Override
+        public void setup() {
+            manager.getRecipes();
         }
     }
 
