@@ -22,7 +22,6 @@
 package com.tagnumelite.projecteintegration.api;
 
 import com.google.common.collect.ImmutableMap;
-import com.tagnumelite.projecteintegration.api.internal.Phase;
 import com.tagnumelite.projecteintegration.api.internal.sized.SizedObject;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import com.tagnumelite.projecteintegration.api.plugin.APEIPlugin;
@@ -55,6 +54,7 @@ public class PEIApi {
     public static final String VERSION = "@VERSION@";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.12.x/update.json";
     public static final Logger LOGGER = LogManager.getLogger(APIID);
+
     public static final IEMCProxy emc_proxy = ProjectEAPI.getEMCProxy();
     private static final Map<Ingredient, Object> INGREDIENT_CACHE = new HashMap<>();
     //private static final Map<List<?>, Object> LIST_CACHE = new HashMap<>();
@@ -63,7 +63,6 @@ public class PEIApi {
     private static final Map<ResourceLocation, Object> RESOURCE_MAP = new HashMap<>();
     public static int mapped_conversions = 0;
     private static boolean LOCK_EMC_MAPPER = false;
-    private static Phase PHASE = Phase.NULL;
     private static PEIApi INSTANCE;
     public final Configuration CONFIG;
     private final Map<String, String> FAILED_PLUGINS = new HashMap<>();
@@ -72,9 +71,7 @@ public class PEIApi {
 
     private boolean LOADED = false;
 
-    /**
-     * Is Debugging mode activated.
-     */
+    /** Is Debugging mode activated. */
     public final boolean DEBUG;
 
     /**
@@ -88,7 +85,6 @@ public class PEIApi {
         if (INSTANCE != null) throw new IllegalStateException("Tried to create an instance of the API when one existed already!");
         INSTANCE = this;
 
-        PHASE = Phase.INITIALIZING;
         CONFIG = config;
         DEBUG = config.getBoolean("debug", "general", false, "Enable debugging mode");
         LOGGER.info("Starting Phase: Initialization");
@@ -98,19 +94,11 @@ public class PEIApi {
         FAILED_PLUGINS.putAll(handler.getFailed());
         final long endTime = System.currentTimeMillis();
         LOGGER.info("Finished Phase: Initialization. Took {}ms", (endTime - startTime));
-        PHASE = Phase.WAITING;
-    }
-
-    /**
-     * @return The current phase of the com.tagnumelite.projecteintegration.api
-     */
-    public static Phase getPhase() {
-        return PHASE;
     }
 
     /**
      * @return Returns the current {@link PEIApi} Instance
-     * @throws IllegalStateException The com.tagnumelite.projecteintegration.api hasn't been instantiated yet
+     * @throws IllegalStateException The api hasn't been instantiated yet
      */
     public static PEIApi getInstance() {
         if (INSTANCE == null) throw new IllegalStateException("PEIApi hasn't been instantiated yet");
@@ -272,7 +260,6 @@ public class PEIApi {
      *
      */
     public void setupPlugins() {
-        PHASE = Phase.SETTING_UP_PLUGINS;
         LOGGER.info("Starting Phase: Setting up plugins");
         final long startTime = System.currentTimeMillis();
 
@@ -288,7 +275,6 @@ public class PEIApi {
         }
 
         registerEMCObjects();
-        PHASE = Phase.WAITING;
         final long endTime = System.currentTimeMillis();
         LOGGER.info("Finished Phase: Setting up plugins. Took {}ms", (endTime - startTime));
     }
@@ -298,7 +284,6 @@ public class PEIApi {
      */
     public void setupMappers() {
         if (LOADED) return;
-        PHASE = Phase.SETTING_UP_MAPPERS;
         LOGGER.info("Starting Phase: Setting Up Mappers for {} plugins", PLUGINS.size());
         final long startTime = System.currentTimeMillis();
 
@@ -322,6 +307,5 @@ public class PEIApi {
 
         final long endTime = System.currentTimeMillis();
         LOGGER.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
-        PHASE = Phase.FINISHED;
     }
 }
