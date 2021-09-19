@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `IngredientHandlers` for 'ItemStack', 'FluidStack', 'Item', 'Block', 'OreDict', 'IIngredient', 'BlockState' and 'SizedObject'.
 - Added `Debug` option to PEIApi config
 - Added `Minecraft Development` Intellij plugin as required
+- Support for SecurityCraft reinforced blocks
 
 ### Changed
 - Moved from Travis to GitHub Actions

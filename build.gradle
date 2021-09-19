@@ -211,6 +211,7 @@ if (System.env.CURSEFORGE_API_KEY) {
                 // Misc Plugins
                 optionalDependency 'Avaritia-1-10'
                 optionalDependency 'Pams-HarvestCraft'
+                optionalDependency 'Security-Craft'
                 optionalDependency 'Tinkers-Construct'
                 optionalDependency 'Woot'
 
