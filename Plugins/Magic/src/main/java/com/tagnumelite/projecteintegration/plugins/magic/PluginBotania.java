@@ -44,6 +44,7 @@ public class PluginBotania extends APEIPlugin {
 
     @Override
     public void setup() {
+        // TODO: Is this actually a multiplier tho, I don't really know. It's been a year.
         addEMC("mana", mana, 1, "NOTE: This is effectively a multiplier. Calculation is {EMC VALUE} * {MANA REQUIRED}");
 
         addMapper(new ElvenTradeMapper());

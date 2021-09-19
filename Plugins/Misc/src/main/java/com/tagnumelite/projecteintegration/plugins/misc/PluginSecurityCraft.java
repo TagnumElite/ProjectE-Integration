@@ -29,6 +29,7 @@ import net.geforcemods.securitycraft.blocks.reinforced.IReinforcedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
+// Not gonna lie, I've never used this mod ever.
 @PEIPlugin("securitycraft")
 public class PluginSecurityCraft extends APEIPlugin {
     @Override
@@ -43,6 +44,10 @@ public class PluginSecurityCraft extends APEIPlugin {
 
         @Override
         public void setup() {
+            IReinforcedBlock.BLOCKS.forEach(rb -> {
+                PEIApi.debugLog("Reinforced block: {}", rb);
+                PEIApi.debugLog("Vanilla Blocks {}: {}", ((IReinforcedBlock)rb).getAmount(), ((IReinforcedBlock)rb).getVanillaBlocks());
+            });
             for (Block block : IReinforcedBlock.BLOCKS) {
                 IReinforcedBlock reinforcedBlock = (IReinforcedBlock)block;
                 for (Block vanillaBlock : reinforcedBlock.getVanillaBlocks()) {

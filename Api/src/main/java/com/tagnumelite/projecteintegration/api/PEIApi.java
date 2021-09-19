@@ -72,7 +72,7 @@ public class PEIApi {
     private boolean LOADED = false;
 
     /** Is Debugging mode activated. */
-    public final boolean DEBUG;
+    public static boolean DEBUG = false;
 
     /**
      * If you need the instance, use {@link #getInstance()}.
@@ -264,7 +264,7 @@ public class PEIApi {
         final long startTime = System.currentTimeMillis();
 
         for (APEIPlugin plugin : PLUGINS) {
-            PEIApi.LOGGER.debug("Running Plugin for Mod: {}", plugin.modid);
+            debugLog("Running Plugin for Mod: {}", plugin.modid);
             try {
                 plugin.setup();
             } catch (Throwable t) {
@@ -289,7 +289,7 @@ public class PEIApi {
 
         List<PEIMapper> mappers = PLUGINS.stream().map(APEIPlugin::call).flatMap(List::stream).collect(Collectors.toList());
         for (PEIMapper mapper : mappers) {
-            PEIApi.LOGGER.info("Running Mapper: {} ({})", mapper.name, mapper);
+            debugLog("Running Mapper: {} ({})", mapper.name, mapper);
             try {
                 mapper.setup();
             } catch (Throwable t) {
@@ -307,5 +307,13 @@ public class PEIApi {
 
         final long endTime = System.currentTimeMillis();
         LOGGER.info("Finished Phase: Setting Up Mappers. Took {}ms", (endTime - startTime));
+    }
+
+    public static void debugLog(String message, Object... args){
+        if (DEBUG) {
+            LOGGER.info(message, args);
+        } else {
+            LOGGER.debug(message, args);
+        }
     }
 }

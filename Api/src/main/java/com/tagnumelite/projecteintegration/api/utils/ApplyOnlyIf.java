@@ -58,9 +58,7 @@ public final class ApplyOnlyIf {
             boolean invert = versionEndsWith.charAt(0) == '!';
             // Remove the '!' from string if it starts with it
             versionEndsWith = invert ? versionEndsWith.substring(1) : versionEndsWith;
-            if (invert == mod_version.endsWith(versionEndsWith)) {
-                return false;
-            }
+            return invert != mod_version.endsWith(versionEndsWith);
         }
         return true;
     }

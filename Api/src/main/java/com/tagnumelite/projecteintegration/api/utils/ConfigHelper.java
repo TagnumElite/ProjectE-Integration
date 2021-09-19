@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.api.utils;
 import com.tagnumelite.projecteintegration.api.mappers.PEIMapper;
 import net.minecraftforge.common.config.Configuration;
 
+// TODO: DOCUMENTATION
 public final class ConfigHelper {
     public static final String CATEGORY_GENERAL = "general";
     public static final String CATEGORY_PLUGINS = "plugins";

@@ -38,9 +38,9 @@ import java.util.List;
 public class PluginLibVulpes extends APEIPlugin {
     @Override
     public void setup() {
-        PEIApi.LOGGER.debug("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());
+        PEIApi.debugLog("libVulpes recipe list size: {}", RecipesMachine.getInstance().recipeList.size());
         for (Class<? extends TileMultiblockMachine> clazz : RecipesMachine.getInstance().recipeList.keySet()) {
-            PEIApi.LOGGER.debug("Adding new mapper from libvuples {}", clazz.getSimpleName());
+            PEIApi.debugLog("Adding new mapper from libvuples {}", clazz.getSimpleName());
             addMapper(new RecipeMapper(clazz));
         }
     }

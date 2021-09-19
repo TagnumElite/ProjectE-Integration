@@ -91,7 +91,7 @@ public class PluginIndustrialCraft extends APEIPlugin {
         @Override
         public void setup() {
             for (MachineRecipe<IRecipeInput, Collection<ItemStack>> recipe : manager.getRecipes()) {
-                PEIApi.LOGGER.debug("IC2 Recipe: {} from {}*{}", recipe.getOutput(), recipe.getInput().getInputs(),
+                PEIApi.debugLog("IC2 Recipe: {} from {}*{}", recipe.getOutput(), recipe.getInput().getInputs(),
                     recipe.getInput().getAmount());
                 addConversion(recipe.getOutput().stream().findFirst().orElse(ItemStack.EMPTY), ImmutableMap
                     .of(PEIApi.getIngredient(recipe.getInput().getIngredient()), recipe.getInput().getAmount()));

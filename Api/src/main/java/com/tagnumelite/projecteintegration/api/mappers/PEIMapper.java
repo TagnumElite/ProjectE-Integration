@@ -191,8 +191,7 @@ public abstract class PEIMapper {
     }
 
     /**
-     * TODO: ADD DECSTIPJON
-     *
+     * TODO: Make actual logging and error attempts
      * @param output Outputs that will EMC shared across them
      * @param inputs Inputs that will have EMC taken from
      */
@@ -202,30 +201,30 @@ public abstract class PEIMapper {
 
         for (Object out : output) {
             if (Objects.isNull(out)) {
-                PEIApi.LOGGER.info("Null Output Item");
+                PEIApi.debugLog("Null Output Item");
                 continue;
             }
             if (out instanceof ItemStack) {
                 ItemStack item = (ItemStack) out;
                 if (item.isEmpty()) {
-                    PEIApi.LOGGER.info("Empty ItemStack Output");
+                    PEIApi.debugLog("Empty ItemStack Output");
                     continue;
                 }
-                PEIApi.LOGGER.info("ItemStack Output: {}", out);
+                PEIApi.debugLog("ItemStack Output: {}", out);
                 out_ing.addIngredient(out, item.getCount());
             } else if (out instanceof FluidStack) {
                 FluidStack fluid = (FluidStack) out;
                 if (fluid.amount <= 0) {
-                    PEIApi.LOGGER.info("Empty FluidStack Output");
+                    PEIApi.debugLog("Empty FluidStack Output");
                     continue;
                 }
-                PEIApi.LOGGER.info("FluidStack Output: {}", out);
+                PEIApi.debugLog("FluidStack Output: {}", out);
                 out_ing.addIngredient(out, fluid.amount);
             } else if (out instanceof Item || out instanceof Block || out.getClass().equals(Object.class)) {
-                PEIApi.LOGGER.info("Output: Object||Item||Block");
+                PEIApi.debugLog("Output: Object||Item||Block");
                 out_ing.addIngredient(out, 1);
             } else if (out instanceof SizedObject) {
-
+                // TODO: This obviously
             } else {
                 PEIApi.LOGGER.warn("Invalid Multi-Output item: {}:({})", out, out.getClass());
             }
@@ -239,7 +238,7 @@ public abstract class PEIMapper {
         } else if (outputs.size() == 1) {
             Entry<Object, Integer> out = outputs.entrySet().iterator().next();
             addConversion(out.getValue(), out.getKey(), inputs);
-            PEIApi.LOGGER.debug("Multi-Output: Only one output {}*{}", out.getKey(), out.getValue());
+            PEIApi.debugLog("Multi-Output: Only one output {}*{}", out.getKey(), out.getValue());
             return;
         }
 
@@ -253,10 +252,10 @@ public abstract class PEIMapper {
         for (Entry<Object, Integer> out : outputs.entrySet()) {
             HashMap<Object, Integer> ing = new HashMap<>();
             ing.put(obj, out.getValue());
-            PEIApi.LOGGER.debug("Adding multi-output for {}*{}", out.getKey(), out.getValue());
+            PEIApi.debugLog("Adding multi-output for {}*{}", out.getKey(), out.getValue());
             addConversion(out.getValue(), out.getKey(), ing);
         }
-        PEIApi.LOGGER.debug("Multi-Output Took {}ms", (System.currentTimeMillis() - startTime));
+        PEIApi.debugLog("Multi-Output Took {}ms", (System.currentTimeMillis() - startTime));
     }
 
     /**

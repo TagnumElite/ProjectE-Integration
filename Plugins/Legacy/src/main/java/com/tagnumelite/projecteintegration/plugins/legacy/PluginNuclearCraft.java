@@ -47,6 +47,7 @@ public class PluginNuclearCraft extends APEIPlugin {
     public void setup() {
         ArrayList<AbstractRecipeHandler<? extends IRecipe>> handlers = new ArrayList<>();
 
+        // TODO: HOLY MOTHER OF BATMAN BRUCE, WHAT ON EARTH IS THIS?
         Collections.addAll(handlers, NCRecipes.alloy_furnace, NCRecipes.centrifuge, NCRecipes.chemical_reactor,
             NCRecipes.collector, NCRecipes.condenser, NCRecipes.coolant_heater, NCRecipes.crystallizer,
             NCRecipes.decay_generator, NCRecipes.decay_hastener, NCRecipes.dissolver, NCRecipes.electrolyser,
@@ -62,7 +63,7 @@ public class PluginNuclearCraft extends APEIPlugin {
     }
 
     private static class AbstractRecipeMapper extends PEIMapper {
-        private AbstractRecipeHandler<? extends IRecipe> handler;
+        private final AbstractRecipeHandler<? extends IRecipe> handler;
 
         public AbstractRecipeMapper(AbstractRecipeHandler<? extends IRecipe> handler) {
             super(handler.getRecipeName());

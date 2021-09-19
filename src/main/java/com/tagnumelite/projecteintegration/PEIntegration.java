@@ -62,6 +62,14 @@ public class PEIntegration {
     private static boolean doMapperCheck = false;
     private static ForgeVersion.CheckResult versionCheck;
 
+    public static void debugLog(String message, Object... args) {
+        if (DEBUG) {
+            LOGGER.info(message, args);
+        } else {
+            LOGGER.debug(message, args);
+        }
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
