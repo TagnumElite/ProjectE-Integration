@@ -145,6 +145,8 @@ dependencies {
     // compileOnly because of mixin problems
     compileOnly fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
+    // compileOnly because of mixin problems
+    compileOnly fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     // compileOnly because of mixin problems
@@ -243,6 +245,7 @@ curseforge {
             optionalLibrary 'Applied-Energistics-2'
             optionalLibrary 'Extended-Crafting'
             optionalLibrary 'Compact-Crafting'
+            //optionalLibrary 'Create'
             optionalLibrary 'Immersive-Engineering'
             optionalLibrary 'Woot'
         }
