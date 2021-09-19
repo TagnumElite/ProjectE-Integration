@@ -40,6 +40,7 @@ import java.util.Arrays;
 
 @ZenRegister
 @ZenClass("mods.projecteintegration.PEI")
+// TODO: Check if either I remove this or make it better.
 public class CompatCraftTweaker {
     @ZenMethod
     public static void addConversion(IItemStack output, IIngredient[] input) {
@@ -72,7 +73,7 @@ public class CompatCraftTweaker {
 
         @Override
         public void apply() {
-            IngredientMap<Object> map = new IngredientMap<Object>();
+            IngredientMap<Object> map = new IngredientMap<>();
 
             for (IIngredient ingredient : ingredients) {
                 Object input = null;

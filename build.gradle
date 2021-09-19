@@ -25,6 +25,7 @@ if (System.getenv('GITHUB_ACTIONS') != null && System.getenv('GITHUB_EVENT_NAME'
 group = 'com.tagnumelite.projecteintegration'
 archivesBaseName = "ProjectE-Integration-${mc_version}"
 
+def apiProject = project(":Api")
 def plugins = gradle.ext.pei_plugins
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
@@ -76,20 +77,25 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    compile project(":Api")
+    compile apiProject
 
     compile fg.deobf("curse.maven:ProjectE-226410:${curse_projecte}")
     compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}:deobf"
     //runtimeOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}"
 }
 
-jar.dependsOn subprojects.tasks['classes']
-
 jar {
     from sourceSets.main.output.classesDirs
-    from project("Api").sourceSets.main.output.classesDirs
+    from apiProject.sourceSets.main.output.classesDirs
     from sourceSets.main.output.resourcesDir
-    from project("Api").sourceSets.main.output.resourcesDir
+    from apiProject.sourceSets.main.output.resourcesDir
+
+    plugins.each { plugin ->
+        def pProject = project("Plugins:${plugin}")
+        dependsOn pProject.tasks['classes']
+        from pProject.sourceSets.main.output.classesDir
+        from pProject.sourceSets.main.output.resourcesDir
+    }
 
     manifest {
         attributes([
@@ -100,11 +106,6 @@ jar {
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-
-    plugins.each { plugin ->
-        from project("Plugins:${plugin}").sourceSets.main.output.classesDir
-        from project("Plugins:${plugin}").sourceSets.main.output.resourcesDir
-    }
 }
 
 tasks.withType(Javadoc) {
@@ -114,19 +115,19 @@ tasks.withType(Javadoc) {
 task javadocJar(type: Jar, dependsOn: ":Api:javadoc") {
     classifier = "javadoc"
     from javadoc.destinationDir
-    from project(":Api").javadoc.destinationDir
+    from apiProject.javadoc.destinationDir
 }
 
 task sourcesJar(type: Jar, dependsOn: plugins.collect{ "Plugins:${it}:compileJava"}) {
     classifier = "sources"
     from sourceSets.main.allJava
-    from project(":Api").sourceSets.main.allJava
+    from apiProject.sourceSets.main.allJava
     from files(plugins.collect{ project("Plugins:${it}").sourceSets.main.output })
 }
 
 task apiJar(type: Jar) {
     classifier = "api"
-    from project(":Api").sourceSets.main.output
+    from apiProject.sourceSets.main.output
 }
 
 artifacts {
@@ -145,6 +146,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact javadocJar
+            artifact sourcesJar
+            artifact apiJar
         }
     }
     repositories {
@@ -159,16 +163,14 @@ if (System.env.CURSEFORGE_API_KEY) {
         apiKey = System.env.CURSEFORGE_API_KEY
         project {
             id = "${cf_project_id}"
-            changelog = "See [Changelog](https://github.com/TagnumElite/ProjectE-Integration/blob/1.12.x/CHANGELOG.md)"
-            changelogType = 'markdown'
             releaseType = "${release_type}"
             addGameVersion "${mc_version}"
 
             mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
-            //addArtifact(apiJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-com.tagnumelite.projecteintegration.api" }
+            addArtifact(apiJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-api" }
             //addArtifact(deobfJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-deobf" }
-            //addArtifact(javadocJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-javadoc" }
-            //addArtifact(sourcesJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-sources" }
+            addArtifact(javadocJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-javadoc" }
+            addArtifact(sourcesJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-sources" }
 
             relations {
                 requiredDependency 'ProjectE'
@@ -193,7 +195,7 @@ if (System.env.CURSEFORGE_API_KEY) {
                 optionalDependency 'Charset-Lib'
                 optionalDependency 'LibVulpes'
                 optionalDependency 'RebornCore'
-                optionalDependency 'SonarCore'
+                optionalDependency 'Sonar-Core'
 
                 // Magic Plugins
                 optionalDependency 'Astral-Sorcery'
