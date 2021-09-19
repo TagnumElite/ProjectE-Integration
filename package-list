@@ -1,4 +1,3 @@
+com.tagnumelite.projecteintegration
 com.tagnumelite.projecteintegration.api
-com.tagnumelite.projecteintegration.api.internal.input
-com.tagnumelite.projecteintegration.api.mappers
-com.tagnumelite.projecteintegration.api.utils
+com.tagnumelite.projecteintegration.compat
