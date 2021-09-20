@@ -20,9 +20,21 @@ jobs:
 
             - run: ./gradlew build javadoc
 
+            - name: Archive production artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                name: dist-without-markdown
+                path: build/libs/*.jar
+
             - name: Deploy Docs if push
               uses: JamesIves/github-pages-deploy-action@4.1.5
               if: ${{ github.event_name == 'push' }}
               with:
                   branch: gh-pages
                   folder: build/docs/javadoc
+
+            - name: Archive javadoc results
+              uses: actions/upload-artifact@v2
+              with:
+                name: javadocs
+                path: build/docs/javadoc/
