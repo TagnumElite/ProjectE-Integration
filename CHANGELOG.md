@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.0.5] - 2021-09-20
 ### Added
 - Support for [Create] (Basin, Compacting, Crushing, Cutting, Milling, Mixing, Pressing, Splashing, Deploying, Sandpaper Polishing)
 - The ability to designate empty recipe output
@@ -414,7 +416,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.4...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.5...HEAD
+[4.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.1...4.0.2
@@ -454,6 +457,7 @@ Added support for 18 more mods
 <!-- MODS -->
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
+[Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot

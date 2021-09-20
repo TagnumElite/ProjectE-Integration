@@ -1,9 +1,8 @@
 # ProjectE-Integration (PEI)
-This mod will be the bridge between [ProjectE] and all ~~my~~ your favourite mods!    
+This mod will be the bridge between [ProjectE] and all ~~my~~ your favourite mods!
 
 ## NOTE:
-> I am currenty stumped by a road block for a while and I have been quite busy. Sadly this has resulted in halted progress.
-> I will pick up the mod later.
+> README IS OUTDATED. Everything below this line will be changed probably in the future.
     
 PEI will be adding [ProjectE] conversion mapping support to these mods crafting mechanics.    
 This means you will not have to manually set EMC for these mods recipes, instead, this mod will tell [ProjectE] about
