@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Create] (Basin, Compacting, Crushing, Cutting, Milling, Mixing, Pressing, Splashing, Deploying, Sandpaper Polishing)
 
+### Fixed
+- Mapper errors don't cause ProjectE to fail mapping everything.
+
 ## [4.0.4]
 ### Fixed
 - [Applied Energistics] inscriber mapper didn't know the deference between inscribing and pressing recipes.

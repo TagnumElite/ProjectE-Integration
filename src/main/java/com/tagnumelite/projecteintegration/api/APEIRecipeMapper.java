@@ -93,8 +93,11 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
                     getClass().getName(), iRecipe.getClass().getName(),
                     ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
-            return false;
+        } catch (Exception e) {
+            PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
+                    getClass().getName(), recipeID, iRecipe.getClass().getName(), e);
         }
+        return false;
     }
 
     /**
