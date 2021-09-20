@@ -23,7 +23,7 @@ jobs:
             - name: Archive production artifacts
               uses: actions/upload-artifact@v2
               with:
-                name: dist-without-markdown
+                name: projecte-integration-jars
                 path: build/libs/*.jar
 
             - name: Deploy Docs if push
