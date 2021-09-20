@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for [Create] (Basin, Compacting, Crushing, Cutting, Milling, Mixing, Pressing, Splashing, Deploying, Sandpaper Polishing)
+- The ability to designate empty recipe output
 
 ### Fixed
 - Mapper errors don't cause ProjectE to fail mapping everything.
+- Empty recipe outputs fail gracefully
+- [Create] recipe outputs now report as Empty when it should
 
 ## [4.0.4]
 ### Fixed

@@ -146,6 +146,7 @@ public class CreateMappers {
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
+            if (outputs.size() == 0) return NSSOutput.EMPTY;
             return mapOutputs(outputs.toArray());
         }
     }

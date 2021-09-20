@@ -67,7 +67,7 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
      */
     protected boolean convertRecipe(R recipe) {
         NSSOutput output = getOutput(recipe);
-        if (output == null) {
+        if (output == null || output.isEmpty()) {
             PEIntegration.debugLog("Recipe ({}) contains no outputs: {}", recipeID, recipe.getResultItem());
             return false;
         }
@@ -371,6 +371,8 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
      * A 'data' class to hold both a {@link NormalizedSimpleStack} and an integer denoting the output item and amount.
      */
     public static class NSSOutput {
+        public static final NSSOutput EMPTY = new NSSOutput(0, null);
+
         public final NormalizedSimpleStack nss;
         public final int amount;
 
@@ -400,6 +402,10 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
         public NSSOutput(FluidStack fluid) {
             this.amount = fluid.getAmount();
             this.nss = NSSFluid.createFluid(fluid);
+        }
+
+        public boolean isEmpty() {
+            return amount == 0 || this == EMPTY;
         }
     }
 
