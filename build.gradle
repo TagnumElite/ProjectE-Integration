@@ -26,7 +26,7 @@ archivesBaseName = "ProjectEIntegration-${mc_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+//project.logger.info('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
     // You must be aware of the Mojang license when using the 'official' mappings.
     // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
@@ -220,8 +220,7 @@ publishing {
 changelog {
     version = "${project.version}"
     path = "${project.projectDir}/CHANGELOG.md"
-    header = "[${-> version.get()}] - ${new SimpleDateFormat("yyyy-MM-dd").format(new Date())}"
-    headerParserRegex = ~/\d+\.\d+/
+    header = "[${-> version.get()}]"
     itemPrefix = "-"
     keepUnreleasedSection = true
     unreleasedTerm = "[Unreleased]"

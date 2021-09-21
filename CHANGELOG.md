@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - CurseGradle, it just suddenly broke.
 
-## [4.0.5] - 2021-09-20
+## [4.0.5]
 ### Added
 - Support for [Create] (Basin, Compacting, Crushing, Cutting, Milling, Mixing, Pressing, Splashing, Deploying, Sandpaper Polishing)
 - The ability to designate empty recipe output
