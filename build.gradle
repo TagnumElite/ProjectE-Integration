@@ -224,3 +224,21 @@ changelog {
     unreleasedTerm = "[Unreleased]"
     groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
 }
+
+tasks.register('mod_relations') {
+    doLast {
+        def requiredMods = ['projecte']
+        def optionalMods = [
+                'applied-energistics-2',
+                'extended-crafting',
+                'compact-crafting',
+                'create',
+                'immersive-engineering',
+                'woot'
+        ]
+        def allMods = []
+        allMods.addAll(requiredMods.stream().sorted().map(modid -> modid + ":requiredDependency").collect());
+        allMods.addAll(optionalMods.stream().sorted().map(modid -> modid + ":optionalDependency").collect());
+        println String.join(',', allMods)
+    }
+}
