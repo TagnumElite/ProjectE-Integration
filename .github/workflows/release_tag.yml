@@ -94,7 +94,7 @@ jobs:
 
       - name: Get current changelog
         id: changelog
-        run: echo "::set-output name=value::$(./gradlew getChangelog --console=plain -q)"
+        run: echo "::set-output name=value::'(./gradlew getChangelog --console=plain -q)'"
 
       - name: Upload Jars
         uses: actions/upload-artifact@v2
