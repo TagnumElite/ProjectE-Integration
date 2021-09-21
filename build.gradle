@@ -150,6 +150,7 @@ dependencies {
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     // compileOnly because of mixin problems
     compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
@@ -230,6 +231,7 @@ tasks.register('mod_relations') {
         def requiredMods = ['projecte']
         def optionalMods = [
                 'applied-energistics-2',
+                'ex-nihilo-sequentia',
                 'extended-crafting',
                 'compact-crafting',
                 'create',

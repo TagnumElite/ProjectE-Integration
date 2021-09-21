@@ -430,6 +430,16 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
             this.successful = successful;
         }
 
+        //public static NSSInput createItem(ItemStack stack) {
+        //
+        //}
+
+        public static NSSInput createFluid(FluidStack fluid) {
+            IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
+            ingMap.addIngredient(NSSFluid.createFluid(fluid), fluid.getAmount());
+            return new NSSInput(ingMap, new ArrayList<>(), true);
+        }
+
         /**
          *
          * @return
