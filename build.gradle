@@ -22,7 +22,7 @@ apply plugin: 'maven-publish'
 
 version = "${mod_version}"
 group = 'com.tagnumelite.projecteintegration'
-archivesBaseName = "ProjectEIntegration-${mc_version}"
+archivesBaseName = "${mod_name}-${mc_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 

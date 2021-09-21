@@ -18,7 +18,7 @@ jobs:
       cf_project: ${{steps.cf_project.outputs.value }}
       mc_version: ${{steps.mc_version.outputs.value }}
       mod_version: ${{steps.mod_version.outputs.value }}
-      mod_id: ${{steps.mod_id.outputs.value }}
+      mod_name: ${{steps.mod_name.outputs.value }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -58,12 +58,12 @@ jobs:
           path: './gradle.properties'
           property: 'mod_version'
 
-      - name: Mod ID
-        id: mod_id
+      - name: Mod Name
+        id: mod_name
         uses: christian-draeger/read-properties@1.0.1
         with:
           path: './gradle.properties'
-          property: 'mod_id'
+          property: 'mod_name'
 
   jar:
     name: Build Jars
@@ -128,7 +128,7 @@ jobs:
           token: ${{ secrets.CURSEFORGE_API_KEY }}
           project_id: ${{ needs.vars.outputs.cf_project }}
           game_endpoint: minecraft
-          file_path: build/libs/${{ needs.vars.outputs.mod_id }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}.jar
+          file_path: build/libs/${{ needs.vars.outputs.mod_name }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}.jar
           changelog: ${{ needs.jar.outputs.changelog }}
           changelog_type: markdown
           game_versions: java:Java 8,Forge
