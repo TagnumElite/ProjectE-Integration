@@ -68,7 +68,7 @@ jobs:
   jar:
     name: Build Jars
     runs-on: ubuntu-latest
-    needs: [ variables ]
+    needs: [ vars ]
     outputs:
       changelog: ${{steps.changelog.outputs.value }}
     steps:
