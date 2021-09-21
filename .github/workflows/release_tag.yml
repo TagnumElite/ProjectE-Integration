@@ -100,10 +100,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: libs
-          path: |
-            build/libs/${{ needs.vars.outputs.mod_id }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}.jar
-            build/libs/${{ needs.vars.outputs.mod_id }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}-sources.jar
-            build/libs/${{ needs.vars.outputs.mod_id }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}-javadoc.jar
+          path: build/libs/*.jar
 
   publishCurseforge:
     name: Make Releases
