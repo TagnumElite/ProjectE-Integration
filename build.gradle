@@ -8,16 +8,17 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
-        classpath "org.jetbrains.intellij.plugins:gradle-changelog-plugin:1.3.0"
     }
 }
+
+plugins {
+    id "org.jetbrains.changelog" version "1.3.+"
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply plugin: 'com.matthewprenger.cursegradle'
-apply plugin: 'org.jetbrains.changelog'
 
 version = "${mod_version}"
 group = 'com.tagnumelite.projecteintegration'
@@ -225,33 +226,4 @@ changelog {
     keepUnreleasedSection = true
     unreleasedTerm = "[Unreleased]"
     groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
-}
-
-curseforge {
-    apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
-    project {
-        id = "${cf_project}"
-        changelog = { changelog.get("${project.version}").toString() }
-        changelogType = 'markdown'
-        releaseType = "${release_type}"
-        addGameVersion "${mc_version}"
-        mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
-        addArtifact sourcesJar
-        addArtifact javadocJar
-        relations {
-            requiredDependency 'ProjectE'
-
-            // Crafting Plugins
-            optionalLibrary 'Applied-Energistics-2'
-            optionalLibrary 'Extended-Crafting'
-            optionalLibrary 'Compact-Crafting'
-            //optionalLibrary 'Create'
-            optionalLibrary 'Immersive-Engineering'
-            optionalLibrary 'Woot'
-        }
-    }
-}
-
-afterEvaluate {
-    //tasks["curseforge${cf_project}"].dependsOn.add(updateJSON)
 }
