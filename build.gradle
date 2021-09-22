@@ -149,6 +149,8 @@ dependencies {
     implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     // compileOnly because of mixin problems
+    compileOnly fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
+    // compileOnly because of mixin problems
     compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
@@ -231,10 +233,11 @@ tasks.register('mod_relations') {
         def requiredMods = ['projecte']
         def optionalMods = [
                 'applied-energistics-2',
-                'ex-nihilo-sequentia',
-                'extended-crafting',
                 'compact-crafting',
                 'create',
+                'ex-nihilo-sequentia',
+                'extended-crafting',
+                'farmers-delight',
                 'immersive-engineering',
                 'woot'
         ]

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.7]
+## Added
+- Support for [Farmers Delight] (Cooking Pot, Cutting Board)
+
+## Fixed
+- Support for [Ex Nihilo Sequentia]
+
 ## [4.0.6]
 ### Added 
 - GitHub actions for publishing builds to GitHub and CurseForge
@@ -424,7 +431,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.6...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.7...HEAD
+[4.0.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.6...4.0.7
 [4.0.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.5...4.0.6
 [4.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.3...4.0.4
@@ -469,5 +477,6 @@ Added support for 18 more mods
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
+[Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot
