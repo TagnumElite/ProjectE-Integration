@@ -48,7 +48,7 @@ public class ExNihiloSequentiaMappers {
     static String NAME(String name) { return "ExNihiloSequentia" + name + "Mapper"; }
 /* Leave compost and crooks disabled, makes no sense to have them here
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSCompostMapper extends APEIRecipeMapper<CompostRecipe> {
+    public static class ENSCompostMapper extends APEIRecipeMapper<CompostRecipe> {
         @Override
         public String getName() {
             return NAME("Compost");
@@ -78,7 +78,7 @@ public class ExNihiloSequentiaMappers {
         }
     }
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSCrookMapper extends APEIRecipeMapper<CrookRecipe> {
+    public static class ENSCrookMapper extends APEIRecipeMapper<CrookRecipe> {
 
         @Override
         public String getName() {
@@ -97,7 +97,7 @@ public class ExNihiloSequentiaMappers {
     }
  */
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSCrucibleMapper extends APEIRecipeMapper<CrucibleRecipe> {
+    public static class ENSCrucibleMapper extends APEIRecipeMapper<CrucibleRecipe> {
         @Override
         public String getName() {
             return NAME("Crucible");
@@ -125,7 +125,7 @@ public class ExNihiloSequentiaMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSFluidItemTransformationMapper extends APEIRecipeMapper<FluidItemRecipe> {
+    public static class ENSFluidItemTransformationMapper extends APEIRecipeMapper<FluidItemRecipe> {
         @Override
         public String getName() {
             return NAME("FluidItemTransformation");
@@ -148,7 +148,7 @@ public class ExNihiloSequentiaMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSFluidOnTopMapper extends APEIRecipeMapper<FluidOnTopRecipe> {
+    public static class ENSFluidOnTopMapper extends APEIRecipeMapper<FluidOnTopRecipe> {
         @Override
         public String getName() {
             return NAME("FluidOnTop");
@@ -171,7 +171,7 @@ public class ExNihiloSequentiaMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSFluidTransformationMapper extends APEIRecipeMapper<FluidTransformRecipe> {
+    public static class ENSFluidTransformationMapper extends APEIRecipeMapper<FluidTransformRecipe> {
         @Override
         public String getName() {
             return NAME("FluidTransformation");
@@ -199,7 +199,7 @@ public class ExNihiloSequentiaMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSHammerMapper extends APEIRecipeMapper<HammerRecipe> {
+    public static class ENSHammerMapper extends APEIRecipeMapper<HammerRecipe> {
         @Override
         public String getName() {
             return NAME("Hammer");
@@ -234,7 +234,7 @@ public class ExNihiloSequentiaMappers {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    static class ENSSieveMapper extends APEIRecipeMapper<SieveRecipe> {
+    public static class ENSSieveMapper extends APEIRecipeMapper<SieveRecipe> {
         @Override
         public String getName() {
             return NAME("Sieve");
