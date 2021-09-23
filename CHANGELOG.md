@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.8]
+### Added
+- Support for [PneumaticCraft: Repressurized] (Amadron, Assembly, Explosion Crafting, Heat Frame Cooling, Pressure Chamber, Refinery, Thermopneumatic Plant)
+- Added convertIngredient for FluidStack
+
 ## [4.0.7]
 ### Added
 - Support for [Farmers Delight] (Cooking Pot, Cutting Board)
@@ -431,7 +436,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.7...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.8...HEAD
+[4.0.8]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.7...4.0.8
 [4.0.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.6...4.0.7
 [4.0.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.5...4.0.6
 [4.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.4...4.0.5
@@ -479,4 +485,5 @@ Added support for 18 more mods
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
+[PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot

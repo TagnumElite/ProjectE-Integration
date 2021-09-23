@@ -314,6 +314,11 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
         return false;
     }
 
+    protected boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
+        ingredientMap.addIngredient(NSSFluid.createFluid(stack), stack.getAmount());
+        return true;
+    }
+
     // Also from ProjectE, a dependency for the above code:
     // https://github.com/sinkillerj/ProjectE/blob/mc1.16.x/src/main/java/moze_intel/projecte/emc/mappers/recipe/BaseRecipeTypeMapper.java#L187-L189
     protected boolean isTagException(Exception e) {

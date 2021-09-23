@@ -148,12 +148,13 @@ dependencies {
     compileOnly fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     // compileOnly because of mixin problems
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     // compileOnly because of mixin problems
     compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
-    implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
-    implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
+    implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 
@@ -239,6 +240,7 @@ tasks.register('mod_relations') {
                 'extended-crafting',
                 'farmers-delight',
                 'immersive-engineering',
+                'pneumaticcraft-repressurized',
                 'woot'
         ]
         def allMods = []
