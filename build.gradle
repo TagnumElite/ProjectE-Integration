@@ -138,13 +138,15 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
     //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     // This is giving world loading problems for me
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
 
     // ======================= [ Optional Mods ] =======================
     // compileOnly because of mixin problems
     compileOnly fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
+    // compileOnly because of mixin problems
+    compileOnly fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     // compileOnly because of mixin problems
     compileOnly fg.deobf("curse.maven:create-328085:${version_create}")
@@ -236,6 +238,7 @@ tasks.register('mod_relations') {
         def requiredMods = ['projecte']
         def optionalMods = [
                 'applied-energistics-2',
+                'botania',
                 'compact-crafting',
                 'create',
                 'ex-nihilo-sequentia',
