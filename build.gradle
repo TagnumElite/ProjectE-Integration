@@ -124,6 +124,7 @@ repositories {
     maven { url 'https://maven.blamejared.com' }
     maven { url "https://dvs1.progwm16.com/files/maven" }
     maven { url "https://chickenbones.net/maven/" }
+    maven { url "https://maven.theillusivec4.top/" }
     maven { url "https://modmaven.k-4u.nl" }
 }
 
@@ -135,6 +136,7 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
     runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
+    //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     // This is giving world loading problems for me
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.1")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")

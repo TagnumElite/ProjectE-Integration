@@ -30,6 +30,7 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -407,6 +408,11 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
         public NSSOutput(FluidStack fluid) {
             this.amount = fluid.getAmount();
             this.nss = NSSFluid.createFluid(fluid);
+        }
+
+        public NSSOutput(BlockState state) {
+            this.amount = 1;
+            this.nss = NSSItem.createItem(state.getBlock());
         }
 
         public boolean isEmpty() {

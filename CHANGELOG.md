@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.9]
+### Added
+- Support for [Botania] (Elven Trade, Mana Infusion, Petal Apothecary, Pure Daisy, Rune Alter, Terra Plate)
+
 ## [4.0.8]
 ### Added
 - Support for [PneumaticCraft: Repressurized] (Amadron, Assembly, Explosion Crafting, Heat Frame Cooling, Pressure Chamber, Refinery, Thermopneumatic Plant)
@@ -436,7 +440,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.8...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.9...HEAD
+[4.0.9]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.8...4.0.9
 [4.0.8]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.7...4.0.8
 [4.0.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.6...4.0.7
 [4.0.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.5...4.0.6
@@ -479,6 +484,7 @@ Added support for 18 more mods
 
 <!-- MODS -->
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
+[Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
