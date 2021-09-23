@@ -95,11 +95,11 @@ jobs:
 
       - name: Get changelog
         id: changelog
-        run: echo "::set-output name=value::$(./gradlew getChangelog --console=plain -q)"
+        run: echo "::set-output name=value::\"$(./gradlew getChangelog --console=plain -q)\""
 
       - name: Get mod relations
         id: mod_relations
-        run: echo "::set-output name=value::\"$(./gradlew mod_relations --console=plain -q)\""
+        run: echo "::set-output name=value::$(./gradlew mod_relations --console=plain -q)"
 
       - name: Upload Jars
         uses: actions/upload-artifact@v2
