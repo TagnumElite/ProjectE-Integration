@@ -1,0 +1,11 @@
+{
+  "comment": "default conversions for Mystical Agriculture",
+  "values": {
+    "before": {
+      "mysticalagriculture:prosperity_shard": 128,
+      "mysticalagriculture:inferium_essence": 32,
+      "mysticalagriculture:soulium_dust": 128,
+      "mysticalagriculture:soulstone_cobble": 16
+    }
+  }
+}

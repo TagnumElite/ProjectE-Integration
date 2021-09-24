@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ## Added
 - Support for [Psi] (Trick)
+- Support for [Mystical Agriculture] (Infusion, Seed Reprocessor)
 
 ## Fixed
 - Fixed [Astral Sorcery] marble not being assigned emc
@@ -510,5 +511,7 @@ Added support for 18 more mods
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
+[Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
+[Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot

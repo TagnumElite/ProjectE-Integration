@@ -119,7 +119,7 @@ dependencies {
     // ======================= [ Runtime Mods ] =======================
     runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}") // Draconic Evolution dependency
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
-    runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
+    runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting and Mystical Agriculture dependency
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel:${version_flywheel}") // Create dependency
     runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
@@ -138,6 +138,7 @@ dependencies {
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
@@ -231,6 +232,7 @@ tasks.register('mod_relations') {
                 'extended-crafting',
                 'farmers-delight',
                 'immersive-engineering',
+                'mystical-agriculture',
                 'pneumaticcraft-repressurized',
                 'psi',
                 'woot'
