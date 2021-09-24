@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.1]
+### Added
+- Support for [Astral Sorcery] (Altar, Block Transmutation, Liquid Infusion, Well)
+
 ## [4.1.0]
 ### Added
 - DataGen for EMC provision from addons
@@ -447,7 +451,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.1.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.1.1...HEAD
+[4.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.1.0...4.1.1
 [4.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.9...4.1.0
 [4.0.9]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.8...4.0.9
 [4.0.8]: https://github.com/TagnumElite/ProjectE-Integration/compare/4.0.7...4.0.8
@@ -492,6 +497,7 @@ Added support for 18 more mods
 
 <!-- MODS -->
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
+[Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create

@@ -1,0 +1,11 @@
+{
+  "comment": "default conversions for Astral Sorcery",
+  "values": {
+    "before": {
+      "#forge:gems/aquamarine": 128,
+      "#forge:marble": 32,
+      "astralsorcery:rock_crystal": 256,
+      "astralsorcery:celestial_crystal": 512
+    }
+  }
+}

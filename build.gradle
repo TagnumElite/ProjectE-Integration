@@ -144,20 +144,22 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
-    runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
-    // This is giving world loading problems for me
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
+    runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}") // Draconic Evolution dependency
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
-    runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
-    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel:${version_flywheel}")
+    runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
+    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel:${version_flywheel}") // Create dependency
+    runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
+    runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}") // Astral Sorcery dependency
+    // This is giving world loading problems for me
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
 
     // ======================= [ Optional Mods ] =======================
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
+    implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
-    implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
@@ -247,6 +249,7 @@ tasks.register('mod_relations') {
         def requiredMods = ['projecte']
         def optionalMods = [
                 'applied-energistics-2',
+                'astral-sorcery',
                 'botania',
                 'compact-crafting',
                 'create',
