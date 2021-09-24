@@ -12,9 +12,24 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="Modmaven" />
+      <option name="name" value="Modmaven" />
+      <option name="url" value="https://modmaven.dev/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven2" />
       <option name="name" value="maven2" />
       <option name="url" value="https://libraries.minecraft.net/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Jitpack" />
+      <option name="name" value="Jitpack" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="BlameJared" />
+      <option name="name" value="BlameJared" />
+      <option name="url" value="https://maven.blamejared.com" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="MavenRepo" />
@@ -22,54 +37,34 @@
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.minecraftforge.net/" />
+      <option name="id" value="TheIllusiveC4" />
+      <option name="name" value="TheIllusiveC4" />
+      <option name="url" value="https://maven.theillusivec4.top/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
+      <option name="id" value="CurseMaven" />
+      <option name="name" value="CurseMaven" />
       <option name="url" value="https://www.cursemaven.com" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="ModMaven" />
-      <option name="name" value="ModMaven" />
-      <option name="url" value="https://modmaven.k-4u.nl" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Progwm16 Maven" />
-      <option name="name" value="Progwm16 Maven" />
-      <option name="url" value="https://dvs1.progwm16.com/files/maven" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://maven.blamejared.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://jitpack.io" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="tterrag maven" />
-      <option name="name" value="tterrag maven" />
+      <option name="id" value="TTerrag" />
+      <option name="name" value="TTerrag" />
       <option name="url" value="https://maven.tterrag.com/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven6" />
-      <option name="name" value="maven6" />
-      <option name="url" value="https://repo.spongepowered.org/maven" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven5" />
-      <option name="name" value="maven5" />
+      <option name="id" value="ChickenBones" />
+      <option name="name" value="ChickenBones" />
       <option name="url" value="https://chickenbones.net/maven/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven6" />
-      <option name="name" value="maven6" />
-      <option name="url" value="https://maven.theillusivec4.top/" />
+      <option name="id" value="Progwm16" />
+      <option name="name" value="Progwm16" />
+      <option name="url" value="https://dvs1.progwm16.com/files/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven.minecraftforge.net/" />
     </remote-repository>
   </component>
 </project>
