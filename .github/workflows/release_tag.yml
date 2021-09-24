@@ -95,7 +95,12 @@ jobs:
 
       - name: Get changelog
         id: changelog
-        run: echo "::set-output name=value::\"$(./gradlew getChangelog --console=plain -q)\""
+        run: |
+          export CHANGELOG="$(./gradlew getChangelog --console=plain -q)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=value::$(echo "$CHANGELOG")"
 
       - name: Get mod relations
         id: mod_relations
