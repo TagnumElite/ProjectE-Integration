@@ -139,6 +139,7 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
+    implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 
@@ -231,6 +232,7 @@ tasks.register('mod_relations') {
                 'farmers-delight',
                 'immersive-engineering',
                 'pneumaticcraft-repressurized',
+                'psi',
                 'woot'
         ]
         def allMods = []
