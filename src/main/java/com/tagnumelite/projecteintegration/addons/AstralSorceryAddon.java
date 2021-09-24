@@ -31,6 +31,7 @@ import hellfirepvp.astralsorcery.common.crafting.recipe.LiquidInfusion;
 import hellfirepvp.astralsorcery.common.crafting.recipe.SimpleAltarRecipe;
 import hellfirepvp.astralsorcery.common.crafting.recipe.WellLiquefaction;
 import hellfirepvp.astralsorcery.common.crafting.recipe.altar.AltarRecipeGrid;
+import hellfirepvp.astralsorcery.common.lib.BlocksAS;
 import hellfirepvp.astralsorcery.common.lib.ItemsAS;
 import hellfirepvp.astralsorcery.common.lib.RecipeTypesAS;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
@@ -196,6 +197,7 @@ public class AstralSorceryAddon {
             builder.comment("default conversions for Astral Sorcery")
                     .before(gemTag("aquamarine"), 128)
                     .before(tag("forge:marble"), 32)
+                    .before(BlocksAS.MARBLE_RAW, 32)
                     .before(ItemsAS.ROCK_CRYSTAL, 256)
                     .before(ItemsAS.CELESTIAL_CRYSTAL, 512);
         }
