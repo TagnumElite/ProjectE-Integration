@@ -116,22 +116,25 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
+        name "CurseMaven"
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
         }
     }
     maven {
+        name "Jitpack"
         url "https://jitpack.io"
         content {
             includeGroup "com.github"
         }
     }
-    maven { url 'https://maven.blamejared.com' }
-    maven { url "https://dvs1.progwm16.com/files/maven" }
-    maven { url "https://chickenbones.net/maven/" }
-    maven { url "https://maven.theillusivec4.top/" }
-    maven { url "https://modmaven.k-4u.nl" }
+    maven { name "BlameJared"; url 'https://maven.blamejared.com' }
+    maven { name "Progwm16"; url "https://dvs1.progwm16.com/files/maven" }
+    maven { name "ChickenBones"; url "https://chickenbones.net/maven/" }
+    maven { name "TheIllusiveC4"; url "https://maven.theillusivec4.top/" }
+    maven { name "TTerrag"; url "https://maven.tterrag.com/" }
+    maven { name "Modmaven"; url "https://modmaven.dev/" }
 }
 
 dependencies {
