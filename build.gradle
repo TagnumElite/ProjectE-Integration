@@ -206,10 +206,14 @@ artifacts {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-            artifact sourcesJar
-            artifact javadocJar
+        maven(MavenPublication) {
+            artifactId = mod_name
+            group = "com.tagnumelite"
+            artifacts {
+                artifact jar
+                artifact sourcesJar
+                artifact javadocJar
+            }
         }
     }
     repositories {
