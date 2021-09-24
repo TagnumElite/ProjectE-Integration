@@ -46,6 +46,9 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             mods {
                 projecteintegration {
                     source sourceSets.main
@@ -89,6 +92,9 @@ minecraft {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', 'projecteintegration', '--all',
@@ -136,28 +142,24 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
     runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
-    //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     // This is giving world loading problems for me
-    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel:${version_flywheel}")
 
     // ======================= [ Optional Mods ] =======================
-    // compileOnly because of mixin problems
-    compileOnly fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
-    // compileOnly because of mixin problems
-    compileOnly fg.deobf("vazkii.botania:Botania:${version_botania}")
+    implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
+    implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
-    // compileOnly because of mixin problems
-    compileOnly fg.deobf("curse.maven:create-328085:${version_create}")
+    implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:cucumber-272335:${version_cucumber}") // Extended Crafting dependency
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
-    // compileOnly because of mixin problems
-    compileOnly fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
-    // compileOnly because of mixin problems
-    compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
+    implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
