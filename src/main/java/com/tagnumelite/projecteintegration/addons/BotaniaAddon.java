@@ -20,9 +20,12 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
+import com.tagnumelite.projecteintegration.api.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.ConversionProvider;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -31,8 +34,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Tuple;
+import net.minecraftforge.registries.ObjectHolder;
 import vazkii.botania.api.recipe.*;
 import vazkii.botania.common.crafting.ModRecipeTypes;
+import vazkii.botania.common.item.ModItems;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,7 +45,7 @@ import java.util.List;
 import java.util.Set;
 
 // TODO: Look at brew recipes
-public class BotaniaMappers {
+public class BotaniaAddon {
     public static final String MODID = "botania";
 
     static String NAME(String name) {
@@ -210,6 +215,18 @@ public class BotaniaMappers {
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModRecipeTypes.TERRA_PLATE_TYPE;
+        }
+    }
+
+    @ConversionProvider(MODID)
+    public static class BotaniaConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("Default conversions for Botania")
+                    .before(ModItems.pebble, 1)
+                    .before(ModItems.livingroot, 1)
+                    .before(ModItems.lifeEssence, 256)
+                    .before(ModItems.enderAirBottle, 1024);
         }
     }
 }

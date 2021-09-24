@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
@@ -38,7 +38,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
 
-public class ImmersiveEngineeringMappers {
+public class ImmersiveEngineeringAddon {
     public static final String MODID = "immersiveengineering";
 
     protected static String NAME(String name) {

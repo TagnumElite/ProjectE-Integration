@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import ipsis.woot.crafting.*;
@@ -37,7 +37,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.*;
 
 // FactoryRecipe and EnchantSqueezerRecipe not supported. You can guess why.
-public class WootMappers {
+public class WootAddon {
     public static final String MODID = "woot";
     public static final NormalizedSimpleStack WHITE_STACK = NSSFake.create("woot_white_dye_stack");
     public static final NormalizedSimpleStack RED_STACK = NSSFake.create("woot_red_dye_stack");

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import com.blakebr0.extendedcrafting.api.crafting.ICompressorRecipe;
 import com.blakebr0.extendedcrafting.api.crafting.RecipeTypes;
@@ -36,7 +36,7 @@ import net.minecraft.util.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtendedCraftingMappers {
+public class ExtendedCraftingAddon {
     public static final String MODID = "extendedcrafting";
 
     @RecipeTypeMapper(requiredMods=MODID, priority = 1)

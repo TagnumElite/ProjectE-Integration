@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import me.desht.pneumaticcraft.api.crafting.ingredient.FluidIngredient;
@@ -39,7 +39,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
 
-public class PneumaticCraftMappers {
+public class PneumaticCraftAddon {
     // TODO: PneumaticCraft implements a special FluidIngredient.
     // TODO: I noticed this way too late. Need to inspect the other recipes.
     public static final String MODID = "pneumaticcraft";

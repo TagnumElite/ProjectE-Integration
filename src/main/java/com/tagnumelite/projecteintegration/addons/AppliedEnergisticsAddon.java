@@ -20,21 +20,28 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import appeng.api.features.InscriberProcessType;
 import appeng.recipes.handlers.GrinderRecipe;
 import appeng.recipes.handlers.InscriberRecipe;
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.ConversionProvider;
+import com.tagnumelite.projecteintegration.api.AConversionProvider;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AppliedEnergisticsMappers {
+public class AppliedEnergisticsAddon {
     public static final String MODID = "appliedenergistics2";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -79,6 +86,35 @@ public class AppliedEnergisticsMappers {
                 return Collections.singletonList(recipe.getMiddleInput());
             }
             return super.getIngredients(recipe);
+        }
+    }
+
+    @ConversionProvider(MODID)
+    @ObjectHolder("appliedenergistics2")
+    public static class AEConversionProvider extends AConversionProvider {
+        @ObjectHolder("certus_quartz_crystal")
+        public static final Item CERTUS_QUARTZ_CRYSTAL = null;
+        @ObjectHolder("charged_certus_quartz_crystal")
+        public static final Item CERTUS_QUARTZ_CRYSTAL_CHARGED  = null;
+        @ObjectHolder("fluix_crystal")
+        public static final Item FLUIX_CRYSTAL  = null;
+
+        @ObjectHolder("nether_quartz_seed")
+        public static final Item NETHER_QUARTZ_SEED  = null;
+        @ObjectHolder("fluix_crystal_seed")
+        public static final Item FLUIX_CRYSTAL_SEED  = null;
+        @ObjectHolder("certus_crystal_seed")
+        public static final Item CERTUS_CRYSTAL_SEED   = null;
+
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("Set defaults conversions for Applied Energistics")
+                    .before(CERTUS_QUARTZ_CRYSTAL, 256)
+                    .conversion(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(CERTUS_QUARTZ_CRYSTAL).end()
+                    .conversion(FLUIX_CRYSTAL, 2).ingredient(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(Tags.Items.DUSTS_REDSTONE).ingredient(Items.QUARTZ).end()
+                    .conversion(Items.QUARTZ).ingredient(NETHER_QUARTZ_SEED).end()
+                    .conversion(FLUIX_CRYSTAL).ingredient(FLUIX_CRYSTAL_SEED).end()
+                    .conversion(CERTUS_QUARTZ_CRYSTAL).ingredient(CERTUS_CRYSTAL_SEED).end();
         }
     }
 }

@@ -20,13 +20,12 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
@@ -37,12 +36,10 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ExNihiloSequentiaMappers {
+public class ExNihiloSequentiaAddon {
     public static final String MODID = "exnihilosequentia";
 
     static String NAME(String name) { return "ExNihiloSequentia" + name + "Mapper"; }

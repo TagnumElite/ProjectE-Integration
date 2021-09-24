@@ -20,19 +20,20 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
+import com.tagnumelite.projecteintegration.api.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.ConversionProvider;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.registry.ModItems;
+import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
-import java.util.Collections;
-import java.util.List;
-
-public class FarmersDelightMappers {
+public class FarmersDelightAddon {
     public static final String MODID = "farmersdelight";
 
     static String NAME(String name) {
@@ -80,6 +81,16 @@ public class FarmersDelightMappers {
         @Override
         protected NSSOutput getOutput(CuttingBoardRecipe recipe) {
             return mapOutputs(recipe.getResults().toArray());
+        }
+    }
+
+    @ConversionProvider(MODID)
+    public static class FDConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("Set defaults conversions for Farmer's Delight")
+                    .before(ForgeTags.CROPS_RICE, 1)
+                    .before(ModItems.STRAW.get(), 1);
         }
     }
 }

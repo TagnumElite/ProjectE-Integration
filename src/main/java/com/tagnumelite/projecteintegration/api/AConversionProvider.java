@@ -23,7 +23,30 @@
 package com.tagnumelite.projecteintegration.api;
 
 import moze_intel.projecte.api.data.CustomConversionBuilder;
+import moze_intel.projecte.api.nss.NSSItem;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
+import net.minecraft.util.ResourceLocation;
 
-public interface IConversionProvider {
-    void convert(CustomConversionBuilder builder);
+public abstract class AConversionProvider {
+    public abstract void convert(CustomConversionBuilder builder);
+
+    protected static NormalizedSimpleStack ingotTag(String ingot) {
+        return tag("forge:ingots/" + ingot);
+    }
+
+    protected static NormalizedSimpleStack gemTag(String gem) {
+        return tag("forge:gems/" + gem);
+    }
+
+    protected static NormalizedSimpleStack cropsTag(String crop) {
+        return tag("forge:crops/" + crop);
+    }
+
+    protected static NormalizedSimpleStack grainTag(String grain) {
+        return tag("forge:grain/" + grain);
+    }
+
+    protected static NormalizedSimpleStack tag(String resourceLocation) {
+        return NSSItem.createTag(new ResourceLocation(resourceLocation));
+    }
 }

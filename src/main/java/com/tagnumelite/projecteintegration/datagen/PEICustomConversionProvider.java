@@ -24,9 +24,11 @@ package com.tagnumelite.projecteintegration.datagen;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.IConversionProvider;
+import com.tagnumelite.projecteintegration.api.AConversionProvider;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.data.CustomConversionProvider;
+import moze_intel.projecte.api.nss.NSSItem;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
@@ -45,7 +47,10 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     @Override
     protected void addCustomConversions() {
-        for (Map.Entry<IConversionProvider, String> entry : getConversionProviders().entrySet()) {
+        createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
+                .before(ingotTag("zinc"), 128);
+
+        for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
             ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue()+"_default");
             PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
@@ -53,13 +58,13 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         }
     }
 
-    private Map<IConversionProvider, String> getConversionProviders() {
+    private Map<AConversionProvider, String> getConversionProviders() {
         ModList modList = ModList.get();
-        Map<IConversionProvider, String> conversionProviders = new HashMap<>();
+        Map<AConversionProvider, String> conversionProviders = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
             for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
                 if (CONVERSION_PROVIDER_TYPE.equals(data.getAnnotationType())) {
-                    IConversionProvider provider = createInstance(data.getMemberName());
+                    AConversionProvider provider = createInstance(data.getMemberName());
                     if (provider != null) {
                         Map<String, Object> annotationData = data.getAnnotationData();
                         if (!annotationData.containsKey("value")) {
@@ -73,12 +78,25 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         return conversionProviders;
     }
 
-    private IConversionProvider createInstance(String className) {
+    private AConversionProvider createInstance(String className) {
         try {
-            return Class.forName(className).asSubclass(IConversionProvider.class).newInstance();
+            return Class.forName(className).asSubclass(AConversionProvider.class).newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;
+    }
+
+    // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
+    private static NormalizedSimpleStack ingotTag(String ingot) {
+        return tag("forge:ingots/" + ingot);
+    }
+
+    private static NormalizedSimpleStack gemTag(String gem) {
+        return tag("forge:gems/" + gem);
+    }
+
+    private static NormalizedSimpleStack tag(String tag) {
+        return NSSItem.createTag(new ResourceLocation(tag));
     }
 }

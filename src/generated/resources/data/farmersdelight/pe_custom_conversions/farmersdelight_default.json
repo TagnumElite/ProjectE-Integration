@@ -1,0 +1,9 @@
+{
+  "comment": "Set defaults conversions for Farmer\u0027s Delight",
+  "values": {
+    "before": {
+      "#forge:crops/rice": 1,
+      "farmersdelight:straw": 1
+    }
+  }
+}

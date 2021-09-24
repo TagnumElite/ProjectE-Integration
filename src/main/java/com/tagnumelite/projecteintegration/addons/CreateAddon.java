@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.compat;
+package com.tagnumelite.projecteintegration.addons;
 
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.components.crusher.CrushingRecipe;
@@ -56,8 +56,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 // TODO: Can you see this below, maybe not gut.
-
-public class CreateMappers {
+public class CreateAddon {
     public static final String MODID = "create";
 
     static String NAME(String name) {

@@ -23,6 +23,7 @@
 package com.tagnumelite.projecteintegration.api;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.addons.ImmersiveEngineeringAddon;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
@@ -53,7 +54,7 @@ import java.util.*;
  * To overwrite output, override method {@link #getOutput(IRecipe)}
  * to overwrite input, override method {@link #getIngredients(IRecipe)}
  *
- * For an example on how to handle recipes with multiple outputs, look at {@link com.tagnumelite.projecteintegration.compat.ImmersiveEngineeringMappers}
+ * For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
  */
 public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeTypeMapper {
     protected ResourceLocation recipeID;
