@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [4.1.2]
-## Added
+### Added
 - Support for [Psi] (Trick)
 - Support for [Mystical Agriculture] (Infusion, Seed Reprocessor)
 
-## Fixed
+### Fixed
 - Fixed [Astral Sorcery] marble not being assigned emc
 - Changelog version links incorrect
 
