@@ -23,7 +23,9 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
-import ipsis.woot.crafting.*;
+import ipsis.woot.crafting.AnvilRecipe;
+import ipsis.woot.crafting.FluidConvertorRecipe;
+import ipsis.woot.crafting.InfuserRecipe;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NSSFluid;
@@ -34,7 +36,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // FactoryRecipe and EnchantSqueezerRecipe not supported. You can guess why.
 public class WootAddon {
