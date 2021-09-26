@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
+import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
@@ -128,7 +129,7 @@ public class ImmersiveEngineeringAddon {
 
             Tuple<NormalizedSimpleStack, Boolean> group = getFakeGroup(itemStack, slagStack);
             NormalizedSimpleStack dummy = group.getA();
-            Map<NormalizedSimpleStack, Integer> dummyMap = getDummyMap(dummy);
+            Map<NormalizedSimpleStack, Integer> dummyMap = Utils.getDummyMap(dummy);
 
             mapper.addConversion(slagOutput.getCount(), slagStack, dummyMap);
             mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
@@ -168,7 +169,7 @@ public class ImmersiveEngineeringAddon {
 
                 Tuple<NormalizedSimpleStack, Boolean> group = getFakeGroup(fluidStack, itemStack);
                 NormalizedSimpleStack dummy = group.getA();
-                Map<NormalizedSimpleStack, Integer> dummyMap = getDummyMap(dummy);
+                Map<NormalizedSimpleStack, Integer> dummyMap = Utils.getDummyMap(dummy);
 
                 mapper.addConversion(creosoteOutput.getAmount(), fluidStack, dummyMap);
                 mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);

@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.api.recipe;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.addons.ImmersiveEngineeringAddon;
+import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
