@@ -22,7 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import ipsis.woot.crafting.AnvilRecipe;
@@ -50,7 +50,7 @@ public class WootAddon {
     public static final NormalizedSimpleStack BLUE_STACK = NSSFake.create("woot_blue_dye_stack");
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootAnvilMapper extends APEIRecipeMapper<AnvilRecipe> {
+    public static class WootAnvilMapper extends ARecipeTypeMapper<AnvilRecipe> {
         @Override
         public String getName() {
             return "WootAnvilMapper";
@@ -78,6 +78,7 @@ public class WootAddon {
             return ingredients;
         }
     }
+
     /* TODO: I'll deal with this later
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootDyeSqueezerMapper extends APEIRecipeMapper<DyeSqueezerRecipe> {
@@ -161,7 +162,7 @@ public class WootAddon {
     }
     */
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootFluidConvertorMapper extends APEIRecipeMapper<FluidConvertorRecipe> {
+    public static class WootFluidConvertorMapper extends ARecipeTypeMapper<FluidConvertorRecipe> {
         @Override
         public String getName() {
             return "WootFluidConvertorMapper";
@@ -178,12 +179,12 @@ public class WootAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(FluidConvertorRecipe recipe) {
+        public NSSOutput getOutput(FluidConvertorRecipe recipe) {
             return new NSSOutput(recipe.getOutput());
         }
 
         @Override
-        protected NSSInput getInput(FluidConvertorRecipe recipe) {
+        public NSSInput getInput(FluidConvertorRecipe recipe) {
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
             if (!convertIngredient(recipe.getCatalyst(), ingredientMap, fakeGroupMap)) {
@@ -195,7 +196,7 @@ public class WootAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootInfuserMapper extends APEIRecipeMapper<InfuserRecipe> {
+    public static class WootInfuserMapper extends ARecipeTypeMapper<InfuserRecipe> {
         @Override
         public String getName() {
             return "WootInfuserMapper";
@@ -212,7 +213,7 @@ public class WootAddon {
         }
 
         @Override
-        protected NSSInput getInput(InfuserRecipe recipe) {
+        public NSSInput getInput(InfuserRecipe recipe) {
             List<Ingredient> ingredients = new ArrayList<>(1);
             ingredients.add(recipe.getIngredient());
             if (recipe.getAugment() != null) {
@@ -237,7 +238,7 @@ public class WootAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(InfuserRecipe recipe) {
+        public NSSOutput getOutput(InfuserRecipe recipe) {
             return new NSSOutput(recipe.getOutput());
         }
     }

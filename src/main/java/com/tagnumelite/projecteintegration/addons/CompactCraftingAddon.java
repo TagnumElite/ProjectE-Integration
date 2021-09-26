@@ -26,7 +26,7 @@ import com.robotgryphon.compactcrafting.Registration;
 import com.robotgryphon.compactcrafting.api.components.IRecipeBlockComponent;
 import com.robotgryphon.compactcrafting.recipes.MiniaturizationRecipe;
 import com.robotgryphon.compactcrafting.recipes.components.BlockComponent;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -44,7 +44,7 @@ import java.util.Set;
 
 public class CompactCraftingAddon {
     @RecipeTypeMapper(requiredMods = {"compactcrafting"}, priority = 1)
-    public static class CCMiniaturizationMapper extends APEIRecipeMapper<MiniaturizationRecipe> {
+    public static class CCMiniaturizationMapper extends ARecipeTypeMapper<MiniaturizationRecipe> {
         @Override
         public String getName() {
             return "CompactCraftingMiniaturizationMapper";

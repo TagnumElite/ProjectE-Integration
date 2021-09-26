@@ -39,11 +39,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PEICustomConversionProvider extends CustomConversionProvider {
+    private static final Type CONVERSION_PROVIDER_TYPE = Type.getType(ConversionProvider.class);
+
     protected PEICustomConversionProvider(DataGenerator generator) {
         super(generator);
     }
 
-    private static final Type CONVERSION_PROVIDER_TYPE = Type.getType(ConversionProvider.class);
+    // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
+    private static NormalizedSimpleStack ingotTag(String ingot) {
+        return tag("forge:ingots/" + ingot);
+    }
+
+    private static NormalizedSimpleStack gemTag(String gem) {
+        return tag("forge:gems/" + gem);
+    }
+
+    private static NormalizedSimpleStack tag(String tag) {
+        return NSSItem.createTag(new ResourceLocation(tag));
+    }
 
     @Override
     protected void addCustomConversions() {
@@ -51,7 +64,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
                 .before(ingotTag("zinc"), 128);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
-            ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue()+"_default");
+            ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue() + "_default");
             PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
             entry.getKey().convert(builder);
@@ -85,18 +98,5 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;
-    }
-
-    // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
-    private static NormalizedSimpleStack ingotTag(String ingot) {
-        return tag("forge:ingots/" + ingot);
-    }
-
-    private static NormalizedSimpleStack gemTag(String gem) {
-        return tag("forge:gems/" + gem);
-    }
-
-    private static NormalizedSimpleStack tag(String tag) {
-        return NSSItem.createTag(new ResourceLocation(tag));
     }
 }

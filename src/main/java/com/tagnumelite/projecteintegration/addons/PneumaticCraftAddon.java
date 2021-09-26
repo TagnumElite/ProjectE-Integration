@@ -22,7 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import me.desht.pneumaticcraft.api.crafting.ingredient.FluidIngredient;
@@ -47,10 +47,10 @@ public class PneumaticCraftAddon {
     public static final String MODID = "pneumaticcraft";
 
     static String NAME(String name) {
-        return "PneumaticCraft"+name+"Mapper";
+        return "PneumaticCraft" + name + "Mapper";
     }
 
-    public static abstract class PCRMapper<R extends PneumaticCraftRecipe> extends APEIRecipeMapper<R> {
+    public static abstract class PCRMapper<R extends PneumaticCraftRecipe> extends ARecipeTypeMapper<R> {
         @Override
         protected boolean convertIngredient(Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
             if (ingredient instanceof FluidIngredient) {
@@ -110,7 +110,7 @@ public class PneumaticCraftAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRAmadronOfferMapper extends APEIRecipeMapper<AmadronOffer> {
+    public static class PCRAmadronOfferMapper extends ARecipeTypeMapper<AmadronOffer> {
         @Override
         public String getName() {
             return NAME("AmadronOffer");
@@ -128,7 +128,7 @@ public class PneumaticCraftAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRAssemblyMapper extends APEIRecipeMapper<AssemblyRecipe> {
+    public static class PCRAssemblyMapper extends ARecipeTypeMapper<AssemblyRecipe> {
         @Override
         public String getName() {
             return NAME("Assembly");
@@ -147,7 +147,7 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSInput getInput(AssemblyRecipe recipe) {
+        public NSSInput getInput(AssemblyRecipe recipe) {
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
             convertIngredient(recipe.getInputAmount(), recipe.getInput(), ingredientMap, fakeGroupMap);
@@ -155,13 +155,13 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(AssemblyRecipe recipe) {
+        public NSSOutput getOutput(AssemblyRecipe recipe) {
             return new NSSOutput(recipe.getOutput());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRExplosionCraftingMapper extends APEIRecipeMapper<ExplosionCraftingRecipe> {
+    public static class PCRExplosionCraftingMapper extends ARecipeTypeMapper<ExplosionCraftingRecipe> {
         @Override
         public String getName() {
             return NAME("ExplosionCrafting");
@@ -188,7 +188,7 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(ExplosionCraftingRecipe recipe) {
+        public NSSOutput getOutput(ExplosionCraftingRecipe recipe) {
             return mapOutputs(recipe.getOutputs().toArray());
         }
     }
@@ -212,7 +212,7 @@ public class PneumaticCraftAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRPressureChamberMapper extends APEIRecipeMapper<PressureChamberRecipe> {
+    public static class PCRPressureChamberMapper extends ARecipeTypeMapper<PressureChamberRecipe> {
         @Override
         public String getName() {
             return NAME("PressureChamber");
@@ -234,7 +234,7 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(PressureChamberRecipe recipe) {
+        public NSSOutput getOutput(PressureChamberRecipe recipe) {
             return mapOutputs(recipe.getResultsForDisplay().toArray());
         }
     }
@@ -257,7 +257,7 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(RefineryRecipe recipe) {
+        public NSSOutput getOutput(RefineryRecipe recipe) {
             return mapOutputs(recipe.getOutputs().toArray());
         }
     }
@@ -280,7 +280,7 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(ThermoPlantRecipe recipe) {
+        public NSSOutput getOutput(ThermoPlantRecipe recipe) {
             ItemStack outputItem = recipe.getOutputItem();
             FluidStack outputFluid = recipe.getOutputFluid();
             boolean itemEmpty = outputItem == null || outputItem.isEmpty();

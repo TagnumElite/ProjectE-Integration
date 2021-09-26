@@ -29,9 +29,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
-@Mod.EventBusSubscriber(modid = PEIntegration.MODID, bus= Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = PEIntegration.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
-    private DataGenerators() {}
+    private DataGenerators() {
+    }
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

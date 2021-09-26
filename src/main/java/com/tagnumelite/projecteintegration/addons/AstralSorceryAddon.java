@@ -24,7 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import hellfirepvp.astralsorcery.common.crafting.helper.WrappedIngredient;
@@ -54,7 +54,7 @@ public class AstralSorceryAddon {
     public static final String MODID = "astralsorcery";
 
     static String NAME(String name) {
-        return "AstralSorcery"+name+"Mapper";
+        return "AstralSorcery" + name + "Mapper";
     }
 
     static String DESC(String name) {
@@ -62,7 +62,7 @@ public class AstralSorceryAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASAltarMapper extends APEIRecipeMapper<SimpleAltarRecipe> {
+    public static class ASAltarMapper extends ARecipeTypeMapper<SimpleAltarRecipe> {
         @Override
         public String getName() {
             return NAME("Altar");
@@ -79,7 +79,7 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        protected NSSInput getInput(SimpleAltarRecipe recipe) {
+        public NSSInput getInput(SimpleAltarRecipe recipe) {
             AltarRecipeGrid grid = recipe.getInputs();
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
@@ -96,13 +96,13 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(SimpleAltarRecipe recipe) {
+        public NSSOutput getOutput(SimpleAltarRecipe recipe) {
             return new NSSOutput(recipe.getOutputForRender(Collections.emptyList()));
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASBlockTransmutationMapper extends APEIRecipeMapper<BlockTransmutation> {
+    public static class ASBlockTransmutationMapper extends ARecipeTypeMapper<BlockTransmutation> {
         @Override
         public String getName() {
             return NAME("BlockTransmutation");
@@ -119,7 +119,7 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(BlockTransmutation recipe) {
+        public NSSOutput getOutput(BlockTransmutation recipe) {
             return new NSSOutput(recipe.getOutputDisplay());
         }
 
@@ -130,7 +130,7 @@ public class AstralSorceryAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASLiquidInfusionMapper extends APEIRecipeMapper<LiquidInfusion> {
+    public static class ASLiquidInfusionMapper extends ARecipeTypeMapper<LiquidInfusion> {
         @Override
         public String getName() {
             return NAME("LiquidInfusion");
@@ -147,7 +147,7 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(LiquidInfusion recipe) {
+        public NSSOutput getOutput(LiquidInfusion recipe) {
             return new NSSOutput(recipe.getOutputForRender(Collections.emptyList()));
         }
 
@@ -160,7 +160,7 @@ public class AstralSorceryAddon {
     // NOTE: There is no LiquidInteraction mapper, just because it shouldn't be needed.
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASWellLiquefactionMapper extends APEIRecipeMapper<WellLiquefaction> {
+    public static class ASWellLiquefactionMapper extends ARecipeTypeMapper<WellLiquefaction> {
         @Override
         public String getName() {
             return NAME("WellLiquefaction");
@@ -168,7 +168,7 @@ public class AstralSorceryAddon {
 
         @Override
         public String getDescription() {
-            return DESC("Well Liquefaction")+ " Disabled by default. Maps 1 Item to 1 bucket (" + FluidAttributes.BUCKET_VOLUME + ')';
+            return DESC("Well Liquefaction") + " Disabled by default. Maps 1 Item to 1 bucket (" + FluidAttributes.BUCKET_VOLUME + ')';
         }
 
         @Override
@@ -182,7 +182,7 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(WellLiquefaction recipe) {
+        public NSSOutput getOutput(WellLiquefaction recipe) {
             return new NSSOutput(new FluidStack(recipe.getFluidOutput(), FluidAttributes.BUCKET_VOLUME));
         }
 

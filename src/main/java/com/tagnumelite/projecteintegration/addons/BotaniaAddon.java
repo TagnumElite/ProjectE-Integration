@@ -24,7 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
@@ -50,11 +50,11 @@ public class BotaniaAddon {
     public static final String MODID = "botania";
 
     static String NAME(String name) {
-        return "Botania"+name+"Mapper";
+        return "Botania" + name + "Mapper";
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BElvenTradeMapper extends APEIRecipeMapper<IElvenTradeRecipe> {
+    public static class BElvenTradeMapper extends ARecipeTypeMapper<IElvenTradeRecipe> {
         @Override
         public String getName() {
             return NAME("ElvenTrade");
@@ -71,13 +71,13 @@ public class BotaniaAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(IElvenTradeRecipe recipe) {
+        public NSSOutput getOutput(IElvenTradeRecipe recipe) {
             return mapOutputs(recipe.getOutputs().toArray());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BManaInfusionMapper extends APEIRecipeMapper<IManaInfusionRecipe> {
+    public static class BManaInfusionMapper extends ARecipeTypeMapper<IManaInfusionRecipe> {
         @Override
         public String getName() {
             return NAME("ManaInfusion");
@@ -95,7 +95,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BPetalMapper extends APEIRecipeMapper<IPetalRecipe> {
+    public static class BPetalMapper extends ARecipeTypeMapper<IPetalRecipe> {
         @Override
         public String getName() {
             return NAME("Petal");
@@ -113,7 +113,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BPureDaisyMapper extends APEIRecipeMapper<IPureDaisyRecipe> {
+    public static class BPureDaisyMapper extends ARecipeTypeMapper<IPureDaisyRecipe> {
         @Override
         public String getName() {
             return NAME("PureDaisy");
@@ -130,12 +130,12 @@ public class BotaniaAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(IPureDaisyRecipe recipe) {
+        public NSSOutput getOutput(IPureDaisyRecipe recipe) {
             return new NSSOutput(recipe.getOutputState());
         }
 
         @Override
-        protected NSSInput getInput(IPureDaisyRecipe recipe) {
+        public NSSInput getInput(IPureDaisyRecipe recipe) {
             List<BlockState> matches = recipe.getInput().getDisplayed();
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
@@ -184,7 +184,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BRuneAlterMapper extends APEIRecipeMapper<IRuneAltarRecipe> {
+    public static class BRuneAlterMapper extends ARecipeTypeMapper<IRuneAltarRecipe> {
         @Override
         public String getName() {
             return NAME("RuneAlter");
@@ -202,7 +202,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BTerraPlateMapper extends APEIRecipeMapper<ITerraPlateRecipe> {
+    public static class BTerraPlateMapper extends ARecipeTypeMapper<ITerraPlateRecipe> {
         @Override
         public String getName() {
             return NAME("TerraPlate");

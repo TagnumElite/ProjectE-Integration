@@ -22,7 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
 import vazkii.psi.common.crafting.ModCraftingRecipes;
@@ -32,7 +32,7 @@ public class PsiAddon {
     public static final String MODID = "psi";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PsiTrickMapper extends APEIRecipeMapper<TrickRecipe> {
+    public static class PsiTrickMapper extends ARecipeTypeMapper<TrickRecipe> {
         @Override
         public String getName() {
             return "PsiTrickMapper";

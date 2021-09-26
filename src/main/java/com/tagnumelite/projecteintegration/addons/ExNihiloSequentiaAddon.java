@@ -23,7 +23,7 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
@@ -44,59 +44,62 @@ import java.util.List;
 public class ExNihiloSequentiaAddon {
     public static final String MODID = "exnihilosequentia";
 
-    static String NAME(String name) { return "ExNihiloSequentia" + name + "Mapper"; }
-/* Leave compost and crooks disabled, makes no sense to have them here
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSCompostMapper extends APEIRecipeMapper<CompostRecipe> {
-        @Override
-        public String getName() {
-            return NAME("Compost");
-        }
-
-        @Override
-        public String getDescription() {
-            return "";
-        }
-
-        @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == CompostRecipe.RECIPE_TYPE;
-        }
-
-        @Override
-        protected NSSInput getInput(CompostRecipe recipe) {
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            convertIngredient(recipe.getAmount(), recipe.getInput(), ingredientMap, fakeGroupMap);
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
-        }
-
-        @Override
-        protected NSSOutput getOutput(CompostRecipe recipe) {
-            return new NSSOutput(new ItemStack(Items.DIRT, 1));
-        }
+    static String NAME(String name) {
+        return "ExNihiloSequentia" + name + "Mapper";
     }
+
+    /* Leave compost and crooks disabled, makes no sense to have them here
+        @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+        public static class ENSCompostMapper extends APEIRecipeMapper<CompostRecipe> {
+            @Override
+            public String getName() {
+                return NAME("Compost");
+            }
+
+            @Override
+            public String getDescription() {
+                return "";
+            }
+
+            @Override
+            public boolean canHandle(IRecipeType<?> iRecipeType) {
+                return iRecipeType == CompostRecipe.RECIPE_TYPE;
+            }
+
+            @Override
+            protected NSSInput getInput(CompostRecipe recipe) {
+                IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+                List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+                convertIngredient(recipe.getAmount(), recipe.getInput(), ingredientMap, fakeGroupMap);
+                return new NSSInput(ingredientMap, fakeGroupMap, true);
+            }
+
+            @Override
+            protected NSSOutput getOutput(CompostRecipe recipe) {
+                return new NSSOutput(new ItemStack(Items.DIRT, 1));
+            }
+        }
+        @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+        public static class ENSCrookMapper extends APEIRecipeMapper<CrookRecipe> {
+
+            @Override
+            public String getName() {
+                return NAME("Crook");
+            }
+
+            @Override
+            public String getDescription() {
+                return "null";
+            }
+
+            @Override
+            public boolean canHandle(IRecipeType<?> iRecipeType) {
+                return iRecipeType ==CrookRecipe.RECIPE_TYPE;
+            }
+        }
+     */
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSCrookMapper extends APEIRecipeMapper<CrookRecipe> {
-
-        @Override
-        public String getName() {
-            return NAME("Crook");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType ==CrookRecipe.RECIPE_TYPE;
-        }
-    }
- */
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSCrucibleMapper extends APEIRecipeMapper<CrucibleRecipe> {
+    public static class ENSCrucibleMapper extends ARecipeTypeMapper<CrucibleRecipe> {
         @Override
         public String getName() {
             return NAME("Crucible");
@@ -112,19 +115,19 @@ public class ExNihiloSequentiaAddon {
             return iRecipeType == CrucibleRecipe.RECIPE_TYPE;
         }
 
-    @Override
-    protected List<Ingredient> getIngredients(CrucibleRecipe recipe) {
-        return Collections.singletonList(recipe.getInput());
-    }
+        @Override
+        protected List<Ingredient> getIngredients(CrucibleRecipe recipe) {
+            return Collections.singletonList(recipe.getInput());
+        }
 
-    @Override
-        protected NSSOutput getOutput(CrucibleRecipe recipe) {
+        @Override
+        public NSSOutput getOutput(CrucibleRecipe recipe) {
             return new NSSOutput(recipe.getAmount(), NSSFluid.createFluid(recipe.getResultFluid()));
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSFluidItemTransformationMapper extends APEIRecipeMapper<FluidItemRecipe> {
+    public static class ENSFluidItemTransformationMapper extends ARecipeTypeMapper<FluidItemRecipe> {
         @Override
         public String getName() {
             return NAME("FluidItemTransformation");
@@ -147,7 +150,7 @@ public class ExNihiloSequentiaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSFluidOnTopMapper extends APEIRecipeMapper<FluidOnTopRecipe> {
+    public static class ENSFluidOnTopMapper extends ARecipeTypeMapper<FluidOnTopRecipe> {
         @Override
         public String getName() {
             return NAME("FluidOnTop");
@@ -164,13 +167,13 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        protected NSSInput getInput(FluidOnTopRecipe recipe) {
+        public NSSInput getInput(FluidOnTopRecipe recipe) {
             return NSSInput.createFluid(recipe.getFluidInTank());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSFluidTransformationMapper extends APEIRecipeMapper<FluidTransformRecipe> {
+    public static class ENSFluidTransformationMapper extends ARecipeTypeMapper<FluidTransformRecipe> {
         @Override
         public String getName() {
             return NAME("FluidTransformation");
@@ -187,18 +190,18 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        protected NSSInput getInput(FluidTransformRecipe recipe) {
+        public NSSInput getInput(FluidTransformRecipe recipe) {
             return NSSInput.createFluid(recipe.getFluidInTank());
         }
 
         @Override
-        protected NSSOutput getOutput(FluidTransformRecipe recipe) {
+        public NSSOutput getOutput(FluidTransformRecipe recipe) {
             return new NSSOutput(recipe.getResult());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSHammerMapper extends APEIRecipeMapper<HammerRecipe> {
+    public static class ENSHammerMapper extends ARecipeTypeMapper<HammerRecipe> {
         @Override
         public String getName() {
             return NAME("Hammer");
@@ -220,7 +223,7 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(HammerRecipe recipe) {
+        public NSSOutput getOutput(HammerRecipe recipe) {
             Object[] outputs = recipe.getOutput().stream().filter(output -> output.getChance() >= 1f).map(ItemStackWithChance::getStack).toArray();
 
             if (outputs.length == 0) {
@@ -233,7 +236,7 @@ public class ExNihiloSequentiaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSSieveMapper extends APEIRecipeMapper<SieveRecipe> {
+    public static class ENSSieveMapper extends ARecipeTypeMapper<SieveRecipe> {
         @Override
         public String getName() {
             return NAME("Sieve");
@@ -255,7 +258,7 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(SieveRecipe recipe) {
+        public NSSOutput getOutput(SieveRecipe recipe) {
             return new NSSOutput(recipe.getDrop());
         }
     }

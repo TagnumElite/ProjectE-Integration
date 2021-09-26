@@ -28,7 +28,7 @@ import com.brandon3055.draconicevolution.api.crafting.IFusionRecipe;
 import com.brandon3055.draconicevolution.init.DETags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.Item;
@@ -44,7 +44,7 @@ public class DraconicEvolutionAddon {
     public static final String MODID = "draconicevolution";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class DEFusionMapper extends APEIRecipeMapper<FusionRecipe> {
+    public static class DEFusionMapper extends ARecipeTypeMapper<FusionRecipe> {
         @Override
         public String getName() {
             return "DraconicEvolutionFusionMapper";

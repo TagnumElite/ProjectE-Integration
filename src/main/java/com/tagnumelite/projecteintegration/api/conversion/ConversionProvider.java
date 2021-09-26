@@ -22,13 +22,24 @@
 
 package com.tagnumelite.projecteintegration.api.conversion;
 
+import com.tagnumelite.projecteintegration.datagen.PEICustomConversionProvider;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to tell {@link PEICustomConversionProvider} where to find
+ * {@link AConversionProvider} to load and generate resources from!
+ */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConversionProvider {
+    /**
+     * The MODID of the conversion provider, needed to output generated resources to correct folder
+     *
+     * @return The modid
+     */
     String value();
 }

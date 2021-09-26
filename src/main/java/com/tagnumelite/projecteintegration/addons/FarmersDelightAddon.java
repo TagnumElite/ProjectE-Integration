@@ -24,13 +24,14 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
 import vectorwing.farmersdelight.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.registry.ModBlocks;
 import vectorwing.farmersdelight.registry.ModItems;
 import vectorwing.farmersdelight.utils.tags.ForgeTags;
 
@@ -38,13 +39,13 @@ public class FarmersDelightAddon {
     public static final String MODID = "farmersdelight";
 
     static String NAME(String name) {
-        return "FarmersDelight"+name+"Mapper";
+        return "FarmersDelight" + name + "Mapper";
     }
 
     // TODO: Cooking pot seems to implement special logic, figure out what this means
     // Never played with this mod before.
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class FDCookingPotMapper extends APEIRecipeMapper<CookingPotRecipe> {
+    public static class FDCookingPotMapper extends ARecipeTypeMapper<CookingPotRecipe> {
         @Override
         public String getName() {
             return NAME("CookingPot");
@@ -62,7 +63,7 @@ public class FarmersDelightAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class FDCuttingBoardMapper extends APEIRecipeMapper<CuttingBoardRecipe> {
+    public static class FDCuttingBoardMapper extends ARecipeTypeMapper<CuttingBoardRecipe> {
 
         @Override
         public String getName() {
@@ -80,7 +81,7 @@ public class FarmersDelightAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(CuttingBoardRecipe recipe) {
+        public NSSOutput getOutput(CuttingBoardRecipe recipe) {
             return mapOutputs(recipe.getResults().toArray());
         }
     }

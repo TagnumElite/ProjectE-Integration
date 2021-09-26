@@ -27,7 +27,7 @@ import appeng.recipes.handlers.GrinderRecipe;
 import appeng.recipes.handlers.InscriberRecipe;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
@@ -63,7 +63,7 @@ public class AppliedEnergisticsAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class AEInscriberMapper extends APEIRecipeMapper<InscriberRecipe> {
+    public static class AEInscriberMapper extends ARecipeTypeMapper<InscriberRecipe> {
         @Override
         public String getName() {
             return "AppliedEnergisticsInscriberMapper";
@@ -95,16 +95,16 @@ public class AppliedEnergisticsAddon {
         @ObjectHolder("certus_quartz_crystal")
         public static final Item CERTUS_QUARTZ_CRYSTAL = null;
         @ObjectHolder("charged_certus_quartz_crystal")
-        public static final Item CERTUS_QUARTZ_CRYSTAL_CHARGED  = null;
+        public static final Item CERTUS_QUARTZ_CRYSTAL_CHARGED = null;
         @ObjectHolder("fluix_crystal")
-        public static final Item FLUIX_CRYSTAL  = null;
+        public static final Item FLUIX_CRYSTAL = null;
 
         @ObjectHolder("nether_quartz_seed")
-        public static final Item NETHER_QUARTZ_SEED  = null;
+        public static final Item NETHER_QUARTZ_SEED = null;
         @ObjectHolder("fluix_crystal_seed")
-        public static final Item FLUIX_CRYSTAL_SEED  = null;
+        public static final Item FLUIX_CRYSTAL_SEED = null;
         @ObjectHolder("certus_crystal_seed")
-        public static final Item CERTUS_CRYSTAL_SEED   = null;
+        public static final Item CERTUS_CRYSTAL_SEED = null;
 
         @Override
         public void convert(CustomConversionBuilder builder) {

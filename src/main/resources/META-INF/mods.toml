@@ -1,19 +1,19 @@
-modLoader="javafml"
-loaderVersion="[36,)"
-license="MIT"
-issueTrackerURL="https://github.com/TagnumElite/ProjectE-Integration/issues"
+modLoader = "javafml"
+loaderVersion = "[36,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/TagnumElite/ProjectE-Integration/issues"
 
 [[mods]]
-modId="projecteintegration"
-version="${file.jarVersion}"
-displayName="ProjectE Integration"
+modId = "projecteintegration"
+version = "${file.jarVersion}"
+displayName = "ProjectE Integration"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
-updateJSONURL="https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.16.x/update.json"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/projecte-integration"
+updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.16.x/update.json"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/projecte-integration"
 # logoFile="examplemod.png"
-credits="Thanks for this example mod goes to Java"
-authors="TagnumElite"
-description='''
+credits = "Thanks for this example mod goes to Java"
+authors = "TagnumElite"
+description = '''
 This is a long form description of the mod. You can write whatever you want here
 
 Have some lorem ipsum.
@@ -22,20 +22,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 '''
 
 [[dependencies.projecteintegration]]
-    modId="projecte"
-    mandatory=true
-    versionRange="[PE1.0.1B,)"
+modId = "projecte"
+mandatory = true
+versionRange = "[PE1.0.1B,)"
 
 [[dependencies.projecteintegration]]
-    modId="forge"
-    mandatory=true
-    versionRange="[36,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[36,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.projecteintegration]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.5,1.17)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.5,1.17)"
+ordering = "NONE"
+side = "BOTH"

@@ -37,7 +37,7 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
 import com.simibubi.create.content.curiosities.tools.SandPaperPolishingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
@@ -62,16 +62,16 @@ public class CreateAddon {
     public static final String MODID = "create";
 
     static String NAME(String name) {
-        return "Create"+name+"Mapper";
+        return "Create" + name + "Mapper";
     }
 
     static String DESC(String name) {
-        return "Create "+name+" Mapper";
+        return "Create " + name + " Mapper";
     }
 
-    private abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends APEIRecipeMapper<R> {
+    private abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
         @Override
-        protected NSSInput getInput(R recipe) {
+        public NSSInput getInput(R recipe) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
             NonNullList<FluidIngredient> fluidIngredients = recipe.getFluidIngredients();
             if (ingredients.isEmpty() && fluidIngredients.isEmpty()) {
@@ -141,7 +141,7 @@ public class CreateAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(R recipe) {
+        public NSSOutput getOutput(R recipe) {
             List<Object> outputs = new ArrayList<>();
             List<ItemStack> results = recipe.getRollableResults().stream().filter(pO -> pO.getChance() >= 1.0f).map(ProcessingOutput::getStack).collect(Collectors.toList());
             outputs.addAll(results);
@@ -315,6 +315,7 @@ public class CreateAddon {
             return iRecipeType == AllRecipeTypes.SPLASHING.getType();
         }
     }
+
     /* Maybe not filling and emptying recipes just yet.
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateFillingMapper extends CreateProcessingRecipeMapper<FillingRecipe> {

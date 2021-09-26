@@ -24,7 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
@@ -52,7 +52,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEAlloyMapper extends APEIRecipeMapper<AlloyRecipe> {
+    public static class IEAlloyMapper extends ARecipeTypeMapper<AlloyRecipe> {
         @Override
         public String getName() {
             return NAME("Alloy");
@@ -75,7 +75,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEArcFurnaceMapper extends APEIRecipeMapper<ArcFurnaceRecipe> {
+    public static class IEArcFurnaceMapper extends ARecipeTypeMapper<ArcFurnaceRecipe> {
         @Override
         public String getName() {
             return NAME("ArcFurnace");
@@ -92,13 +92,13 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(ArcFurnaceRecipe recipe) {
+        public NSSOutput getOutput(ArcFurnaceRecipe recipe) {
             return super.getOutput(recipe);
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEBlastFurnaceMapper extends APEIRecipeMapper<BlastFurnaceRecipe> {
+    public static class IEBlastFurnaceMapper extends ARecipeTypeMapper<BlastFurnaceRecipe> {
         @Override
         public String getName() {
             return NAME("BlastFurnace");
@@ -120,7 +120,7 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(BlastFurnaceRecipe recipe) {
+        public NSSOutput getOutput(BlastFurnaceRecipe recipe) {
             ItemStack itemOutput = recipe.getResultItem().copy();
             ItemStack slagOutput = recipe.slag.copy();
             NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
@@ -137,7 +137,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IECokeOvenMapper extends APEIRecipeMapper<CokeOvenRecipe> {
+    public static class IECokeOvenMapper extends ARecipeTypeMapper<CokeOvenRecipe> {
         @Override
         public String getName() {
             return NAME("CokeOven");
@@ -159,7 +159,7 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(CokeOvenRecipe recipe) {
+        public NSSOutput getOutput(CokeOvenRecipe recipe) {
             if (recipe.creosoteOutput > 0) {
                 ItemStack itemOutput = recipe.getResultItem().copy();
                 FluidStack creosoteOutput = new FluidStack(IEContent.fluidCreosote, recipe.creosoteOutput);
@@ -180,7 +180,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IECrusherMapper extends APEIRecipeMapper<CrusherRecipe> {
+    public static class IECrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
         @Override
         public String getName() {
             return NAME("Crusher");
@@ -197,7 +197,7 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(CrusherRecipe recipe) {
+        public NSSOutput getOutput(CrusherRecipe recipe) {
             return new NSSOutput(recipe.output.copy());
         }
 
@@ -208,7 +208,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEMetalPressMapper extends APEIRecipeMapper<MetalPressRecipe> {
+    public static class IEMetalPressMapper extends ARecipeTypeMapper<MetalPressRecipe> {
         @Override
         public String getName() {
             return NAME("MetalPress");
@@ -230,13 +230,13 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(MetalPressRecipe recipe) {
+        public NSSOutput getOutput(MetalPressRecipe recipe) {
             return new NSSOutput(recipe.output.copy());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEMixerMapper extends APEIRecipeMapper<MixerRecipe> {
+    public static class IEMixerMapper extends ARecipeTypeMapper<MixerRecipe> {
         @Override
         public String getName() {
             return NAME("Mixer");
@@ -254,18 +254,18 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(MixerRecipe recipe) {
+        public NSSOutput getOutput(MixerRecipe recipe) {
             return new NSSOutput(recipe.fluidOutput.copy());
         }
 
         @Override
-        protected NSSInput getInput(MixerRecipe recipe) {
+        public NSSInput getInput(MixerRecipe recipe) {
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
             //ingredientMap.addIngredient(recipe.fluidInput);
             // TODO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
-            
+
             for (IngredientWithSize input : recipe.itemInputs) {
                 convertIngredient(input.getCount(), input.getBaseIngredient(), ingredientMap, fakeGroupMap);
             }
@@ -275,7 +275,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IESawmillMapper extends APEIRecipeMapper<SawmillRecipe> {
+    public static class IESawmillMapper extends ARecipeTypeMapper<SawmillRecipe> {
         @Override
         public String getName() {
             return NAME("Sawmill");
@@ -297,14 +297,14 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(SawmillRecipe recipe) {
+        public NSSOutput getOutput(SawmillRecipe recipe) {
             // TODO: Add support for multiple outputs
             return new NSSOutput(recipe.output.copy());
         }
     }
 
     //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IESqueezerMapper extends APEIRecipeMapper<SqueezerRecipe> {
+    public static class IESqueezerMapper extends ARecipeTypeMapper<SqueezerRecipe> {
         @Override
         public String getName() {
             return NAME("Squeezer");
@@ -326,7 +326,7 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected NSSOutput getOutput(SqueezerRecipe recipe) {
+        public NSSOutput getOutput(SqueezerRecipe recipe) {
             return mapOutputs(recipe.itemOutput, recipe.fluidOutput);
         }
     }

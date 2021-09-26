@@ -29,7 +29,7 @@ import com.blakebr0.mysticalagriculture.init.ModBlocks;
 import com.blakebr0.mysticalagriculture.init.ModItems;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
@@ -38,7 +38,7 @@ public class MysticalAgricultureAddon {
     public static final String MODID = "mysticalagriculture";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class MAInfusionMapper extends APEIRecipeMapper<IInfusionRecipe> {
+    public static class MAInfusionMapper extends ARecipeTypeMapper<IInfusionRecipe> {
         @Override
         public String getName() {
             return "MysticalAgricultureInfusionMapper";
@@ -56,7 +56,7 @@ public class MysticalAgricultureAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class MAReprocessorMapper extends APEIRecipeMapper<IReprocessorRecipe> {
+    public static class MAReprocessorMapper extends ARecipeTypeMapper<IReprocessorRecipe> {
         @Override
         public String getName() {
             return "MysticalAgricultureReprocessorMapper";

@@ -25,7 +25,7 @@ package com.tagnumelite.projecteintegration.addons;
 import com.blakebr0.extendedcrafting.api.crafting.ICompressorRecipe;
 import com.blakebr0.extendedcrafting.api.crafting.RecipeTypes;
 import com.blakebr0.extendedcrafting.config.ModConfigs;
-import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -40,8 +40,8 @@ import java.util.List;
 public class ExtendedCraftingAddon {
     public static final String MODID = "extendedcrafting";
 
-    @RecipeTypeMapper(requiredMods=MODID, priority = 1)
-    public static class ECCompressorMapper extends APEIRecipeMapper<ICompressorRecipe> {
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ECCompressorMapper extends ARecipeTypeMapper<ICompressorRecipe> {
         @Override
         public String getName() {
             return "Compressor";
@@ -58,7 +58,7 @@ public class ExtendedCraftingAddon {
         }
 
         @Override
-        protected NSSInput getInput(ICompressorRecipe recipe) {
+        public NSSInput getInput(ICompressorRecipe recipe) {
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
             convertIngredient(recipe.getInputCount(), recipe.getIngredients().get(0), ingredientMap, fakeGroupMap);
@@ -66,7 +66,7 @@ public class ExtendedCraftingAddon {
         }
     }
 
-    @RecipeTypeMapper(requiredMods=MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECEnderCrafterMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
@@ -84,7 +84,7 @@ public class ExtendedCraftingAddon {
         }
     }
 
-    @RecipeTypeMapper(requiredMods=MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECTableMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
@@ -102,7 +102,7 @@ public class ExtendedCraftingAddon {
         }
     }
 
-    @RecipeTypeMapper(requiredMods=MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECCombinationMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {

@@ -22,35 +22,69 @@
 
 package com.tagnumelite.projecteintegration.api.conversion;
 
+import com.tagnumelite.projecteintegration.datagen.PEICustomConversionProvider;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * An abstract class for generating custom conversions for ProjectE. Use {@link ConversionProvider} to denote your class
+ * as a conversion provider. There are a few utility functions for getting {@link NormalizedSimpleStack} from tags.
+ */
 public abstract class AConversionProvider {
-    public abstract void convert(CustomConversionBuilder builder);
-
+    /**
+     * @param ingot
+     * @return
+     */
     protected static NormalizedSimpleStack ingotTag(String ingot) {
         return forgeTag("ingots/" + ingot);
     }
 
+    /**
+     * @param gem
+     * @return
+     */
     protected static NormalizedSimpleStack gemTag(String gem) {
         return forgeTag("gems/" + gem);
     }
 
+    /**
+     * @param crop
+     * @return
+     */
     protected static NormalizedSimpleStack cropsTag(String crop) {
         return forgeTag("crops/" + crop);
     }
 
+    /**
+     * @param grain
+     * @return
+     */
     protected static NormalizedSimpleStack grainTag(String grain) {
         return forgeTag("grain/" + grain);
     }
 
+    /**
+     * @param tag
+     * @return
+     */
     protected static NormalizedSimpleStack forgeTag(String tag) {
         return tag("forge:" + tag);
     }
 
+    /**
+     * @param resourceLocation
+     * @return
+     */
     protected static NormalizedSimpleStack tag(String resourceLocation) {
         return NSSItem.createTag(new ResourceLocation(resourceLocation));
     }
+
+    /**
+     * Used by {@link PEICustomConversionProvider} add custom conversions
+     *
+     * @param builder The builder used for this specific mod.
+     */
+    public abstract void convert(CustomConversionBuilder builder);
 }
