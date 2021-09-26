@@ -22,9 +22,9 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.tagnumelite.projecteintegration.api.AConversionProvider;
-import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
-import com.tagnumelite.projecteintegration.api.ConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;

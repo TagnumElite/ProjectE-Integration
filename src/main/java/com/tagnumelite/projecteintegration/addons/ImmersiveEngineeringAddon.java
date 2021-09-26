@@ -24,7 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
-import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;

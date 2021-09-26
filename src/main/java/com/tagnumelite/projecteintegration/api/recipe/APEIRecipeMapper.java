@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.api;
+package com.tagnumelite.projecteintegration.api.recipe;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.addons.ImmersiveEngineeringAddon;

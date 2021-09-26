@@ -23,7 +23,7 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import net.minecraft.item.crafting.IRecipeType;

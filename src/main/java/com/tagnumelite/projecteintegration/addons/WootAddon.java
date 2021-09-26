@@ -22,7 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.tagnumelite.projecteintegration.api.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
 import ipsis.woot.crafting.AnvilRecipe;
 import ipsis.woot.crafting.FluidConvertorRecipe;
 import ipsis.woot.crafting.InfuserRecipe;

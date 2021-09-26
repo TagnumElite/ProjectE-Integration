@@ -23,8 +23,8 @@
 package com.tagnumelite.projecteintegration.datagen;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.AConversionProvider;
-import com.tagnumelite.projecteintegration.api.ConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.data.CustomConversionProvider;
 import moze_intel.projecte.api.nss.NSSItem;

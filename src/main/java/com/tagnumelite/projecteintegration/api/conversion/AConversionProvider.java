@@ -20,15 +20,37 @@
  * SOFTWARE.
  */
 
-package com.tagnumelite.projecteintegration.api;
+package com.tagnumelite.projecteintegration.api.conversion;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
+import moze_intel.projecte.api.nss.NSSItem;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
+import net.minecraft.util.ResourceLocation;
 
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ConversionProvider {
-    String value();
+public abstract class AConversionProvider {
+    public abstract void convert(CustomConversionBuilder builder);
+
+    protected static NormalizedSimpleStack ingotTag(String ingot) {
+        return forgeTag("ingots/" + ingot);
+    }
+
+    protected static NormalizedSimpleStack gemTag(String gem) {
+        return forgeTag("gems/" + gem);
+    }
+
+    protected static NormalizedSimpleStack cropsTag(String crop) {
+        return forgeTag("crops/" + crop);
+    }
+
+    protected static NormalizedSimpleStack grainTag(String grain) {
+        return forgeTag("grain/" + grain);
+    }
+
+    protected static NormalizedSimpleStack forgeTag(String tag) {
+        return tag("forge:" + tag);
+    }
+
+    protected static NormalizedSimpleStack tag(String resourceLocation) {
+        return NSSItem.createTag(new ResourceLocation(resourceLocation));
+    }
 }
