@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Moved AConversionProvider and ConversionProvider to subpackage conversion
-- Moved APEIRecipeMapper to subpackage recipe
+- Moved `AConversionProvider` and `ConversionProvider` to subpackage `conversion`
+- Moved `APEIRecipeMapper` to subpackage `recipe`
+- Moved `NSSInput` and `NSSOutput` to subpackage `nss`
 
 ## [4.1.2]
 ### Added

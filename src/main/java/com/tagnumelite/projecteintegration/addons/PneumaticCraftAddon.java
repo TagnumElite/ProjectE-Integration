@@ -23,6 +23,8 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import me.desht.pneumaticcraft.api.crafting.ingredient.FluidIngredient;
 import me.desht.pneumaticcraft.api.crafting.recipe.*;
 import me.desht.pneumaticcraft.common.recipes.PneumaticCraftRecipeType;

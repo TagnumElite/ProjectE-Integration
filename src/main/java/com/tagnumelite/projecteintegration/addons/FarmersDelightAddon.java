@@ -25,6 +25,7 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.APEIRecipeMapper;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;

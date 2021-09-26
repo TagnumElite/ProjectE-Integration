@@ -24,6 +24,8 @@ package com.tagnumelite.projecteintegration.api.recipe;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.addons.ImmersiveEngineeringAddon;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
@@ -31,7 +33,6 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -374,90 +375,4 @@ public abstract class APEIRecipeMapper<R extends IRecipe<?>> implements IRecipeT
         return ingredientMap.getMap();
     }
 
-    /**
-     * A 'data' class to hold both a {@link NormalizedSimpleStack} and an integer denoting the output item and amount.
-     */
-    public static class NSSOutput {
-        public static final NSSOutput EMPTY = new NSSOutput(0, null);
-
-        public final NormalizedSimpleStack nss;
-        public final int amount;
-
-        /**
-         * Create an NSSOutput with the specified amount and NSS
-         * @param amount The amount that will be outputted
-         * @param nss The item that will be outputted
-         */
-        public NSSOutput(int amount, NormalizedSimpleStack nss) {
-            this.amount = amount;
-            this.nss = nss;
-        }
-
-        /**
-         * A helper constructor to create an NSSOutput from an {@link ItemStack}
-         * @param item The {@link ItemStack} to be converted
-         */
-        public NSSOutput(ItemStack item) {
-            this.amount = item.getCount();
-            this.nss = NSSItem.createItem(item);
-        }
-
-        /**
-         * A helper constructor to create an NSSOutput from an {@link FluidStack}
-         * @param fluid The {@link FluidStack} to be converted
-         */
-        public NSSOutput(FluidStack fluid) {
-            this.amount = fluid.getAmount();
-            this.nss = NSSFluid.createFluid(fluid);
-        }
-
-        public NSSOutput(BlockState state) {
-            this.amount = 1;
-            this.nss = NSSItem.createItem(state.getBlock());
-        }
-
-        public boolean isEmpty() {
-            return amount == 0 || this == EMPTY;
-        }
-    }
-
-    /**
-     *
-     */
-    public static class NSSInput {
-        public final IngredientMap<NormalizedSimpleStack> ingredientMap;
-        public final List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap;
-        public final boolean successful;
-
-        /**
-         * @param ingredientMap
-         * @param fakeGroupMap
-         * @param successful
-         */
-        public NSSInput(IngredientMap<NormalizedSimpleStack> ingredientMap,
-                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap,
-                        boolean successful) {
-            this.ingredientMap = ingredientMap;
-            this.fakeGroupMap = fakeGroupMap;
-            this.successful = successful;
-        }
-
-        //public static NSSInput createItem(ItemStack stack) {
-        //
-        //}
-
-        public static NSSInput createFluid(FluidStack fluid) {
-            IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
-            ingMap.addIngredient(NSSFluid.createFluid(fluid), fluid.getAmount());
-            return new NSSInput(ingMap, new ArrayList<>(), true);
-        }
-
-        /**
-         *
-         * @return
-         */
-        public Map<NormalizedSimpleStack, Integer> getMap() {
-            return ingredientMap.getMap();
-        }
-    }
 }
