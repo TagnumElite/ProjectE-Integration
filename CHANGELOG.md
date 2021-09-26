@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Gave EMC to some [Farmers Delight] crops
+- Fake Random number generator
+- Support for [Blood Magic] (Alchemy Table, Alchemy Array, Alchemical Reaction Chamber, Blood Altar, Tartaric Forge)
 
 ### Changed
 - Moved `AConversionProvider` and `ConversionProvider` to subpackage `conversion`
@@ -517,6 +519,7 @@ Added support for 18 more mods
 <!-- MODS -->
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
+[Blood Magic]: https://www.curseforge.com/minecraft/mc-mods/blood-magic
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
