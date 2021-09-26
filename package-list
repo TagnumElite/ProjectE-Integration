@@ -1,4 +1,7 @@
 com.tagnumelite.projecteintegration
 com.tagnumelite.projecteintegration.addons
 com.tagnumelite.projecteintegration.api
+com.tagnumelite.projecteintegration.api.conversion
+com.tagnumelite.projecteintegration.api.recipe
+com.tagnumelite.projecteintegration.api.recipe.nss
 com.tagnumelite.projecteintegration.datagen
