@@ -3,7 +3,13 @@
   "values": {
     "before": {
       "#forge:crops/rice": 1,
-      "farmersdelight:straw": 1
+      "farmersdelight:straw": 1,
+      "#forge:crops/tomato": 32,
+      "#forge:crops/onion": 32,
+      "#forge:crops/cabbage": 32,
+      "farmersdelight:ham": 64,
+      "farmersdelight:brown_mushroom_colony": 32,
+      "farmersdelight:red_mushroom_colony": 32
     }
   }
 }

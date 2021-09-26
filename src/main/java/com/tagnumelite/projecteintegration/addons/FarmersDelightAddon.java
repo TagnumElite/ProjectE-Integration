@@ -92,7 +92,13 @@ public class FarmersDelightAddon {
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Set defaults conversions for Farmer's Delight")
                     .before(ForgeTags.CROPS_RICE, 1)
-                    .before(ModItems.STRAW.get(), 1);
+                    .before(ModItems.STRAW.get(), 1)
+                    .before(cropsTag("tomato"), 32)
+                    .before(cropsTag("onion"), 32)
+                    .before(cropsTag("cabbage"), 32)
+                    .before(ModItems.HAM.get(), 64)
+                    .before(ModBlocks.BROWN_MUSHROOM_COLONY.get(), 32)
+                    .before(ModBlocks.RED_MUSHROOM_COLONY.get(), 32);
         }
     }
 }
