@@ -233,6 +233,7 @@ tasks.register('mod_relations') {
                 'create',
                 'ex-nihilo-sequentia',
                 'extended-crafting',
+                'ice-and-fire',
                 'farmers-delight',
                 'immersive-engineering',
                 'mystical-agriculture',
