@@ -23,6 +23,8 @@
 package com.tagnumelite.projecteintegration.api;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
@@ -43,6 +45,25 @@ import org.objectweb.asm.Type;
 import java.util.*;
 
 public class Utils {
+    private static final Type CUSTOM_RECIPE_MAPPER_TYPE = Type.getType(CustomRecipeMapper.class);
+
+    public static Map<? extends ACustomRecipeMapper, String> getCustomRecipeMappers() {
+        ModList modList = ModList.get();
+        Map<ACustomRecipeMapper, String> recipeTypeMappers = new HashMap<>();
+        for (ModFileScanData scanData : modList.getAllScanData()) {
+            for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
+                if (CUSTOM_RECIPE_MAPPER_TYPE.equals(data.getAnnotationType()) && checkRequiredMod(data)) {
+                    ACustomRecipeMapper mapper = createOrGetInstance(data.getMemberName(), ACustomRecipeMapper.class);
+                    if (mapper != null) {
+                        recipeTypeMappers.put(mapper, getAnnotationData(data, "value"));
+                        PEIntegration.LOGGER.info("Instantiated custom recipe mapper: {}", mapper.getName());
+                    }
+                }
+            }
+        }
+        return recipeTypeMappers;
+    }
+
     public static <T> T createOrGetInstance(String className, Class<T> baseClass) {
         try {
             Class<? extends T> subClass = Class.forName(className).asSubclass(baseClass);

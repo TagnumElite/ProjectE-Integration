@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gave EMC to some [Farmers Delight] crops
 - Fake Random number generator
 - Support for [Blood Magic] (Alchemy Table, Alchemy Array, Alchemical Reaction Chamber, Blood Altar, Tartaric Forge)
+- The ability to make custom recipe mappers
 
 ### Changed
 - Moved `AConversionProvider` and `ConversionProvider` to subpackage `conversion`
