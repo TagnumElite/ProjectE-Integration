@@ -1,0 +1,27 @@
+{
+  "comment": "Set defaults conversions for Ice and Fire",
+  "values": {
+    "before": {
+      "#forge:gems/amethyst": 2048,
+      "#forge:heart": 262144,
+      "#iceandfire:mob_skulls": 320,
+      "#iceandfire:dragon_skulls": 624,
+      "#iceandfire:myrmex_harvestables": 32,
+      "#iceandfire:scales/sea_serpent": 256,
+      "#iceandfire:scales/dragon": 512,
+      "#iceandfire:bones/dragon": 156,
+      "#iceandfire:bones/wither": 156,
+      "iceandfire:ice_dragon_blood": 256,
+      "iceandfire:lightning_dragon_blood": 256,
+      "iceandfire:fire_dragon_blood": 256,
+      "iceandfire:dread_shard": 144,
+      "iceandfire:hippogryph_talon": 128,
+      "iceandfire:hippocampus_fin": 512,
+      "iceandfire:shiny_scales": 512,
+      "iceandfire:siren_tear": 768,
+      "iceandfire:cyclops_eye": 96,
+      "iceandfire:pixie_dust": 1,
+      "iceandfire:pixie_wings": 1
+    }
+  }
+}

@@ -118,6 +118,7 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
     runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
@@ -137,6 +138,7 @@ dependencies {
     implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
+    compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
