@@ -24,18 +24,28 @@ package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.IEContent;
+import blusunrize.immersiveengineering.common.blocks.IEBlocks;
+import blusunrize.immersiveengineering.common.blocks.wooden.TreatedWoodStyles;
 import com.tagnumelite.projecteintegration.api.Utils;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
+import moze_intel.projecte.api.nss.NSSTag;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -339,4 +349,21 @@ public class ImmersiveEngineeringAddon {
         RefineryRecipe
         ClocheRecipe
         */
+
+    @ConversionProvider(MODID)
+    public static class IEConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("default conversions for immersive engineering")
+                    .before(forgeTag("fiber_hemp"), 4)
+                    .before(dustTag("wood"), 1)
+                    .before(dustTag("sulfur"), 8)
+                    .before(dustTag("nitrate"), 8);
+
+            // TODO: Replace this forEach. It should not be done this way.
+            for (Block block : IEBlocks.WoodenDecoration.treatedWood.values()) {
+                builder.conversion(block).ingredient(ItemTags.PLANKS, 8).end();
+            }
+        }
+    }
 }
