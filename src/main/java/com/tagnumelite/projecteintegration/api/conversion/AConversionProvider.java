@@ -37,6 +37,14 @@ public abstract class AConversionProvider {
      * @param ingot
      * @return
      */
+    protected static NormalizedSimpleStack dustTag(String dust) {
+        return forgeTag("dusts/" + dust);
+    }
+
+    /**
+     * @param ingot
+     * @return
+     */
     protected static NormalizedSimpleStack ingotTag(String ingot) {
         return forgeTag("ingots/" + ingot);
     }
