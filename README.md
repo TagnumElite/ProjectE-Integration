@@ -3,6 +3,7 @@ This mod will be the bridge between [ProjectE] and all ~~my~~ your favourite mod
 
 [![Build](https://github.com/TagnumElite/ProjectE-Integration/actions/workflows/gradle_build.yml/badge.svg?branch=1.16.x)](https://github.com/TagnumElite/ProjectE-Integration/actions/workflows/gradle_build.yml)
 [![Downloads](http://cf.way2muchnoise.eu/projecte-integration.svg)](https://www.curseforge.com/minecraft/mc-mods/projecte-integration)
+[![](https://jitpack.io/v/TagnumElite/ProjectE-Integration.svg)](https://jitpack.io/#TagnumElite/ProjectE-Integration)
 
 ## NOTE:
 > README IS OUTDATED. Everything below this line will be changed probably in the future.
