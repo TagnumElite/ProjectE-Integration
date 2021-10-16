@@ -42,6 +42,10 @@ public class FarmersDelightAddon {
         return "FarmersDelight" + name + "Mapper";
     }
 
+    static String DESC(String name) {
+        return "Recipe Mapper for Farmer's Delights " + name + " recipes";
+    }
+
     // TODO: Cooking pot seems to implement special logic, figure out what this means
     // Never played with this mod before.
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -53,7 +57,7 @@ public class FarmersDelightAddon {
 
         @Override
         public String getDescription() {
-            return "null";
+            return DESC("Cooking Pot");
         }
 
         @Override
@@ -72,7 +76,7 @@ public class FarmersDelightAddon {
 
         @Override
         public String getDescription() {
-            return "null";
+            return DESC("Cutting Board");
         }
 
         @Override
@@ -92,6 +96,7 @@ public class FarmersDelightAddon {
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Set defaults conversions for Farmer's Delight")
                     .before(ForgeTags.CROPS_RICE, 1)
+                    .before(ModItems.RICE_PANICLE.get(), 1)
                     .before(ModItems.STRAW.get(), 1)
                     .before(cropsTag("tomato"), 32)
                     .before(cropsTag("onion"), 32)

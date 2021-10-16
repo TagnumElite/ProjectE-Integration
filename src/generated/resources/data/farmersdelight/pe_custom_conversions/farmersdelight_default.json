@@ -3,6 +3,7 @@
   "values": {
     "before": {
       "#forge:crops/rice": 1,
+      "farmersdelight:rice_panicle": 1,
       "farmersdelight:straw": 1,
       "#forge:crops/tomato": 32,
       "#forge:crops/onion": 32,

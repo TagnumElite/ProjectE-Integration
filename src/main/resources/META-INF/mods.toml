@@ -27,6 +27,11 @@ mandatory = true
 versionRange = "[PE1.0.1B,)"
 
 [[dependencies.projecteintegration]]
+modId = "farmersdelight"
+mandatory = false
+versionRange = "[1.16.5-0.5,)"
+
+[[dependencies.projecteintegration]]
 modId = "forge"
 mandatory = true
 versionRange = "[36,)"
