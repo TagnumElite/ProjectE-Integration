@@ -212,12 +212,17 @@ public class Utils {
         int totalOutputs = 0;
         for (Object output : outputs) {
             if (output == null) continue;
+
             if (output instanceof ItemStack) {
                 ItemStack item = (ItemStack) output;
+                if (item.isEmpty()) continue;
+
                 outputStacks.put(NSSItem.createItem(item), item.getCount());
                 totalOutputs += item.getCount();
             } else if (output instanceof FluidStack) {
                 FluidStack fluid = (FluidStack) output;
+                if (fluid.isEmpty()) continue;
+
                 outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
                 totalOutputs += fluid.getAmount();
             } else {
