@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.5]
+### Fixed
+- Support for [Create] Mixer, I was using the wrong recipe type.
+
 ## [4.1.4]
 ### Added
 - Support for dusts tags to AConversionProvider

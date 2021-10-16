@@ -276,7 +276,7 @@ public class CreateAddon {
 
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == AllRecipeTypes.CUTTING.getType();
+            return iRecipeType == AllRecipeTypes.MIXING.getType();
         }
     }
 

@@ -1,7 +1,8 @@
 {
   "values": {
     "before": {
-      "#forge:ingots/zinc": 128
+      "#forge:ingots/zinc": 128,
+      "FLUID|minecraft:water": 1
     }
   }
 }
