@@ -7,32 +7,34 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+### Prerequisites
+
+- [ ] I am running the latest version
+- [ ] I have made sure there is no duplicate issue
+
+### Details
+
+- MC Version: 
+- Mod Version: 
+
+## Description
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
+### Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### To Reproduce
+Steps to reproduce the behavior:
+1. Do This <!-- Launch MC -->
+2. Do That <!-- Click Crash -->
+3. Then This <!-- Crashes -->
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Logs
+<!-- Log files are required to find out what the problems are -->
+<!-- just use gist https://gist.github.com/ to upload errors -->
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+- latest.log
+- crash-\*.log (if applicable)
 
-**Additional context**
-Add any other context about the problem here.
+<!-- Other notes below -->
