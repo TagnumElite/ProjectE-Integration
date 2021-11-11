@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -40,6 +41,7 @@ import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
@@ -97,7 +99,13 @@ public class AstralSorceryAddon {
 
         @Override
         public NSSOutput getOutput(SimpleAltarRecipe recipe) {
-            return new NSSOutput(recipe.getOutputForRender(Collections.emptyList()));
+            try {
+                return mapOutputs(recipe.getOutputs(null).toArray());
+            } catch (Exception e) {
+                PEIntegration.LOGGER.info("Failed to get outputs for Altar Recipe", e);
+                // TODO: This is an temporary replacement, must make sure to implement something proper.
+                return null;
+            }
         }
     }
 
@@ -148,7 +156,7 @@ public class AstralSorceryAddon {
 
         @Override
         public NSSOutput getOutput(LiquidInfusion recipe) {
-            return new NSSOutput(recipe.getOutputForRender(Collections.emptyList()));
+            return new NSSOutput(recipe.getOutput(ItemStack.EMPTY));
         }
 
         @Override

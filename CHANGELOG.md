@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.7]
+### Fixed
+- [Astral Sorcery] Infusion recipe mapper was using client only method
+
+### Changed
+- [Astral Sorcery] Altar recipe mapper now uses temp fix (bandage)
+
 ## [4.1.6]
 ### Changed
 - Farmers delight now requires version 5.0+ because it changed package paths.
@@ -492,7 +499,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.6...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...HEAD
+[4.1.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.6...v4.1.7
 [4.1.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.5...v4.1.6
 [4.1.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.4...v4.1.5
 [4.1.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.3...v4.1.4
