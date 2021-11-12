@@ -226,36 +226,38 @@ changelog {
     groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
 }
 
+if (System.getenv().CURSEFORGE_API_KEY != null) {
+    curseforge {
+        apiKey System.getenv().CURSEFORGE_API_KEY
+        project {
+            id = "${cf_project}"
+            addGameVersion "${mc_version}"
+            changelog = "${project.changelog.get(mod_version).toString()}"
+            changelogType = 'markdown'
+            releaseType = "${release_type}"
 
-curseforge {
-    apiKey System.getenv().CURSEFORGE_API_KEY
-    project {
-        id = "${cf_project}"
-        addGameVersion "${mc_version}"
-        changelog = "${project.changelog.get(mod_version).toString()}"
-        changelogType = 'markdown'
-        releaseType = "${release_type}"
+            mainArtifact(jar) {
+                relations {
+                    requiredDependency 'projecte'
 
-        mainArtifact(jar) {
-            relations {
-                requiredDependency 'projecte'
-
-                optionalDependency 'applied-energistics-2'
-                optionalDependency 'astral-sorcery'
-                optionalDependency 'blood-magic'
-                optionalDependency 'botania'
-                optionalDependency 'compact-crafting'
-                optionalDependency 'create'
-                optionalDependency 'ex-nihilo-sequentia'
-                optionalDependency 'extended-crafting'
-                optionalDependency 'ice-and-fire'
-                optionalDependency 'farmers-delight'
-                optionalDependency 'immersive-engineering'
-                optionalDependency 'mystical-agriculture'
-                optionalDependency 'pneumaticcraft-repressurized'
-                optionalDependency 'psi'
-                optionalDependency 'woot'
+                    optionalDependency 'applied-energistics-2'
+                    optionalDependency 'astral-sorcery'
+                    optionalDependency 'blood-magic'
+                    optionalDependency 'botania'
+                    optionalDependency 'compact-crafting'
+                    optionalDependency 'create'
+                    optionalDependency 'ex-nihilo-sequentia'
+                    optionalDependency 'extended-crafting'
+                    optionalDependency 'ice-and-fire'
+                    optionalDependency 'farmers-delight'
+                    optionalDependency 'immersive-engineering'
+                    optionalDependency 'mystical-agriculture'
+                    optionalDependency 'pneumaticcraft-repressurized'
+                    optionalDependency 'psi'
+                    optionalDependency 'woot'
+                }
             }
         }
     }
 }
+
