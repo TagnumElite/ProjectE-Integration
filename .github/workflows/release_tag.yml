@@ -9,69 +9,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  vars:
-    name: Get Variables
-    runs-on: ubuntu-latest
-    outputs:
-      release_type: ${{steps.release_type.outputs.value }}
-      cf_project: ${{steps.cf_project.outputs.value }}
-      mc_version: ${{steps.mc_version.outputs.value }}
-      mod_version: ${{steps.mod_version.outputs.value }}
-      mod_name: ${{steps.mod_name.outputs.value }}
-      cf_game_versions: ${{steps.cf_game_versions.outputs.value }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Release Type
-        id: release_type
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'release_type'
-
-      - name: Project ID
-        id: cf_project
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'cf_project'
-
-      - name: MC Version
-        id: mc_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'mc_version'
-
-      - name: Mod Version
-        id: mod_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'mod_version'
-
-      - name: Mod Name
-        id: mod_name
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'mod_name'
-
-      - name: CF Game Versions
-        id: cf_game_versions
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './gradle.properties'
-          property: 'cf_game_versions'
-
-  jar:
+  buildAndPublishCurse:
     name: Build Jars
     runs-on: ubuntu-latest
-    needs: [ vars ]
-    outputs:
-      mod_relations: ${{ steps.mod_relations.outputs.value }}
-      changelog: ${{ steps.changelog.outputs.value }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -87,24 +27,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build JAR with Gradle
-        run: ./gradlew build
+      - name: Build and Publish JAR with Gradle
+        run: ./gradlew build curseforge
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get changelog
-        id: changelog
-        run: |
-          export CHANGELOG="$(./gradlew getChangelog --console=plain -q)"
-          CHANGELOG="${CHANGELOG//'%'/'%25'}"
-          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          echo "::set-output name=value::$(echo "$CHANGELOG")"
-
-      - name: Get mod relations
-        id: mod_relations
-        run: echo "::set-output name=value::$(./gradlew mod_relations --console=plain -q)"
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
 
       - name: Upload Jars
         uses: actions/upload-artifact@v2
@@ -115,7 +43,7 @@ jobs:
   publishRelease:
     name: Make Releases
     runs-on: ubuntu-latest
-    needs: [ vars, jar ]
+    needs: [ buildAndPublishCurse ]
     steps:
       - name: Download Build Results
         uses: actions/download-artifact@v2
@@ -123,32 +51,22 @@ jobs:
           name: libs
           path: build/libs
 
+      - name: Get TAG
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
       - name: Create GitHub Release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          title: "Release v${{ needs.vars.outputs.mod_version }}"
+          title: "Release ${{ env.RELEASE_VERSION }}"
           automatic_release_tag: "latest"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: build/libs/*.jar
 
-      - name: Create CurseForge Release
-        uses: itsmeow/curseforge-upload@master
-        with:
-          token: ${{ secrets.CURSEFORGE_API_KEY }}
-          project_id: ${{ needs.vars.outputs.cf_project }}
-          game_endpoint: minecraft
-          file_path: build/libs/${{ needs.vars.outputs.mod_name }}-${{ needs.vars.outputs.mc_version }}-${{ needs.vars.outputs.mod_version }}.jar
-          changelog: ${{ needs.jar.outputs.changelog }}
-          changelog_type: markdown
-          game_versions: ${{ needs.vars.outputs.cf_game_versions }}
-          release_type: ${{ needs.vars.outputs.release_type }}
-          relations: ${{ needs.jar.outputs.mod_relations }}
-
   publishGithub:
     name: GitHub Packages release
     runs-on: ubuntu-latest
-    needs: [ vars, jar ]
+    needs: [ buildAndPublishCurse ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2

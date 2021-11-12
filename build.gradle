@@ -11,6 +11,7 @@ buildscript {
 
 plugins {
     id "org.jetbrains.changelog" version "1.3.+"
+    id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -225,29 +226,36 @@ changelog {
     groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
 }
 
-tasks.register('mod_relations') {
-    doLast {
-        def requiredMods = ['projecte']
-        def optionalMods = [
-                'applied-energistics-2',
-                'astral-sorcery',
-                'blood-magic',
-                'botania',
-                'compact-crafting',
-                'create',
-                'ex-nihilo-sequentia',
-                'extended-crafting',
-                'ice-and-fire',
-                'farmers-delight',
-                'immersive-engineering',
-                'mystical-agriculture',
-                'pneumaticcraft-repressurized',
-                'psi',
-                'woot'
-        ]
-        def allMods = []
-        allMods.addAll(requiredMods.stream().sorted().map(modid -> modid + ":requiredDependency").collect());
-        allMods.addAll(optionalMods.stream().sorted().map(modid -> modid + ":optionalDependency").collect());
-        println String.join(',', allMods)
+
+curseforge {
+    apiKey System.getenv().CURSEFORGE_API_KEY
+    project {
+        id = "${cf_project}"
+        addGameVersion "${mc_version}"
+        changelog = "${project.changelog.get(mod_version).toString()}"
+        changelogType = 'markdown'
+        releaseType = "${release_type}"
+
+        mainArtifact(jar) {
+            relations {
+                requiredDependency 'projecte'
+
+                optionalDependency 'applied-energistics-2'
+                optionalDependency 'astral-sorcery'
+                optionalDependency 'blood-magic'
+                optionalDependency 'botania'
+                optionalDependency 'compact-crafting'
+                optionalDependency 'create'
+                optionalDependency 'ex-nihilo-sequentia'
+                optionalDependency 'extended-crafting'
+                optionalDependency 'ice-and-fire'
+                optionalDependency 'farmers-delight'
+                optionalDependency 'immersive-engineering'
+                optionalDependency 'mystical-agriculture'
+                optionalDependency 'pneumaticcraft-repressurized'
+                optionalDependency 'psi'
+                optionalDependency 'woot'
+            }
+        }
     }
 }
