@@ -250,7 +250,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'create'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
-                    optionalDependency 'ice-and-fire'
+                    optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'mystical-agriculture'
