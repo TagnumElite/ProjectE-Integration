@@ -146,6 +146,53 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
     }
 
     /**
+     *
+     * @param fluidIngredients
+     * @return
+     */
+    protected NSSInput convertFluidIngredients(List<List<FluidStack>> fluidIngredients) {
+        if (fluidIngredients == null || fluidIngredients.isEmpty()) {
+            PEIntegration.debugLog("Recipe ({}) contains no inputs: {}", recipeID, fluidIngredients);
+            return null;
+        }
+
+        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+        IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+
+        for (List<FluidStack> ingredient : fluidIngredients) {
+            if (!convertFluidIngredient(ingredient, ingredientMap, fakeGroupMap)) {
+                return new NSSInput(ingredientMap, fakeGroupMap, false);
+            }
+        }
+        return new NSSInput(ingredientMap, fakeGroupMap, true);
+    }
+
+    /**
+     *
+     * @param fluidIngredient
+     * @param ingredientMap
+     * @param fakeGroupMap
+     * @return
+     */
+    protected boolean convertFluidIngredient(List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
+                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+        return convertFluidIngredient(-1, fluidIngredient, ingredientMap, fakeGroupMap);
+    }
+
+    /**
+     *
+     * @param amount
+     * @param fluidIngredient
+     * @param ingredientMap
+     * @param fakeGroupMap
+     * @return
+     */
+    protected boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
+                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+        return Utils.convertFluidIngredient(amount, fluidIngredient,ingredientMap,fakeGroupMap,fakeGroupManager,recipeID.toString());
+    }
+
+    /**
      * @param ingredient
      * @param ingredientMap
      * @param fakeGroupMap
@@ -174,6 +221,10 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
      */
     protected NSSOutput mapOutputs(Object... allOutputs) {
         return Utils.mapOutputs(mapper, fakeGroupManager, recipeID.toString(), allOutputs);
+    }
+
+    protected NSSOutput mapOutput(Object... outputVariants) {
+        return Utils.mapOutput(mapper, fakeGroupManager, recipeID.toString(), outputVariants);
     }
 
     /**

@@ -145,9 +145,11 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
+    implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 

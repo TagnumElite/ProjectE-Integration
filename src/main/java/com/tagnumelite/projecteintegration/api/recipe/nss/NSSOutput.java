@@ -55,8 +55,22 @@ public class NSSOutput {
      * @param item The {@link ItemStack} to be converted
      */
     public NSSOutput(ItemStack item) {
+        this(item, false);
+    }
+
+    /**
+     * A helper constructor to create an NSSOutput from an {@link ItemStack}.
+     *
+     * @param item The {@link ItemStack} to be converted
+     * @param forceCopyNBT Force copies the NBT tag from ItemStack or just uses {@link NSSItem#createItem(ItemStack)}
+     */
+    public NSSOutput(ItemStack item, boolean forceCopyNBT) {
         this.amount = item.getCount();
-        this.nss = NSSItem.createItem(item);
+        if (forceCopyNBT) {
+            this.nss = NSSItem.createItem(item.getItem(), item.getTag());
+        } else {
+            this.nss = NSSItem.createItem(item);
+        }
     }
 
     /**

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0]
+### Added
+- [Tinkers Construct] Alloying, Casting and Melting recipes mapped (except material recipes as NBT is difficult)
+- Support for mapping a single output with multiple variants
+- Support for mapping a list of Fluids as a single ingredient
+
 ## [4.1.7]
 ### Fixed
 - [Astral Sorcery] Infusion recipe mapper was using client only method
@@ -119,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for [Woot] (Anvil, Fluid Converter, Infuser) I will add Dye Squeezer later when brain no hurty anymore.
 
 ### Changed
-- Project icon was replace with placeholder
+- Project icon was replaced with placeholder
 
 ### Removed
 - Support for [Extended Crafting] Compressor, for now. Just ironning some kinks out.
@@ -499,7 +505,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...HEAD
+[4.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...v4.2.0
 [4.1.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.6...v4.1.7
 [4.1.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.5...v4.1.6
 [4.1.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.4...v4.1.5
@@ -563,4 +570,5 @@ Added support for 18 more mods
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
+[Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot

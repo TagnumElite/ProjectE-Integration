@@ -100,6 +100,53 @@ public class Utils {
         return null;
     }
 
+    public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
+        if (fluidIngredient == null) {
+            return false;
+        } else if (fluidIngredient.size() == 1) {
+            //Handle this ingredient as a direct representation of the stack it represents
+            return !addIngredient(ingredientMap, fluidIngredient.get(0));
+        } else if (fluidIngredient.size() > 0) {
+            Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
+            List<FluidStack> fluids = new ArrayList<>();
+
+            for (FluidStack match : fluidIngredient) {
+                //Validate it is not an empty stack in case mods do weird things in custom ingredients
+                if (!match.isEmpty()) {
+                    rawNSSMatches.add(NSSFluid.createFluid(match));
+                    fluids.add(match);
+                }
+            }
+
+            int count = fluids.size();
+            if (count == 1) {
+                return !addIngredient(ingredientMap, fluids.get(0));
+            } else if (count > 1) {
+                //Handle this ingredient as the representation of all the fluids it supports
+                Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
+                NormalizedSimpleStack dummy = group.getA();
+                ingredientMap.addIngredient(dummy, Math.max(amount, 1));
+                if (group.getB()) {
+                    //Only lookup the matching fluids for the group with conversion if we don't already have
+                    // a group created for this dummy ingredient
+                    // Note: We soft ignore cases where it fails/there are no matching group ingredients
+                    // as then our fake ingredient will never actually have an emc value assigned with it
+                    // so the recipe won't either
+                    List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
+                    for (FluidStack fluid : fluids) {
+                        IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
+                        if (addIngredient(groupIngredientMap, fluid.copy())) {
+                            return false;
+                        }
+                        groupIngredientMaps.add(groupIngredientMap);
+                    }
+                    fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
+                }
+            }
+        }
+        return true;
+    }
+
     public static boolean convertIngredient(int amount, Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
         ItemStack[] matches = getMatchingStacks(ingredient, recipeID);
         if (matches == null) {
@@ -237,6 +284,42 @@ public class Utils {
         }
 
         return new NSSOutput(totalOutputs, dummy);
+    }
+
+    public static NSSOutput mapOutput(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, String recipeID, Object... outputVariants) {
+        List<Object> outputs = Arrays.asList(outputVariants);
+        if (outputVariants.length == 1 && outputVariants[0] instanceof Collection) {
+            outputs = new ArrayList<>((Collection<?>) outputVariants[0]);
+        }
+
+        // Assume output stacks will be the size length as outputs
+        Map<NormalizedSimpleStack, Integer> outputStacks = new HashMap<>(outputs.size());
+
+        for (Object output : outputs) {
+            if (output == null) continue;
+
+            if (output instanceof ItemStack) {
+                ItemStack item = (ItemStack) output;
+                if (item.isEmpty()) continue;
+
+                outputStacks.put(NSSItem.createItem(item), item.getCount());
+            } else if (output instanceof FluidStack) {
+                FluidStack fluid = (FluidStack) output;
+                if (fluid.isEmpty()) continue;
+
+                outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
+            } else {
+                PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
+            }
+        }
+
+        NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).getA();
+
+        for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
+            mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, 1));
+        }
+
+        return new NSSOutput(1, dummy);
     }
 
     /**
