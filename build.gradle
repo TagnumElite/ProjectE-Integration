@@ -108,7 +108,7 @@ repositories {
         }
     }
     maven { name "BlameJared"; url 'https://maven.blamejared.com' }
-    maven { name "Progwm16"; url "https://dvs1.progwm16.com/files/maven" }
+    maven { name "Progwml6"; url "https://dvs1.progwml6.com/files/maven/" }
     maven { name "ChickenBones"; url "https://chickenbones.net/maven/" }
     maven { name "TheIllusiveC4"; url "https://maven.theillusivec4.top/" }
     maven { name "TTerrag"; url "https://maven.tterrag.com/" }
