@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0]
+### Fixed
+- Updated support for [Compact Crafting], now requires version 1.0.0+
+
 ## [4.2.0]
 ### Added
 - [Tinkers Construct] Alloying, Casting and Melting recipes mapped (except material recipes as NBT is difficult)
@@ -505,7 +509,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.3.0...HEAD
+[4.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...v4.2.0
 [4.1.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.6...v4.1.7
 [4.1.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.5...v4.1.6

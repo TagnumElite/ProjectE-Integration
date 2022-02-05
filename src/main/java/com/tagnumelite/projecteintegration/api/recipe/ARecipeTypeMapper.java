@@ -146,7 +146,6 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
     }
 
     /**
-     *
      * @param fluidIngredients
      * @return
      */
@@ -168,7 +167,6 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
     }
 
     /**
-     *
      * @param fluidIngredient
      * @param ingredientMap
      * @param fakeGroupMap
@@ -180,7 +178,6 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
     }
 
     /**
-     *
      * @param amount
      * @param fluidIngredient
      * @param ingredientMap
@@ -188,8 +185,8 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
      * @return
      */
     protected boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-        return Utils.convertFluidIngredient(amount, fluidIngredient,ingredientMap,fakeGroupMap,fakeGroupManager,recipeID.toString());
+                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+        return Utils.convertFluidIngredient(amount, fluidIngredient, ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
     /**

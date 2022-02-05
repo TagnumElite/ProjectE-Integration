@@ -22,11 +22,11 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.robotgryphon.compactcrafting.Registration;
-import com.robotgryphon.compactcrafting.api.components.IRecipeBlockComponent;
-import com.robotgryphon.compactcrafting.recipes.MiniaturizationRecipe;
-import com.robotgryphon.compactcrafting.recipes.components.BlockComponent;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
+import dev.compactmods.crafting.Registration;
+import dev.compactmods.crafting.api.components.IRecipeBlockComponent;
+import dev.compactmods.crafting.recipes.MiniaturizationRecipe;
+import dev.compactmods.crafting.recipes.components.BlockComponent;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -35,12 +35,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class CompactCraftingAddon {
     @RecipeTypeMapper(requiredMods = {"compactcrafting"}, priority = 1)
@@ -63,26 +61,34 @@ public class CompactCraftingAddon {
         @Override
         public boolean convertRecipe(MiniaturizationRecipe recipe) {
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-            ItemStack catalyst = recipe.getCatalyst().copy();
-            ingredientMap.addIngredient(NSSItem.createItem(catalyst), /* Ensure 1 */Math.max(catalyst.getCount(), 1));
+            List<ItemStack> catalysts;
+            if (recipe.getCatalyst() != null && !recipe.getCatalyst().matches(ItemStack.EMPTY)) {
+                catalysts = new ArrayList<>(recipe.getCatalyst().getPossible());
+            } else {
+                catalysts = Collections.singletonList(new ItemStack(Items.REDSTONE));
+            }
+            // TODO: The fakeGroupMap isn't used elsewhere. I must make sure that it is fine.
+            convertIngredient(1, Ingredient.of(catalysts.stream()), ingredientMap, fakeGroupMap);
 
-            recipe.getRecipeComponentTotals().entrySet().stream().filter(comp -> comp.getValue() > 0)
-                    .forEach((comp) -> {
-                        String componentKey = comp.getKey();
-                        int required = comp.getValue();
+            for (Map.Entry<String, Integer> entry : recipe.getComponentTotals().entrySet()) {
+                String componentKey = entry.getKey();
+                int componentAmount = entry.getValue();
 
-                        Optional<IRecipeBlockComponent> component = recipe.getRecipeBlockComponent(componentKey);
-                        if (component.isPresent()) {
-                            IRecipeBlockComponent iBlockComponent = component.get();
-                            if (iBlockComponent instanceof BlockComponent) {
-                                BlockComponent blockComponent = (BlockComponent) iBlockComponent;
-                                Item blockItem = blockComponent.getBlock().asItem();
-                                if (blockItem != Items.AIR)
-                                    ingredientMap.addIngredient(NSSItem.createItem(new ItemStack(blockItem)), required);
-                            }
-                        }
-                    });
+                if (componentAmount <= 0) continue;
+
+                Optional<IRecipeBlockComponent> component = recipe.getComponents().getBlock(componentKey);
+                if (component.isPresent()) {
+                    IRecipeBlockComponent iBlockComponent = component.get();
+                    if (iBlockComponent instanceof BlockComponent) {
+                        BlockComponent blockComponent = (BlockComponent) iBlockComponent;
+                        Item blockItem = blockComponent.getBlock().asItem();
+                        if (blockItem != Items.AIR)
+                            ingredientMap.addIngredient(NSSItem.createItem(new ItemStack(blockItem)), componentAmount);
+                    }
+                }
+            }
 
             ItemStack[] outputs = recipe.getOutputs();
             if (outputs.length == 0) {
