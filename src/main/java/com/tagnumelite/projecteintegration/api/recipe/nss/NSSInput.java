@@ -53,6 +53,14 @@ public class NSSInput {
         this.successful = successful;
     }
 
+    /**
+     * @param ingredientMap
+     * @param successful
+     */
+    public NSSInput(IngredientMap<NormalizedSimpleStack> ingredientMap, boolean successful) {
+        this(ingredientMap, new ArrayList<>(), successful);
+    }
+
     //public static NSSInput createItem(ItemStack stack) {
     //
     //}
@@ -60,7 +68,7 @@ public class NSSInput {
     public static NSSInput createFluid(FluidStack fluid) {
         IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
         ingMap.addIngredient(NSSFluid.createFluid(fluid), fluid.getAmount());
-        return new NSSInput(ingMap, new ArrayList<>(), true);
+        return new NSSInput(ingMap, true);
     }
 
     /**

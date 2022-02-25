@@ -47,13 +47,13 @@ import java.util.*;
 public class Utils {
     private static final Type CUSTOM_RECIPE_MAPPER_TYPE = Type.getType(CustomRecipeMapper.class);
 
-    public static Map<? extends ACustomRecipeMapper, String> getCustomRecipeMappers() {
+    public static Map<? extends ACustomRecipeMapper<?>, String> getCustomRecipeMappers() {
         ModList modList = ModList.get();
-        Map<ACustomRecipeMapper, String> recipeTypeMappers = new HashMap<>();
+        Map<ACustomRecipeMapper<?>, String> recipeTypeMappers = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
             for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
                 if (CUSTOM_RECIPE_MAPPER_TYPE.equals(data.getAnnotationType()) && checkRequiredMod(data)) {
-                    ACustomRecipeMapper mapper = createOrGetInstance(data.getMemberName(), ACustomRecipeMapper.class);
+                    ACustomRecipeMapper<?> mapper = createOrGetInstance(data.getMemberName(), ACustomRecipeMapper.class);
                     if (mapper != null) {
                         recipeTypeMappers.put(mapper, getAnnotationData(data, "value"));
                         PEIntegration.LOGGER.info("Instantiated custom recipe mapper: {}", mapper.getName());

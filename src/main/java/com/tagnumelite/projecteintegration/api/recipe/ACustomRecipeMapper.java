@@ -23,7 +23,6 @@
 package com.tagnumelite.projecteintegration.api.recipe;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
@@ -32,26 +31,25 @@ import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  */
-public abstract class ACustomRecipeMapper implements IRecipeMapper<Object> {
-    private IMappingCollector<NormalizedSimpleStack, Long> mapper;
-    private INSSFakeGroupManager fakeGroupManager;
+public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
+    public abstract List<R> getRecipes();
 
-    public abstract List<Object> getRecipes();
+    protected abstract List<Ingredient> getIngredients(R recipe);
 
-    protected abstract List<Ingredient> getIngredients(Object recipe);
-
-    protected abstract ItemStack getResult(Object recipe);
+    protected abstract ItemStack getResult(R recipe);
 
     @Override
-    public NSSInput getInput(Object recipe) {
+    public NSSInput getInput(R recipe) {
         List<Ingredient> ingredients = getIngredients(recipe);
         if (ingredients == null || ingredients.isEmpty()) {
             PEIntegration.debugLog("Recipe ({}) contains no inputs: {}", recipe, ingredients);
@@ -71,62 +69,10 @@ public abstract class ACustomRecipeMapper implements IRecipeMapper<Object> {
     }
 
     @Override
-    public NSSOutput getOutput(Object recipe) {
+    public NSSOutput getOutput(R recipe) {
         ItemStack output = getResult(recipe);
         if (output.isEmpty()) return null;
         return new NSSOutput(output);
-    }
-
-    @Override
-    public boolean convertRecipe(Object recipe) {
-        NSSOutput output = getOutput(recipe);
-        if (output == null || output.isEmpty()) {
-            PEIntegration.debugLog("Recipe ({}) contains no outputs: {}", recipe, output);
-            return false;
-        }
-
-        NSSInput input = getInput(recipe);
-        if (input == null || !input.successful) {
-            return addConversionsAndReturn(input != null ? input.fakeGroupMap : null, true);
-        }
-
-        mapper.addConversion(output.amount, output.nss, input.getMap());
-        return addConversionsAndReturn(input.fakeGroupMap, true);
-    }
-
-    /**
-     * @param ingredient
-     * @param ingredientMap
-     * @param fakeGroupMap
-     * @return
-     */
-    protected boolean convertIngredient(Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-        return convertIngredient(-1, ingredient, ingredientMap, fakeGroupMap);
-    }
-
-    /**
-     * @param amount
-     * @param ingredient
-     * @param ingredientMap
-     * @param fakeGroupMap
-     * @return
-     */
-    protected boolean convertIngredient(int amount, Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-        return Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager, null);
-    }
-
-    protected boolean addConversionsAndReturn(List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> dummyGroupInfos, boolean returnValue) {
-        //If we have any conversions make sure to add them even if we are returning early
-        if (dummyGroupInfos != null) {
-            for (Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>> dummyGroupInfo : dummyGroupInfos) {
-                for (IngredientMap<NormalizedSimpleStack> groupIngredientMap : dummyGroupInfo.getB()) {
-                    mapper.addConversion(1, dummyGroupInfo.getA(), groupIngredientMap.getMap());
-                }
-            }
-        }
-        return returnValue;
     }
 
     /**
@@ -135,9 +81,34 @@ public abstract class ACustomRecipeMapper implements IRecipeMapper<Object> {
      * @param fakeGroupManager
      * @return
      */
+    @SuppressWarnings("unchecked")
     public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe, INSSFakeGroupManager fakeGroupManager) {
+        this.recipeID = new ResourceLocation(getRequiredMods()[0], getName().toLowerCase());
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
-        return convertRecipe(recipe);
+        try {
+            return convertRecipe((R) recipe);
+        } catch (ClassCastException e) {
+            PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
+                    getClass().getName(), recipe.getClass().getName(),
+                    ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
+        } catch (Exception e) {
+            PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
+                    getClass().getName(), recipeID, recipe.getClass().getName(), e);
+        }
+        return false;
+    }
+
+    /**
+     * Returns an array of one required mod from the {@link CustomRecipeMapper} annotation
+     *
+     * @return An array of a modid or a single array of 'unregistered_mapper'.
+     */
+    public String[] getRequiredMods() {
+        CustomRecipeMapper recipeTypeMapperAnnotation = getClass().getAnnotation(CustomRecipeMapper.class);
+        if (recipeTypeMapperAnnotation != null) {
+            return new String[]{recipeTypeMapperAnnotation.value()};
+        }
+        return new String[]{"unregistered_mapper"};
     }
 }

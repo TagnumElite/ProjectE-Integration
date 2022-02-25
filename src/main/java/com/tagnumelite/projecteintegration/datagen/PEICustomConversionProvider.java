@@ -40,34 +40,28 @@ import org.objectweb.asm.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PEICustomConversionProvider extends CustomConversionProvider
-{
+public class PEICustomConversionProvider extends CustomConversionProvider {
     private static final Type CONVERSION_PROVIDER_TYPE = Type.getType(ConversionProvider.class);
 
-    protected PEICustomConversionProvider(DataGenerator generator)
-    {
+    protected PEICustomConversionProvider(DataGenerator generator) {
         super(generator);
     }
 
-    private static NormalizedSimpleStack gemTag(String gem)
-    {
+    private static NormalizedSimpleStack gemTag(String gem) {
         return tag("forge:gems/" + gem);
     }
 
-    private static NormalizedSimpleStack tag(String tag)
-    {
+    private static NormalizedSimpleStack tag(String tag) {
         return NSSItem.createTag(new ResourceLocation(tag));
     }
 
     @Override
-    protected void addCustomConversions()
-    {
+    protected void addCustomConversions() {
         createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
-          .before(ingotTag("zinc"), 128)
-          .before(new FluidStack(Fluids.WATER, 250), 1);
+                .before(ingotTag("zinc"), 128)
+                .before(new FluidStack(Fluids.WATER, 250), 1);
 
-        for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet())
-        {
+        for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
             ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue() + "_default");
             PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
@@ -76,27 +70,20 @@ public class PEICustomConversionProvider extends CustomConversionProvider
     }
 
     // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
-    private static NormalizedSimpleStack ingotTag(String ingot)
-    {
+    private static NormalizedSimpleStack ingotTag(String ingot) {
         return tag("forge:ingots/" + ingot);
     }
 
-    private Map<AConversionProvider, String> getConversionProviders()
-    {
+    private Map<AConversionProvider, String> getConversionProviders() {
         ModList modList = ModList.get();
         Map<AConversionProvider, String> conversionProviders = new HashMap<>();
-        for (ModFileScanData scanData : modList.getAllScanData())
-        {
-            for (ModFileScanData.AnnotationData data : scanData.getAnnotations())
-            {
-                if (CONVERSION_PROVIDER_TYPE.equals(data.getAnnotationType()))
-                {
+        for (ModFileScanData scanData : modList.getAllScanData()) {
+            for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
+                if (CONVERSION_PROVIDER_TYPE.equals(data.getAnnotationType())) {
                     AConversionProvider provider = createInstance(data.getMemberName());
-                    if (provider != null)
-                    {
+                    if (provider != null) {
                         Map<String, Object> annotationData = data.getAnnotationData();
-                        if (!annotationData.containsKey("value"))
-                        {
+                        if (!annotationData.containsKey("value")) {
                             continue;
                         }
                         conversionProviders.put(provider, (String) annotationData.get("value"));
@@ -107,14 +94,10 @@ public class PEICustomConversionProvider extends CustomConversionProvider
         return conversionProviders;
     }
 
-    private AConversionProvider createInstance(String className)
-    {
-        try
-        {
+    private AConversionProvider createInstance(String className) {
+        try {
             return Class.forName(className).asSubclass(AConversionProvider.class).newInstance();
-        }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
-        {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;

@@ -37,7 +37,7 @@ public class IceAndFireAddon {
     public static final String MODID = "iceandfire";
 
     @CustomRecipeMapper(MODID)
-    public static class IAFDragonForgeMapper extends ACustomRecipeMapper {
+    public static class IAFDragonForgeMapper extends ACustomRecipeMapper<DragonForgeRecipe> {
         @Override
         public String getName() {
             return "IceAndFireDragonForgeMapper";
@@ -49,19 +49,18 @@ public class IceAndFireAddon {
         }
 
         @Override
-        public List<Object> getRecipes() {
+        public List<DragonForgeRecipe> getRecipes() {
             return ImmutableList.copyOf(IafRecipeRegistry.ALL_FORGE_RECIPES);
         }
 
         @Override
-        protected List<Ingredient> getIngredients(Object recipe) {
-            DragonForgeRecipe r = (DragonForgeRecipe) recipe;
-            return Arrays.asList(r.getInput(), r.getBlood());
+        protected List<Ingredient> getIngredients(DragonForgeRecipe recipe) {
+            return Arrays.asList(recipe.getInput(), recipe.getBlood());
         }
 
         @Override
-        protected ItemStack getResult(Object recipe) {
-            return ((DragonForgeRecipe) recipe).getOutput();
+        protected ItemStack getResult(DragonForgeRecipe recipe) {
+            return recipe.getOutput();
         }
     }
 

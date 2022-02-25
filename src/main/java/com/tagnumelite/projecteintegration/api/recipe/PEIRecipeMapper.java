@@ -40,7 +40,7 @@ import java.util.*;
 
 @EMCMapper
 public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> {
-    private static final Map<ACustomRecipeMapper, String> recipeMappers = new HashMap<>();
+    private static final Map<ACustomRecipeMapper<?>, String> recipeMappers = new HashMap<>();
 
     public static void loadMappers() {
         if (recipeMappers.isEmpty()) {
@@ -63,15 +63,15 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
         NSSFake.setCurrentNamespace(PEIntegration.MODID + "RecipeMapper");
 
         NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager();
-        for (Map.Entry<ACustomRecipeMapper, String> mapperEntry : recipeMappers.entrySet()) {
-            final ACustomRecipeMapper recipeMapper = mapperEntry.getKey();
+        for (Map.Entry<ACustomRecipeMapper<?>, String> mapperEntry : recipeMappers.entrySet()) {
+            final ACustomRecipeMapper<?> recipeMapper = mapperEntry.getKey();
             final String modid = mapperEntry.getValue();
             final String name = recipeMapper.getName();
             final String configKey = getName() + '.' + name + ".enabled";
 
             if (EMCMappingHandler.getOrSetDefault(config, configKey, recipeMapper.getDescription(), true)) {
                 NSSFakeGroupManager.setNamespace(modid);
-                List<Object> recipes = recipeMapper.getRecipes();
+                List<?> recipes = recipeMapper.getRecipes();
                 for (Object recipe : recipes) {
                     try {
                         if (!recipeMapper.handleRecipe(mapper, recipe, fakeGroupManager)) {
