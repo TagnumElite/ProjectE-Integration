@@ -42,10 +42,6 @@ public class FarmersDelightAddon {
         return "FarmersDelight" + name + "Mapper";
     }
 
-    static String DESC(String name) {
-        return "Recipe Mapper for Farmer's Delights " + name + " recipes";
-    }
-
     // TODO: Cooking pot seems to implement special logic, figure out what this means
     // Never played with this mod before.
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -53,11 +49,6 @@ public class FarmersDelightAddon {
         @Override
         public String getName() {
             return NAME("CookingPot");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Cooking Pot");
         }
 
         @Override
@@ -72,11 +63,6 @@ public class FarmersDelightAddon {
         @Override
         public String getName() {
             return NAME("CuttingBoard");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Cutting Board");
         }
 
         @Override

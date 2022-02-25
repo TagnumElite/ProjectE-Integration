@@ -49,11 +49,6 @@ public class CompactCraftingAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Mapper for Compact Crafting miniaturization recipes";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == Registration.MINIATURIZATION_RECIPE_TYPE;
         }

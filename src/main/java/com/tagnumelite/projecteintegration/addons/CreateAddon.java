@@ -65,10 +65,6 @@ public class CreateAddon {
         return "Create" + name + "Mapper";
     }
 
-    static String DESC(String name) {
-        return "Create " + name + " Mapper";
-    }
-
     private abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
         @Override
         public NSSInput getInput(R recipe) {
@@ -161,11 +157,6 @@ public class CreateAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("BASIN");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.BASIN.getType();
         }
@@ -176,11 +167,6 @@ public class CreateAddon {
         @Override
         public String getName() {
             return NAME("Compacting");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Compacting");
         }
 
         @Override
@@ -197,11 +183,6 @@ public class CreateAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Crushing");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.CRUSHING.getType();
         }
@@ -212,11 +193,6 @@ public class CreateAddon {
         @Override
         public String getName() {
             return NAME("Cutting");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Cutting");
         }
 
         @Override
@@ -252,11 +228,6 @@ public class CreateAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Milling");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.MILLING.getType();
         }
@@ -267,11 +238,6 @@ public class CreateAddon {
         @Override
         public String getName() {
             return NAME("CUTTING");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("CUTTING");
         }
 
         @Override
@@ -288,11 +254,6 @@ public class CreateAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Pressing");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.PRESSING.getType();
         }
@@ -303,11 +264,6 @@ public class CreateAddon {
         @Override
         public String getName() {
             return NAME("Splashing");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Splashing");
         }
 
         @Override
@@ -361,11 +317,6 @@ public class CreateAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Deployer Application");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.DEPLOYING.getType();
         }
@@ -395,11 +346,6 @@ public class CreateAddon {
         @Override
         public String getName() {
             return NAME("SandpaperPolishing");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Sandpaper Polishing");
         }
 
         @Override

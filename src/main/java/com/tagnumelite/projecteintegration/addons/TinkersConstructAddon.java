@@ -53,20 +53,11 @@ public class TinkersConstructAddon {
         return "TinkersConstruct" + name + "Mapper";
     }
 
-    static String DESC(String name) {
-        return "Mapper for Tinker's Construct " + name + " recipes";
-    }
-
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class TCAlloyingMapper extends ARecipeTypeMapper<AlloyRecipe> {
         @Override
         public String getName() {
             return NAME("Alloying");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Alloying");
         }
 
         @Override
@@ -90,11 +81,6 @@ public class TinkersConstructAddon {
         @Override
         public String getName() {
             return NAME("Casting");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Casting");
         }
 
         @Override
@@ -140,11 +126,6 @@ public class TinkersConstructAddon {
         @Override
         public String getName() {
             return NAME("Melting");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Melting");
         }
 
         @Override

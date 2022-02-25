@@ -40,16 +40,15 @@ import java.util.List;
 public class ExtendedCraftingAddon {
     public static final String MODID = "extendedcrafting";
 
+    public static String NAME(String name) {
+        return "ExtendedCrafting" + name + "Mapper";
+    }
+
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECCompressorMapper extends ARecipeTypeMapper<ICompressorRecipe> {
         @Override
         public String getName() {
-            return "Compressor";
-        }
-
-        @Override
-        public String getDescription() {
-            return "Maps the Extended Crafting compressor recipes";
+            return NAME("Compressor");
         }
 
         @Override
@@ -70,7 +69,7 @@ public class ExtendedCraftingAddon {
     public static class ECEnderCrafterMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
-            return "EnderCrafter";
+            return NAME("EnderCrafter");
         }
 
         @Override
@@ -88,7 +87,7 @@ public class ExtendedCraftingAddon {
     public static class ECTableMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
-            return "Table";
+            return NAME("Table");
         }
 
         @Override
@@ -106,7 +105,7 @@ public class ExtendedCraftingAddon {
     public static class ECCombinationMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
-            return "Combination";
+            return NAME("Combination");
         }
 
         @Override

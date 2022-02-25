@@ -57,11 +57,6 @@ public class WootAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Recipe mapper for Woot anvil";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AnvilRecipe.ANVIL_TYPE;
         }
@@ -169,11 +164,6 @@ public class WootAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Recipe mapper for Woot Dye Squeezer";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == FluidConvertorRecipe.FLUID_CONV_TYPE;
         }
@@ -200,11 +190,6 @@ public class WootAddon {
         @Override
         public String getName() {
             return "WootInfuserMapper";
-        }
-
-        @Override
-        public String getDescription() {
-            return "Recipe mapper for Woot Dye Squeezer";
         }
 
         @Override

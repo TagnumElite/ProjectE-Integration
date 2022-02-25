@@ -106,11 +106,6 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == CrucibleRecipe.RECIPE_TYPE;
         }
@@ -134,11 +129,6 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == FluidItemRecipe.RECIPE_TYPE;
         }
@@ -157,11 +147,6 @@ public class ExNihiloSequentiaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == FluidOnTopRecipe.RECIPE_TYPE;
         }
@@ -177,11 +162,6 @@ public class ExNihiloSequentiaAddon {
         @Override
         public String getName() {
             return NAME("FluidTransformation");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -205,11 +185,6 @@ public class ExNihiloSequentiaAddon {
         @Override
         public String getName() {
             return NAME("Hammer");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -244,7 +219,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public String getDescription() {
-            return "A recipe mapper for Ex Nihilo sieves. Only maps guaranteed drop, ignore chanced items.";
+            return super.getDescription() + " NOTE: Only maps guaranteed drop, ignore chanced items.";
         }
 
         @Override

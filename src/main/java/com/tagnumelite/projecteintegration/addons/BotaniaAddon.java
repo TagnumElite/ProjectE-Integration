@@ -61,11 +61,6 @@ public class BotaniaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModRecipeTypes.ELVEN_TRADE_TYPE;
         }
@@ -84,11 +79,6 @@ public class BotaniaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModRecipeTypes.MANA_INFUSION_TYPE;
         }
@@ -102,11 +92,6 @@ public class BotaniaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return null;
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModRecipeTypes.PETAL_TYPE;
         }
@@ -117,11 +102,6 @@ public class BotaniaAddon {
         @Override
         public String getName() {
             return NAME("PureDaisy");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -191,11 +171,6 @@ public class BotaniaAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModRecipeTypes.RUNE_TYPE;
         }
@@ -206,11 +181,6 @@ public class BotaniaAddon {
         @Override
         public String getName() {
             return NAME("TerraPlate");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override

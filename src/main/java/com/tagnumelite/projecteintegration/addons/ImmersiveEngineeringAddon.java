@@ -54,20 +54,11 @@ public class ImmersiveEngineeringAddon {
         return "ImmersiveEngineering" + name + "Mapper";
     }
 
-    protected static String DESC(String name) {
-        return "Recipe mapper for Immersive Engineering " + name + " recipes";
-    }
-
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IEAlloyMapper extends ARecipeTypeMapper<AlloyRecipe> {
         @Override
         public String getName() {
             return NAME("Alloy");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Alloy");
         }
 
         @Override
@@ -89,11 +80,6 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Arc Furnace");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ArcFurnaceRecipe.TYPE;
         }
@@ -109,11 +95,6 @@ public class ImmersiveEngineeringAddon {
         @Override
         public String getName() {
             return NAME("BlastFurnace");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Blast Furnace");
         }
 
         @Override
@@ -148,11 +129,6 @@ public class ImmersiveEngineeringAddon {
         @Override
         public String getName() {
             return NAME("CokeOven");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Coke Oven");
         }
 
         @Override
@@ -194,11 +170,6 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Crusher");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == CrusherRecipe.TYPE;
         }
@@ -222,11 +193,6 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Metal Press");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == MetalPressRecipe.TYPE;
         }
@@ -247,11 +213,6 @@ public class ImmersiveEngineeringAddon {
         @Override
         public String getName() {
             return NAME("Mixer");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Mixer");
         }
 
         @Override
@@ -289,11 +250,6 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Sawmill");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == SawmillRecipe.TYPE;
         }
@@ -315,11 +271,6 @@ public class ImmersiveEngineeringAddon {
         @Override
         public String getName() {
             return NAME("Squeezer");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Squeezer");
         }
 
         @Override

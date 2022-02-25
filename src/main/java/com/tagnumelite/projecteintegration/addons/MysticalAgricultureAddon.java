@@ -45,11 +45,6 @@ public class MysticalAgricultureAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Recipe mapper for Mystical Agriculture infusion recipes";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == RecipeTypes.INFUSION;
         }
@@ -60,11 +55,6 @@ public class MysticalAgricultureAddon {
         @Override
         public String getName() {
             return "MysticalAgricultureReprocessorMapper";
-        }
-
-        @Override
-        public String getDescription() {
-            return "Recipe mapper for Mystical Agriculture seed reprocessor recipes";
         }
 
         @Override

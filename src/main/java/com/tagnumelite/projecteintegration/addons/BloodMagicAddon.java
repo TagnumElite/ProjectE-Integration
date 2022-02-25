@@ -44,7 +44,7 @@ public class BloodMagicAddon {
     public static final String MODID = "bloodmagic";
 
     static String NAME(String name) {
-        return "BloodMagic"+name+"Mapper";
+        return "BloodMagic" + name + "Mapper";
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -52,11 +52,6 @@ public class BloodMagicAddon {
         @Override
         public String getName() {
             return NAME("AlchemyTable");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -83,11 +78,6 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == BloodMagicRecipeType.ARRAY;
         }
@@ -103,11 +93,6 @@ public class BloodMagicAddon {
         @Override
         public String getName() {
             return NAME("AlchemicalReactionChamber");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -142,11 +127,6 @@ public class BloodMagicAddon {
             return NAME("BloodAltar");
         }
 
-        @Override
-        public String getDescription() {
-            return "null";
-        }
-
         // You know, I could make blood have emc. TODO: Do I want blood to have emc.
         // To whom may not realise the implications, it means I can calculate your bloods worth in your body. Creepy
 
@@ -171,11 +151,6 @@ public class BloodMagicAddon {
         @Override
         public String getName() {
             return NAME("TartaricForge");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override

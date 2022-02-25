@@ -44,11 +44,15 @@ import java.util.List;
 public class AppliedEnergisticsAddon {
     public static final String MODID = "appliedenergistics2";
 
+    public static String NAME(String name) {
+        return "AppliedEnergistics" + name + "Mapper";
+    }
+
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEGrinderMapper extends BaseRecipeTypeMapper {
         @Override
         public String getName() {
-            return "AppliedEnergisticsGrinderMapper";
+            return NAME("Grinder");
         }
 
         @Override
@@ -66,12 +70,7 @@ public class AppliedEnergisticsAddon {
     public static class AEInscriberMapper extends ARecipeTypeMapper<InscriberRecipe> {
         @Override
         public String getName() {
-            return "AppliedEnergisticsInscriberMapper";
-        }
-
-        @Override
-        public String getDescription() {
-            return "Recipe mapper for Applied Energistics inscriber";
+            return NAME("Inscriber");
         }
 
         @Override
@@ -90,7 +89,7 @@ public class AppliedEnergisticsAddon {
     }
 
     @ConversionProvider(MODID)
-    @ObjectHolder("appliedenergistics2")
+    @ObjectHolder(MODID)
     public static class AEConversionProvider extends AConversionProvider {
         @ObjectHolder("certus_quartz_crystal")
         public static final Item CERTUS_QUARTZ_CRYSTAL = null;

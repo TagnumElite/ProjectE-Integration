@@ -30,6 +30,7 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
+import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
@@ -62,6 +63,11 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
     protected ResourceLocation recipeID;
     protected IMappingCollector<NormalizedSimpleStack, Long> mapper;
     protected INSSFakeGroupManager fakeGroupManager;
+
+    @Override
+    public String getDescription() {
+        return "ProjectE-Integration Recipe Mapper for " + getName().replaceAll("(\\p{Ll})(\\p{Lu})", "$1 $2") + ". Required Mods: [" + String.join(",", getRequiredMods()) + ']';
+    }
 
     /**
      * Convert the recipe into an EMC map
@@ -258,5 +264,17 @@ public abstract class ARecipeTypeMapper<R extends IRecipe<?>> implements IRecipe
      */
     protected Tuple<NormalizedSimpleStack, Boolean> getFakeGroup(NormalizedSimpleStack... stacks) {
         return fakeGroupManager.getOrCreateFakeGroup(new HashSet<>(Arrays.asList(stacks)));
+    }
+
+    /**
+     * Returns a list of required mods from the {@link RecipeTypeMapper} annotation
+     * @return A list of modids or null.
+     */
+    public String[] getRequiredMods() {
+        RecipeTypeMapper recipeTypeMapperAnnotation = getClass().getAnnotation(RecipeTypeMapper.class);
+        if (recipeTypeMapperAnnotation != null) {
+            return recipeTypeMapperAnnotation.requiredMods();
+        }
+        return null;
     }
 }

@@ -117,11 +117,6 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == PneumaticCraftRecipeType.AMADRON_OFFERS;
         }
@@ -132,11 +127,6 @@ public class PneumaticCraftAddon {
         @Override
         public String getName() {
             return NAME("Assembly");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -169,7 +159,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public String getDescription() {
-            return "Disabled by default because this mapper ignore loss rate.";
+            return super.getDescription() + " NOTE: Disabled by default because this mapper ignore loss rate.";
         }
 
         @Override
@@ -201,11 +191,6 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == PneumaticCraftRecipeType.HEAT_FRAME_COOLING;
         }
@@ -216,11 +201,6 @@ public class PneumaticCraftAddon {
         @Override
         public String getName() {
             return NAME("PressureChamber");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override
@@ -247,11 +227,6 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "null";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == PneumaticCraftRecipeType.REFINERY;
         }
@@ -267,11 +242,6 @@ public class PneumaticCraftAddon {
         @Override
         public String getName() {
             return NAME("ThermopneumaticProcessingPlant");
-        }
-
-        @Override
-        public String getDescription() {
-            return "null";
         }
 
         @Override

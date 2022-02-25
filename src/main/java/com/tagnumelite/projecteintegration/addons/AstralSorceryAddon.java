@@ -59,20 +59,11 @@ public class AstralSorceryAddon {
         return "AstralSorcery" + name + "Mapper";
     }
 
-    static String DESC(String name) {
-        return "A recipe mapper for Astral Sorcery " + name + " recipes.";
-    }
-
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ASAltarMapper extends ARecipeTypeMapper<SimpleAltarRecipe> {
         @Override
         public String getName() {
             return NAME("Altar");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Altar");
         }
 
         @Override
@@ -117,11 +108,6 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Block Transmutation");
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == RecipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
         }
@@ -142,11 +128,6 @@ public class AstralSorceryAddon {
         @Override
         public String getName() {
             return NAME("LiquidInfusion");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Liquid Infusion");
         }
 
         @Override
@@ -176,7 +157,7 @@ public class AstralSorceryAddon {
 
         @Override
         public String getDescription() {
-            return DESC("Well Liquefaction") + " Disabled by default. Maps 1 Item to 1 bucket (" + FluidAttributes.BUCKET_VOLUME + ')';
+            return super.getDescription() + " NOTE: Disabled by default. Maps 1 Item to 1 bucket (" + FluidAttributes.BUCKET_VOLUME + ')';
         }
 
         @Override

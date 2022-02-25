@@ -39,11 +39,6 @@ public class PsiAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Maps Psi trick crafting recipes";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == ModCraftingRecipes.TRICK_RECIPE_TYPE;
         }

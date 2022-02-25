@@ -51,11 +51,6 @@ public class DraconicEvolutionAddon {
         }
 
         @Override
-        public String getDescription() {
-            return "Recipe mapper for Draconic Evolution Fusion recipes";
-        }
-
-        @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == DraconicAPI.FUSION_RECIPE_TYPE;
         }
