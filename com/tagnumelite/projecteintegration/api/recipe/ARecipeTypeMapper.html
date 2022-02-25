@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -240,32 +240,42 @@ implements <a href="../../../../../com/tagnumelite/projecteintegration/api/recip
 </td>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected net.minecraft.util.Tuple&lt;moze_intel.projecte.api.nss.NormalizedSimpleStack,java.lang.Boolean&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getFakeGroup-moze_intel.projecte.api.nss.NormalizedSimpleStack...-">getFakeGroup</a></span>(moze_intel.projecte.api.nss.NormalizedSimpleStack...&nbsp;stacks)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>protected java.util.List&lt;net.minecraft.item.crafting.Ingredient&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getIngredients-R-">getIngredients</a></span>(<a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html" title="type parameter in ARecipeTypeMapper">R</a>&nbsp;recipe)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/nss/NSSInput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSInput</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getInput-R-">getInput</a></span>(<a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html" title="type parameter in ARecipeTypeMapper">R</a>&nbsp;recipe)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/nss/NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getOutput-R-">getOutput</a></span>(<a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html" title="type parameter in ARecipeTypeMapper">R</a>&nbsp;recipe)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>java.lang.String[]</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#getRequiredMods--">getRequiredMods</a></span>()</code>
+<div class="block">Returns a list of required mods from the <code>RecipeTypeMapper</code> annotation</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#handleRecipe-moze_intel.projecte.api.mapper.collector.IMappingCollector-net.minecraft.item.crafting.IRecipe-moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager-">handleRecipe</a></span>(moze_intel.projecte.api.mapper.collector.IMappingCollector&lt;moze_intel.projecte.api.nss.NormalizedSimpleStack,java.lang.Long&gt;&nbsp;mapper,
             net.minecraft.item.crafting.IRecipe&lt;?&gt;&nbsp;iRecipe,
             moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager&nbsp;fakeGroupManager)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/nss/NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#mapOutput-java.lang.Object...-">mapOutput</a></span>(java.lang.Object...&nbsp;outputVariants)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/nss/NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html#mapOutputs-java.lang.Object...-">mapOutputs</a></span>(java.lang.Object...&nbsp;allOutputs)</code>&nbsp;</td>
 </tr>
@@ -282,14 +292,14 @@ implements <a href="../../../../../com/tagnumelite/projecteintegration/api/recip
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;com.tagnumelite.projecteintegration.api.recipe.<a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html" title="interface in com.tagnumelite.projecteintegration.api.recipe">IRecipeMapper</a></h3>
-<code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html#getDescription--">getDescription</a>, <a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html#getName--">getName</a></code></li>
+<code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html#getName--">getName</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper</h3>
-<code>canHandle, getDescription, getName, isAvailable</code></li>
+<code>canHandle, getName, isAvailable</code></li>
 </ul>
 </li>
 </ul>
@@ -357,6 +367,21 @@ implements <a href="../../../../../com/tagnumelite/projecteintegration/api/recip
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getDescription--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDescription</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getDescription()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html#getDescription--">getDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/IRecipeMapper.html" title="interface in com.tagnumelite.projecteintegration.api.recipe">IRecipeMapper</a>&lt;<a href="../../../../../com/tagnumelite/projecteintegration/api/recipe/ARecipeTypeMapper.html" title="type parameter in ARecipeTypeMapper">R</a> extends net.minecraft.item.crafting.IRecipe&lt;?&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getDescription</code>&nbsp;in interface&nbsp;<code>moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper</code></dd>
+</dl>
+</li>
+</ul>
 <a name="convertRecipe-net.minecraft.item.crafting.IRecipe-">
 <!--   -->
 </a><a name="convertRecipe-R-">
@@ -589,7 +614,7 @@ implements <a href="../../../../../com/tagnumelite/projecteintegration/api/recip
 <a name="getFakeGroup-moze_intel.projecte.api.nss.NormalizedSimpleStack...-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getFakeGroup</h4>
 <pre>protected&nbsp;net.minecraft.util.Tuple&lt;moze_intel.projecte.api.nss.NormalizedSimpleStack,java.lang.Boolean&gt;&nbsp;getFakeGroup(moze_intel.projecte.api.nss.NormalizedSimpleStack...&nbsp;stacks)</pre>
@@ -597,6 +622,20 @@ implements <a href="../../../../../com/tagnumelite/projecteintegration/api/recip
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>stacks</code> - </dd>
 <dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="getRequiredMods--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getRequiredMods</h4>
+<pre>public&nbsp;java.lang.String[]&nbsp;getRequiredMods()</pre>
+<div class="block">Returns a list of required mods from the <code>RecipeTypeMapper</code> annotation</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A list of modids or null.</dd>
 </dl>
 </li>
 </ul>
