@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.4.0]
 ### Added
+- Support for [Industrial Foregoing]
 - A base class for Custom Mappers and IRecipe mappers.
 - Shortcut for NSSOutput
 
@@ -520,7 +523,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.0...HEAD
+[4.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...v4.2.0
 [4.1.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.6...v4.1.7
@@ -583,6 +587,7 @@ Added support for 18 more mods
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
+[Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
