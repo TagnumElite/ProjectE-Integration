@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.1]
+### Added
+- Support for [Touhou Little Maid] altar crafting
+
 ## [4.4.0]
 ### Added
 - Support for [Industrial Foregoing]
@@ -523,7 +527,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.1...HEAD
+[4.4.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.0...v4.4.1
 [4.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.1.7...v4.2.0
@@ -592,4 +597,5 @@ Added support for 18 more mods
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct
+[Touhou Little Maid]: https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot

@@ -152,6 +152,7 @@ dependencies {
     implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
     implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
     implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
+    implementation fg.deobf("curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}")
     implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 
@@ -260,6 +261,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'pneumaticcraft-repressurized'
                     optionalDependency 'psi'
                     optionalDependency 'tinkers-construct'
+                    optionalDependency 'touhou-little-maid'
                     optionalDependency 'woot'
                 }
             }
