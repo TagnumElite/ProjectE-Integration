@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.2]
+### Added
+- EMC for Pams Harvestcraft Core, Crops, Food Extended items
+
 ## [4.4.1]
 ### Added
 - Support for [Touhou Little Maid] altar crafting

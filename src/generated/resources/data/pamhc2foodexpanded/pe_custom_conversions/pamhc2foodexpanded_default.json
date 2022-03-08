@@ -1,0 +1,10 @@
+{
+  "comment": "Sets default conversions for Pam\u0027s HarvestCraft: Crops",
+  "values": {
+    "before": {
+      "#forge:rawfish": 64,
+      "#forge:rawmeats/rawtofishitem": 64,
+      "#forge:rawfish/rawtofishitem": 64
+    }
+  }
+}
