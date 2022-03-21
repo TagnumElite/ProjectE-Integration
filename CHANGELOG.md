@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.3]
+### Added
+- Support for [MrCrayfish's Vehicle Mod] Fluid Extractor and Fluid Mixer
+
 ## [4.4.2]
 ### Added
 - EMC for Pams Harvestcraft Core, Crops, Food Extended items
@@ -531,7 +535,9 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.3...HEAD
+[4.4.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.2...v4.4.3
+[4.4.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.1...v4.4.2
 [4.4.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.0...v4.4.1
 [4.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.2.0...v4.3.0
@@ -597,6 +603,7 @@ Added support for 18 more mods
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
+[MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
