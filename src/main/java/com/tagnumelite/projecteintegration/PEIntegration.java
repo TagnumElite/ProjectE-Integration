@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +22,7 @@ public class PEIntegration {
     }
 
     public static void debugLog(String msg, Object... args) {
-        if (PECore.DEV_ENVIRONMENT || ProjectEConfig.common.debugLogging.get()) {
+        if (!FMLEnvironment.production || ProjectEConfig.common.debugLogging.get()) {
             LOGGER.info(msg, args);
         } else {
             LOGGER.debug(msg, args);
