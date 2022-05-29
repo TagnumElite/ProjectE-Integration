@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '17'
           cache: 'gradle'
 
       - uses: gradle/wrapper-validation-action@v1
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '17'
           cache: 'gradle'
 
       - uses: gradle/wrapper-validation-action@v1
