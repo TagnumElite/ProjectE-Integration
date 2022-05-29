@@ -36,7 +36,7 @@ import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 
@@ -59,8 +59,8 @@ public class MrCrayfishVehicleModAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeType.FLUID_EXTRACTOR;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeType.FLUID_EXTRACTOR;
         }
 
         @Override
@@ -82,8 +82,8 @@ public class MrCrayfishVehicleModAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeType.FLUID_MIXER;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeType.FLUID_MIXER;
         }
 
         @Override

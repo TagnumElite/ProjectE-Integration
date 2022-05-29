@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[36,)"
+loaderVersion = "[40,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/TagnumElite/ProjectE-Integration/issues"
 
@@ -24,7 +24,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 [[dependencies.projecteintegration]]
 modId = "projecte"
 mandatory = true
-versionRange = "[PE1.0.1B,)"
+versionRange = "[PE1.0.1,)"
 
 [[dependencies.projecteintegration]]
 modId = "farmersdelight"
@@ -39,13 +39,13 @@ versionRange = "[1.16.5-0.5,)"
 [[dependencies.projecteintegration]]
 modId = "forge"
 mandatory = true
-versionRange = "[36,)"
+versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.projecteintegration]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.16.5,1.17)"
+versionRange = "[1.18.2,1.19)"
 ordering = "NONE"
 side = "BOTH"

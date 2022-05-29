@@ -1,0 +1,37 @@
+{
+  "comment": "Set defaults conversions for Applied Energistics",
+  "values": {
+    "before": {
+      "ae2:certus_quartz_crystal": 256
+    },
+    "conversion": [
+      {
+        "output": "ae2:charged_certus_quartz_crystal",
+        "ingredients": [
+          "ae2:certus_quartz_crystal"
+        ]
+      },
+      {
+        "output": "ae2:fluix_crystal",
+        "count": 2,
+        "ingredients": [
+          "ae2:charged_certus_quartz_crystal",
+          "#forge:dusts/redstone",
+          "minecraft:quartz"
+        ]
+      },
+      {
+        "output": "ae2:fluix_crystal",
+        "ingredients": [
+          "ae2:fluix_crystal_seed"
+        ]
+      },
+      {
+        "output": "ae2:certus_quartz_crystal",
+        "ingredients": [
+          "ae2:certus_crystal_seed"
+        ]
+      }
+    ]
+  }
+}

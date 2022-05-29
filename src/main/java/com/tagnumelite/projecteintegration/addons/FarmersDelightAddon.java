@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@ import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.IRecipeType;
-import vectorwing.farmersdelight.crafting.CookingPotRecipe;
-import vectorwing.farmersdelight.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.registry.ModBlocks;
-import vectorwing.farmersdelight.registry.ModItems;
-import vectorwing.farmersdelight.utils.tags.ForgeTags;
+import net.minecraft.world.item.crafting.RecipeType;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 public class FarmersDelightAddon {
     public static final String MODID = "farmersdelight";
@@ -52,8 +52,8 @@ public class FarmersDelightAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == CookingPotRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == CookingPotRecipe.TYPE;
         }
     }
 
@@ -66,8 +66,8 @@ public class FarmersDelightAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == CuttingBoardRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == CuttingBoardRecipe.TYPE;
         }
 
         @Override

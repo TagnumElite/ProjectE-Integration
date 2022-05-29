@@ -32,10 +32,10 @@ import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.lang.reflect.ParameterizedType;
@@ -43,34 +43,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An abstract class used for converting {@link IRecipe}s to EMC conversion maps.
+ * An abstract class used for converting {@link Recipe}s to EMC conversion maps.
  * <p>
  * This function has a few helper variables: {@link #recipeID}, {@link #mapper} and {@link #fakeGroupManager}
  * <p>
  * This class follows closely to {@link moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper} with added
  * function for special recipes with {@link ItemStack} and/or {@link FluidStack} outputs.
  * <p>
- * To overwrite output, override method {@link #getOutput(IRecipe)}
- * to overwrite input, override method {@link #getIngredients(IRecipe)}
+ * To overwrite output, override method {@link #getOutput(Recipe)}
+ * to overwrite input, override method {@link #getIngredients(Recipe)}
  * <p>
  * For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
  */
-public abstract class ARecipeTypeMapper<R extends IRecipe<?>> extends ABaseRecipeMapper<R> implements IRecipeTypeMapper {
+public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipeMapper<R> implements IRecipeTypeMapper {
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, IRecipe<?> iRecipe, INSSFakeGroupManager fakeGroupManager) {
+    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Recipe<?> recipe, INSSFakeGroupManager fakeGroupManager) {
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
-        recipeID = iRecipe.getId();
+        recipeID = recipe.getId();
         try {
-            return convertRecipe((R) iRecipe);
+            return convertRecipe((R) recipe);
         } catch (ClassCastException e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
-                    getClass().getName(), iRecipe.getClass().getName(),
+                    getClass().getName(), recipe.getClass().getName(),
                     ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
         } catch (Exception e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
-                    getClass().getName(), recipeID, iRecipe.getClass().getName(), e);
+                    getClass().getName(), recipeID, recipe.getClass().getName(), e);
         }
         return false;
     }

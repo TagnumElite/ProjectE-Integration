@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,10 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.recipe.*;
 import vazkii.botania.common.crafting.ModRecipeTypes;
 import vazkii.botania.common.item.ModItems;
@@ -61,8 +61,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.ELVEN_TRADE_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.ELVEN_TRADE_TYPE;
         }
 
         @Override
@@ -79,8 +79,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.MANA_INFUSION_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.MANA_INFUSION_TYPE;
         }
     }
 
@@ -92,8 +92,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.PETAL_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.PETAL_TYPE;
         }
     }
 
@@ -105,8 +105,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.PURE_DAISY_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.PURE_DAISY_TYPE;
         }
 
         @Override
@@ -136,7 +136,7 @@ public class BotaniaAddon {
 
                 int count = stacks.size();
                 if (count == 1) {// I feel like this is unreachable code.... TODO: Unreachable Code?
-                    ingredientMap.addIngredient(NSSItem.createItem(stacks.get(0).getBlock()), 1);
+                    ingredientMap.addIngredient(NSSItem.createItem(stacks.get(0)), 1);
                     return new NSSInput(ingredientMap, fakeGroupMap, true);
                 } else {
                     //Handle this ingredient as the representation of all the stacks it supports
@@ -171,8 +171,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.RUNE_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.RUNE_TYPE;
         }
     }
 
@@ -184,8 +184,8 @@ public class BotaniaAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModRecipeTypes.TERRA_PLATE_TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.TERRA_PLATE_TYPE;
         }
     }
 

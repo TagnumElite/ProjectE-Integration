@@ -32,8 +32,8 @@ import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.EMCMappingHandler;
-import net.minecraft.resources.DataPackRegistries;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.server.ReloadableServerResources;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Tuple;
 
 import java.util.*;
@@ -59,7 +59,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
     }
 
     @Override
-    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mapper, CommentedFileConfig config, DataPackRegistries dataPackRegistries, IResourceManager iResourceManager) {
+    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mapper, CommentedFileConfig config, ReloadableServerResources reloadableServerResources, ResourceManager resourceManager) {
         NSSFake.setCurrentNamespace(PEIntegration.MODID + "RecipeMapper");
 
         NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager();

@@ -34,7 +34,7 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 
@@ -49,8 +49,8 @@ public class CompactCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == Registration.MINIATURIZATION_RECIPE_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == Registration.MINIATURIZATION_RECIPE_TYPE;
         }
 
         @Override

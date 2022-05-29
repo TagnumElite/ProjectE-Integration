@@ -38,7 +38,7 @@ import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 
@@ -53,9 +53,9 @@ public class IndustrialForegoingAddon {
         return "IndustrialForegoing" + name + "Mapper";
     }
 
-    public static final IRecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
-    public static final IRecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
-    public static final IRecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
+    public static finalrecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
+    public static finalrecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
+    public static finalrecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFCrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
@@ -65,8 +65,8 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == crusherRecipeType;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == crusherRecipeType;
         }
 
         @Override
@@ -88,8 +88,8 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == dissolutionChamberRecipeType;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == dissolutionChamberRecipeType;
         }
 
         @Override
@@ -136,8 +136,8 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == stoneworkGenerateRecipeType;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == stoneworkGenerateRecipeType;
         }
 
         @Override

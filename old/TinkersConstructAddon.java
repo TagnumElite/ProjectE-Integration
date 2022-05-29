@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,9 +33,9 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import slimeknights.tconstruct.library.recipe.RecipeTypes;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipe;
 import slimeknights.tconstruct.library.recipe.casting.ICastingRecipe;
@@ -61,8 +61,8 @@ public class TinkersConstructAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.ALLOYING;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.ALLOYING;
         }
 
         @Override
@@ -84,8 +84,8 @@ public class TinkersConstructAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.CASTING_BASIN || iRecipeType == RecipeTypes.CASTING_TABLE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.CASTING_BASIN || recipeType == RecipeTypes.CASTING_TABLE;
         }
 
         @Override
@@ -129,8 +129,8 @@ public class TinkersConstructAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.MELTING;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.MELTING;
         }
 
         @Override
@@ -157,8 +157,8 @@ public class TinkersConstructAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.PART_BUILDER;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType ==recipeTypes.PART_BUILDER;
         }
 
         @Override

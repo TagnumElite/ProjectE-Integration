@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,8 +31,8 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +52,8 @@ public class ExtendedCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.COMPRESSOR && ModConfigs.ENABLE_COMPRESSOR.get();
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.COMPRESSOR && ModConfigs.ENABLE_COMPRESSOR.get();
         }
 
         @Override
@@ -78,7 +78,7 @@ public class ExtendedCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == RecipeTypes.ENDER_CRAFTER && ModConfigs.ENABLE_ENDER_CRAFTER.get();
         }
     }
@@ -96,7 +96,7 @@ public class ExtendedCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == RecipeTypes.TABLE && ModConfigs.ENABLE_TABLES.get();
         }
     }
@@ -114,7 +114,7 @@ public class ExtendedCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == RecipeTypes.COMBINATION && ModConfigs.ENABLE_CRAFTING_CORE.get();
         }
     }

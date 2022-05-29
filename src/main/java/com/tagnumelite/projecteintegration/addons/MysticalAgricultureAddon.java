@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class MysticalAgricultureAddon {
     public static final String MODID = "mysticalagriculture";
@@ -45,8 +45,8 @@ public class MysticalAgricultureAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.INFUSION;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.INFUSION;
         }
     }
 
@@ -58,8 +58,8 @@ public class MysticalAgricultureAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypes.REPROCESSOR;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeTypes.REPROCESSOR;
         }
     }
 

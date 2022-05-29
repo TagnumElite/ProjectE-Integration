@@ -32,11 +32,11 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.forgespi.language.ModFileScanData;
@@ -52,8 +52,8 @@ public class Utils {
         Map<ACustomRecipeMapper<?>, String> recipeTypeMappers = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
             for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
-                if (CUSTOM_RECIPE_MAPPER_TYPE.equals(data.getAnnotationType()) && checkRequiredMod(data)) {
-                    ACustomRecipeMapper<?> mapper = createOrGetInstance(data.getMemberName(), ACustomRecipeMapper.class);
+                if (CUSTOM_RECIPE_MAPPER_TYPE.equals(data.annotationType()) && checkRequiredMod(data)) {
+                    ACustomRecipeMapper<?> mapper = createOrGetInstance(data.memberName(), ACustomRecipeMapper.class);
                     if (mapper != null) {
                         recipeTypeMappers.put(mapper, getAnnotationData(data, "value"));
                         PEIntegration.LOGGER.info("Instantiated custom recipe mapper: {}", mapper.getName());
@@ -81,7 +81,7 @@ public class Utils {
     public static boolean checkRequiredMod(ModFileScanData.AnnotationData data, String key) {
         String modId = getAnnotationData(data, key);
         if (modId != null && !ModList.get().isLoaded(modId)) {
-            PEIntegration.debugLog("Skipped checking class {}, as its required mod ({}) is not loaded.", data.getMemberName(), modId);
+            PEIntegration.debugLog("Skipped checking class {}, as its required mod ({}) is not loaded.", data.memberName(), modId);
             return false;
         }
         return true;
@@ -89,7 +89,7 @@ public class Utils {
 
     @SuppressWarnings("unchecked")
     public static <T> T getAnnotationData(ModFileScanData.AnnotationData data, String key) {
-        Map<String, Object> annotationData = data.getAnnotationData();
+        Map<String, Object> annotationData = data.annotationData();
         if (annotationData.containsKey(key)) {
             try {
                 return (T) annotationData.get(key);

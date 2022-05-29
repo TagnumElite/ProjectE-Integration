@@ -42,7 +42,7 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -67,8 +67,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypesAS.TYPE_ALTAR.getType();
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeTypesAS.TYPE_ALTAR.getType();
         }
 
         @Override
@@ -108,8 +108,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
         }
 
         @Override
@@ -131,8 +131,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypesAS.TYPE_INFUSION.getType();
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeTypesAS.TYPE_INFUSION.getType();
         }
 
         @Override
@@ -161,8 +161,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeTypesAS.TYPE_WELL.getType();
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType ==recipeTypesAS.TYPE_WELL.getType();
         }
 
         @Override

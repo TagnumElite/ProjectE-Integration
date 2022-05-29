@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,25 +22,30 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.github.tartaricacid.touhoulittlemaid.crafting.AltarRecipe;
+import com.github.tartaricacid.touhoulittlemaid.init.InitRecipes;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.IRecipeType;
-import vazkii.psi.common.crafting.ModCraftingRecipes;
-import vazkii.psi.common.crafting.recipe.TrickRecipe;
+import net.minecraft.item.crafting.RecipeType;
 
-public class PsiAddon {
-    public static final String MODID = "psi";
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PsiTrickMapper extends ARecipeTypeMapper<TrickRecipe> {
+public class TouhouLittleMaidAddon {
+    @RecipeTypeMapper(requiredMods = "touhou_little_maid", priority = 1)
+    public static class TLMAltarMapper extends ARecipeTypeMapper<AltarRecipe> {
         @Override
         public String getName() {
-            return "PsiTrickMapper";
+            return "TouhoutLittleMaidAltarMapper";
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ModCraftingRecipes.TRICK_RECIPE_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == InitRecipes.ALTAR_CRAFTING;
+        }
+
+        @Override
+        public boolean convertRecipe(AltarRecipe recipe) {
+            if (recipe.isItemCraft())
+                return super.convertRecipe(recipe);
+            return false;
         }
     }
 }

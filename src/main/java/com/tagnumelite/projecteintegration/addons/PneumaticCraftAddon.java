@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,10 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
@@ -117,8 +117,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.AMADRON_OFFERS;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.amadronOffers;
         }
     }
 
@@ -130,10 +130,10 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.ASSEMBLY_DRILL ||
-                    iRecipeType == PneumaticCraftRecipeType.ASSEMBLY_LASER ||
-                    iRecipeType == PneumaticCraftRecipeType.ASSEMBLY_DRILL_LASER;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.assemblyDrill ||
+                    recipeType == PneumaticCraftRecipeType.assemblyLaser ||
+                    recipeType == PneumaticCraftRecipeType.assemblyDrillLaser;
         }
 
         @Override
@@ -168,8 +168,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.EXPLOSION_CRAFTING;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.explosionCrafting;
         }
 
         @Override
@@ -191,8 +191,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.HEAT_FRAME_COOLING;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.heatFrameCooling;
         }
     }
 
@@ -204,8 +204,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.PRESSURE_CHAMBER;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.pressureChamber;
         }
 
         @Override
@@ -227,8 +227,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.REFINERY;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.refinery;
         }
 
         @Override
@@ -245,8 +245,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == PneumaticCraftRecipeType.THERMO_PLANT;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == PneumaticCraftRecipeType.thermoPlant;
         }
 
         @Override

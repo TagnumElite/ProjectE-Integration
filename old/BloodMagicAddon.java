@@ -30,7 +30,7 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import wayoftime.bloodmagic.common.item.BloodMagicItems;
 import wayoftime.bloodmagic.common.recipe.BloodMagicRecipeType;
@@ -65,8 +65,8 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BloodMagicRecipeType.ALCHEMYTABLE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == BloodMagicRecipeType.ALCHEMYTABLE;
         }
     }
 
@@ -78,8 +78,8 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BloodMagicRecipeType.ARRAY;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == BloodMagicRecipeType.ARRAY;
         }
 
         @Override
@@ -96,8 +96,8 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BloodMagicRecipeType.ARC;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == BloodMagicRecipeType.ARC;
         }
 
         @Override
@@ -131,8 +131,8 @@ public class BloodMagicAddon {
         // To whom may not realise the implications, it means I can calculate your bloods worth in your body. Creepy
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BloodMagicRecipeType.ALTAR;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == BloodMagicRecipeType.ALTAR;
         }
 
         @Override
@@ -154,8 +154,8 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BloodMagicRecipeType.TARTARICFORGE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == BloodMagicRecipeType.TARTARICFORGE;
         }
 
         // OOH, souls could have emc. Mine would probably be -1 because, no one want dat sh**.

@@ -32,7 +32,7 @@ import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -51,8 +51,8 @@ public class DraconicEvolutionAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == DraconicAPI.FUSION_RECIPE_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == DraconicAPI.FUSION_RECIPE_TYPE;
         }
 
         @Override

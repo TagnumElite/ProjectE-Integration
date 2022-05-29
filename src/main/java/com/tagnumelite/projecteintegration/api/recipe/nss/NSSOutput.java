@@ -25,8 +25,8 @@ package com.tagnumelite.projecteintegration.api.recipe.nss;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
@@ -61,7 +61,7 @@ public class NSSOutput {
     /**
      * A helper constructor to create an NSSOutput from an {@link ItemStack}.
      *
-     * @param item The {@link ItemStack} to be converted
+     * @param item         The {@link ItemStack} to be converted
      * @param forceCopyNBT Force copies the NBT tag from ItemStack or just uses {@link NSSItem#createItem(ItemStack)}
      */
     public NSSOutput(ItemStack item, boolean forceCopyNBT) {

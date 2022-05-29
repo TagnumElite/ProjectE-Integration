@@ -1,7 +1,6 @@
 package com.tagnumelite.projecteintegration;
 
 import com.tagnumelite.projecteintegration.api.recipe.PEIRecipeMapper;
-import moze_intel.projecte.PECore;
 import moze_intel.projecte.config.ProjectEConfig;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;

@@ -10,26 +10,27 @@ buildscript {
 }
 
 plugins {
+    id 'eclipse'
+    id 'maven-publish'
     id "org.jetbrains.changelog" version "1.3.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 version = "${mod_version}"
 group = 'com.tagnumelite.projecteintegration'
 archivesBaseName = "${mod_name}-${mc_version}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-//project.logger.info('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+//println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     // You must be aware of the Mojang license when using the 'official' mappings.
     // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: '1.18.2'
 
     runs {
         client {
@@ -37,6 +38,7 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'projecteintegration'
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
@@ -53,6 +55,27 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'projecteintegration'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                projecteintegration {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        // This run config launches GameTestServer and runs all registered gametests, then exits.
+        // By default, the server will crash when no gametests are provided.
+        // The gametest system is also enabled by default for other run configs under the /test command.
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'projecteintegration'
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
@@ -93,6 +116,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    flatDir {
+        dir 'libs'
+    }
     maven {
         name "CurseMaven"
         url "https://www.cursemaven.com"
@@ -122,43 +148,43 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
-    runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
-    runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
-    runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
+    //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
+    //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
-    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel:${version_flywheel}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${version_jei}")
-    runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
-    runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
+    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:${version_flywheel}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
+    implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
+    //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
+    //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
 
     // ======================= [ Optional Mods ] =======================
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
-    implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
-    implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
+    //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
+    //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
-    implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
-    implementation fg.deobf("curse.maven:create-328085:${version_create}")
-    implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
-    implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
+    implementation fg.deobf("com.simibubi.create:Create:${version_create}")
+    //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
-    compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
+    //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
-    implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
-    implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
-    implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
+    //implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
+    //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
-    implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
+    //implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
     implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
-    implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
-    implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
-    implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
-    implementation fg.deobf("curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}")
-    implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
+    //implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
+    //implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
+    //implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
+    //implementation fg.deobf("curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}")
+    //implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
 }
 
 jar {
@@ -226,6 +252,10 @@ publishing {
     }
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
 changelog {
     version = "${project.version}"
     path = "${project.projectDir}/CHANGELOG.md"
@@ -251,27 +281,28 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     requiredDependency 'projecte'
 
                     optionalDependency 'applied-energistics-2'
-                    optionalDependency 'astral-sorcery'
-                    optionalDependency 'blood-magic'
+                    //optionalDependency 'astral-sorcery'
+                    //optionalDependency 'blood-magic'
                     optionalDependency 'botania'
-                    optionalDependency 'compact-crafting'
+                    //optionalDependency 'compact-crafting'
                     optionalDependency 'create'
-                    optionalDependency 'ex-nihilo-sequentia'
+                    //optionalDependency 'draconic-evolution'
+                    //optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
-                    optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'farmers-delight'
+                    //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
-                    optionalDependency 'industrial-foregoing'
-                    optionalDependency 'mrcrayfishs-vehicle-mod'
+                    //optionalDependency 'industrial-foregoing'
+                    //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
                     optionalDependency 'pams-harvestcraft-2-food-core'
-                    optionalDependency 'pams-harvestcraft-2-crops'
+                    //optionalDependency 'pams-harvestcraft-2-crops'
                     optionalDependency 'pams-harvestcraft-2-food-extended'
                     optionalDependency 'pneumaticcraft-repressurized'
-                    optionalDependency 'psi'
-                    optionalDependency 'tinkers-construct'
-                    optionalDependency 'touhou-little-maid'
-                    optionalDependency 'woot'
+                    //optionalDependency 'psi'
+                    //optionalDependency 'tinkers-construct'
+                    //optionalDependency 'touhou-little-maid'
+                    //optionalDependency 'woot'
                 }
             }
         }

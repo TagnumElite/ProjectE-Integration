@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,17 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import appeng.api.features.InscriberProcessType;
-import appeng.recipes.handlers.GrinderRecipe;
+import appeng.recipes.handlers.InscriberProcessType;
 import appeng.recipes.handlers.InscriberRecipe;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -42,12 +40,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class AppliedEnergisticsAddon {
-    public static final String MODID = "appliedenergistics2";
+    public static final String MODID = "ae2"; // Great idea, I'll change my modid to pei. Perfect right.
 
     public static String NAME(String name) {
         return "AppliedEnergistics" + name + "Mapper";
     }
-
+/*
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEGrinderMapper extends BaseRecipeTypeMapper {
         @Override
@@ -61,10 +59,11 @@ public class AppliedEnergisticsAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == GrinderRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == GrinderRecipe.TYPE;
         }
     }
+ */
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEInscriberMapper extends ARecipeTypeMapper<InscriberRecipe> {
@@ -74,8 +73,8 @@ public class AppliedEnergisticsAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == InscriberRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == InscriberRecipe.TYPE;
         }
 
         @Override
@@ -98,8 +97,8 @@ public class AppliedEnergisticsAddon {
         @ObjectHolder("fluix_crystal")
         public static final Item FLUIX_CRYSTAL = null;
 
-        @ObjectHolder("nether_quartz_seed")
-        public static final Item NETHER_QUARTZ_SEED = null;
+        //@ObjectHolder("nether_quartz_seed")
+        //public static final Item NETHER_QUARTZ_SEED = null;
         @ObjectHolder("fluix_crystal_seed")
         public static final Item FLUIX_CRYSTAL_SEED = null;
         @ObjectHolder("certus_crystal_seed")
@@ -111,7 +110,7 @@ public class AppliedEnergisticsAddon {
                     .before(CERTUS_QUARTZ_CRYSTAL, 256)
                     .conversion(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(CERTUS_QUARTZ_CRYSTAL).end()
                     .conversion(FLUIX_CRYSTAL, 2).ingredient(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(Tags.Items.DUSTS_REDSTONE).ingredient(Items.QUARTZ).end()
-                    .conversion(Items.QUARTZ).ingredient(NETHER_QUARTZ_SEED).end()
+                    //.conversion(Items.QUARTZ).ingredient(NETHER_QUARTZ_SEED).end()
                     .conversion(FLUIX_CRYSTAL).ingredient(FLUIX_CRYSTAL_SEED).end()
                     .conversion(CERTUS_QUARTZ_CRYSTAL).ingredient(CERTUS_CRYSTAL_SEED).end();
         }

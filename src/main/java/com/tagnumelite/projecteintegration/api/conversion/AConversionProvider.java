@@ -26,7 +26,7 @@ import com.tagnumelite.projecteintegration.datagen.PEICustomConversionProvider;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * An abstract class for generating custom conversions for ProjectE. Use {@link ConversionProvider} to denote your class

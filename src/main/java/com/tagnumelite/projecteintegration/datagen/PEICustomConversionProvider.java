@@ -30,8 +30,8 @@ import moze_intel.projecte.api.data.CustomConversionProvider;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.forgespi.language.ModFileScanData;
@@ -79,10 +79,10 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         Map<AConversionProvider, String> conversionProviders = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
             for (ModFileScanData.AnnotationData data : scanData.getAnnotations()) {
-                if (CONVERSION_PROVIDER_TYPE.equals(data.getAnnotationType())) {
-                    AConversionProvider provider = createInstance(data.getMemberName());
+                if (CONVERSION_PROVIDER_TYPE.equals(data.annotationType())) {
+                    AConversionProvider provider = createInstance(data.memberName());
                     if (provider != null) {
-                        Map<String, Object> annotationData = data.getAnnotationData();
+                        Map<String, Object> annotationData = data.annotationData();
                         if (!annotationData.containsKey("value")) {
                             continue;
                         }

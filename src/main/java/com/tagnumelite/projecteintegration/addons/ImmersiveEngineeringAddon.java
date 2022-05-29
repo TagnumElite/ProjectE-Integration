@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,9 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import blusunrize.immersiveengineering.api.crafting.*;
-import blusunrize.immersiveengineering.common.IEContent;
-import blusunrize.immersiveengineering.common.blocks.IEBlocks;
+import blusunrize.immersiveengineering.common.blocks.IEBaseBlock;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+import blusunrize.immersiveengineering.common.register.IEFluids;
 import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
@@ -37,12 +38,11 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
@@ -62,8 +62,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == AlloyRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == AlloyRecipe.TYPE;
         }
 
         @Override
@@ -80,8 +80,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == ArcFurnaceRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ArcFurnaceRecipe.TYPE;
         }
 
         @Override
@@ -98,8 +98,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == BlastFurnaceRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == BlastFurnaceRecipe.TYPE;
         }
 
         @Override
@@ -110,7 +110,7 @@ public class ImmersiveEngineeringAddon {
         @Override
         public NSSOutput getOutput(BlastFurnaceRecipe recipe) {
             ItemStack itemOutput = recipe.getResultItem().copy();
-            ItemStack slagOutput = recipe.slag.copy();
+            ItemStack slagOutput = recipe.slag.get();
             NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
             NormalizedSimpleStack slagStack = NSSItem.createItem(slagOutput);
 
@@ -132,8 +132,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == CokeOvenRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == CokeOvenRecipe.TYPE;
         }
 
         @Override
@@ -145,7 +145,7 @@ public class ImmersiveEngineeringAddon {
         public NSSOutput getOutput(CokeOvenRecipe recipe) {
             if (recipe.creosoteOutput > 0) {
                 ItemStack itemOutput = recipe.getResultItem().copy();
-                FluidStack creosoteOutput = new FluidStack(IEContent.fluidCreosote, recipe.creosoteOutput);
+                FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getBlock().getFluid(), recipe.creosoteOutput);
                 NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
                 NormalizedSimpleStack fluidStack = NSSFluid.createFluid(creosoteOutput);
 
@@ -170,13 +170,13 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == CrusherRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == CrusherRecipe.TYPE;
         }
 
         @Override
         public NSSOutput getOutput(CrusherRecipe recipe) {
-            return new NSSOutput(recipe.output.copy());
+            return new NSSOutput(recipe.output.get());
         }
 
         @Override
@@ -193,8 +193,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == MetalPressRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == MetalPressRecipe.TYPE;
         }
 
         @Override
@@ -204,7 +204,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public NSSOutput getOutput(MetalPressRecipe recipe) {
-            return new NSSOutput(recipe.output.copy());
+            return new NSSOutput(recipe.output.get());
         }
     }
 
@@ -216,8 +216,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            //return iRecipeType == MixerRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            //returnrecipeType == MixerRecipe.TYPE;
             return false;
         }
 
@@ -250,8 +250,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == SawmillRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == SawmillRecipe.TYPE;
         }
 
         @Override
@@ -262,7 +262,7 @@ public class ImmersiveEngineeringAddon {
         @Override
         public NSSOutput getOutput(SawmillRecipe recipe) {
             // TODO: Add support for multiple outputs
-            return new NSSOutput(recipe.output.copy());
+            return new NSSOutput(recipe.output.get());
         }
     }
 
@@ -274,8 +274,8 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == SqueezerRecipe.TYPE;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == SqueezerRecipe.TYPE;
         }
 
         @Override
@@ -308,7 +308,7 @@ public class ImmersiveEngineeringAddon {
                     .before(dustTag("nitrate"), 8);
 
             // TODO: Replace this forEach. It should not be done this way.
-            for (Block block : IEBlocks.WoodenDecoration.treatedWood.values()) {
+            for (IEBlocks.BlockEntry<IEBaseBlock> block : IEBlocks.WoodenDecoration.TREATED_WOOD.values()) {
                 builder.conversion(block).ingredient(ItemTags.PLANKS, 8).end();
             }
         }

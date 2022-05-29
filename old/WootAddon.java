@@ -33,7 +33,7 @@ import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidStack;
@@ -57,8 +57,8 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == AnvilRecipe.ANVIL_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == AnvilRecipe.ANVIL_TYPE;
         }
 
         @Override
@@ -88,8 +88,8 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == DyeSqueezerRecipe.DYE_SQUEEZER_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == DyeSqueezerRecipe.DYE_SQUEEZER_TYPE;
         }
 
         @Override
@@ -164,8 +164,8 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == FluidConvertorRecipe.FLUID_CONV_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == FluidConvertorRecipe.FLUID_CONV_TYPE;
         }
 
         @Override
@@ -193,8 +193,8 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
-            return iRecipeType == InfuserRecipe.INFUSER_TYPE;
+        public boolean canHandle(RecipeType<?>recipeType) {
+            returnrecipeType == InfuserRecipe.INFUSER_TYPE;
         }
 
         @Override
