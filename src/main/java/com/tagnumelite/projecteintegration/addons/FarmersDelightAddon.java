@@ -33,6 +33,7 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 public class FarmersDelightAddon {
@@ -53,7 +54,7 @@ public class FarmersDelightAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CookingPotRecipe.TYPE;
+            return recipeType == ModRecipeTypes.COOKING.get();
         }
     }
 
@@ -67,7 +68,7 @@ public class FarmersDelightAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CuttingBoardRecipe.TYPE;
+            return recipeType == ModRecipeTypes.CUTTING.get();
         }
 
         @Override

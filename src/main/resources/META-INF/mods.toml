@@ -29,7 +29,7 @@ versionRange = "[PE1.0.1,)"
 [[dependencies.projecteintegration]]
 modId = "farmersdelight"
 mandatory = false
-versionRange = "[1.16.5-0.5,)"
+versionRange = "[1.18.2-1.1.2,)"
 
 #[[dependencies.projecteintegration]]
 #modId = "compactcrafting"
