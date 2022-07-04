@@ -31,6 +31,11 @@ modId = "farmersdelight"
 mandatory = false
 versionRange = "[1.18.2-1.1.2,)"
 
+[[dependencies.projecteintegration]]
+modId = "pneumaticcraft"
+mandatory = false
+versionRange = "[1.18.2-3.3.0,)"
+
 #[[dependencies.projecteintegration]]
 #modId = "compactcrafting"
 #mandatory = false

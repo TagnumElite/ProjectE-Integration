@@ -179,6 +179,7 @@ dependencies {
     implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
     implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
+    // Once availible, use https://modmaven.dev/me/desht/pneumaticcraft/pneumaticcraft-repressurized
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     //implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
     //implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")

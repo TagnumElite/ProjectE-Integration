@@ -27,7 +27,7 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import me.desht.pneumaticcraft.api.crafting.ingredient.FluidIngredient;
 import me.desht.pneumaticcraft.api.crafting.recipe.*;
-import me.desht.pneumaticcraft.common.recipes.PneumaticCraftRecipeType;
+import me.desht.pneumaticcraft.common.core.ModRecipeTypes;
 import me.desht.pneumaticcraft.common.recipes.amadron.AmadronOffer;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
@@ -118,7 +118,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.amadronOffers;
+            return recipeType == ModRecipeTypes.AMADRON.get();
         }
     }
 
@@ -131,9 +131,9 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.assemblyDrill ||
-                    recipeType == PneumaticCraftRecipeType.assemblyLaser ||
-                    recipeType == PneumaticCraftRecipeType.assemblyDrillLaser;
+            return recipeType == ModRecipeTypes.ASSEMBLY_DRILL.get() ||
+                    recipeType == ModRecipeTypes.ASSEMBLY_LASER.get() ||
+                    recipeType == ModRecipeTypes.ASSEMBLY_DRILL_LASER.get();
         }
 
         @Override
@@ -169,7 +169,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.explosionCrafting;
+            return recipeType == ModRecipeTypes.EXPLOSION_CRAFTING.get();
         }
 
         @Override
@@ -192,7 +192,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.heatFrameCooling;
+            return recipeType == ModRecipeTypes.HEAT_FRAME_COOLING.get();
         }
     }
 
@@ -205,7 +205,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.pressureChamber;
+            return recipeType == ModRecipeTypes.PRESSURE_CHAMBER.get();
         }
 
         @Override
@@ -228,7 +228,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.refinery;
+            return recipeType == ModRecipeTypes.REFINERY.get();
         }
 
         @Override
@@ -246,7 +246,7 @@ public class PneumaticCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == PneumaticCraftRecipeType.thermoPlant;
+            return recipeType == ModRecipeTypes.THERMO_PLANT.get();
         }
 
         @Override
