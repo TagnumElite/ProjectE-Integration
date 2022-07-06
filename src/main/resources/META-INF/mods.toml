@@ -8,7 +8,7 @@ modId = "projecteintegration"
 version = "${file.jarVersion}"
 displayName = "ProjectE Integration"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
-updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.16.x/update.json"
+updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.18.x/update.json"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/projecte-integration"
 # logoFile="examplemod.png"
 credits = "Thanks for this example mod goes to Java"
