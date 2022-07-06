@@ -5,8 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for [Create] Mechanical Crafter
+
 ### Fixed
 - Fixed the url for updateJSON in the mods.toml
+
+### Removed
+- Unused code in CreateAddon
 
 ## [5.0.3]
 ### Fixed

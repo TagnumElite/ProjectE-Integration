@@ -23,6 +23,7 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.contraptions.components.crafter.MechanicalCraftingRecipe;
 import com.simibubi.create.content.contraptions.components.crusher.CrushingRecipe;
 import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.contraptions.components.fan.SplashingRecipe;
@@ -55,7 +56,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 // TODO: Can you see this below, maybe not gut.
 public class CreateAddon {
@@ -139,7 +139,7 @@ public class CreateAddon {
         @Override
         public NSSOutput getOutput(R recipe) {
             List<Object> outputs = new ArrayList<>();
-            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO -> pO.getChance() >= 1.0f).map(ProcessingOutput::getStack).collect(Collectors.toList());
+            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO -> pO.getChance() >= 1.0f).map(ProcessingOutput::getStack).toList();
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
@@ -272,43 +272,6 @@ public class CreateAddon {
         }
     }
 
-    /* Maybe not filling and emptying recipes just yet.
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class CreateFillingMapper extends CreateProcessingRecipeMapper<FillingRecipe> {
-        @Override
-        public String getName() {
-            return NAME("Filling");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Filling");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType == AllRecipeTypes.FILLING.getType();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class CreateEmptyingMapper extends CreateProcessingRecipeMapper<EmptyingRecipe> {
-        @Override
-        public String getName() {
-            return NAME("Emptying");
-        }
-
-        @Override
-        public String getDescription() {
-            return DESC("Emptying");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType == AllRecipeTypes.EMPTYING.getType();
-        }
-    }
-     */
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateDeployerApplicationMapper extends CreateProcessingRecipeMapper<DeployerApplicationRecipe> {
         @Override
@@ -322,25 +285,19 @@ public class CreateAddon {
         }
     }
 
-    /* TODO: BELOW
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class CreateMechanicalCraftingMapper extends CreateProcessingRecipeMapper<MechanicalCraftingRecipe> {
+    public static class CreateMechanicalCraftingMapper extends ARecipeTypeMapper<MechanicalCraftingRecipe> {
         @Override
         public String getName() {
             return NAME("MechanicalCrafting");
         }
 
         @Override
-        public String getDescription() {
-            return DESC("Mechanical Crafting");
-        }
-
-        @Override
         public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType == AllRecipeTypes.CUTTING.getType();
+            return recipeType == AllRecipeTypes.MECHANICAL_CRAFTING.getType();
         }
     }
-     */
+
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSandPaperPolishingMapper extends CreateProcessingRecipeMapper<SandPaperPolishingRecipe> {
         @Override
@@ -353,4 +310,6 @@ public class CreateAddon {
             return recipeType == AllRecipeTypes.SANDPAPER_POLISHING.getType();
         }
     }
+
+    // We are ignoring Filling, Emptying and SequencedAssembly recipes.
 }
