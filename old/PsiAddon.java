@@ -39,7 +39,7 @@ public class PsiAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == ModCraftingRecipes.TRICK_RECIPE_TYPE;
         }
     }

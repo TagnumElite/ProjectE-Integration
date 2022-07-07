@@ -65,7 +65,7 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == BloodMagicRecipeType.ALCHEMYTABLE;
         }
     }
@@ -78,7 +78,7 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == BloodMagicRecipeType.ARRAY;
         }
 
@@ -96,7 +96,7 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == BloodMagicRecipeType.ARC;
         }
 
@@ -131,7 +131,7 @@ public class BloodMagicAddon {
         // To whom may not realise the implications, it means I can calculate your bloods worth in your body. Creepy
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == BloodMagicRecipeType.ALTAR;
         }
 
@@ -154,7 +154,7 @@ public class BloodMagicAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == BloodMagicRecipeType.TARTARICFORGE;
         }
 

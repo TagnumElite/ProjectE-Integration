@@ -37,7 +37,7 @@ public class TouhouLittleMaidAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == InitRecipes.ALTAR_CRAFTING;
         }
 

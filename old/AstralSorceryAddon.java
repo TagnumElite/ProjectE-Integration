@@ -67,8 +67,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeTypesAS.TYPE_ALTAR.getType();
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeTypesAS.TYPE_ALTAR.getType();
         }
 
         @Override
@@ -108,8 +108,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
         }
 
         @Override
@@ -131,8 +131,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeTypesAS.TYPE_INFUSION.getType();
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeTypesAS.TYPE_INFUSION.getType();
         }
 
         @Override
@@ -161,8 +161,8 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeTypesAS.TYPE_WELL.getType();
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeTypesAS.TYPE_WELL.getType();
         }
 
         @Override

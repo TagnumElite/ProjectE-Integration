@@ -59,8 +59,8 @@ public class MrCrayfishVehicleModAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeType.FLUID_EXTRACTOR;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeType.FLUID_EXTRACTOR;
         }
 
         @Override
@@ -82,8 +82,8 @@ public class MrCrayfishVehicleModAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
-            returnrecipeType ==recipeType.FLUID_MIXER;
+        public boolean canHandle(RecipeType<?> recipeType) {
+            returnrecipeType == recipeType.FLUID_MIXER;
         }
 
         @Override
@@ -103,7 +103,7 @@ public class MrCrayfishVehicleModAddon {
                 ingredientMap.addIngredient(NSSFluid.createFluid(fluidInput.getFluid()), fluidInput.getAmount());
             }
 
-            return new NSSInput(ingredientMap,  new ArrayList<>(), true);
+            return new NSSInput(ingredientMap, new ArrayList<>(), true);
         }
     }
 }

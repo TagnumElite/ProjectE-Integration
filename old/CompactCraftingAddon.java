@@ -49,7 +49,7 @@ public class CompactCraftingAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == Registration.MINIATURIZATION_RECIPE_TYPE;
         }
 

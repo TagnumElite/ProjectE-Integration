@@ -51,7 +51,7 @@ public class DraconicEvolutionAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == DraconicAPI.FUSION_RECIPE_TYPE;
         }
 

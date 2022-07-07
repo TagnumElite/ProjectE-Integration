@@ -57,7 +57,7 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == AnvilRecipe.ANVIL_TYPE;
         }
 
@@ -164,7 +164,7 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == FluidConvertorRecipe.FLUID_CONV_TYPE;
         }
 
@@ -193,7 +193,7 @@ public class WootAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == InfuserRecipe.INFUSER_TYPE;
         }
 

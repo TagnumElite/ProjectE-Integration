@@ -48,14 +48,13 @@ import java.util.List;
 
 public class IndustrialForegoingAddon {
     public static final String MODID = "industrialforegoing";
+    public static finalrecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
+    public static finalrecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
+    public static finalrecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
 
     public static String NAME(String name) {
         return "IndustrialForegoing" + name + "Mapper";
     }
-
-    public static finalrecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
-    public static finalrecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
-    public static finalrecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFCrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
@@ -65,7 +64,7 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == crusherRecipeType;
         }
 
@@ -88,7 +87,7 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == dissolutionChamberRecipeType;
         }
 
@@ -136,7 +135,7 @@ public class IndustrialForegoingAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             returnrecipeType == stoneworkGenerateRecipeType;
         }
 
