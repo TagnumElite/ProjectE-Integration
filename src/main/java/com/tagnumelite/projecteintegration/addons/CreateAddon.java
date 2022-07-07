@@ -293,7 +293,7 @@ public class CreateAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?>recipeType) {
+        public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == AllRecipeTypes.MECHANICAL_CRAFTING.getType();
         }
     }
