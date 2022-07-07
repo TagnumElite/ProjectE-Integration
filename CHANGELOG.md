@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.1.0]
 ### Added
 - Support for [Create] Mechanical Crafter
 - NSSOutput.Builder for building NSSOutput with multiple outputs
@@ -566,7 +568,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.3...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.1.0...HEAD
+[5.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.3...v5.1.0
 [5.0.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.1...v5.0.3
 [5.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.4...v5.0.0

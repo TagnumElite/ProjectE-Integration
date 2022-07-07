@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.0.3",
-        "1.18.2-recommended": "5.0.3"
+        "1.18.2-latest": "5.1.0",
+        "1.18.2-recommended": "5.1.0"
     },
     "1.18.2": {
+        "5.1.3": "Added support for Thermal and add support for a create machine",
         "5.0.3": "Fixed support for PneumaticCraft: Repressurized - 3.3.0",
         "5.0.1": "Fixed support for Farmers Delight - 1.1.2",
         "5.0.0": "Initial release for 1.18.2"
