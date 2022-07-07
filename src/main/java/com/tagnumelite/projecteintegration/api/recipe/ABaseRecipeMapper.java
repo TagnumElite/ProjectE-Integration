@@ -189,6 +189,14 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     }
 
     /**
+     * A helper function to return a {@link NSSOutput.Builder} initialized with the appropriate args.
+     * @return A NSSOutput.Builder to be used for mapping outputs
+     */
+    public NSSOutput.Builder getOutputBuilder() {
+        return new NSSOutput.Builder(mapper, fakeGroupManager, recipeID);
+    }
+
+    /**
      * Returns a list of required mods from the {@link RecipeTypeMapper} annotation
      *
      * @return A list of modids or null.
