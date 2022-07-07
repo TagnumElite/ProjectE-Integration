@@ -260,14 +260,12 @@ public class Utils {
         for (Object output : outputs) {
             if (output == null) continue;
 
-            if (output instanceof ItemStack) {
-                ItemStack item = (ItemStack) output;
+            if (output instanceof ItemStack item) {
                 if (item.isEmpty()) continue;
 
                 outputStacks.put(NSSItem.createItem(item), item.getCount());
                 totalOutputs += item.getCount();
-            } else if (output instanceof FluidStack) {
-                FluidStack fluid = (FluidStack) output;
+            } else if (output instanceof FluidStack fluid) {
                 if (fluid.isEmpty()) continue;
 
                 outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
@@ -298,13 +296,11 @@ public class Utils {
         for (Object output : outputs) {
             if (output == null) continue;
 
-            if (output instanceof ItemStack) {
-                ItemStack item = (ItemStack) output;
+            if (output instanceof ItemStack item) {
                 if (item.isEmpty()) continue;
 
                 outputStacks.put(NSSItem.createItem(item), item.getCount());
-            } else if (output instanceof FluidStack) {
-                FluidStack fluid = (FluidStack) output;
+            } else if (output instanceof FluidStack fluid) {
                 if (fluid.isEmpty()) continue;
 
                 outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());

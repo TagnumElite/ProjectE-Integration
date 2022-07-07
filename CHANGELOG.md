@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Create] Mechanical Crafter
 
+### Changed
+- Use pattern matching in Utils
+
 ### Fixed
 - Fixed the url for updateJSON in the mods.toml
 
