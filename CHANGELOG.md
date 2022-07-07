@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Create] Mechanical Crafter
 - NSSOutput.Builder for building NSSOutput with multiple outputs
+- Support for [Thermal] Machines
 
 ### Changed
 - Use pattern matching in Utils

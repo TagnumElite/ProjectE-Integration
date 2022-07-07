@@ -133,6 +133,7 @@ repositories {
             includeGroup "com.github"
         }
     }
+    maven { name "Covers1624"; url 'https://maven.covers1624.net/' }
     maven { name "BlameJared"; url 'https://maven.blamejared.com' }
     maven { name "Progwml6"; url "https://dvs1.progwml6.com/files/maven/" }
     maven { name "ChickenBones"; url "https://chickenbones.net/maven/" }
@@ -165,6 +166,7 @@ dependencies {
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
+    implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
     //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("com.simibubi.create:Create:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
@@ -182,6 +184,12 @@ dependencies {
     // Once availible, use https://modmaven.dev/me/desht/pneumaticcraft/pneumaticcraft-repressurized
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
     //implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
+    implementation fg.deobf("com.teamcofh:thermal_cultivation:${mc_version}-${version_thermalcultivation}")
+    implementation fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${version_thermalexpansion}")
+    implementation fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${version_thermalfoundation}")
+    implementation fg.deobf("com.teamcofh:thermal_innovation:${mc_version}-${version_thermalinnovation}")
+    implementation fg.deobf("com.teamcofh:thermal_integration:${mc_version}-${version_thermalintegration}")
+    implementation fg.deobf("com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}")
     //implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
     //implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
     //implementation fg.deobf("curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}")

@@ -71,5 +71,10 @@
       <option name="name" value="Progwml6" />
       <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Covers1624" />
+      <option name="name" value="Covers1624" />
+      <option name="url" value="https://maven.covers1624.net/" />
+    </remote-repository>
   </component>
 </project>
