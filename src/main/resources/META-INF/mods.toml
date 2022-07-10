@@ -26,6 +26,16 @@ modId = "projecte"
 mandatory = true
 versionRange = "[PE1.0.1,)"
 
+#[[dependencies.projecteintegration]]
+#modId = "compactcrafting"
+#mandatory = false
+#versionRange = "[1.0.0,)"
+
+[[dependencies.projecteintegration]]
+modId = "create"
+mandatory = false
+versionRange = "[0.5.0,)"
+
 [[dependencies.projecteintegration]]
 modId = "farmersdelight"
 mandatory = false
@@ -35,11 +45,6 @@ versionRange = "[1.18.2-1.1.2,)"
 modId = "pneumaticcraft"
 mandatory = false
 versionRange = "[1.18.2-3.3.0,)"
-
-#[[dependencies.projecteintegration]]
-#modId = "compactcrafting"
-#mandatory = false
-#versionRange = "[1.0.0,)"
 
 [[dependencies.projecteintegration]]
 modId = "forge"
