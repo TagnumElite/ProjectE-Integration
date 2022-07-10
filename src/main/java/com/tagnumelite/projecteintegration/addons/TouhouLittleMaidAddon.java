@@ -26,19 +26,19 @@ import com.github.tartaricacid.touhoulittlemaid.crafting.AltarRecipe;
 import com.github.tartaricacid.touhoulittlemaid.init.InitRecipes;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class TouhouLittleMaidAddon {
     @RecipeTypeMapper(requiredMods = "touhou_little_maid", priority = 1)
     public static class TLMAltarMapper extends ARecipeTypeMapper<AltarRecipe> {
         @Override
         public String getName() {
-            return "TouhoutLittleMaidAltarMapper";
+            return "TouhouLittleMaidAltarMapper";
         }
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == InitRecipes.ALTAR_CRAFTING;
+            return recipeType == InitRecipes.ALTAR_CRAFTING;
         }
 
         @Override
