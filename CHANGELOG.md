@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.1]
+### Fixed
+- Default conversions for fluix dust in [Applied Energistics]
+
 ## [5.2.0]
 ### Added
 - Re-Added Support for [Touhou Little Maid] Altar crafting

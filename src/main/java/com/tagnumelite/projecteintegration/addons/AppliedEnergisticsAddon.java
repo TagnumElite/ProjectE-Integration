@@ -94,6 +94,8 @@ public class AppliedEnergisticsAddon {
         public static final Item CERTUS_QUARTZ_CRYSTAL = null;
         @ObjectHolder("charged_certus_quartz_crystal")
         public static final Item CERTUS_QUARTZ_CRYSTAL_CHARGED = null;
+        @ObjectHolder("fluix_dust")
+        public static final Item FLUIX_DUST = null;
         @ObjectHolder("fluix_crystal")
         public static final Item FLUIX_CRYSTAL = null;
 
