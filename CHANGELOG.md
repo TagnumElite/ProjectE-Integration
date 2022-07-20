@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.2] version bump
+
 ## [5.2.1]
 ### Fixed
 - Default conversions for fluix dust in [Applied Energistics]
@@ -579,7 +581,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.2...HEAD
+[5.2.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.0...v5.2.2
 [5.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.1.0...v5.2.0
 [5.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.3...v5.1.0
 [5.0.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.1...v5.0.3

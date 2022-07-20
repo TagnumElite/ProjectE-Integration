@@ -1,11 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.2.1",
-        "1.18.2-recommended": "5.2.1"
+        "1.18.2-latest": "5.2.2",
+        "1.18.2-recommended": "5.2.2"
     },
     "1.18.2": {
-        "5.2.1": "Fixed fluix dust conversion for Applied Energistics",
+        "5.2.2": "Fixed fluix dust conversion for Applied Energistics",
         "5.2.0": "Re added support for Touhou Little Maid and support Create 0.5.+",
         "5.1.0": "Added support for Thermal and add support for a create machine",
         "5.0.3": "Fixed support for PneumaticCraft: Repressurized - 3.3.0",
