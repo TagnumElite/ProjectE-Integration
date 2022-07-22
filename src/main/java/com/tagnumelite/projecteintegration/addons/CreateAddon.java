@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.components.crusher.CrushingRecipe;
 import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
@@ -37,9 +38,12 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
 import com.simibubi.create.content.curiosities.tools.SandPaperPolishingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -351,6 +355,15 @@ public class CreateAddon {
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == AllRecipeTypes.SANDPAPER_POLISHING.getType();
+        }
+    }
+
+    @ConversionProvider(MODID)
+    public static class CDataGenerator extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("default conversions for create")
+                    .before(AllItems.BAR_OF_CHOCOLATE.get(), 32);
         }
     }
 }

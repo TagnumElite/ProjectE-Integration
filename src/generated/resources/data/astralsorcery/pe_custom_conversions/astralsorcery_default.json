@@ -7,6 +7,14 @@
       "astralsorcery:marble_raw": 32,
       "astralsorcery:rock_crystal": 256,
       "astralsorcery:celestial_crystal": 512
-    }
+    },
+    "conversion": [
+      {
+        "output": "astralsorcery:starmetal_ingot",
+        "ingredients": [
+          "minecraft:iron_ingot"
+        ]
+      }
+    ]
   }
 }

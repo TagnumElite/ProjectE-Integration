@@ -106,11 +106,14 @@ public class AppliedEnergisticsAddon {
         public static final Item CERTUS_CRYSTAL_SEED = null;
         @ObjectHolder("purified_certus_quartz_crystal")
         public static final Item PURE_CERTUS_CRYSTAL_SEED = null;
+        @ObjectHolder("singularity")
+        public static final Item SINGULARITY = null;
 
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Set defaults conversions for Applied Energistics")
                     .before(CERTUS_QUARTZ_CRYSTAL, 256)
+                    .before(SINGULARITY, 256000)
                     .conversion(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(CERTUS_QUARTZ_CRYSTAL).end()
                     .conversion(FLUIX_CRYSTAL, 2).ingredient(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(Tags.Items.DUSTS_REDSTONE).ingredient(Items.QUARTZ).end()
                     .conversion(Items.QUARTZ).ingredient(NETHER_QUARTZ_SEED).end()

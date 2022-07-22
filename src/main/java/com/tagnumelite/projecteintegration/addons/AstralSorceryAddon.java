@@ -42,6 +42,7 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
@@ -190,7 +191,8 @@ public class AstralSorceryAddon {
                     .before(tag("forge:marble"), 32)
                     .before(BlocksAS.MARBLE_RAW, 32)
                     .before(ItemsAS.ROCK_CRYSTAL, 256)
-                    .before(ItemsAS.CELESTIAL_CRYSTAL, 512);
+                    .before(ItemsAS.CELESTIAL_CRYSTAL, 512)
+                    .conversion(ItemsAS.STARMETAL_INGOT).ingredient(Items.IRON_INGOT).end();
         }
     }
 }

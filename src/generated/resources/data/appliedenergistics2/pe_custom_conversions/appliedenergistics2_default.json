@@ -2,7 +2,8 @@
   "comment": "Set defaults conversions for Applied Energistics",
   "values": {
     "before": {
-      "appliedenergistics2:certus_quartz_crystal": 256
+      "appliedenergistics2:certus_quartz_crystal": 256,
+      "appliedenergistics2:singularity": 256000
     },
     "conversion": [
       {

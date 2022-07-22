@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Default conversions for [Applied Energistics]
+- Add conversion for star metal from iron ingot to [Astral Sorcery]
+- Forgotten to add singularity for [Applied Energistics]
+- Add EMC to the chocolate bar for [Create]
 
 ## [4.4.4]
 ### Fixed
