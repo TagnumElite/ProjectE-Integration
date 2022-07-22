@@ -141,6 +141,7 @@ dependencies {
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    implementation fg.deobf("curse.maven:endless-fake-624491:${version_endless_fake}")
     implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
@@ -256,6 +257,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'botania'
                     optionalDependency 'compact-crafting'
                     optionalDependency 'create'
+                    optionalDependency 'endless-fake'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'ice-and-fire-dragons'

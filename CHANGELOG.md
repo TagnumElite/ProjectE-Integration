@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for [Endless Fake] Extreme Crafting and Neutronium Compressor
+
 ### Fixed
 - Default conversions for [Applied Energistics]
 - Add conversion for star metal from iron ingot to [Astral Sorcery]
@@ -608,6 +611,7 @@ Added support for 18 more mods
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
+[Endless Fake]: https://www.curseforge.com/minecraft/mc-mods/endless-fake
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
