@@ -5,7 +5,7 @@ name: Latest tag
 on:
   push:
     tags:
-    - v*
+    - v4*
   workflow_dispatch:
 
 jobs:
