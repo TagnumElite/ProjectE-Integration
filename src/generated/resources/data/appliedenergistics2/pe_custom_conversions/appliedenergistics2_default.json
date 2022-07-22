@@ -33,7 +33,7 @@
         ]
       },
       {
-        "output": "appliedenergistics2:certus_quartz_crystal",
+        "output": "appliedenergistics2:purified_certus_quartz_crystal",
         "ingredients": [
           "appliedenergistics2:certus_crystal_seed"
         ]

@@ -104,6 +104,8 @@ public class AppliedEnergisticsAddon {
         public static final Item FLUIX_CRYSTAL_SEED = null;
         @ObjectHolder("certus_crystal_seed")
         public static final Item CERTUS_CRYSTAL_SEED = null;
+        @ObjectHolder("purified_certus_quartz_crystal")
+        public static final Item PURE_CERTUS_CRYSTAL_SEED = null;
 
         @Override
         public void convert(CustomConversionBuilder builder) {
@@ -113,7 +115,7 @@ public class AppliedEnergisticsAddon {
                     .conversion(FLUIX_CRYSTAL, 2).ingredient(CERTUS_QUARTZ_CRYSTAL_CHARGED).ingredient(Tags.Items.DUSTS_REDSTONE).ingredient(Items.QUARTZ).end()
                     .conversion(Items.QUARTZ).ingredient(NETHER_QUARTZ_SEED).end()
                     .conversion(FLUIX_CRYSTAL).ingredient(FLUIX_CRYSTAL_SEED).end()
-                    .conversion(CERTUS_QUARTZ_CRYSTAL).ingredient(CERTUS_CRYSTAL_SEED).end();
+                    .conversion(PURE_CERTUS_CRYSTAL_SEED).ingredient(CERTUS_CRYSTAL_SEED).end();
         }
     }
 }
