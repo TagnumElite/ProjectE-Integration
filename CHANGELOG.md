@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.4.5]
 ### Added
 - Support for [Endless Fake] Extreme Crafting and Neutronium Compressor
 
@@ -547,7 +549,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.4...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.5...HEAD
+[4.4.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.4...v4.4.5
 [4.4.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.3...v4.4.4
 [4.4.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.2...v4.4.3
 [4.4.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.1...v4.4.2
