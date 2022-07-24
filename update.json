@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.16.5-latest": "4.4.5",
-        "1.16.5-recommended": "4.4.5"
+        "1.16.5-latest": "4.4.6",
+        "1.16.5-recommended": "4.4.6"
     },
     "1.16.5": {
+        "4.4.6": "See https://github.com/TagnumElite/ProjectE-Integration/releases/4.4.6 for more details",
         "4.4.5": "See https://github.com/TagnumElite/ProjectE-Integration/releases/4.4.5 for more details",
         "4.1.7": "See https://github.com/TagnumElite/ProjectE-Integration/releases/4.1.7 for more details",
         "4.1.6": "See https://github.com/TagnumElite/ProjectE-Integration/releases/4.1.6 for more details",
