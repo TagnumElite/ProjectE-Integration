@@ -52,7 +52,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ManaAndArtificeAddon {
-    public static final String MODID = "manaandartifice";
+    public static final String MODID = "mna";
 
     public static String NAME(String name) {
         return "ManaAndArtifice" + name + "Mapper";

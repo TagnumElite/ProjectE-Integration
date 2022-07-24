@@ -2,7 +2,7 @@
   "comment": "Default conversions for Mana and Artifice",
   "values": {
     "before": {
-      "mana-and-artifice:vinteum_dust": 32
+      "mna:vinteum_dust": 32
     }
   }
 }
