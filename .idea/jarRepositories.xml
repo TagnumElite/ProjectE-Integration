@@ -76,5 +76,10 @@
       <option name="name" value="Covers1624" />
       <option name="url" value="https://maven.covers1624.net/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="GeckoMaven" />
+      <option name="name" value="GeckoMaven" />
+      <option name="url" value="https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" />
+    </remote-repository>
   </component>
 </project>
