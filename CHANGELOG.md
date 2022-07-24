@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- WIP Support for [Mana And Artifice]
 
 ## [4.4.5]
 ### Added
@@ -620,6 +622,7 @@ Added support for 18 more mods
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
+[Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
 [MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
