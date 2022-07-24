@@ -26,6 +26,7 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.components.crafter.MechanicalCraftingRecipe;
 import com.simibubi.create.content.contraptions.components.crusher.CrushingRecipe;
 import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.contraptions.components.fan.HauntingRecipe;
 import com.simibubi.create.content.contraptions.components.fan.SplashingRecipe;
 import com.simibubi.create.content.contraptions.components.millstone.MillingRecipe;
 import com.simibubi.create.content.contraptions.components.mixer.CompactingRecipe;
@@ -219,6 +220,19 @@ public class CreateAddon {
     //        returnrecipeType == AllRecipeTypes.CONVERSION.getType();
     //    }
     //}
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class CreateHauntingMapper extends CreateProcessingRecipeMapper<HauntingRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Haunting");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == AllRecipeTypes.HAUNTING.getType();
+        }
+    }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMillingMapper extends CreateProcessingRecipeMapper<MillingRecipe> {

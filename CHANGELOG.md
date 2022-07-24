@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.2.3]
 ### Added
 - WIP Support for [Mana And Artifice]
+- Support for [Create] Haunting fan
 
 ## [5.2.2] version bump
 
@@ -583,7 +586,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.2...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.3...HEAD
+[5.2.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.2...v5.2.3
 [5.2.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.0...v5.2.2
 [5.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.1.0...v5.2.0
 [5.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.0.3...v5.1.0
