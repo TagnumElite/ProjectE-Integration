@@ -55,6 +55,11 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         return NSSItem.createTag(new ResourceLocation(tag));
     }
 
+    // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
+    private static NormalizedSimpleStack ingotTag(String ingot) {
+        return tag("forge:ingots/" + ingot);
+    }
+
     @Override
     protected void addCustomConversions() {
         createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
@@ -67,11 +72,6 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
             entry.getKey().convert(builder);
         }
-    }
-
-    // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
-    private static NormalizedSimpleStack ingotTag(String ingot) {
-        return tag("forge:ingots/" + ingot);
     }
 
     private Map<AConversionProvider, String> getConversionProviders() {

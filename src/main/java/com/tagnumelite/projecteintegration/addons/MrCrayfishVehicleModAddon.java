@@ -103,7 +103,7 @@ public class MrCrayfishVehicleModAddon {
                 ingredientMap.addIngredient(NSSFluid.createFluid(fluidInput.getFluid()), fluidInput.getAmount());
             }
 
-            return new NSSInput(ingredientMap,  new ArrayList<>(), true);
+            return new NSSInput(ingredientMap, new ArrayList<>(), true);
         }
     }
 }

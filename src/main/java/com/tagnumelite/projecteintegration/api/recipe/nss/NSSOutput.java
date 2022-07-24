@@ -61,7 +61,7 @@ public class NSSOutput {
     /**
      * A helper constructor to create an NSSOutput from an {@link ItemStack}.
      *
-     * @param item The {@link ItemStack} to be converted
+     * @param item         The {@link ItemStack} to be converted
      * @param forceCopyNBT Force copies the NBT tag from ItemStack or just uses {@link NSSItem#createItem(ItemStack)}
      */
     public NSSOutput(ItemStack item, boolean forceCopyNBT) {

@@ -48,14 +48,13 @@ import java.util.List;
 
 public class IndustrialForegoingAddon {
     public static final String MODID = "industrialforegoing";
+    public static final IRecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
+    public static final IRecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
+    public static final IRecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
 
     public static String NAME(String name) {
         return "IndustrialForegoing" + name + "Mapper";
     }
-
-    public static final IRecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
-    public static final IRecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
-    public static final IRecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFCrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
@@ -166,6 +165,47 @@ public class IndustrialForegoingAddon {
             return new NSSInput(ingredientMap, true);
         }
     }
+
+    /* Disable the fermentation station mapper for now, I don't think it is required for now
+    @CustomRecipeMapper(MODID)
+    public static class IFFermentationStationMapper extends ACustomRecipeMapper<OreFluidEntryFermenter> {
+        @Override
+        public String getName() {
+            return NAME("FermentationStation");
+        }
+
+        @Override
+        public List<OreFluidEntryFermenter> getRecipes() {
+            List<OreFluidEntryFermenter> fermentationStationRecipes = new ArrayList<>();
+            TagCollectionManager.getInstance().getItems().getAvailableTags().stream()
+                    .filter(resourceLocation -> resourceLocation.toString().startsWith("forge:ores/") && OreTitaniumFluidAttributes.isValid(resourceLocation))
+                    .forEach(resourceLocation -> {
+                        fermentationStationRecipes.add(new OreFluidEntryFermenter(OreTitaniumFluidAttributes.getFluidWithTag(ModuleCore.RAW_ORE_MEAT, 100, resourceLocation), OreTitaniumFluidAttributes.getFluidWithTag(ModuleCore.FERMENTED_ORE_MEAT, 200, resourceLocation)));
+                    });
+            return fermentationStationRecipes;
+        }
+
+        @Override
+        public NSSOutput getOutput(OreFluidEntryFermenter recipe) {
+            return new NSSOutput(recipe.getOutput());
+        }
+
+        @Override
+        public NSSInput getInput(OreFluidEntryFermenter recipe) {
+            return NSSInput.createFluid(recipe.getInput());
+        }
+
+        @Override
+        protected List<Ingredient> getIngredients(OreFluidEntryFermenter recipe) {
+            return null;
+        }
+
+        @Override
+        protected ItemStack getResult(OreFluidEntryFermenter recipe) {
+            return null;
+        }
+    }
+    */
 
     @ConversionProvider(MODID)
     public static class IFConversionProvider extends AConversionProvider {
