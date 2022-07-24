@@ -22,34 +22,30 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.ma.api.recipes.IItemAndPatternRecipe;
-import com.ma.api.rituals.IRitualReagent;
-import com.ma.interop.jei.ingredients.ManaweavePatternIngredient;
-import com.ma.items.ItemInit;
-import com.ma.recipes.RecipeInit;
-import com.ma.recipes.arcanefurnace.ArcaneFurnaceRecipe;
-import com.ma.recipes.eldrin.EldrinAltarRecipe;
-import com.ma.recipes.manaweaving.ManaweavingRecipe;
-import com.ma.recipes.rituals.RitualRecipe;
-import com.ma.recipes.runeforging.RuneforgingRecipe;
-import com.ma.recipes.runeforging.RunescribingRecipe;
-import com.ma.tools.MATags;
+import com.mna.api.recipes.IItemAndPatternRecipe;
+import com.mna.api.rituals.IRitualReagent;
+import com.mna.items.ItemInit;
+import com.mna.recipes.RecipeInit;
+import com.mna.recipes.arcanefurnace.ArcaneFurnaceRecipe;
+import com.mna.recipes.eldrin.EldrinAltarRecipe;
+import com.mna.recipes.manaweaving.ManaweavingRecipe;
+import com.mna.recipes.rituals.RitualRecipe;
+import com.mna.recipes.runeforging.RuneforgingRecipe;
+import com.mna.recipes.runeforging.RunescribingRecipe;
+import com.mna.tools.MATags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.ABaseRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
-import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,7 +73,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.ARCANE_FURNACE_TYPE;
         }
 
@@ -95,7 +91,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.ELDRIN_ALTAR_TYPE;
         }
     }
@@ -108,7 +104,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.MANAWEAVING_RECIPE_TYPE; // TODO: MANAWEAVING_PATTERN
         }
     }
@@ -131,7 +127,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.RITUAL_TYPE;
         }
 
@@ -166,7 +162,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.RUNESCRIBING_TYPE;
         }
     }
@@ -179,7 +175,7 @@ public class ManaAndArtificeAddon {
         }
 
         @Override
-        public boolean canHandle(IRecipeType<?> iRecipeType) {
+        public boolean canHandle(RecipeType<?> iRecipeType) {
             return iRecipeType == RecipeInit.RUNEFORGING_TYPE;
         }
 
@@ -201,7 +197,7 @@ public class ManaAndArtificeAddon {
         }
     }
 
-    public static abstract class MAAItemAndPatternRecipeMapper<R extends IItemAndPatternRecipe & IRecipe<?>> extends ARecipeTypeMapper<R> {
+    public static abstract class MAAItemAndPatternRecipeMapper<R extends IItemAndPatternRecipe & Recipe<?>> extends ARecipeTypeMapper<R> {
         @Override
         protected List<Ingredient> getIngredients(R recipe) {
             List<Ingredient> recipeIngredients = new ArrayList<>();
