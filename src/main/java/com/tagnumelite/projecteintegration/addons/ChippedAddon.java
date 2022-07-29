@@ -28,18 +28,16 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.grimbo.chipped.recipe.ChippedRecipe.*;
+import static com.grimbo.chipped.recipe.ChippedSerializer.*;
 
 public class ChippedAddon {
     // TODO: Figure out if I want to split this into separate mappers or keep it as one.
@@ -51,7 +49,7 @@ public class ChippedAddon {
         }
 
         @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
+        public boolean canHandle(IRecipeType<?> recipeType) {
             return recipeType == BOTANIST_WORKBENCH_TYPE ||
                     recipeType == GLASSBLOWER_TYPE ||
                     recipeType == CARPENTERS_TABLE_TYPE ||
@@ -64,15 +62,16 @@ public class ChippedAddon {
         @Override
         public boolean convertRecipe(ChippedRecipe recipe) {
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
-            for (HolderSet<Item> tag : recipe.getTags()) {
-                IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
-                List<Item> items = tag.stream().filter(Holder::isBound).map(Holder::value).toList();
-                convertIngredient(Ingredient.of(items.stream().map(ItemStack::new)), ingMap, fgm);
 
-                for (Item item : items) {
+            for (ITag<Item> tag : recipe.getTags()) {
+                IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
+                convertIngredient(Ingredient.of(tag), ingMap, fgm);
+
+                for (Item item : tag.getValues()) {
                     mapper.addConversion(1, NSSItem.createItem(item), ingMap.getMap());
                 }
             }
+
             return addConversionsAndReturn(fgm, true);
         }
     }
