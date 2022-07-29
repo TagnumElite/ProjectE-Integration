@@ -140,6 +140,7 @@ dependencies {
     implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
+    implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
@@ -258,6 +259,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'astral-sorcery'
                     optionalDependency 'blood-magic'
                     optionalDependency 'botania'
+                    optionalDependency 'chipped'
                     optionalDependency 'compact-crafting'
                     optionalDependency 'create'
                     optionalDependency 'endless-fake'

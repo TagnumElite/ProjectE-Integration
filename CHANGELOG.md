@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for recipes from [Chipped]
 
 ## [4.4.6]
 ### Added
@@ -617,6 +619,7 @@ Added support for 18 more mods
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
 [Blood Magic]: https://www.curseforge.com/minecraft/mc-mods/blood-magic
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
+[Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Endless Fake]: https://www.curseforge.com/minecraft/mc-mods/endless-fake
