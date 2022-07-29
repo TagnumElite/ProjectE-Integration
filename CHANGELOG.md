@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.4]
+### Added
+- Support for recipes from [Chipped]
+
 ## [5.2.3]
 ### Added
 - WIP Support for [Mana And Artifice]
@@ -586,7 +590,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.3...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.4...HEAD
+[5.2.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.3...v5.2.4
 [5.2.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.2...v5.2.3
 [5.2.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.2.0...v5.2.2
 [5.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.1.0...v5.2.0
@@ -655,6 +660,7 @@ Added support for 18 more mods
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
 [Blood Magic]: https://www.curseforge.com/minecraft/mc-mods/blood-magic
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
+[Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
