@@ -11,4 +11,11 @@
       </configuration>
     </facet>
   </component>
+  <component name="McpModuleSettings">
+    <option name="mappingFile" value="D:\GitHub\TagnumElite\ProjectE Integration\build\createMcpToSrg\output.tsrg" />
+    <option name="mcpVersion" value="official_1.18.2" />
+    <option name="minecraftVersion" value="1.18.2" />
+    <option name="platformVersion" value="40.1.54" />
+    <option name="srgType" value="TSRG" />
+  </component>
 </module>
