@@ -42,25 +42,13 @@ import java.util.List;
 import static com.grimbo.chipped.recipe.ChippedRecipe.*;
 
 public class ChippedAddon {
-    // TODO: Figure out if I want to split this into separate mappers or keep it as one.
-    @RecipeTypeMapper(requiredMods = "chipped", priority = 1)
-    public static class CRecipeMapper extends ARecipeTypeMapper<ChippedRecipe> {
-        @Override
-        public String getName() {
-            return "ChippedRecipeMapper";
-        }
+    public static final String MODID = "chipped";
 
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == BOTANIST_WORKBENCH_TYPE ||
-                    recipeType == GLASSBLOWER_TYPE ||
-                    recipeType == CARPENTERS_TABLE_TYPE ||
-                    recipeType == LOOM_TABLE_TYPE ||
-                    recipeType == MASON_TABLE_TYPE ||
-                    recipeType == ALCHEMY_BENCH_TYPE ||
-                    recipeType == MECHANIST_WORKBENCH_TYPE;
-        }
+    public static String NAME(String name) {
+        return "Chipped" + name + "Mapper";
+    }
 
+    public abstract static class ChippedRecipeMapper extends ARecipeTypeMapper<ChippedRecipe> {
         @Override
         public boolean convertRecipe(ChippedRecipe recipe) {
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
@@ -74,6 +62,97 @@ public class ChippedAddon {
                 }
             }
             return addConversionsAndReturn(fgm, true);
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedBotanistWorkbenchMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("BotanistWorkbench");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == BOTANIST_WORKBENCH_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedGlassblowerMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("Glassblower");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == GLASSBLOWER_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedCarpentersTableMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("CarpentersTable");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == CARPENTERS_TABLE_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedLoomTableMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("LoomTable");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == LOOM_TABLE_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedMasonTableMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("MasonTable");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == MASON_TABLE_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedAlchemyBenchMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("AlchemyBench");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ALCHEMY_BENCH_TYPE;
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedMechanistWorkbenchMapper extends ChippedRecipeMapper {
+        @Override
+        public String getName() {
+            return NAME("MechanistWorkbench");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == MECHANIST_WORKBENCH_TYPE;
         }
     }
 }
