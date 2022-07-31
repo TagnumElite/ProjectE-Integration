@@ -33,7 +33,9 @@ import com.simibubi.create.content.contraptions.components.mixer.CompactingRecip
 import com.simibubi.create.content.contraptions.components.mixer.MixingRecipe;
 import com.simibubi.create.content.contraptions.components.press.PressingRecipe;
 import com.simibubi.create.content.contraptions.components.saw.CuttingRecipe;
+import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyRecipe;
 import com.simibubi.create.content.contraptions.processing.BasinRecipe;
+import com.simibubi.create.content.contraptions.processing.ItemApplicationRecipe;
 import com.simibubi.create.content.contraptions.processing.ProcessingOutput;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
 import com.simibubi.create.content.curiosities.tools.SandPaperPolishingRecipe;
@@ -53,10 +55,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // TODO: Can you see this below, maybe not gut.
 public class CreateAddon {
@@ -80,7 +79,10 @@ public class CreateAddon {
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
 
-            for (Ingredient ingredient : ingredients) {
+            for (int i = 0; i < ingredients.size(); i++) {
+                Ingredient ingredient = ingredients.get(i);
+                if (recipe instanceof ItemApplicationRecipe iaRecipe && iaRecipe.shouldKeepHeldItem() && i == 1)
+                    continue; // Skip ItemApplicationRecipe's held item if it is not consumed.
                 if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
                     return new NSSInput(ingredientMap, fakeGroupMap, false);
                 }
@@ -313,6 +315,47 @@ public class CreateAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class CreateItemApplicationMapper extends CreateProcessingRecipeMapper<ItemApplicationRecipe> {
+        @Override
+        public String getName() {
+            return NAME("ItemApplication");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == AllRecipeTypes.ITEM_APPLICATION.getType();
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class CreateSequencedAssemblyMapper extends ARecipeTypeMapper<SequencedAssemblyRecipe> {
+        @Override
+        public String getName() {
+            return NAME("SequencedAssembly");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == AllRecipeTypes.SEQUENCED_ASSEMBLY.getType();
+        }
+
+        @Override
+        protected List<Ingredient> getIngredients(SequencedAssemblyRecipe recipe) {
+            return Collections.singletonList(recipe.getIngredient());
+        }
+
+        @Override
+        public NSSOutput getOutput(SequencedAssemblyRecipe recipe) {
+            // TODO: Add support for mapOutput multiple items with 100% chance
+            if (recipe.getOutputChance() != 1f) return null;
+
+            ItemStack output = recipe.getResultItem();
+            if (output.isEmpty()) return null;
+            return new NSSOutput(output);
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSandPaperPolishingMapper extends CreateProcessingRecipeMapper<SandPaperPolishingRecipe> {
         @Override
         public String getName() {
@@ -325,5 +368,5 @@ public class CreateAddon {
         }
     }
 
-    // We are ignoring Filling, Emptying and SequencedAssembly recipes.
+    // We are ignoring Filling, Emptying recipes.
 }
