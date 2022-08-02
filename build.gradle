@@ -166,6 +166,7 @@ dependencies {
     // ======================= [ Optional Mods ] =======================
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
+    implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
@@ -295,6 +296,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     requiredDependency 'projecte'
 
                     optionalDependency 'applied-energistics-2'
+                    optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
                     //optionalDependency 'blood-magic'
                     optionalDependency 'botania'
