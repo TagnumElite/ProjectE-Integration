@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.3.0",
-        "1.18.2-recommended": "5.3.0"
+        "1.18.2-latest": "5.3.1",
+        "1.18.2-recommended": "5.3.1"
     },
     "1.18.2": {
+        "5.3.1": "Added support for Ars Nouveau",
         "5.3.0": "Separated Chipped mappers and more Create support",
         "5.2.4": "Add support for recipes from Chipped",
         "5.2.3": "WIP support for Mana and Artifice and Create Haunting Fan",
