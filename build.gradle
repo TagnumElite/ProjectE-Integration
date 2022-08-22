@@ -165,12 +165,14 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
+    runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
     // ======================= [ Optional Mods ] =======================
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
+    implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
     implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
@@ -302,6 +304,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
                     //optionalDependency 'blood-magic'
+                    optionalDependency 'blue-skies'
                     optionalDependency 'botania'
                     optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'

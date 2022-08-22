@@ -1,0 +1,34 @@
+{
+  "comment": "Default conversions for Blue Skies",
+  "values": {
+    "before": {
+      "blue_skies:horizofin_tunid": 64,
+      "blue_skies:charscale_moki": 64,
+      "blue_skies:municipal_monkfish": 64,
+      "blue_skies:grittle_flatfish": 64,
+      "blue_skies:monitor_tail": 64,
+      "blue_skies:venison": 64,
+      "blue_skies:carabeef": 64,
+      "blue_skies:black_brewberry": 32,
+      "blue_skies:pink_brewberry": 32,
+      "blue_skies:brewberry": 32,
+      "blue_skies:crescent_fruit": 32,
+      "blue_skies:cherry": 16,
+      "blue_skies:raw_charoite": 128,
+      "blue_skies:raw_aquite": 128,
+      "blue_skies:raw_falsite": 128,
+      "blue_skies:raw_horizonite": 128,
+      "blue_skies:raw_ventium": 128,
+      "blue_skies:diopside_gem": 96,
+      "blue_skies:aquatic_arc": 96,
+      "blue_skies:pyrope_gem": 96,
+      "blue_skies:moonstone_shard": 96,
+      "blue_skies:pearl": 128,
+      "blue_skies:soul_fragment": 156,
+      "blue_skies:bug_guts": 1,
+      "blue_skies:fox_pelt": 8,
+      "blue_skies:azulfo_horn": 24,
+      "blue_skies:snowcap_pinhead": 1
+    }
+  }
+}
