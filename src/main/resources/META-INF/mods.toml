@@ -10,7 +10,7 @@ displayName = "ProjectE Integration"
 updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.19.x/update.json"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/projecte-integration"
 # logoFile="examplemod.png"
-#credits = "Thanks for this example mod goes to Java"
+credits = "Thanks to ProjectE team for ProjectE"
 authors = "TagnumElite"
 description = '''
 ProjectE Integration is a mod for adding support for mapping recipes from other mods to something that ProjectE understands
