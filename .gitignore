@@ -279,3 +279,4 @@ gradle-app.setting
 *.jks
 .idea/runConfigurations/*.xml
 .idea/discord.xml
+!libs/*.jar
