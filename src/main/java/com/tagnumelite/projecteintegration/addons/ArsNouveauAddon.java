@@ -60,7 +60,7 @@ public class ArsNouveauAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.CRUSH_TYPE;
+            return recipeType == RecipeRegistry.CRUSH_TYPE.get();
         }
 
         @Override
@@ -71,9 +71,9 @@ public class ArsNouveauAddon {
         @Override
         public NSSOutput getOutput(CrushRecipe recipe) {
             Object[] outputs = recipe.outputs.stream().filter(output -> output.chance > 1f).map(output -> output.stack).toArray();
-            
+
             if (outputs.length == 0) return null;
-                       
+
             return mapOutputs(outputs);
         }
     }
@@ -88,7 +88,7 @@ public class ArsNouveauAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.APPARATUS_TYPE;
+            return recipeType == RecipeRegistry.APPARATUS_TYPE.get();
         }
 
         @Override
@@ -113,7 +113,7 @@ public class ArsNouveauAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.GLYPH_TYPE;
+            return recipeType == RecipeRegistry.GLYPH_TYPE.get();
         }
 
         @Override
@@ -136,7 +136,7 @@ public class ArsNouveauAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.IMBUEMENT_TYPE;
+            return recipeType == RecipeRegistry.IMBUEMENT_TYPE.get();
         }
 
         @Override

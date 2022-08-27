@@ -3,31 +3,31 @@
   "values": {
     "before": {
       "ars_nouveau:experience_gem": 16,
-      "ars_nouveau:wilden_spike": 64,
-      "ars_nouveau:wilden_horn": 96,
-      "ars_nouveau:wixie_shards": 32,
       "ars_nouveau:whirlisprig_shards": 16,
+      "ars_nouveau:wilden_horn": 96,
+      "ars_nouveau:wilden_spike": 64,
+      "ars_nouveau:wilden_tribute": 96,
       "ars_nouveau:wilden_wing": 72,
-      "ars_nouveau:wilden_tribute": 96
+      "ars_nouveau:wixie_shards": 32
     },
     "conversion": [
       {
-        "output": "ars_nouveau:magebloom",
         "ingredients": [
           "ars_nouveau:magebloom_crop"
-        ]
+        ],
+        "output": "ars_nouveau:magebloom"
       },
       {
-        "output": "ars_nouveau:drygmy_shard",
         "ingredients": [
           "ars_nouveau:wilden_horn"
-        ]
+        ],
+        "output": "ars_nouveau:drygmy_shard"
       },
       {
-        "output": "ars_nouveau:starbuncle_shards",
         "ingredients": [
           "minecraft:gold_nugget"
-        ]
+        ],
+        "output": "ars_nouveau:starbuncle_shards"
       }
     ]
   }

@@ -23,8 +23,8 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.blakebr0.extendedcrafting.api.crafting.ICompressorRecipe;
-import com.blakebr0.extendedcrafting.api.crafting.RecipeTypes;
 import com.blakebr0.extendedcrafting.config.ModConfigs;
+import com.blakebr0.extendedcrafting.init.ModRecipeTypes;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
@@ -53,7 +53,7 @@ public class ExtendedCraftingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.COMPRESSOR && ModConfigs.ENABLE_COMPRESSOR.get();
+            return recipeType == ModRecipeTypes.COMPRESSOR.get() && ModConfigs.ENABLE_COMPRESSOR.get();
         }
 
         @Override
@@ -79,7 +79,7 @@ public class ExtendedCraftingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.ENDER_CRAFTER && ModConfigs.ENABLE_ENDER_CRAFTER.get();
+            return recipeType == ModRecipeTypes.ENDER_CRAFTER.get() && ModConfigs.ENABLE_ENDER_CRAFTER.get();
         }
     }
 
@@ -97,7 +97,7 @@ public class ExtendedCraftingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.TABLE && ModConfigs.ENABLE_TABLES.get();
+            return recipeType == ModRecipeTypes.TABLE.get() && ModConfigs.ENABLE_TABLES.get();
         }
     }
 
@@ -115,7 +115,7 @@ public class ExtendedCraftingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.COMBINATION && ModConfigs.ENABLE_CRAFTING_CORE.get();
+            return recipeType == ModRecipeTypes.COMBINATION.get() && ModConfigs.ENABLE_CRAFTING_CORE.get();
         }
     }
 }

@@ -1,9 +1,0 @@
-{
-  "comment": "Sets default conversions for Pam\u0027s HarvestCraft: Crops",
-  "values": {
-    "before": {
-      "#forge:crops": 16,
-      "#forge:seeds": 16
-    }
-  }
-}

@@ -1,16 +1,16 @@
 {
-  "comment": "Set defaults conversions for Farmer\u0027s Delight",
+  "comment": "Set defaults conversions for Farmer's Delight",
   "values": {
     "before": {
-      "#forge:crops/rice": 1,
-      "farmersdelight:rice_panicle": 1,
-      "farmersdelight:straw": 1,
-      "#forge:crops/tomato": 32,
-      "#forge:crops/onion": 32,
       "#forge:crops/cabbage": 32,
-      "farmersdelight:ham": 64,
+      "#forge:crops/onion": 32,
+      "#forge:crops/rice": 1,
+      "#forge:crops/tomato": 32,
       "farmersdelight:brown_mushroom_colony": 32,
-      "farmersdelight:red_mushroom_colony": 32
+      "farmersdelight:ham": 64,
+      "farmersdelight:red_mushroom_colony": 32,
+      "farmersdelight:rice_panicle": 1,
+      "farmersdelight:straw": 1
     }
   }
 }

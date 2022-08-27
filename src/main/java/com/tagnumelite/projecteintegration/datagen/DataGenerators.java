@@ -24,9 +24,9 @@ package com.tagnumelite.projecteintegration.datagen;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = PEIntegration.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -35,9 +35,7 @@ public class DataGenerators {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
-        if (event.includeServer()) {
-            gen.addProvider(new PEICustomConversionProvider(gen));
-        }
+        final DataGenerator gen = event.getGenerator();
+        gen.addProvider(event.includeServer(), new PEICustomConversionProvider(gen));
     }
 }

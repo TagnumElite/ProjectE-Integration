@@ -24,9 +24,9 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.blakebr0.mysticalagriculture.api.crafting.IInfusionRecipe;
 import com.blakebr0.mysticalagriculture.api.crafting.IReprocessorRecipe;
-import com.blakebr0.mysticalagriculture.api.crafting.RecipeTypes;
 import com.blakebr0.mysticalagriculture.init.ModBlocks;
 import com.blakebr0.mysticalagriculture.init.ModItems;
+import com.blakebr0.mysticalagriculture.init.ModRecipeTypes;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -46,7 +46,7 @@ public class MysticalAgricultureAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.INFUSION;
+            return recipeType == ModRecipeTypes.INFUSION.get();
         }
     }
 
@@ -59,7 +59,7 @@ public class MysticalAgricultureAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.REPROCESSOR;
+            return recipeType == ModRecipeTypes.REPROCESSOR.get();
         }
     }
 

@@ -44,7 +44,9 @@ import static com.tagnumelite.projecteintegration.api.Utils.getDummyMap;
  * A 'data' class to hold both a {@link NormalizedSimpleStack} and an integer denoting the output item and amount.
  */
 public class NSSOutput {
-    /** A Singleton to denote an empty NSSOutput */
+    /**
+     * A Singleton to denote an empty NSSOutput
+     */
     public static final NSSOutput EMPTY = new NSSOutput(0, null);
 
     public final NormalizedSimpleStack nss;
@@ -107,6 +109,7 @@ public class NSSOutput {
 
     /**
      * A helper function to check this object has a valid NSS object with amount over 0 and isn't equal to EMPTY.
+     *
      * @return A boolean value denoting that this object has something of value.
      */
     public boolean isEmpty() {
@@ -120,6 +123,7 @@ public class NSSOutput {
 
     /**
      * NSSOutput.Builder is used to create a {@link NSSOutput} with multiple outputs.
+     *
      * @TODO: Make a conversion module in {@link com.tagnumelite.projecteintegration.api.Utils}
      */
     public static class Builder {
@@ -130,11 +134,9 @@ public class NSSOutput {
         private int totalOutputs;
 
         /**
-         *
-         *
-         * @param mapper The mapping collector given by the RecipeMapper
+         * @param mapper           The mapping collector given by the RecipeMapper
          * @param fakeGroupManager The fake group manager given by the RecipeMapper
-         * @param recipeID The ID of the recipe being worked on
+         * @param recipeID         The ID of the recipe being worked on
          */
         public Builder(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, ResourceLocation recipeID) {
             this.mapper = mapper;
@@ -146,6 +148,7 @@ public class NSSOutput {
 
         /**
          * Add an output to the mapper with all of its variants. Supported classes are {@link ItemStack} and {@link FluidStack}.
+         *
          * @param variants The array of variants for an output
          */
         public void addOutput(Object... variants) {
@@ -155,6 +158,7 @@ public class NSSOutput {
 
         /**
          * Add an output to the mapper with all of its variants. Supported classes are {@link ItemStack} and {@link FluidStack}.
+         *
          * @param variants The list of variants for an output
          */
         public void addOutput(List<?> variants) {
@@ -197,6 +201,7 @@ public class NSSOutput {
 
         /**
          * Add multiple outputs to the mapper. Supported classes are {@link ItemStack} and {@link FluidStack}.
+         *
          * @param outputs An array of outputs to be added
          */
         public void addOutputs(Object... outputs) {
@@ -206,6 +211,7 @@ public class NSSOutput {
 
         /**
          * Add multiple outputs to the mapper. Supported classes are {@link ItemStack} and {@link FluidStack}.
+         *
          * @param outputs A list of outputs to be added
          */
         public void addOutputs(List<?> outputs) {
@@ -238,6 +244,7 @@ public class NSSOutput {
 
         /**
          * Get the resulting {@link NSSOutput} from all the outputs.
+         *
          * @return A NSSOutput resulting from the outputs or {@link NSSOutput#EMPTY} if it failed.
          */
         public NSSOutput toOutput() {

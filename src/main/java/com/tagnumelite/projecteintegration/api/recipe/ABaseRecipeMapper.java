@@ -191,6 +191,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
 
     /**
      * A helper function to return a {@link NSSOutput.Builder} initialized with the appropriate args.
+     *
      * @return A NSSOutput.Builder to be used for mapping outputs
      */
     public NSSOutput.Builder getOutputBuilder() {

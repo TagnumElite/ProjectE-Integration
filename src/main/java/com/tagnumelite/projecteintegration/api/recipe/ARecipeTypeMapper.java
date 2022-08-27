@@ -23,7 +23,6 @@
 package com.tagnumelite.projecteintegration.api.recipe;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
-import com.tagnumelite.projecteintegration.addons.ImmersiveEngineeringAddon;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
@@ -53,8 +52,8 @@ import java.util.List;
  * To overwrite output, override method {@link #getOutput(Recipe)}
  * to overwrite input, override method {@link #getIngredients(Recipe)}
  * <p>
- * For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
  */
+//* For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
 public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipeMapper<R> implements IRecipeTypeMapper {
     @Override
     @SuppressWarnings("unchecked")

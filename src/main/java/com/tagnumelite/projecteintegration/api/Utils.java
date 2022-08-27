@@ -32,6 +32,7 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import moze_intel.projecte.utils.RegistryUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -196,20 +197,20 @@ public class Utils {
     }
 
     // Borrowed from ProjectE with a few modifications
-    // https://github.com/sinkillerj/ProjectE/blob/mc1.16.x/src/main/java/moze_intel/projecte/emc/mappers/recipe/BaseRecipeTypeMapper.java#L148-L185
+    // https://github.com/sinkillerj/ProjectE/blob/mc1.19.x/src/main/java/moze_intel/projecte/emc/mappers/recipe/BaseRecipeTypeMapper.java#L158-L195
     public static boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, ItemStack stack, String recipeID) {
         Item item = stack.getItem();
         boolean hasContainerItem = false;
         try {
             //Note: We include the hasContainerItem check in the try catch, as if a mod is handling tags incorrectly
             // there is a chance their hasContainerItem is checking something about tags, and
-            hasContainerItem = item.hasContainerItem(stack);
+            hasContainerItem = item.hasCraftingRemainingItem(stack);
             if (hasContainerItem) {
                 //If this item has a container for the stack, we remove the cost of the container itself
-                ingredientMap.addIngredient(NSSItem.createItem(item.getContainerItem(stack)), -1);
+                ingredientMap.addIngredient(NSSItem.createItem(item.getCraftingRemainingItem(stack)), -1);
             }
         } catch (Exception e) {
-            ResourceLocation itemName = item.getRegistryName();
+            ResourceLocation itemName = RegistryUtils.getName(item);
             if (hasContainerItem) {
                 if (isTagException(e)) {
                     PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} reported that it has a container item, "
