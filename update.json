@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.3.2",
-        "1.18.2-recommended": "5.3.2"
+        "1.18.2-latest": "5.3.3",
+        "1.18.2-recommended": "5.3.3"
     },
     "1.18.2": {
+        "5.3.3": "Re-Added support Blood Magic, Ex Nihilio Sequentia and Industrial Foregoing",
         "5.3.2": "Added partial support for Blue Skies",
         "5.3.1": "Added support for Ars Nouveau",
         "5.3.0": "Separated Chipped mappers and more Create support",

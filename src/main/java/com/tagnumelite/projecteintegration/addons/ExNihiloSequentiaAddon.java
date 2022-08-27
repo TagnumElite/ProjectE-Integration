@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,15 +28,15 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 
 import java.util.Collections;
 import java.util.List;
@@ -107,7 +107,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == CrucibleRecipe.RECIPE_TYPE;
+            return recipeType == CrucibleRecipe.RECIPE_TYPE;
         }
 
         @Override
@@ -130,7 +130,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == FluidItemRecipe.RECIPE_TYPE;
+            return recipeType == FluidItemRecipe.RECIPE_TYPE;
         }
 
         @Override
@@ -148,7 +148,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == FluidOnTopRecipe.RECIPE_TYPE;
+            return recipeType == FluidOnTopRecipe.RECIPE_TYPE;
         }
 
         @Override
@@ -166,7 +166,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == FluidTransformRecipe.RECIPE_TYPE;
+            return recipeType == FluidTransformRecipe.RECIPE_TYPE;
         }
 
         @Override
@@ -189,7 +189,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == HammerRecipe.RECIPE_TYPE;
+            return recipeType == HammerRecipe.RECIPE_TYPE;
         }
 
         @Override
@@ -224,7 +224,7 @@ public class ExNihiloSequentiaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == SieveRecipe.RECIPE_TYPE;
+            return recipeType == SieveRecipe.RECIPE_TYPE;
         }
 
         @Override

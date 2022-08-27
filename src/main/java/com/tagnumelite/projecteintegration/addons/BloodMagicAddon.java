@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2022 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,9 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import wayoftime.bloodmagic.common.item.BloodMagicItems;
 import wayoftime.bloodmagic.common.recipe.BloodMagicRecipeType;
 import wayoftime.bloodmagic.recipe.*;
@@ -66,7 +67,7 @@ public class BloodMagicAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == BloodMagicRecipeType.ALCHEMYTABLE;
+            return recipeType == BloodMagicRecipeType.ALCHEMYTABLE.get();
         }
     }
 
@@ -79,7 +80,7 @@ public class BloodMagicAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == BloodMagicRecipeType.ARRAY;
+            return recipeType == BloodMagicRecipeType.ARRAY.get();
         }
 
         @Override
@@ -97,14 +98,14 @@ public class BloodMagicAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == BloodMagicRecipeType.ARC;
+            return recipeType == BloodMagicRecipeType.ARC.get();
         }
 
         @Override
         public NSSOutput getOutput(RecipeARC recipe) {
             List<Object> outputs = new ArrayList<>();
             outputs.add(recipe.getFluidOutput());
-            outputs.addAll(recipe.getAllOutputs(new FRandom(1)));
+            outputs.addAll(recipe.getAllOutputs(new FRandom(1), ItemStack.EMPTY, ItemStack.EMPTY, 0));
             return mapOutputs(outputs.toArray());
         }
 
@@ -132,7 +133,7 @@ public class BloodMagicAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == BloodMagicRecipeType.ALTAR;
+            return recipeType == BloodMagicRecipeType.ALTAR.get();
         }
 
         @Override
@@ -155,7 +156,7 @@ public class BloodMagicAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == BloodMagicRecipeType.TARTARICFORGE;
+            return recipeType == BloodMagicRecipeType.TARTARICFORGE.get();
         }
 
         // OOH, souls could have emc. Mine would probably be -1 because, no one want dat sh**.

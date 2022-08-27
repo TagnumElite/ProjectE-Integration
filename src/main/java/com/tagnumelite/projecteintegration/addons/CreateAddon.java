@@ -67,6 +67,16 @@ public class CreateAddon {
 
     private abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
         @Override
+        public boolean convertRecipe(R recipe) {
+            PEIntegration.debugLog("Create: {}; Inputs: {} + {}; Outputs: {} + {}", recipeID,
+                    recipe.getFluidIngredients().stream().map(fI -> "" + fI.getRequiredAmount() + "*" + fI.getMatchingFluidStacks()).toList(),
+                    recipe.getIngredients().stream().map(Ingredient::getItems).toList(),
+                    recipe.getRollableResults().stream().map(rgS -> "" + rgS.getStack() + "%" + rgS.getChance()).toList(),
+                    recipe.getFluidResults());
+            return super.convertRecipe(recipe);
+        }
+
+        @Override
         public NSSInput getInput(R recipe) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
             NonNullList<FluidIngredient> fluidIngredients = recipe.getFluidIngredients();

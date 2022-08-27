@@ -143,6 +143,7 @@ repositories {
     maven { name "TheIllusiveC4"; url "https://maven.theillusivec4.top/" }
     maven { name "TTerrag"; url "https://maven.tterrag.com/" }
     maven { name "GeckoMaven"; url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
+    maven { name "HorizonStudio"; url "https://cdn.hrzn.studio/maven" }
     maven { name "Modmaven"; url "https://modmaven.dev/" }
 }
 
@@ -166,12 +167,14 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
     runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
+    //implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
+    implementation fg.deobf("curse.maven:titanium-287342:${version_titanium}")
 
     // ======================= [ Optional Mods ] =======================
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
-    //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
+    implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
@@ -180,12 +183,13 @@ dependencies {
     //implementation fg.deobf("com.simibubi.create:Create:${version_create}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
-    //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    //implementation fg.deobf("curse.maven:ex-nihilo-sequentia-400012:${version_ex_nihilo_sequentia}")
+    implementation fg.deobf("blank:ExNihiloSequentia:1.18.2-20220818-010806")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
-    //implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
+    implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
     implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
@@ -303,19 +307,19 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
-                    //optionalDependency 'blood-magic'
+                    optionalDependency 'blood-magic'
                     optionalDependency 'blue-skies'
                     optionalDependency 'botania'
                     optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'
                     optionalDependency 'create'
                     //optionalDependency 'draconic-evolution'
-                    //optionalDependency 'ex-nihilo-sequentia'
+                    optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
-                    //optionalDependency 'industrial-foregoing'
+                    optionalDependency 'industrial-foregoing'
                     optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
