@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.2]
+### Ported
+- Fix for BlueSkies from 1.18.2
+
 ## [6.0.1]
 ### Updated
 - Support for 1.19.2
@@ -617,7 +621,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.2...HEAD
+[6.0.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.1...v6.0.2
 [6.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.2...v6.0.1
 [5.3.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.1...v5.3.2
 [5.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.0...v5.3.1

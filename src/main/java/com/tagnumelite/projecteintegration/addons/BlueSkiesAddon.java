@@ -32,8 +32,8 @@ import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +54,7 @@ public class BlueSkiesAddon {
 
         @Override
         public List<AlchemyRecipe> getRecipes() {
-            return Lists.newArrayList(BlueSkiesData.ALCHEMY_RECIPES.getData().values().iterator());
+            return new ArrayList<>(BlueSkiesData.ALCHEMY_RECIPES.getData().values().iterator());
         }
 
         @Override
