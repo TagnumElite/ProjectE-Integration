@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.5]
+### Fixed
+- Using the wrong package in Blue Skies addon which caused problems in a dedicated server
+
 ## [5.3.4]
 ### Added
 - Support for [Blood Magic], [Ex Nihilio Sequentia] and [Industrial Foregoing]
@@ -612,7 +616,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.4...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.5...HEAD
+[5.3.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.4...v5.3.5
 [5.3.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.2...v5.3.4
 [5.3.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.1...v5.3.2
 [5.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.0...v5.3.1

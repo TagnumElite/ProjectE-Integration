@@ -27,7 +27,6 @@ import com.legacy.blue_skies.data.objects.alchemy.AlchemyRecipe;
 import com.legacy.blue_skies.data.objects.alchemy.CatylistRecipe;
 import com.legacy.blue_skies.registries.SkiesBlocks;
 import com.legacy.blue_skies.registries.SkiesItems;
-import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
@@ -36,7 +35,6 @@ import moze_intel.projecte.api.data.CustomConversionBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,7 +57,7 @@ public class BlueSkiesAddon {
 
         @Override
         public List<AlchemyRecipe> getRecipes() {
-            return Lists.newArrayList(BlueSkiesData.ALCHEMY_RECIPES.getData().values().iterator());
+            return new ArrayList<>(BlueSkiesData.ALCHEMY_RECIPES.getData().values());
         }
 
         @Override
