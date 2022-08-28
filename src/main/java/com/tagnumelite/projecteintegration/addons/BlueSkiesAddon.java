@@ -54,7 +54,7 @@ public class BlueSkiesAddon {
 
         @Override
         public List<AlchemyRecipe> getRecipes() {
-            return new ArrayList<>(BlueSkiesData.ALCHEMY_RECIPES.getData().values().iterator());
+            return new ArrayList<>(BlueSkiesData.ALCHEMY_RECIPES.getData().values());
         }
 
         @Override
