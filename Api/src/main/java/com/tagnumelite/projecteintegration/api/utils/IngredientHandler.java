@@ -146,6 +146,9 @@ public final class IngredientHandler {
         } else if (object.object == null) {
             PEIApi.LOGGER.warn("SizedObject ingredient is null: {} ({})", ingredient, ClassUtils.getPackageCanonicalName(ingredient.getClass()));
             return false;
+        } else if (object.amount <= 0) {
+            PEIApi.LOGGER.warn("SizedObject amount is ({} <= 0): {} ({})", object.amount, ingredient, ClassUtils.getPackageCanonicalName(object.object.getClass()));
+            return false;
         }
         ingredients.addIngredient(object.object, object.amount);
         return true;

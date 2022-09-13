@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `Minecraft Development` Intellij plugin as required
 - Support for SecurityCraft reinforced blocks
 - Timings for plugin initialization and setup
+- Warnings for an empty sized object
 
 ### Changed
 - Moved from Travis to GitHub Actions

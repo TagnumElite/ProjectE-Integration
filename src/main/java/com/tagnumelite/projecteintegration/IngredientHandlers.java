@@ -59,7 +59,6 @@ public final class IngredientHandlers {
 
         @Override
         public SizedObject<Object> get(ItemStack obj) {
-            if (obj.isEmpty()) return null;
             return new SizedObject<>(obj.getCount(), obj);
         }
     }
@@ -72,7 +71,6 @@ public final class IngredientHandlers {
 
         @Override
         public SizedObject<Object> get(FluidStack obj) {
-            if (obj.amount == 0) return null;
             return new SizedObject<>(obj.amount, obj);
         }
     }
