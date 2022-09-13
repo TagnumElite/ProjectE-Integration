@@ -17,19 +17,24 @@
       <option name="url" value="https://libraries.minecraft.net/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="BlameJared" />
+      <option name="name" value="BlameJared" />
+      <option name="url" value="https://maven.blamejared.com" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="MavenRepo" />
       <option name="name" value="MavenRepo" />
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="CurseMaven" />
+      <option name="name" value="CurseMaven" />
+      <option name="url" value="https://cursemaven.com" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
       <option name="url" value="https://maven.minecraftforge.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="BlameJared" />
-      <option name="name" value="BlameJared" />
-      <option name="url" value="https://maven.blamejared.com" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="TTerrag" />
@@ -42,8 +47,8 @@
       <option name="url" value="https://maven.hellfiredev.net" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="BlameJared" />
-      <option name="name" value="BlameJared" />
+      <option name="id" value="BlameJared2" />
+      <option name="name" value="BlameJared2" />
       <option name="url" value="https://maven.blamejared.com/" />
     </remote-repository>
     <remote-repository>
@@ -62,39 +67,14 @@
       <option name="url" value="http://maven.ic2.player.to" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="ModMuss50" />
-      <option name="name" value="ModMuss50" />
-      <option name="url" value="https://maven.modmuss50.me" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="TehNuuuuuuuuuuuut" />
-      <option name="name" value="TehNuuuuuuuuuuuut" />
-      <option name="url" value="http://tehnut.info/maven/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="BuildCraft" />
       <option name="name" value="BuildCraft" />
       <option name="url" value="https://mod-buildcraft.com/maven" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="Modmuss" />
-      <option name="name" value="Modmuss" />
-      <option name="url" value="https://maven.modmuss50.me/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="Elytra" />
       <option name="name" value="Elytra" />
       <option name="url" value="http://repo.elytradev.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="CurseMaven" />
-      <option name="name" value="CurseMaven" />
-      <option name="url" value="https://cursemaven.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="TehNuuuuuuuuuuuut" />
-      <option name="name" value="TehNuuuuuuuuuuuut" />
-      <option name="url" value="http://maven.tehnut.info" />
     </remote-repository>
   </component>
 </project>

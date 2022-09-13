@@ -10,13 +10,13 @@ repositories {
 }
 
 dependencies {
-    implementation files("libs/MysticalAgriculture-1.12.2-1.7.5.jar")
+    //implementation files("libs/MysticalAgriculture-1.12.2-1.7.5.jar")
 
     // CurseMaven
     implementation fg.deobf("curse.maven:BloodMagic-224791:${curse_bloodmagic}")
     implementation fg.deobf("curse.maven:embers-251918:${curse_embers}")
     implementation fg.deobf("curse.maven:ExtraBotany-299086:${curse_extrabotany}")
-    //implementation fg.deobf("curse.maven:MysticalAgriculture-246640:${curse_mysticalagriculture}")
+    implementation fg.deobf("curse.maven:mystical-agriculture-246640:${curse_mysticalagriculture}")
     implementation fg.deobf("curse.maven:Thaumcraft-223628:${curse_thaumcraft}")
     implementation fg.deobf("curse.maven:twilightforest-227639:${curse_twilightforest}")
 
