@@ -45,13 +45,13 @@ import java.util.stream.Collectors;
 /**
  * ProjectE Integration API
  *
- * @author TagnumElite (Tagan Hoyle https://tagnumelite.com)
+ * @author <a href="https://tagnumelite.com">TagnumElite (Tagan Hoyle)</a>
  */
 public class PEIApi {
     public static final String MODID = "projecteintegration";
     public static final String APIID = MODID + "api";
     public static final String NAME = "ProjectE Integration";
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = "3.0.1";
     public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.12.x/update.json";
     public static final Logger LOGGER = LogManager.getLogger(APIID);
 

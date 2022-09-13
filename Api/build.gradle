@@ -18,21 +18,6 @@ minecraft {
     mappings channel: 'snapshot', version: "${mcp_version}"
 }
 
-processResources {
-    inputs.property 'version', project.version
-    inputs.property 'mcversion', project.mc_version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-
-        expand 'version': project.version, 'mcversion': project.mc_version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
-
 repositories {
     maven { name 'CurseMaven'; url 'https://cursemaven.com' }
 }
