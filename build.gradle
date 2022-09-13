@@ -1,6 +1,7 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = "https://maven.minecraftforge.net/" }
+        maven { url = "https://files.minecraftforge.net/maven" }
         mavenCentral()
     }
     dependencies {
@@ -30,6 +31,13 @@ def plugins = gradle.ext.pei_plugins
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 subprojects.each { subproject -> evaluationDependsOn(subproject.path) }
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+    options.encoding = 'UTF-8'
+}
 
 minecraft {
     mappings channel: 'snapshot', version: "${mcp_version}"
@@ -85,6 +93,7 @@ dependencies {
 }
 
 jar {
+    dependsOn apiProject.tasks['classes']
     from sourceSets.main.output.classesDirs
     from apiProject.sourceSets.main.output.classesDirs
     from sourceSets.main.output.resourcesDir
@@ -100,9 +109,11 @@ jar {
     manifest {
         attributes([
             "Specification-Title": "projecteintegration",
+            "Specification-Vendor": "TagnumElite",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"TagnumElite",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -122,7 +133,7 @@ task sourcesJar(type: Jar, dependsOn: plugins.collect{ "Plugins:${it}:compileJav
     classifier = "sources"
     from sourceSets.main.allJava
     from apiProject.sourceSets.main.allJava
-    from files(plugins.collect{ project("Plugins:${it}").sourceSets.main.output })
+    from files(plugins.collect { project("Plugins:${it}").sourceSets.main.output })
 }
 
 task apiJar(type: Jar) {
@@ -160,7 +171,7 @@ publishing {
 
 if (System.env.CURSEFORGE_API_KEY) {
     curseforge {
-        apiKey = System.env.CURSEFORGE_API_KEY
+        apiKey = System.env.CURSEFORGE_API_KEY != null ? System.env.CURSEFORGE_API_KEY : '0'
         project {
             id = "${cf_project_id}"
             releaseType = "${release_type}"
@@ -168,7 +179,7 @@ if (System.env.CURSEFORGE_API_KEY) {
 
             mainArtifact(jar) { displayName = "ProjectEIntegration-${mc_version}-${version}" }
             addArtifact(apiJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-api" }
-            //addArtifact(deobfJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-deobf" }
+            addArtifact(deobfJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-deobf" }
             addArtifact(javadocJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-javadoc" }
             addArtifact(sourcesJar) { displayName = "ProjectEIntegration-${mc_version}-${version}-sources" }
 

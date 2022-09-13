@@ -71,11 +71,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched to ForgeGradle 3.+
 - Updated .gitignore
 - Moved Api sourceSet to Api subproject
+- Moved [Mystical Agriculture] from file to cursemaven
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now
 - Utils.createOutputs: It was old and for something completely unknown now
 - Arguments from APEIPlugin constructor
+- Option to add emc to mana, it is on by default, just set mana emc to 0 to disable.
 - Debug log from Modular Machinery plugin
 - Misc Category from config, was never used.
 - TTerrag second maven, was removed
