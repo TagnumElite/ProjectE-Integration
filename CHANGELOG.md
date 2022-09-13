@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `Debug` option to PEIApi config
 - Added `Minecraft Development` Intellij plugin as required
 - Support for SecurityCraft reinforced blocks
+- Timings for plugin initialization and setup
 
 ### Changed
 - Moved from Travis to GitHub Actions

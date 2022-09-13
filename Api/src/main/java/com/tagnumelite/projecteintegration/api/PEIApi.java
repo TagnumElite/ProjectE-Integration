@@ -266,7 +266,9 @@ public class PEIApi {
         for (APEIPlugin plugin : PLUGINS) {
             debugLog("Running Plugin for Mod: {}", plugin.modid);
             try {
+                long start = System.currentTimeMillis();
                 plugin.setup();
+                LOGGER.debug("Plugin {} took {}ms to setup", plugin.getClass().getCanonicalName(), System.currentTimeMillis() - start);
             } catch (Throwable t) {
                 LOGGER.error("Failed to run Plugin for '{}': {}", plugin.modid, t);
                 FAILED_PLUGINS.put(plugin.modid, plugin.getClass().getCanonicalName());

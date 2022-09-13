@@ -65,6 +65,7 @@ public final class ASMHandler {
             try {
                 Class<?> asmClass = Class.forName(asmData.getClassName());
                 if (APEIPlugin.class.isAssignableFrom(asmClass)) {
+                    long start = System.currentTimeMillis();
                     if (asmClass.isAnnotationPresent(OnlyIf.class)) {
                         OnlyIf onlyIf = asmClass.getAnnotation(OnlyIf.class);
                         ModContainer modcontainer = Loader.instance().getIndexedModList().get(modid);
@@ -78,8 +79,10 @@ public final class ASMHandler {
                         continue;
 
                     Class<? extends APEIPlugin> asm_instance = asmClass.asSubclass(APEIPlugin.class);
-                    Constructor<? extends APEIPlugin> plugin = asm_instance.getConstructor();
-                    plugins.add(plugin.newInstance());
+                    Constructor<? extends APEIPlugin> plugin_constructor = asm_instance.getConstructor();
+                    APEIPlugin plugin = plugin_constructor.newInstance();
+                    plugins.add(plugin);
+                    PEIApi.LOGGER.debug("Plugin {} took {}ms to instantiate", plugin.getClass().getCanonicalName(), System.currentTimeMillis() - start);
                 }
             } catch (Throwable t) {
                 PEIApi.LOGGER.error("Failed to instantiate plugin {}:", asmData.getClassName(), t);
