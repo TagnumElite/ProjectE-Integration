@@ -264,7 +264,7 @@ public class PEIApi {
         final long startTime = System.currentTimeMillis();
 
         for (APEIPlugin plugin : PLUGINS) {
-            debugLog("Running Plugin for Mod: {}", plugin.modid);
+            debugLog("Running Plugin for mod `{}`: {}", plugin.modid, plugin.getClass().getCanonicalName());
             try {
                 long start = System.currentTimeMillis();
                 plugin.setup();
