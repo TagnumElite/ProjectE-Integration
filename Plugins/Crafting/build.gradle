@@ -1,9 +1,5 @@
 repositories {
     maven {
-        name 'HellFire'
-        url 'https://maven.hellfiredev.net'
-    }
-    maven {
         name 'TTerrag'
         url 'https://maven.tterrag.com'
     }
@@ -14,9 +10,7 @@ dependencies {
     implementation fg.deobf("curse.maven:ArmorPlus-237366:${curse_armorplus}")
     implementation fg.deobf("curse.maven:ArtisanWorktables-284351:${curse_artisanworktables}")
     implementation fg.deobf("curse.maven:ExtendedCrafting-268387:${curse_extendedcrafting}")
-
-    // HellFire Maven
-    implementation fg.deobf("hellfirepvp.modularmachinery:modularmachinery:${mc_version}-${version_modularmachinery}")
+    implementation fg.deobf("curse.maven:modular-machinery-270790:${curse_modularmachinery}")
 
     // TTerrag Maven
     implementation fg.deobf("team.chisel:Chisel:MC${mc_version}-${version_chisel}")
