@@ -170,7 +170,7 @@ dependencies {
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
-    //implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     //implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
     //implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
@@ -300,7 +300,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     //optionalDependency 'ice-and-fire-dragons'
-                    //optionalDependency 'immersive-engineering'
+                    optionalDependency 'immersive-engineering'
                     //optionalDependency 'industrial-foregoing'
                     //optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'

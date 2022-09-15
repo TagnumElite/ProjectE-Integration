@@ -63,7 +63,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == AlloyRecipe.TYPE;
+            return recipeType == IERecipeTypes.ALLOY.get();
         }
 
         @Override
@@ -81,7 +81,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ArcFurnaceRecipe.TYPE;
+            return recipeType == IERecipeTypes.ARC_FURNACE.get();
         }
 
         @Override
@@ -99,7 +99,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == BlastFurnaceRecipe.TYPE;
+            return recipeType == IERecipeTypes.BLAST_FURNACE.get();
         }
 
         @Override
@@ -133,7 +133,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CokeOvenRecipe.TYPE;
+            return recipeType == IERecipeTypes.COKE_OVEN.get();
         }
 
         @Override
@@ -171,7 +171,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CrusherRecipe.TYPE;
+            return recipeType == IERecipeTypes.CRUSHER.get();
         }
 
         @Override
@@ -194,7 +194,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == MetalPressRecipe.TYPE;
+            return recipeType == IERecipeTypes.METAL_PRESS.get();
         }
 
         @Override
@@ -251,7 +251,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == SawmillRecipe.TYPE;
+            return recipeType == IERecipeTypes.SAWMILL.get();
         }
 
         @Override
@@ -275,7 +275,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == SqueezerRecipe.TYPE;
+            return recipeType == IERecipeTypes.SQUEEZER.get();
         }
 
         @Override
