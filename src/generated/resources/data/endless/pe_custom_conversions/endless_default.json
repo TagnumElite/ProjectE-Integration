@@ -2,7 +2,7 @@
   "comment": "default conversions for Endless Fake",
   "values": {
     "before": {
-      "endless:neutron_pile": 128
+      "endless:neutronium_pile": 128
     }
   }
 }

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Ported
 - Support for [Alchemistry]
 - Support for [Farming for Blockheads]
+- Support for [Corail Woodcutter]
+- Support for [FTB Industrial Contraptions] (Canning is disabled)
 ### Fixed
 - [Endless Fake] and [Ex Nihlio Sequentia] are now in the lib folder as they couldn't be downloaded.
 

@@ -86,5 +86,15 @@
       <option name="name" value="CurseMaven" />
       <option name="url" value="https://cursemaven.com" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="HorizonStudio" />
+      <option name="name" value="HorizonStudio" />
+      <option name="url" value="https://cdn.hrzn.studio/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Architectury" />
+      <option name="name" value="Architectury" />
+      <option name="url" value="https://maven.architectury.dev/" />
+    </remote-repository>
   </component>
 </project>
