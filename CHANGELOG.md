@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for [Farming for Blockheads]
+- Support for [FTB Industrial Contraptions] (Canning is disabled)
 
 ## [5.3.5]
 ### Fixed

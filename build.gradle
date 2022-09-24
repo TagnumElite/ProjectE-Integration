@@ -136,6 +136,7 @@ repositories {
             includeGroup "com.github"
         }
     }
+    maven { name "Architectury"; url "https://maven.architectury.dev/" }
     maven { name "Covers1624"; url 'https://maven.covers1624.net/' }
     maven { name "BlameJared"; url 'https://maven.blamejared.com' }
     maven { name "Progwml6"; url "https://dvs1.progwml6.com/files/maven/" }
@@ -154,6 +155,7 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
+    runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
@@ -161,9 +163,11 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:${version_flywheel}")
+    runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
     runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-1.18:${version_geckolib}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
     implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
+    runtimeOnly fg.deobf("curse.maven:myrtrees-546151:${version_myrtrees}")
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
@@ -189,6 +193,7 @@ dependencies {
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
+    implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
@@ -320,6 +325,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
+                    optionalDependency 'ftb-industrial-contraptions-forge'
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'industrial-foregoing'
