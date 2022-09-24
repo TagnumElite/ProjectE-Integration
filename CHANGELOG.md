@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Updated
 - [Immersive Engineering] addon to 1.19.2
-
 ### Ported
 - Support for [Alchemistry]
 - Support for [Corail Woodcutter]
+- Support for [Farming for Blockheads]
 - Support for [FTB Industrial Contraptions] (Canning is disabled)
 
 ## [6.0.3]

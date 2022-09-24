@@ -177,6 +177,7 @@ dependencies {
     //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
+    implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
     implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
@@ -310,6 +311,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
+                    optionalDependency 'farming-for-blockheads'
                     optionalDependency 'ftb-industrial-contraptions-forge'
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
