@@ -154,6 +154,7 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
+    runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
@@ -187,6 +188,7 @@ dependencies {
     implementation fg.deobf("blank:ExNihiloSequentia:1.18.2-20220818-010806")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
+    implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
     implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
@@ -317,6 +319,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
+                    optionalDependency 'farming-for-blockheads'
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'industrial-foregoing'
