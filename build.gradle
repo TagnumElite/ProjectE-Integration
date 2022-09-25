@@ -136,6 +136,7 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    runtimeOnly fg.deobf("curse.maven:chemlib-340666:${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
@@ -154,6 +155,7 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}"))
 
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
+    implementation fg.deobf("curse.maven:alchemistry-293425:${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
@@ -287,6 +289,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     requiredDependency 'projecte'
 
                     optionalDependency 'applied-energistics-2'
+                    optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
                     //optionalDependency 'blood-magic'

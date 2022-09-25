@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 - [Immersive Engineering] addon to 1.19.2
 
+### Ported
+- Support for [Alchemistry]
+
 ## [6.0.3]
 ### Ported
 - Fix for BlueSkies from 1.18.2
