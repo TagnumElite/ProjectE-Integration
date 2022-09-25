@@ -148,6 +148,7 @@ dependencies {
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
+    implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     //implementation fg.deobf("curse.maven:endless-fake-624491:${version_endless_fake}")
@@ -270,6 +271,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'botania'
                     optionalDependency 'chipped'
                     optionalDependency 'compact-crafting'
+                    optionalDependency 'corail-woodcutter'
                     optionalDependency 'create'
                     optionalDependency 'endless-fake'
                     optionalDependency 'ex-nihilo-sequentia'
