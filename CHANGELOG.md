@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.6.7]
 ### Added
 - Support for [Corail Woodcutter]
 - Support for [Alchemistry]
@@ -624,7 +626,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.6...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.7...HEAD
+[5.3.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.6...v5.3.7
 [5.3.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.5...v5.3.6
 [5.3.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.4...v5.3.5
 [5.3.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.2...v5.3.4

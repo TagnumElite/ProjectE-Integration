@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.3.6",
-        "1.18.2-recommended": "5.3.6"
+        "1.18.2-latest": "5.3.7",
+        "1.18.2-recommended": "5.3.7"
     },
     "1.18.2": {
+        "5.3.7": "Added support for Corail Woodcutter and Alchemistry",
         "5.3.6": "Added support for FTB Industrial Contraptions and Farming for Blockheads",
         "5.3.5": "Fixed an error causing for the BlueSkies addon which caused EMC to not be mapped",
         "5.3.4": "Re-Added support Blood Magic, Ex Nihilio Sequentia and Industrial Foregoing",
