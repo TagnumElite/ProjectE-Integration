@@ -62,7 +62,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.ATOMIZER_TYPE;
+            return recipeType == RecipeRegistry.ATOMIZER_TYPE.get();
         }
 
         @Override
@@ -80,7 +80,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.COMBINER_TYPE;
+            return recipeType == RecipeRegistry.COMBINER_TYPE.get();
         }
 
         @Override
@@ -113,7 +113,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.COMPACTOR_TYPE;
+            return recipeType == RecipeRegistry.COMPACTOR_TYPE.get();
         }
 
         @Override
@@ -152,7 +152,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.FISSION_TYPE;
+            return recipeType == RecipeRegistry.FISSION_TYPE.get();
         }
 
         @Override
@@ -170,7 +170,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.FUSION_TYPE;
+            return recipeType == RecipeRegistry.FUSION_TYPE.get();
         }
     }
 
@@ -183,7 +183,7 @@ public class AlchemistryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeRegistry.LIQUIFIER_TYPE;
+            return recipeType == RecipeRegistry.LIQUIFIER_TYPE.get();
         }
 
         @Override

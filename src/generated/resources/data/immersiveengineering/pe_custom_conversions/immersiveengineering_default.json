@@ -1,0 +1,31 @@
+{
+  "comment": "default conversions for immersive engineering",
+  "values": {
+    "before": {
+      "#forge:dusts/nitrate": 8,
+      "#forge:dusts/sulfur": 8,
+      "#forge:dusts/wood": 1,
+      "#forge:fiber_hemp": 4
+    },
+    "conversion": [
+      {
+        "ingredients": {
+          "#minecraft:planks": 8
+        },
+        "output": "immersiveengineering:treated_wood_horizontal"
+      },
+      {
+        "ingredients": {
+          "#minecraft:planks": 8
+        },
+        "output": "immersiveengineering:treated_wood_vertical"
+      },
+      {
+        "ingredients": {
+          "#minecraft:planks": 8
+        },
+        "output": "immersiveengineering:treated_wood_packaged"
+      }
+    ]
+  }
+}
