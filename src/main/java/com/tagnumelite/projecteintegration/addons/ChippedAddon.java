@@ -22,8 +22,8 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.grimbo.chipped.recipe.ChippedRecipe;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
+import earth.terrarium.chipped.recipe.ChippedRecipe;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -39,7 +39,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.grimbo.chipped.recipe.ChippedRecipe.*;
+import static earth.terrarium.chipped.registry.ChippedRecipeTypes.*;
+
 
 public class ChippedAddon {
     public static final String MODID = "chipped";
@@ -52,7 +53,7 @@ public class ChippedAddon {
         @Override
         public boolean convertRecipe(ChippedRecipe recipe) {
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
-            for (HolderSet<Item> tag : recipe.getTags()) {
+            for (HolderSet<Item> tag : recipe.tags()) {
                 IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
                 List<Item> items = tag.stream().filter(Holder::isBound).map(Holder::value).toList();
                 convertIngredient(Ingredient.of(items.stream().map(ItemStack::new)), ingMap, fgm);
