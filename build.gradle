@@ -156,7 +156,7 @@ dependencies {
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
-    //implementation fg.deobf("curse.maven:endless-fake-624491:${version_endless_fake}")
+    //implementation fg.deobf("curse.maven:avaritia-endless-624491:${version_avaritia_endless}")
     implementation fg.deobf("blank:Endless-1.16.5:1.4.0")
     //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
     implementation fg.deobf("blank:exnihilosequentia-1.16-20220530:185402")
@@ -274,13 +274,13 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'alchemistry'
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'astral-sorcery'
+                    optionalDependency 'avaritia-endless'
                     optionalDependency 'blood-magic'
                     optionalDependency 'botania'
                     optionalDependency 'chipped'
                     optionalDependency 'compact-crafting'
                     optionalDependency 'corail-woodcutter'
                     optionalDependency 'create'
-                    optionalDependency 'endless-fake'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'ice-and-fire-dragons'

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.5.1]
+### Fixed
+- [Endless Fake] changed their name to [Avaritia Endless]
+
 ## [4.5.0]
 ### Ported
 - Support for [Alchemistry]
@@ -567,7 +571,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.5.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.5.1...HEAD
+[4.5.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.5.0...v4.5.1
 [4.5.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.7...v4.5.0
 [4.4.7]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.6...v4.4.7
 [4.4.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v4.4.5...v4.4.6
