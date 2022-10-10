@@ -121,7 +121,7 @@ public class EndlessFakeAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("default conversions for Endless Fake")
-                    .before(ItemRegistry.neutronPile.get(), 128);
+                    .before(ItemRegistry.neutroniumPile.get(), 128);
         }
     }
 }

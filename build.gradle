@@ -29,7 +29,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 minecraft {
     // You must be aware of the Mojang license when using the 'official' mappings.
     // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: "${mc_version}"
 
     runs {
         client {
@@ -93,9 +93,12 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    flatDir {
+        dir 'libs'
+    }
     maven {
         name "CurseMaven"
-        url "https://www.cursemaven.com"
+        url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
         }
@@ -107,7 +110,7 @@ repositories {
             includeGroup "com.github"
         }
     }
-    maven { name "BlameJared"; url 'https://maven.blamejared.com' }
+    maven { name "BlameJared"; url "https://maven.blamejared.com" }
     maven { name "Progwml6"; url "https://dvs1.progwml6.com/files/maven/" }
     maven { name "ChickenBones"; url "https://chickenbones.net/maven/" }
     maven { name "TheIllusiveC4"; url "https://maven.theillusivec4.top/" }
@@ -144,8 +147,10 @@ dependencies {
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
-    implementation fg.deobf("curse.maven:endless-fake-624491:${version_endless_fake}")
-    implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    //implementation fg.deobf("curse.maven:endless-fake-624491:${version_endless_fake}")
+    implementation fg.deobf("blank:Endless-1.16.5:1.4.0")
+    //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    implementation fg.deobf("blank:exnihilosequentia-1.16-20220530:185402")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
@@ -243,7 +248,7 @@ changelog {
 
 if (System.getenv().CURSEFORGE_API_KEY != null) {
     curseforge {
-        apiKey System.getenv().CURSEFORGE_API_KEY
+        apiKey = System.getenv().CURSEFORGE_API_KEY
         project {
             id = "${cf_project}"
             addGameVersion "${mc_version}"
