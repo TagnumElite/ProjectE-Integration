@@ -81,5 +81,10 @@
       <option name="name" value="Covers1624" />
       <option name="url" value="https://maven.covers1624.net/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="CurseMaven" />
+      <option name="name" value="CurseMaven" />
+      <option name="url" value="https://cursemaven.com" />
+    </remote-repository>
   </component>
 </project>
