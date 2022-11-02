@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Missing conversions and EMC for iridium ingots
 - Support for [Avaritia]
 
+### Ported
+- Support for [EvilCraft]
+
 ## [5.4.0]
 ### Changed
 - Support for [Chipped] 2.+
@@ -724,6 +727,7 @@ Added support for 18 more mods
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
+[EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing

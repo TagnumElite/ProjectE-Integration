@@ -162,9 +162,10 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:chemlib-340666:${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
+    runtimeOnly fg.deobf("curse.maven:ctm-267602:${version_ctm}")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
-    runtimeOnly fg.deobf("curse.maven:ctm-267602:${version_ctm}")
+    runtimeOnly fg.deobf("curse.maven:cyclops-core-232758:${version_cyclopscore}")
     runtimeOnly fg.deobf("curse.maven:flywheel-486392:${version_flywheel}")
     runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
     runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-1.18:${version_geckolib}")
@@ -198,6 +199,7 @@ dependencies {
     //implementation fg.deobf("curse.maven:ex-nihilo-sequentia-400012:${version_ex_nihilo_sequentia}")
     implementation fg.deobf("blank:ExNihiloSequentia:1.18.2-20220818-010806")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
+    implementation fg.deobf("curse.maven:evilcraft-74610:${version_evilcraft}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
     implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
@@ -301,7 +303,7 @@ changelog {
     itemPrefix = "-"
     keepUnreleasedSection = true
     unreleasedTerm = "[Unreleased]"
-    groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
+    groups = ["Added", "Changed", "Deprecated", "Ported", "Removed", "Fixed", "Security"]
 }
 
 if (System.getenv().CURSEFORGE_API_KEY != null) {
@@ -333,6 +335,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'draconic-evolution'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
+                    optionalDependency 'evilcraft'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
                     optionalDependency 'ftb-industrial-contraptions-forge'
