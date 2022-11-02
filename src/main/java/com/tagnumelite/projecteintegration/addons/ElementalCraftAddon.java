@@ -41,6 +41,7 @@ import sirttas.elementalcraft.recipe.instrument.binding.AbstractBindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.infusion.IInfusionRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.grinding.IGrindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.sawing.SawingRecipe;
+import sirttas.elementalcraft.tag.ECTags;
 
 public class ElementalCraftAddon {
     public static final String MODID = "elementalcraft";
@@ -171,7 +172,11 @@ public class ElementalCraftAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Default conversions for ElementalCraft")
-                    .before(ECItems.INERT_CRYSTAL.get(), 8);
+                    .before(ECItems.INERT_CRYSTAL.get(), 8)
+                    .before(ECItems.AIR_SHARD.get(), 8)
+                    .before(ECItems.EARTH_SHARD.get(), 8)
+                    .before(ECItems.FIRE_SHARD.get(), 8)
+                    .before(ECItems.WATER_SHARD.get(), 8);
             gem(builder, ECItems.CRUDE_AIR_GEM.get(), ECItems.FINE_AIR_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
             gem(builder, ECItems.CRUDE_EARTH_GEM.get(), ECItems.FINE_EARTH_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
             gem(builder, ECItems.CRUDE_FIRE_GEM.get(), ECItems.FINE_FIRE_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());

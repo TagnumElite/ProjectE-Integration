@@ -2,7 +2,11 @@
   "comment": "Default conversions for ElementalCraft",
   "values": {
     "before": {
-      "elementalcraft:inert_crystal": 8
+      "elementalcraft:air_shard": 8,
+      "elementalcraft:earth_shard": 8,
+      "elementalcraft:fire_shard": 8,
+      "elementalcraft:inert_crystal": 8,
+      "elementalcraft:water_shard": 8
     },
     "conversion": [
       {
