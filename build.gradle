@@ -175,7 +175,8 @@ dependencies {
     //implementation fg.deobf("com.simibubi.create:Create:${version_create}")
     //implementation fg.deobf("curse.maven:create-328085:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
-    //implementation fg.deobf("curse.maven:exnihilo-sequel-400012:${version_exnihilo_sequel}")
+    //implementation fg.deobf("curse.maven:exnihilo-sequentia-400012:${version_exnihilo_sequentia}")
+    implementation fg.deobf("blank:ExNihiloSequentia-1.19.2-4.0.0.43:beta")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
@@ -310,7 +311,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'create'
                     optionalDependency 'corail-woodcutter'
                     //optionalDependency 'draconic-evolution'
-                    //optionalDependency 'ex-nihilo-sequentia'
+                    optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
