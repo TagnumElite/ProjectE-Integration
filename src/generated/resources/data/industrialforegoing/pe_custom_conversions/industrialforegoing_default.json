@@ -1,0 +1,24 @@
+{
+  "comment": "Sets default conversions for Industrial Foregoing",
+  "values": {
+    "before": {
+      "FLUID|industrialforegoing:sewage": 1,
+      "industrialforegoing:tinydryrubber": 1
+    },
+    "conversion": [
+      {
+        "count": 1600,
+        "ingredients": [
+          "#minecraft:logs"
+        ],
+        "output": "FLUID|industrialforegoing:latex"
+      },
+      {
+        "ingredients": {
+          "FLUID|industrialforegoing:sewage": 1000
+        },
+        "output": "industrialforegoing:fertilizer"
+      }
+    ]
+  }
+}

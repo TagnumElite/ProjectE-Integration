@@ -36,11 +36,11 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,9 +48,9 @@ import java.util.List;
 
 public class IndustrialForegoingAddon {
     public static final String MODID = "industrialforegoing";
-    public static finalrecipeType<CrusherRecipe> crusherRecipeType = CrusherRecipe.SERIALIZER.getRecipeType();
-    public static finalrecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = DissolutionChamberRecipe.SERIALIZER.getRecipeType();
-    public static finalrecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = StoneWorkGenerateRecipe.SERIALIZER.getRecipeType();
+    public static final RecipeType<CrusherRecipe> crusherRecipeType = (RecipeType<CrusherRecipe>) ModuleCore.CRUSHER_TYPE.get();
+    public static final RecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = (RecipeType<DissolutionChamberRecipe>) ModuleCore.DISSOLUTION_TYPE.get();
+    public static final RecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = (RecipeType<StoneWorkGenerateRecipe>) ModuleCore.STONEWORK_GENERATE_TYPE.get();
 
     public static String NAME(String name) {
         return "IndustrialForegoing" + name + "Mapper";
@@ -65,7 +65,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == crusherRecipeType;
+            return recipeType == crusherRecipeType;
         }
 
         @Override
@@ -88,7 +88,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == dissolutionChamberRecipeType;
+            return recipeType == dissolutionChamberRecipeType;
         }
 
         @Override
@@ -107,7 +107,7 @@ public class IndustrialForegoingAddon {
         @Override
         protected List<Ingredient> getIngredients(DissolutionChamberRecipe recipe) {
             ArrayList<Ingredient> list = new ArrayList<>(recipe.input.length);
-            for (Ingredient.IItemList input : recipe.input) {
+            for (Ingredient.Value input : recipe.input) {
                 list.add(Ingredient.of(input.getItems().stream()));
             }
             // TODO: Fluid Input, Im too lazy for this now.
@@ -136,7 +136,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == stoneworkGenerateRecipeType;
+            return recipeType == stoneworkGenerateRecipeType;
         }
 
         @Override
@@ -171,10 +171,10 @@ public class IndustrialForegoingAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Industrial Foregoing")
-                    .before(ModuleCore.SEWAGE.getSourceFluid(), 1)
-                    .before(ModuleCore.TINY_DRY_RUBBER, 1)
-                    .conversion(ModuleCore.LATEX.getSourceFluid(), 1600).ingredient(ItemTags.LOGS).end()
-                    .conversion(ModuleCore.FERTILIZER).ingredient(ModuleCore.SEWAGE.getSourceFluid(), 1000).end();
+                    .before(ModuleCore.SEWAGE.getSourceFluid().get(), 1)
+                    .before(ModuleCore.TINY_DRY_RUBBER.get(), 1)
+                    .conversion(ModuleCore.LATEX.getSourceFluid().get(), 1600).ingredient(ItemTags.LOGS).end()
+                    .conversion(ModuleCore.FERTILIZER.get()).ingredient(ModuleCore.SEWAGE.getSourceFluid().get(), 1000).end();
             //.conversion(ModuleCore.TINY_DRY_RUBBER).ingredient(Fluids.WATER, 500).ingredient(ModuleCore.LATEX.getSourceFluid(), 100).end();
         }
     }

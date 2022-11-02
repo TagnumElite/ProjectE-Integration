@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Allthemodium]
 
+### Ported
+- Support for [Industrial Foregoing]
+
 ## [6.0.5]
 ### Ported
 - Support for [Alchemistry]

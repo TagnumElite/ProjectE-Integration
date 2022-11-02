@@ -182,7 +182,7 @@ dependencies {
     implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
-    //implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
+    implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
     //implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
@@ -317,7 +317,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'ftb-industrial-contraptions-forge'
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
-                    //optionalDependency 'industrial-foregoing'
+                    optionalDependency 'industrial-foregoing'
                     //optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
