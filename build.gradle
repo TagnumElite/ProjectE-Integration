@@ -150,6 +150,7 @@ dependencies {
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
+    runtimeOnly fg.deobf("curse.maven:cyclops-core-232758:${version_cyclopscore}")
     runtimeOnly fg.deobf("sirttas.dpanvil:DPAnvil:${version_datapackanvil}")
     runtimeOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-1.19.2:${version_flywheel}")
     runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
@@ -183,6 +184,7 @@ dependencies {
     implementation fg.deobf("curse.maven:create-328085:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
+    implementation fg.deobf("curse.maven:evilcraft-74610:${version_evilcraft}")
     //implementation fg.deobf("curse.maven:exnihilo-sequentia-400012:${version_exnihilo_sequentia}")
     implementation fg.deobf("blank:ExNihiloSequentia-1.19.2-4.0.0.43:beta")
     implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
@@ -320,6 +322,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'corail-woodcutter'
                     //optionalDependency 'draconic-evolution'
                     optionalDependency 'elemental-craft'
+                    optionalDependency 'evilcraft'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'

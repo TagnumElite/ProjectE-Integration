@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Allthemodium]
 - Support for [Elemental Craft]
+- Support for [EvilCraft]
 
 ### Changed
 - Updated support for [Alchemistry] to 2.2+
@@ -726,6 +727,7 @@ Added support for 18 more mods
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
+[EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
