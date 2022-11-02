@@ -108,28 +108,29 @@ repositories {
         dir 'libs'
     }
     maven {
-        name "CurseMaven"
-        url "https://www.cursemaven.com"
+        name 'CurseMaven'
+        url 'https://www.cursemaven.com'
         content {
-            includeGroup "curse.maven"
+            includeGroup 'curse.maven'
         }
     }
     maven {
-        name "Jitpack"
-        url "https://jitpack.io"
+        name 'Jitpack'
+        url 'https://jitpack.io'
         content {
-            includeGroup "com.github"
+            includeGroup 'com.github'
         }
     }
-    maven { name "Architectury"; url "https://maven.architectury.dev/" }
-    maven { name "Covers1624"; url 'https://maven.covers1624.net/' }
-    maven { name "BlameJared"; url 'https://maven.blamejared.com' }
-    maven { name "Progwml6"; url "https://dvs1.progwml6.com/files/maven/" }
-    maven { name "ChickenBones"; url "https://chickenbones.net/maven/" }
-    maven { name "TheIllusiveC4"; url "https://maven.theillusivec4.top/" }
-    maven { name "TTerrag"; url "https://maven.tterrag.com/" }
-    maven { name "GeckoMaven"; url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
-    maven { name "Modmaven"; url "https://modmaven.dev/" }
+    maven { name 'Architectury'; url 'https://maven.architectury.dev/' }
+    maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
+    maven { name 'ChickenBones'; url 'https://chickenbones.net/maven/' }
+    maven { name 'Covers1624'; url 'https://maven.covers1624.net/' }
+    maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
+    maven { name 'Tamaized'; url 'https://maven.tamaized.com/releases' }
+    maven { name 'TheIllusiveC4'; url 'https://maven.theillusivec4.top/' }
+    maven { name 'TTerrag'; url 'https://maven.tterrag.com/' }
+    maven { name 'Modmaven'; url 'https://modmaven.dev/' }
 }
 
 dependencies {
@@ -139,10 +140,11 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
+    implementation fg.deobf("smashingmods:alchemylib:${mc_version}-${version_alchemylib}")
     runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
-    runtimeOnly fg.deobf("curse.maven:chemlib-340666:${version_chemlib}")
+    runtimeOnly fg.deobf("smashingmods:chemlib:${mc_version}-${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
@@ -164,7 +166,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
-    implementation fg.deobf("curse.maven:alchemistry-293425:${version_alchemistry}")
+    implementation fg.deobf("smashingmods:alchemistry:${mc_version}-${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")

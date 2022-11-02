@@ -96,5 +96,10 @@
       <option name="name" value="Architectury" />
       <option name="url" value="https://maven.architectury.dev/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Tamaized" />
+      <option name="name" value="Tamaized" />
+      <option name="url" value="https://maven.tamaized.com/releases" />
+    </remote-repository>
   </component>
 </project>
