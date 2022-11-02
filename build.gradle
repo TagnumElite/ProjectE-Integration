@@ -159,6 +159,7 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${version_jei}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}"))
 
+    implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     implementation fg.deobf("curse.maven:alchemistry-293425:${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
@@ -296,6 +297,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 relations {
                     requiredDependency 'projecte'
 
+                    optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'

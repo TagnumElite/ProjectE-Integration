@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for [Allthemodium]
 
 ## [6.0.5]
 ### Ported
@@ -704,6 +706,7 @@ Added support for 18 more mods
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
 
 <!-- MODS -->
+[Allthemodium]: https://www.curseforge.com/minecraft/mc-mods/allthemodium
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Ars Nouveau]: https://www.curseforge.com/minecraft/mc-mods/ars-nouveau
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
