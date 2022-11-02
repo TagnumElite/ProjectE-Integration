@@ -1,0 +1,11 @@
+{
+  "comment": "Default conversions for Allthemodium",
+  "values": {
+    "before": {
+      "allthemodium:allthemodium_ingot": 122800,
+      "allthemodium:ancient_cavevines_plant": 16,
+      "allthemodium:ancient_soulberries": 16,
+      "allthemodium:ancient_stone": 8
+    }
+  }
+}

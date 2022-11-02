@@ -155,6 +155,7 @@ dependencies {
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
+    runtimeOnly fg.deobf("curse.maven:alltheores-405593:${version_alltheores}")
     runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
@@ -164,7 +165,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("curse.maven:ctm-267602:${version_ctm}")
-    runtimeOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${version_flywheel}")
+    runtimeOnly fg.deobf("curse.maven:flywheel-486392:${version_flywheel}")
     runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
     runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-1.18:${version_geckolib}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${version_jei}")
@@ -178,6 +179,7 @@ dependencies {
     implementation fg.deobf("curse.maven:titanium-287342:${version_titanium}")
 
     // ======================= [ Optional Mods ] =======================
+    implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("curse.maven:alchemistry-293425:${version_alchemistry}")
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
@@ -315,6 +317,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 relations {
                     requiredDependency 'projecte'
 
+                    optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
