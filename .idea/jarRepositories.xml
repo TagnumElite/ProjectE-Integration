@@ -97,6 +97,11 @@
       <option name="url" value="https://maven.architectury.dev/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="Ellpeck" />
+      <option name="name" value="Ellpeck" />
+      <option name="url" value="https://maven.ellpeck.de" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="Tamaized" />
       <option name="name" value="Tamaized" />
       <option name="url" value="https://maven.tamaized.com/releases" />

@@ -125,6 +125,7 @@ repositories {
     maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
     maven { name 'ChickenBones'; url 'https://chickenbones.net/maven/' }
     maven { name 'Covers1624'; url 'https://maven.covers1624.net/' }
+    maven { name 'Ellpeck'; url 'https://maven.ellpeck.de' }
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
     maven { name 'Tamaized'; url 'https://maven.tamaized.com/releases' }
@@ -197,6 +198,9 @@ dependencies {
     //implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
+    implementation(fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
+        exclude group: '*'
+    }))
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
@@ -291,7 +295,7 @@ changelog {
     itemPrefix = "-"
     keepUnreleasedSection = true
     unreleasedTerm = "[Unreleased]"
-    groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
+    groups = ["Added", "Changed", "Ported", "Deprecated", "Removed", "Fixed", "Security"]
 }
 
 if (System.getenv().CURSEFORGE_API_KEY != null) {
@@ -334,6 +338,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
+                    optionalDependency 'natures-aura'
                     //optionalDependency 'pams-harvestcraft-2-food-core'
                     //optionalDependency 'pams-harvestcraft-2-crops'
                     //optionalDependency 'pams-harvestcraft-2-food-extended'

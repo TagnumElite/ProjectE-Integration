@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for [Allthemodium]
 - Support for [Elemental Craft]
 - Support for [EvilCraft]
+- Support for [Natures Aura]
 
 ### Changed
 - Updated support for [Alchemistry] to 2.2+
@@ -736,6 +737,7 @@ Added support for 18 more mods
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
 [MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
+[Natures Aura]: https://www.curseforge.com/minecraft/mc-mods/natures-aura
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct

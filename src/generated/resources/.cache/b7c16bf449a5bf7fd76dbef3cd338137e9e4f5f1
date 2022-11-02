@@ -1,4 +1,4 @@
-// 1.19.2	2022-11-02T17:53:16.2058003	Custom EMC Conversions
+// 1.19.2	2022-11-02T17:57:03.4698656	Custom EMC Conversions
 3f240b2c8e943d0e012068e1179cd36fb9babff1 data/ae2/pe_custom_conversions/ae2_default.json
 08ba106a91fe31eca2059deed07c3374b7d0eacc data/allthemodium/pe_custom_conversions/allthemodium_default.json
 80a3b7248532fdc99d18c5a9d3c9c9546dfb6e91 data/ars_nouveau/pe_custom_conversions/ars_nouveau_default.json
@@ -8,4 +8,5 @@
 10fdf61bff8435517c5986ab411ee0ffe7420ebd data/immersiveengineering/pe_custom_conversions/immersiveengineering_default.json
 47da1b7062cd8510a490a3bbd8c0bcd2dbc3a635 data/industrialforegoing/pe_custom_conversions/industrialforegoing_default.json
 1ea0cac2b2c5cab10e0369839f0aae007b0a1dbd data/mysticalagriculture/pe_custom_conversions/mysticalagriculture_default.json
+54172fbdc2ba91424128490e7e49519639fe0884 data/naturesaura/pe_custom_conversions/naturesaura_default.json
 63d7900ba552620f8dbf977541d6aafbebdf8d01 data/projecteintegration/pe_custom_conversions/pei_metals.json
