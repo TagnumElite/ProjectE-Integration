@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.19.2-latest": "6.1.0",
-        "1.19.2-recommended": "6.1.0"
+        "1.19.2-latest": "6.1.1",
+        "1.19.2-recommended": "6.1.1"
     },
     "1.19.2": {
+        "6.1.1": "Added a missing dependency that was excluded",
         "6.1.0": "Ported some more addons from 1.18, and added some othe addons",
         "6.0.5": "Ported some addons from 1.18",
         "6.0.4": "Re-added support for Immersive Engineering",
