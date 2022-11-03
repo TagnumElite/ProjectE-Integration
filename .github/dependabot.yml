@@ -11,3 +11,7 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "curse.maven:*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
