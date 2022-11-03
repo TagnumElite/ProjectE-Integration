@@ -651,10 +651,11 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...HEAD
-[6.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
-[6.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.5...v6.1.0
-[6.0.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.4...v6.0.3
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...HEAD
+[6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
+[6.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.5...v6.1.0
+[6.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.4...v6.0.5
+[6.0.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.3...v6.0.4
 [6.0.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.1...v6.0.3
 [6.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.2...v6.0.1
 [5.3.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.1...v5.3.2
