@@ -46,7 +46,7 @@ jobs:
     needs: [ buildAndPublishCurse ]
     steps:
       - name: Download Build Results
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: libs
           path: build/libs
