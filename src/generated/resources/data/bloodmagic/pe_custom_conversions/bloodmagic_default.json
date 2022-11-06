@@ -1,0 +1,9 @@
+{
+  "comment": "default recipe conversions for Blood Magic",
+  "values": {
+    "before": {
+      "bloodmagic:weakbloodshard": 256,
+      "#bloodmagic:crystals/demon": 512
+    }
+  }
+}
