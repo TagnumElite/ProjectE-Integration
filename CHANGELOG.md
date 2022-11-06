@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Missing conversions and EMC for iridium ingots
 - Support for [Avaritia]
 
+### Changed
+- Updated support for [Alchemistry] to 2.2+
+
 ### Ported
 - Support for [EvilCraft]
 
@@ -714,6 +717,7 @@ Added support for 18 more mods
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
 
 <!-- MODS -->
+[Alchemistry]: https://www.curseforge.com/minecraft/mc-mods/alchemistry
 [Allthemodium]: https://www.curseforge.com/minecraft/mc-mods/allthemodium
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Ars Nouveau]: https://www.curseforge.com/minecraft/mc-mods/ars-nouveau

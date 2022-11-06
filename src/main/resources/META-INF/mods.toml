@@ -21,6 +21,11 @@ modId = "projecte"
 mandatory = true
 versionRange = "[PE1.0.1,)"
 
+[[dependencies.projecteintegration]]
+modId = "alchemistry"
+mandatory = false
+versionRange = "[1.18.2-2.2,)"
+
 #[[dependencies.projecteintegration]]
 #modId = "compactcrafting"
 #mandatory = false
