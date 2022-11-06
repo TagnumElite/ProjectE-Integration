@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.18.2-latest": "5.4.1",
-        "1.18.2-recommended": "5.4.1"
+        "1.18.2-latest": "5.4.2",
+        "1.18.2-recommended": "5.4.2"
     },
     "1.18.2": {
+        "5.4.2": "Updated support for alchemistry and added support for more mappers",
         "5.4.1": "Added support for Allthemodium and Avaritia",
         "5.4.0": "Updated support for Chipped to 2.+",
         "5.3.7": "Added support for Corail Woodcutter and Alchemistry",
