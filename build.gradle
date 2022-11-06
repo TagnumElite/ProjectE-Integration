@@ -161,7 +161,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
     runtimeOnly fg.deobf("curse.maven:chemlib-340666:${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
-    //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
+    runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("curse.maven:ctm-267602:${version_ctm}")
@@ -184,6 +184,7 @@ dependencies {
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
+    implementation fg.deobf("curse.maven:avaritia-261348:${version_avaritia}")
     implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
@@ -321,6 +322,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
+                    optionalDependency 'avaritia-1-10'
                     optionalDependency 'blood-magic'
                     optionalDependency 'blue-skies'
                     optionalDependency 'botania'

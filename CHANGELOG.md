@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Allthemodium]
 - Missing conversions and EMC for iridium ingots
+- Support for [Avaritia]
 
 ## [5.4.0]
 ### Changed
@@ -711,6 +712,7 @@ Added support for 18 more mods
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Ars Nouveau]: https://www.curseforge.com/minecraft/mc-mods/ars-nouveau
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
+[Avaritia]: https://www.curseforge.com/minecraft/mc-mods/avaritia-1-10
 [Blood Magic]: https://www.curseforge.com/minecraft/mc-mods/blood-magic
 [Blue Skies]: https://www.curseforge.com/minecraft/mc-mods/blue-skies
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania

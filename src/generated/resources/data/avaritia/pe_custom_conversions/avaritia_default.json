@@ -1,0 +1,8 @@
+{
+  "comment": "Default conversions for Avaritia",
+  "values": {
+    "before": {
+      "avaritia:neutron_pile": 128
+    }
+  }
+}
