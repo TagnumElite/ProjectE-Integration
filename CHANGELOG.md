@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Ported
 - Support for [EvilCraft]
+- Support for [Natures Aura]
+- Support for [Elemental Craft]
 
 ## [5.4.0]
 ### Changed
@@ -732,12 +734,14 @@ Added support for 18 more mods
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
+[Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
 [MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
+[Natures Aura]: https://www.curseforge.com/minecraft/mc-mods/natures-aura
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct

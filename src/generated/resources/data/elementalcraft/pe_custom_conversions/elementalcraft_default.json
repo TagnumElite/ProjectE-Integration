@@ -1,0 +1,78 @@
+{
+  "comment": "Default conversions for ElementalCraft",
+  "values": {
+    "before": {
+      "elementalcraft:inert_crystal": 8,
+      "elementalcraft:air_shard": 8,
+      "elementalcraft:earth_shard": 8,
+      "elementalcraft:fire_shard": 8,
+      "elementalcraft:water_shard": 8
+    },
+    "conversion": [
+      {
+        "output": "elementalcraft:crude_air_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:fine_air_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:crude_earth_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:fine_earth_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:crude_fire_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:fine_fire_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:crude_water_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      },
+      {
+        "output": "elementalcraft:fine_water_gem",
+        "ingredients": [
+          "minecraft:diamond",
+          "elementalcraft:aircrystal",
+          "elementalcraft:air_shard"
+        ]
+      }
+    ]
+  }
+}

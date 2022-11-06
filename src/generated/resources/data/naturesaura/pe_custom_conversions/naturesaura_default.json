@@ -1,0 +1,17 @@
+{
+  "comment": "Default conversions for Natures Aura",
+  "values": {
+    "before": {
+      "naturesaura:gold_leaf": 2,
+      "naturesaura:end_flower": 32
+    },
+    "conversion": [
+      {
+        "output": "naturesaura:aura_bottle",
+        "ingredients": [
+          "naturesaura:bottle_two_the_rebottling"
+        ]
+      }
+    ]
+  }
+}
