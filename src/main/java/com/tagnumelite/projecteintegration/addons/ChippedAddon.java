@@ -39,7 +39,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static earth.terrarium.chipped.registry.ChippedRecipeTypes.*;
+import static earth.terrarium.chipped.registry.ModRecipeTypes.*;
 
 
 public class ChippedAddon {

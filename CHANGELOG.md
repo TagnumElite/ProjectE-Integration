@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.4.3]
+### Fixed
+- Updated support for [Chipped] to 2.0.1
+
 ## [5.4.2]
 ### Changed
 - Updated support for [Alchemistry] to 2.2+
@@ -645,7 +649,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.2...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.3...HEAD
+[5.4.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.2...v5.4.3
 [5.4.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.1...v5.4.2
 [5.4.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.0...v5.4.1
 [5.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.3.7...v5.4.0
