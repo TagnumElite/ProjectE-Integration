@@ -33,58 +33,30 @@ import net.minecraft.resources.ResourceLocation;
  * as a conversion provider. There are a few utility functions for getting {@link NormalizedSimpleStack} from tags.
  */
 public abstract class AConversionProvider {
-    /**
-     * @param ingot
-     * @return
-     */
     protected static NormalizedSimpleStack dustTag(String dust) {
         return forgeTag("dusts/" + dust);
     }
 
-    /**
-     * @param ingot
-     * @return
-     */
     protected static NormalizedSimpleStack ingotTag(String ingot) {
         return forgeTag("ingots/" + ingot);
     }
 
-    /**
-     * @param gem
-     * @return
-     */
     protected static NormalizedSimpleStack gemTag(String gem) {
         return forgeTag("gems/" + gem);
     }
 
-    /**
-     * @param crop
-     * @return
-     */
     protected static NormalizedSimpleStack cropsTag(String crop) {
         return forgeTag("crops/" + crop);
     }
 
-    /**
-     * @param grain
-     * @return
-     */
     protected static NormalizedSimpleStack grainTag(String grain) {
         return forgeTag("grain/" + grain);
     }
 
-    /**
-     * @param tag
-     * @return
-     */
     protected static NormalizedSimpleStack forgeTag(String tag) {
         return tag("forge:" + tag);
     }
 
-    /**
-     * @param resourceLocation
-     * @return
-     */
     protected static NormalizedSimpleStack tag(String resourceLocation) {
         return NSSItem.createTag(new ResourceLocation(resourceLocation));
     }

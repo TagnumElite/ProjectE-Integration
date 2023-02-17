@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Support for [Farming for Blockheads] as I used the wrong package
+- Javadoc errors because I left some empty docstrings
 
 ## [5.4.3]
 ### Fixed
