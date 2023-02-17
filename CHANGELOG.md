@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved Api sourceSet to Api subproject
 - Moved [Mystical Agriculture] from file to cursemaven
 - Moved [Modular Machinery] from Hellfire maven to cursemaven
+- Changed ApplyOnlyIf and OnlyIf to use version ranges instead of regex
 
 ### Removed
 - Harvestcraft jar, we fetch from jitpack now

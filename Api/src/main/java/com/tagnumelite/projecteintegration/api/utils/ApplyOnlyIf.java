@@ -23,9 +23,10 @@ package com.tagnumelite.projecteintegration.api.utils;
 
 import com.tagnumelite.projecteintegration.api.plugin.OnlyIf;
 import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.common.versioning.VersionParser;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.regex.Pattern;
 
 /**
  * The class that contains the logic for {@link OnlyIf}
@@ -43,7 +44,8 @@ public final class ApplyOnlyIf {
     public static boolean apply(OnlyIf onlyIf, ModContainer modContainer) {
         String mod_version = modContainer.getVersion();
         if (!StringUtils.isEmpty(onlyIf.version())) {
-            if (!Pattern.matches(onlyIf.version(), mod_version)) {
+            VersionRange onlyifRange = VersionParser.parseRange(onlyIf.version());
+            if (new DefaultArtifactVersion(modContainer.getModId(), onlyifRange).containsVersion(modContainer.getProcessedVersion())) {
                 return false;
             }
         }

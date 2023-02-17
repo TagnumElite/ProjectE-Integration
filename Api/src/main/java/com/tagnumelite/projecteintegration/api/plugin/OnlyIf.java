@@ -34,10 +34,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface OnlyIf {
     /**
-     * Compares the version to regex pattern
+     * Uses {@link net.minecraftforge.fml.common.versioning.VersionParser},
+     * {@link net.minecraftforge.fml.common.versioning.VersionRange}
+     * and {@link net.minecraftforge.fml.common.versioning.DefaultArtifactVersion} to use
+     * Apache Maven rules
      *
-     * @return A string to be compiled into a {@link java.util.regex.Pattern}
-     * @see java.util.regex.Pattern
+     * @return A version range string as per the version range specification
+     * @see <a href="https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html">Version Range Specification</a>
      */
     String version() default "";
 
