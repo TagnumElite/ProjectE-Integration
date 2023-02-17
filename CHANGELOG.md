@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [5.4.4]
 ### Fixed
 - Support for [Farming for Blockheads] as I used the wrong package
 - Javadoc errors because I left some empty docstrings
@@ -652,7 +654,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.3...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.4...HEAD
+[5.4.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.3...v5.4.4
 [5.4.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.2...v5.4.3
 [5.4.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.1...v5.4.2
 [5.4.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.0...v5.4.1
@@ -746,6 +749,7 @@ Added support for 18 more mods
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
+[Farming for Blockheads]: https://www.curseforge.com/minecraft/mc-mods/farming-for-blockheads
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
