@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- EMC to #forge:ingots/iridium of 4096
+- 
 ### Fixed
 - Support for updated [Ice And Fire]
 - Support for [Botania] Pure Daisy to be able to use Fluid Blocks

@@ -64,6 +64,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     protected void addCustomConversions() {
         createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
                 .before(ingotTag("zinc"), 128)
+                .before(ingotTag("iridium"), 4096)
                 .before(new FluidStack(Fluids.WATER, 250), 1);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
