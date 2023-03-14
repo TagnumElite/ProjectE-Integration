@@ -35,7 +35,8 @@ public class DataGenerators {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
+        final DataGenerator gen = event.getGenerator();
+
         if (event.includeServer()) {
             gen.addProvider(new PEICustomConversionProvider(gen));
         }

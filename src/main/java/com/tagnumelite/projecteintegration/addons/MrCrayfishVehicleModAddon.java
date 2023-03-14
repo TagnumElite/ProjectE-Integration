@@ -26,7 +26,6 @@ import com.mrcrayfish.vehicle.crafting.FluidEntry;
 import com.mrcrayfish.vehicle.crafting.FluidExtractorRecipe;
 import com.mrcrayfish.vehicle.crafting.FluidMixerRecipe;
 import com.mrcrayfish.vehicle.crafting.RecipeType;
-import com.mrcrayfish.vehicle.tileentity.FluidMixerTileEntity;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
@@ -38,7 +37,6 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.Tuple;
 
 import java.util.ArrayList;
 import java.util.Collections;

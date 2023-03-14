@@ -41,6 +41,7 @@ public class IceAndFireAddon {
         public String getName() {
             return "IceAndFireDragonForgeMapper";
         }
+
         @Override
         public boolean canHandle(IRecipeType<?> iRecipeType) {
             return iRecipeType == IafRecipeRegistry.DRAGON_FORGE_TYPE;

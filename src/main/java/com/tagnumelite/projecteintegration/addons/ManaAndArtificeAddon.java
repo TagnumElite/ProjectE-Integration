@@ -24,7 +24,6 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.ma.api.recipes.IItemAndPatternRecipe;
 import com.ma.api.rituals.IRitualReagent;
-import com.ma.interop.jei.ingredients.ManaweavePatternIngredient;
 import com.ma.items.ItemInit;
 import com.ma.recipes.RecipeInit;
 import com.ma.recipes.arcanefurnace.ArcaneFurnaceRecipe;
@@ -36,10 +35,7 @@ import com.ma.recipes.runeforging.RunescribingRecipe;
 import com.ma.tools.MATags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.ABaseRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
-import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.ItemStack;
