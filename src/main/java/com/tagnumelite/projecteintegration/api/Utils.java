@@ -32,7 +32,13 @@ import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.block.Block;
+import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +48,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.forgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class Utils {
@@ -360,5 +367,36 @@ public class Utils {
         IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
         ingredientMap.addIngredient(dummy, amount);
         return ingredientMap.getMap();
+    }
+
+    public static <CLZ> Field getField(Class<CLZ> clazz, String fieldName)
+            throws NoSuchFieldException {
+        try {
+            return clazz.getDeclaredField(fieldName);
+        } catch (NoSuchFieldException e) {
+            Class<? super CLZ> superClass = clazz.getSuperclass();
+            if (superClass == null) {
+                throw e;
+            } else {
+                return getField(superClass, fieldName);
+            }
+        }
+    }
+
+    public static boolean addBlockToIngredientMap(IngredientMap<NormalizedSimpleStack> ingredientMap, Block block) {
+        NormalizedSimpleStack nss = getNSSFromBlock(block);
+        if (nss == null) return false;
+        int amount = block instanceof FlowingFluidBlock ? 1000 : 1;
+        ingredientMap.addIngredient(nss, amount);
+        return true;
+    }
+
+    public static NormalizedSimpleStack getNSSFromBlock(Block block) {
+        if (block instanceof FlowingFluidBlock) {
+            return NSSFluid.createFluid(((FlowingFluidBlock) block).getFluid());
+        } else {
+            if (block.asItem() == Items.AIR) return null;
+            return NSSItem.createItem(block);
+        }
     }
 }

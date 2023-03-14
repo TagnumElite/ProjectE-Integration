@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -29,7 +30,6 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.util.Tuple;
@@ -119,25 +119,28 @@ public class BotaniaAddon {
             List<BlockState> matches = recipe.getInput().getDisplayed();
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            boolean res;
             if (matches == null) {
                 return null;
             } else if (matches.size() == 1) {
                 //Handle this ingredient as a direct representation of the stack it represents
-                ingredientMap.addIngredient(NSSItem.createItem(matches.get(0).getBlock()), 1);
-                return new NSSInput(ingredientMap, fakeGroupMap, true);
+                res = Utils.addBlockToIngredientMap(ingredientMap, matches.get(0).getBlock());
+                return new NSSInput(ingredientMap, fakeGroupMap, res);
             } else if (matches.size() > 1) {
                 Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
                 List<Block> stacks = new ArrayList<>();
 
                 for (BlockState match : matches) {
-                    rawNSSMatches.add(NSSItem.createItem(match.getBlock()));
+                    NormalizedSimpleStack nss = Utils.getNSSFromBlock(match.getBlock());
+                    if (nss != null)
+                        rawNSSMatches.add(nss);
                     stacks.add(match.getBlock());
                 }
 
                 int count = stacks.size();
                 if (count == 1) {// I feel like this is unreachable code.... TODO: Unreachable Code?
-                    ingredientMap.addIngredient(NSSItem.createItem(stacks.get(0)), 1);
-                    return new NSSInput(ingredientMap, fakeGroupMap, true);
+                    res = Utils.addBlockToIngredientMap(ingredientMap, stacks.get(0).getBlock());
+                    return new NSSInput(ingredientMap, fakeGroupMap, res);
                 } else {
                     //Handle this ingredient as the representation of all the stacks it supports
                     Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
@@ -150,9 +153,10 @@ public class BotaniaAddon {
                         // as then our fake ingredient will never actually have an emc value assigned with it
                         // so the recipe won't either
                         List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
-                        for (Block stack : stacks) {
+                        for (Block block : stacks) {
                             IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
-                            groupIngredientMap.addIngredient(NSSItem.createItem(stack), 1);
+                            if (!Utils.addBlockToIngredientMap(groupIngredientMap, block))
+                                continue;
                             groupIngredientMaps.add(groupIngredientMap);
                         }
                         fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
