@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - EMC to #forge:ingots/iridium of 4096
+- EMC to [Megaman Armor Mod] Ceratanium Ingot of 16000
 
 ### Changed
 - Some mappers now don't fail hard and instead fail soft

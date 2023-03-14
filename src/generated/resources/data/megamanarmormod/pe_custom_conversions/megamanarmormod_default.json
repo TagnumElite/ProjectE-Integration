@@ -1,0 +1,8 @@
+{
+  "comment": "Set defaults conversions for Megaman Armor Mod",
+  "values": {
+    "before": {
+      "megamanarmormod:ceratanium": 16000
+    }
+  }
+}
