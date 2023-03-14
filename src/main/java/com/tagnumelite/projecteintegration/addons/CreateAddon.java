@@ -38,6 +38,7 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
 import com.simibubi.create.content.curiosities.tools.SandPaperPolishingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -48,13 +49,16 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -91,47 +95,61 @@ public class CreateAddon {
 
             for (FluidIngredient fluidIngredient : fluidIngredients) {
                 final int amount = fluidIngredient.getRequiredAmount();
-                List<FluidStack> matches = fluidIngredient.getMatchingFluidStacks();
-                if (matches.isEmpty()) {
-                    //PEIntegration.LOGGER.warn("");
-                    continue;
-                }
-
-                if (matches.size() == 1) {
-                    ingredientMap.addIngredient(NSSFluid.createFluid(matches.get(0)), amount);
+                if (fluidIngredient instanceof FluidIngredient.FluidTagIngredient) {
+                    FluidIngredient.FluidTagIngredient fluidTagIngredient = (FluidIngredient.FluidTagIngredient) fluidIngredient;
+                    Class<? extends FluidIngredient.FluidTagIngredient> obj = fluidTagIngredient.getClass();
+                    try {
+                        Field tagField = Utils.getField(obj, "tag");
+                        tagField.setAccessible(true);
+                        ITag.INamedTag<Fluid> tag = (ITag.INamedTag<Fluid>) tagField.get(fluidTagIngredient);
+                        ingredientMap.addIngredient(NSSFluid.createTag(tag), amount);
+                    } catch (NoSuchFieldException | IllegalAccessException e) {
+                        PEIntegration.LOGGER.error("Failed to get fluid tag from FluidTagIngredient", e);
+                        return new NSSInput(ingredientMap, fakeGroupMap, false);
+                    }
                 } else {
-                    Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
-                    List<FluidStack> stacks = new ArrayList<>();
-
-                    for (FluidStack match : matches) {
-                        //Validate it is not an empty stack in case mods do weird things in custom ingredients
-                        if (!match.isEmpty()) {
-                            rawNSSMatches.add(NSSFluid.createFluid(match));
-                            stacks.add(match);
-                        }
+                    List<FluidStack> matches = fluidIngredient.getMatchingFluidStacks();
+                    if (matches.isEmpty()) {
+                        //PEIntegration.LOGGER.warn("");
+                        continue;
                     }
 
-                    int count = stacks.size();
-                    if (count == 1) {
-                        ingredientMap.addIngredient(NSSFluid.createFluid(stacks.get(0)), amount);
-                    } else if (count > 1) {
-                        //Handle this ingredient as the representation of all the stacks it supports
-                        Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                        NormalizedSimpleStack dummy = group.getA();
-                        ingredientMap.addIngredient(dummy, Math.max(amount, 1));
-                        if (group.getB()) {
-                            //Only lookup the matching stacks for the group with conversion if we don't already have
-                            // a group created for this dummy ingredient
-                            // Note: We soft ignore cases where it fails/there are no matching group ingredients
-                            // as then our fake ingredient will never actually have an emc value assigned with it
-                            // so the recipe won't either
-                            List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
-                            for (FluidStack stack : stacks) {
-                                IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
-                                groupIngredientMap.addIngredient(NSSFluid.createFluid(stack), 1);
-                                groupIngredientMaps.add(groupIngredientMap);
+                    if (matches.size() == 1) {
+                        ingredientMap.addIngredient(NSSFluid.createFluid(matches.get(0)), amount);
+                    } else {
+                        Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
+                        List<FluidStack> stacks = new ArrayList<>();
+
+                        for (FluidStack match : matches) {
+                            //Validate it is not an empty stack in case mods do weird things in custom ingredients
+                            if (!match.isEmpty()) {
+                                rawNSSMatches.add(NSSFluid.createFluid(match));
+                                stacks.add(match);
                             }
-                            fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
+                        }
+
+                        int count = stacks.size();
+                        if (count == 1) {
+                            ingredientMap.addIngredient(NSSFluid.createFluid(stacks.get(0)), amount);
+                        } else if (count > 1) {
+                            //Handle this ingredient as the representation of all the stacks it supports
+                            Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
+                            NormalizedSimpleStack dummy = group.getA();
+                            ingredientMap.addIngredient(dummy, Math.max(amount, 1));
+                            if (group.getB()) {
+                                //Only lookup the matching stacks for the group with conversion if we don't already have
+                                // a group created for this dummy ingredient
+                                // Note: We soft ignore cases where it fails/there are no matching group ingredients
+                                // as then our fake ingredient will never actually have an emc value assigned with it
+                                // so the recipe won't either
+                                List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
+                                for (FluidStack stack : stacks) {
+                                    IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
+                                    groupIngredientMap.addIngredient(NSSFluid.createFluid(stack), 1);
+                                    groupIngredientMaps.add(groupIngredientMap);
+                                }
+                                fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
+                            }
                         }
                     }
                 }

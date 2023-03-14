@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Support for updated [Ice And Fire]
 - Support for [Botania] Pure Daisy to be able to use Fluid Blocks
+- Support for [Create] FluidTagIngredient to not call unbound tags
 
 ## [4.5.1]
 ### Fixed
