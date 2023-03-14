@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - EMC to #forge:ingots/iridium of 4096
-- 
+
+### Changed
+- Some mappers now don't fail hard and instead fail soft
+
 ### Fixed
 - Support for updated [Ice And Fire]
 - Support for [Botania] Pure Daisy to be able to use Fluid Blocks

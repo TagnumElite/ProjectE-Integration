@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.FRandom;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
@@ -84,6 +85,10 @@ public class BloodMagicAddon {
 
         @Override
         public NSSOutput getOutput(RecipeAlchemyArray recipe) {
+            if (recipe.getOutput().isEmpty()) {
+                PEIntegration.LOGGER.warn("Blood Magic Array recipe stack is empty: {}", recipe.getOutput());
+                return null;
+            }
             return new NSSOutput(recipe.getOutput());
         }
     }

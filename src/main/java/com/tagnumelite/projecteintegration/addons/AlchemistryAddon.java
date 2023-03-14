@@ -108,6 +108,7 @@ public class AlchemistryAddon {
 
         @Override
         public NSSInput getInput(EvaporatorRecipe recipe) {
+            if (recipe.input == null || recipe.input.isEmpty()) return null;
             return NSSInput.createFluid(recipe.input);
         }
 
