@@ -25,7 +25,7 @@ package com.tagnumelite.projecteintegration.addons;
 import com.github.alexthe666.iceandfire.recipe.DragonForgeRecipe;
 import com.github.alexthe666.iceandfire.recipe.IafRecipeRegistry;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
+import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -35,7 +35,7 @@ import java.util.List;
 public class IceAndFireAddon {
     public static final String MODID = "iceandfire";
 
-    @CustomRecipeMapper(MODID)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IAFDragonForgeMapper extends ARecipeTypeMapper<DragonForgeRecipe> {
         @Override
         public String getName() {

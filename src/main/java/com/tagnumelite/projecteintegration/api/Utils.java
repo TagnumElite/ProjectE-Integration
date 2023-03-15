@@ -72,6 +72,8 @@ public class Utils {
         try {
             Class<? extends T> subClass = Class.forName(className).asSubclass(baseClass);
             return subClass.newInstance();
+        } catch (ClassCastException e) {
+            PEIntegration.LOGGER.error("Failed to load ({}) and cast to ({})", className, baseClass, e);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | LinkageError e) {
             PEIntegration.LOGGER.error("Failed to load: {}", className, e);
         }
