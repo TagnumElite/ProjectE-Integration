@@ -139,7 +139,7 @@ public class BotaniaAddon {
 
                 int count = stacks.size();
                 if (count == 1) {// I feel like this is unreachable code.... TODO: Unreachable Code?
-                    res = Utils.addBlockToIngredientMap(ingredientMap, stacks.get(0).getBlock());
+                    res = Utils.addBlockToIngredientMap(ingredientMap, stacks.get(0));
                     return new NSSInput(ingredientMap, fakeGroupMap, res);
                 } else {
                     //Handle this ingredient as the representation of all the stacks it supports
