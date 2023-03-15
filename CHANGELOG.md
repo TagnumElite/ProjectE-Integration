@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [6.2.0]
 ### Fixed
 - Support for [Botania] Pure Daisy to be able to use Fluid Blocks
 
@@ -656,7 +658,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...HEAD
+[6.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...v6.2.0
 [6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
 [6.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.5...v6.1.0
 [6.0.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.4...v6.0.5
