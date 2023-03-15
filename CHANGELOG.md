@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Support for [Botania] Pure Daisy to be able to use Fluid Blocks
 
+### Ported
+- Support for [Botania]
+
 ## [6.1.1]
 ### Fixed
 - Add missing dependency [Titanium]

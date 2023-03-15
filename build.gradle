@@ -176,7 +176,7 @@ dependencies {
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     //implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     compileOnly fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
-    //implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
+    implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     //implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
     //implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
     //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
@@ -319,7 +319,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'astral-sorcery'
                     //optionalDependency 'blood-magic'
                     optionalDependency 'blue-skies'
-                    //optionalDependency 'botania'
+                    optionalDependency 'botania'
                     //optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'
                     optionalDependency 'create'

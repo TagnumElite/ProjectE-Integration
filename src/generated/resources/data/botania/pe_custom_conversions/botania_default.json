@@ -1,0 +1,11 @@
+{
+  "comment": "Default conversions for Botania",
+  "values": {
+    "before": {
+      "botania:ender_air_bottle": 1024,
+      "botania:life_essence": 256,
+      "botania:living_root": 1,
+      "botania:pebble": 1
+    }
+  }
+}

@@ -37,8 +37,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.recipe.*;
-import vazkii.botania.common.crafting.ModRecipeTypes;
-import vazkii.botania.common.item.ModItems;
+import vazkii.botania.common.crafting.BotaniaRecipeTypes;
+import vazkii.botania.common.item.BotaniaItems;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -54,7 +54,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BElvenTradeMapper extends ARecipeTypeMapper<IElvenTradeRecipe> {
+    public static class BElvenTradeMapper extends ARecipeTypeMapper<ElvenTradeRecipe> {
         @Override
         public String getName() {
             return NAME("ElvenTrade");
@@ -62,17 +62,17 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.ELVEN_TRADE_TYPE;
+            return recipeType == BotaniaRecipeTypes.ELVEN_TRADE_TYPE;
         }
 
         @Override
-        public NSSOutput getOutput(IElvenTradeRecipe recipe) {
+        public NSSOutput getOutput(ElvenTradeRecipe recipe) {
             return mapOutputs(recipe.getOutputs().toArray());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BManaInfusionMapper extends ARecipeTypeMapper<IManaInfusionRecipe> {
+    public static class BManaInfusionMapper extends ARecipeTypeMapper<ManaInfusionRecipe> {
         @Override
         public String getName() {
             return NAME("ManaInfusion");
@@ -80,12 +80,12 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.MANA_INFUSION_TYPE;
+            return recipeType == BotaniaRecipeTypes.MANA_INFUSION_TYPE;
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BPetalMapper extends ARecipeTypeMapper<IPetalRecipe> {
+    public static class BPetalMapper extends ARecipeTypeMapper<PetalApothecaryRecipe> {
         @Override
         public String getName() {
             return NAME("Petal");
@@ -93,12 +93,12 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.PETAL_TYPE;
+            return recipeType == BotaniaRecipeTypes.PETAL_TYPE;
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BPureDaisyMapper extends ARecipeTypeMapper<IPureDaisyRecipe> {
+    public static class BPureDaisyMapper extends ARecipeTypeMapper<PureDaisyRecipe> {
         @Override
         public String getName() {
             return NAME("PureDaisy");
@@ -106,16 +106,16 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.PURE_DAISY_TYPE;
+            return recipeType == BotaniaRecipeTypes.PURE_DAISY_TYPE;
         }
 
         @Override
-        public NSSOutput getOutput(IPureDaisyRecipe recipe) {
+        public NSSOutput getOutput(PureDaisyRecipe recipe) {
             return new NSSOutput(recipe.getOutputState());
         }
 
         @Override
-        public NSSInput getInput(IPureDaisyRecipe recipe) {
+        public NSSInput getInput(PureDaisyRecipe recipe) {
             List<BlockState> matches = recipe.getInput().getDisplayed();
             IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
@@ -139,7 +139,7 @@ public class BotaniaAddon {
 
                 int count = stacks.size();
                 if (count == 1) {// I feel like this is unreachable code.... TODO: Unreachable Code?
-                    res = Utils.addBlockToIngredientMap(ingredientMap, stacks.get(0).getBlock());
+                    res = Utils.addBlockToIngredientMap(ingredientMap, stacks.get(0).defaultBlockState().getBlock());
                     return new NSSInput(ingredientMap, fakeGroupMap, res);
                 } else {
                     //Handle this ingredient as the representation of all the stacks it supports
@@ -168,7 +168,7 @@ public class BotaniaAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BRuneAlterMapper extends ARecipeTypeMapper<IRuneAltarRecipe> {
+    public static class BRuneAlterMapper extends ARecipeTypeMapper<RunicAltarRecipe> {
         @Override
         public String getName() {
             return NAME("RuneAlter");
@@ -176,12 +176,12 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.RUNE_TYPE;
+            return recipeType == BotaniaRecipeTypes.RUNE_TYPE;
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class BTerraPlateMapper extends ARecipeTypeMapper<ITerraPlateRecipe> {
+    public static class BTerraPlateMapper extends ARecipeTypeMapper<TerrestrialAgglomerationRecipe> {
         @Override
         public String getName() {
             return NAME("TerraPlate");
@@ -189,7 +189,7 @@ public class BotaniaAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ModRecipeTypes.TERRA_PLATE_TYPE;
+            return recipeType == BotaniaRecipeTypes.TERRA_PLATE_TYPE;
         }
     }
 
@@ -198,10 +198,10 @@ public class BotaniaAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Default conversions for Botania")
-                    .before(ModItems.pebble, 1)
-                    .before(ModItems.livingroot, 1)
-                    .before(ModItems.lifeEssence, 256)
-                    .before(ModItems.enderAirBottle, 1024);
+                    .before(BotaniaItems.pebble, 1)
+                    .before(BotaniaItems.livingroot, 1)
+                    .before(BotaniaItems.lifeEssence, 256)
+                    .before(BotaniaItems.enderAirBottle, 1024);
         }
     }
 }
