@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 TagnumElite
+ * Copyright (c) 2019-2023 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -115,7 +115,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_BOTTLER;
+            return recipeType == TCoreRecipeTypes.BOTTLER_RECIPE.get();
         }
     }
 
@@ -128,7 +128,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_BREWER;
+            return recipeType == TCoreRecipeTypes.BREWER_RECIPE.get();
         }
     }
 
@@ -141,7 +141,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_CENTRIFUGE;
+            return recipeType == TCoreRecipeTypes.CENTRIFUGE_RECIPE.get();
         }
     }
 
@@ -154,7 +154,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_CHILLER;
+            return recipeType == TCoreRecipeTypes.CHILLER_RECIPE.get();
         }
     }
 
@@ -167,7 +167,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_CRUCIBLE;
+            return recipeType == TCoreRecipeTypes.CRUCIBLE_RECIPE.get();
         }
     }
 
@@ -180,7 +180,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_FURNACE;
+            return recipeType == TCoreRecipeTypes.FURNACE_RECIPE.get();
         }
     }
 
@@ -193,7 +193,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_INSOLATOR;
+            return recipeType == TCoreRecipeTypes.INSOLATOR_RECIPE.get();
         }
     }
 
@@ -206,7 +206,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_PRESS;
+            return recipeType == TCoreRecipeTypes.PRESS_RECIPE.get();
         }
     }
 
@@ -219,7 +219,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_PULVERIZER;
+            return recipeType == TCoreRecipeTypes.PULVERIZER_RECIPE.get();
         }
     }
 
@@ -232,7 +232,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_PULVERIZER_RECYCLE;
+            return recipeType == TCoreRecipeTypes.PULVERIZER_RECYCLE_RECIPE.get();
         }
     }
 
@@ -245,7 +245,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_PYROLYZER;
+            return recipeType == TCoreRecipeTypes.PYROLYZER_RECIPE.get();
         }
     }
 
@@ -258,7 +258,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_REFINERY;
+            return recipeType == TCoreRecipeTypes.REFINERY_RECIPE.get();
         }
     }
 
@@ -271,7 +271,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_SAWMILL;
+            return recipeType == TCoreRecipeTypes.SAWMILL_RECIPE.get();
         }
     }
 
@@ -284,7 +284,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_SMELTER;
+            return recipeType == TCoreRecipeTypes.SMELTER_RECIPE.get();
         }
     }
 
@@ -297,7 +297,7 @@ public class ThermalAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TCoreRecipeTypes.RECIPE_SMELTER_RECYCLE;
+            return recipeType == TCoreRecipeTypes.SMELTER_RECYCLE_RECIPE.get();
         }
     }
 }
