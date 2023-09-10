@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.mna.api.recipes.IItemAndPatternRecipe;
 import com.mna.api.rituals.IRitualReagent;
+import com.mna.api.tools.MATags;
 import com.mna.items.ItemInit;
 import com.mna.recipes.RecipeInit;
 import com.mna.recipes.arcanefurnace.ArcaneFurnaceRecipe;
@@ -32,7 +33,6 @@ import com.mna.recipes.manaweaving.ManaweavingRecipe;
 import com.mna.recipes.rituals.RitualRecipe;
 import com.mna.recipes.runeforging.RuneforgingRecipe;
 import com.mna.recipes.runeforging.RunescribingRecipe;
-import com.mna.tools.MATags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
