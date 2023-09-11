@@ -39,12 +39,17 @@ versionRange = "[2.0.1,)"
 [[dependencies.projecteintegration]]
 modId = "create"
 mandatory = false
-versionRange = "[0.5.0,)"
+versionRange = "[0.5.1,)"
 
 [[dependencies.projecteintegration]]
 modId = "farmersdelight"
 mandatory = false
 versionRange = "[1.18.2-1.1.2,)"
+
+[[dependencies.projecteintegration]]
+modId = "mna"
+mandatory = false
+versionRange = "[2.0.0.0,)"
 
 [[dependencies.projecteintegration]]
 modId = "pneumaticcraft"

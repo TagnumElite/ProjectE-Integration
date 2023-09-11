@@ -1,0 +1,14 @@
+{
+  "comment": "Default conversions for Create",
+  "values": {
+    "conversion": [
+      {
+        "output": "create:blaze_burner",
+        "ingredients": [
+          "minecraft:blaze_powder",
+          "create:empty_blaze_burner"
+        ]
+      }
+    ]
+  }
+}

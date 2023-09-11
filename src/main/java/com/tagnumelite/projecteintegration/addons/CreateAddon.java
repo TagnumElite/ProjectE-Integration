@@ -22,38 +22,45 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.contraptions.components.crafter.MechanicalCraftingRecipe;
-import com.simibubi.create.content.contraptions.components.crusher.CrushingRecipe;
-import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.contraptions.components.fan.HauntingRecipe;
-import com.simibubi.create.content.contraptions.components.fan.SplashingRecipe;
-import com.simibubi.create.content.contraptions.components.millstone.MillingRecipe;
-import com.simibubi.create.content.contraptions.components.mixer.CompactingRecipe;
-import com.simibubi.create.content.contraptions.components.mixer.MixingRecipe;
-import com.simibubi.create.content.contraptions.components.press.PressingRecipe;
-import com.simibubi.create.content.contraptions.components.saw.CuttingRecipe;
-import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyRecipe;
-import com.simibubi.create.content.contraptions.processing.BasinRecipe;
-import com.simibubi.create.content.contraptions.processing.ItemApplicationRecipe;
-import com.simibubi.create.content.contraptions.processing.ProcessingOutput;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
-import com.simibubi.create.content.curiosities.tools.SandPaperPolishingRecipe;
+import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
+import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
+import com.simibubi.create.content.kinetics.crusher.CrushingRecipe;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
+import com.simibubi.create.content.kinetics.fan.HauntingRecipe;
+import com.simibubi.create.content.kinetics.fan.SplashingRecipe;
+import com.simibubi.create.content.kinetics.millstone.MillingRecipe;
+import com.simibubi.create.content.kinetics.mixer.CompactingRecipe;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
+import com.simibubi.create.content.kinetics.press.PressingRecipe;
+import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingOutput;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.*;
 
@@ -156,7 +163,7 @@ public class CreateAddon {
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
-            if (outputs.size() == 0) return NSSOutput.EMPTY;
+            if (outputs.isEmpty()) return NSSOutput.EMPTY;
             return mapOutputs(outputs.toArray());
         }
     }
@@ -379,4 +386,19 @@ public class CreateAddon {
     }
 
     // We are ignoring Filling, Emptying recipes.
+
+    @ConversionProvider(MODID)
+    @ObjectHolder(MODID)
+    public static class CreateConversionProvider extends AConversionProvider {
+        @ObjectHolder("blaze_burner")
+        public static Item BLAZE_BURNER;
+
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("Default conversions for Create")
+                    .conversion(BLAZE_BURNER)
+                    .ingredient(Items.BLAZE_POWDER)
+                    .ingredient(AllItems.EMPTY_BLAZE_BURNER.asStack()).end();
+        }
+    }
 }

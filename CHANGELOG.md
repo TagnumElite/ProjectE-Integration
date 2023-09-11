@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.6.0]
+### Fixed support for [Create] 0.5.1c
+
 ## [5.5.0]
 ### Fixed
 - Support for [Mana and Artifice] version 2.+
@@ -666,7 +669,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.5.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.6.0...HEAD
+[5.6.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.5.0...v5.6.0
 [5.5.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.6...v5.5.0
 [5.4.6]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.5...v5.4.6
 [5.4.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v5.4.4...v5.4.5
