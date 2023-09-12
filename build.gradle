@@ -154,7 +154,7 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("curse.maven:cyclops-core-232758:${version_cyclopscore}")
     runtimeOnly fg.deobf("sirttas.dpanvil:DPAnvil:${version_datapackanvil}")
-    runtimeOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-1.19.2:${version_flywheel}")
+    runtimeOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${version_flywheel}")
     runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
     runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-1.19:${version_geckolib}")
     runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}"))
@@ -163,6 +163,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${version_registrate}")
     runtimeOnly fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
     //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
@@ -184,7 +185,7 @@ dependencies {
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
     //implementation fg.deobf("com.simibubi.create:Create:${version_create}")
-    implementation fg.deobf("curse.maven:create-328085:${version_create}")
+    implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}:slim") { transitive = false }
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
     implementation fg.deobf("curse.maven:evilcraft-74610:${version_evilcraft}")

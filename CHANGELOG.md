@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [6.3.0]
+### Fixed
+- Support for [Create] 0.5.1d
+
 ### Ported
 - Support for [Chipped]
 - Support for [Compact Crafting]
@@ -662,7 +667,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.3.0...HEAD
+[6.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...v6.3.0
 [6.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...v6.2.0
 [6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
 [6.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.5...v6.1.0
