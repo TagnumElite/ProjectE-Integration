@@ -34,7 +34,6 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.compress.utils.Lists;
 
