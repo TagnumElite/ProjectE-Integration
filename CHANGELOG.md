@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for [Tinkers Construct]
 
 ## [5.6.0]
-### Fixed support for [Create] 0.5.1c
+### Fixed 
+- Support for [Create] 0.5.1c
 
 ## [5.5.0]
 ### Fixed
@@ -21,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.4.6]
 ### Ported
-- Support for Botania
+- Support for [Botania]
 
 ## [5.4.5]
 ### Fixed
@@ -768,6 +769,7 @@ Added support for 18 more mods
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
+[Corail Woodcutter]: https://www.curseforge.com/minecraft/mc-mods/corail-woodcutter
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Draconic Evolution]: https://www.curseforge.com/minecraft/mc-mods/draconic-evolution
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
