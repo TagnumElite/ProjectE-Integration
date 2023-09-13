@@ -195,7 +195,7 @@ dependencies {
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
     implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
-    //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
+    implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}:slim") { transitive = false }
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
@@ -334,7 +334,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'blue-skies'
                     optionalDependency 'botania'
                     optionalDependency 'chipped'
-                    //optionalDependency 'compact-crafting'
+                    optionalDependency 'compact-crafting'
                     optionalDependency 'corail-woodcutter'
                     optionalDependency 'create'
                     //optionalDependency 'draconic-evolution'

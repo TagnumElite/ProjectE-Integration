@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2023 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,20 +23,20 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import dev.compactmods.crafting.Registration;
 import dev.compactmods.crafting.api.components.IRecipeBlockComponent;
+import dev.compactmods.crafting.core.CCMiniaturizationRecipes;
 import dev.compactmods.crafting.recipes.MiniaturizationRecipe;
 import dev.compactmods.crafting.recipes.components.BlockComponent;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.*;
 
@@ -50,7 +50,7 @@ public class CompactCraftingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == Registration.MINIATURIZATION_RECIPE_TYPE;
+            return recipeType == CCMiniaturizationRecipes.MINIATURIZATION_RECIPE_TYPE;
         }
 
         @Override
@@ -76,8 +76,7 @@ public class CompactCraftingAddon {
                 Optional<IRecipeBlockComponent> component = recipe.getComponents().getBlock(componentKey);
                 if (component.isPresent()) {
                     IRecipeBlockComponent iBlockComponent = component.get();
-                    if (iBlockComponent instanceof BlockComponent) {
-                        BlockComponent blockComponent = (BlockComponent) iBlockComponent;
+                    if (iBlockComponent instanceof BlockComponent blockComponent) {
                         Item blockItem = blockComponent.getBlock().asItem();
                         if (blockItem != Items.AIR)
                             ingredientMap.addIngredient(NSSItem.createItem(new ItemStack(blockItem)), componentAmount);
