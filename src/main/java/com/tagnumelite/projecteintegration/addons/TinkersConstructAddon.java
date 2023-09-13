@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 TagnumElite
+ * Copyright (c) 2019-2023 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import slimeknights.tconstruct.library.recipe.RecipeTypes;
+import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipe;
 import slimeknights.tconstruct.library.recipe.casting.ICastingRecipe;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipe;
@@ -62,7 +62,7 @@ public class TinkersConstructAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.ALLOYING;
+            return recipeType == TinkerRecipeTypes.ALLOYING.get();
         }
 
         @Override
@@ -85,7 +85,7 @@ public class TinkersConstructAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.CASTING_BASIN || recipeType == RecipeTypes.CASTING_TABLE;
+            return recipeType == TinkerRecipeTypes.CASTING_BASIN.get() || recipeType == TinkerRecipeTypes.CASTING_TABLE.get();
         }
 
         @Override
@@ -130,13 +130,13 @@ public class TinkersConstructAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RecipeTypes.MELTING;
+            return recipeType == TinkerRecipeTypes.MELTING.get();
         }
 
         @Override
         public NSSOutput getOutput(IMeltingRecipe recipe) {
-            if (recipe instanceof MeltingRecipe) {
-                return mapOutput(((MeltingRecipe) recipe).getDisplayOutput());
+            if (recipe instanceof MeltingRecipe meltingRecipe) {
+                return mapOutput(meltingRecipe.getOutput());
             } else {
                 return NSSOutput.EMPTY;
             }
@@ -158,7 +158,7 @@ public class TinkersConstructAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType ==recipeTypes.PART_BUILDER;
+            return recipeType == TinkerRecipeTypes.PART_BUILDER.get();
         }
 
         @Override

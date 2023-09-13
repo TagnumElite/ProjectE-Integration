@@ -1,0 +1,8 @@
+{
+  "comment": "Default conversions for Tinkers Construct",
+  "values": {
+    "before": {
+      "#forge:ingots/cobalt": 4096
+    }
+  }
+}
