@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Ported
 - Support for [Compact Crafting]
 - Support for [Draconic Evolution]
+- Support for [Ice and Fire]
 
 ## [5.6.0]
 ### Fixed support for [Create] 0.5.1c
@@ -773,6 +774,7 @@ Added support for 18 more mods
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Farming for Blockheads]: https://www.curseforge.com/minecraft/mc-mods/farming-for-blockheads
+[Ice And Fire]: https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice

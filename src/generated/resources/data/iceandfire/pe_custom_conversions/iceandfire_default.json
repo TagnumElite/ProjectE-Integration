@@ -1,5 +1,5 @@
 {
-  "comment": "Set defaults conversions for Ice and Fire",
+  "comment": "default conversions for Ice and Fire: Dragons",
   "values": {
     "before": {
       "#forge:gems/amethyst": 2048,
@@ -7,10 +7,10 @@
       "#iceandfire:mob_skulls": 320,
       "#iceandfire:dragon_skulls": 624,
       "#iceandfire:myrmex_harvestables": 32,
-      "#iceandfire:scales/sea_serpent": 256,
-      "#iceandfire:scales/dragon": 512,
-      "#iceandfire:bones/dragon": 156,
-      "#iceandfire:bones/wither": 156,
+      "#forge:scales/sea_serpent": 256,
+      "#forge:scales/dragon": 512,
+      "#forge:bones/dragon": 156,
+      "#forge:bones/wither": 156,
       "iceandfire:ice_dragon_blood": 256,
       "iceandfire:lightning_dragon_blood": 256,
       "iceandfire:fire_dragon_blood": 256,

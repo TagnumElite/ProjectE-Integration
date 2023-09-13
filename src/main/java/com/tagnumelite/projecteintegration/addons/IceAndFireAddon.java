@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2023 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,17 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.github.alexthe666.iceandfire.item.IafItemRegistry;
 import com.github.alexthe666.iceandfire.recipe.DragonForgeRecipe;
 import com.github.alexthe666.iceandfire.recipe.IafRecipeRegistry;
-import com.google.common.collect.ImmutableList;
-import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
+import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,35 +40,24 @@ import java.util.List;
 public class IceAndFireAddon {
     public static final String MODID = "iceandfire";
 
-    @CustomRecipeMapper(MODID)
-    public static class IAFDragonForgeMapper extends ACustomRecipeMapper<DragonForgeRecipe> {
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IAFDragonForgeMapper extends ARecipeTypeMapper<DragonForgeRecipe> {
         @Override
         public String getName() {
             return "IceAndFireDragonForgeMapper";
         }
 
         @Override
-        public String getDescription() {
-            return "Recipe mapper for Ice and Fire DragonForge recipes";
-        }
-
-        @Override
-        public List<DragonForgeRecipe> getRecipes() {
-            return ImmutableList.copyOf(IafRecipeRegistry.ALL_FORGE_RECIPES);
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IafRecipeRegistry.DRAGON_FORGE_TYPE;
         }
 
         @Override
         protected List<Ingredient> getIngredients(DragonForgeRecipe recipe) {
             return Arrays.asList(recipe.getInput(), recipe.getBlood());
         }
-
-        @Override
-        protected ItemStack getResult(DragonForgeRecipe recipe) {
-            return recipe.getOutput();
-        }
     }
 
-    /* TODO: Ice and Fire doesn't like to be run in an dev enviroment.
     @ConversionProvider(MODID)
     public static class IAFDataGenerator extends AConversionProvider {
         protected static NormalizedSimpleStack bonesTag(String tag) {
@@ -91,18 +84,17 @@ public class IceAndFireAddon {
                     .before(scaleTag("dragon"), 512)
                     .before(bonesTag("dragon"), 156)
                     .before(bonesTag("wither"), 156)
-                    .before(IafItemRegistry.ICE_DRAGON_BLOOD, 256)
-                    .before(IafItemRegistry.LIGHTNING_DRAGON_BLOOD, 256)
-                    .before(IafItemRegistry.FIRE_DRAGON_BLOOD, 256)
-                    .before(IafItemRegistry.DREAD_SHARD, 144)
-                    .before(IafItemRegistry.HIPPOGRYPH_TALON, 128)
-                    .before(IafItemRegistry.HIPPOCAMPUS_FIN, 512)
-                    .before(IafItemRegistry.SHINY_SCALES, 512)
-                    .before(IafItemRegistry.SIREN_TEAR, 768)
-                    .before(IafItemRegistry.CYCLOPS_EYE, 96)
-                    .before(IafItemRegistry.PIXIE_DUST, 1)
-                    .before(IafItemRegistry.PIXIE_WINGS, 1);
+                    .before(IafItemRegistry.ICE_DRAGON_BLOOD.get(), 256)
+                    .before(IafItemRegistry.LIGHTNING_DRAGON_BLOOD.get(), 256)
+                    .before(IafItemRegistry.FIRE_DRAGON_BLOOD.get(), 256)
+                    .before(IafItemRegistry.DREAD_SHARD.get(), 144)
+                    .before(IafItemRegistry.HIPPOGRYPH_TALON.get(), 128)
+                    .before(IafItemRegistry.HIPPOCAMPUS_FIN.get(), 512)
+                    .before(IafItemRegistry.SHINY_SCALES.get(), 512)
+                    .before(IafItemRegistry.SIREN_TEAR.get(), 768)
+                    .before(IafItemRegistry.CYCLOPS_EYE.get(), 96)
+                    .before(IafItemRegistry.PIXIE_DUST.get(), 1)
+                    .before(IafItemRegistry.PIXIE_WINGS.get(), 1);
         }
     }
-    */
 }
