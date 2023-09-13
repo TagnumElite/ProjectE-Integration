@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2023 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,18 @@ package com.tagnumelite.projecteintegration.addons;
 import com.brandon3055.draconicevolution.api.DraconicAPI;
 import com.brandon3055.draconicevolution.api.crafting.FusionRecipe;
 import com.brandon3055.draconicevolution.api.crafting.IFusionRecipe;
+import com.brandon3055.draconicevolution.init.DEContent;
 import com.brandon3055.draconicevolution.init.DETags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DraconicEvolutionAddon {
     public static final String MODID = "draconicevolution";
@@ -52,7 +50,7 @@ public class DraconicEvolutionAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == DraconicAPI.FUSION_RECIPE_TYPE;
+            return recipeType == DraconicAPI.FUSION_RECIPE_TYPE;
         }
 
         @Override
@@ -62,25 +60,19 @@ public class DraconicEvolutionAddon {
             ingredients.addAll(recipe.fusionIngredients().stream()
                     .filter(IFusionRecipe.IFusionIngredient::consume)
                     .map(IFusionRecipe.IFusionIngredient::get)
-                    .collect(Collectors.toList()));
+                    .toList());
             return ingredients;
         }
     }
 
-    @ObjectHolder(MODID)
     @ConversionProvider(MODID)
     public static class DEConversionProvider extends AConversionProvider {
-        @ObjectHolder("dragon_heart")
-        public static final Item DRAGON_HEART = null;
-        @ObjectHolder("chaos_shard")
-        public static final Item CHAOS_SHARD = null;
-
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Draconic Evolution")
                     .before(DETags.Items.DUSTS_DRACONIUM, 2048)
-                    .before(DRAGON_HEART, 262144)
-                    .before(CHAOS_SHARD, 4096000);
+                    .before(DEContent.dragon_heart, 262144)
+                    .before(DEContent.chaos_shard, 4096000);
         }
     }
 }

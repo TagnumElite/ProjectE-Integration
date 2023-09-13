@@ -160,7 +160,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:alltheores-405593:${version_alltheores}")
     runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
-    //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    runtimeOnly fg.deobf("com.brandon3055.brandonscore:BrandonsCore:${version_brandonscore}:universal")
     runtimeOnly fg.deobf("smashingmods:chemlib:${mc_version}-${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
@@ -198,7 +198,7 @@ dependencies {
     implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
     implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}:slim") { transitive = false }
-    //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    implementation fg.deobf("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
     //implementation fg.deobf("curse.maven:ex-nihilo-sequentia-400012:${version_ex_nihilo_sequentia}")
     implementation fg.deobf("blank:ExNihiloSequentia:1.18.2-20220818-010806")
@@ -337,7 +337,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'compact-crafting'
                     optionalDependency 'corail-woodcutter'
                     optionalDependency 'create'
-                    //optionalDependency 'draconic-evolution'
+                    optionalDependency 'draconic-evolution'
                     optionalDependency 'elemental-craft'
                     optionalDependency 'ex-nihilo-sequentia'
                     optionalDependency 'extended-crafting'

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Ported
 - Support for [Compact Crafting]
+- Support for [Draconic Evolution]
 
 ## [5.6.0]
 ### Fixed support for [Create] 0.5.1c
@@ -765,6 +766,7 @@ Added support for 18 more mods
 [Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
+[Draconic Evolution]: https://www.curseforge.com/minecraft/mc-mods/draconic-evolution
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
