@@ -219,7 +219,7 @@ dependencies {
     implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
     // Once availible, use https://modmaven.dev/me/desht/pneumaticcraft/pneumaticcraft-repressurized
     implementation fg.deobf("curse.maven:pneumaticcraft-repressurized-281849:${version_pneumaticcraft}")
-    //implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
+    implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
     implementation fg.deobf("com.teamcofh:thermal_cultivation:${mc_version}-${version_thermalcultivation}")
     implementation fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${version_thermalexpansion}")
     implementation fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${version_thermalfoundation}")
@@ -356,7 +356,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'pams-harvestcraft-2-crops'
                     optionalDependency 'pams-harvestcraft-2-food-extended'
                     optionalDependency 'pneumaticcraft-repressurized'
-                    //optionalDependency 'psi'
+                    optionalDependency 'psi'
 					optionalDependency 'thermal-expansion'
 					optionalDependency 'thermal-foundation'
                     //optionalDependency 'tinkers-construct'

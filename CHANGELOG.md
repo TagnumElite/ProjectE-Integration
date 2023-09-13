@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for [Compact Crafting]
 - Support for [Draconic Evolution]
 - Support for [Ice and Fire]
+- Support for [Psi]
 
 ## [5.6.0]
 ### Fixed support for [Create] 0.5.1c
