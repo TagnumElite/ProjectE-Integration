@@ -32,6 +32,11 @@ modId = "create"
 mandatory = false
 versionRange = "[0.5.1,)"
 
+[[dependencies.projecteintegration]]
+modId = "elementalcraft"
+mandatory = false
+versionRange = "[1.19.2-5.8.3,)"
+
 #[[dependencies.projecteintegration]]
 #modId = "farmersdelight"
 #mandatory = false
