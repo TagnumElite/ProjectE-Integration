@@ -1,11 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.19.2-latest": "6.3.1",
-        "1.19.2-recommended": "6.3.1"
+        "1.19.2-latest": "6.3.2",
+        "1.19.2-recommended": "6.3.2"
     },
     "1.19.2": {
-        "6.3.1": "Fixed support for elemental craft",
+        "6.3.2": "Fixed support for elemental craft",
         "6.3.0": "Fixed support for create",
         "6.2.1": "Port some addons from previous versions",
         "6.1.1": "Added a missing dependency that was excluded",
