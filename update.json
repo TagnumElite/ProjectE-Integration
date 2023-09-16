@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.19.2-latest": "6.3.2",
-        "1.19.2-recommended": "6.3.2"
+        "1.19.2-latest": "6.3.3",
+        "1.19.2-recommended": "6.3.3"
     },
     "1.19.2": {
+        "6.3.3": "Added support for Avaritia: Reforged",
         "6.3.2": "Fixed support for elemental craft",
         "6.3.0": "Fixed support for create",
         "6.2.1": "Port some addons from previous versions",
