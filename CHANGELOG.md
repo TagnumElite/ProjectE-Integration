@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for [Avaritia Reforged]
 
 ## [6.3.2]
 ### Fixed
@@ -754,6 +756,7 @@ Added support for 18 more mods
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
 [Ars Nouveau]: https://www.curseforge.com/minecraft/mc-mods/ars-nouveau
 [Astral Sorcery]: https://www.curseforge.com/minecraft/mc-mods/astral-sorcery
+[Avaritia Reforged]: https://www.curseforge.com/minecraft/mc-mods/avaritia-reforged
 [Blood Magic]: https://www.curseforge.com/minecraft/mc-mods/blood-magic
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped

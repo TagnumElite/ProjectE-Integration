@@ -176,6 +176,7 @@ dependencies {
     implementation fg.deobf("smashingmods:alchemistry:${mc_version}-${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
+    implementation fg.deobf("curse.maven:avaritia-reforged-623969:${version_avaritia_reforged}")
     //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     //implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     compileOnly fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
@@ -321,6 +322,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
+                    optionalDependency 'avaritia-reforged'
                     //optionalDependency 'blood-magic'
                     optionalDependency 'blue-skies'
                     optionalDependency 'botania'

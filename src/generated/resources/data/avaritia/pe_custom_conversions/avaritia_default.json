@@ -1,0 +1,8 @@
+{
+  "comment": "Default conversions for Avaritia: Reforged.",
+  "values": {
+    "before": {
+      "avaritia:neutron_pile": 128
+    }
+  }
+}
