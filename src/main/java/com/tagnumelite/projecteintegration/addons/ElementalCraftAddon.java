@@ -124,7 +124,7 @@ public class ElementalCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ECRecipeTypes.AIR_MILL_GRINDING.get();
+            return recipeType == ECRecipeTypes.GRINDING.get();
         }
     }
 

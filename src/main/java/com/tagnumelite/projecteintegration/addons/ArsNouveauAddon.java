@@ -26,9 +26,9 @@ import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantingApparatus
 import com.hollingsworth.arsnouveau.common.crafting.recipes.CrushRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.ImbuementRecipe;
-import com.hollingsworth.arsnouveau.setup.BlockRegistry;
-import com.hollingsworth.arsnouveau.setup.ItemsRegistry;
-import com.hollingsworth.arsnouveau.setup.RecipeRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.RecipeRegistry;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -52,7 +52,6 @@ public class ArsNouveauAddon {
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ANCrushMapper extends ARecipeTypeMapper<CrushRecipe> {
-
         @Override
         public String getName() {
             return NAME("Crush");

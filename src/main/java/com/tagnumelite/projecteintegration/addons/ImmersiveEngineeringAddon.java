@@ -109,7 +109,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public NSSOutput getOutput(BlastFurnaceRecipe recipe) {
-            ItemStack itemOutput = recipe.getResultItem().copy();
+            ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
             ItemStack slagOutput = recipe.slag.get();
             NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
             NormalizedSimpleStack slagStack = NSSItem.createItem(slagOutput);
@@ -144,7 +144,7 @@ public class ImmersiveEngineeringAddon {
         @Override
         public NSSOutput getOutput(CokeOvenRecipe recipe) {
             if (recipe.creosoteOutput > 0) {
-                ItemStack itemOutput = recipe.getResultItem().copy();
+                ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
                 FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getBlock().getFluid(), recipe.creosoteOutput);
                 NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
                 NormalizedSimpleStack fluidStack = NSSFluid.createFluid(creosoteOutput);
@@ -157,7 +157,7 @@ public class ImmersiveEngineeringAddon {
                 mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
                 return new NSSOutput(2, dummy);
             } else {
-                return new NSSOutput(recipe.getResultItem());
+                return new NSSOutput(recipe.getResultItem(registryAccess));
             }
         }
     }
