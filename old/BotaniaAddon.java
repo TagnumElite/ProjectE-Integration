@@ -25,7 +25,6 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
-import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
@@ -36,9 +35,6 @@ import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import vazkii.botania.api.recipe.*;
-import vazkii.botania.common.crafting.BotaniaRecipeTypes;
-import vazkii.botania.common.item.BotaniaItems;
 
 import java.util.ArrayList;
 import java.util.HashSet;
