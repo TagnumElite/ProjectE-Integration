@@ -31,6 +31,7 @@ import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -55,11 +56,13 @@ import java.util.List;
  */
 //* For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
 public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipeMapper<R> implements IRecipeTypeMapper {
+
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Recipe<?> recipe, INSSFakeGroupManager fakeGroupManager) {
+    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Recipe<?> recipe, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
+        this.registryAccess = registryAccess;
         recipeID = recipe.getId();
         try {
             return convertRecipe((R) recipe);
@@ -79,7 +82,7 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
      * @return
      */
     public NSSOutput getOutput(R recipe) {
-        ItemStack output = recipe.getResultItem();
+        ItemStack output = recipe.getResultItem(registryAccess);
         if (output.isEmpty()) return null;
         return new NSSOutput(output);
     }

@@ -29,6 +29,7 @@ import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
@@ -78,14 +79,16 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
     /**
      * @param mapper
      * @param recipe
+     * @param registryAccess
      * @param fakeGroupManager
      * @return
      */
     @SuppressWarnings("unchecked")
-    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe, INSSFakeGroupManager fakeGroupManager) {
+    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
         this.recipeID = new ResourceLocation(getRequiredMods()[0], getName().toLowerCase());
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
+        this.registryAccess = registryAccess;
         try {
             return convertRecipe((R) recipe);
         } catch (ClassCastException e) {

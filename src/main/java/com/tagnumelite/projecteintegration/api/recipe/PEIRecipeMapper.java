@@ -32,6 +32,7 @@ import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.EMCMappingHandler;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Tuple;
@@ -59,7 +60,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
     }
 
     @Override
-    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mapper, CommentedFileConfig config, ReloadableServerResources reloadableServerResources, ResourceManager resourceManager) {
+    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector, CommentedFileConfig config, ReloadableServerResources reloadableServerResources, RegistryAccess registryAccess, ResourceManager resourceManager) {
         NSSFake.setCurrentNamespace(PEIntegration.MODID + "RecipeMapper");
 
         NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager();
@@ -74,7 +75,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
                 List<?> recipes = recipeMapper.getRecipes();
                 for (Object recipe : recipes) {
                     try {
-                        if (!recipeMapper.handleRecipe(mapper, recipe, fakeGroupManager)) {
+                        if (!recipeMapper.handleRecipe(mappingCollector, recipe, registryAccess, fakeGroupManager)) {
                             PEIntegration.debugLog("Recipe Mapper ({}) failed to handle recipe: {}", name, recipe);
                         }
                     } catch (Exception e) {

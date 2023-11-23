@@ -29,7 +29,8 @@ import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.data.CustomConversionProvider;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,12 +40,13 @@ import org.objectweb.asm.Type;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class PEICustomConversionProvider extends CustomConversionProvider {
     private static final Type CONVERSION_PROVIDER_TYPE = Type.getType(ConversionProvider.class);
 
-    protected PEICustomConversionProvider(DataGenerator generator) {
-        super(generator);
+    protected PEICustomConversionProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider);
     }
 
     private static NormalizedSimpleStack gemTag(String gem) {
@@ -58,20 +60,6 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
     private static NormalizedSimpleStack ingotTag(String ingot) {
         return tag("forge:ingots/" + ingot);
-    }
-
-    @Override
-    protected void addCustomConversions() {
-        createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
-                .before(ingotTag("zinc"), 128)
-                .before(new FluidStack(Fluids.WATER, 250), 1);
-
-        for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
-            ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue() + "_default");
-            PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
-            CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
-            entry.getKey().convert(builder);
-        }
     }
 
     private Map<AConversionProvider, String> getConversionProviders() {
@@ -101,5 +89,19 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;
+    }
+
+    @Override
+    protected void addCustomConversions(HolderLookup.Provider provider) {
+        createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
+                .before(ingotTag("zinc"), 128)
+                .before(new FluidStack(Fluids.WATER, 250), 1);
+
+        for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
+            ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue() + "_default");
+            PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
+            CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
+            entry.getKey().convert(builder);
+        }
     }
 }

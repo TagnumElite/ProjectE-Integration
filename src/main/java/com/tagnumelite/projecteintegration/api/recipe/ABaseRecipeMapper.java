@@ -31,6 +31,7 @@ import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,6 +46,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     protected ResourceLocation recipeID;
     protected IMappingCollector<NormalizedSimpleStack, Long> mapper;
     protected INSSFakeGroupManager fakeGroupManager;
+    protected RegistryAccess registryAccess;
 
     @Override
     public String getDescription() {

@@ -23,10 +23,14 @@
 package com.tagnumelite.projecteintegration.datagen;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = PEIntegration.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -36,6 +40,9 @@ public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         final DataGenerator gen = event.getGenerator();
-        gen.addProvider(event.includeServer(), new PEICustomConversionProvider(gen));
+        final PackOutput packOutput = gen.getPackOutput();
+        final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+        gen.addProvider(event.includeServer(), new PEICustomConversionProvider(packOutput, lookupProvider));
     }
 }
