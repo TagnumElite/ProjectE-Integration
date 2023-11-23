@@ -1,57 +1,54 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
-license = "MIT"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
 issueTrackerURL = "https://github.com/TagnumElite/ProjectE-Integration/issues"
 
 [[mods]]
-modId = "projecteintegration"
-version = "${file.jarVersion}"
-displayName = "ProjectE Integration"
-updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.19.x/update.json"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+updateJSONURL = "https://raw.githubusercontent.com/TagnumElite/ProjectE-Integration/1.20.x/update.json"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/projecte-integration"
 # logoFile="examplemod.png"
 credits = "Thanks to ProjectE team for ProjectE"
-authors = "TagnumElite"
-description = '''
-ProjectE Integration is a mod for adding support for mapping recipes from other mods to something that ProjectE understands
-and is able to convert to emc with
-'''
+authors = "${mod_authors}"
+description = '''${mod_description}'''
 
-[[dependencies.projecteintegration]]
+[[dependencies.${mod_id}]]
 modId = "projecte"
 mandatory = true
 versionRange = "[PE1.0.0B,)"
 
-[[dependencies.projecteintegration]]
+[[dependencies.${mod_id}]]
 modId = "alchemistry"
 mandatory = false
 versionRange = "[1.19.2-2.2,)"
 
-#[[dependencies.projecteintegration]]
+#[[dependencies.${mod_id}]]
 #modId = "create"
 #mandatory = false
 #versionRange = "[0.5.0,)"
 
-#[[dependencies.projecteintegration]]
+#[[dependencies.${mod_id}]]
 #modId = "farmersdelight"
 #mandatory = false
 #versionRange = "[1.18.2-1.1.2,)"
 
-#[[dependencies.projecteintegration]]
+#[[dependencies.${mod_id}]]
 #modId = "pneumaticcraft"
 #mandatory = false
 #versionRange = "[1.18.2-3.3.0,)"
 
-[[dependencies.projecteintegration]]
+[[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "${forge_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.projecteintegration]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,1.20)"
+versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
