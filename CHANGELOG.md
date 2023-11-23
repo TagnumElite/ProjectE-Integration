@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [7.0.0]
+## [7.0.1]
 ### Ported
 - Support for [Chipped]
 - Support for [Compact Crafting]
@@ -664,7 +664,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.0.0...HEAD
+[7.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...v7.0.1
 [6.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...v6.2.0
 [6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
 [6.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.0.5...v6.1.0
