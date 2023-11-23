@@ -133,12 +133,10 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
     runtimeOnly fg.deobf("curse.maven:cyclops-core-232758:${version_cyclopscore}")
     runtimeOnly fg.deobf("sirttas.dpanvil:DPAnvil:${version_datapackanvil}")
-    runtimeOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-1.19.2:${version_flywheel}")
-    runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
-    runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-1.19:${version_geckolib}")
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}"))
+    //runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
+    runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-${version_geckolib}")
     //implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
-    runtimeOnly fg.deobf("curse.maven:myrtrees-546151:${version_myrtrees}")
+    //runtimeOnly fg.deobf("curse.maven:myrtrees-546151:${version_myrtrees}")
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
@@ -148,13 +146,14 @@ dependencies {
     // ======================= [ Optional Mods ] =======================
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${version_jei}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}"))
 
     implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2:${version_appliedenergistics}")
     implementation fg.deobf("smashingmods:alchemistry:${mc_version}-${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
-    //implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
+    implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
     //implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     compileOnly fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
@@ -316,7 +315,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
-                    //optionalDependency 'blood-magic'
+                    optionalDependency 'blood-magic'
                     optionalDependency 'blue-skies'
                     //optionalDependency 'botania'
                     optionalDependency 'chipped'

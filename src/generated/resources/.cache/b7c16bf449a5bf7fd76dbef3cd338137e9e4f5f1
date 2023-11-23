@@ -1,7 +1,8 @@
-// 1.19.2	2023-03-15T12:51:36.806184	Custom EMC Conversions
+// 1.20.1	2023-11-23T09:48:21.1237182	Custom EMC Conversions
 3f240b2c8e943d0e012068e1179cd36fb9babff1 data/ae2/pe_custom_conversions/ae2_default.json
 08ba106a91fe31eca2059deed07c3374b7d0eacc data/allthemodium/pe_custom_conversions/allthemodium_default.json
 80a3b7248532fdc99d18c5a9d3c9c9546dfb6e91 data/ars_nouveau/pe_custom_conversions/ars_nouveau_default.json
+2f14f1e1c15880ec94207bbbbb227d329b5fefed data/bloodmagic/pe_custom_conversions/bloodmagic_default.json
 1155ccadff0efdc3c1567e3082dbc5e7927e718a data/elementalcraft/pe_custom_conversions/elementalcraft_default.json
 303f7a98f0e96c375a0484a5672727e6abccfdaa data/evilcraft/pe_custom_conversions/evilcraft_default.json
 49468bd414ef0b0590c674db6699444656a78ea4 data/farmersdelight/pe_custom_conversions/farmersdelight_default.json
