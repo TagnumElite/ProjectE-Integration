@@ -33,13 +33,8 @@ import de.ellpeck.naturesaura.recipes.OfferingRecipe;
 import de.ellpeck.naturesaura.recipes.TreeRitualRecipe;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NSSFake;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -41,7 +41,6 @@ import sirttas.elementalcraft.recipe.instrument.binding.AbstractBindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.infusion.IInfusionRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.grinding.IGrindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.sawing.SawingRecipe;
-import sirttas.elementalcraft.tag.ECTags;
 
 public class ElementalCraftAddon {
     public static final String MODID = "elementalcraft";
