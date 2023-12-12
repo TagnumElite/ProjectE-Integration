@@ -1,0 +1,10 @@
+{
+  "comment": "Default conversions for Occultism",
+  "values": {
+    "before": {
+      "occultism:tallow": 16,
+      "occultism:afrit_essence": 64,
+      "#forge:ingots/iesnium": 512
+    }
+  }
+}

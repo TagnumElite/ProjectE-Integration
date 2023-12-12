@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.0]
+### Added
+- Support for [Occultism] Crushing, Ritual, Spirit Fire, Spirit Trade recipes
+
 ## [7.0.1]
 ### Ported
 - Support for [Chipped]
@@ -664,7 +668,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.0.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.0...HEAD
+[7.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.0.0...v7.1.0
 [7.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...v7.0.1
 [6.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...v6.2.0
 [6.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.0...v6.1.1
@@ -762,6 +767,7 @@ Added support for 18 more mods
 [MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [Natures Aura]: https://www.curseforge.com/minecraft/mc-mods/natures-aura
+[Occultism]: https://www.curseforge.com/minecraft/mc-mods/occultism
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct

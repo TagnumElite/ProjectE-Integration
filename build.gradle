@@ -100,6 +100,14 @@ repositories {
             includeGroup 'com.github'
         }
     }
+    maven {
+        name 'klikli_dev'
+        url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
+        content {
+            includeGroup "com.klikli_dev"
+        }
+    }
+    maven { name  'SmartBrainLib'; url 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven { name 'Architectury'; url 'https://maven.architectury.dev/' }
     maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
     maven { name 'ChickenBones'; url 'https://chickenbones.net/maven/' }
@@ -137,11 +145,14 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
     runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-${version_geckolib}")
     //implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
+    compileOnly fg.deobf("com.klikli_dev:modonomicon-${mc_version}-common:${version_modonomicon}")
+    implementation fg.deobf("com.klikli_dev:modonomicon-${mc_version}-forge:${version_modonomicon}")
     //runtimeOnly fg.deobf("curse.maven:myrtrees-546151:${version_myrtrees}")
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
     runtimeOnly fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
+    implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${mc_version}:${version_smartbrainlib}")
     //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
     // ======================= [ Optional Mods ] =======================
@@ -180,6 +191,9 @@ dependencies {
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
+        exclude group: '*'
+    })
+    implementation fg.deobf("com.klikli_dev:occultism-${version_occultism}", { // WARNING/NOTE: runData doesn't work with occultism
         exclude group: '*'
     })
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
@@ -337,6 +351,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
                     optionalDependency 'natures-aura'
+                    optionalDependency 'occultism'
                     //optionalDependency 'pams-harvestcraft-2-food-core'
                     //optionalDependency 'pams-harvestcraft-2-crops'
                     //optionalDependency 'pams-harvestcraft-2-food-extended'
