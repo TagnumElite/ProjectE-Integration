@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'net.neoforged.gradle' version '[6.0.13, 6.2)'
     id "org.jetbrains.changelog" version "1.3.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
@@ -54,12 +54,11 @@ minecraft {
         }
 
         client {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            property 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
-
-            property 'forge.enabledGameTestNamespaces', mod_id
+            property 'forge.enabledGameTestNamespaces', project.mod_id
             args '--nogui'
         }
 
@@ -67,7 +66,7 @@ minecraft {
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            property 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
@@ -75,7 +74,7 @@ minecraft {
             workingDirectory project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
     }
 }
@@ -115,19 +114,19 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    minecraft "net.neoforged:forge:${mc_version}-${forge_version}"
 
     // ======================= [ Required Mods ] =======================
     implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
 
     // ======================= [ Runtime Mods ] =======================
-    implementation fg.deobf("smashingmods:alchemylib:${mc_version}-${version_alchemylib}")
+    implementation fg.deobf("smashingmods:alchemylib:${version_alchemylib}")
     runtimeOnly fg.deobf("curse.maven:alltheores-405593:${version_alltheores}")
     runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:athena-841890:${version_athena}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
-    runtimeOnly fg.deobf("smashingmods:chemlib:${mc_version}-${version_chemlib}")
+    runtimeOnly fg.deobf("smashingmods:chemlib:${version_chemlib}")
     //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${version_ctm}")
@@ -146,13 +145,13 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
     // ======================= [ Optional Mods ] =======================
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${version_jei}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}"))
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}"))
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${version_jei}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}")
 
     implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2-forge:${version_appliedenergistics}")
-    implementation fg.deobf("smashingmods:alchemistry:${mc_version}-${version_alchemistry}")
+    implementation fg.deobf("smashingmods:alchemistry:${version_alchemistry}")
     //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
     implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
@@ -175,14 +174,14 @@ dependencies {
     implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
     //implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
-    implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${mc_version}-${version_immersiveengineering}")
+    implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}")
     implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
     //implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
-    implementation(fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
+    implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
         exclude group: '*'
-    }))
+    })
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
     //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
