@@ -12,7 +12,7 @@ plugins {
 version = mod_version
 group = mod_group_id
 base {
-    archivesName = "${mod_name}-${mc_version}"
+    archivesName = "ProjectE_Integration-${mc_version}"
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -173,7 +173,9 @@ dependencies {
     //implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
     //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
-    //implementation fg.deobf("com.simibubi.create:Create:${version_create}")
+    implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}-+:all", {
+        exclude group: '*'
+    })
     //implementation fg.deobf("curse.maven:create-328085:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
