@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- EMC to some items in [Alex's Caves]
+
 ### Fixed
 - Updated [Occultism] to fix datagen crash <!-- because devs make stinky poo poo /jk -->
 
@@ -757,6 +760,7 @@ Added support for 18 more mods
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
 
 <!-- MODS -->
+[Alex's Caves]: https://www.curseforge.com/minecraft/mc-mods/alexs-caves
 [Allthemodium]: https://www.curseforge.com/minecraft/mc-mods/allthemodium
 [Alchemistry]: https://www.curseforge.com/minecraft/mc-mods/alchemistry
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2

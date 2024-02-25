@@ -135,7 +135,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
     runtimeOnly fg.deobf("smashingmods:chemlib:${version_chemlib}")
-    //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
+    runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${version_ctm}")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
@@ -160,6 +160,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}")
 
+    implementation fg.deobf("curse.maven:alexcaves-924854:${version_alexcaves}")
     implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2-forge:${version_appliedenergistics}")
     implementation fg.deobf("smashingmods:alchemistry:${version_alchemistry}")
@@ -326,6 +327,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 relations {
                     requiredDependency 'projecte'
 
+                    optionalDependency 'alexs-caves'
                     optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'alchemistry'
@@ -336,7 +338,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'botania'
                     optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'
-                    //optionalDependency 'create'
+                    optionalDependency 'create'
                     optionalDependency 'corail-woodcutter'
                     //optionalDependency 'draconic-evolution'
                     optionalDependency 'elemental-craft'

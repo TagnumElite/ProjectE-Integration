@@ -1,0 +1,10 @@
+{
+  "comment": "Default conversions for Alex's Caves",
+  "values": {
+    "before": {
+      "alexscaves:galena": 4,
+      "alexscaves:raw_azure_neodymium": 64,
+      "alexscaves:raw_scarlet_neodymium": 64
+    }
+  }
+}
