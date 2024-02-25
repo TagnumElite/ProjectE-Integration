@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Updated [Occultism] to fix datagen crash <!-- because devs make stinky poo poo /jk -->
+
 ### Ported
 - Support for [Create]
 
