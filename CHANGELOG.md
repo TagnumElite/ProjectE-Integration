@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0]
 ### Added
 - EMC to some items in [Alex's Caves]
 
@@ -682,7 +683,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.0...HEAD
+[7.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.1...v7.2.0
 [7.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.0.0...v7.1.0
 [7.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...v7.0.1

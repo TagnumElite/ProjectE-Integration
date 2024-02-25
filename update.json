@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.20.1-latest": "7.1.1",
-        "1.20.1-recommended": "7.1.1"
+        "1.20.1-latest": "7.2.0",
+        "1.20.1-recommended": "7.2.0"
     },
     "1.20.1": {
+        "7.2.0": "Updated support for Create, Mana and Artifice and Alex Caves",
         "7.1.1": "Updated support for chipped to 3.0.4",
         "7.0.1": "Initial 1.20.1 release"
     }
