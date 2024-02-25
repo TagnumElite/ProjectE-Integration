@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 TagnumElite
+ * Copyright (c) 2019-2024 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.mna.api.recipes.IItemAndPatternRecipe;
 import com.mna.api.rituals.IRitualReagent;
+import com.mna.api.tools.MATags;
 import com.mna.items.ItemInit;
 import com.mna.recipes.RecipeInit;
 import com.mna.recipes.arcanefurnace.ArcaneFurnaceRecipe;
@@ -32,7 +33,6 @@ import com.mna.recipes.manaweaving.ManaweavingRecipe;
 import com.mna.recipes.rituals.RitualRecipe;
 import com.mna.recipes.runeforging.RuneforgingRecipe;
 import com.mna.recipes.runeforging.RunescribingRecipe;
-import com.mna.tools.MATags;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -74,7 +74,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.ARCANE_FURNACE_TYPE;
+            return iRecipeType == RecipeInit.ARCANE_FURNACE_TYPE.get();
         }
 
         @Override
@@ -92,7 +92,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.ELDRIN_ALTAR_TYPE;
+            return iRecipeType == RecipeInit.ELDRIN_ALTAR_TYPE.get();
         }
     }
 
@@ -105,7 +105,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.MANAWEAVING_RECIPE_TYPE; // TODO: MANAWEAVING_PATTERN
+            return iRecipeType == RecipeInit.MANAWEAVING_RECIPE_TYPE.get(); // TODO: MANAWEAVING_PATTERN
         }
     }
 
@@ -128,7 +128,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.RITUAL_TYPE;
+            return iRecipeType == RecipeInit.RITUAL_TYPE.get();
         }
 
         @Override
@@ -163,7 +163,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.RUNESCRIBING_TYPE;
+            return iRecipeType == RecipeInit.RUNESCRIBING_TYPE.get();
         }
     }
 
@@ -176,7 +176,7 @@ public class ManaAndArtificeAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> iRecipeType) {
-            return iRecipeType == RecipeInit.RUNEFORGING_TYPE;
+            return iRecipeType == RecipeInit.RUNEFORGING_TYPE.get();
         }
 
         @Override
@@ -193,7 +193,8 @@ public class ManaAndArtificeAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Default conversions for Mana and Artifice")
-                    .before(ItemInit.VINTEUM_DUST.get(), 32);
+                    .before(ItemInit.VINTEUM_DUST.get(), 32)
+                    .before(ItemInit.CHIMERITE_GEM.get(), 96);
         }
     }
 

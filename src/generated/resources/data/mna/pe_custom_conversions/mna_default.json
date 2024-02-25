@@ -1,0 +1,9 @@
+{
+  "comment": "Default conversions for Mana and Artifice",
+  "values": {
+    "before": {
+      "mna:chimerite_gem": 96,
+      "mna:vinteum_dust": 32
+    }
+  }
+}

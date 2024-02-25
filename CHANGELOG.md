@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Ported
 - Support for [Create]
+- Support for [Mana and Artifice]
 
 ## [7.1.1]
 ### Fixed
