@@ -24,6 +24,11 @@ modId = "alchemistry"
 mandatory = false
 versionRange = "[1.19.2-2.2,)"
 
+[[dependencies.${mod_id}]]
+modId = "chipped"
+mandatory = false
+versionRange = "[3.0.4,)"
+
 #[[dependencies.${mod_id}]]
 #modId = "create"
 #mandatory = false

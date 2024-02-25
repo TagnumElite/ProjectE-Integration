@@ -23,7 +23,7 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import earth.terrarium.chipped.common.recipe.ChippedRecipe;
+import earth.terrarium.chipped.common.recipes.ChippedRecipe;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
@@ -74,7 +74,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == BOTANIST_WORKBENCH_TYPE;
+            return recipeType == BOTANIST_WORKBENCH.get();
         }
     }
 
@@ -87,7 +87,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == GLASSBLOWER_TYPE;
+            return recipeType == GLASSBLOWER.get();
         }
     }
 
@@ -100,7 +100,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CARPENTERS_TABLE_TYPE;
+            return recipeType == CARPENTERS_TABLE.get();
         }
     }
 
@@ -113,7 +113,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == LOOM_TABLE_TYPE;
+            return recipeType == LOOM_TABLE.get();
         }
     }
 
@@ -126,7 +126,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == MASON_TABLE_TYPE;
+            return recipeType == MASON_TABLE.get();
         }
     }
 
@@ -139,7 +139,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ALCHEMY_BENCH_TYPE;
+            return recipeType == ALCHEMY_BENCH.get();
         }
     }
 
@@ -152,7 +152,7 @@ public class ChippedAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TINKERING_TABLE_TYPE;
+            return recipeType == TINKERING_TABLE.get();
         }
     }
 }

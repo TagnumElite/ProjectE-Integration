@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle' version '[6.0.13, 6.2)'
+    id 'net.neoforged.gradle' version '[6.0, 6.2)'
     id "org.jetbrains.changelog" version "1.3.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
@@ -151,7 +151,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
-    runtimeOnly fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
+    implementation fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${mc_version}:${version_smartbrainlib}")
     //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
