@@ -22,13 +22,13 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.google.common.collect.Lists;
 import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
 import net.blay09.mods.farmingforblockheads.api.IMarketEntry;
 import net.blay09.mods.farmingforblockheads.registry.MarketRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.Collections;
 import java.util.List;
