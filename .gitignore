@@ -104,6 +104,7 @@ local.properties
 ### ForgeGradle ###
 # Minecraft client/server files
 run/
+run-data/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

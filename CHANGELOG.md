@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0]
+### Added
+- EMC to some items in [Alex's Caves]
+
+### Fixed
+- Updated [Occultism] to fix datagen crash <!-- because devs make stinky poo poo /jk -->
+
+### Ported
+- Support for [Create]
+- Support for [Mana and Artifice]
+
+## [7.1.1]
+### Fixed
+- Support for [Chipped] 3.0.4
+
 ## [7.1.0]
 ### Added
 - Support for [Occultism] Crushing, Ritual, Spirit Fire, Spirit Trade recipes
@@ -668,7 +683,9 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.0...HEAD
+[7.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.1...v7.2.0
+[7.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.0.0...v7.1.0
 [7.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.2.0...v7.0.1
 [6.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v6.1.1...v6.2.0
@@ -746,6 +763,7 @@ Added support for 18 more mods
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
 
 <!-- MODS -->
+[Alex's Caves]: https://www.curseforge.com/minecraft/mc-mods/alexs-caves
 [Allthemodium]: https://www.curseforge.com/minecraft/mc-mods/allthemodium
 [Alchemistry]: https://www.curseforge.com/minecraft/mc-mods/alchemistry
 [Applied Energistics]: https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2

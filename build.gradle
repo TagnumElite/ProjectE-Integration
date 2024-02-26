@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle' version '[6.0.13, 6.2)'
+    id 'net.neoforged.gradle' version '[6.0, 6.2)'
     id "org.jetbrains.changelog" version "1.3.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
@@ -12,7 +12,7 @@ plugins {
 version = mod_version
 group = mod_group_id
 base {
-    archivesName = "${mod_name}-${mc_version}"
+    archivesName = "ProjectE_Integration-${mc_version}"
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -135,7 +135,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
     //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
     runtimeOnly fg.deobf("smashingmods:chemlib:${version_chemlib}")
-    //runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
+    runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
     //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
     //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${version_ctm}")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
@@ -151,7 +151,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
     //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
-    runtimeOnly fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
+    implementation fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${mc_version}:${version_smartbrainlib}")
     //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
 
@@ -160,6 +160,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}")
 
+    implementation fg.deobf("curse.maven:alexcaves-924854:${version_alexcaves}")
     implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
     implementation fg.deobf("appeng:appliedenergistics2-forge:${version_appliedenergistics}")
     implementation fg.deobf("smashingmods:alchemistry:${version_alchemistry}")
@@ -170,11 +171,12 @@ dependencies {
     compileOnly fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
     //implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
     implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
-    implementation fg.deobf("curse.maven:resourcefullib-570073:${version_resourcefullib}")
     //implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
     //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
     implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
-    //implementation fg.deobf("com.simibubi.create:Create:${version_create}")
+    implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}-+:all", {
+        exclude group: '*'
+    })
     //implementation fg.deobf("curse.maven:create-328085:${version_create}")
     //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
@@ -188,7 +190,7 @@ dependencies {
     //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}")
     implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
-    //implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
+    implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
     //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
     implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
     implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
@@ -325,6 +327,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 relations {
                     requiredDependency 'projecte'
 
+                    optionalDependency 'alexs-caves'
                     optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
                     optionalDependency 'alchemistry'
@@ -335,7 +338,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'botania'
                     optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'
-                    //optionalDependency 'create'
+                    optionalDependency 'create'
                     optionalDependency 'corail-woodcutter'
                     //optionalDependency 'draconic-evolution'
                     optionalDependency 'elemental-craft'
@@ -348,7 +351,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'industrial-foregoing'
-                    //optionalDependency 'mana-and-artifice'
+                    optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
                     optionalDependency 'natures-aura'
