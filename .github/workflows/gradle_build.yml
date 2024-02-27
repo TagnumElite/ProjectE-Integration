@@ -27,7 +27,7 @@ jobs:
                 path: build/libs/*.jar
 
             - name: Deploy Docs if push
-              uses: JamesIves/github-pages-deploy-action@v4.4.1
+              uses: JamesIves/github-pages-deploy-action@v4.5.0
               if: ${{ github.event_name == 'push' }}
               with:
                   branch: gh-pages
