@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.4]
+### Fixed
+- Typo in `build.gradle`
+
 ## [7.2.3]
 ### Ported
 - Support for [Draconic Evolution]
@@ -698,7 +702,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.3...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.4...HEAD
+[7.2.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.3...v7.2.4
 [7.2.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.2...v7.2.3
 [7.2.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.1...v7.2.2
 [7.2.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.0...v7.2.1
