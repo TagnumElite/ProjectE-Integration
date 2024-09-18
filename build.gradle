@@ -133,10 +133,10 @@ dependencies {
     runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
     runtimeOnly fg.deobf("curse.maven:athena-841890:${version_athena}")
     runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
-    //runtimeOnly fg.deobf("curse.maven:brandons-core-231382:${version_brandonscore}")
+    runtimeOnly fg.deobf("com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal")
     runtimeOnly fg.deobf("smashingmods:chemlib:${version_chemlib}")
     runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
-    //runtimeOnly fg.deobf("codechicken:CodeChickenLib:${version_codechickenlib}:universal")
+    runtimeOnly fg.deobf("io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}:universal")
     //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${version_ctm}")
     runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
@@ -178,7 +178,7 @@ dependencies {
         exclude group: '*'
     })
     //implementation fg.deobf("curse.maven:create-328085:${version_create}")
-    //implementation fg.deobf("curse.maven:draconic-evolution-223565:${version_draconicevolution}")
+    implementation fg.deobf("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal")
     implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
     implementation fg.deobf("curse.maven:evilcraft-74610:${version_evilcraft}")
     //implementation fg.deobf("curse.maven:exnihilo-sequentia-400012:${version_exnihilo_sequentia}")
@@ -340,7 +340,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     //optionalDependency 'compact-crafting'
                     optionalDependency 'create'
                     optionalDependency 'corail-woodcutter'
-                    //optionalDependency 'draconic-evolution'
+                    optionalDependency 'draconic-evolution'
                     optionalDependency 'elemental-craft'
                     optionalDependency 'evilcraft'
                     //optionalDependency 'ex-nihilo-sequentia'
