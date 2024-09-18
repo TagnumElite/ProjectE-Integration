@@ -187,7 +187,7 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
     implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
     //implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
-    //compileOnly fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
+    implementation fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
     implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}")
     implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
     implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
@@ -348,7 +348,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
                     //optionalDependency 'ftb-industrial-contraptions-forge'
-                    //optionalDependency 'ice-and-fire-dragons'
+                    optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'industrial-foregoing'
                     optionalDependency 'mana-and-artifice'
