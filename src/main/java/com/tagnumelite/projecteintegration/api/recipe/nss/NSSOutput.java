@@ -121,6 +121,10 @@ public class NSSOutput {
         return "NSSOutput{amount=" + amount + ";nss=" + nss + "}";
     }
 
+    public static Builder builder(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, ResourceLocation recipeId) {
+        return new Builder(mapper, fakeGroupManager, recipeId);
+    }
+
     /**
      * NSSOutput.Builder is used to create a {@link NSSOutput} with multiple outputs.
      *
@@ -260,6 +264,14 @@ public class NSSOutput {
             }
 
             return new NSSOutput(totalOutputs, dummy);
+        }
+
+        /**
+         * Check if the output stacks contains any items.
+         * @return A True/False value of whether the outputStacks Map is empty
+         */
+        public boolean isEmpty() {
+            return outputStacks.isEmpty();
         }
     }
 }

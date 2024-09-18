@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Ported
 - Support for [Draconic Evolution]
 - Support for [Ice and Fire]
+- Support for [Ex Nihilo Sequentia]
 
 ## [7.2.2]
 ### Ported

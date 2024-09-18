@@ -37,10 +37,7 @@ import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     protected ResourceLocation recipeID;
@@ -95,6 +92,11 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
             }
         }
         return new NSSInput(ingredientMap, fakeGroupMap, true);
+    }
+
+    protected boolean convertFluidIngredient(FluidStack fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
+                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+        return Utils.convertFluidIngredient(-1, Collections.singletonList(fluidIngredient), ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
     /**
@@ -160,7 +162,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param stack
      * @return
      */
-    protected boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
+    protected static boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
         return Utils.addIngredient(ingredientMap, stack);
     }
 
