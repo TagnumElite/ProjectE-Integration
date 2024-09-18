@@ -107,19 +107,20 @@ repositories {
             includeGroup "com.klikli_dev"
         }
     }
-    maven { name  'SmartBrainLib'; url 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven { name 'Architectury'; url 'https://maven.architectury.dev/' }
     maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
     maven { name 'ChickenBones'; url 'https://chickenbones.net/maven/' }
     maven { name 'Covers1624'; url 'https://maven.covers1624.net/' }
-    maven { name 'Ellpeck'; url 'https://maven.ellpeck.de' }
+    //maven { name 'Ellpeck'; url 'https://maven.ellpeck.de' }
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'NovaMachina'; url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/' }
     maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
+    maven { name 'SmartBrainLib'; url 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven { name 'Tamaized'; url 'https://maven.tamaized.com/releases' }
     maven { name 'TheIllusiveC4'; url 'https://maven.theillusivec4.top/' }
     maven { name 'TTerrag'; url 'https://maven.tterrag.com/' }
-    maven { name 'Modmaven'; url 'https://modmaven.dev/' }
+
+    maven { name 'Modmaven'; url 'https://modmaven.dev/' } // Backup Maven
 }
 
 dependencies {
