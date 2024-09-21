@@ -28,8 +28,8 @@ import com.github.alexthe666.iceandfire.recipe.IafRecipeRegistry;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
+import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -40,7 +40,7 @@ import java.util.List;
 public class IceAndFireAddon {
     public static final String MODID = "iceandfire";
 
-    @CustomRecipeMapper(MODID)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IAFDragonForgeMapper extends ARecipeTypeMapper<DragonForgeRecipe> {
         @Override
         public String getName() {
