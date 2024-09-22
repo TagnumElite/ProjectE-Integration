@@ -38,11 +38,13 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AlchemistryAddon {
@@ -159,6 +161,11 @@ public class AlchemistryAddon {
         public NSSOutput getOutput(FissionRecipe recipe) {
             return mapOutputs(recipe.getOutput1(), recipe.getOutput2());
         }
+
+        @Override
+        protected List<Ingredient> getIngredients(FissionRecipe recipe) {
+            return Collections.singletonList(Ingredient.of(recipe.getInput()));
+        }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -171,6 +178,14 @@ public class AlchemistryAddon {
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == RecipeRegistry.FUSION_TYPE.get();
+        }
+
+        @Override
+        protected List<Ingredient> getIngredients(FusionRecipe recipe) {
+            ArrayList<Ingredient> ingredients = new ArrayList<>(2);
+            ingredients.add(Ingredient.of(recipe.getInput1()));
+            ingredients.add(Ingredient.of(recipe.getInput2()));
+            return ingredients;
         }
     }
 
@@ -187,8 +202,19 @@ public class AlchemistryAddon {
         }
 
         @Override
+        public NSSInput getInput(LiquifierRecipe recipe) {
+            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+
+            if (!convertIngredient(recipe.getInput().getCount(), recipe.getInput().getIngredient(), ingredientMap, fakeGroupMap))
+                return new NSSInput(ingredientMap, fakeGroupMap, false);
+
+            return new NSSInput(ingredientMap, fakeGroupMap, true);
+        }
+
+        @Override
         public NSSOutput getOutput(LiquifierRecipe recipe) {
-            return new NSSOutput(recipe.getOutput());
+           return new NSSOutput(recipe.getOutput());
         }
     }
 }

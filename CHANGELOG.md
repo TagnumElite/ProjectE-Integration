@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
+- Fixed [Alchemistry] Mappers to actually have inputs
 
 ## [7.2.5]
 ### Fixed
