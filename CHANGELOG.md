@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Ported
 - Support for [Touhou Little Maid]
+- Support for [Ice and Fire]
 
 ## [6.3.4]
 ### Ported
