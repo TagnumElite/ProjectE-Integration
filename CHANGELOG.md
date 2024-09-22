@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - EMC to some ingots
 
+### Fixed
+- Changed the SmartBrainLib to NeoForge version
+
 ## [7.2.5]
 ### Fixed
 - Wrong decorator on [Ice and Fire] Dragon Forge mapper
