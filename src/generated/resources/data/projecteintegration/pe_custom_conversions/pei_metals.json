@@ -1,6 +1,8 @@
 {
   "values": {
     "before": {
+      "#forge:ingots/cobalt": 412,
+      "#forge:ingots/tungsten": 356,
       "#forge:ingots/zinc": 128,
       "FLUID|minecraft:water": 1
     }

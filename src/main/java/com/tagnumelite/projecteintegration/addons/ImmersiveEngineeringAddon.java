@@ -305,7 +305,8 @@ public class ImmersiveEngineeringAddon {
                     .before(forgeTag("fiber_hemp"), 4)
                     .before(dustTag("wood"), 1)
                     .before(dustTag("sulfur"), 8)
-                    .before(dustTag("nitrate"), 8);
+                    .before(dustTag("nitrate"), 8)
+                    .before(ingotTag("hop_graphite"), 12);
 
             // TODO: Replace this forEach. It should not be done this way.
             for (IEBlocks.BlockEntry<IEBaseBlock> block : IEBlocks.WoodenDecoration.TREATED_WOOD.values()) {

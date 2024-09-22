@@ -95,6 +95,8 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     protected void addCustomConversions(HolderLookup.Provider provider) {
         createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
                 .before(ingotTag("zinc"), 128)
+                .before(ingotTag("cobalt"), 412)
+                .before(ingotTag("tungsten"), 356)
                 .before(new FluidStack(Fluids.WATER, 250), 1);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {

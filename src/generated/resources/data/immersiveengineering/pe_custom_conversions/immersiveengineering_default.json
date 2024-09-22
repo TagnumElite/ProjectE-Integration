@@ -5,7 +5,8 @@
       "#forge:dusts/nitrate": 8,
       "#forge:dusts/sulfur": 8,
       "#forge:dusts/wood": 1,
-      "#forge:fiber_hemp": 4
+      "#forge:fiber_hemp": 4,
+      "#forge:ingots/hop_graphite": 12
     },
     "conversion": [
       {
