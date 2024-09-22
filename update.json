@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.19.2-latest": "6.3.5",
-        "1.19.2-recommended": "6.3.5"
+        "1.19.2-latest": "6.3.6",
+        "1.19.2-recommended": "6.3.6"
     },
     "1.19.2": {
+        "6.3.6": "Fix incorrect slug for Ex Nihilo Sequentia",
         "6.3.5": "Ported support for Ice and Fire, Touhou Little Maid",
         "6.3.4": "Added support for Mana and Artifice",
         "6.3.3": "Added support for Avaritia: Reforged",
