@@ -2,11 +2,18 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle' version '[6.0, 6.2)'
+    id 'net.neoforged.moddev' version '2.0.78'
     id "org.jetbrains.changelog" version "2.2.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
+    // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
+    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
+    // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
+    // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 version = mod_version
@@ -15,66 +22,74 @@ base {
     archivesName = "ProjectE_Integration-${mc_version}"
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+// Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 //println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    // You must be aware of the Mojang license when using the 'official' mappings.
-    // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
-    mappings channel: mapping_channel, version: mapping_version
-    copyIdeResources = true
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_map_version
+        minecraftVersion = project.parchment_mc_version
+    }
+
+    //copyIdeResources = true
 
     runs {
-        // applies to all the run configs below
-        configureEach {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            property 'forge.logging.console.level', 'debug'
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
         client {
-            property 'forge.enabledGameTestNamespaces', project.mod_id
+            client()
+
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', project.mod_id
-            args '--nogui'
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', project.mod_id
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
-            // example of overriding the workingDirectory set in configureEach above
-            workingDirectory project.file('run-data')
+            data()
+
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        // applies to all the run configs above
+        configureEach {
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        // define mod <-> source bindings
+        // these are used to tell the game which sources are for which mod
+        // multi mod projects should define one per mod
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
         }
     }
 }
@@ -83,6 +98,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     flatDir {
         dir 'libs'
     }
@@ -124,114 +141,93 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.neoforged:forge:${mc_version}-${forge_version}"
-
     // ======================= [ Required Mods ] =======================
-    implementation fg.deobf("curse.maven:projecte-226410:${version_projecte}")
+    implementation "curse.maven:projecte-226410:${version_projecte}"
 
     // ======================= [ Runtime Mods ] =======================
-    implementation fg.deobf("smashingmods:alchemylib:${version_alchemylib}")
-    runtimeOnly fg.deobf("curse.maven:alltheores-405593:${version_alltheores}")
-    runtimeOnly fg.deobf("dev.architectury:architectury-forge:${version_architectury}")
-    runtimeOnly fg.deobf("curse.maven:athena-841890:${version_athena}")
-    runtimeOnly fg.deobf("curse.maven:balm-531761:${version_balm}")
-    runtimeOnly fg.deobf("com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal")
-    runtimeOnly fg.deobf("smashingmods:chemlib:${version_chemlib}")
-    runtimeOnly fg.deobf("curse.maven:citadel-331936:${version_citadel}")
-    runtimeOnly fg.deobf("io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}:universal")
-    //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${version_ctm}")
-    runtimeOnly fg.deobf("curse.maven:cucumber-272335:${version_cucumber}")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${version_curios}")
-    runtimeOnly fg.deobf("curse.maven:cyclops-core-232758:${version_cyclopscore}")
-    runtimeOnly fg.deobf("sirttas.dpanvil:DPAnvil:${version_datapackanvil}")
-    //runtimeOnly fg.deobf("curse.maven:ftb-library-404465:${version_ftb_library}")
-    runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-${version_geckolib}")
-    //implementation fg.deobf("slimeknights.mantle:Mantle:${version_mantle}")
-    compileOnly fg.deobf("com.klikli_dev:modonomicon-${mc_version}-common:${version_modonomicon}")
-    implementation fg.deobf("com.klikli_dev:modonomicon-${mc_version}-forge:${version_modonomicon}")
-    //runtimeOnly fg.deobf("curse.maven:myrtrees-546151:${version_myrtrees}")
-    implementation fg.deobf("novamachina.novacore:novacore:${version_novacore}")
-    //runtimeOnly fg.deobf("curse.maven:obfuscate-289380:${version_obfuscate}")
-    //runtimeOnly fg.deobf("curse.maven:observerlib-316833:${version_observerlib}")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${version_patchouli}")
-    implementation fg.deobf("curse.maven:resourceful-lib-570073:${version_resourceful_lib}")
-    implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}")
-    //runtimeOnly fg.deobf("curse.maven:structure-gel-api-378802:${version_structuregelapi}")
+//    implementation "smashingmods:alchemylib:${version_alchemylib}"
+    runtimeOnly "curse.maven:alltheores-405593:${version_alltheores}"
+    runtimeOnly "dev.architectury:architectury-forge:${version_architectury}"
+    runtimeOnly "curse.maven:athena-841890:${version_athena}"
+    runtimeOnly "curse.maven:balm-531761:${version_balm}"
+//    runtimeOnly "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal"
+    runtimeOnly "smashingmods:chemlib:${version_chemlib}"
+//    runtimeOnly "curse.maven:citadel-331936:${version_citadel}"
+    runtimeOnly "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
+    //runtimeOnly "team.chisel.ctm:CTM:${version_ctm}"
+    runtimeOnly "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
+    runtimeOnly "top.theillusivec4.curios:curios-forge:${version_curios}"
+    runtimeOnly "curse.maven:cyclops-core-232758:${version_cyclopscore}"
+//    runtimeOnly "sirttas.dpanvil:DPAnvil:${version_datapackanvil}"
+    //runtimeOnly "curse.maven:ftb-library-404465:${version_ftb_library}"
+    runtimeOnly "software.bernie.geckolib:geckolib-forge-${version_geckolib}"
+    //implementation "slimeknights.mantle:Mantle:${version_mantle}"
+    compileOnly "com.klikli_dev:modonomicon-${mc_version}-common:${version_modonomicon}"
+    implementation "com.klikli_dev:modonomicon-${mc_version}-neoforge:${version_modonomicon}"
+    //runtimeOnly "curse.maven:myrtrees-546151:${version_myrtrees}"
+    implementation "novamachina.novacore:novacore:${version_novacore}"
+    //runtimeOnly "curse.maven:obfuscate-289380:${version_obfuscate}"
+    //runtimeOnly "curse.maven:observerlib-316833:${version_observerlib}"
+    runtimeOnly "vazkii.patchouli:Patchouli:${version_patchouli}"
+    implementation "curse.maven:resourceful-lib-570073:${version_resourceful_lib}"
+    implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}"
+//    runtimeOnly "curse.maven:structure-gel-api-378802:${version_structuregelapi}"
+    implementation "com.hrznstudio:titanium:${version_titanium}"
 
     // ======================= [ Optional Mods ] =======================
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${version_jei}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${version_jei}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${version_jei}")
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${version_jei}"
+    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${version_jei}"
+    runtimeOnly "mezz.jei:jei-${mc_version}-forge:${version_jei}"
 
-    implementation fg.deobf("curse.maven:alexcaves-924854:${version_alexcaves}")
-    implementation fg.deobf("curse.maven:allthemodium-364466:${version_allthemodium}")
-    implementation fg.deobf("appeng:appliedenergistics2-forge:${version_appliedenergistics}")
-    implementation fg.deobf("smashingmods:alchemistry:${version_alchemistry}")
-    //implementation fg.deobf("curse.maven:astralsorcery-241721:${version_astralsorcery}")
-    implementation fg.deobf("curse.maven:ars-nouveau-401955:${version_arsnouveau}")
-    implementation fg.deobf("curse.maven:blood-magic-224791:${version_bloodmagic}")
-    //implementation fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
-    compileOnly fg.deobf("curse.maven:blue-skies-312918:${version_blueskies}")
-    implementation fg.deobf("vazkii.botania:Botania:${version_botania}")
-    implementation fg.deobf("curse.maven:chipped-456956:${version_chipped}")
-    //implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}")
-    //implementation fg.deobf("curse.maven:compactcrafting-429735:${version_compactcrafting}")
-    implementation fg.deobf("curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}")
-    implementation fg.deobf("com.simibubi.create:create-${mc_version}:${version_create}-+:all", {
+//    implementation "curse.maven:alexcaves-924854:${version_alexcaves}"
+    implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
+    implementation "org.appliedenergistics:appliedenergistics2:${version_appliedenergistics}"
+//    implementation "smashingmods:alchemistry:${version_alchemistry}"
+//    implementation "curse.maven:astralsorcery-241721:${version_astralsorcery}"
+    implementation "curse.maven:ars-nouveau-401955:${version_arsnouveau}"
+//    implementation "curse.maven:blood-magic-224791:${version_bloodmagic}"
+//    implementation "curse.maven:blue-skies-312918:${version_blueskies}"
+//    compileOnly "curse.maven:blue-skies-312918:${version_blueskies}"
+//    implementation "vazkii.botania:Botania:${version_botania}"
+    implementation "curse.maven:chipped-456956:${version_chipped}"
+    //implementation "com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}"
+    //implementation "curse.maven:compactcrafting-429735:${version_compactcrafting}"
+    implementation "curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}"
+    implementation("com.simibubi.create:create-${mc_version}:${version_create}-+:all"){ transitive = false }
+//    implementation "curse.maven:create-328085:${version_create}"
+//    implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal"
+//    implementation "curse.maven:elemental-craft-395158:${version_elementalcraft}"
+    implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
+    implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
+    implementation "com.blakebr0.extendedcrafting:ExtendedCrafting:${mc_version}-${version_extendedcrafting}"
+    implementation "curse.maven:farmers-delight-398521:${version_farmersdelight}"
+    implementation "curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}"
+    //implementation "curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}"
+//    implementation "curse.maven:ice-and-fire-264231:${version_iceandfire}"
+    implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}"
+    implementation "com.buuz135:industrialforegoing:${version_industrialforegoing}"
+//    implementation "curse.maven:mana-and-artifice-406360:${version_manaandartifice}"
+    //implementation "curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}"
+    implementation "curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}"
+    implementation "curse.maven:natures-aura-306626:${version_naturesaura}"
+    implementation "com.klikli_dev:occultism-${version_occultism}", { // WARNING/NOTE: runData doesn't work with occultism
         exclude group: '*'
-    })
-    //implementation fg.deobf("curse.maven:create-328085:${version_create}")
-    implementation fg.deobf("com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal")
-    implementation fg.deobf("curse.maven:elemental-craft-395158:${version_elementalcraft}")
-    implementation fg.deobf("curse.maven:evilcraft-74610:${version_evilcraft}")
-    implementation fg.deobf("novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}")
-    implementation fg.deobf("curse.maven:extended-crafting-268387:${version_extendedcrafting}")
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${version_farmersdelight}")
-    implementation fg.deobf("curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}")
-    //implementation fg.deobf("curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}")
-    implementation fg.deobf("curse.maven:ice-and-fire-264231:${version_iceandfire}")
-    implementation fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}")
-    implementation fg.deobf("com.buuz135:industrial-foregoing:${version_industrialforegoing}")
-    implementation fg.deobf("curse.maven:mana-and-artifice-406360:${version_manaandartifice}")
-    //implementation fg.deobf("curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}")
-    implementation fg.deobf("curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}")
-    implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${version_naturesaura}", {
-        exclude group: '*'
-    })
-    implementation fg.deobf("com.klikli_dev:occultism-${version_occultism}", { // WARNING/NOTE: runData doesn't work with occultism
-        exclude group: '*'
-    })
-    //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}")
-    //implementation fg.deobf("curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}")
-    //implementation fg.deobf("curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}")
-    implementation fg.deobf("me.desht.pneumaticcraft:pneumaticcraft-repressurized:${version_pneumaticcraft}")
-    //implementation fg.deobf("vazkii.psi:Psi:${version_psi}")
-    //implementation fg.deobf("com.teamcofh:thermal_core:${mc_version}-${version_thermal_core}")
-    //implementation fg.deobf("com.teamcofh:thermal_cultivation:${mc_version}-${version_thermalcultivation}")
-    //implementation fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${version_thermalexpansion}")
-    //implementation fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${version_thermalfoundation}")
-    //implementation fg.deobf("com.teamcofh:thermal_innovation:${mc_version}-${version_thermalinnovation}")
-    //implementation fg.deobf("com.teamcofh:thermal_integration:${mc_version}-${version_thermalintegration}")
-    //implementation fg.deobf("com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}")
-    //implementation fg.deobf("slimeknights.tconstruct:TConstruct:${version_tinkers}")
-    implementation fg.deobf("com.hrznstudio:titanium:${version_titanium}")
-    implementation fg.deobf("curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}")
-    //implementation fg.deobf("curse.maven:woot-244049:${version_woot}")
-}
-
-tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
-            minecraft_version: mc_version, minecraft_version_range: mc_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
     }
+    //implementation "curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}"
+    //implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
+    //implementation "curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}"
+    implementation "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${version_pneumaticcraft}"
+    //implementation "vazkii.psi:Psi:${version_psi}"
+    //implementation "com.teamcofh:thermal_core:${mc_version}-${version_thermal_core}"
+    //implementation "com.teamcofh:thermal_cultivation:${mc_version}-${version_thermalcultivation}"
+    //implementation "com.teamcofh:thermal_expansion:${mc_version}-${version_thermalexpansion}"
+    //implementation "com.teamcofh:thermal_foundation:${mc_version}-${version_thermalfoundation}"
+    //implementation "com.teamcofh:thermal_innovation:${mc_version}-${version_thermalinnovation}"
+    //implementation "com.teamcofh:thermal_integration:${mc_version}-${version_thermalintegration}"
+    //implementation "com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}"
+    //implementation "slimeknights.tconstruct:TConstruct:${version_tinkers}"
+    implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
+    //implementation "curse.maven:woot-244049:${version_woot}"
 }
 
 tasks.named('jar', Jar).configure {
@@ -273,6 +269,32 @@ artifacts {
     archives jar, sourcesJar, javadocJar
 }
 
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : mc_version,
+            minecraft_version_range: mc_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+
+// Include the output of "generateModMetadata" as an input directory for the build
+// this works with both building through Gradle and the IDE.
+sourceSets.main.resources.srcDir generateModMetadata
+// To avoid having to run "generateModMetadata" manually, make it run on every project reload
+neoForge.ideSyncTask generateModMetadata
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
@@ -303,6 +325,14 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
 
 changelog {
