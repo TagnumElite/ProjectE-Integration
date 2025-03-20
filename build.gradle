@@ -126,8 +126,10 @@ repositories {
     }
     maven { name 'Architectury'; url 'https://maven.architectury.dev/' }
     maven { name 'BlameJared'; url 'https://maven.blamejared.com' }
+    maven { name 'BlakeBr0'; url 'https://maven.blakesmods.com/releases' }
     maven { name 'ChickenBones'; url 'https://chickenbones.net/maven/' }
     maven { name 'Covers1624'; url 'https://maven.covers1624.net/' }
+    maven { name 'Create'; url 'https://maven.createmod.net' }
     //maven { name 'Ellpeck'; url 'https://maven.ellpeck.de' }
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'NovaMachina'; url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/' }
@@ -359,31 +361,31 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 relations {
                     requiredDependency 'projecte'
 
-                    optionalDependency 'alexs-caves'
+//                    optionalDependency 'alexs-caves'
                     optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
-                    optionalDependency 'alchemistry'
+//                    optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'
                     //optionalDependency 'astral-sorcery'
-                    optionalDependency 'blood-magic'
-                    optionalDependency 'blue-skies'
-                    optionalDependency 'botania'
+//                    optionalDependency 'blood-magic'
+//                    optionalDependency 'blue-skies'
+//                    optionalDependency 'botania'
                     optionalDependency 'chipped'
                     //optionalDependency 'compact-crafting'
                     optionalDependency 'create'
                     optionalDependency 'corail-woodcutter'
-                    optionalDependency 'draconic-evolution'
-                    optionalDependency 'elemental-craft'
+//                    optionalDependency 'draconic-evolution'
+//                    optionalDependency 'elemental-craft'
                     optionalDependency 'evilcraft'
                     optionalDependency 'exnihilosequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
                     //optionalDependency 'ftb-industrial-contraptions-forge'
-                    optionalDependency 'ice-and-fire-dragons'
+//                    optionalDependency 'ice-and-fire-dragons'
                     optionalDependency 'immersive-engineering'
                     optionalDependency 'industrial-foregoing'
-                    optionalDependency 'mana-and-artifice'
+//                    optionalDependency 'mana-and-artifice'
                     //optionalDependency 'mrcrayfishs-vehicle-mod'
                     optionalDependency 'mystical-agriculture'
                     optionalDependency 'natures-aura'
