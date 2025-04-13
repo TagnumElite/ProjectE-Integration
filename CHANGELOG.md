@@ -13,16 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
-- The following mappers have been updated and fix
+- The following mappers have been updated/ported and fixed
   - [Applied Energistics]
   - [Ars Nouveau]
+  - [Chipped]
+  - [Corail Woodcutter]
   - [EvilCraft]
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
-  - [Chipped]
-  - [Corail Woodcutter]
   - [Create]
   - [Extended Crafting]
   - [Farmers Delight]
