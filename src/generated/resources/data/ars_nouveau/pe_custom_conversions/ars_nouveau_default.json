@@ -36,6 +36,11 @@
         "type": "projecte:item",
         "emc_value": 96,
         "id": "ars_nouveau:wilden_tribute"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "ars_nouveau:shady_wizard_fruits"
       }
     ],
     "conversion": [

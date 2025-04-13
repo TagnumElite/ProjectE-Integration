@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.hollingsworth.arsnouveau.ArsNouveau;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.CrushRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.EnchantingApparatusRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
@@ -35,6 +36,7 @@ import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -163,6 +165,7 @@ public class ArsNouveauAddon {
                     .before(ItemsRegistry.WHIRLISPRIG_SHARDS, 16)
                     .before(ItemsRegistry.WILDEN_WING, 72)
                     .before(ItemsRegistry.WILDEN_TRIBUTE, 96)
+                    .before(ItemTags.create(ArsNouveau.prefix("shady_wizard_fruits")), 64)
                     .conversion(ItemsRegistry.MAGE_BLOOM).ingredient(BlockRegistry.MAGE_BLOOM_CROP).end()
                     .conversion(ItemsRegistry.DRYGMY_SHARD).ingredient(ItemsRegistry.WILDEN_HORN).end()
                     .conversion(ItemsRegistry.STARBUNCLE_SHARD).ingredient(Items.GOLD_NUGGET).end();
