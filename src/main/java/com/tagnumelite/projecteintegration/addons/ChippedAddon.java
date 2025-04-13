@@ -24,23 +24,19 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import earth.terrarium.chipped.common.recipes.ChippedRecipe;
+import earth.terrarium.chipped.common.registry.ModRecipeTypes;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static earth.terrarium.chipped.common.registry.ModRecipeTypes.*;
 
 public class ChippedAddon {
     public static final String MODID = "chipped";
@@ -49,111 +45,33 @@ public class ChippedAddon {
         return "Chipped" + name + "Mapper";
     }
 
-    public abstract static class ChippedRecipeMapper extends ARecipeTypeMapper<ChippedRecipe> {
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ChippedWorkbenchMapper extends ARecipeTypeMapper<ChippedRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Workbench");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.WORKBENCH.get();
+        }
+
         @Override
         public boolean convertRecipe(ChippedRecipe recipe) {
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
-            for (HolderSet<Item> tag : recipe.tags()) {
-                IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
-                List<Item> items = tag.stream().filter(Holder::isBound).map(Holder::value).toList();
-                convertIngredient(Ingredient.of(items.stream().map(ItemStack::new)), ingMap, fgm);
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
 
-                for (Item item : items) {
-                    mapper.addConversion(1, NSSItem.createItem(item), ingMap.getMap());
+            for (Ingredient ingredient : recipe.ingredients()) {
+                Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+                ItemStack[] items = ingredient.getItems();
+                convertIngredient(ingredient, ingMap, fgm);
+
+                for (ItemStack item : items) {
+                    mapper.addConversion(1, NSSItem.createItem(item), ingMap);
                 }
             }
+
             return addConversionsAndReturn(fgm, true);
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedBotanistWorkbenchMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("BotanistWorkbench");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == BOTANIST_WORKBENCH.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedGlassblowerMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("Glassblower");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == GLASSBLOWER.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedCarpentersTableMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("CarpentersTable");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == CARPENTERS_TABLE.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedLoomTableMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("LoomTable");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == LOOM_TABLE.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedMasonTableMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("MasonTable");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == MASON_TABLE.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedAlchemyBenchMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("AlchemyBench");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == ALCHEMY_BENCH.get();
-        }
-    }
-
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ChippedMechanistWorkbenchMapper extends ChippedRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("MechanistWorkbench");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == TINKERING_TABLE.get();
         }
     }
 }

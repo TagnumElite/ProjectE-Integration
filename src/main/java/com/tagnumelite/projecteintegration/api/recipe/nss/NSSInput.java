@@ -22,22 +22,25 @@
 
 package com.tagnumelite.projecteintegration.api.recipe.nss;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.nss.NSSFluid;
+import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
+import moze_intel.projecte.utils.Constants;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  */
 public class NSSInput {
-    public final IngredientMap<NormalizedSimpleStack> ingredientMap;
-    public final List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap;
+    public final Object2IntMap<NormalizedSimpleStack> ingredientMap;
+    public final List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap;
     public final boolean successful;
 
     /**
@@ -45,8 +48,8 @@ public class NSSInput {
      * @param fakeGroupMap
      * @param successful
      */
-    public NSSInput(IngredientMap<NormalizedSimpleStack> ingredientMap,
-                    List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap,
+    public NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                    List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap,
                     boolean successful) {
         this.ingredientMap = ingredientMap;
         this.fakeGroupMap = fakeGroupMap;
@@ -57,7 +60,7 @@ public class NSSInput {
      * @param ingredientMap
      * @param successful
      */
-    public NSSInput(IngredientMap<NormalizedSimpleStack> ingredientMap, boolean successful) {
+    public NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap, boolean successful) {
         this(ingredientMap, new ArrayList<>(), successful);
     }
 
@@ -66,15 +69,21 @@ public class NSSInput {
     //}
 
     public static NSSInput createFluid(FluidStack fluid) {
-        IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
-        ingMap.addIngredient(NSSFluid.createFluid(fluid), fluid.getAmount());
+        Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+        ingMap.mergeInt(NSSFluid.createFluid(fluid), fluid.getAmount(), Constants.INT_SUM);
+        return new NSSInput(ingMap, true);
+    }
+
+    public static NSSInput createItem(ItemStack item) {
+        Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+        ingMap.mergeInt(NSSItem.createItem(item), item.getCount(), Constants.INT_SUM);
         return new NSSInput(ingMap, true);
     }
 
     /**
      * @return
      */
-    public Map<NormalizedSimpleStack, Integer> getMap() {
-        return ingredientMap.getMap();
+    public Object2IntMap<NormalizedSimpleStack> getMap() {
+        return ingredientMap;
     }
 }

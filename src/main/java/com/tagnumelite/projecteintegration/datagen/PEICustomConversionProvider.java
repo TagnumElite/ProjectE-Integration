@@ -33,9 +33,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.forgespi.language.ModFileScanData;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforgespi.language.ModFileScanData;
+import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     private static final Type CONVERSION_PROVIDER_TYPE = Type.getType(ConversionProvider.class);
 
     protected PEICustomConversionProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider);
+        super(output, lookupProvider, PEIntegration.MODID);
     }
 
     private static NormalizedSimpleStack gemTag(String gem) {
@@ -54,7 +55,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     }
 
     private static NormalizedSimpleStack tag(String tag) {
-        return NSSItem.createTag(new ResourceLocation(tag));
+        return NSSItem.createTag(ResourceLocation.parse(tag));
     }
 
     // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
@@ -92,15 +93,15 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     }
 
     @Override
-    protected void addCustomConversions(HolderLookup.Provider provider) {
-        createConversionBuilder(new ResourceLocation(PEIntegration.MODID, "pei_metals"))
+    protected void addCustomConversions(HolderLookup.@NotNull Provider provider) {
+        createConversionBuilder(ResourceLocation.fromNamespaceAndPath(PEIntegration.MODID, "pei_metals"))
                 .before(ingotTag("zinc"), 128)
                 .before(ingotTag("cobalt"), 412)
                 .before(ingotTag("tungsten"), 356)
                 .before(new FluidStack(Fluids.WATER, 250), 1);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
-            ResourceLocation resourceLocation = new ResourceLocation(entry.getValue(), entry.getValue() + "_default");
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(), entry.getValue() + "_default");
             PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
             entry.getKey().convert(builder);

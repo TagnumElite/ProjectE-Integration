@@ -32,20 +32,25 @@ import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
+import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ImmersiveEngineeringAddon {
     public static final String MODID = "immersiveengineering";
@@ -114,9 +119,9 @@ public class ImmersiveEngineeringAddon {
             NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
             NormalizedSimpleStack slagStack = NSSItem.createItem(slagOutput);
 
-            Tuple<NormalizedSimpleStack, Boolean> group = getFakeGroup(itemStack, slagStack);
-            NormalizedSimpleStack dummy = group.getA();
-            Map<NormalizedSimpleStack, Integer> dummyMap = Utils.getDummyMap(dummy);
+            INSSFakeGroupManager.FakeGroupData group = getFakeGroup(itemStack, slagStack);
+            NormalizedSimpleStack dummy = group.dummy();
+            Object2IntMap<NormalizedSimpleStack> dummyMap = Utils.getDummyMap(dummy);
 
             mapper.addConversion(slagOutput.getCount(), slagStack, dummyMap);
             mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
@@ -145,13 +150,13 @@ public class ImmersiveEngineeringAddon {
         public NSSOutput getOutput(CokeOvenRecipe recipe) {
             if (recipe.creosoteOutput > 0) {
                 ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
-                FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getBlock().getFluid(), recipe.creosoteOutput);
+                FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getStill(), recipe.creosoteOutput);
                 NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
                 NormalizedSimpleStack fluidStack = NSSFluid.createFluid(creosoteOutput);
 
-                Tuple<NormalizedSimpleStack, Boolean> group = getFakeGroup(fluidStack, itemStack);
-                NormalizedSimpleStack dummy = group.getA();
-                Map<NormalizedSimpleStack, Integer> dummyMap = Utils.getDummyMap(dummy);
+                INSSFakeGroupManager.FakeGroupData group = getFakeGroup(fluidStack, itemStack);
+                NormalizedSimpleStack dummy = group.dummy();
+                Object2IntMap<NormalizedSimpleStack> dummyMap = Utils.getDummyMap(dummy);
 
                 mapper.addConversion(creosoteOutput.getAmount(), fluidStack, dummyMap);
                 mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
@@ -228,8 +233,8 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public NSSInput getInput(MixerRecipe recipe) {
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
             //ingredientMap.addIngredient(recipe.fluidInput);
             // TODO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH

@@ -31,7 +31,7 @@ import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class NSSOutput {
     public NSSOutput(ItemStack item, boolean forceCopyNBT) {
         this.amount = item.getCount();
         if (forceCopyNBT) {
-            this.nss = NSSItem.createItem(item.getItem(), item.getTag());
+            this.nss = NSSItem.createItem(item.getItem(), item.getComponentsPatch());
         } else {
             this.nss = NSSItem.createItem(item);
         }
@@ -107,6 +107,10 @@ public class NSSOutput {
         this.nss = NSSItem.createItem(state.getBlock());
     }
 
+    public static Builder builder(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, ResourceLocation recipeId) {
+        return new Builder(mapper, fakeGroupManager, recipeId);
+    }
+
     /**
      * A helper function to check this object has a valid NSS object with amount over 0 and isn't equal to EMPTY.
      *
@@ -119,10 +123,6 @@ public class NSSOutput {
     @Override
     public String toString() {
         return "NSSOutput{amount=" + amount + ";nss=" + nss + "}";
-    }
-
-    public static Builder builder(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, ResourceLocation recipeId) {
-        return new Builder(mapper, fakeGroupManager, recipeId);
     }
 
     /**
@@ -193,7 +193,7 @@ public class NSSOutput {
                 }
             }
 
-            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).getA();
+            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
 
             for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
                 mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, 1));
@@ -257,7 +257,7 @@ public class NSSOutput {
                 return NSSOutput.EMPTY;
             }
 
-            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).getA();
+            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
 
             for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
                 mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, entry.getValue()));
@@ -268,6 +268,7 @@ public class NSSOutput {
 
         /**
          * Check if the output stacks contains any items.
+         *
          * @return A True/False value of whether the outputStacks Map is empty
          */
         public boolean isEmpty() {

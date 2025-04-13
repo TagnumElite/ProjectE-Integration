@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.78'
+    id 'net.neoforged.moddev' version '2.0.80'
     id "org.jetbrains.changelog" version "2.2.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
 }
@@ -148,41 +148,41 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
 //    implementation "smashingmods:alchemylib:${version_alchemylib}"
-    runtimeOnly "curse.maven:alltheores-405593:${version_alltheores}"
-    runtimeOnly "dev.architectury:architectury-forge:${version_architectury}"
-    runtimeOnly "curse.maven:athena-841890:${version_athena}"
-    runtimeOnly "curse.maven:balm-531761:${version_balm}"
-//    runtimeOnly "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal"
-    runtimeOnly "smashingmods:chemlib:${version_chemlib}"
-//    runtimeOnly "curse.maven:citadel-331936:${version_citadel}"
-    runtimeOnly "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
-    //runtimeOnly "team.chisel.ctm:CTM:${version_ctm}"
-    runtimeOnly "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
-    runtimeOnly "top.theillusivec4.curios:curios-forge:${version_curios}"
-    runtimeOnly "curse.maven:cyclops-core-232758:${version_cyclopscore}"
-//    runtimeOnly "sirttas.dpanvil:DPAnvil:${version_datapackanvil}"
-    //runtimeOnly "curse.maven:ftb-library-404465:${version_ftb_library}"
-    runtimeOnly "software.bernie.geckolib:geckolib-forge-${version_geckolib}"
+//    localRuntime "curse.maven:alltheores-405593:${version_alltheores}"
+    localRuntime "dev.architectury:architectury-neoforge:${version_architectury}"
+    localRuntime "curse.maven:athena-841890:${version_athena}"
+    localRuntime "curse.maven:balm-531761:${version_balm}"
+//    localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal"
+//    localRuntime "smashingmods:chemlib:${version_chemlib}"
+//    localRuntime "curse.maven:citadel-331936:${version_citadel}"
+    localRuntime "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
+    //localRuntime "team.chisel.ctm:CTM:${version_ctm}"
+    localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
+    localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}"
+    localRuntime "curse.maven:cyclops-core-232758:${version_cyclopscore}"
+//    localRuntime "sirttas.dpanvil:DPAnvil:${version_datapackanvil}"
+    //localRuntime "curse.maven:ftb-library-404465:${version_ftb_library}"
+    localRuntime "software.bernie.geckolib:geckolib-neoforge-${version_geckolib}"
     //implementation "slimeknights.mantle:Mantle:${version_mantle}"
     compileOnly "com.klikli_dev:modonomicon-${mc_version}-common:${version_modonomicon}"
     implementation "com.klikli_dev:modonomicon-${mc_version}-neoforge:${version_modonomicon}"
-    //runtimeOnly "curse.maven:myrtrees-546151:${version_myrtrees}"
-    implementation "novamachina.novacore:novacore:${version_novacore}"
-    //runtimeOnly "curse.maven:obfuscate-289380:${version_obfuscate}"
-    //runtimeOnly "curse.maven:observerlib-316833:${version_observerlib}"
-    runtimeOnly "vazkii.patchouli:Patchouli:${version_patchouli}"
+    //localRuntime "curse.maven:myrtrees-546151:${version_myrtrees}"
+//    implementation "novamachina.novacore:novacore:${version_novacore}"
+    //localRuntime "curse.maven:obfuscate-289380:${version_obfuscate}"
+    //localRuntime "curse.maven:observerlib-316833:${version_observerlib}"
+    localRuntime "vazkii.patchouli:Patchouli:${version_patchouli}"
     implementation "curse.maven:resourceful-lib-570073:${version_resourceful_lib}"
     implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}"
-//    runtimeOnly "curse.maven:structure-gel-api-378802:${version_structuregelapi}"
-    implementation "com.hrznstudio:titanium:${version_titanium}"
+//    localRuntime "curse.maven:structure-gel-api-378802:${version_structuregelapi}"
+    implementation ("com.hrznstudio:titanium:${version_titanium}") { transitive = false }
 
     // ======================= [ Optional Mods ] =======================
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${version_jei}"
-    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${version_jei}"
-    runtimeOnly "mezz.jei:jei-${mc_version}-forge:${version_jei}"
+    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${version_jei}"
+    localRuntime "mezz.jei:jei-${mc_version}-neoforge:${version_jei}"
 
 //    implementation "curse.maven:alexcaves-924854:${version_alexcaves}"
-    implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
+//    implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
     implementation "org.appliedenergistics:appliedenergistics2:${version_appliedenergistics}"
 //    implementation "smashingmods:alchemistry:${version_alchemistry}"
 //    implementation "curse.maven:astralsorcery-241721:${version_astralsorcery}"
@@ -200,14 +200,14 @@ dependencies {
 //    implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal"
 //    implementation "curse.maven:elemental-craft-395158:${version_elementalcraft}"
     implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
-    implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
+//    implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
     implementation "com.blakebr0.extendedcrafting:ExtendedCrafting:${mc_version}-${version_extendedcrafting}"
     implementation "curse.maven:farmers-delight-398521:${version_farmersdelight}"
     implementation "curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}"
     //implementation "curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}"
 //    implementation "curse.maven:ice-and-fire-264231:${version_iceandfire}"
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}"
-    implementation "com.buuz135:industrialforegoing:${version_industrialforegoing}"
+    implementation ("com.buuz135:industrialforegoing:${version_industrialforegoing}") { transitive = false }
 //    implementation "curse.maven:mana-and-artifice-406360:${version_manaandartifice}"
     //implementation "curse.maven:mrcrayfishs-vehicle-mod-286660:${version_mrcrayfishs_vehicle_mod}"
     implementation "curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}"
@@ -228,7 +228,7 @@ dependencies {
     //implementation "com.teamcofh:thermal_integration:${mc_version}-${version_thermalintegration}"
     //implementation "com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}"
     //implementation "slimeknights.tconstruct:TConstruct:${version_tinkers}"
-    implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
+//    implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
     //implementation "curse.maven:woot-244049:${version_woot}"
 }
 
@@ -296,6 +296,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 sourceSets.main.resources.srcDir generateModMetadata
 // To avoid having to run "generateModMetadata" manually, make it run on every project reload
 neoForge.ideSyncTask generateModMetadata
+createMinecraftArtifacts.dependsOn(generateModMetadata)
 
 publishing {
     publications {
@@ -362,7 +363,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                     requiredDependency 'projecte'
 
 //                    optionalDependency 'alexs-caves'
-                    optionalDependency 'allthemodium'
+//                    optionalDependency 'allthemodium'
                     optionalDependency 'applied-energistics-2'
 //                    optionalDependency 'alchemistry'
                     optionalDependency 'ars-nouveau'
@@ -377,7 +378,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
 //                    optionalDependency 'draconic-evolution'
 //                    optionalDependency 'elemental-craft'
                     optionalDependency 'evilcraft'
-                    optionalDependency 'exnihilosequentia'
+//                    optionalDependency 'exnihilosequentia'
                     optionalDependency 'extended-crafting'
                     optionalDependency 'farmers-delight'
                     optionalDependency 'farming-for-blockheads'
@@ -398,7 +399,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
 					//optionalDependency 'thermal-expansion'
 					//optionalDependency 'thermal-foundation'
                     //optionalDependency 'tinkers-construct'
-                    optionalDependency 'touhou-little-maid'
+//                    optionalDependency 'touhou-little-maid'
                     //optionalDependency 'woot'
                 }
             }

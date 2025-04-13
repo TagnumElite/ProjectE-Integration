@@ -44,16 +44,18 @@ import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.*;
 
@@ -76,8 +78,8 @@ public class CreateAddon {
             }
 
             // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
             for (int i = 0; i < ingredients.size(); i++) {
                 Ingredient ingredient = ingredients.get(i);
@@ -97,7 +99,7 @@ public class CreateAddon {
                 }
 
                 if (matches.size() == 1) {
-                    ingredientMap.addIngredient(NSSFluid.createFluid(matches.get(0)), amount);
+                    ingredientMap.put(NSSFluid.createFluid(matches.getFirst()), amount);
                 } else {
                     Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
                     List<FluidStack> stacks = new ArrayList<>();
@@ -112,22 +114,22 @@ public class CreateAddon {
 
                     int count = stacks.size();
                     if (count == 1) {
-                        ingredientMap.addIngredient(NSSFluid.createFluid(stacks.get(0)), amount);
+                        ingredientMap.put(NSSFluid.createFluid(stacks.getFirst()), amount);
                     } else if (count > 1) {
                         //Handle this ingredient as the representation of all the stacks it supports
-                        Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                        NormalizedSimpleStack dummy = group.getA();
-                        ingredientMap.addIngredient(dummy, Math.max(amount, 1));
-                        if (group.getB()) {
+                        INSSFakeGroupManager.FakeGroupData group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
+                        NormalizedSimpleStack dummy = group.dummy();
+                        ingredientMap.put(dummy, Math.max(amount, 1));
+                        if (group.created()) {
                             //Only lookup the matching stacks for the group with conversion if we don't already have
                             // a group created for this dummy ingredient
                             // Note: We soft ignore cases where it fails/there are no matching group ingredients
                             // as then our fake ingredient will never actually have an emc value assigned with it
                             // so the recipe won't either
-                            List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
+                            List<Object2IntMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
                             for (FluidStack stack : stacks) {
-                                IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
-                                groupIngredientMap.addIngredient(NSSFluid.createFluid(stack), 1);
+                                Object2IntMap<NormalizedSimpleStack> groupIngredientMap = new Object2IntOpenHashMap<>();
+                                groupIngredientMap.put(NSSFluid.createFluid(stack), 1);
                                 groupIngredientMaps.add(groupIngredientMap);
                             }
                             fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));

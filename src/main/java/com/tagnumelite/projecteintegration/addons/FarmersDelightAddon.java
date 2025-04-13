@@ -34,7 +34,7 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 public class FarmersDelightAddon {
     public static final String MODID = "farmersdelight";
@@ -82,12 +82,13 @@ public class FarmersDelightAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Set defaults conversions for Farmer's Delight")
-                    .before(ForgeTags.CROPS_RICE, 1)
                     .before(ModItems.RICE_PANICLE.get(), 1)
                     .before(ModItems.STRAW.get(), 1)
-                    .before(cropsTag("tomato"), 32)
-                    .before(cropsTag("onion"), 32)
-                    .before(cropsTag("cabbage"), 32)
+                    .before(CommonTags.CROPS_RICE, 1)
+                    .before(CommonTags.CROPS_GRAIN, 1)
+                    .before(CommonTags.CROPS_TOMATO, 32)
+                    .before(CommonTags.CROPS_ONION, 32)
+                    .before(CommonTags.CROPS_CABBAGE, 32)
                     .before(ModItems.HAM.get(), 64)
                     .before(ModBlocks.BROWN_MUSHROOM_COLONY.get(), 32)
                     .before(ModBlocks.RED_MUSHROOM_COLONY.get(), 32);

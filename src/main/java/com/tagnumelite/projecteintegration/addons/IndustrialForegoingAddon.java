@@ -31,11 +31,12 @@ import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -93,7 +94,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public NSSOutput getOutput(DissolutionChamberRecipe recipe) {
-            if (!recipe.output.isEmpty() && (recipe.outputFluid == null || recipe.outputFluid.isEmpty())) {
+            if (recipe.output.isPresent() && recipe.outputFluid.isEmpty()) {
                 return super.getOutput(recipe);
             }
             return mapOutputs(recipe.output, recipe.outputFluid);
@@ -106,9 +107,9 @@ public class IndustrialForegoingAddon {
 
         @Override
         protected List<Ingredient> getIngredients(DissolutionChamberRecipe recipe) {
-            ArrayList<Ingredient> list = new ArrayList<>(recipe.input.length);
-            for (Ingredient.Value input : recipe.input) {
-                list.add(Ingredient.of(input.getItems().stream()));
+            ArrayList<Ingredient> list = new ArrayList<>(recipe.input.size());
+            for (Ingredient input : recipe.input) {
+                list.add(Ingredient.of(input.getItems()));
             }
             // TODO: Fluid Input, Im too lazy for this now.
             return list;
@@ -154,13 +155,13 @@ public class IndustrialForegoingAddon {
                 return null;
             }
 
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
             if (lavaRequired > 0)
-                ingredientMap.addIngredient(NSSFluid.createFluid(Fluids.LAVA), lavaRequired);
+                ingredientMap.put(NSSFluid.createFluid(Fluids.LAVA), lavaRequired);
 
             if (waterRequired > 0)
-                ingredientMap.addIngredient(NSSFluid.createFluid(Fluids.WATER), waterRequired);
+                ingredientMap.put(NSSFluid.createFluid(Fluids.WATER), waterRequired);
 
             return new NSSInput(ingredientMap, true);
         }
@@ -172,7 +173,7 @@ public class IndustrialForegoingAddon {
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Industrial Foregoing")
                     .before(ModuleCore.SEWAGE.getSourceFluid().get(), 1)
-                    .before(ModuleCore.TINY_DRY_RUBBER.get(), 1)
+                    .before(ModuleCore.DRY_RUBBER.get(), 12)
                     .conversion(ModuleCore.LATEX.getSourceFluid().get(), 1600).ingredient(ItemTags.LOGS).end()
                     .conversion(ModuleCore.FERTILIZER.get()).ingredient(ModuleCore.SEWAGE.getSourceFluid().get(), 1000).end();
             //.conversion(ModuleCore.TINY_DRY_RUBBER).ingredient(Fluids.WATER, 500).ingredient(ModuleCore.LATEX.getSourceFluid(), 100).end();

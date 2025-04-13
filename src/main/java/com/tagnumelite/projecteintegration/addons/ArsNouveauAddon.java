@@ -22,8 +22,8 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantingApparatusRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.CrushRecipe;
+import com.hollingsworth.arsnouveau.common.crafting.recipes.EnchantingApparatusRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.GlyphRecipe;
 import com.hollingsworth.arsnouveau.common.crafting.recipes.ImbuementRecipe;
 import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
@@ -64,12 +64,12 @@ public class ArsNouveauAddon {
 
         @Override
         protected List<Ingredient> getIngredients(CrushRecipe recipe) {
-            return Collections.singletonList(recipe.input);
+            return Collections.singletonList(recipe.input());
         }
 
         @Override
         public NSSOutput getOutput(CrushRecipe recipe) {
-            Object[] outputs = recipe.outputs.stream().filter(output -> output.chance > 1f).map(output -> output.stack).toArray();
+            Object[] outputs = recipe.outputs().stream().filter(output -> output.chance() > 1f).map(output -> output.stack()).toArray();
 
             if (outputs.length == 0) return null;
 
@@ -92,14 +92,14 @@ public class ArsNouveauAddon {
 
         @Override
         protected List<Ingredient> getIngredients(EnchantingApparatusRecipe recipe) {
-            List<Ingredient> ingredients = new ArrayList<>(recipe.pedestalItems);
-            ingredients.add(recipe.reagent);
+            List<Ingredient> ingredients = new ArrayList<>(recipe.pedestalItems());
+            ingredients.add(recipe.reagent());
             return ingredients;
         }
 
         @Override
         public NSSOutput getOutput(EnchantingApparatusRecipe recipe) {
-            return new NSSOutput(recipe.result);
+            return new NSSOutput(recipe.result());
         }
     }
 

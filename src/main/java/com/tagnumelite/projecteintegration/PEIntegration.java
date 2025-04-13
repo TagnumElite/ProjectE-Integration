@@ -2,11 +2,10 @@ package com.tagnumelite.projecteintegration;
 
 import com.tagnumelite.projecteintegration.api.recipe.PEIRecipeMapper;
 import moze_intel.projecte.config.ProjectEConfig;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,8 +14,7 @@ public class PEIntegration {
     public static final String MODID = "projecteintegration";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-    public PEIntegration() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public PEIntegration(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup);
     }
 

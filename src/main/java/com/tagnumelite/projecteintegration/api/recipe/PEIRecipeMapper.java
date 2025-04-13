@@ -22,20 +22,18 @@
 
 package com.tagnumelite.projecteintegration.api.recipe;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.Utils;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import moze_intel.projecte.api.mapper.EMCMapper;
 import moze_intel.projecte.api.mapper.IEMCMapper;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.EMCMappingHandler;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.Tuple;
 
 import java.util.*;
 
@@ -55,34 +53,39 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
     }
 
     @Override
+    public String getTranslationKey() {
+        return ""; // @TODO
+    }
+
+    @Override
     public String getDescription() {
         return "Recipe mapper for custom recipes that don't implement IRecipe";
     }
 
     @Override
-    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector, CommentedFileConfig config, ReloadableServerResources reloadableServerResources, RegistryAccess registryAccess, ResourceManager resourceManager) {
+    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector, ReloadableServerResources reloadableServerResources, RegistryAccess registryAccess, ResourceManager resourceManager) {
         NSSFake.setCurrentNamespace(PEIntegration.MODID + "RecipeMapper");
 
-        NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager();
+        NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager(mappingCollector);
         for (Map.Entry<ACustomRecipeMapper<?>, String> mapperEntry : recipeMappers.entrySet()) {
             final ACustomRecipeMapper<?> recipeMapper = mapperEntry.getKey();
             final String modid = mapperEntry.getValue();
             final String name = recipeMapper.getName();
-            final String configKey = getName() + '.' + name + ".enabled";
+            final String configKey = getName() + '.' + modid + '.' + name + ".enabled";
 
-            if (EMCMappingHandler.getOrSetDefault(config, configKey, recipeMapper.getDescription(), true)) {
-                NSSFakeGroupManager.setNamespace(modid);
-                List<?> recipes = recipeMapper.getRecipes();
-                for (Object recipe : recipes) {
-                    try {
-                        if (!recipeMapper.handleRecipe(mappingCollector, recipe, registryAccess, fakeGroupManager)) {
-                            PEIntegration.debugLog("Recipe Mapper ({}) failed to handle recipe: {}", name, recipe);
-                        }
-                    } catch (Exception e) {
-                        PEIntegration.LOGGER.error("Custom Recipe Mapper ({}) failed to handle recipe: {}", name, recipe, e);
+            //if (EMCMappingHandler.getOrSetDefault(config, configKey, recipeMapper.getDescription(), true)) { TODO: Reimplement configs for custom mappers
+            NSSFakeGroupManager.setNamespace(modid);
+            List<?> recipes = recipeMapper.getRecipes();
+            for (Object recipe : recipes) {
+                try {
+                    if (!recipeMapper.handleRecipe(mappingCollector, recipe, registryAccess, fakeGroupManager)) {
+                        PEIntegration.debugLog("Recipe Mapper ({}) failed to handle recipe: {}", name, recipe);
                     }
+                } catch (Exception e) {
+                    PEIntegration.LOGGER.error("Custom Recipe Mapper ({}) failed to handle recipe: {}", name, recipe, e);
                 }
             }
+            //}
         }
 
         NSSFake.resetNamespace();
@@ -92,7 +95,12 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
     private static class NSSFakeGroupManager implements INSSFakeGroupManager {
         private static String namespace = "";
         private final Map<Set<NormalizedSimpleStack>, NormalizedSimpleStack> groups = new HashMap<>();
+        private final IMappingCollector<NormalizedSimpleStack, Long> mapperCollector;
         private int fakeIndex;
+
+        public NSSFakeGroupManager(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector) {
+            this.mapperCollector = mappingCollector;
+        }
 
         public static void setNamespace(String namespace) {
             NSSFakeGroupManager.namespace = namespace;
@@ -103,14 +111,24 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
         }
 
         @Override
-        public Tuple<NormalizedSimpleStack, Boolean> getOrCreateFakeGroup(Set<NormalizedSimpleStack> normalizedSimpleStacks) {
+        public FakeGroupData getOrCreateFakeGroup(Set<NormalizedSimpleStack> normalizedSimpleStacks) {
             NormalizedSimpleStack stack = groups.get(normalizedSimpleStacks);
             if (stack == null) {
                 stack = NSSFake.create(namespace + "_" + fakeIndex++);
                 groups.put(new HashSet<>(normalizedSimpleStacks), stack);
-                return new Tuple<>(stack, true);
+                return new FakeGroupData(stack, true);
             }
-            return new Tuple<>(stack, false);
+            return new FakeGroupData(stack, false);
+        }
+
+        @Override
+        public FakeGroupData getOrCreateFakeGroup(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b, boolean b1) {
+            throw new RuntimeException("getOrCreateFakeGroup in PEI not yet implemented");
+        }
+
+        @Override
+        public FakeGroupData getOrCreateFakeGroupDirect(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b, boolean b1) {
+            throw new RuntimeException("getOrCreateFakeGroup in PEI not yet implemented");
         }
     }
 }

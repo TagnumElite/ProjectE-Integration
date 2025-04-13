@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the SmartBrainLib to NeoForge version
 - Fixed [Alchemistry] Mappers to actually have inputs
 
+### Todo
+- Update support for all mappers and underlying classes to support new mappers.
+- Insure all mappers are working right
+
+### Removed
+
+- Support for [All The Modium], [Ex Nihilo Sequentia] and [Touhou Little Maid]
+  - Will be added back later, just causing startup problems right now.
+
 ## [7.2.5]
 ### Fixed
 - Wrong decorator on [Ice and Fire] Dragon Forge mapper

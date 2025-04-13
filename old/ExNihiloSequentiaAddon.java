@@ -25,9 +25,10 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -44,34 +45,10 @@ public class ExNihiloSequentiaAddon {
         return "ExNihiloSequentia" + name + "Mapper";
     }
 
-    public abstract static class ENSDropListRecipeMapper<C extends DropListRecipe> extends ARecipeTypeMapper<C> {
-        @Override
-        public String getDescription() {
-            return super.getDescription() + " NOTE: Skips all items with change less than 100%";
-        }
-
-        @Override
-        protected List<Ingredient> getIngredients(C recipe) {
-            return Collections.singletonList(recipe.getInput());
-        }
-
-        @Override
-        public NSSOutput getOutput(C recipe) {
-            NSSOutput.Builder builder = NSSOutput.builder(mapper, fakeGroupManager, recipeID);
-            for (ItemStackWithChance drop : recipe.getDrops()) {
-                if (drop.getChance() >= 1.0f)
-                    builder.addOutput(drop.getStack());
-            }
-            if (builder.isEmpty())
-                return NSSOutput.EMPTY;
-            return builder.toOutput();
-        }
-    }
-
     // Skipped Composting Recipes
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ENSCrushingMapper extends ENSDropListRecipeMapper<CrushingRecipe> {
+    public static class ENSCrushingMapper extends ARecipeTypeMapper<CrushingRecipe> {
         @Override
         public String getName() {
             return NAME("Crushing");
@@ -80,6 +57,28 @@ public class ExNihiloSequentiaAddon {
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == EXNRecipeTypes.CRUSHING;
+        }
+
+        @Override
+        public String getDescription() {
+            return super.getDescription() + " NOTE: Skips all items with change less than 100%";
+        }
+
+        @Override
+        protected List<Ingredient> getIngredients(CrushingRecipe recipe) {
+            return Collections.singletonList(recipe.getInput());
+        }
+
+        @Override
+        public NSSOutput getOutput(CrushingRecipe recipe) {
+            NSSOutput.Builder builder = NSSOutput.builder(mapper, fakeGroupManager, recipeID);
+            for (ItemStackWithChance drop : recipe.getDrops()) {
+                if (drop.getChance() >= 1.0f)
+                    builder.addOutput(drop.getStack());
+            }
+            if (builder.isEmpty())
+                return NSSOutput.EMPTY;
+            return builder.toOutput();
         }
     }
 
@@ -123,8 +122,8 @@ public class ExNihiloSequentiaAddon {
         @Override
         public NSSInput getInput(PrecipitateRecipe recipe) {
             // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
             if (!convertIngredient(recipe.getInput(), ingredientMap, fakeGroupMap))
                 return new NSSInput(ingredientMap, fakeGroupMap, false);

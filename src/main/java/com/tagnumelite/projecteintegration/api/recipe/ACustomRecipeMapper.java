@@ -25,10 +25,11 @@ package com.tagnumelite.projecteintegration.api.recipe;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -58,8 +59,8 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
         }
 
         // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-        IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+        Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
         for (Ingredient ingredient : ingredients) {
             if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
@@ -85,7 +86,7 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
      */
     @SuppressWarnings("unchecked")
     public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
-        this.recipeID = new ResourceLocation(getRequiredMods()[0], getName().toLowerCase());
+        this.recipeID = ResourceLocation.fromNamespaceAndPath(getRequiredMods()[0], getName().toLowerCase());
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
         this.registryAccess = registryAccess;

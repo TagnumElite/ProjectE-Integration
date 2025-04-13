@@ -26,16 +26,17 @@ import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.*;
 
@@ -44,6 +45,15 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     protected IMappingCollector<NormalizedSimpleStack, Long> mapper;
     protected INSSFakeGroupManager fakeGroupManager;
     protected RegistryAccess registryAccess;
+
+    /**
+     * @param ingredientMap
+     * @param stack
+     * @return
+     */
+    protected static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
+        return Utils.addIngredient(ingredientMap, stack);
+    }
 
     @Override
     public String getDescription() {
@@ -72,7 +82,6 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         return addConversionsAndReturn(input.fakeGroupMap, true);
     }
 
-
     /**
      * @param fluidIngredients
      * @return
@@ -83,8 +92,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
             return null;
         }
 
-        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-        IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+        Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
         for (List<FluidStack> ingredient : fluidIngredients) {
             if (!convertFluidIngredient(ingredient, ingredientMap, fakeGroupMap)) {
@@ -94,8 +103,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         return new NSSInput(ingredientMap, fakeGroupMap, true);
     }
 
-    protected boolean convertFluidIngredient(FluidStack fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+    protected boolean convertFluidIngredient(FluidStack fluidIngredient, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertFluidIngredient(-1, Collections.singletonList(fluidIngredient), ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
@@ -105,8 +114,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param fakeGroupMap
      * @return
      */
-    protected boolean convertFluidIngredient(List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+    protected boolean convertFluidIngredient(List<FluidStack> fluidIngredient, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return convertFluidIngredient(-1, fluidIngredient, ingredientMap, fakeGroupMap);
     }
 
@@ -117,8 +126,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param fakeGroupMap
      * @return
      */
-    protected boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                             List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+    protected boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertFluidIngredient(amount, fluidIngredient, ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
@@ -128,8 +137,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param fakeGroupMap
      * @return
      */
-    protected boolean convertIngredient(Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+    protected boolean convertIngredient(Ingredient ingredient, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return convertIngredient(-1, ingredient, ingredientMap, fakeGroupMap);
     }
 
@@ -140,8 +149,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param fakeGroupMap
      * @return
      */
-    protected boolean convertIngredient(int amount, Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap,
-                                        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+    protected boolean convertIngredient(int amount, Ingredient ingredient, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
@@ -157,15 +166,6 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         return Utils.mapOutput(mapper, fakeGroupManager, recipeID.toString(), outputVariants);
     }
 
-    /**
-     * @param ingredientMap
-     * @param stack
-     * @return
-     */
-    protected static boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
-        return Utils.addIngredient(ingredientMap, stack);
-    }
-
     //TODO: CHANGE THE BELOW CODE SOON!
 
     /**
@@ -173,12 +173,12 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * conversions that we have, regardless of whether the recipe as a whole is valid, because we only create one instance of our group's NSS representation so even if
      * parts of the recipe are not valid, the conversion may be valid and exist in another recipe.
      */
-    protected boolean addConversionsAndReturn(List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> dummyGroupInfos, boolean returnValue) {
+    protected boolean addConversionsAndReturn(List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> dummyGroupInfos, boolean returnValue) {
         //If we have any conversions make sure to add them even if we are returning early
         if (dummyGroupInfos != null) {
-            for (Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>> dummyGroupInfo : dummyGroupInfos) {
-                for (IngredientMap<NormalizedSimpleStack> groupIngredientMap : dummyGroupInfo.getB()) {
-                    mapper.addConversion(1, dummyGroupInfo.getA(), groupIngredientMap.getMap());
+            for (Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>> dummyGroupInfo : dummyGroupInfos) {
+                for (Object2IntMap<NormalizedSimpleStack> groupIngredientMap : dummyGroupInfo.getB()) {
+                    mapper.addConversion(1, dummyGroupInfo.getA(), groupIngredientMap);
                 }
             }
         }
@@ -189,7 +189,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      * @param stacks
      * @return
      */
-    protected Tuple<NormalizedSimpleStack, Boolean> getFakeGroup(NormalizedSimpleStack... stacks) {
+    protected INSSFakeGroupManager.FakeGroupData getFakeGroup(NormalizedSimpleStack... stacks) {
         return fakeGroupManager.getOrCreateFakeGroup(new HashSet<>(Arrays.asList(stacks)));
     }
 

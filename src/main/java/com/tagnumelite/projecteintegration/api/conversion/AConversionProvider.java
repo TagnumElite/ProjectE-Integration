@@ -86,7 +86,7 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack tag(String resourceLocation) {
-        return NSSItem.createTag(new ResourceLocation(resourceLocation));
+        return NSSItem.createTag(ResourceLocation.parse(resourceLocation));
     }
 
     /**

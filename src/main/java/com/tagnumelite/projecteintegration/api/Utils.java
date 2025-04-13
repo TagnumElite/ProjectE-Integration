@@ -26,13 +26,15 @@ import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import moze_intel.projecte.utils.RegistryUtils;
+import moze_intel.projecte.utils.Constants;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -40,10 +42,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.forgespi.language.ModFileScanData;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
 
 import java.lang.reflect.Field;
@@ -105,13 +107,13 @@ public class Utils {
         return null;
     }
 
-    public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
+    public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, Object2IntMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
         if (fluidIngredient == null) {
             return false;
         } else if (fluidIngredient.size() == 1) {
             //Handle this ingredient as a direct representation of the stack it represents
             return !addIngredient(ingredientMap, fluidIngredient.get(0));
-        } else if (fluidIngredient.size() > 0) {
+        } else if (!fluidIngredient.isEmpty()) {
             Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
             List<FluidStack> fluids = new ArrayList<>();
 
@@ -128,18 +130,18 @@ public class Utils {
                 return !addIngredient(ingredientMap, fluids.get(0));
             } else if (count > 1) {
                 //Handle this ingredient as the representation of all the fluids it supports
-                Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                NormalizedSimpleStack dummy = group.getA();
-                ingredientMap.addIngredient(dummy, Math.max(amount, 1));
-                if (group.getB()) {
+                INSSFakeGroupManager.FakeGroupData group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
+                NormalizedSimpleStack dummy = group.dummy();
+                ingredientMap.put(dummy, Math.max(amount, 1));
+                if (group.created()) {
                     //Only lookup the matching fluids for the group with conversion if we don't already have
                     // a group created for this dummy ingredient
                     // Note: We soft ignore cases where it fails/there are no matching group ingredients
                     // as then our fake ingredient will never actually have an emc value assigned with it
                     // so the recipe won't either
-                    List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
+                    List<Object2IntMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
                     for (FluidStack fluid : fluids) {
-                        IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
+                        Object2IntMap<NormalizedSimpleStack> groupIngredientMap = new Object2IntOpenHashMap<>();
                         if (addIngredient(groupIngredientMap, fluid.copy())) {
                             return false;
                         }
@@ -152,7 +154,7 @@ public class Utils {
         return true;
     }
 
-    public static boolean convertIngredient(int amount, Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
+    public static boolean convertIngredient(int amount, Ingredient ingredient, Object2IntMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
         ItemStack[] matches = getMatchingStacks(ingredient, recipeID);
         if (matches == null) {
             return false;
@@ -173,21 +175,21 @@ public class Utils {
 
             int count = stacks.size();
             if (count == 1) {
-                return !addIngredient(ingredientMap, getStack(stacks.get(0), amount), recipeID);
+                return !addIngredient(ingredientMap, getStack(stacks.getFirst(), amount), recipeID);
             } else if (count > 1) {
                 //Handle this ingredient as the representation of all the stacks it supports
-                Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                NormalizedSimpleStack dummy = group.getA();
-                ingredientMap.addIngredient(dummy, Math.max(amount, 1));
-                if (group.getB()) {
+                INSSFakeGroupManager.FakeGroupData group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
+                NormalizedSimpleStack dummy = group.dummy();
+                ingredientMap.mergeInt(dummy, Math.max(amount, 1), Constants.INT_SUM);
+                if (group.created()) {
                     //Only lookup the matching stacks for the group with conversion if we don't already have
                     // a group created for this dummy ingredient
                     // Note: We soft ignore cases where it fails/there are no matching group ingredients
                     // as then our fake ingredient will never actually have an emc value assigned with it
                     // so the recipe won't either
-                    List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
+                    List<Object2IntMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
                     for (ItemStack stack : stacks) {
-                        IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
+                        Object2IntMap<NormalizedSimpleStack> groupIngredientMap = new Object2IntOpenHashMap<>();
                         if (addIngredient(groupIngredientMap, stack.copy(), recipeID)) {
                             return false;
                         }
@@ -202,19 +204,21 @@ public class Utils {
 
     // Borrowed from ProjectE with a few modifications
     // https://github.com/sinkillerj/ProjectE/blob/mc1.19.x/src/main/java/moze_intel/projecte/emc/mappers/recipe/BaseRecipeTypeMapper.java#L158-L195
-    public static boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, ItemStack stack, String recipeID) {
+    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, ItemStack stack, String recipeID) {
+        stack = stack.copy();
         Item item = stack.getItem();
         boolean hasContainerItem = false;
+
         try {
             //Note: We include the hasContainerItem check in the try catch, as if a mod is handling tags incorrectly
             // there is a chance their hasContainerItem is checking something about tags, and
             hasContainerItem = item.hasCraftingRemainingItem(stack);
             if (hasContainerItem) {
                 //If this item has a container for the stack, we remove the cost of the container itself
-                ingredientMap.addIngredient(NSSItem.createItem(item.getCraftingRemainingItem(stack)), -1);
+                ingredientMap.mergeInt(NSSItem.createItem(item.getCraftingRemainingItem(stack)), -1, Constants.INT_SUM);
             }
         } catch (Exception e) {
-            ResourceLocation itemName = RegistryUtils.getName(item);
+            ResourceLocation itemName = BuiltInRegistries.ITEM.getKey(item);
             if (hasContainerItem) {
                 if (isTagException(e)) {
                     PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} reported that it has a container item, "
@@ -234,15 +238,15 @@ public class Utils {
                         + "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
             }
             //If something failed because the recipe errored, return that we did handle it so that we don't try to handle it later
-            // as there is a 99% chance it will just fail again anyways
+            // as there is a 99% chance it will just fail again anyway
             return true;
         }
-        ingredientMap.addIngredient(NSSItem.createItem(stack), stack.getCount());
+        ingredientMap.mergeInt(NSSItem.createItem(stack), stack.getCount(), Constants.INT_SUM);
         return false;
     }
 
-    public static boolean addIngredient(IngredientMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
-        ingredientMap.addIngredient(NSSFluid.createFluid(stack), stack.getAmount());
+    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
+        ingredientMap.put(NSSFluid.createFluid(stack), stack.getAmount());
         return true;
     }
 
@@ -276,11 +280,11 @@ public class Utils {
                 outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
                 totalOutputs += fluid.getAmount();
             } else {
-                PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
+                PEIntegration.LOGGER.warn("Recipe ({}) has unsupported outputs: {}. Skipping...", recipeID, output);
             }
         }
 
-        NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).getA();
+        NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
 
         for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
             mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, entry.getValue()));
@@ -314,7 +318,7 @@ public class Utils {
             }
         }
 
-        NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).getA();
+        NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
 
         for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
             mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, 1));
@@ -353,7 +357,7 @@ public class Utils {
      * @param dummy
      * @return
      */
-    public static Map<NormalizedSimpleStack, Integer> getDummyMap(NormalizedSimpleStack dummy) {
+    public static Object2IntMap<NormalizedSimpleStack> getDummyMap(NormalizedSimpleStack dummy) {
         return getDummyMap(dummy, 1);
     }
 
@@ -361,10 +365,10 @@ public class Utils {
      * @param dummy
      * @return
      */
-    public static Map<NormalizedSimpleStack, Integer> getDummyMap(NormalizedSimpleStack dummy, int amount) {
-        IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-        ingredientMap.addIngredient(dummy, amount);
-        return ingredientMap.getMap();
+    public static Object2IntMap<NormalizedSimpleStack> getDummyMap(NormalizedSimpleStack dummy, int amount) {
+        Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+        ingredientMap.put(dummy, amount);
+        return ingredientMap;
     }
 
     public static <CLZ> Field getField(Class<CLZ> clazz, String fieldName)
@@ -381,17 +385,17 @@ public class Utils {
         }
     }
 
-    public static boolean addBlockToIngredientMap(IngredientMap<NormalizedSimpleStack> ingredientMap, Block block) {
+    public static boolean addBlockToIngredientMap(Object2IntMap<NormalizedSimpleStack> ingredientMap, Block block) {
         NormalizedSimpleStack nss = getNSSFromBlock(block);
         if (nss == null) return false;
-        int amount = block instanceof IFluidBlock ? 1000 : 1;
-        ingredientMap.addIngredient(nss, amount);
+        int amount = block instanceof LiquidBlock ? 1000 : 1;
+        ingredientMap.put(nss, amount);
         return true;
     }
 
     public static NormalizedSimpleStack getNSSFromBlock(Block block) {
-        if (block instanceof IFluidBlock) {
-            return NSSFluid.createFluid(((IFluidBlock) block).getFluid());
+        if (block instanceof LiquidBlock liquidBlock) {
+            return NSSFluid.createFluid(liquidBlock.fluid);
         } else {
             if (block.asItem() == Items.AIR) return null;
             return NSSItem.createItem(block);

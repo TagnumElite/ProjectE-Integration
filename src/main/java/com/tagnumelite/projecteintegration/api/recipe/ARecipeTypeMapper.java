@@ -25,17 +25,20 @@ package com.tagnumelite.projecteintegration.api.recipe;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.IRecipeTypeMapper;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -55,14 +58,14 @@ import java.util.List;
  */
 //* For an example on how to handle recipes with multiple outputs, look at {@link ImmersiveEngineeringAddon}
 public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipeMapper<R> implements IRecipeTypeMapper {
-
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Recipe<?> recipe, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
+    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, RecipeHolder<?> recipeHolder, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
         this.registryAccess = registryAccess;
-        recipeID = recipe.getId();
+        recipeID = recipeHolder.id();
+        Recipe<?> recipe = recipeHolder.value();
         try {
             return convertRecipe((R) recipe);
         } catch (ClassCastException e) {
@@ -106,8 +109,8 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
         }
 
         // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-        List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-        IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+        Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
 
         for (Ingredient ingredient : ingredients) {
             if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
@@ -128,5 +131,10 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
             return recipeTypeMapperAnnotation.requiredMods();
         }
         return null;
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "mapping." + PEIntegration.MODID + ".mapper." + getName().toLowerCase();
     }
 }

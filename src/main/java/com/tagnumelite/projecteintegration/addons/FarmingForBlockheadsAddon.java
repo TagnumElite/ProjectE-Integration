@@ -22,38 +22,43 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.google.common.collect.Lists;
-import com.tagnumelite.projecteintegration.api.recipe.ACustomRecipeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.CustomRecipeMapper;
-import net.blay09.mods.farmingforblockheads.api.IMarketEntry;
-import net.blay09.mods.farmingforblockheads.registry.MarketRegistry;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
+import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
+import moze_intel.projecte.api.nss.NormalizedSimpleStack;
+import net.blay09.mods.farmingforblockheads.api.Payment;
+import net.blay09.mods.farmingforblockheads.recipe.MarketRecipe;
+import net.blay09.mods.farmingforblockheads.recipe.ModRecipes;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.crafting.RecipeType;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FarmingForBlockheadsAddon {
-    @CustomRecipeMapper("farmingforblockheads")
-    public static class FFBMarketMapper extends ACustomRecipeMapper<IMarketEntry> {
+    @RecipeTypeMapper(requiredMods = "farmingforblockheads", priority = 1)
+    public static class FFBMarketMapper extends ARecipeTypeMapper<MarketRecipe> {
         @Override
-        public List<IMarketEntry> getRecipes() {
-            return Lists.newArrayList(MarketRegistry.getEntries().iterator());
-        }
+        public NSSInput getInput(MarketRecipe recipe) {
+            Payment payment = recipe.getPaymentOrDefault();
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-        @Override
-        protected List<Ingredient> getIngredients(IMarketEntry recipe) {
-            return Collections.singletonList(Ingredient.of(recipe.getCostItem()));
-        }
+            convertIngredient(payment.count(), payment.ingredient(), ingMap, fakeGroupMap);
 
-        @Override
-        protected ItemStack getResult(IMarketEntry recipe) {
-            return recipe.getOutputItem();
+            return new NSSInput(ingMap, fakeGroupMap, true);
         }
 
         @Override
         public String getName() {
             return "FarmingForBlockheadsMarketMapper";
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipes.marketRecipeType;
         }
     }
 }

@@ -99,9 +99,9 @@ public class NaturesAuraAddon {
         @Override
         protected List<Ingredient> getIngredients(TreeRitualRecipe recipe) { // TODO: Token of ____ seems to be broken...
             // TODO: Find out why tokens are being trash, I suspect it the the aura bottles not playing nice!
-            ArrayList<Ingredient> ingredients = new ArrayList<>(recipe.ingredients.length + 17);
+            ArrayList<Ingredient> ingredients = new ArrayList<>(recipe.ingredients.size() + 17);
             ingredients.add(recipe.saplingType);
-            ingredients.addAll(List.of(recipe.ingredients));
+            ingredients.addAll(recipe.ingredients);
             ingredients.addAll(Collections.nCopies(16, Ingredient.of(ModBlocks.GOLD_POWDER)));
             return ingredients;
         }

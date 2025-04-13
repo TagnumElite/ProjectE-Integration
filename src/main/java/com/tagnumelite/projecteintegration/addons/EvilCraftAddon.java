@@ -26,11 +26,13 @@ import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
+import moze_intel.projecte.utils.Constants;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -63,11 +65,11 @@ public class EvilCraftAddon {
 
         @Override
         public NSSInput getInput(RecipeBloodInfuser recipe) {
-            IngredientMap<NormalizedSimpleStack> ingMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-            convertIngredient(recipe.getInputIngredient(), ingMap, fakeGroupMap);
-            ingMap.addIngredient(NSSFluid.createFluid(recipe.getInputFluid().getFluid()), recipe.getInputFluid().getAmount());
+            convertIngredient(recipe.getInputIngredient().get(), ingMap, fakeGroupMap);
+            ingMap.mergeInt(NSSFluid.createFluid(recipe.getInputFluid().get()), recipe.getInputFluid().get().getAmount(), Constants.INT_SUM);
             return new NSSInput(ingMap, fakeGroupMap, true);
         }
     }
@@ -95,8 +97,7 @@ public class EvilCraftAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Default conversions for EvilCraft")
-                    .before(RegistryEntries.FLUID_BLOOD.getSource(), 1)
-                    .before(RegistryEntries.FLUID_BLOOD.getFlowing(), 1);
+                    .before(RegistryEntries.FLUID_BLOOD.get(), 1);
         }
     }
 }
