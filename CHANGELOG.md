@@ -7,14 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - EMC to some ingots
+- EMC to [EvilCraft] items that were missing EMC
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
-- Fixed [Alchemistry] Mappers to actually have inputs
+- The following mappers have been updated and fix
+  - [EvilCraft]
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
+  - [Applied Energistics]
+  - [Ars Nouveau]
+  - [Chipped]
+  - [Corail Woodcutter]
+  - [Create]
+  - [Extended Crafting]
+  - [Farmers Delight]
+  - [Farming For Blockheads]
+  - [Immersive Engineering]
+  - [Industrial Foregoing]
+  - [Mystical Agriculture]
+  - [Natures Aura]
+  - [Occultism]
+  - [PneumaticCraft: Repressurized]
 
 ### Removed
 
@@ -816,12 +832,14 @@ Added support for 18 more mods
 [Botania]: https://www.curseforge.com/minecraft/mc-mods/botania
 [Chipped]: https://www.curseforge.com/minecraft/mc-mods/chipped
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
+[Corail Woodcutter]: https://www.curseforge.com/minecraft/mc-mods/corail-woodcutter
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
+[Farming For Blockheads]: https://www.curseforge.com/minecraft/mc-mods/farming-for-blockheads
 [Ice and Fire]: https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing

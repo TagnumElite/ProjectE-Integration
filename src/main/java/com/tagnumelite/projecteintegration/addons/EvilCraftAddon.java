@@ -33,7 +33,10 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import moze_intel.projecte.utils.Constants;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.cyclops.evilcraft.RegistryEntries;
@@ -60,7 +63,7 @@ public class EvilCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RegistryEntries.RECIPETYPE_BLOOD_INFUSER;
+            return recipeType == RegistryEntries.RECIPETYPE_BLOOD_INFUSER.get();
         }
 
         @Override
@@ -69,7 +72,8 @@ public class EvilCraftAddon {
             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
             convertIngredient(recipe.getInputIngredient().get(), ingMap, fakeGroupMap);
-            ingMap.mergeInt(NSSFluid.createFluid(recipe.getInputFluid().get()), recipe.getInputFluid().get().getAmount(), Constants.INT_SUM);
+            // We divide the value by ten otherwise blood will add too much EMC
+            ingMap.mergeInt(NSSFluid.createFluid(recipe.getInputFluid().get()), recipe.getInputFluid().get().getAmount() / 10, Constants.INT_SUM);
             return new NSSInput(ingMap, fakeGroupMap, true);
         }
     }
@@ -83,7 +87,7 @@ public class EvilCraftAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == RegistryEntries.RECIPETYPE_ENVIRONMENTAL_ACCUMULATOR;
+            return recipeType == RegistryEntries.RECIPETYPE_ENVIRONMENTAL_ACCUMULATOR.get();
         }
 
         @Override
@@ -94,10 +98,25 @@ public class EvilCraftAddon {
 
     @ConversionProvider(MODID)
     public static class ECConversionProvider extends AConversionProvider {
+        private static final Item ITEM_VENGEANCE_ESSENCE;
+        private static final Item ITEM_ENDER_TEAR;
+
+        static {
+            ITEM_VENGEANCE_ESSENCE = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "vengeance_essence"));
+            ITEM_ENDER_TEAR = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "ender_tear"));
+        }
+
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Default conversions for EvilCraft")
-                    .before(RegistryEntries.FLUID_BLOOD.get(), 1);
+                    .before(RegistryEntries.FLUID_BLOOD.get(), 1)
+                    .before(RegistryEntries.ITEM_POISON_SAC.get(), 16)
+                    .before(RegistryEntries.ITEM_DARK_GEM.get(), 64)
+                    .before(RegistryEntries.ITEM_WEREWOLF_BONE.get(), 144)
+                    .before(ITEM_VENGEANCE_ESSENCE, 512)
+                    .before(ITEM_ENDER_TEAR, 1024)
+                    .conversion(RegistryEntries.BLOCK_HARDENED_BLOOD.get()).ingredient(RegistryEntries.FLUID_BLOOD.get(), 1000).end()
+                    .conversion(RegistryEntries.ITEM_DARK_GEM_CRUSHED.get()).ingredient(RegistryEntries.ITEM_DARK_GEM.get()).end();
         }
     }
 }
