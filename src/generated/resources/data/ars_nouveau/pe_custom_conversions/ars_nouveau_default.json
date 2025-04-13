@@ -1,33 +1,79 @@
 {
   "comment": "Default conversions for Ars Nouveau",
   "values": {
-    "before": {
-      "ars_nouveau:experience_gem": 16,
-      "ars_nouveau:whirlisprig_shards": 16,
-      "ars_nouveau:wilden_horn": 96,
-      "ars_nouveau:wilden_spike": 64,
-      "ars_nouveau:wilden_tribute": 96,
-      "ars_nouveau:wilden_wing": 72,
-      "ars_nouveau:wixie_shards": 32
-    },
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "ars_nouveau:experience_gem"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "ars_nouveau:wilden_spike"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96,
+        "id": "ars_nouveau:wilden_horn"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "ars_nouveau:wixie_shards"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "ars_nouveau:whirlisprig_shards"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 72,
+        "id": "ars_nouveau:wilden_wing"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96,
+        "id": "ars_nouveau:wilden_tribute"
+      }
+    ],
     "conversion": [
       {
         "ingredients": [
-          "ars_nouveau:magebloom_crop"
+          {
+            "type": "projecte:item",
+            "id": "ars_nouveau:magebloom_crop"
+          }
         ],
-        "output": "ars_nouveau:magebloom"
+        "output": {
+          "type": "projecte:item",
+          "id": "ars_nouveau:magebloom"
+        }
       },
       {
         "ingredients": [
-          "ars_nouveau:wilden_horn"
+          {
+            "type": "projecte:item",
+            "id": "ars_nouveau:wilden_horn"
+          }
         ],
-        "output": "ars_nouveau:drygmy_shard"
+        "output": {
+          "type": "projecte:item",
+          "id": "ars_nouveau:drygmy_shard"
+        }
       },
       {
         "ingredients": [
-          "minecraft:gold_nugget"
+          {
+            "type": "projecte:item",
+            "id": "minecraft:gold_nugget"
+          }
         ],
-        "output": "ars_nouveau:starbuncle_shards"
+        "output": {
+          "type": "projecte:item",
+          "id": "ars_nouveau:starbuncle_shards"
+        }
       }
     ]
   }

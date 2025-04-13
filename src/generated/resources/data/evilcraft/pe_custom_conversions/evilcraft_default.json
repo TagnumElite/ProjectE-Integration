@@ -1,9 +1,12 @@
 {
   "comment": "Default conversions for EvilCraft",
   "values": {
-    "before": {
-      "FLUID|evilcraft:blood": 1,
-      "FLUID|evilcraft:blood_flowing": 1
-    }
+    "before": [
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "evilcraft:blood"
+      }
+    ]
   }
 }

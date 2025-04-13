@@ -1,10 +1,26 @@
 {
   "values": {
-    "before": {
-      "#forge:ingots/cobalt": 412,
-      "#forge:ingots/tungsten": 356,
-      "#forge:ingots/zinc": 128,
-      "FLUID|minecraft:water": 1
-    }
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "tag": "forge:ingots/zinc"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 412,
+        "tag": "forge:ingots/cobalt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 356,
+        "tag": "forge:ingots/tungsten"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "minecraft:water"
+      }
+    ]
   }
 }

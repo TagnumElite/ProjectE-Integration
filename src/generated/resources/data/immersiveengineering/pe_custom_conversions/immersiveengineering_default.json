@@ -1,31 +1,72 @@
 {
   "comment": "default conversions for immersive engineering",
   "values": {
-    "before": {
-      "#forge:dusts/nitrate": 8,
-      "#forge:dusts/sulfur": 8,
-      "#forge:dusts/wood": 1,
-      "#forge:fiber_hemp": 4,
-      "#forge:ingots/hop_graphite": 12
-    },
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "tag": "forge:fiber_hemp"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "forge:dusts/wood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "tag": "forge:dusts/sulfur"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "tag": "forge:dusts/nitrate"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "tag": "forge:ingots/hop_graphite"
+      }
+    ],
     "conversion": [
       {
-        "ingredients": {
-          "#minecraft:planks": 8
-        },
-        "output": "immersiveengineering:treated_wood_horizontal"
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_horizontal"
+        }
       },
       {
-        "ingredients": {
-          "#minecraft:planks": 8
-        },
-        "output": "immersiveengineering:treated_wood_vertical"
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_vertical"
+        }
       },
       {
-        "ingredients": {
-          "#minecraft:planks": 8
-        },
-        "output": "immersiveengineering:treated_wood_packaged"
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_packaged"
+        }
       }
     ]
   }

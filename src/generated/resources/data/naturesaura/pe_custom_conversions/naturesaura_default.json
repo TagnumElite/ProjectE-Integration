@@ -1,16 +1,30 @@
 {
   "comment": "Default conversions for Natures Aura",
   "values": {
-    "before": {
-      "naturesaura:end_flower": 32,
-      "naturesaura:gold_leaf": 2
-    },
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 2,
+        "id": "naturesaura:gold_leaf"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "naturesaura:end_flower"
+      }
+    ],
     "conversion": [
       {
         "ingredients": [
-          "naturesaura:bottle_two_the_rebottling"
+          {
+            "type": "projecte:item",
+            "id": "naturesaura:bottle_two_the_rebottling"
+          }
         ],
-        "output": "naturesaura:aura_bottle"
+        "output": {
+          "type": "projecte:item",
+          "id": "naturesaura:aura_bottle"
+        }
       }
     ]
   }

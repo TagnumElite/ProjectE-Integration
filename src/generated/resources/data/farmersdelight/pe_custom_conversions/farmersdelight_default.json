@@ -1,16 +1,57 @@
 {
   "comment": "Set defaults conversions for Farmer's Delight",
   "values": {
-    "before": {
-      "#forge:crops/cabbage": 32,
-      "#forge:crops/onion": 32,
-      "#forge:crops/rice": 1,
-      "#forge:crops/tomato": 32,
-      "farmersdelight:brown_mushroom_colony": 32,
-      "farmersdelight:ham": 64,
-      "farmersdelight:red_mushroom_colony": 32,
-      "farmersdelight:rice_panicle": 1,
-      "farmersdelight:straw": 1
-    }
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "farmersdelight:rice_panicle"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "farmersdelight:straw"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:crops/rice"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:crops/grain"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "c:crops/tomato"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "c:crops/onion"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "c:crops/cabbage"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "farmersdelight:ham"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "farmersdelight:brown_mushroom_colony"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "farmersdelight:red_mushroom_colony"
+      }
+    ]
   }
 }
