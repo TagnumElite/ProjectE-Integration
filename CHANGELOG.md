@@ -8,16 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - EMC to some ingots
 - EMC to [EvilCraft] items that were missing EMC
+- EMC to [Applied Energistics] Sky Stone
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
 - The following mappers have been updated and fix
+  - [Applied Energistics]
   - [EvilCraft]
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
-  - [Applied Energistics]
   - [Ars Nouveau]
   - [Chipped]
   - [Corail Woodcutter]
