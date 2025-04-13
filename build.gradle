@@ -153,6 +153,7 @@ dependencies {
     // ======================= [ Runtime Mods ] =======================
 //    implementation "smashingmods:alchemylib:${version_alchemylib}"
 //    localRuntime "curse.maven:alltheores-405593:${version_alltheores}"
+    localRuntime "curse.maven:ae-jei-1074338:${version_ae_jei}"
     localRuntime "dev.architectury:architectury-neoforge:${version_architectury}"
     localRuntime "curse.maven:athena-841890:${version_athena}"
     localRuntime "curse.maven:balm-531761:${version_balm}"
