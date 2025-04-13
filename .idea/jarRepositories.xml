@@ -126,5 +126,30 @@
       <option name="name" value="SmartBrainLib" />
       <option name="url" value="https://dl.cloudsmith.io/public/tslat/sbl/maven/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Mojang Meta" />
+      <option name="name" value="Mojang Meta" />
+      <option name="url" value="https://maven.neoforged.net/mojang-meta/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenLocal" />
+      <option name="name" value="MavenLocal" />
+      <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="BlakeBr0" />
+      <option name="name" value="BlakeBr0" />
+      <option name="url" value="https://maven.blakesmods.com/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Create" />
+      <option name="name" value="Create" />
+      <option name="url" value="https://maven.createmod.net" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="NovaMachina" />
+      <option name="name" value="NovaMachina" />
+      <option name="url" value="https://dl.cloudsmith.io/public/novamachina-mods/release/maven/" />
+    </remote-repository>
   </component>
 </project>

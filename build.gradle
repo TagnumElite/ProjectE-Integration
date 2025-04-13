@@ -323,6 +323,15 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+        // maven.tagnumelite.com
+        maven {
+            name = "TagnumEliteMaven"
+            url = "https://maven.tagnumelite.com/releases"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
     }
 }
 
