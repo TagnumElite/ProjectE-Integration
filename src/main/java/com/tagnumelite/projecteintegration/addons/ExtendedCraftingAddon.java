@@ -62,10 +62,7 @@ public class ExtendedCraftingAddon {
 
         @Override
         public NSSInput getInput(ICompressorRecipe recipe) {
-            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
-            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            convertIngredient(recipe.getCount(0), recipe.getIngredients().getFirst(), ingredientMap, fakeGroupMap);
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return convertSingleIngredient(recipe.getCount(0), recipe.getIngredients().getFirst());
         }
     }
 

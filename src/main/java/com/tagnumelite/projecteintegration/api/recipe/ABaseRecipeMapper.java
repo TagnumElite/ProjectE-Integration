@@ -132,6 +132,21 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     }
 
     /**
+     *
+     * @param amount
+     * @param ingredient
+     * @return
+     */
+    protected NSSInput convertSingleIngredient(int amount, Ingredient ingredient) {
+        Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+
+        boolean successful = convertIngredient(amount, ingredient, ingMap, fakeGroupMap);
+
+        return new NSSInput(ingMap, fakeGroupMap, successful);
+    }
+
+    /**
      * @param ingredient
      * @param ingredientMap
      * @param fakeGroupMap

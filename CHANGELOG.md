@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EMC to [Applied Energistics] Sky Stone
 - EMC to [Ars Nouveau] shady fruits
 - EMC to milk fluid and milk food tags
+- Utility method to ABaseRecipeMapper to convert a single ingredient
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
@@ -23,12 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [EvilCraft]
   - [Extended Crafting] also added Flux Crafter mapper
   - [Farmers Delight] also now we don't include chanced objects in the cutting board
+  - [Farming For Blockheads]
 - Tags for ingots have changed from `forge:` to `c:`
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
-  - [Farming For Blockheads]
   - [Immersive Engineering]
   - [Industrial Foregoing]
   - [Mystical Agriculture]

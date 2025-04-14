@@ -24,18 +24,11 @@ package com.tagnumelite.projecteintegration.addons;
 
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.blay09.mods.farmingforblockheads.api.Payment;
 import net.blay09.mods.farmingforblockheads.recipe.MarketRecipe;
 import net.blay09.mods.farmingforblockheads.recipe.ModRecipes;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.RecipeType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FarmingForBlockheadsAddon {
     @RecipeTypeMapper(requiredMods = "farmingforblockheads", priority = 1)
@@ -43,12 +36,7 @@ public class FarmingForBlockheadsAddon {
         @Override
         public NSSInput getInput(MarketRecipe recipe) {
             Payment payment = recipe.getPaymentOrDefault();
-            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
-            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-
-            convertIngredient(payment.count(), payment.ingredient(), ingMap, fakeGroupMap);
-
-            return new NSSInput(ingMap, fakeGroupMap, true);
+            return convertSingleIngredient(payment.count(), payment.ingredient());
         }
 
         @Override
