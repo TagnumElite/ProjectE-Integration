@@ -4,17 +4,17 @@
       {
         "type": "projecte:item",
         "emc_value": 128,
-        "tag": "forge:ingots/zinc"
+        "tag": "c:ingots/zinc"
       },
       {
         "type": "projecte:item",
         "emc_value": 412,
-        "tag": "forge:ingots/cobalt"
+        "tag": "c:ingots/cobalt"
       },
       {
         "type": "projecte:item",
         "emc_value": 356,
-        "tag": "forge:ingots/tungsten"
+        "tag": "c:ingots/tungsten"
       },
       {
         "type": "projecte:fluid",

@@ -51,7 +51,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     }
 
     private static NormalizedSimpleStack gemTag(String gem) {
-        return tag("forge:gems/" + gem);
+        return tag("c:gems/" + gem);
     }
 
     private static NormalizedSimpleStack tag(String tag) {
@@ -60,7 +60,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     // BELOW COPIED FROM: https://github.com/sinkillerj/ProjectE/blob/c0e58894bddef8c090c39dd29143e08932022833/src/datagen/java/moze_intel/projecte/common/PECustomConversionProvider.java#L279-L290
     private static NormalizedSimpleStack ingotTag(String ingot) {
-        return tag("forge:ingots/" + ingot);
+        return tag("c:ingots/" + ingot);
     }
 
     private Map<AConversionProvider, String> getConversionProviders() {

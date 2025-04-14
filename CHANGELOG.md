@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Chipped]
   - [Corail Woodcutter]
   - [EvilCraft]
+- Tags for ingots have changed from `forge:` to `c:`
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
