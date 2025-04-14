@@ -31,6 +31,7 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.world.item.crafting.RecipeType;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -73,7 +74,7 @@ public class FarmersDelightAddon {
 
         @Override
         public NSSOutput getOutput(CuttingBoardRecipe recipe) {
-            return mapOutputs(recipe.getResults().toArray());
+            return mapOutputs(recipe.getRollableResults().stream().filter(r -> r.chance() >= 1f).map(ChanceResult::stack).toArray());
         }
     }
 

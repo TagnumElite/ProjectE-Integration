@@ -5,6 +5,11 @@
         "type": "projecte:fluid",
         "emc_value": 1,
         "id": "minecraft:milk"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "tag": "minecraft:foods/milk"
       }
     ]
   }

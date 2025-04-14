@@ -102,7 +102,8 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
                 .before(new FluidStack(Fluids.WATER, 250), 1);
 
         createConversionBuilder(PEIntegration.RL("pei_fluids"))
-                .before(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1);
+                .before(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1)
+                .before(tag("foods/milk"), 16);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(), entry.getValue() + "_default");
