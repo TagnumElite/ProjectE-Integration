@@ -39,6 +39,7 @@ import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
+import com.simibubi.create.content.processing.sequenced.SequencedRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -59,7 +60,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.*;
 
-// TODO: Can you see this below, maybe not gut.
 public class CreateAddon {
     public static final String MODID = "create";
 
@@ -67,7 +67,7 @@ public class CreateAddon {
         return "Create" + name + "Mapper";
     }
 
-    private abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
+    public abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
         @Override
         public NSSInput getInput(R recipe) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
@@ -148,7 +148,7 @@ public class CreateAddon {
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
-            if (outputs.size() == 0) return NSSOutput.EMPTY;
+            if (outputs.isEmpty()) return NSSOutput.EMPTY;
             return mapOutputs(outputs.toArray());
         }
     }
@@ -343,13 +343,40 @@ public class CreateAddon {
 
         @Override
         protected List<Ingredient> getIngredients(SequencedAssemblyRecipe recipe) {
-            return Collections.singletonList(recipe.getIngredient());
+            final int loops = recipe.getLoops();
+            final List<Ingredient> ingredients = new ArrayList<>(loops * recipe.getSequence().size());
+            ingredients.add(recipe.getIngredient());
+
+            int i = 0;
+            for (SequencedRecipe<?> step : recipe.getSequence()) {
+                final ProcessingRecipe<?> stepRecipe = step.getRecipe();
+                final List<Ingredient> stepIngredients = new ArrayList<>(stepRecipe.getIngredients());
+
+                // TODO: use fluids from stepRecipe.getFluidIngredients();
+
+                // We skip the first ingredient because it is the input from the previous step
+                stepIngredients.removeFirst();
+                // We ignore steps with one ingredient because it doesn't add anything else
+                if (stepIngredients.isEmpty()) continue;
+
+                if (loops == 1) {
+                    ingredients.addAll(stepIngredients);
+                } else {
+                    for (Ingredient ingredient : stepIngredients) {
+                        ingredients.addAll(Collections.nCopies(loops, ingredient));
+                    }
+                }
+
+                i++;
+            }
+
+            return ingredients;
         }
 
         @Override
         public NSSOutput getOutput(SequencedAssemblyRecipe recipe) {
-            // TODO: Add support for mapOutput multiple items with 100% chance
-            if (recipe.getOutputChance() != 1f) return null;
+            // We include recipes with reduced output chance
+            //if (recipe.getOutputChance() < 1f) return null;
 
             ItemStack output = recipe.getResultItem(registryAccess);
             if (output.isEmpty()) return null;

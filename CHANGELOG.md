@@ -19,13 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Ars Nouveau]
   - [Chipped]
   - [Corail Woodcutter]
+  - [Create] also fixed inputs on sequenced assembly.
   - [EvilCraft]
 - Tags for ingots have changed from `forge:` to `c:`
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
-  - [Create]
   - [Extended Crafting]
   - [Farmers Delight]
   - [Farming For Blockheads]
