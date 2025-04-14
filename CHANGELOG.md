@@ -21,12 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Corail Woodcutter]
   - [Create] also fixed inputs on sequenced assembly.
   - [EvilCraft]
+  - [Extended Crafting] also added Flux Crafter mapper
 - Tags for ingots have changed from `forge:` to `c:`
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
-  - [Extended Crafting]
   - [Farmers Delight]
   - [Farming For Blockheads]
   - [Immersive Engineering]

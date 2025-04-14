@@ -23,14 +23,18 @@
 package com.tagnumelite.projecteintegration.addons;
 
 import com.blakebr0.extendedcrafting.api.crafting.ICompressorRecipe;
+import com.blakebr0.extendedcrafting.api.crafting.IEnderCrafterRecipe;
+import com.blakebr0.extendedcrafting.api.crafting.IFluxCrafterRecipe;
+import com.blakebr0.extendedcrafting.api.crafting.ITableRecipe;
 import com.blakebr0.extendedcrafting.config.ModConfigs;
+import com.blakebr0.extendedcrafting.crafting.recipe.CombinationRecipe;
 import com.blakebr0.extendedcrafting.init.ModRecipeTypes;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import moze_intel.projecte.emc.mappers.recipe.BaseRecipeTypeMapper;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -58,23 +62,18 @@ public class ExtendedCraftingAddon {
 
         @Override
         public NSSInput getInput(ICompressorRecipe recipe) {
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            convertIngredient(recipe.getInputCount(), recipe.getIngredients().get(0), ingredientMap, fakeGroupMap);
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            convertIngredient(recipe.getCount(0), recipe.getIngredients().getFirst(), ingredientMap, fakeGroupMap);
             return new NSSInput(ingredientMap, fakeGroupMap, true);
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ECEnderCrafterMapper extends BaseRecipeTypeMapper {
+    public static class ECEnderCrafterMapper extends ARecipeTypeMapper<IEnderCrafterRecipe> {
         @Override
         public String getName() {
             return NAME("EnderCrafter");
-        }
-
-        @Override
-        public String getDescription() {
-            return "Maps extended crafting Ender Crafter recipes";
         }
 
         @Override
@@ -84,15 +83,23 @@ public class ExtendedCraftingAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ECTableMapper extends BaseRecipeTypeMapper {
+    public static class ECFluxCrafterMapper extends ARecipeTypeMapper<IFluxCrafterRecipe> {
         @Override
         public String getName() {
-            return NAME("Table");
+            return NAME("FluxCrafter");
         }
 
         @Override
-        public String getDescription() {
-            return "Maps Extended Crafting Table recipes";
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.FLUX_CRAFTER.get() && ModConfigs.ENABLE_FLUX_CRAFTER.get();
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class ECTableMapper extends ARecipeTypeMapper<ITableRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Table");
         }
 
         @Override
@@ -102,15 +109,10 @@ public class ExtendedCraftingAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ECCombinationMapper extends BaseRecipeTypeMapper {
+    public static class ECCombinationMapper extends ARecipeTypeMapper<CombinationRecipe> {
         @Override
         public String getName() {
             return NAME("Combination");
-        }
-
-        @Override
-        public String getDescription() {
-            return "Maps Extended Crafting Combination recipes";
         }
 
         @Override
