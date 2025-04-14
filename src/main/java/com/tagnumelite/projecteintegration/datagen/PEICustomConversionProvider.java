@@ -30,6 +30,7 @@ import moze_intel.projecte.api.data.CustomConversionProvider;
 import moze_intel.projecte.api.nss.NSSItem;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluids;
@@ -94,11 +95,14 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     @Override
     protected void addCustomConversions(HolderLookup.@NotNull Provider provider) {
-        createConversionBuilder(ResourceLocation.fromNamespaceAndPath(PEIntegration.MODID, "pei_metals"))
+        createConversionBuilder(PEIntegration.RL("pei_metals"))
                 .before(ingotTag("zinc"), 128)
                 .before(ingotTag("cobalt"), 412)
                 .before(ingotTag("tungsten"), 356)
                 .before(new FluidStack(Fluids.WATER, 250), 1);
+
+        createConversionBuilder(PEIntegration.RL("pei_fluids"))
+                .before(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(), entry.getValue() + "_default");

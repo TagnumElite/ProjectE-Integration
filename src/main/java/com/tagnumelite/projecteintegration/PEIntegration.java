@@ -2,6 +2,7 @@ package com.tagnumelite.projecteintegration;
 
 import com.tagnumelite.projecteintegration.api.recipe.PEIRecipeMapper;
 import moze_intel.projecte.config.ProjectEConfig;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,6 +25,10 @@ public class PEIntegration {
         } else {
             LOGGER.debug(msg, args);
         }
+    }
+
+    public static ResourceLocation RL(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

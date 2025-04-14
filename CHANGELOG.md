@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EMC to [EvilCraft] items that were missing EMC
 - EMC to [Applied Energistics] Sky Stone
 - EMC to [Ars Nouveau] shady fruits
+- EMC to milk fluid
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
