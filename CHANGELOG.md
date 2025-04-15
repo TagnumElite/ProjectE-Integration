@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Farmers Delight] also now we don't include chanced objects in the cutting board
   - [Farming For Blockheads]
 - Tags for ingots have changed from `forge:` to `c:`
+- Changed `forgeTag` to `commonTag`
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.

@@ -38,7 +38,7 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack dustTag(String dust) {
-        return forgeTag("dusts/" + dust);
+        return commonTag("dusts/" + dust);
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack ingotTag(String ingot) {
-        return forgeTag("ingots/" + ingot);
+        return commonTag("ingots/" + ingot);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack gemTag(String gem) {
-        return forgeTag("gems/" + gem);
+        return commonTag("gems/" + gem);
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack cropsTag(String crop) {
-        return forgeTag("crops/" + crop);
+        return commonTag("crops/" + crop);
     }
 
     /**
@@ -70,15 +70,15 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack grainTag(String grain) {
-        return forgeTag("grain/" + grain);
+        return commonTag("grain/" + grain);
     }
 
     /**
      * @param tag
      * @return
      */
-    protected static NormalizedSimpleStack forgeTag(String tag) {
-        return tag("forge:" + tag);
+    protected static NormalizedSimpleStack commonTag(String tag) {
+        return tag("c:" + tag);
     }
 
     /**

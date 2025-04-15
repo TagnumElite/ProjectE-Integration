@@ -307,7 +307,7 @@ public class ImmersiveEngineeringAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("default conversions for immersive engineering")
-                    .before(forgeTag("fiber_hemp"), 4)
+                    .before(commonTag("fiber_hemp"), 4)
                     .before(dustTag("wood"), 1)
                     .before(dustTag("sulfur"), 8)
                     .before(dustTag("nitrate"), 8)

@@ -5,27 +5,27 @@
       {
         "type": "projecte:item",
         "emc_value": 4,
-        "tag": "forge:fiber_hemp"
+        "tag": "c:fiber_hemp"
       },
       {
         "type": "projecte:item",
         "emc_value": 1,
-        "tag": "forge:dusts/wood"
+        "tag": "c:dusts/wood"
       },
       {
         "type": "projecte:item",
         "emc_value": 8,
-        "tag": "forge:dusts/sulfur"
+        "tag": "c:dusts/sulfur"
       },
       {
         "type": "projecte:item",
         "emc_value": 8,
-        "tag": "forge:dusts/nitrate"
+        "tag": "c:dusts/nitrate"
       },
       {
         "type": "projecte:item",
         "emc_value": 12,
-        "tag": "forge:ingots/hop_graphite"
+        "tag": "c:ingots/hop_graphite"
       }
     ],
     "conversion": [
