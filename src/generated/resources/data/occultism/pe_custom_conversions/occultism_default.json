@@ -1,0 +1,22 @@
+{
+  "comment": "default conversions for occultism",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "occultism:tallow"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "occultism:afrit_essence"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "tag": "c:ingots/iesnium"
+      }
+    ]
+  }
+}

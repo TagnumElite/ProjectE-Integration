@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Farming For Blockheads]
 - Tags for ingots have changed from `forge:` to `c:`
 - Changed `forgeTag` to `commonTag`
+- Default EMC conversions back to occultism
 
 ### Todo
 - Update support for all mappers and underlying classes to support new mappers.

@@ -26,8 +26,12 @@ import com.klikli_dev.occultism.crafting.recipe.CrushingRecipe;
 import com.klikli_dev.occultism.crafting.recipe.RitualRecipe;
 import com.klikli_dev.occultism.crafting.recipe.SpiritFireRecipe;
 import com.klikli_dev.occultism.crafting.recipe.SpiritTradeRecipe;
+import com.klikli_dev.occultism.registry.OccultismItems;
 import com.klikli_dev.occultism.registry.OccultismRecipes;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -103,14 +107,14 @@ public class OccultismAddon {
         }
     }
 
-    //@ConversionProvider(MODID)
-    //public static class OccultismConversionProvider extends AConversionProvider {
-    //    @Override
-    //    public void convert(CustomConversionBuilder builder) {
-    //        builder.comment("default conversions for occultism")
-    //                .before(OccultismItems.TALLOW.get(), 16)
-    //                .before(OccultismItems.AFRIT_ESSENCE.get(), 64)
-    //                .before(#forge:ingots/iesnium, 512);
-    //    }
-    //}
+    @ConversionProvider(MODID)
+    public static class OccultismConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("default conversions for occultism")
+                    .before(OccultismItems.TALLOW.get(), 16)
+                    .before(OccultismItems.AFRIT_ESSENCE.get(), 64)
+                    .before(ingotTag("iesnium"), 512);
+        }
+    }
 }
