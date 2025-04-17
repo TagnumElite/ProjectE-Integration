@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EMC to [Ars Nouveau] shady fruits
 - EMC to milk fluid and milk food tags
 - Utility method to ABaseRecipeMapper to convert a single ingredient
+- EMC to [Industrial Foregoing] Sludge, Essence, Pink Slime and Ether
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Extended Crafting] also added Flux Crafter mapper
   - [Farmers Delight] also now we don't include chanced objects in the cutting board
   - [Farming For Blockheads]
+  - [Industrial Foregoing] Dissolution chamber now take the fluid into consideration
 - Tags for ingots have changed from `forge:` to `c:`
 - Changed `forgeTag` to `commonTag`
 - Default EMC conversions back to occultism
@@ -33,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
   - [Immersive Engineering]
-  - [Industrial Foregoing]
   - [Mystical Agriculture]
   - [Natures Aura]
   - [Occultism]

@@ -38,6 +38,7 @@ import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -49,9 +50,6 @@ import java.util.List;
 
 public class IndustrialForegoingAddon {
     public static final String MODID = "industrialforegoing";
-    public static final RecipeType<CrusherRecipe> crusherRecipeType = (RecipeType<CrusherRecipe>) ModuleCore.CRUSHER_TYPE.get();
-    public static final RecipeType<DissolutionChamberRecipe> dissolutionChamberRecipeType = (RecipeType<DissolutionChamberRecipe>) ModuleCore.DISSOLUTION_TYPE.get();
-    public static final RecipeType<StoneWorkGenerateRecipe> stoneworkGenerateRecipeType = (RecipeType<StoneWorkGenerateRecipe>) ModuleCore.STONEWORK_GENERATE_TYPE.get();
 
     public static String NAME(String name) {
         return "IndustrialForegoing" + name + "Mapper";
@@ -66,7 +64,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == crusherRecipeType;
+            return recipeType == ModuleCore.CRUSHER_TYPE.get();
         }
 
         @Override
@@ -89,7 +87,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == dissolutionChamberRecipeType;
+            return recipeType == ModuleCore.DISSOLUTION_TYPE.get();
         }
 
         @Override
@@ -102,17 +100,18 @@ public class IndustrialForegoingAddon {
 
         @Override
         public NSSInput getInput(DissolutionChamberRecipe recipe) {
-            return super.getInput(recipe);
-        }
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
 
-        @Override
-        protected List<Ingredient> getIngredients(DissolutionChamberRecipe recipe) {
-            ArrayList<Ingredient> list = new ArrayList<>(recipe.input.size());
             for (Ingredient input : recipe.input) {
-                list.add(Ingredient.of(input.getItems()));
+                convertIngredient(Ingredient.of(input.getItems()), ingMap, fakeGroupData);
             }
-            // TODO: Fluid Input, Im too lazy for this now.
-            return list;
+
+            if (recipe.inputFluid != null) {
+                convertFluidIngredient(recipe.inputFluid.amount(), List.of(recipe.inputFluid.getFluids()), ingMap, fakeGroupData);
+            }
+
+            return new NSSInput(ingMap, fakeGroupData, true);
         }
     }
 
@@ -137,7 +136,7 @@ public class IndustrialForegoingAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == stoneworkGenerateRecipeType;
+            return recipeType == ModuleCore.STONEWORK_GENERATE_TYPE.get();
         }
 
         @Override
@@ -174,6 +173,10 @@ public class IndustrialForegoingAddon {
             builder.comment("Sets default conversions for Industrial Foregoing")
                     .before(ModuleCore.SEWAGE.getSourceFluid().get(), 1)
                     .before(ModuleCore.DRY_RUBBER.get(), 12)
+                    .before(ModuleCore.SLUDGE.getSourceFluid().get(), 1)
+                    .before(ModuleCore.ESSENCE.getSourceFluid().get(), 1)
+                    .before(ModuleCore.PINK_SLIME_ITEM.get(), 16)
+                    .before(ModuleCore.ETHER.getSourceFluid().get(), 1)
                     .conversion(ModuleCore.LATEX.getSourceFluid().get(), 1600).ingredient(ItemTags.LOGS).end()
                     .conversion(ModuleCore.FERTILIZER.get()).ingredient(ModuleCore.SEWAGE.getSourceFluid().get(), 1000).end();
             //.conversion(ModuleCore.TINY_DRY_RUBBER).ingredient(Fluids.WATER, 500).ingredient(ModuleCore.LATEX.getSourceFluid(), 100).end();

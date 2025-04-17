@@ -11,6 +11,26 @@
         "type": "projecte:item",
         "emc_value": 12,
         "id": "industrialforegoing:dryrubber"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:sludge"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:essence"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialforegoing:pink_slime"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:ether_gas"
       }
     ],
     "conversion": [
