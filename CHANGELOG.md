@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EMC to milk fluid and milk food tags
 - Utility method to ABaseRecipeMapper to convert a single ingredient
 - EMC to [Industrial Foregoing] Sludge, Essence, Pink Slime and Ether
+- EMC to [Mystical Agriculture] Cognizant Dust
+- Utility `convertItemStack` to Base Mapper class
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Farmers Delight] also now we don't include chanced objects in the cutting board
   - [Farming For Blockheads]
   - [Industrial Foregoing] Dissolution chamber now take the fluid into consideration
+  - [Mystical Agriculture] also added awakening recipe mapper
 - Tags for ingots have changed from `forge:` to `c:`
 - Changed `forgeTag` to `commonTag`
 - Default EMC conversions back to occultism
@@ -35,7 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
   - [Immersive Engineering]
-  - [Mystical Agriculture]
   - [Natures Aura]
   - [Occultism]
   - [PneumaticCraft: Repressurized]

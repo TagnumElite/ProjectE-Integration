@@ -35,6 +35,7 @@ import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 
@@ -132,7 +133,6 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     }
 
     /**
-     *
      * @param amount
      * @param ingredient
      * @return
@@ -144,6 +144,11 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         boolean successful = convertIngredient(amount, ingredient, ingMap, fakeGroupMap);
 
         return new NSSInput(ingMap, fakeGroupMap, successful);
+    }
+
+    protected boolean convertItemStack(ItemStack stack, Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                       List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
+        return convertIngredient(stack.getCount(), Ingredient.of(stack), ingredientMap, fakeGroupMap);
     }
 
     /**
