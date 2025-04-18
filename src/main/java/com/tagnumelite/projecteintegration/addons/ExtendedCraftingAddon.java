@@ -31,15 +31,8 @@ import com.blakebr0.extendedcrafting.crafting.recipe.CombinationRecipe;
 import com.blakebr0.extendedcrafting.init.ModRecipeTypes;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.RecipeType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExtendedCraftingAddon {
     public static final String MODID = "extendedcrafting";
