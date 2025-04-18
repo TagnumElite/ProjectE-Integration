@@ -33,10 +33,12 @@ import de.ellpeck.naturesaura.recipes.OfferingRecipe;
 import de.ellpeck.naturesaura.recipes.TreeRitualRecipe;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -97,12 +99,35 @@ public class NaturesAuraAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(TreeRitualRecipe recipe) { // TODO: Token of ____ seems to be broken...
-            // TODO: Find out why tokens are being trash, I suspect it the the aura bottles not playing nice!
+        protected List<Ingredient> getIngredients(TreeRitualRecipe recipe) {
             ArrayList<Ingredient> ingredients = new ArrayList<>(recipe.ingredients.size() + 17);
             ingredients.add(recipe.saplingType);
-            ingredients.addAll(recipe.ingredients);
-            ingredients.addAll(Collections.nCopies(16, Ingredient.of(ModBlocks.GOLD_POWDER)));
+
+            // This long-winded method is to change aura_bottles to corked bottles because of problems
+            // with aura bottles data components prevent emc to be pass down.
+            for (Ingredient ingredient : recipe.ingredients) {
+                ItemStack[] stackItems = ingredient.getItems();
+
+                if (Arrays.stream(stackItems).anyMatch(s -> s.getItem() == ModItems.AURA_BOTTLE)) {
+                    List<ItemStack> items = new ArrayList<>(stackItems.length);
+
+                    for (ItemStack stack : stackItems) {
+                        if (stack.getItem() == ModItems.AURA_BOTTLE)  {
+                            items.add(new ItemStack(ModItems.BOTTLE_TWO_THE_REBOTTLING));
+                        } else {
+                            items.add(stack);
+                        }
+                    }
+
+                    ingredients.add(Ingredient.of(items.toArray(new ItemStack[]{})));
+                } else {
+                    ingredients.add(ingredient);
+                }
+            }
+
+            Ingredient goldPowderIng = Ingredient.of(ModBlocks.GOLD_POWDER);
+            ingredients.addAll(Collections.nCopies(16, goldPowderIng));
+
             return ingredients;
         }
     }

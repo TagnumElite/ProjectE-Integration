@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Farming For Blockheads]
   - [Industrial Foregoing] Dissolution chamber now take the fluid into consideration
   - [Mystical Agriculture] also added awakening recipe mapper
+  - [Natures Aura] also fixed the problem with the ritual passing down emc through aura bottles
 - Tags for ingots have changed from `forge:` to `c:`
 - Changed `forgeTag` to `commonTag`
 - Default EMC conversions back to occultism
@@ -38,7 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update support for all mappers and underlying classes to support new mappers.
 - Insure all mappers are working right
   - [Immersive Engineering]
-  - [Natures Aura]
   - [Occultism]
   - [PneumaticCraft: Repressurized]
 
