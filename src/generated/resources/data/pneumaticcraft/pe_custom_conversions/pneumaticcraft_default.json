@@ -1,0 +1,27 @@
+{
+  "comment": "Default conversions for PneumaticCraft",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "pneumaticcraft:oil"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:fluid",
+            "amount": 1000,
+            "id": "pneumaticcraft:plastic"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "pneumaticcraft:plastic"
+        }
+      }
+    ]
+  }
+}

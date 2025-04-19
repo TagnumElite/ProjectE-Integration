@@ -132,6 +132,14 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         return Utils.convertFluidIngredient(amount, fluidIngredient, ingredientMap, fakeGroupMap, fakeGroupManager, recipeID.toString());
     }
 
+    protected NSSInput convertSingleItemStack(ItemStack stack) {
+        return convertSingleIngredient(stack.getCount(), Ingredient.of(stack));
+    }
+
+    protected NSSInput convertSingleFluidStack(FluidStack stack) {
+        return convertSingleIngredient(stack.getAmount(), Collections.singletonList(stack));
+    }
+
     /**
      * @param amount
      * @param ingredient
@@ -142,6 +150,20 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
         boolean successful = convertIngredient(amount, ingredient, ingMap, fakeGroupMap);
+
+        return new NSSInput(ingMap, fakeGroupMap, successful);
+    }
+
+    /**
+     * @param amount
+     * @param fluidIngredient
+     * @return
+     */
+    protected NSSInput convertSingleIngredient(int amount, List<FluidStack> fluidIngredient) {
+        Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+
+        boolean successful = convertFluidIngredient(amount, fluidIngredient, ingMap, fakeGroupMap);
 
         return new NSSInput(ingMap, fakeGroupMap, successful);
     }

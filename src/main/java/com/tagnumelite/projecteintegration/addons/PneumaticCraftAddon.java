@@ -22,103 +22,70 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
+import com.mojang.datafixers.util.Either;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import me.desht.pneumaticcraft.api.crafting.ingredient.FluidIngredient;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import me.desht.pneumaticcraft.api.crafting.AmadronTradeResource;
+import me.desht.pneumaticcraft.api.crafting.ingredient.FluidContainerIngredient;
 import me.desht.pneumaticcraft.api.crafting.recipe.*;
-import me.desht.pneumaticcraft.common.core.ModRecipeTypes;
-import me.desht.pneumaticcraft.common.recipes.amadron.AmadronOffer;
+import me.desht.pneumaticcraft.common.registry.ModFluids;
+import me.desht.pneumaticcraft.common.registry.ModItems;
+import me.desht.pneumaticcraft.common.registry.ModRecipeTypes;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
+import net.neoforged.neoforge.fluids.FluidStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class PneumaticCraftAddon {
-    // TODO: PneumaticCraft implements a special FluidIngredient.
-    // TODO: I noticed this way too late. Need to inspect the other recipes.
     public static final String MODID = "pneumaticcraft";
 
     static String NAME(String name) {
         return "PneumaticCraft" + name + "Mapper";
     }
 
-    public static abstract class PCRMapper<R extends PneumaticCraftRecipe> extends ARecipeTypeMapper<R> {
-        @Override
-        protected boolean convertIngredient(Ingredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-            if (ingredient instanceof FluidIngredient) {
-                return convertFluidIngredient((FluidIngredient) ingredient, ingredientMap, fakeGroupMap);
-            } else {
-                return super.convertIngredient(ingredient, ingredientMap, fakeGroupMap);
-            }
-        }
-
-        protected boolean convertFluidIngredient(FluidIngredient ingredient, IngredientMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap) {
-            List<FluidStack> matches = ingredient.getFluidStacks();
-            if (matches == null) {
-                return false;
-            } else if (matches.size() == 1) {
-                //Handle this ingredient as a direct representation of the stack it represents
-                return !addIngredient(ingredientMap, matches.get(0));
-            } else if (matches.size() > 0) {
-                Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
-                List<FluidStack> stacks = new ArrayList<>();
-
-                for (FluidStack match : matches) {
-                    //Validate it is not an empty stack in case mods do weird things in custom ingredients
-                    if (!match.isEmpty()) {
-                        rawNSSMatches.add(NSSFluid.createFluid(match));
-                        stacks.add(match);
-                    }
-                }
-
-                int count = stacks.size();
-                if (count == 1) {
-                    return !addIngredient(ingredientMap, stacks.get(0));
-                } else if (count > 1) {
-                    //Handle this ingredient as the representation of all the stacks it supports
-                    Tuple<NormalizedSimpleStack, Boolean> group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                    NormalizedSimpleStack dummy = group.getA();
-                    ingredientMap.addIngredient(dummy, Math.max(ingredient.getAmount(), 1));
-                    if (group.getB()) {
-                        //Only lookup the matching stacks for the group with conversion if we don't already have
-                        // a group created for this dummy ingredient
-                        // Note: We soft ignore cases where it fails/there are no matching group ingredients
-                        // as then our fake ingredient will never actually have an emc value assigned with it
-                        // so the recipe won't either
-                        List<IngredientMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
-                        for (FluidStack stack : stacks) {
-                            IngredientMap<NormalizedSimpleStack> groupIngredientMap = new IngredientMap<>();
-                            if (addIngredient(groupIngredientMap, stack.copy())) {
-                                return false;
-                            }
-                            groupIngredientMaps.add(groupIngredientMap);
-                        }
-                        fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
-                    }
-                }
-            }
-            return true;
-        }
-    }
-
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRAmadronOfferMapper extends ARecipeTypeMapper<AmadronOffer> {
+    public static class PCRAmadronRecipeMapper extends ARecipeTypeMapper<AmadronRecipe> {
         @Override
         public String getName() {
-            return NAME("AmadronOffer");
+            return NAME("AmadronRecipe");
         }
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == ModRecipeTypes.AMADRON.get();
+        }
+
+        @Override
+        public NSSOutput getOutput(AmadronRecipe recipe) {
+            AmadronTradeResource output = recipe.getOutput();
+            if (output.isEmpty()) return NSSOutput.EMPTY;
+
+            return output.resource().map(NSSOutput::new, NSSOutput::new);
+        }
+
+        @Override
+        public NSSInput getInput(AmadronRecipe recipe) {
+            AmadronTradeResource input = recipe.getInput();
+            if (input.isEmpty()) return null;
+
+            return input.resource().map(this::convertSingleItemStack, this::convertSingleFluidStack);
         }
     }
 
@@ -138,9 +105,11 @@ public class PneumaticCraftAddon {
 
         @Override
         public NSSInput getInput(AssemblyRecipe recipe) {
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            convertIngredient(recipe.getInputAmount(), recipe.getInput(), ingredientMap, fakeGroupMap);
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+
+            convertIngredient(recipe.getInputAmount(), recipe.getInput().ingredient(), ingredientMap, fakeGroupMap);
+
             return new NSSInput(ingredientMap, fakeGroupMap, true);
         }
 
@@ -173,8 +142,8 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(ExplosionCraftingRecipe recipe) {
-            return Collections.singletonList(recipe.getInput());
+        public NSSInput getInput(ExplosionCraftingRecipe recipe) {
+            return convertSingleIngredient(recipe.getInput().count(), recipe.getInput().ingredient());
         }
 
         @Override
@@ -184,7 +153,7 @@ public class PneumaticCraftAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRHeatFrameCoolingMapper extends PCRMapper<HeatFrameCoolingRecipe> {
+    public static class PCRHeatFrameCoolingMapper extends ARecipeTypeMapper<HeatFrameCoolingRecipe> {
         @Override
         public String getName() {
             return NAME("HeatFrameCooling");
@@ -193,6 +162,33 @@ public class PneumaticCraftAddon {
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == ModRecipeTypes.HEAT_FRAME_COOLING.get();
+        }
+
+        @Override
+        public NSSInput getInput(HeatFrameCoolingRecipe recipe) {
+            Either<Ingredient, FluidContainerIngredient> eitherInput = recipe.getInput();
+
+            if (eitherInput.right().isPresent()) {
+                Either<FluidStack, FluidContainerIngredient.TagWithAmount> fluidIng = eitherInput.right().get().either();
+
+                if (fluidIng.right().isPresent()) { // TODO: WTF, this is a mess. I must clean this up later
+                    return convertSingleIngredient(eitherInput.right().get().amount(),
+                            StreamSupport.stream(BuiltInRegistries.FLUID.getTagOrEmpty(fluidIng.right().get().tag()).spliterator(), false)
+                                    .map(i -> new FluidStack(i.value(), 1)).toList());
+                } else if (fluidIng.left().isPresent()) {
+                    return convertSingleIngredient(1, Collections.singletonList(fluidIng.left().get()));
+                }
+
+            } else if (eitherInput.left().isPresent()) {
+                return convertSingleIngredient(1, eitherInput.left().get());
+            }
+
+            return null;
+        }
+
+        @Override
+        public NSSOutput getOutput(HeatFrameCoolingRecipe recipe) {
+            return new NSSOutput(recipe.getOutput());
         }
     }
 
@@ -209,18 +205,25 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(PressureChamberRecipe recipe) {
-            return recipe.getInputsForDisplay();
+        public NSSInput getInput(PressureChamberRecipe recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
+
+            for (SizedIngredient ingredient : recipe.getInputs()) {
+                convertIngredient(ingredient.count(), ingredient.ingredient(), ingMap, fakeGroupData);
+            }
+
+            return new NSSInput(ingMap, fakeGroupData, true);
         }
 
         @Override
         public NSSOutput getOutput(PressureChamberRecipe recipe) {
-            return mapOutputs(recipe.getResultsForDisplay().toArray());
+            return mapOutputs(recipe.getOutputs().toArray());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRRefineryMapper extends PCRMapper<RefineryRecipe> {
+    public static class PCRRefineryMapper extends ARecipeTypeMapper<RefineryRecipe> {
         @Override
         public String getName() {
             return NAME("Refinery");
@@ -232,13 +235,18 @@ public class PneumaticCraftAddon {
         }
 
         @Override
+        public NSSInput getInput(RefineryRecipe recipe) {
+            return convertSingleIngredient(recipe.getInput().amount(), Arrays.asList(recipe.getInput().ingredient().getStacks()));
+        }
+
+        @Override
         public NSSOutput getOutput(RefineryRecipe recipe) {
             return mapOutputs(recipe.getOutputs().toArray());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class PCRThermoPlantMapper extends PCRMapper<ThermoPlantRecipe> {
+    public static class PCRThermoPlantMapper extends ARecipeTypeMapper<ThermoPlantRecipe> {
         @Override
         public String getName() {
             return NAME("ThermopneumaticProcessingPlant");
@@ -257,9 +265,9 @@ public class PneumaticCraftAddon {
             boolean fluidEmpty = outputFluid == null || outputFluid.isEmpty();
             if (itemEmpty && fluidEmpty) return NSSOutput.EMPTY;
 
-            if (!itemEmpty && fluidEmpty) {
+            if (fluidEmpty) {
                 return new NSSOutput(outputItem);
-            } else if (itemEmpty/* && !fluidEmpty*/) {
+            } else if (itemEmpty) {
                 return new NSSOutput(outputFluid);
             } else {
                 return mapOutputs(outputItem, outputFluid);
@@ -267,20 +275,53 @@ public class PneumaticCraftAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(ThermoPlantRecipe recipe) {
-            List<Ingredient> inputs = new ArrayList<>();
+        public NSSInput getInput(ThermoPlantRecipe recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
 
-            if (!(recipe.getInputItem() == null || recipe.getInputItem().isEmpty())) {
-                inputs.add(recipe.getInputItem());
-            }
+            recipe.getInputItem().ifPresent(ingredient -> convertIngredient(ingredient, ingMap, fakeGroupData));
+            recipe.getInputFluid().ifPresent(ingredient -> convertFluidIngredient(ingredient.amount(), Arrays.asList(ingredient.getFluids()), ingMap, fakeGroupData));
 
-            if (!(recipe.getInputFluid() == null || recipe.getInputFluid().isEmpty())) {
-                inputs.add(recipe.getInputFluid());
-            }
-
-            return inputs;
+            return new NSSInput(ingMap, fakeGroupData, recipe.getInputFluid().isPresent() || recipe.getInputItem().isPresent());
         }
     }
 
-    //FLUID_MIXER
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class PCRFluidMixerMapper extends ARecipeTypeMapper<FluidMixerRecipe> {
+        @Override
+        public String getName() {
+            return NAME("FluidMixer");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == ModRecipeTypes.FLUID_MIXER.get();
+        }
+
+        @Override
+        public NSSOutput getOutput(FluidMixerRecipe recipe) {
+            return mapOutputs(recipe.getOutputFluid(), recipe.getOutputItem());
+        }
+
+        @Override
+        public NSSInput getInput(FluidMixerRecipe recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
+
+            convertFluidIngredient(recipe.getInput1().amount(), Arrays.asList(recipe.getInput1().getFluids()), ingMap, fakeGroupData);
+            convertFluidIngredient(recipe.getInput2().amount(), Arrays.asList(recipe.getInput2().getFluids()), ingMap, fakeGroupData);
+
+            return new NSSInput(ingMap, fakeGroupData, true);
+        }
+    }
+
+    @ConversionProvider(MODID)
+    public static class PCRConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.comment("Default conversions for PneumaticCraft")
+                    .before(ModFluids.OIL.get(), 1)
+                    .conversion(ModItems.PLASTIC).ingredient(ModFluids.PLASTIC.get(), 1000);
+        }
+    }
 }
