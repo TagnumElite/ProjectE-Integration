@@ -1,10 +1,13 @@
+import org.jetbrains.changelog.Changelog
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.80'
     id "org.jetbrains.changelog" version "2.2.+"
-    id "com.matthewprenger.cursegradle" version "1.4.0"
+    id 'net.darkhax.curseforgegradle' version '1.1.+'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -346,60 +349,58 @@ changelog {
 }
 
 if (System.getenv().CURSEFORGE_API_KEY != null) {
-    curseforge {
-        apiKey System.getenv().CURSEFORGE_API_KEY
-        project {
-            id = "${cf_project}"
-            addGameVersion "${mc_version}"
-            changelog = "${project.changelog.get(mod_version).toString()}"
-            changelogType = 'markdown'
-            releaseType = "${release_type}"
+    tasks.register('curseforge', TaskPublishCurseForge) {
+        apiToken = System.getenv().CURSEFORGE_API_KEY
+        def mainFile = upload(cf_project, jar)
+        mainFile.changelog = changelog.renderItem(changelog.get(mod_version), Changelog.OutputType.MARKDOWN)
+        mainFile.changelogType = 'markdown'
+        mainFile.releaseType = "${release_type}"
+        mainFile.addModLoader("NeoForge")
+        mainFile.withAdditionalFile(sourcesJar)
+        mainFile.withAdditionalFile(javadocJar)
 
-            mainArtifact(jar) {
-                relations {
-                    requiredDependency 'projecte'
-
-//                    optionalDependency 'alexs-caves'
-//                    optionalDependency 'allthemodium'
-                    optionalDependency 'applied-energistics-2'
-//                    optionalDependency 'alchemistry'
-                    optionalDependency 'ars-nouveau'
-                    //optionalDependency 'astral-sorcery'
-//                    optionalDependency 'blood-magic'
-//                    optionalDependency 'blue-skies'
-//                    optionalDependency 'botania'
-                    optionalDependency 'chipped'
-                    //optionalDependency 'compact-crafting'
-                    optionalDependency 'create'
-                    optionalDependency 'corail-woodcutter'
-//                    optionalDependency 'draconic-evolution'
-//                    optionalDependency 'elemental-craft'
-                    optionalDependency 'evilcraft'
-//                    optionalDependency 'exnihilosequentia'
-                    optionalDependency 'extended-crafting'
-                    optionalDependency 'farmers-delight'
-                    optionalDependency 'farming-for-blockheads'
-                    //optionalDependency 'ftb-industrial-contraptions-forge'
-//                    optionalDependency 'ice-and-fire-dragons'
-                    optionalDependency 'immersive-engineering'
-                    optionalDependency 'industrial-foregoing'
-//                    optionalDependency 'mana-and-artifice'
-                    //optionalDependency 'mrcrayfishs-vehicle-mod'
-                    optionalDependency 'mystical-agriculture'
-                    optionalDependency 'natures-aura'
-                    optionalDependency 'occultism'
-                    //optionalDependency 'pams-harvestcraft-2-food-core'
-                    //optionalDependency 'pams-harvestcraft-2-crops'
-                    //optionalDependency 'pams-harvestcraft-2-food-extended'
-                    optionalDependency 'pneumaticcraft-repressurized'
-                    //optionalDependency 'psi'
-					//optionalDependency 'thermal-expansion'
-					//optionalDependency 'thermal-foundation'
-                    //optionalDependency 'tinkers-construct'
-//                    optionalDependency 'touhou-little-maid'
-                    //optionalDependency 'woot'
-                }
-            }
-        }
+        // Relations
+        mainFile.addRequirement('projecte')
+        mainFile.addOptional(
+                //'alexs-caves',
+                //'allthemodium',
+                'applied-energistics-2',
+                //'alchemistry',
+                'ars-nouveau',
+                // 'astral-sorcery',
+                //'blood-magic',
+                //'blue-skies',
+                //'botania',
+                'chipped',
+                //'compact-crafting',
+                'create',
+                'corail-woodcutter',
+                //'draconic-evolution',
+                //'elemental-craft',
+                'evilcraft',
+                //'exnihilosequentia',
+                'extended-crafting',
+                'farmers-delight',
+                'farming-for-blockheads',
+                //'ftb-industrial-contraptions-forge',
+                //'ice-and-fire-dragons',
+                'immersive-engineering',
+                'industrial-foregoing',
+                //'mana-and-artifice',
+                //'mrcrayfishs-vehicle-mod',
+                'mystical-agriculture',
+                'natures-aura',
+                'occultism',
+                //'pams-harvestcraft-2-food-core',
+                //'pams-harvestcraft-2-crops',
+                //'pams-harvestcraft-2-food-extended',
+                'pneumaticcraft-repressurized',
+                // 'psi',
+                // 'thermal-expansion',
+                // 'thermal-foundation',
+                // 'tinkers-construct',
+                //'touhou-little-maid',
+                // 'woot'
+        )
     }
 }

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.2]
+### Fixed
+- CurseGradle upload task by using DarkHax CurseForgeGradle
+
 ## [8.0.1]
 I'm an idiot
 
@@ -749,7 +753,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.2...HEAD
+[8.0.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.1...v8.0.2
 [8.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.0...v8.0.1
 [8.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.5...v8.0.0
 [7.2.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.4...v7.2.5

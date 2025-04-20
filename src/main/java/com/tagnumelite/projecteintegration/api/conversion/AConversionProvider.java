@@ -34,7 +34,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public abstract class AConversionProvider {
     /**
-     * @param ingot
+     * @param dust
      * @return
      */
     protected static NormalizedSimpleStack dustTag(String dust) {
