@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 TagnumElite
+ * Copyright (c) 2019-2025 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +36,9 @@ public class PamsHarvestcraftAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Pam's HarvestCraft: Food Core")
-                    .before(forgeTag("salt"), 1)
-                    .before(forgeTag("salt/salt"), 1)
-                    .before(forgeTag("water/freshwater"), 1);
+                    .before(commonTag("salt"), 1)
+                    .before(commonTag("salt/salt"), 1)
+                    .before(commonTag("water/freshwater"), 1);
         }
     }
 
@@ -46,10 +46,10 @@ public class PamsHarvestcraftAddon {
     public static class PHCFoodExpandedConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Sets default conversions for Pam's HarvestCraft: Crops")
-                    .before(forgeTag("rawfish"), 64)
-                    .before(forgeTag("rawmeats/rawtofishitem"), 64)
-                    .before(forgeTag("rawfish/rawtofishitem"), 64);
+            builder.comment("Sets default conversions for Pam's HarvestCraft: Food Extended")
+                    .before(commonTag("rawfish"), 64)
+                    .before(commonTag("rawmeats/rawtofishitem"), 64)
+                    .before(commonTag("rawfish/rawtofishitem"), 64);
         }
     }
 
@@ -58,8 +58,8 @@ public class PamsHarvestcraftAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Pam's HarvestCraft: Crops")
-                    .before(forgeTag("crops"), 16)
-                    .before(forgeTag("seeds"), 16);
+                    .before(commonTag("crops"), 16)
+                    .before(commonTag("seeds"), 16);
         }
     }
 }

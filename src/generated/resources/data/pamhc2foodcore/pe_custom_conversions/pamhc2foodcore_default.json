@@ -1,0 +1,22 @@
+{
+  "comment": "Sets default conversions for Pam's HarvestCraft: Food Core",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:salt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:salt/salt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:water/freshwater"
+      }
+    ]
+  }
+}

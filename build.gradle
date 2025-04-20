@@ -223,9 +223,9 @@ dependencies {
     implementation "com.klikli_dev:occultism-${version_occultism}", { // WARNING/NOTE: runData doesn't work with occultism
         exclude group: '*'
     }
-    //implementation "curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}"
-    //implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
-    //implementation "curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}"
+    implementation "curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}"
+    implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
+    implementation "curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}"
     implementation "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${version_pneumaticcraft}"
     //implementation "vazkii.psi:Psi:${version_psi}"
     //implementation "com.teamcofh:thermal_core:${mc_version}-${version_thermal_core}"
@@ -410,9 +410,9 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 'mystical-agriculture',
                 'natures-aura',
                 'occultism',
-                //'pams-harvestcraft-2-food-core',
-                //'pams-harvestcraft-2-crops',
-                //'pams-harvestcraft-2-food-extended',
+                'pams-harvestcraft-2-food-core',
+                'pams-harvestcraft-2-crops',
+                'pams-harvestcraft-2-food-extended',
                 'pneumaticcraft-repressurized',
                 // 'psi',
                 // 'thermal-expansion',

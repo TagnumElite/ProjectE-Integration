@@ -1,0 +1,22 @@
+{
+  "comment": "Sets default conversions for Pam's HarvestCraft: Crops",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawfish"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawmeats/rawtofishitem"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawfish/rawtofishitem"
+      }
+    ]
+  }
+}
