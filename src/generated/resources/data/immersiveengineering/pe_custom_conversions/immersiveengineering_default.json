@@ -26,6 +26,16 @@
         "type": "projecte:item",
         "emc_value": 12,
         "tag": "c:ingots/hop_graphite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "immersiveengineering:slag"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "immersiveengineering:creosote"
       }
     ],
     "conversion": [

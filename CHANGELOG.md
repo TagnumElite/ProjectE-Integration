@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EMC to [Industrial Foregoing] Sludge, Essence, Pink Slime and Ether
 - EMC to [Mystical Agriculture] Cognizant Dust
 - Utility `convertItemStack` to Base Mapper class
+- EMC to [Immersive Engineering] creosote and slag and leave them out of the recipes mapping
 
 ### Fixed
 - Changed the SmartBrainLib to NeoForge version
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - [Extended Crafting] also added Flux Crafter mapper
   - [Farmers Delight] also now we don't include chanced objects in the cutting board
   - [Farming For Blockheads]
+  - [Immersive Engineering] Add support for more machines and fix other mappers
   - [Industrial Foregoing] Dissolution chamber now take the fluid into consideration
   - [Mystical Agriculture] also added awakening recipe mapper
   - [Natures Aura] also fixed the problem with the ritual passing down emc through aura bottles
@@ -36,11 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tags for ingots have changed from `forge:` to `c:`
 - Changed `forgeTag` to `commonTag`
 - Default EMC conversions back to occultism
-
-### Todo
-- Update support for all mappers and underlying classes to support new mappers.
-- Insure all mappers are working right
-  - [Immersive Engineering]
 
 ### Removed
 

@@ -26,6 +26,8 @@ import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEFluids;
+import blusunrize.immersiveengineering.common.register.IEItems;
+import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.Utils;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
@@ -48,7 +50,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,6 +58,41 @@ public class ImmersiveEngineeringAddon {
 
     protected static String NAME(String name) {
         return "ImmersiveEngineering" + name + "Mapper";
+    }
+
+    public static abstract class IEMultiblockRecipeMapper<R extends MultiblockRecipe> extends ARecipeTypeMapper<R> {
+        @Override
+        public NSSInput getInput(R recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
+
+            if (recipe.getFluidInputs() != null && recipe.getFluidInputs().isEmpty() && recipe.getItemInputs().isEmpty())
+                PEIntegration.LOGGER.warn("Immersive Engineering Recipe ({}) contains no inputs!", recipeID);
+
+            for (IngredientWithSize ingredient : recipe.getItemInputs()) {
+                convertIngredient(ingredient.getCount(), ingredient.getBaseIngredient(), ingMap, fakeGroupData);
+            }
+
+            if (recipe.getFluidInputs() != null) {
+                for (FluidTagInput fluidInput : recipe.getFluidInputs()) {
+                    convertFluidIngredient(fluidInput.getAmount(), fluidInput.getMatchingFluidStacks(), ingMap, fakeGroupData);
+                }
+            }
+
+            return new NSSInput(ingMap, fakeGroupData, true);
+        }
+
+        @Override
+        public NSSOutput getOutput(R recipe) {
+            ArrayList<Object> outputs = new ArrayList<>(recipe.getItemOutputs());
+
+            if (recipe.getFluidOutputs() != null && !recipe.getFluidOutputs().isEmpty())
+                outputs.addAll(recipe.getFluidOutputs());
+
+            PEIntegration.LOGGER.info("Multiblock Recipe ({}) has outputs {}", recipeID, outputs);
+
+            return mapOutputs(outputs.toArray());
+        }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -72,13 +108,19 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(AlloyRecipe recipe) {
-            return Arrays.asList(recipe.input0.getBaseIngredient(), recipe.input1.getBaseIngredient());
+        public NSSInput getInput(AlloyRecipe recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupData = new ArrayList<>();
+
+            convertIngredient(recipe.input0.getCount(), recipe.input0.getBaseIngredient(), ingMap, fakeGroupData);
+            convertIngredient(recipe.input1.getCount(), recipe.input1.getBaseIngredient(), ingMap, fakeGroupData);
+
+            return new NSSInput(ingMap, fakeGroupData, true);
         }
     }
 
-    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEArcFurnaceMapper extends ARecipeTypeMapper<ArcFurnaceRecipe> {
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IEArcFurnaceMapper extends IEMultiblockRecipeMapper<ArcFurnaceRecipe> {
         @Override
         public String getName() {
             return NAME("ArcFurnace");
@@ -90,8 +132,13 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        public NSSOutput getOutput(ArcFurnaceRecipe recipe) {
-            return super.getOutput(recipe);
+        public boolean convertRecipe(ArcFurnaceRecipe recipe) {
+            if (recipe.isSpecialType(ArcRecyclingRecipe.SPECIAL_TYPE)) {
+                PEIntegration.debugLog("Skipping Arc Furnace - Recycling Recipe ({})", recipeID);
+                return false;
+            }
+
+            return super.convertRecipe(recipe);
         }
     }
 
@@ -108,24 +155,57 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(BlastFurnaceRecipe recipe) {
-            return Collections.singletonList(recipe.input.getBaseIngredient());
+        public NSSInput getInput(BlastFurnaceRecipe recipe) {
+            return convertSingleIngredient(recipe.input.getCount(), recipe.input.getBaseIngredient());
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IEBlueprintMapper extends IEMultiblockRecipeMapper<BlueprintCraftingRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Blueprint");
         }
 
         @Override
-        public NSSOutput getOutput(BlastFurnaceRecipe recipe) {
-            ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
-            ItemStack slagOutput = recipe.slag.get();
-            NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
-            NormalizedSimpleStack slagStack = NSSItem.createItem(slagOutput);
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IERecipeTypes.BLUEPRINT.get();
+        }
+    }
 
-            INSSFakeGroupManager.FakeGroupData group = getFakeGroup(itemStack, slagStack);
-            NormalizedSimpleStack dummy = group.dummy();
-            Object2IntMap<NormalizedSimpleStack> dummyMap = Utils.getDummyMap(dummy);
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IEBottlerMapper extends IEMultiblockRecipeMapper<BottlingMachineRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Bottling");
+        }
 
-            mapper.addConversion(slagOutput.getCount(), slagStack, dummyMap);
-            mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
-            return new NSSOutput(2, dummy);
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IERecipeTypes.BOTTLING_MACHINE.get();
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IEClocheMapper extends ARecipeTypeMapper<ClocheRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Cloche");
+        }
+
+        @Override
+        public String getDescription() {
+            return super.getDescription() + " NOTE: Disabled by default because its plants";
+        }
+
+        @Override
+        public boolean isAvailable() {
+            return false; // Disabled by default
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IERecipeTypes.CLOCHE.get();
         }
     }
 
@@ -142,33 +222,25 @@ public class ImmersiveEngineeringAddon {
         }
 
         @Override
-        protected List<Ingredient> getIngredients(CokeOvenRecipe recipe) {
-            return Collections.singletonList(recipe.input.getBaseIngredient());
+        public NSSInput getInput(CokeOvenRecipe recipe) {
+            return convertSingleIngredient(recipe.input.getCount(), recipe.input.getBaseIngredient());
         }
 
-        @Override
-        public NSSOutput getOutput(CokeOvenRecipe recipe) {
-            if (recipe.creosoteOutput > 0) {
-                ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
-                FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getStill(), recipe.creosoteOutput);
-                NormalizedSimpleStack itemStack = NSSItem.createItem(itemOutput);
-                NormalizedSimpleStack fluidStack = NSSFluid.createFluid(creosoteOutput);
-
-                INSSFakeGroupManager.FakeGroupData group = getFakeGroup(fluidStack, itemStack);
-                NormalizedSimpleStack dummy = group.dummy();
-                Object2IntMap<NormalizedSimpleStack> dummyMap = Utils.getDummyMap(dummy);
-
-                mapper.addConversion(creosoteOutput.getAmount(), fluidStack, dummyMap);
-                mapper.addConversion(itemOutput.getCount(), itemStack, dummyMap);
-                return new NSSOutput(2, dummy);
-            } else {
-                return new NSSOutput(recipe.getResultItem(registryAccess));
-            }
-        }
+        //@Override
+        //public NSSOutput getOutput(CokeOvenRecipe recipe) {
+        //    if (recipe.creosoteOutput > 0) {
+        //        ItemStack itemOutput = recipe.getResultItem(registryAccess).copy();
+        //        FluidStack creosoteOutput = new FluidStack(IEFluids.CREOSOTE.getStill(), recipe.creosoteOutput);
+//
+        //        return mapOutputs(itemOutput, creosoteOutput);
+        //    }
+//
+        //    return new NSSOutput(recipe.getResultItem(registryAccess));
+        //}
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IECrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
+    public static class IECrusherMapper extends IEMultiblockRecipeMapper<CrusherRecipe> {
         @Override
         public String getName() {
             return NAME("Crusher");
@@ -187,6 +259,26 @@ public class ImmersiveEngineeringAddon {
         @Override
         protected List<Ingredient> getIngredients(CrusherRecipe recipe) {
             return Collections.singletonList(recipe.input);
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IEFermenterMapper extends ARecipeTypeMapper<FermenterRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Fermenter");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IERecipeTypes.FERMENTER.get();
+        }
+
+        @Override
+        public NSSOutput getOutput(FermenterRecipe recipe) {
+            // We skip the itemOutput because it's just a glass bottle
+            //return mapOutputs(recipe.itemOutput.get(), recipe.fluidOutput);
+            return new NSSOutput(recipe.fluidOutput);
         }
     }
 
@@ -214,7 +306,7 @@ public class ImmersiveEngineeringAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IEMixerMapper extends ARecipeTypeMapper<MixerRecipe> {
+    public static class IEMixerMapper extends IEMultiblockRecipeMapper<MixerRecipe> {
         @Override
         public String getName() {
             return NAME("Mixer");
@@ -222,8 +314,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            //returnrecipeType == MixerRecipe.TYPE;
-            return false;
+            return recipeType == IERecipeTypes.MIXER.get();
         }
 
         @Override
@@ -236,19 +327,30 @@ public class ImmersiveEngineeringAddon {
             Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-            //ingredientMap.addIngredient(recipe.fluidInput);
-            // TODO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
-
+            convertFluidIngredient(recipe.fluidInput.getAmount(), recipe.fluidInput.getMatchingFluidStacks(), ingredientMap, fakeGroupMap);
             for (IngredientWithSize input : recipe.itemInputs) {
                 convertIngredient(input.getCount(), input.getBaseIngredient(), ingredientMap, fakeGroupMap);
             }
 
-            return super.getInput(recipe);
+            return new NSSInput(ingredientMap, fakeGroupMap, true);
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IESawmillMapper extends ARecipeTypeMapper<SawmillRecipe> {
+    public static class IERefineryMapper extends IEMultiblockRecipeMapper<RefineryRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Refinery");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == IERecipeTypes.REFINERY.get();
+        }
+    }
+
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IESawmillMapper extends IEMultiblockRecipeMapper<SawmillRecipe> {
         @Override
         public String getName() {
             return NAME("Sawmill");
@@ -271,8 +373,8 @@ public class ImmersiveEngineeringAddon {
         }
     }
 
-    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class IESqueezerMapper extends ARecipeTypeMapper<SqueezerRecipe> {
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class IESqueezerMapper extends IEMultiblockRecipeMapper<SqueezerRecipe> {
         @Override
         public String getName() {
             return NAME("Squeezer");
@@ -294,14 +396,6 @@ public class ImmersiveEngineeringAddon {
         }
     }
 
-        /*
-        BlueprintCraftingRecipe
-        BottlingMachineRecipe
-        FermenterRecipe
-        RefineryRecipe
-        ClocheRecipe
-        */
-
     @ConversionProvider(MODID)
     public static class IEConversionProvider extends AConversionProvider {
         @Override
@@ -311,7 +405,9 @@ public class ImmersiveEngineeringAddon {
                     .before(dustTag("wood"), 1)
                     .before(dustTag("sulfur"), 8)
                     .before(dustTag("nitrate"), 8)
-                    .before(ingotTag("hop_graphite"), 12);
+                    .before(ingotTag("hop_graphite"), 12)
+                    .before(IEItems.Ingredients.SLAG.get(), 8)
+                    .before(IEFluids.CREOSOTE.getStill(), 1);
 
             // TODO: Replace this forEach. It should not be done this way.
             for (IEBlocks.BlockEntry<IEBaseBlock> block : IEBlocks.WoodenDecoration.TREATED_WOOD.values()) {
