@@ -246,14 +246,15 @@ javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-task sourcesJar(type: Jar) {
+tasks.register('sourcesJar', Jar) {
     from sourceSets.main.allSource
     archiveBaseName.set(project.archivesBaseName)
     archiveVersion.set("${project.version}")
     archiveClassifier.set('sources')
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     from javadoc.destinationDir
     archiveClassifier.set('javadoc')
 }
@@ -291,13 +292,31 @@ createMinecraftArtifacts.dependsOn(generateModMetadata)
 
 publishing {
     publications {
-        register('mavenJava', MavenPublication) {
+        maven(MavenPublication) {
+            from components.java
+
             artifactId = mod_name
-            group = "com.tagnumelite"
+            groupId = "com.tagnumelite.projecteintegration"
+
             artifacts {
-                jar
                 sourcesJar
                 javadocJar
+            }
+
+            pom {
+                scm {
+                    url = "https://github.com/TagnumElite/ProjectE-Integration.git"
+                }
+                issueManagement {
+                    system = 'github'
+                    url = "https://github.com/TagnumElite/ProjectE-Integration/issues"
+                }
+                licenses {
+                    license {
+                        name = 'MIT'
+                        distribution = 'repo'
+                    }
+                }
             }
         }
     }
