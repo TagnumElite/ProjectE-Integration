@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [8.0.1]
+I'm an idiot
+
+## [8.0.0]
 ### Added
 - EMC to some ingots
 - EMC to [EvilCraft] items that were missing EMC
@@ -744,7 +749,9 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.5...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.1...HEAD
+[8.0.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.0.0...v8.0.1
+[8.0.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.5...v8.0.0
 [7.2.5]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.4...v7.2.5
 [7.2.4]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.3...v7.2.4
 [7.2.3]: https://github.com/TagnumElite/ProjectE-Integration/compare/v7.2.2...v7.2.3
