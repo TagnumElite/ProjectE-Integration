@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Ported
 - Support for Pams HarvestCraft
+- Seems like [Touhou Little Maid] works out of the box
 
 ## [8.0.3]
 ### Fixed

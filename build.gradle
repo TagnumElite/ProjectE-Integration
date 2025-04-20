@@ -236,7 +236,7 @@ dependencies {
     //implementation "com.teamcofh:thermal_integration:${mc_version}-${version_thermalintegration}"
     //implementation "com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}"
     //implementation "slimeknights.tconstruct:TConstruct:${version_tinkers}"
-//    implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
+    implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
     //implementation "curse.maven:woot-244049:${version_woot}"
 }
 
@@ -418,7 +418,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 // 'thermal-expansion',
                 // 'thermal-foundation',
                 // 'tinkers-construct',
-                //'touhou-little-maid',
+                'touhou-little-maid',
                 // 'woot'
         )
     }
