@@ -295,7 +295,7 @@ publishing {
         maven(MavenPublication) {
             from components.java
 
-            artifactId = mod_name
+            artifactId = "${mod_name}".toLowerCase()
             groupId = "com.tagnumelite.projecteintegration"
 
             artifacts {
