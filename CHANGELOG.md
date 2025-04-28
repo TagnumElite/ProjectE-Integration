@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- EMC for [Mystical Agriculture] `cognizant_dust` to `16384` because it is a rarer mob drop
+
 ### Removed
 - Support for [Pams HarvestCraft 2: Crops] because the emc on crops and seeds was causing problems with other mods.
 

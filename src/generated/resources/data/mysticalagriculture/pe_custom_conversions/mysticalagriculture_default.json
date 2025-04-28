@@ -19,7 +19,7 @@
       },
       {
         "type": "projecte:item",
-        "emc_value": 1024,
+        "emc_value": 16384,
         "id": "mysticalagriculture:cognizant_dust"
       },
       {

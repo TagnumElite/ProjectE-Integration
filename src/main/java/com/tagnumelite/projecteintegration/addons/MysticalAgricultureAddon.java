@@ -119,7 +119,7 @@ public class MysticalAgricultureAddon {
                     .before(ModItems.PROSPERITY_SHARD.get(), 128)
                     .before(ModItems.INFERIUM_ESSENCE.get(), 32)
                     .before(ModItems.SOULIUM_DUST.get(), 128)
-                    .before(ModItems.COGNIZANT_DUST.get(), 1024)
+                    .before(ModItems.COGNIZANT_DUST.get(), 16384)
                     .before(ModBlocks.SOULSTONE_COBBLE.get(), 16);
         }
     }
