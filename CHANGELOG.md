@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Removed
+- Support for [Pams HarvestCraft 2: Crops] because the emc on crops and seeds was causing problems with other mods.
 
 ## [8.1.1]
 Tried to fix publications again, thanks GithubPackages, I'm thinking of just removing you.
@@ -882,6 +884,7 @@ Added support for 18 more mods
 [Mystical Agriculture]: https://www.curseforge.com/minecraft/mc-mods/mystical-agriculture
 [Natures Aura]: https://www.curseforge.com/minecraft/mc-mods/natures-aura
 [Occultism]: https://www.curseforge.com/minecraft/mc-mods/occultism
+[Pams HarvestCraft 2: Crops]: https://www.curseforge.com/minecraft/mc-mods/pams-harvestcraft-2-crops
 [PneumaticCraft: Repressurized]: https://www.curseforge.com/minecraft/mc-mods/pneumaticcraft-repressurized
 [Psi]: https://www.curseforge.com/minecraft/mc-mods/psi
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct

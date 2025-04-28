@@ -53,13 +53,13 @@ public class PamsHarvestcraftAddon {
         }
     }
 
-    @ConversionProvider(MODID_CROPS)
-    public static class PHCCropsConversionProvider extends AConversionProvider {
-        @Override
-        public void convert(CustomConversionBuilder builder) {
-            builder.comment("Sets default conversions for Pam's HarvestCraft: Crops")
-                    .before(commonTag("crops"), 16)
-                    .before(commonTag("seeds"), 16);
-        }
-    }
+    //@ConversionProvider(MODID_CROPS)
+    //public static class PHCCropsConversionProvider extends AConversionProvider {
+    //    @Override
+    //    public void convert(CustomConversionBuilder builder) {
+    //        builder.comment("Sets default conversions for Pam's HarvestCraft: Crops")
+    //                .before(commonTag("crops"), 16)
+    //                .before(commonTag("seeds"), 16);
+    //    }
+    //}
 }

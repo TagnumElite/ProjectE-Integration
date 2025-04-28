@@ -28,6 +28,11 @@ base {
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 //println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 neoForge {
     version = project.neo_version
@@ -224,7 +229,7 @@ dependencies {
         exclude group: '*'
     }
     implementation "curse.maven:pams-harvestcraft-2-food-core-372534:${version_pamsharvestcraftfoodcore}"
-    implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
+    //implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
     implementation "curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}"
     implementation "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${version_pneumaticcraft}"
     //implementation "vazkii.psi:Psi:${version_psi}"
@@ -244,19 +249,6 @@ javadoc {
     source = [sourceSets.main.allJava]
     // prevent java 8's strict doclint for javadocs from failing builds
     options.addStringOption('Xdoclint:none', '-quiet')
-}
-
-tasks.register('sourcesJar', Jar) {
-    from sourceSets.main.allSource
-    archiveBaseName.set(project.archivesBaseName)
-    archiveVersion.set("${project.version}")
-    archiveClassifier.set('sources')
-}
-
-tasks.register('javadocJar', Jar) {
-    dependsOn javadoc
-    from javadoc.destinationDir
-    archiveClassifier.set('javadoc')
 }
 
 artifacts {
@@ -411,7 +403,7 @@ if (System.getenv().CURSEFORGE_API_KEY != null) {
                 'natures-aura',
                 'occultism',
                 'pams-harvestcraft-2-food-core',
-                'pams-harvestcraft-2-crops',
+                //'pams-harvestcraft-2-crops',
                 'pams-harvestcraft-2-food-extended',
                 'pneumaticcraft-repressurized',
                 // 'psi',
