@@ -1,10 +1,11 @@
 {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/projecte-integration",
     "promos": {
-        "1.21.1-latest": "8.1.2",
-        "1.21.1-recommended": "8.1.2"
+        "1.21.1-latest": "8.2.0",
+        "1.21.1-recommended": "8.2.0"
     },
     "1.21.1": {
+        "8.2.0": "Updated support for Immersive Engineering",
         "8.1.2": "Removed emc for crops and seeds tags and increased emc for MA cogizant dust",
         "8.1.0": "Added support for Pam's HC and Touhou Little Maid"
     }
