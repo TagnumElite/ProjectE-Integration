@@ -34,6 +34,11 @@ modId = "create"
 type = "optional"
 versionRange = "[0.5.1,)"
 
+[[dependencies.${mod_id}]]
+modId = "immersiveengineering"
+type = "optional"
+versionRange = "[1.21.1-12.2.0-187,)"
+
 #[[dependencies.${mod_id}]]
 #modId = "farmersdelight"
 #type = "optional"

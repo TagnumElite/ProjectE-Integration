@@ -42,8 +42,10 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,8 +70,8 @@ public class ImmersiveEngineeringAddon {
             }
 
             if (recipe.getFluidInputs() != null) {
-                for (FluidTagInput fluidInput : recipe.getFluidInputs()) {
-                    convertFluidIngredient(fluidInput.getAmount(), fluidInput.getMatchingFluidStacks(), ingMap, fakeGroupData);
+                for (SizedFluidIngredient fluidInput : recipe.getFluidInputs()) {
+                    convertFluidIngredient(fluidInput.amount(), Arrays.asList(fluidInput.getFluids()), ingMap, fakeGroupData);
                 }
             }
 
@@ -321,7 +323,7 @@ public class ImmersiveEngineeringAddon {
             Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-            convertFluidIngredient(recipe.fluidInput.getAmount(), recipe.fluidInput.getMatchingFluidStacks(), ingredientMap, fakeGroupMap);
+            convertFluidIngredient(recipe.fluidInput.amount(), Arrays.asList(recipe.fluidInput.getFluids()), ingredientMap, fakeGroupMap);
             for (IngredientWithSize input : recipe.itemInputs) {
                 convertIngredient(input.getCount(), input.getBaseIngredient(), ingredientMap, fakeGroupMap);
             }
