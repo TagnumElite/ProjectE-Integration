@@ -208,7 +208,7 @@ dependencies {
     //implementation "com.teamcofh:cofh_core:${mc_version}-${version_cofhcore}"
     //implementation "curse.maven:compactcrafting-429735:${version_compactcrafting}"
     implementation "curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}"
-    implementation("com.simibubi.create:create-${mc_version}:${version_create}-+:all"){ transitive = false }
+    implementation("com.simibubi.create:create-${mc_version}:${version_create}"){ transitive = false }
 //    implementation "curse.maven:create-328085:${version_create}"
 //    implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal"
 //    implementation "curse.maven:elemental-craft-395158:${version_elementalcraft}"
