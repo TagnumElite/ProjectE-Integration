@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Support for [Create] 6.0.9
 ## [8.2.0]
 ### Fixed
 - Support for [Immersive Engineering] as they moved from FluidTagInput to SizedFluidIngredient

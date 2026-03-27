@@ -19,10 +19,6 @@ modId = "projecte"
 type = "required"
 versionRange = "[PE1.0.1,)"
 
-[[dependencies.${mod_id}]]
-modId = "alchemistry"
-type = "optional"
-versionRange = "[1.21.1-2.3,)"
 
 [[dependencies.${mod_id}]]
 modId = "chipped"
@@ -32,22 +28,13 @@ versionRange = "[3.0.4,)"
 [[dependencies.${mod_id}]]
 modId = "create"
 type = "optional"
-versionRange = "[0.5.1,)"
+versionRange = "[6.0.9,)"
 
 [[dependencies.${mod_id}]]
 modId = "immersiveengineering"
 type = "optional"
 versionRange = "[1.21.1-12.2.0-187,)"
 
-#[[dependencies.${mod_id}]]
-#modId = "farmersdelight"
-#type = "optional"
-#versionRange = "[1.18.2-1.1.2,)"
-
-#[[dependencies.${mod_id}]]
-#modId = "pneumaticcraft"
-#type = "optional"
-#versionRange = "[1.18.2-3.3.0,)"
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"

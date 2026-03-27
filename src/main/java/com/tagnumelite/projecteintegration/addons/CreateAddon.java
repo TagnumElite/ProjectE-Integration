@@ -40,7 +40,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
@@ -57,6 +56,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.*;
 
@@ -67,11 +67,11 @@ public class CreateAddon {
         return "Create" + name + "Mapper";
     }
 
-    public abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?>> extends ARecipeTypeMapper<R> {
+    public abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?, ?>> extends ARecipeTypeMapper<R> {
         @Override
         public NSSInput getInput(R recipe) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
-            NonNullList<FluidIngredient> fluidIngredients = recipe.getFluidIngredients();
+            NonNullList<SizedFluidIngredient> fluidIngredients = recipe.getFluidIngredients();
             if (ingredients.isEmpty() && fluidIngredients.isEmpty()) {
                 PEIntegration.debugLog("Recipe ({}) contains no inputs: (Ingredients: {}; Fluids: {})", recipeID, ingredients, fluidIngredients);
                 return null;
@@ -90,9 +90,9 @@ public class CreateAddon {
                 }
             }
 
-            for (FluidIngredient fluidIngredient : fluidIngredients) {
-                final int amount = fluidIngredient.getRequiredAmount();
-                List<FluidStack> matches = fluidIngredient.getMatchingFluidStacks();
+            for (SizedFluidIngredient fluidIngredient : fluidIngredients) {
+                final int amount = fluidIngredient.amount();
+                List<FluidStack> matches = List.of(fluidIngredient.getFluids());
                 if (matches.isEmpty()) {
                     //PEIntegration.LOGGER.warn("");
                     continue;
@@ -349,7 +349,7 @@ public class CreateAddon {
 
             int i = 0;
             for (SequencedRecipe<?> step : recipe.getSequence()) {
-                final ProcessingRecipe<?> stepRecipe = step.getRecipe();
+                final ProcessingRecipe<?, ?> stepRecipe = step.getRecipe();
                 final List<Ingredient> stepIngredients = new ArrayList<>(stepRecipe.getIngredients());
 
                 // TODO: use fluids from stepRecipe.getFluidIngredients();
