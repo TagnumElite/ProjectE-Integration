@@ -1,13 +1,12 @@
 import org.jetbrains.changelog.Changelog
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.80'
-    id "org.jetbrains.changelog" version "2.2.+"
-    id 'net.darkhax.curseforgegradle' version '1.1.+'
+    id "org.jetbrains.changelog" version "2.5.+"
+    id "com.hypherionmc.modutils.modpublisher" version "2.2.1"
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -162,7 +161,7 @@ dependencies {
 //    implementation "smashingmods:alchemylib:${version_alchemylib}"
 //    localRuntime "curse.maven:alltheores-405593:${version_alltheores}"
     localRuntime "curse.maven:ae-jei-1074338:${version_ae_jei}"
-    localRuntime "dev.architectury:architectury-neoforge:${version_architectury}"
+    implementation "dev.architectury:architectury-neoforge:${version_architectury}"
     localRuntime "curse.maven:athena-841890:${version_athena}"
     localRuntime "curse.maven:balm-531761:${version_balm}"
     localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}"
@@ -359,59 +358,54 @@ changelog {
     groups = ["Added", "Changed", "Ported", "Deprecated", "Removed", "Fixed", "Security"]
 }
 
-if (System.getenv().CURSEFORGE_API_KEY != null) {
-    tasks.register('curseforge', TaskPublishCurseForge) {
-        apiToken = System.getenv().CURSEFORGE_API_KEY
-        def mainFile = upload(cf_project, jar)
-        mainFile.changelog = changelog.renderItem(changelog.get(mod_version), Changelog.OutputType.MARKDOWN)
-        mainFile.changelogType = 'markdown'
-        mainFile.releaseType = "${release_type}"
-        mainFile.addModLoader("NeoForge")
-        mainFile.withAdditionalFile(sourcesJar)
-        mainFile.withAdditionalFile(javadocJar)
+String changelogText = changelog.renderItem(changelog.get(project.version), Changelog.OutputType.MARKDOWN)
 
-        // Relations
-        mainFile.addRequirement('projecte')
-        mainFile.addOptional(
-                //'alexs-caves',
-                //'allthemodium',
-                'applied-energistics-2',
-                //'alchemistry',
-                'ars-nouveau',
-                // 'astral-sorcery',
-                //'blood-magic',
-                //'blue-skies',
-                //'botania',
-                'chipped',
-                //'compact-crafting',
-                'create',
-                'corail-woodcutter',
-                //'draconic-evolution',
-                //'elemental-craft',
-                'evilcraft',
-                //'exnihilosequentia',
-                'extended-crafting',
-                'farmers-delight',
-                'farming-for-blockheads',
-                //'ftb-industrial-contraptions-forge',
-                //'ice-and-fire-dragons',
-                'immersive-engineering',
-                'industrial-foregoing',
-                //'mana-and-artifice',
-                //'mrcrayfishs-vehicle-mod',
+publisher {
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+        github System.getenv("GITHUB_TOKEN")
+    }
+
+    setGameType('minecraft')
+    setCurseID("313402")
+    setModrinthID("V8sT0HfM")
+    setVersionType("release")
+    setChangelog(changelogText)
+    setProjectVersion("${mod_version}")
+    setDisplayName("ProjectE-Integration-${mc_version}-${mod_version}")
+    setGameVersions("${mc_version}")
+    setLoaders('neoforge')
+    setArtifact(jar)
+
+    modrinthDepends {
+        optional 'ae2', 'ars-nouveau',
+                'chipped', 'create',
+                'evilcraft', 'extended-crafting',
+                'farmers-delight', 'farming-for-blockheads',
+                'iceandfire-ce', 'immersiveengineering', 'industrial-foregoing',
                 'mystical-agriculture',
                 'natures-aura',
                 'occultism',
-                'pams-harvestcraft-2-food-core',
-                //'pams-harvestcraft-2-crops',
-                'pams-harvestcraft-2-food-extended',
-                'pneumaticcraft-repressurized',
-                // 'psi',
-                // 'thermal-expansion',
-                // 'thermal-foundation',
-                // 'tinkers-construct',
+                'pams-harvestcraft-2-food-core', 'pams-harvestcraft-2-food-extended', 'pneumaticcraft-repressurized', 'psi',
                 'touhou-little-maid',
-                // 'woot'
-        )
+                'woot-revived'
+    }
+
+    curseDepends {
+        required 'projecte'
+
+        optional 'applied-energistics-2', 'ars-nouveau',
+            'chipped', 'create', 'corail-woodcutter',
+            'draconic-evolution',
+            'evilcraft', 'extended-crafting',
+            'farmers-delight', 'farming-for-blockheads',
+            'iceandfire-ce', 'immersive-engineering', 'industrial-foregoing',
+            'mystical-agriculture',
+            'natures-aura',
+            'occultism',
+            'pams-harvestcraft-2-food-core', 'pams-harvestcraft-2-food-extended', 'pneumaticcraft-repressurized', 'psi',
+            'touhou-little-maid',
+            'woot-revived'
     }
 }

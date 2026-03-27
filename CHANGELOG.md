@@ -890,6 +890,7 @@ Added support for 18 more mods
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Corail Woodcutter]: https://www.curseforge.com/minecraft/mc-mods/corail-woodcutter
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
+[Draconic Evolution]: https://www.curseforge.com/minecraft/mc-mods/draconic-evolution
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
@@ -897,6 +898,7 @@ Added support for 18 more mods
 [Farmers Delight]: https://www.curseforge.com/minecraft/mc-mods/farmers-delight
 [Farming For Blockheads]: https://www.curseforge.com/minecraft/mc-mods/farming-for-blockheads
 [Ice and Fire]: https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons
+[Ice and Fire CE]: https://www.curseforge.com/minecraft/mc-mods/iceandfire-ce
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
@@ -910,3 +912,4 @@ Added support for 18 more mods
 [Tinkers Construct]: https://www.curseforge.com/minecraft/mc-mods/tinkers-construct
 [Touhou Little Maid]: https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid
 [Woot]: https://www.curseforge.com/minecraft/mc-mods/woot
+[Woot Revived]: https://www.curseforge.com/minecraft/mc-mods/woot-revived
