@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Support for [Actually Additions] with EMC for Black Quarts (16), Coffee Beans (4), Canola (4), Bat Wings (16) and Bowl -> Water Bowl
+
 ### Fixed
 - Support for [Create] 6.0.9
 
@@ -780,7 +783,7 @@ Added support for 18 more mods
 
 ## [1.0.0] - 2019-02-06
 ### Added
-- Added support for Actually Additions
+- Added support for [Actually Additions]
     - Crusher, Empowerer and Reconstructor
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
@@ -878,6 +881,7 @@ Added support for 18 more mods
 [1.0.0]: https://github.com/TagnumElite/ProjectE-Integration/releases/tag/1.0.0
 
 <!-- MODS -->
+[Actually Additions]: https://www.curseforge.com/minecraft/mc-mods/actually-additions
 [Alex's Caves]: https://www.curseforge.com/minecraft/mc-mods/alexs-caves
 [Allthemodium]: https://www.curseforge.com/minecraft/mc-mods/allthemodium
 [Alchemistry]: https://www.curseforge.com/minecraft/mc-mods/alchemistry

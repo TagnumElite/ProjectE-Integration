@@ -1,32 +1,32 @@
 {
-  "comment": "default conversions for Mystical Agriculture",
-  "values": {
-    "before": [
-      {
-        "type": "projecte:item",
-        "emc_value": 128,
-        "id": "mysticalagriculture:prosperity_shard"
-      },
-      {
-        "type": "projecte:item",
-        "emc_value": 32,
-        "id": "mysticalagriculture:inferium_essence"
-      },
-      {
-        "type": "projecte:item",
-        "emc_value": 128,
-        "id": "mysticalagriculture:soulium_dust"
-      },
-      {
-        "type": "projecte:item",
-        "emc_value": 16384,
-        "id": "mysticalagriculture:cognizant_dust"
-      },
-      {
-        "type": "projecte:item",
-        "emc_value": 16,
-        "id": "mysticalagriculture:soulstone_cobble"
-      }
-    ]
-  }
+    "comment": "default conversions for Mystical Agriculture",
+    "values": {
+        "before": [
+            {
+                "type": "projecte:item",
+                "emc_value": 128,
+                "id": "mysticalagriculture:prosperity_shard"
+            },
+            {
+                "type": "projecte:item",
+                "emc_value": 32,
+                "id": "mysticalagriculture:inferium_essence"
+            },
+            {
+                "type": "projecte:item",
+                "emc_value": 128,
+                "id": "mysticalagriculture:soulium_dust"
+            },
+            {
+                "type": "projecte:item",
+                "emc_value": 16384,
+                "id": "mysticalagriculture:cognizant_dust"
+            },
+            {
+                "type": "projecte:item",
+                "emc_value": 16,
+                "id": "mysticalagriculture:soulstone_cobble"
+            }
+        ]
+    }
 }

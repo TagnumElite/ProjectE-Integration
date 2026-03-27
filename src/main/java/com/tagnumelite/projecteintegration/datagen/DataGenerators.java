@@ -32,7 +32,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = PEIntegration.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = PEIntegration.MODID)
 public class DataGenerators {
     private DataGenerators() {
     }

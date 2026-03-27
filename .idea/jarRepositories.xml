@@ -151,5 +151,10 @@
       <option name="name" value="NovaMachina" />
       <option name="url" value="https://dl.cloudsmith.io/public/novamachina-mods/release/maven/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Saps" />
+      <option name="name" value="Saps" />
+      <option name="url" value="https://maven.saps.dev/release" />
+    </remote-repository>
   </component>
 </project>

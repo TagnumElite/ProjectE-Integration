@@ -145,6 +145,7 @@ repositories {
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'NovaMachina'; url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/' }
     maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
+    maven { name 'Saps'; url 'https://maven.saps.dev/releases' }
     maven { name 'SmartBrainLib'; url 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven { name 'Tamaized'; url 'https://maven.tamaized.com/releases' }
     maven { name 'TheIllusiveC4'; url 'https://maven.theillusivec4.top/' }
@@ -193,6 +194,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${version_jei}"
     localRuntime "mezz.jei:jei-${mc_version}-neoforge:${version_jei}"
 
+    implementation "de.ellpeck:actuallyadditions:${version_actually_additions}+mc${mc_version}"
 //    implementation "curse.maven:alexcaves-924854:${version_alexcaves}"
 //    implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
     implementation "org.appliedenergistics:appliedenergistics2:${version_appliedenergistics}"
