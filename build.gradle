@@ -122,6 +122,13 @@ repositories {
         }
     }
     maven {
+        name 'Modrinth'
+        url 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
         name 'Jitpack'
         url 'https://jitpack.io'
         content {
@@ -193,6 +200,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${version_jei}"
     compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${version_jei}"
     localRuntime "mezz.jei:jei-${mc_version}-neoforge:${version_jei}"
+    localRuntime "maven.modrinth:jade:${version_jade}"
 
     implementation "de.ellpeck:actuallyadditions:${version_actually_additions}+mc${mc_version}"
 //    implementation "curse.maven:alexcaves-924854:${version_alexcaves}"
