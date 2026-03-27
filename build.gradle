@@ -358,7 +358,7 @@ publisher {
     modrinthDepends {
         optional 'actually-additions', 'ae2', 'ars-nouveau',
                 'chipped', 'create',
-                'evilcraft', 'extended-crafting',
+                'enderio', 'evilcraft', 'extended-crafting',
                 'farmers-delight', 'farming-for-blockheads',
                 'iceandfire-ce', 'immersiveengineering', 'industrial-foregoing',
                 'mystical-agriculture',
@@ -375,7 +375,7 @@ publisher {
         optional 'actually-additions', 'applied-energistics-2', 'ars-nouveau',
             'chipped', 'create', 'corail-woodcutter',
             'draconic-evolution',
-            'evilcraft', 'extended-crafting',
+            'ender-io', 'evilcraft', 'extended-crafting',
             'farmers-delight', 'farming-for-blockheads',
             'iceandfire-ce', 'immersive-engineering', 'industrial-foregoing',
             'mystical-agriculture',
