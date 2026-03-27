@@ -178,11 +178,12 @@ dependencies {
     localRuntime "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
     //localRuntime "team.chisel.ctm:CTM:${version_ctm}"
     localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
-    localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}"
+    localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}+${mc_version}"
     localRuntime "curse.maven:cyclops-core-232758:${version_cyclopscore}"
 //    localRuntime "sirttas.dpanvil:DPAnvil:${version_datapackanvil}"
     //localRuntime "curse.maven:ftb-library-404465:${version_ftb_library}"
     localRuntime "software.bernie.geckolib:geckolib-neoforge-${version_geckolib}"
+    localRuntime "curse.maven:jupiter-1072905:${version_jupiter}"
     //implementation "slimeknights.mantle:Mantle:${version_mantle}"
     compileOnly "com.klikli_dev:modonomicon-${mc_version}-common:${version_modonomicon}"
     implementation "com.klikli_dev:modonomicon-${mc_version}-neoforge:${version_modonomicon}"
@@ -195,6 +196,7 @@ dependencies {
     implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}"
 //    localRuntime "curse.maven:structure-gel-api-378802:${version_structuregelapi}"
     implementation ("com.hrznstudio:titanium:${version_titanium}") { transitive = false }
+    localRuntime "curse.maven:uranus-1010827:${version_uranus}"
 
     // ======================= [ Optional Mods ] =======================
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${version_jei}"
@@ -389,7 +391,7 @@ publisher {
     setArtifact(jar)
 
     modrinthDepends {
-        optional 'ae2', 'ars-nouveau',
+        optional 'actually-additions', 'ae2', 'ars-nouveau',
                 'chipped', 'create',
                 'evilcraft', 'extended-crafting',
                 'farmers-delight', 'farming-for-blockheads',
@@ -405,7 +407,7 @@ publisher {
     curseDepends {
         required 'projecte'
 
-        optional 'applied-energistics-2', 'ars-nouveau',
+        optional 'actually-additions', 'applied-energistics-2', 'ars-nouveau',
             'chipped', 'create', 'corail-woodcutter',
             'draconic-evolution',
             'evilcraft', 'extended-crafting',
