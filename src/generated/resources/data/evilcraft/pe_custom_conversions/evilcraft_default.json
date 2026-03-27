@@ -1,64 +1,64 @@
 {
-    "comment": "Default conversions for EvilCraft",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "evilcraft:blood"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 16,
-                "id": "evilcraft:poison_sac"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 64,
-                "id": "evilcraft:dark_gem"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 144,
-                "id": "evilcraft:werewolf_bone"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 512,
-                "id": "evilcraft:vengeance_essence"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 1024,
-                "id": "evilcraft:ender_tear"
-            }
+  "comment": "Default conversions for EvilCraft",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "evilcraft:blood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "evilcraft:poison_sac"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "evilcraft:dark_gem"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 144,
+        "id": "evilcraft:werewolf_bone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "evilcraft:vengeance_essence"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1024,
+        "id": "evilcraft:ender_tear"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:fluid",
+            "amount": 1000,
+            "id": "evilcraft:blood"
+          }
         ],
-        "conversion": [
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:fluid",
-                        "amount": 1000,
-                        "id": "evilcraft:blood"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "evilcraft:hardened_blood"
-                }
-            },
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "id": "evilcraft:dark_gem"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "evilcraft:dark_gem_crushed"
-                }
-            }
-        ]
-    }
+        "output": {
+          "type": "projecte:item",
+          "id": "evilcraft:hardened_blood"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "evilcraft:dark_gem"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "evilcraft:dark_gem_crushed"
+        }
+      }
+    ]
+  }
 }

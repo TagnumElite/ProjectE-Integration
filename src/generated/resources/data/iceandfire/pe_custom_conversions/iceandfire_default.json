@@ -1,107 +1,107 @@
 {
-    "comment": "default conversions for Ice and Fire: Dragons",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 2048,
-                "tag": "c:gems/amethyst"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 262144,
-                "tag": "c:heart"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 320,
-                "tag": "iceandfire:mob_skulls"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 624,
-                "tag": "iceandfire:dragon_skulls"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 32,
-                "tag": "iceandfire:myrmex_harvestables"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 256,
-                "tag": "c:scales/sea_serpent"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 512,
-                "tag": "c:scales/dragon"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 156,
-                "tag": "c:bones/dragon"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 156,
-                "tag": "c:bones/wither"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 256,
-                "id": "iceandfire:ice_dragon_blood"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 256,
-                "id": "iceandfire:lightning_dragon_blood"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 256,
-                "id": "iceandfire:fire_dragon_blood"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 144,
-                "id": "iceandfire:dread_shard"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 128,
-                "id": "iceandfire:hippogryph_talon"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 512,
-                "id": "iceandfire:hippocampus_fin"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 512,
-                "id": "iceandfire:shiny_scales"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 768,
-                "id": "iceandfire:siren_tear"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 96,
-                "id": "iceandfire:cyclops_eye"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 1,
-                "id": "iceandfire:pixie_dust"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 1,
-                "id": "iceandfire:pixie_wings"
-            }
-        ]
-    }
+  "comment": "default conversions for Ice and Fire: Dragons",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "tag": "c:gems/amethyst"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 262144,
+        "tag": "c:heart"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 320,
+        "tag": "iceandfire:mob_skulls"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 624,
+        "tag": "iceandfire:dragon_skulls"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "iceandfire:myrmex_harvestables"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "tag": "c:scales/sea_serpent"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "tag": "c:scales/dragon"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 156,
+        "tag": "c:bones/dragon"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 156,
+        "tag": "c:bones/wither"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "iceandfire:ice_dragon_blood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "iceandfire:lightning_dragon_blood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "iceandfire:fire_dragon_blood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 144,
+        "id": "iceandfire:dread_shard"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "iceandfire:hippogryph_talon"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "iceandfire:hippocampus_fin"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "iceandfire:shiny_scales"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 768,
+        "id": "iceandfire:siren_tear"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96,
+        "id": "iceandfire:cyclops_eye"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "iceandfire:pixie_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "iceandfire:pixie_wings"
+      }
+    ]
+  }
 }

@@ -1,41 +1,41 @@
 {
-    "comment": "default conversions for Actually Additions",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 16,
-                "tag": "c:gems/black_quartz"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 4,
-                "tag": "actuallyadditions:coffee_beans"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 4,
-                "id": "actuallyadditions:canola"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 16,
-                "id": "actuallyadditions:bats_wing"
-            }
+  "comment": "default conversions for Actually Additions",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "tag": "c:gems/black_quartz"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "tag": "actuallyadditions:coffee_beans"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "actuallyadditions:canola"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "actuallyadditions:bats_wing"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "minecraft:bowl"
+          }
         ],
-        "conversion": [
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "id": "minecraft:bowl"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "actuallyadditions:water_bowl"
-                }
-            }
-        ]
-    }
+        "output": {
+          "type": "projecte:item",
+          "id": "actuallyadditions:water_bowl"
+        }
+      }
+    ]
+  }
 }

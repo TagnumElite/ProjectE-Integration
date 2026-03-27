@@ -1,65 +1,65 @@
 {
-    "comment": "Sets default conversions for Industrial Foregoing",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "industrialforegoing:sewage"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 12,
-                "id": "industrialforegoing:dryrubber"
-            },
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "industrialforegoing:sludge"
-            },
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "industrialforegoing:essence"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 16,
-                "id": "industrialforegoing:pink_slime"
-            },
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "industrialforegoing:ether_gas"
-            }
+  "comment": "Sets default conversions for Industrial Foregoing",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:sewage"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "id": "industrialforegoing:dryrubber"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:sludge"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:essence"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialforegoing:pink_slime"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "industrialforegoing:ether_gas"
+      }
+    ],
+    "conversion": [
+      {
+        "count": 1600,
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "tag": "minecraft:logs"
+          }
         ],
-        "conversion": [
-            {
-                "count": 1600,
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "tag": "minecraft:logs"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:fluid",
-                    "id": "industrialforegoing:latex"
-                }
-            },
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:fluid",
-                        "amount": 1000,
-                        "id": "industrialforegoing:sewage"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "industrialforegoing:fertilizer"
-                }
-            }
-        ]
-    }
+        "output": {
+          "type": "projecte:fluid",
+          "id": "industrialforegoing:latex"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:fluid",
+            "amount": 1000,
+            "id": "industrialforegoing:sewage"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "industrialforegoing:fertilizer"
+        }
+      }
+    ]
+  }
 }

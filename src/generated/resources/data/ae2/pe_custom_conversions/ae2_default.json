@@ -1,17 +1,17 @@
 {
-    "comment": "Set defaults conversions for Applied Energistics",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 256,
-                "id": "ae2:certus_quartz_crystal"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 16,
-                "id": "ae2:sky_stone_block"
-            }
-        ]
-    }
+  "comment": "Set defaults conversions for Applied Energistics",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "ae2:certus_quartz_crystal"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "ae2:sky_stone_block"
+      }
+    ]
+  }
 }

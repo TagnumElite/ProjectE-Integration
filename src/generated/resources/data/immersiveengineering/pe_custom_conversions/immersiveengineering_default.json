@@ -1,83 +1,83 @@
 {
-    "comment": "default conversions for immersive engineering",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 4,
-                "tag": "c:fiber_hemp"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 1,
-                "tag": "c:dusts/wood"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 8,
-                "tag": "c:dusts/sulfur"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 8,
-                "tag": "c:dusts/nitrate"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 12,
-                "tag": "c:ingots/hop_graphite"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 8,
-                "id": "immersiveengineering:slag"
-            },
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "immersiveengineering:creosote"
-            }
+  "comment": "default conversions for immersive engineering",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "tag": "c:fiber_hemp"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "c:dusts/wood"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "tag": "c:dusts/sulfur"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "tag": "c:dusts/nitrate"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "tag": "c:ingots/hop_graphite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "immersiveengineering:slag"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "immersiveengineering:creosote"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
         ],
-        "conversion": [
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "amount": 8,
-                        "tag": "minecraft:planks"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "immersiveengineering:treated_wood_horizontal"
-                }
-            },
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "amount": 8,
-                        "tag": "minecraft:planks"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "immersiveengineering:treated_wood_vertical"
-                }
-            },
-            {
-                "ingredients": [
-                    {
-                        "type": "projecte:item",
-                        "amount": 8,
-                        "tag": "minecraft:planks"
-                    }
-                ],
-                "output": {
-                    "type": "projecte:item",
-                    "id": "immersiveengineering:treated_wood_packaged"
-                }
-            }
-        ]
-    }
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_horizontal"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_vertical"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "amount": 8,
+            "tag": "minecraft:planks"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "immersiveengineering:treated_wood_packaged"
+        }
+      }
+    ]
+  }
 }

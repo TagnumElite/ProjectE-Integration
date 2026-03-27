@@ -1,26 +1,26 @@
 {
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 128,
-                "tag": "c:ingots/zinc"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 412,
-                "tag": "c:ingots/cobalt"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 356,
-                "tag": "c:ingots/tungsten"
-            },
-            {
-                "type": "projecte:fluid",
-                "emc_value": 1,
-                "id": "minecraft:water"
-            }
-        ]
-    }
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "tag": "c:ingots/zinc"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 412,
+        "tag": "c:ingots/cobalt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 356,
+        "tag": "c:ingots/tungsten"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "minecraft:water"
+      }
+    ]
+  }
 }

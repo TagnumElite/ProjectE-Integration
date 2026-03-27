@@ -1,22 +1,22 @@
 {
-    "comment": "Sets default conversions for Pam's HarvestCraft: Food Extended",
-    "values": {
-        "before": [
-            {
-                "type": "projecte:item",
-                "emc_value": 64,
-                "tag": "c:rawfish"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 64,
-                "tag": "c:rawmeats/rawtofishitem"
-            },
-            {
-                "type": "projecte:item",
-                "emc_value": 64,
-                "tag": "c:rawfish/rawtofishitem"
-            }
-        ]
-    }
+  "comment": "Sets default conversions for Pam's HarvestCraft: Food Extended",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawfish"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawmeats/rawtofishitem"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:rawfish/rawtofishitem"
+      }
+    ]
+  }
 }
