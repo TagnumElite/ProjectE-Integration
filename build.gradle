@@ -152,6 +152,7 @@ repositories {
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'NovaMachina'; url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/' }
     maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
+    maven { name 'Rover656'; url 'https://maven.rover656.dev/releases' }
     maven { name 'Saps'; url 'https://maven.saps.dev/releases' }
     maven { name 'SmartBrainLib'; url 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven { name 'Tamaized'; url 'https://maven.tamaized.com/releases' }
