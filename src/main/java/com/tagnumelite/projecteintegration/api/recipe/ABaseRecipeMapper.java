@@ -72,8 +72,8 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
         }
 
         NSSInput input = getInput(recipe);
-            return addConversionsAndReturn(input != null ? input.fakeGroupMap : null, true);
         if (input == null || !input.successful()) {
+            return addConversionsAndReturn(input != null ? input.fakeGroupMap() : null, true);
         }
 
         mapper.addConversion(output.amount, output.nss, input.getMap());
