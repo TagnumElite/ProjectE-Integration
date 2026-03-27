@@ -200,6 +200,7 @@ dependencies {
     implementation "curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}"
     implementation("com.simibubi.create:create-${mc_version}:${version_create}-+"){ transitive = false }
     implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}"
+    implementation "com.enderio:enderio:${version_enderio}"
     implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
 //    implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
     implementation "com.blakebr0.extendedcrafting:ExtendedCrafting:${mc_version}-${version_extendedcrafting}"

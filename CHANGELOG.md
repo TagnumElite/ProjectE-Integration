@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for [Actually Additions] with EMC for Black Quarts (16), Coffee Beans (4), Canola (4), Bat Wings (16) and Bowl -> Water Bowl
 - NSSInput.Builder to make writing mappers easier with fewer imports
+- Support for [Ender IO]
 
 ### Changed
 - Changed all Mappers and MapperBases to use NSSInput.Builder instead and mark old methods as deprecated for removal
@@ -900,6 +901,7 @@ Added support for 18 more mods
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
 [Draconic Evolution]: https://www.curseforge.com/minecraft/mc-mods/draconic-evolution
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
+[Ender IO]: https://www.curseforge.com/minecraft/mc-mods/ender-io
 [EvilCraft]: https://www.curseforge.com/minecraft/mc-mods/evilcraft
 [Ex Nihilo Sequentia]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia
 [Extended Crafting]: https://www.curseforge.com/minecraft/mc-mods/extended-crafting

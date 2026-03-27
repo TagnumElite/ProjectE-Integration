@@ -1,0 +1,36 @@
+{
+  "comment": "Default EMC for EnderIO",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "enderio:grains_of_infinity"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "enderio:suspicious_seed"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "id": "enderio:enderman_head"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "minecraft:sand"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "enderio:silicon"
+        }
+      }
+    ]
+  }
+}
