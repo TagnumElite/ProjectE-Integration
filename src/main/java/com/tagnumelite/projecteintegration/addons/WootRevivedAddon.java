@@ -25,16 +25,11 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFake;
-import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.fluids.FluidStack;
 import wootrevived.woot.recipes.fluid_infuser.FluidInfuserRecipe;
 import wootrevived.woot.recipes.item_infuser.ItemInfuserRecipe;
 import wootrevived.woot.recipes.stygian_anvil.StygianAnvilRecipe;
@@ -54,7 +49,7 @@ public class WootRevivedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootAnvilMapper extends ARecipeTypeMapper<StygianAnvilRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "WootAnvilMapper";
         }
 
@@ -167,7 +162,7 @@ public class WootRevivedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootFluidConvertorMapper extends ARecipeTypeMapper<FluidInfuserRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "WootFluidConvertorMapper";
         }
 
@@ -183,22 +178,14 @@ public class WootRevivedAddon {
 
         @Override
         public NSSInput getInput(FluidInfuserRecipe recipe) {
-            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
-            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-
-            if (!convertIngredient(recipe.getIngredient(), ingredientMap, fakeGroupMap)) {
-                return new NSSInput(ingredientMap, fakeGroupMap, false);
-            }
-
-            ingredientMap.put(NSSFluid.createFluid(recipe.getInputFluid()), recipe.getInputFluid().getAmount());
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return getInputBuilder().addIngredient(recipe.getIngredient()).addFluid(recipe.getInputFluid()).build();
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootInfuserMapper extends ARecipeTypeMapper<ItemInfuserRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "WootInfuserMapper";
         }
 
@@ -209,26 +196,16 @@ public class WootRevivedAddon {
 
         @Override
         public NSSInput getInput(ItemInfuserRecipe recipe) {
-            List<Ingredient> ingredients = new ArrayList<>(1);
-            ingredients.add(recipe.getIngredient());
+            NSSInput.Builder builder = getInputBuilder();
 
-            recipe.getAugment().ifPresent(ingredients::add);
-
-            // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
-            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+            builder.addIngredient(recipe.getIngredient());
+            recipe.getAugment().ifPresent(builder::addIngredient);
 
             if (!recipe.getFluid().isEmpty()) {
-                FluidStack fluid = recipe.getFluid();
-                ingredientMap.put(NSSFluid.createFluid(fluid), fluid.getAmount());
+                builder.addFluid(recipe.getFluid());
             }
 
-            for (Ingredient ingredient : ingredients) {
-                if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
-                    return new NSSInput(ingredientMap, fakeGroupMap, false);
-                }
-            }
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return builder.build();
         }
 
         @Override

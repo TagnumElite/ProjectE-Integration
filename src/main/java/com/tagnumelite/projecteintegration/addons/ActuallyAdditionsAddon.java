@@ -45,7 +45,7 @@ public class ActuallyAdditionsAddon {
         return "ActuallyAdditions" + name + "Mapper";
     }
 
-    @RecipeTypeMapper(requiredMods =  MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AACrushingMapper extends ARecipeTypeMapper<CrushingRecipe> {
         @Override
         public String getName( ) {
@@ -68,7 +68,7 @@ public class ActuallyAdditionsAddon {
 
     // Skip CoffeeMachineIngredient
 
-    @RecipeTypeMapper(requiredMods =  MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAEmpowerMapper extends ARecipeTypeMapper<EmpowererRecipe> {
         @Override
         public String getName( ) {
@@ -82,11 +82,12 @@ public class ActuallyAdditionsAddon {
 
         @Override
         protected List<Ingredient> getIngredients(EmpowererRecipe recipe) {
-            return List.of(recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(), recipe.getStandThree(),  recipe.getStandFour());
+            return List.of(recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(), recipe.getStandThree(),
+                           recipe.getStandFour());
         }
     }
 
-    @RecipeTypeMapper(requiredMods =  MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAFermentingMapper extends ARecipeTypeMapper<FermentingRecipe> {
         @Override
         public String getName( ) {
@@ -100,17 +101,17 @@ public class ActuallyAdditionsAddon {
 
         @Override
         public NSSOutput getOutput(FermentingRecipe recipe) {
-            return new  NSSOutput(recipe.getOutput());
+            return new NSSOutput(recipe.getOutput());
         }
 
         @Override
         public NSSInput getInput(FermentingRecipe recipe) {
             //TODO: Eventually this will become a FluidIngredient, fix then
-            return NSSInput.createFluid(recipe.getInput());
+            return NSSInput.ofFluid(recipe.getInput());
         }
     }
 
-    @RecipeTypeMapper(requiredMods =  MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AALaserMapper extends ARecipeTypeMapper<LaserRecipe> {
         @Override
         public String getName( ) {
@@ -135,14 +136,14 @@ public class ActuallyAdditionsAddon {
     //    public String getName( ) {
     //        return NAME("MiningLens");
     //    }
-//
+    //
     //    @Override
     //    public boolean canHandle(RecipeType<?> recipeType) {
     //        return recipeType == ActuallyRecipes.Types.MINING_LENS.get();
     //    }
     //}
 
-    @RecipeTypeMapper(requiredMods =  MODID, priority = 1)
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAPressingMapper extends ARecipeTypeMapper<PressingRecipe> {
         @Override
         public String getName( ) {
@@ -165,11 +166,9 @@ public class ActuallyAdditionsAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("default conversions for Actually Additions")
-                    .before(ActuallyTags.Items.GEMS_BLACK_QUARTZ, 16)
-                   .before(ActuallyTags.Items.COFFEE_BEANS, 4)
-                    .before(ActuallyItems.CANOLA, 4)
-                    .before(ActuallyItems.BATS_WING, 16)
-                    .conversion(ActuallyItems.WATER_BOWL).ingredient(Items.BOWL).end();
+                   .before(ActuallyTags.Items.GEMS_BLACK_QUARTZ, 16).before(ActuallyTags.Items.COFFEE_BEANS, 4)
+                   .before(ActuallyItems.CANOLA, 4).before(ActuallyItems.BATS_WING, 16)
+                   .conversion(ActuallyItems.WATER_BOWL).ingredient(Items.BOWL).end();
         }
     }
 }

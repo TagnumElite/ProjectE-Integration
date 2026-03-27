@@ -48,7 +48,7 @@ public class ChippedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ChippedWorkbenchMapper extends ARecipeTypeMapper<ChippedRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Workbench");
         }
 
@@ -58,6 +58,7 @@ public class ChippedAddon {
         }
 
         @Override
+        //TODO: Figure out stuff
         public boolean convertRecipe(ChippedRecipe recipe) {
             List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fgm = new ArrayList<>();
 

@@ -40,7 +40,7 @@ public class FarmingForBlockheadsAddon {
         }
 
         @Override
-        public String getName() {
+        public String getName( ) {
             return "FarmingForBlockheadsMarketMapper";
         }
 

@@ -64,7 +64,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         return tag("c:ingots/" + ingot);
     }
 
-    private Map<AConversionProvider, String> getConversionProviders() {
+    private Map<AConversionProvider, String> getConversionProviders( ) {
         ModList modList = ModList.get();
         Map<AConversionProvider, String> conversionProviders = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
@@ -95,18 +95,18 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     @Override
     protected void addCustomConversions(HolderLookup.@NotNull Provider provider) {
-        createConversionBuilder(PEIntegration.RL("pei_metals"))
-                .before(ingotTag("zinc"), 128)
-                .before(ingotTag("cobalt"), 412)
-                .before(ingotTag("tungsten"), 356)
-                .before(new FluidStack(Fluids.WATER, 250), 1);
+        createConversionBuilder(PEIntegration.RL("pei_metals")).before(ingotTag("zinc"), 128)
+                                                               .before(ingotTag("cobalt"), 412)
+                                                               .before(ingotTag("tungsten"), 356)
+                                                               .before(new FluidStack(Fluids.WATER, 250), 1);
 
-        createConversionBuilder(PEIntegration.RL("pei_fluids"))
-                .before(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1)
-                .before(tag("foods/milk"), 16);
+        createConversionBuilder(PEIntegration.RL("pei_fluids")).before(
+                                                                       BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1)
+                                                               .before(tag("foods/milk"), 16);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
-            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(), entry.getValue() + "_default");
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(),
+                                                                                      entry.getValue() + "_default");
             PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
             entry.getKey().convert(builder);

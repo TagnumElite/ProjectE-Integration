@@ -44,7 +44,7 @@ public class ExtendedCraftingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECCompressorMapper extends ARecipeTypeMapper<ICompressorRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Compressor");
         }
 
@@ -62,7 +62,7 @@ public class ExtendedCraftingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECEnderCrafterMapper extends ARecipeTypeMapper<IEnderCrafterRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("EnderCrafter");
         }
 
@@ -75,7 +75,7 @@ public class ExtendedCraftingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECFluxCrafterMapper extends ARecipeTypeMapper<IFluxCrafterRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("FluxCrafter");
         }
 
@@ -88,7 +88,7 @@ public class ExtendedCraftingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECTableMapper extends ARecipeTypeMapper<ITableRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Table");
         }
 
@@ -101,7 +101,7 @@ public class ExtendedCraftingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECCombinationMapper extends ARecipeTypeMapper<CombinationRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Combination");
         }
 

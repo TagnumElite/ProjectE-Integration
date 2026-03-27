@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = PEIntegration.MODID)
 public class DataGenerators {
-    private DataGenerators() {
+    private DataGenerators( ) {
     }
 
     @SubscribeEvent

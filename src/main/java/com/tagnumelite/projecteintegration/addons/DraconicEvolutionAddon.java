@@ -44,7 +44,7 @@ public class DraconicEvolutionAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class DEFusionMapper extends ARecipeTypeMapper<FusionRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "DraconicEvolutionFusionMapper";
         }
 
@@ -57,10 +57,8 @@ public class DraconicEvolutionAddon {
         protected List<Ingredient> getIngredients(FusionRecipe recipe) {
             ArrayList<Ingredient> ingredients = new ArrayList<>();
             ingredients.add(recipe.getCatalyst());
-            ingredients.addAll(recipe.fusionIngredients().stream()
-                    .filter(IFusionRecipe.IFusionIngredient::consume)
-                    .map(IFusionRecipe.IFusionIngredient::get)
-                    .toList());
+            ingredients.addAll(recipe.fusionIngredients().stream().filter(IFusionRecipe.IFusionIngredient::consume)
+                                     .map(IFusionRecipe.IFusionIngredient::get).toList());
             return ingredients;
         }
     }
@@ -70,9 +68,8 @@ public class DraconicEvolutionAddon {
         @Override
         public void convert(CustomConversionBuilder builder) {
             builder.comment("Sets default conversions for Draconic Evolution")
-                    .before(DETags.Items.DUSTS_DRACONIUM, 2048)
-                    .before(DEContent.DRAGON_HEART.get(), 262144)
-                    .before(DEContent.CHAOS_SHARD.get(), 4096000);
+                   .before(DETags.Items.DUSTS_DRACONIUM, 2048).before(DEContent.DRAGON_HEART.get(), 262144)
+                   .before(DEContent.CHAOS_SHARD.get(), 4096000);
         }
     }
 }

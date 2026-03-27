@@ -25,26 +25,22 @@ package com.tagnumelite.projecteintegration.api.recipe;
 import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  */
 public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
-    public abstract List<R> getRecipes();
+    public abstract List<R> getRecipes( );
 
     protected abstract List<Ingredient> getIngredients(R recipe);
 
@@ -58,16 +54,10 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
             return null;
         }
 
-        // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-        List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-        Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+        NSSInput.Builder builder = getInputBuilder();
+        ingredients.forEach(builder::addIngredient);
 
-        for (Ingredient ingredient : ingredients) {
-            if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
-                return new NSSInput(ingredientMap, fakeGroupMap, false);
-            }
-        }
-        return new NSSInput(ingredientMap, fakeGroupMap, true);
+        return builder.build();
     }
 
     @Override
@@ -85,7 +75,8 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe, RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
+    public final boolean handleRecipe(IMappingCollector<NormalizedSimpleStack, Long> mapper, Object recipe,
+                                      RegistryAccess registryAccess, INSSFakeGroupManager fakeGroupManager) {
         this.recipeID = ResourceLocation.fromNamespaceAndPath(getRequiredMods()[0], getName().toLowerCase());
         this.mapper = mapper;
         this.fakeGroupManager = fakeGroupManager;
@@ -94,11 +85,11 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
             return convertRecipe((R) recipe);
         } catch (ClassCastException e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
-                    getClass().getName(), recipe.getClass().getName(),
-                    ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
+                                       getClass().getName(), recipe.getClass().getName(),
+                                       ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
         } catch (Exception e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
-                    getClass().getName(), recipeID, recipe.getClass().getName(), e);
+                                       getClass().getName(), recipeID, recipe.getClass().getName(), e);
         }
         return false;
     }
@@ -108,7 +99,7 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
      *
      * @return An array of a modid or a single array of 'unregistered_mapper'.
      */
-    public String[] getRequiredMods() {
+    public String[] getRequiredMods( ) {
         CustomRecipeMapper recipeTypeMapperAnnotation = getClass().getAnnotation(CustomRecipeMapper.class);
         if (recipeTypeMapperAnnotation != null) {
             return new String[]{recipeTypeMapperAnnotation.value()};

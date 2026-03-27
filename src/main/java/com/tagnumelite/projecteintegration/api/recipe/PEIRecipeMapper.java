@@ -41,29 +41,31 @@ import java.util.*;
 public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> {
     private static final Map<ACustomRecipeMapper<?>, String> recipeMappers = new HashMap<>();
 
-    public static void loadMappers() {
+    public static void loadMappers( ) {
         if (recipeMappers.isEmpty()) {
             recipeMappers.putAll(Utils.getCustomRecipeMappers());
         }
     }
 
     @Override
-    public String getName() {
+    public String getName( ) {
         return "ProjectEIntegrationRecipeMapper";
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getTranslationKey( ) {
         return ""; // @TODO
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription( ) {
         return "Recipe mapper for custom recipes that don't implement IRecipe";
     }
 
     @Override
-    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector, ReloadableServerResources reloadableServerResources, RegistryAccess registryAccess, ResourceManager resourceManager) {
+    public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mappingCollector,
+                            ReloadableServerResources reloadableServerResources, RegistryAccess registryAccess,
+                            ResourceManager resourceManager) {
         NSSFake.setCurrentNamespace(PEIntegration.MODID + "RecipeMapper");
 
         NSSFakeGroupManager fakeGroupManager = new NSSFakeGroupManager(mappingCollector);
@@ -82,7 +84,8 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
                         PEIntegration.debugLog("Recipe Mapper ({}) failed to handle recipe: {}", name, recipe);
                     }
                 } catch (Exception e) {
-                    PEIntegration.LOGGER.error("Custom Recipe Mapper ({}) failed to handle recipe: {}", name, recipe, e);
+                    PEIntegration.LOGGER.error("Custom Recipe Mapper ({}) failed to handle recipe: {}", name, recipe,
+                                               e);
                 }
             }
             //}
@@ -106,7 +109,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
             NSSFakeGroupManager.namespace = namespace;
         }
 
-        public static void resetNamespace() {
+        public static void resetNamespace( ) {
             NSSFakeGroupManager.namespace = "";
         }
 
@@ -122,12 +125,14 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
         }
 
         @Override
-        public FakeGroupData getOrCreateFakeGroup(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b, boolean b1) {
+        public FakeGroupData getOrCreateFakeGroup(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b,
+                                                  boolean b1) {
             throw new RuntimeException("getOrCreateFakeGroup in PEI not yet implemented");
         }
 
         @Override
-        public FakeGroupData getOrCreateFakeGroupDirect(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b, boolean b1) {
+        public FakeGroupData getOrCreateFakeGroupDirect(Object2IntMap<NormalizedSimpleStack> object2IntMap, boolean b,
+                                                        boolean b1) {
             throw new RuntimeException("getOrCreateFakeGroup in PEI not yet implemented");
         }
     }

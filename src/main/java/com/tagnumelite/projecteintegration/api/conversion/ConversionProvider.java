@@ -41,5 +41,5 @@ public @interface ConversionProvider {
      *
      * @return The modid
      */
-    String value();
+    String value( );
 }

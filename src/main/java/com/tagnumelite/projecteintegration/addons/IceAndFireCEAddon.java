@@ -43,12 +43,12 @@ public class IceAndFireCEAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IAFDragonForgeMapper extends ARecipeTypeMapper<DragonForgeRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "IceAndFireDragonForgeMapper";
         }
 
         @Override
-        public String getDescription() {
+        public String getDescription( ) {
             return "Recipe mapper for Ice and Fire DragonForge recipes";
         }
 
@@ -79,27 +79,16 @@ public class IceAndFireCEAddon {
 
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default conversions for Ice and Fire: Dragons")
-                    .before(gemTag("amethyst"), 2048)
-                    .before(commonTag("heart"), 262144)
-                    .before(iafTag("mob_skulls"), 320)
-                    .before(iafTag("dragon_skulls"), 624)
-                    .before(iafTag("myrmex_harvestables"), 32)
-                    .before(scaleTag("sea_serpent"), 256)
-                    .before(scaleTag("dragon"), 512)
-                    .before(bonesTag("dragon"), 156)
-                    .before(bonesTag("wither"), 156)
-                    .before(IafItems.ICE_DRAGON_BLOOD.get(), 256)
-                    .before(IafItems.LIGHTNING_DRAGON_BLOOD.get(), 256)
-                    .before(IafItems.FIRE_DRAGON_BLOOD.get(), 256)
-                    .before(IafItems.DREAD_SHARD.get(), 144)
-                    .before(IafItems.HIPPOGRYPH_TALON.get(), 128)
-                    .before(IafItems.HIPPOCAMPUS_FIN.get(), 512)
-                    .before(IafItems.SHINY_SCALES.get(), 512)
-                    .before(IafItems.SIREN_TEAR.get(), 768)
-                    .before(IafItems.CYCLOPS_EYE.get(), 96)
-                    .before(IafItems.PIXIE_DUST.get(), 1)
-                    .before(IafItems.PIXIE_WINGS.get(), 1);
+            builder.comment("default conversions for Ice and Fire: Dragons").before(gemTag("amethyst"), 2048)
+                   .before(commonTag("heart"), 262144).before(iafTag("mob_skulls"), 320)
+                   .before(iafTag("dragon_skulls"), 624).before(iafTag("myrmex_harvestables"), 32)
+                   .before(scaleTag("sea_serpent"), 256).before(scaleTag("dragon"), 512).before(bonesTag("dragon"), 156)
+                   .before(bonesTag("wither"), 156).before(IafItems.ICE_DRAGON_BLOOD.get(), 256)
+                   .before(IafItems.LIGHTNING_DRAGON_BLOOD.get(), 256).before(IafItems.FIRE_DRAGON_BLOOD.get(), 256)
+                   .before(IafItems.DREAD_SHARD.get(), 144).before(IafItems.HIPPOGRYPH_TALON.get(), 128)
+                   .before(IafItems.HIPPOCAMPUS_FIN.get(), 512).before(IafItems.SHINY_SCALES.get(), 512)
+                   .before(IafItems.SIREN_TEAR.get(), 768).before(IafItems.CYCLOPS_EYE.get(), 96)
+                   .before(IafItems.PIXIE_DUST.get(), 1).before(IafItems.PIXIE_WINGS.get(), 1);
         }
     }
 }

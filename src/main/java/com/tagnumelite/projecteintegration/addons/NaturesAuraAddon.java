@@ -52,7 +52,7 @@ public class NaturesAuraAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class NAAltarMapper extends ARecipeTypeMapper<AltarRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Altar");
         }
 
@@ -71,7 +71,7 @@ public class NaturesAuraAddon {
     public static class NAOfferingMapper extends ARecipeTypeMapper<OfferingRecipe> {
 
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Offering");
         }
 
@@ -89,7 +89,7 @@ public class NaturesAuraAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class NATreeRitualMapper extends ARecipeTypeMapper<TreeRitualRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("TreeRitual");
         }
 
@@ -108,18 +108,18 @@ public class NaturesAuraAddon {
             for (Ingredient ingredient : recipe.ingredients) {
                 ItemStack[] stackItems = ingredient.getItems();
 
-                if (Arrays.stream(stackItems).anyMatch(s -> s.getItem() == ModItems.AURA_BOTTLE)) {
+                if (Arrays.stream(stackItems).anyMatch(s->s.getItem() == ModItems.AURA_BOTTLE)) {
                     List<ItemStack> items = new ArrayList<>(stackItems.length);
 
                     for (ItemStack stack : stackItems) {
-                        if (stack.getItem() == ModItems.AURA_BOTTLE)  {
+                        if (stack.getItem() == ModItems.AURA_BOTTLE) {
                             items.add(new ItemStack(ModItems.BOTTLE_TWO_THE_REBOTTLING));
                         } else {
                             items.add(stack);
                         }
                     }
 
-                    ingredients.add(Ingredient.of(items.toArray(new ItemStack[]{})));
+                    ingredients.add(Ingredient.of(items.toArray(new ItemStack[]{ })));
                 } else {
                     ingredients.add(ingredient);
                 }
@@ -136,10 +136,9 @@ public class NaturesAuraAddon {
     public static class NAConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Natures Aura")
-                    .before(ModItems.GOLD_LEAF, 2)
-                    .before(ModBlocks.END_FLOWER, 32)
-                    .conversion(ModItems.AURA_BOTTLE).ingredient(ModItems.BOTTLE_TWO_THE_REBOTTLING).end();
+            builder.comment("Default conversions for Natures Aura").before(ModItems.GOLD_LEAF, 2)
+                   .before(ModBlocks.END_FLOWER, 32).conversion(ModItems.AURA_BOTTLE)
+                   .ingredient(ModItems.BOTTLE_TWO_THE_REBOTTLING).end();
         }
     }
 }

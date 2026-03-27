@@ -44,21 +44,15 @@ import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NSSFluid;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.core.NonNullList;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CreateAddon {
     public static final String MODID = "create";
@@ -70,81 +64,30 @@ public class CreateAddon {
     public abstract static class CreateProcessingRecipeMapper<R extends ProcessingRecipe<?, ?>> extends ARecipeTypeMapper<R> {
         @Override
         public NSSInput getInput(R recipe) {
-            NonNullList<Ingredient> ingredients = recipe.getIngredients();
-            NonNullList<SizedFluidIngredient> fluidIngredients = recipe.getFluidIngredients();
-            if (ingredients.isEmpty() && fluidIngredients.isEmpty()) {
-                PEIntegration.debugLog("Recipe ({}) contains no inputs: (Ingredients: {}; Fluids: {})", recipeID, ingredients, fluidIngredients);
+            if (recipe.getIngredients().isEmpty() && recipe.getFluidIngredients().isEmpty()) {
+                PEIntegration.debugLog("Recipe ({}) contains no inputs", recipeID);
                 return null;
             }
 
-            // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            NSSInput.Builder builder = getInputBuilder();
+            recipe.getFluidIngredients().forEach(builder::addFluid);
 
+            NonNullList<Ingredient> ingredients = recipe.getIngredients();
             for (int i = 0; i < ingredients.size(); i++) {
                 Ingredient ingredient = ingredients.get(i);
                 if (recipe instanceof ItemApplicationRecipe iaRecipe && iaRecipe.shouldKeepHeldItem() && i == 1)
                     continue; // Skip ItemApplicationRecipe's held item if it is not consumed.
-                if (!convertIngredient(ingredient, ingredientMap, fakeGroupMap)) {
-                    return new NSSInput(ingredientMap, fakeGroupMap, false);
-                }
+                builder.addIngredient(ingredient);
             }
 
-            for (SizedFluidIngredient fluidIngredient : fluidIngredients) {
-                final int amount = fluidIngredient.amount();
-                List<FluidStack> matches = List.of(fluidIngredient.getFluids());
-                if (matches.isEmpty()) {
-                    //PEIntegration.LOGGER.warn("");
-                    continue;
-                }
-
-                if (matches.size() == 1) {
-                    ingredientMap.put(NSSFluid.createFluid(matches.getFirst()), amount);
-                } else {
-                    Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
-                    List<FluidStack> stacks = new ArrayList<>();
-
-                    for (FluidStack match : matches) {
-                        //Validate it is not an empty stack in case mods do weird things in custom ingredients
-                        if (!match.isEmpty()) {
-                            rawNSSMatches.add(NSSFluid.createFluid(match));
-                            stacks.add(match);
-                        }
-                    }
-
-                    int count = stacks.size();
-                    if (count == 1) {
-                        ingredientMap.put(NSSFluid.createFluid(stacks.getFirst()), amount);
-                    } else if (count > 1) {
-                        //Handle this ingredient as the representation of all the stacks it supports
-                        INSSFakeGroupManager.FakeGroupData group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
-                        NormalizedSimpleStack dummy = group.dummy();
-                        ingredientMap.put(dummy, Math.max(amount, 1));
-                        if (group.created()) {
-                            //Only lookup the matching stacks for the group with conversion if we don't already have
-                            // a group created for this dummy ingredient
-                            // Note: We soft ignore cases where it fails/there are no matching group ingredients
-                            // as then our fake ingredient will never actually have an emc value assigned with it
-                            // so the recipe won't either
-                            List<Object2IntMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
-                            for (FluidStack stack : stacks) {
-                                Object2IntMap<NormalizedSimpleStack> groupIngredientMap = new Object2IntOpenHashMap<>();
-                                groupIngredientMap.put(NSSFluid.createFluid(stack), 1);
-                                groupIngredientMaps.add(groupIngredientMap);
-                            }
-                            fakeGroupMap.add(new Tuple<>(dummy, groupIngredientMaps));
-                        }
-                    }
-                }
-            }
-
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return builder.build();
         }
 
         @Override
         public NSSOutput getOutput(R recipe) {
             List<Object> outputs = new ArrayList<>();
-            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO -> pO.getChance() >= 1.0f).map(ProcessingOutput::getStack).toList();
+            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO->pO.getChance() >= 1.0f)
+                                            .map(ProcessingOutput::getStack).toList();
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
@@ -157,7 +100,7 @@ public class CreateAddon {
     public static class CreateBasinMapper extends CreateProcessingRecipeMapper<BasinRecipe> {
 
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("BASIN");
         }
 
@@ -170,7 +113,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCompactingMapper extends CreateProcessingRecipeMapper<CompactingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Compacting");
         }
 
@@ -183,7 +126,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCrushingMapper extends CreateProcessingRecipeMapper<CrushingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Crushing");
         }
 
@@ -196,7 +139,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCuttingMapper extends CreateProcessingRecipeMapper<CuttingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Cutting");
         }
 
@@ -228,7 +171,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateHauntingMapper extends CreateProcessingRecipeMapper<HauntingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Haunting");
         }
 
@@ -241,7 +184,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMillingMapper extends CreateProcessingRecipeMapper<MillingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Milling");
         }
 
@@ -254,7 +197,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMixingMapper extends CreateProcessingRecipeMapper<MixingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("CUTTING");
         }
 
@@ -267,7 +210,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreatePressingMapper extends CreateProcessingRecipeMapper<PressingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Pressing");
         }
 
@@ -280,7 +223,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSplashingMapper extends CreateProcessingRecipeMapper<SplashingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Splashing");
         }
 
@@ -293,7 +236,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateDeployerApplicationMapper extends CreateProcessingRecipeMapper<DeployerApplicationRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("DeployerApplication");
         }
 
@@ -306,7 +249,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMechanicalCraftingMapper extends ARecipeTypeMapper<MechanicalCraftingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("MechanicalCrafting");
         }
 
@@ -319,7 +262,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateItemApplicationMapper extends CreateProcessingRecipeMapper<ItemApplicationRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("ItemApplication");
         }
 
@@ -332,7 +275,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSequencedAssemblyMapper extends ARecipeTypeMapper<SequencedAssemblyRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("SequencedAssembly");
         }
 
@@ -387,7 +330,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSandPaperPolishingMapper extends CreateProcessingRecipeMapper<SandPaperPolishingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("SandpaperPolishing");
         }
 

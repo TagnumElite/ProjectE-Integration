@@ -55,7 +55,7 @@ public class ArsNouveauAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ANCrushMapper extends ARecipeTypeMapper<CrushRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Crush");
         }
 
@@ -71,7 +71,8 @@ public class ArsNouveauAddon {
 
         @Override
         public NSSOutput getOutput(CrushRecipe recipe) {
-            Object[] outputs = recipe.outputs().stream().filter(output -> output.chance() > 1f).map(output -> output.stack()).toArray();
+            Object[] outputs = recipe.outputs().stream().filter(output->output.chance() > 1f)
+                                     .map(output->output.stack()).toArray();
 
             if (outputs.length == 0) return null;
 
@@ -83,7 +84,7 @@ public class ArsNouveauAddon {
     public static class ANEnchantingApparatusMapper extends ARecipeTypeMapper<EnchantingApparatusRecipe> {
 
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("EnchantingApparatus");
         }
 
@@ -108,7 +109,7 @@ public class ArsNouveauAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ANGlyphMapper extends ARecipeTypeMapper<GlyphRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Glyph");
         }
 
@@ -131,7 +132,7 @@ public class ArsNouveauAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ANImbuementMapper extends ARecipeTypeMapper<ImbuementRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return NAME("Imbuement");
         }
 
@@ -157,18 +158,14 @@ public class ArsNouveauAddon {
     public static class ANConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Ars Nouveau")
-                    .before(ItemsRegistry.EXPERIENCE_GEM, 16)
-                    .before(ItemsRegistry.WILDEN_SPIKE, 64)
-                    .before(ItemsRegistry.WILDEN_HORN, 96)
-                    .before(ItemsRegistry.WIXIE_SHARD, 32)
-                    .before(ItemsRegistry.WHIRLISPRIG_SHARDS, 16)
-                    .before(ItemsRegistry.WILDEN_WING, 72)
-                    .before(ItemsRegistry.WILDEN_TRIBUTE, 96)
-                    .before(ItemTags.create(ArsNouveau.prefix("shady_wizard_fruits")), 64)
-                    .conversion(ItemsRegistry.MAGE_BLOOM).ingredient(BlockRegistry.MAGE_BLOOM_CROP).end()
-                    .conversion(ItemsRegistry.DRYGMY_SHARD).ingredient(ItemsRegistry.WILDEN_HORN).end()
-                    .conversion(ItemsRegistry.STARBUNCLE_SHARD).ingredient(Items.GOLD_NUGGET).end();
+            builder.comment("Default conversions for Ars Nouveau").before(ItemsRegistry.EXPERIENCE_GEM, 16)
+                   .before(ItemsRegistry.WILDEN_SPIKE, 64).before(ItemsRegistry.WILDEN_HORN, 96)
+                   .before(ItemsRegistry.WIXIE_SHARD, 32).before(ItemsRegistry.WHIRLISPRIG_SHARDS, 16)
+                   .before(ItemsRegistry.WILDEN_WING, 72).before(ItemsRegistry.WILDEN_TRIBUTE, 96)
+                   .before(ItemTags.create(ArsNouveau.prefix("shady_wizard_fruits")), 64)
+                   .conversion(ItemsRegistry.MAGE_BLOOM).ingredient(BlockRegistry.MAGE_BLOOM_CROP).end()
+                   .conversion(ItemsRegistry.DRYGMY_SHARD).ingredient(ItemsRegistry.WILDEN_HORN).end()
+                   .conversion(ItemsRegistry.STARBUNCLE_SHARD).ingredient(Items.GOLD_NUGGET).end();
         }
     }
 }

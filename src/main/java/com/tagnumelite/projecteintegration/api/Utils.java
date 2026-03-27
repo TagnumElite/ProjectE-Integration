@@ -54,7 +54,7 @@ import java.util.*;
 public class Utils {
     private static final Type CUSTOM_RECIPE_MAPPER_TYPE = Type.getType(CustomRecipeMapper.class);
 
-    public static Map<? extends ACustomRecipeMapper<?>, String> getCustomRecipeMappers() {
+    public static Map<? extends ACustomRecipeMapper<?>, String> getCustomRecipeMappers( ) {
         ModList modList = ModList.get();
         Map<ACustomRecipeMapper<?>, String> recipeTypeMappers = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
@@ -74,8 +74,8 @@ public class Utils {
     public static <T> T createOrGetInstance(String className, Class<T> baseClass) {
         try {
             Class<? extends T> subClass = Class.forName(className).asSubclass(baseClass);
-            return subClass.newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | LinkageError e) {
+            return subClass.getDeclaredConstructor().newInstance();
+        } catch (LinkageError | ReflectiveOperationException e) {
             PEIntegration.LOGGER.error("Failed to load: {}", className, e);
         }
         return null;
@@ -88,7 +88,8 @@ public class Utils {
     public static boolean checkRequiredMod(ModFileScanData.AnnotationData data, String key) {
         String modId = getAnnotationData(data, key);
         if (modId != null && !ModList.get().isLoaded(modId)) {
-            PEIntegration.debugLog("Skipped checking class {}, as its required mod ({}) is not loaded.", data.memberName(), modId);
+            PEIntegration.debugLog("Skipped checking class {}, as its required mod ({}) is not loaded.",
+                                   data.memberName(), modId);
             return false;
         }
         return true;
@@ -101,19 +102,23 @@ public class Utils {
             try {
                 return (T) annotationData.get(key);
             } catch (ClassCastException e) {
-                PEIntegration.LOGGER.fatal("Annotation Data {}:{} was casted to an invalid class", key, annotationData.get(key), e);
+                PEIntegration.LOGGER.fatal("Annotation Data {}:{} was casted to an invalid class", key,
+                                           annotationData.get(key), e);
             }
         }
         return null;
     }
 
-    public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient, Object2IntMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
-        if (fluidIngredient == null) {
+    public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient,
+                                                 Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                                 List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap,
+                                                 INSSFakeGroupManager fakeGroupManager, String recipeID) {
+        if (fluidIngredient == null || fluidIngredient.isEmpty()) {
             return false;
         } else if (fluidIngredient.size() == 1) {
             //Handle this ingredient as a direct representation of the stack it represents
-            return !addIngredient(ingredientMap, fluidIngredient.get(0));
-        } else if (!fluidIngredient.isEmpty()) {
+            return !addIngredient(ingredientMap, fluidIngredient.getFirst());
+        } else {
             Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
             List<FluidStack> fluids = new ArrayList<>();
 
@@ -154,7 +159,10 @@ public class Utils {
         return true;
     }
 
-    public static boolean convertIngredient(int amount, Ingredient ingredient, Object2IntMap<NormalizedSimpleStack> ingredientMap, List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap, INSSFakeGroupManager fakeGroupManager, String recipeID) {
+    public static boolean convertIngredient(int amount, Ingredient ingredient,
+                                            Object2IntMap<NormalizedSimpleStack> ingredientMap,
+                                            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap,
+                                            INSSFakeGroupManager fakeGroupManager, String recipeID) {
         ItemStack[] matches = getMatchingStacks(ingredient, recipeID);
         if (matches == null) {
             return false;
@@ -204,7 +212,8 @@ public class Utils {
 
     // Borrowed from ProjectE with a few modifications
     // https://github.com/sinkillerj/ProjectE/blob/mc1.19.x/src/main/java/moze_intel/projecte/emc/mappers/recipe/BaseRecipeTypeMapper.java#L158-L195
-    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, ItemStack stack, String recipeID) {
+    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, ItemStack stack,
+                                        String recipeID) {
         stack = stack.copy();
         Item item = stack.getItem();
         boolean hasContainerItem = false;
@@ -221,21 +230,25 @@ public class Utils {
             ResourceLocation itemName = BuiltInRegistries.ITEM.getKey(item);
             if (hasContainerItem) {
                 if (isTagException(e)) {
-                    PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} reported that it has a container item, "
-                            + "but errors when trying to get the container item due to not properly deserializing and handling tags. "
-                            + "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
+                    PEIntegration.LOGGER.fatal(
+                            "Error mapping recipe {}. Item: {} reported that it has a container item, " +
+                                    "but errors when trying to get the container item due to not properly deserializing and handling tags. " +
+                                    "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
                 } else {
-                    PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} reported that it has a container item, "
-                            + "but errors when trying to get the container item based on the stack in the recipe. "
-                            + "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
+                    PEIntegration.LOGGER.fatal(
+                            "Error mapping recipe {}. Item: {} reported that it has a container item, " +
+                                    "but errors when trying to get the container item based on the stack in the recipe. " +
+                                    "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
                 }
             } else if (isTagException(e)) {
-                PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} crashed when checking if the stack has a container item, "
-                                + "due to not properly deserializing and handling tags. Please report this to {}.", recipeID, itemName,
-                        itemName.getNamespace(), e);
+                PEIntegration.LOGGER.fatal(
+                        "Error mapping recipe {}. Item: {} crashed when checking if the stack has a container item, " +
+                                "due to not properly deserializing and handling tags. Please report this to {}.",
+                        recipeID, itemName, itemName.getNamespace(), e);
             } else {
-                PEIntegration.LOGGER.fatal("Error mapping recipe {}. Item: {} crashed when checking if the stack in the recipe has a container item. "
-                        + "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
+                PEIntegration.LOGGER.fatal(
+                        "Error mapping recipe {}. Item: {} crashed when checking if the stack in the recipe has a container item. " +
+                                "Please report this to {}.", recipeID, itemName, itemName.getNamespace(), e);
             }
             //If something failed because the recipe errored, return that we did handle it so that we don't try to handle it later
             // as there is a 99% chance it will just fail again anyway
@@ -256,7 +269,8 @@ public class Utils {
         return e instanceof IllegalStateException && e.getMessage().matches("Tag \\S*:\\S* used before it was bound");
     }
 
-    public static NSSOutput mapOutputs(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, String recipeID, Object... allOutputs) {
+    public static NSSOutput mapOutputs(IMappingCollector<NormalizedSimpleStack, Long> mapper,
+                                       INSSFakeGroupManager fakeGroupManager, String recipeID, Object... allOutputs) {
         List<Object> outputs = Arrays.asList(allOutputs);
         if (allOutputs.length == 1 && allOutputs[0] instanceof Collection) {
             outputs = new ArrayList<>((Collection<?>) allOutputs[0]);
@@ -267,21 +281,23 @@ public class Utils {
 
         int totalOutputs = 0;
         for (Object output : outputs) {
-            if (output == null) continue;
+            switch (output) {
+                case ItemStack item -> {
+                    if (item.isEmpty()) continue;
 
-            if (output instanceof ItemStack item) {
-                if (item.isEmpty()) continue;
+                    outputStacks.put(NSSItem.createItem(item), item.getCount());
+                    totalOutputs += item.getCount();
+                }
+                case FluidStack fluid -> {
+                    if (fluid.isEmpty()) continue;
 
-                outputStacks.put(NSSItem.createItem(item), item.getCount());
-                totalOutputs += item.getCount();
-            } else if (output instanceof FluidStack fluid) {
-                if (fluid.isEmpty()) continue;
-
-                outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
-                totalOutputs += fluid.getAmount();
-            } else {
-                PEIntegration.LOGGER.warn("Recipe ({}) has unsupported outputs: {}. Skipping...", recipeID, output);
+                    outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
+                    totalOutputs += fluid.getAmount();
+                }
+                default -> PEIntegration.LOGGER.warn("Recipe ({}) has unsupported outputs: {}. Skipping...", recipeID,
+                                                     output);
             }
+
         }
 
         NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
@@ -293,7 +309,9 @@ public class Utils {
         return new NSSOutput(totalOutputs, dummy);
     }
 
-    public static NSSOutput mapOutput(IMappingCollector<NormalizedSimpleStack, Long> mapper, INSSFakeGroupManager fakeGroupManager, String recipeID, Object... outputVariants) {
+    public static NSSOutput mapOutput(IMappingCollector<NormalizedSimpleStack, Long> mapper,
+                                      INSSFakeGroupManager fakeGroupManager, String recipeID,
+                                      Object... outputVariants) {
         List<Object> outputs = Arrays.asList(outputVariants);
         if (outputVariants.length == 1 && outputVariants[0] instanceof Collection) {
             outputs = new ArrayList<>((Collection<?>) outputVariants[0]);
@@ -303,19 +321,21 @@ public class Utils {
         Map<NormalizedSimpleStack, Integer> outputStacks = new HashMap<>(outputs.size());
 
         for (Object output : outputs) {
-            if (output == null) continue;
+            switch (output) {
+                case ItemStack item -> {
+                    if (item.isEmpty()) continue;
 
-            if (output instanceof ItemStack item) {
-                if (item.isEmpty()) continue;
+                    outputStacks.put(NSSItem.createItem(item), item.getCount());
+                }
+                case FluidStack fluid -> {
+                    if (fluid.isEmpty()) continue;
 
-                outputStacks.put(NSSItem.createItem(item), item.getCount());
-            } else if (output instanceof FluidStack fluid) {
-                if (fluid.isEmpty()) continue;
-
-                outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
-            } else {
-                PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
+                    outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
+                }
+                default -> PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID,
+                                                     output);
             }
+
         }
 
         NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
@@ -327,25 +347,16 @@ public class Utils {
         return new NSSOutput(1, dummy);
     }
 
-    /**
-     * @param ingredient
-     * @param recipeID
-     * @return
-     */
     public static ItemStack[] getMatchingStacks(Ingredient ingredient, String recipeID) {
         try {
             return ingredient.getItems();
         } catch (Exception e) {
-            PEIntegration.LOGGER.fatal("Failed to map recipe ({}). Ingredient ({}) failed to get matching stacks", recipeID, ingredient.getClass().getName(), e);
+            PEIntegration.LOGGER.fatal("Failed to map recipe ({}). Ingredient ({}) failed to get matching stacks",
+                                       recipeID, ingredient.getClass().getName(), e);
             return null;
         }
     }
 
-    /**
-     * @param item
-     * @param amount
-     * @return
-     */
     public static ItemStack getStack(ItemStack item, int amount) {
         if (amount > 0) {
             return new ItemStack(item.getItem(), amount);
@@ -353,26 +364,17 @@ public class Utils {
         return item.copy();
     }
 
-    /**
-     * @param dummy
-     * @return
-     */
     public static Object2IntMap<NormalizedSimpleStack> getDummyMap(NormalizedSimpleStack dummy) {
         return getDummyMap(dummy, 1);
     }
 
-    /**
-     * @param dummy
-     * @return
-     */
     public static Object2IntMap<NormalizedSimpleStack> getDummyMap(NormalizedSimpleStack dummy, int amount) {
         Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
         ingredientMap.put(dummy, amount);
         return ingredientMap;
     }
 
-    public static <CLZ> Field getField(Class<CLZ> clazz, String fieldName)
-            throws NoSuchFieldException {
+    public static <CLZ> Field getField(Class<CLZ> clazz, String fieldName) throws NoSuchFieldException {
         try {
             return clazz.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {

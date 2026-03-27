@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for [Actually Additions] with EMC for Black Quarts (16), Coffee Beans (4), Canola (4), Bat Wings (16) and Bowl -> Water Bowl
+- NSSInput.Builder to make writing mappers easier with fewer imports
+
+### Changed
+- Changed all Mappers and MapperBases to use NSSInput.Builder instead and mark old methods as deprecated for removal
 
 ### Fixed
 - Support for [Create] 6.0.9

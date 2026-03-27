@@ -32,7 +32,7 @@ public class TouhouLittleMaidAddon {
     @RecipeTypeMapper(requiredMods = "touhou_little_maid", priority = 1)
     public static class TLMAltarMapper extends ARecipeTypeMapper<AltarRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "TouhouLittleMaidAltarMapper";
         }
 
@@ -43,8 +43,7 @@ public class TouhouLittleMaidAddon {
 
         @Override
         public boolean convertRecipe(AltarRecipe recipe) {
-            if (recipe.isItemCraft())
-                return super.convertRecipe(recipe);
+            if (recipe.isItemCraft()) return super.convertRecipe(recipe);
             return false;
         }
     }

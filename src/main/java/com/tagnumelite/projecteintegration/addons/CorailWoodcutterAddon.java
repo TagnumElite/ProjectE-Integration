@@ -32,7 +32,7 @@ public class CorailWoodcutterAddon {
     @RecipeTypeMapper(requiredMods = "corail_woodcutter", priority = 1)
     public static final class CWWoodcuttingMapper extends ARecipeTypeMapper<WoodcuttingRecipe> {
         @Override
-        public String getName() {
+        public String getName( ) {
             return "CorailWoodcuttingMapper";
         }
 

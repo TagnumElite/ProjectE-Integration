@@ -26,9 +26,9 @@ import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 
 public interface IRecipeMapper<R> {
-    String getName();
+    String getName( );
 
-    String getDescription();
+    String getDescription( );
 
     NSSOutput getOutput(R recipe);
 
