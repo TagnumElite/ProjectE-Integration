@@ -19,8 +19,7 @@ decided it would be better to make a separate mod that does everything without C
 
 ## Development
 
-I do not have a proper maven setup yet (just don't think I will need one).
-I do support JitPack though. [![Latest Version](https://jitpack.io/v/TagnumElite/ProjectE-Integration.svg)](https://jitpack.io/#TagnumElite/ProjectE-Integration)
+[![Latest Version](https://jitpack.io/v/TagnumElite/ProjectE-Integration.svg)](https://jitpack.io/#TagnumElite/ProjectE-Integration)
 
 ```groovy
 repositories {
@@ -30,6 +29,19 @@ repositories {
 dependencies {
     provided "com.tagnumelite:ProjectE-Integration:{VERSION}"
 }
+```
+
+Maven (doesn't have all versions)
+
+```groovy
+repositories {
+    maven { url 'https://maven.tagnumelite.com/releases' }
+}
+
+dependencies {
+    provided "com.tagnumelite.projecteintegration:projecte-integration:{VERSION}"
+}
+
 ```
 
 ## Permissions:
