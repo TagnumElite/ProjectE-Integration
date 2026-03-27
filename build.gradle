@@ -192,6 +192,7 @@ dependencies {
     //localRuntime "curse.maven:obfuscate-289380:${version_obfuscate}"
     //localRuntime "curse.maven:observerlib-316833:${version_observerlib}"
     localRuntime "vazkii.patchouli:Patchouli:${version_patchouli}"
+    localRuntime "xyz.brassgoggledcoders:PatchouliProvider:${mc_version}-${version_patchouli_provider}"
     implementation "curse.maven:resourceful-lib-570073:${version_resourceful_lib}"
     implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}"
 //    localRuntime "curse.maven:structure-gel-api-378802:${version_structuregelapi}"
