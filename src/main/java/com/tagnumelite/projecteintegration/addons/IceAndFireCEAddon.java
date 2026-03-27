@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 TagnumElite
+ * Copyright (c) 2019-2026 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,9 @@
 
 package com.tagnumelite.projecteintegration.addons;
 
-import com.github.alexthe666.iceandfire.item.IafItemRegistry;
-import com.github.alexthe666.iceandfire.recipe.DragonForgeRecipe;
-import com.github.alexthe666.iceandfire.recipe.IafRecipeRegistry;
+import com.iafenvoy.iceandfire.recipe.DragonForgeRecipe;
+import com.iafenvoy.iceandfire.registry.IafItems;
+import com.iafenvoy.iceandfire.registry.IafRecipes;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
@@ -37,7 +37,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.Arrays;
 import java.util.List;
 
-public class IceAndFireAddon {
+public class IceAndFireCEAddon {
     public static final String MODID = "iceandfire";
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
@@ -54,7 +54,7 @@ public class IceAndFireAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == IafRecipeRegistry.DRAGON_FORGE_TYPE.get();
+            return recipeType == IafRecipes.DRAGON_FORGE_TYPE.get();
         }
 
         @Override
@@ -66,11 +66,11 @@ public class IceAndFireAddon {
     @ConversionProvider(MODID)
     public static class IAFDataGenerator extends AConversionProvider {
         protected static NormalizedSimpleStack bonesTag(String tag) {
-            return forgeTag("bones/" + tag);
+            return commonTag("bones/" + tag);
         }
 
         protected static NormalizedSimpleStack scaleTag(String tag) {
-            return forgeTag("scales/" + tag);
+            return commonTag("scales/" + tag);
         }
 
         protected static NormalizedSimpleStack iafTag(String tag) {
@@ -81,7 +81,7 @@ public class IceAndFireAddon {
         public void convert(CustomConversionBuilder builder) {
             builder.comment("default conversions for Ice and Fire: Dragons")
                     .before(gemTag("amethyst"), 2048)
-                    .before(forgeTag("heart"), 262144)
+                    .before(commonTag("heart"), 262144)
                     .before(iafTag("mob_skulls"), 320)
                     .before(iafTag("dragon_skulls"), 624)
                     .before(iafTag("myrmex_harvestables"), 32)
@@ -89,17 +89,17 @@ public class IceAndFireAddon {
                     .before(scaleTag("dragon"), 512)
                     .before(bonesTag("dragon"), 156)
                     .before(bonesTag("wither"), 156)
-                    .before(IafItemRegistry.ICE_DRAGON_BLOOD.get(), 256)
-                    .before(IafItemRegistry.LIGHTNING_DRAGON_BLOOD.get(), 256)
-                    .before(IafItemRegistry.FIRE_DRAGON_BLOOD.get(), 256)
-                    .before(IafItemRegistry.DREAD_SHARD.get(), 144)
-                    .before(IafItemRegistry.HIPPOGRYPH_TALON.get(), 128)
-                    .before(IafItemRegistry.HIPPOCAMPUS_FIN.get(), 512)
-                    .before(IafItemRegistry.SHINY_SCALES.get(), 512)
-                    .before(IafItemRegistry.SIREN_TEAR.get(), 768)
-                    .before(IafItemRegistry.CYCLOPS_EYE.get(), 96)
-                    .before(IafItemRegistry.PIXIE_DUST.get(), 1)
-                    .before(IafItemRegistry.PIXIE_WINGS.get(), 1);
+                    .before(IafItems.ICE_DRAGON_BLOOD.get(), 256)
+                    .before(IafItems.LIGHTNING_DRAGON_BLOOD.get(), 256)
+                    .before(IafItems.FIRE_DRAGON_BLOOD.get(), 256)
+                    .before(IafItems.DREAD_SHARD.get(), 144)
+                    .before(IafItems.HIPPOGRYPH_TALON.get(), 128)
+                    .before(IafItems.HIPPOCAMPUS_FIN.get(), 512)
+                    .before(IafItems.SHINY_SCALES.get(), 512)
+                    .before(IafItems.SIREN_TEAR.get(), 768)
+                    .before(IafItems.CYCLOPS_EYE.get(), 96)
+                    .before(IafItems.PIXIE_DUST.get(), 1)
+                    .before(IafItems.PIXIE_WINGS.get(), 1);
         }
     }
 }

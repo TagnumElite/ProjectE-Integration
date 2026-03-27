@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Support for [Create] 6.0.9
+
+### Ported
+- Support for [Draconic Evolution]
+- Support for [Ice And Fire] to [Ice And Fire CE]
+- Support for [Psi]
+- Support for [Woot] to [Woot Revived]
+
 ## [8.2.0]
 ### Fixed
 - Support for [Immersive Engineering] as they moved from FluidTagInput to SizedFluidIngredient

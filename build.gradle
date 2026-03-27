@@ -165,7 +165,7 @@ dependencies {
     localRuntime "dev.architectury:architectury-neoforge:${version_architectury}"
     localRuntime "curse.maven:athena-841890:${version_athena}"
     localRuntime "curse.maven:balm-531761:${version_balm}"
-//    localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}:universal"
+    localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}"
 //    localRuntime "smashingmods:chemlib:${version_chemlib}"
 //    localRuntime "curse.maven:citadel-331936:${version_citadel}"
     localRuntime "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
@@ -210,7 +210,7 @@ dependencies {
     implementation "curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}"
     implementation("com.simibubi.create:create-${mc_version}:${version_create}-+"){ transitive = false }
 //    implementation "curse.maven:create-328085:${version_create}"
-//    implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}:universal"
+    implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}"
 //    implementation "curse.maven:elemental-craft-395158:${version_elementalcraft}"
     implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
 //    implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
@@ -218,7 +218,7 @@ dependencies {
     implementation "curse.maven:farmers-delight-398521:${version_farmersdelight}"
     implementation "curse.maven:farming-for-blockheads-261924:${version_farmingforblockheads}"
     //implementation "curse.maven:ftb-industrial-contraptions-539097:${version_ftb_industrial_contraptions}"
-//    implementation "curse.maven:ice-and-fire-264231:${version_iceandfire}"
+    implementation "curse.maven:ice-and-fire-ce-1040076:${version_iceandfirece}"
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}"
     implementation ("com.buuz135:industrialforegoing:${version_industrialforegoing}") { transitive = false }
 //    implementation "curse.maven:mana-and-artifice-406360:${version_manaandartifice}"
@@ -232,7 +232,7 @@ dependencies {
     //implementation "curse.maven:pams-harvestcraft-2-crops-361385:${version_pamsharvestcraftcrops}"
     implementation "curse.maven:pams-harvestcraft-2-food-extended-402231:${version_pamsharvestcraftfoodextended}"
     implementation "me.desht.pneumaticcraft:pneumaticcraft-repressurized:${version_pneumaticcraft}"
-    //implementation "vazkii.psi:Psi:${version_psi}"
+    implementation "vazkii.psi:psi:${version_psi}"
     //implementation "com.teamcofh:thermal_core:${mc_version}-${version_thermal_core}"
     //implementation "com.teamcofh:thermal_cultivation:${mc_version}-${version_thermalcultivation}"
     //implementation "com.teamcofh:thermal_expansion:${mc_version}-${version_thermalexpansion}"
@@ -242,7 +242,7 @@ dependencies {
     //implementation "com.teamcofh:thermal_locomotion:${mc_version}-${version_thermallocomotion}"
     //implementation "slimeknights.tconstruct:TConstruct:${version_tinkers}"
     implementation "curse.maven:touhou_little_maid-355044:${version_touhou_little_maid}"
-    //implementation "curse.maven:woot-244049:${version_woot}"
+    implementation "curse.maven:woot-revived-1337238:${version_woot_revived}"
 }
 
 javadoc {

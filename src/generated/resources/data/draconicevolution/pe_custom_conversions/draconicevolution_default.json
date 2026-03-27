@@ -1,0 +1,22 @@
+{
+  "comment": "Sets default conversions for Draconic Evolution",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "tag": "c:dusts/draconium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 262144,
+        "id": "draconicevolution:dragon_heart"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4096000,
+        "id": "draconicevolution:chaos_shard"
+      }
+    ]
+  }
+}

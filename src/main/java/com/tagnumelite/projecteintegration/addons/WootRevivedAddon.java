@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2026 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,32 +25,34 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import ipsis.woot.crafting.AnvilRecipe;
-import ipsis.woot.crafting.FluidConvertorRecipe;
-import ipsis.woot.crafting.InfuserRecipe;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
 import moze_intel.projecte.api.nss.NSSFake;
 import moze_intel.projecte.api.nss.NSSFluid;
 import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.fluids.FluidStack;
+import wootrevived.woot.recipes.fluid_infuser.FluidInfuserRecipe;
+import wootrevived.woot.recipes.item_infuser.ItemInfuserRecipe;
+import wootrevived.woot.recipes.stygian_anvil.StygianAnvilRecipe;
+import wootrevived.woot.registries.RecipesRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // FactoryRecipe and EnchantSqueezerRecipe not supported. You can guess why.
-public class WootAddon {
-    public static final String MODID = "woot";
+public class WootRevivedAddon {
+    public static final String MODID = "woot_revived";
     public static final NormalizedSimpleStack WHITE_STACK = NSSFake.create("woot_white_dye_stack");
     public static final NormalizedSimpleStack RED_STACK = NSSFake.create("woot_red_dye_stack");
     public static final NormalizedSimpleStack YELLOW_STACK = NSSFake.create("woot_yellow_dye_stack");
     public static final NormalizedSimpleStack BLUE_STACK = NSSFake.create("woot_blue_dye_stack");
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootAnvilMapper extends ARecipeTypeMapper<AnvilRecipe> {
+    public static class WootAnvilMapper extends ARecipeTypeMapper<StygianAnvilRecipe> {
         @Override
         public String getName() {
             return "WootAnvilMapper";
@@ -58,18 +60,24 @@ public class WootAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == AnvilRecipe.ANVIL_TYPE;
+            return recipeType == RecipesRegistry.ANVIL_RECIPE_TYPE.get();
         }
 
         @Override
-        public NSSOutput getOutput(AnvilRecipe recipe) {
+        public NSSOutput getOutput(StygianAnvilRecipe recipe) {
             return new NSSOutput(recipe.getOutput());
         }
 
         @Override
-        public List<Ingredient> getIngredients(AnvilRecipe recipe) {
-            ArrayList<Ingredient> ingredients = new ArrayList<>(recipe.getIngredients());
-            ingredients.add(recipe.getBaseIngredient());
+        public List<Ingredient> getIngredients(StygianAnvilRecipe recipe) {
+            ArrayList<Ingredient> ingredients = new ArrayList<>();
+
+            ingredients.add(recipe.getBase());
+            recipe.getFirstComplementary().ifPresent(ingredients::add);
+            recipe.getSecondComplementary().ifPresent(ingredients::add);
+            recipe.getThirdComplementary().ifPresent(ingredients::add);
+            recipe.getFourthComplementary().ifPresent(ingredients::add);
+
             return ingredients;
         }
     }
@@ -157,7 +165,7 @@ public class WootAddon {
     }
     */
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootFluidConvertorMapper extends ARecipeTypeMapper<FluidConvertorRecipe> {
+    public static class WootFluidConvertorMapper extends ARecipeTypeMapper<FluidInfuserRecipe> {
         @Override
         public String getName() {
             return "WootFluidConvertorMapper";
@@ -165,28 +173,30 @@ public class WootAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == FluidConvertorRecipe.FLUID_CONV_TYPE;
+            return recipeType == RecipesRegistry.FLUID_INFUSER_RECIPE_TYPE.get();
         }
 
         @Override
-        public NSSOutput getOutput(FluidConvertorRecipe recipe) {
-            return new NSSOutput(recipe.getOutput());
+        public NSSOutput getOutput(FluidInfuserRecipe recipe) {
+            return new NSSOutput(recipe.getOutputFluid());
         }
 
         @Override
-        public NSSInput getInput(FluidConvertorRecipe recipe) {
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            if (!convertIngredient(recipe.getCatalyst(), ingredientMap, fakeGroupMap)) {
+        public NSSInput getInput(FluidInfuserRecipe recipe) {
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+
+            if (!convertIngredient(recipe.getIngredient(), ingredientMap, fakeGroupMap)) {
                 return new NSSInput(ingredientMap, fakeGroupMap, false);
             }
-            ingredientMap.addIngredient(NSSFluid.createFluid(recipe.getInputFluid()), recipe.getInputFluid().getAmount());
+
+            ingredientMap.put(NSSFluid.createFluid(recipe.getInputFluid()), recipe.getInputFluid().getAmount());
             return new NSSInput(ingredientMap, fakeGroupMap, true);
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class WootInfuserMapper extends ARecipeTypeMapper<InfuserRecipe> {
+    public static class WootInfuserMapper extends ARecipeTypeMapper<ItemInfuserRecipe> {
         @Override
         public String getName() {
             return "WootInfuserMapper";
@@ -194,24 +204,23 @@ public class WootAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == InfuserRecipe.INFUSER_TYPE;
+            return recipeType == RecipesRegistry.ITEM_INFUSER_RECIPE_TYPE.get();
         }
 
         @Override
-        public NSSInput getInput(InfuserRecipe recipe) {
+        public NSSInput getInput(ItemInfuserRecipe recipe) {
             List<Ingredient> ingredients = new ArrayList<>(1);
             ingredients.add(recipe.getIngredient());
-            if (recipe.getAugment() != null) {
-                ingredients.add(recipe.getAugment());
-            }
+
+            recipe.getAugment().ifPresent(ingredients::add);
 
             // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
+            Object2IntMap<NormalizedSimpleStack> ingredientMap = new Object2IntOpenHashMap<>();
+            List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
 
-            if (recipe.getFluidInput() != null) {
-                FluidStack fluid = recipe.getFluidInput();
-                ingredientMap.addIngredient(NSSFluid.createFluid(fluid), fluid.getAmount());
+            if (!recipe.getFluid().isEmpty()) {
+                FluidStack fluid = recipe.getFluid();
+                ingredientMap.put(NSSFluid.createFluid(fluid), fluid.getAmount());
             }
 
             for (Ingredient ingredient : ingredients) {
@@ -223,7 +232,7 @@ public class WootAddon {
         }
 
         @Override
-        public NSSOutput getOutput(InfuserRecipe recipe) {
+        public NSSOutput getOutput(ItemInfuserRecipe recipe) {
             return new NSSOutput(recipe.getOutput());
         }
     }
