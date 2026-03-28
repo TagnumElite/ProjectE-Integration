@@ -195,6 +195,7 @@ dependencies {
     localRuntime "maven.modrinth:jade:${version_jade}"
 
     implementation "de.ellpeck:actuallyadditions:${version_actually_additions}+mc${mc_version}"
+    implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
     implementation ("org.appliedenergistics:appliedenergistics2:${version_appliedenergistics}") { transitive = false }
     implementation "curse.maven:ars-nouveau-401955:${version_arsnouveau}"
     implementation "curse.maven:chipped-456956:${version_chipped}"
@@ -372,7 +373,7 @@ publisher {
     curseDepends {
         required 'projecte'
 
-        optional 'actually-additions', 'applied-energistics-2', 'ars-nouveau',
+        optional 'actually-additions', 'allthemodium', 'applied-energistics-2', 'ars-nouveau',
             'chipped', 'create', 'corail-woodcutter',
             'draconic-evolution',
             'ender-io', 'evilcraft', 'extended-crafting',

@@ -88,7 +88,8 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     private AConversionProvider createInstance(String className) {
         try {
             return Class.forName(className).asSubclass(AConversionProvider.class).getDeclaredConstructor().newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 TagnumElite
+ * Copyright (c) 2019-2026 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,16 +27,24 @@ import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.thevortex.allthemodium.registry.ModRegistry;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 
+//TODO: Relook at all the EMC values
 public class AllTheModiumAddon {
     @ConversionProvider("allthemodium")
     public static final class ATMConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Allthemodium")
+            builder.before(ModRegistry.ATM_SMITHING.get(), 24000)
+                    .before(ModRegistry.VIB_SMITHING.get(), 24000 * 2)
+                    .before(ModRegistry.UNO_SMITHING.get(), 24000 * 4)
                     .before(ModRegistry.ALLTHEMODIUM_INGOT.get(), 122800)
-                    .before(ModRegistry.ANCIENT_CAVEVINES_PLANT_.get(), 16)
-                    .before(ModRegistry.ANCIENT_SOULBERRY.get(), 16)
-                    .before(ModRegistry.ANCIENT_STONE.get(), 8);
+                    .before(ModRegistry.VIBRANIUM_INGOT.get(), 122800 * 2)
+                    .before(ModRegistry.UNOBTAINIUM_INGOT.get(), 122800 * 4)
+                    .before(ModRegistry.ANCIENT_CAVEVINES.get(), 16)
+                    .before(ModRegistry.PIGLICH_HEART.get(), 1024)
+                    .before(ModRegistry.ANCIENT_STONE.get(), 8)
+                    .before(ModRegistry.ANCIENT_DIRT.get(), 8)
+                    .before(ModRegistry.ANCIENT_GRASS.get(), 8)
+                    .before(ModRegistry.ANCIENT_PODZOL.get(), 8);
         }
     }
 }

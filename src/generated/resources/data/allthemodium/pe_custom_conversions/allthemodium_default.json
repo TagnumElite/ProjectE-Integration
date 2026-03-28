@@ -1,0 +1,67 @@
+{
+  "comment": "Default ProjectE Conversions for allthemodium by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 24000,
+        "id": "allthemodium:allthemodium_upgrade_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 48000,
+        "id": "allthemodium:vibranium_upgrade_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96000,
+        "id": "allthemodium:unobtainium_upgrade_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 122800,
+        "id": "allthemodium:allthemodium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 245600,
+        "id": "allthemodium:vibranium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 491200,
+        "id": "allthemodium:unobtainium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "allthemodium:ancient_soulberries"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1024,
+        "id": "allthemodium:piglich_heart"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "allthemodium:ancient_stone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "allthemodium:ancient_dirt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "allthemodium:ancient_grass"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "allthemodium:ancient_podzol"
+      }
+    ]
+  }
+}
