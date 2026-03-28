@@ -109,6 +109,16 @@ public class Utils {
         return null;
     }
 
+    /**
+     *
+     * @param amount
+     * @param fluidIngredient
+     * @param ingredientMap
+     * @param fakeGroupMap
+     * @param fakeGroupManager
+     * @param recipeID
+     * @return
+     */
     public static boolean convertFluidIngredient(int amount, List<FluidStack> fluidIngredient,
                                                  Object2IntMap<NormalizedSimpleStack> ingredientMap,
                                                  List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap,
@@ -117,7 +127,7 @@ public class Utils {
             return false;
         } else if (fluidIngredient.size() == 1) {
             //Handle this ingredient as a direct representation of the stack it represents
-            return !addIngredient(ingredientMap, fluidIngredient.getFirst());
+            return !addIngredient(ingredientMap, fluidIngredient.getFirst(), amount);
         } else {
             Set<NormalizedSimpleStack> rawNSSMatches = new HashSet<>();
             List<FluidStack> fluids = new ArrayList<>();
@@ -132,7 +142,7 @@ public class Utils {
 
             int count = fluids.size();
             if (count == 1) {
-                return !addIngredient(ingredientMap, fluids.get(0));
+                return !addIngredient(ingredientMap, fluids.getFirst(), amount);
             } else if (count > 1) {
                 //Handle this ingredient as the representation of all the fluids it supports
                 INSSFakeGroupManager.FakeGroupData group = fakeGroupManager.getOrCreateFakeGroup(rawNSSMatches);
@@ -147,7 +157,7 @@ public class Utils {
                     List<Object2IntMap<NormalizedSimpleStack>> groupIngredientMaps = new ArrayList<>();
                     for (FluidStack fluid : fluids) {
                         Object2IntMap<NormalizedSimpleStack> groupIngredientMap = new Object2IntOpenHashMap<>();
-                        if (addIngredient(groupIngredientMap, fluid.copy())) {
+                        if (addIngredient(groupIngredientMap, fluid.copy(), amount)) {
                             return false;
                         }
                         groupIngredientMaps.add(groupIngredientMap);
@@ -258,9 +268,9 @@ public class Utils {
         return false;
     }
 
-    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
-        ingredientMap.put(NSSFluid.createFluid(stack), stack.getAmount());
-        return true;
+    public static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, FluidStack stack, int amount) {
+        ingredientMap.put(NSSFluid.createFluid(stack), amount);
+        return false;
     }
 
     // Also from ProjectE, a dependency for the above code:

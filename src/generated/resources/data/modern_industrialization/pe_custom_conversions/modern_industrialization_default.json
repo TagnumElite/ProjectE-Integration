@@ -1,0 +1,57 @@
+{
+  "comment": "Default ProjectE Conversions for modern_industrialization by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "modern_industrialization:titanium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "modern_industrialization:chromium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "modern_industrialization:antimony_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "modern_industrialization:iridium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "modern_industrialization:manganese_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "modern_industrialization:monazite_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "modern_industrialization:bauxite_dust"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "modern_industrialization:shale_oil"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "modern_industrialization:crude_oil"
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": 1,
+        "id": "modern_industrialization:lubricant"
+      }
+    ]
+  }
+}

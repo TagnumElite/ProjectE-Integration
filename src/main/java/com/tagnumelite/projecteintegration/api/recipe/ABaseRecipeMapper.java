@@ -49,7 +49,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
 
     @Deprecated(forRemoval = true, since = "8.3.0")
     protected static boolean addIngredient(Object2IntMap<NormalizedSimpleStack> ingredientMap, FluidStack stack) {
-        return Utils.addIngredient(ingredientMap, stack);
+        return Utils.addIngredient(ingredientMap, stack, stack.getAmount());
     }
 
     @Override
@@ -73,6 +73,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
 
         NSSInput input = getInput(recipe);
         if (input == null || !input.successful()) {
+            if (input != null) PEIntegration.LOGGER.warn("Recipe ({}) has failed NSSInput ({})", recipeID, input);
             return addConversionsAndReturn(input != null ? input.fakeGroupMap() : null, true);
         }
 

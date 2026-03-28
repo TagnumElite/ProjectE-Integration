@@ -22,6 +22,7 @@
 
 package com.tagnumelite.projecteintegration.api.recipe.nss;
 
+import com.tagnumelite.projecteintegration.PEIntegration;
 import com.tagnumelite.projecteintegration.api.Utils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -130,8 +131,10 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
         }
 
         public Builder addIngredient(int amount, Ingredient ingredient) {
-            success(Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager,
-                    recipeID.toString()));
+            var successful = Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager,
+                    recipeID.toString());
+            if (!successful) PEIntegration.debugLog("Failed to proccess Ingredient ({}#{}) from Recipe ({})", ingredient, amount, recipeID);
+            success(successful);
             return this;
         }
 
@@ -149,8 +152,10 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
         }
 
         public Builder addFluid(int amount, FluidIngredient fluidIngredient) {
-            success(Utils.convertFluidIngredient(amount, Arrays.asList(fluidIngredient.getStacks()), ingredientMap,
-                    fakeGroupMap, fakeGroupManager, recipeID.toString()));
+            var successful = Utils.convertFluidIngredient(amount, Arrays.asList(fluidIngredient.getStacks()), ingredientMap,
+                    fakeGroupMap, fakeGroupManager, recipeID.toString());
+            if (!successful) PEIntegration.debugLog("Failed to convert FluidIngredient ({}#{}) from recipe ({})", fluidIngredient.getStacks(), amount, recipeID);
+            success(successful);
             return this;
         }
 

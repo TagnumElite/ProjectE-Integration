@@ -211,6 +211,7 @@ dependencies {
     implementation "curse.maven:ice-and-fire-ce-1040076:${version_iceandfirece}"
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}"
     implementation ("com.buuz135:industrialforegoing:${version_industrialforegoing}") { transitive = false }
+    implementation ("aztech:Modern-Industrialization:${version_modernindustrialization}") { transitive = false }
     implementation "curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}"
     implementation "curse.maven:natures-aura-306626:${version_naturesaura}"
     implementation ("com.klikli_dev:occultism-${version_occultism}") { transitive = false }

@@ -23,6 +23,8 @@
 package com.tagnumelite.projecteintegration.api.recipe.nss;
 
 import com.tagnumelite.projecteintegration.PEIntegration;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import moze_intel.projecte.api.mapper.collector.IMappingCollector;
 import moze_intel.projecte.api.mapper.recipe.INSSFakeGroupManager;
 import moze_intel.projecte.api.nss.NSSFluid;
@@ -31,6 +33,7 @@ import moze_intel.projecte.api.nss.NormalizedSimpleStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Arrays;
@@ -128,15 +131,14 @@ public class NSSOutput {
 
     /**
      * NSSOutput.Builder is used to create a {@link NSSOutput} with multiple outputs.
-     *
-     * @TODO: Make a conversion module in {@link com.tagnumelite.projecteintegration.api.Utils}
+     * TODO: Make a conversion module in {@link com.tagnumelite.projecteintegration.api.Utils}
      */
     public static class Builder {
         private final IMappingCollector<NormalizedSimpleStack, Long> mapper;
         private final INSSFakeGroupManager fakeGroupManager;
         private final ResourceLocation recipeID;
-        private final HashMap<NormalizedSimpleStack, Integer> outputStacks;
-        private int totalOutputs;
+        private final Object2IntMap<NormalizedSimpleStack> outputStacks = new Object2IntOpenHashMap<>();
+        private int totalOutputs = 0;
 
         /**
          * @param mapper           The mapping collector given by the RecipeMapper
@@ -148,8 +150,6 @@ public class NSSOutput {
             this.mapper = mapper;
             this.fakeGroupManager = fakeGroupManager;
             this.recipeID = recipeID;
-            this.outputStacks = new HashMap<>();
-            this.totalOutputs = 0;
         }
 
         /**
@@ -157,9 +157,10 @@ public class NSSOutput {
          *
          * @param variants The array of variants for an output
          */
-        public void addOutput(Object... variants) {
-            if (variants.length <= 0) return; // Skip empty lists
+        public Builder addOutput(Object... variants) {
+            if (variants.length == 0) return this; // Skip empty lists
             this.addOutput(Arrays.asList(variants));
+            return this;
         }
 
         /**
@@ -167,43 +168,46 @@ public class NSSOutput {
          *
          * @param variants The list of variants for an output
          */
-        public void addOutput(List<?> variants) {
-            if (variants == null || variants.isEmpty()) return; // Skip empty lists
+        public Builder addOutput(List<?> variants) {
+            if (variants == null || variants.isEmpty()) return this; // Skip empty lists
 
             // Assume output stacks will be the size length as outputs
-            Map<NormalizedSimpleStack, Integer> outputStacks = new HashMap<>(variants.size());
+            Object2IntMap<NormalizedSimpleStack> variantStacks = new Object2IntOpenHashMap<>(variants.size());
 
             for (Object variant : variants) {
-                if (variant == null) continue;
+                switch (variant) {
+                    case null -> {}
+                    case ItemStack item -> {
+                        if (item.isEmpty()) {
+                            PEIntegration.debugLog("ItemStack ({}) came up empty during recipe '{}'", item, recipeID);
+                            continue;
+                        }
 
-                if (variant instanceof ItemStack item) {
-                    if (item.isEmpty()) {
-                        PEIntegration.debugLog("ItemStack ({}) came up empty during recipe '{}'", item, recipeID);
-                        continue;
+                        variantStacks.put(NSSItem.createItem(item), item.getCount());
                     }
+                    case FluidStack fluid -> {
+                        if (fluid.isEmpty()) {
+                            PEIntegration.debugLog("FluidStack ({}) came up empty during recipe '{}'", fluid, recipeID);
+                            continue;
+                        }
 
-                    outputStacks.put(NSSItem.createItem(item), item.getCount());
-                } else if (variant instanceof FluidStack fluid) {
-                    if (fluid.isEmpty()) {
-                        PEIntegration.debugLog("FluidStack ({}) came up empty during recipe '{}'", fluid, recipeID);
-                        continue;
+                        variantStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
                     }
-
-                    outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
-                } else {
-                    PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output variant: {}. Skipping...", recipeID,
-                            variant);
+                    default ->
+                            PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output variant: {}. Skipping...", recipeID,
+                                    variant);
                 }
             }
 
-            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
+            NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(variantStacks.keySet()).dummy();
 
-            for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
-                mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, 1));
+            for (Object2IntMap.Entry<NormalizedSimpleStack> entry : variantStacks.object2IntEntrySet()) {
+                mapper.addConversion(entry.getIntValue(), entry.getKey(), getDummyMap(dummy, 1));
             }
 
             this.outputStacks.put(dummy, 1);
             this.totalOutputs += 1;
+            return this;
         }
 
         /**
@@ -211,9 +215,10 @@ public class NSSOutput {
          *
          * @param outputs An array of outputs to be added
          */
-        public void addOutputs(Object... outputs) {
-            if (outputs.length <= 0) return; // Skip empty lists
+        public Builder addOutputs(Object... outputs) {
+            if (outputs.length == 0) return this; // Skip empty lists
             this.addOutputs(Arrays.asList(outputs));
+            return this;
         }
 
         /**
@@ -221,32 +226,53 @@ public class NSSOutput {
          *
          * @param outputs A list of outputs to be added
          */
-        public void addOutputs(List<?> outputs) {
-            if (outputs == null || outputs.isEmpty()) return; // Skip empty lists
+        public Builder addOutputs(List<?> outputs) {
+            if (outputs == null || outputs.isEmpty()) return this; // Skip empty lists
 
             for (Object output : outputs) {
-                if (output == null) continue;
+                switch (output) {
+                    case null -> {}
+                    case ItemStack item -> {
+                        if (item.isEmpty()) {
+                            PEIntegration.debugLog("ItemStack ({}) came up empty during recipe '{}'", item, recipeID);
+                            continue;
+                        }
 
-                if (output instanceof ItemStack item) {
-                    if (item.isEmpty()) {
-                        PEIntegration.debugLog("ItemStack ({}) came up empty during recipe '{}'", item, recipeID);
-                        continue;
+                        outputStacks.put(NSSItem.createItem(item), item.getCount());
+                        totalOutputs += item.getCount();
                     }
+                    case FluidStack fluid -> {
+                        if (fluid.isEmpty()) {
+                            PEIntegration.debugLog("FluidStack ({}) came up empty during recipe '{}'", fluid, recipeID);
+                            continue;
+                        }
 
-                    outputStacks.put(NSSItem.createItem(item), item.getCount());
-                    totalOutputs += item.getCount();
-                } else if (output instanceof FluidStack fluid) {
-                    if (fluid.isEmpty()) {
-                        PEIntegration.debugLog("FluidStack ({}) came up empty during recipe '{}'", fluid, recipeID);
-                        continue;
+                        outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
+                        totalOutputs += fluid.getAmount();
                     }
-
-                    outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
-                    totalOutputs += fluid.getAmount();
-                } else {
-                    PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
+                    default ->
+                            PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
                 }
+
             }
+            return this;
+        }
+
+        public Builder addItem(ItemStack stack) {
+            outputStacks.put(NSSItem.createItem(stack), stack.getCount());
+            totalOutputs += stack.getCount();
+            return this;
+        }
+
+        public Builder addFluid(int amount, Fluid fluid) {
+            outputStacks.put(NSSFluid.createFluid(fluid), amount);
+            totalOutputs += amount;
+            return this;
+        }
+
+        @Deprecated(forRemoval = true)
+        public NSSOutput toOutput() {
+            return build();
         }
 
         /**
@@ -254,7 +280,7 @@ public class NSSOutput {
          *
          * @return A NSSOutput resulting from the outputs or {@link NSSOutput#EMPTY} if it failed.
          */
-        public NSSOutput toOutput() {
+        public NSSOutput build() {
             if (totalOutputs <= 0 || outputStacks.isEmpty()) {
                 PEIntegration.LOGGER.warn("NSSOutput.Builder resulted in {} outputs from recipe ({}): {}", totalOutputs,
                         recipeID, outputStacks);
@@ -263,7 +289,7 @@ public class NSSOutput {
 
             NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();
 
-            for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.entrySet()) {
+            for (Map.Entry<NormalizedSimpleStack, Integer> entry : outputStacks.object2IntEntrySet()) {
                 mapper.addConversion(entry.getValue(), entry.getKey(), getDummyMap(dummy, entry.getValue()));
             }
 
