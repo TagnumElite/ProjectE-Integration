@@ -96,7 +96,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">NSSOutput.Builder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">NSSOutput.Builder is used to create a <a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss"><code>NSSOutput</code></a> with multiple outputs.</div>
+<div class="block">NSSOutput.Builder is used to create a <a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss"><code>NSSOutput</code></a> with multiple outputs.
+ TODO: Make a conversion module in <a href="../../Utils.html" title="class in com.tagnumelite.projecteintegration.api"><code>Utils</code></a></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -120,41 +121,53 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addFluid(int,net.minecraft.world.level.material.Fluid)" class="member-name-link">addFluid</a><wbr>(int&nbsp;amount,
+ net.minecraft.world.level.material.Fluid&nbsp;fluid)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addItem(net.minecraft.world.item.ItemStack)" class="member-name-link">addItem</a><wbr>(net.minecraft.world.item.ItemStack&nbsp;stack)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOutput(java.lang.Object...)" class="member-name-link">addOutput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;variants)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add an output to the mapper with all of its variants.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOutput(java.util.List)" class="member-name-link">addOutput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;variants)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add an output to the mapper with all of its variants.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOutputs(java.lang.Object...)" class="member-name-link">addOutputs</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;outputs)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add multiple outputs to the mapper.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOutputs(java.util.List)" class="member-name-link">addOutputs</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;outputs)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add multiple outputs to the mapper.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the resulting <a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss"><code>NSSOutput</code></a> from all the outputs.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Check if the output stacks contains any items.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toOutput()" class="member-name-link">toOutput</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get the resulting <a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss"><code>NSSOutput</code></a> from all the outputs.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#toOutput()" class="member-name-link">toOutput</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 </div>
 </div>
 </div>
@@ -198,7 +211,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addOutput(java.lang.Object...)">
 <h3>addOutput</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;variants)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;variants)</span></div>
 <div class="block">Add an output to the mapper with all of its variants. Supported classes are <code>ItemStack</code> and <code>FluidStack</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -209,7 +222,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addOutput(java.util.List)">
 <h3>addOutput</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;variants)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addOutput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;variants)</span></div>
 <div class="block">Add an output to the mapper with all of its variants. Supported classes are <code>ItemStack</code> and <code>FluidStack</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -220,7 +233,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addOutputs(java.lang.Object...)">
 <h3>addOutputs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOutputs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;outputs)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addOutputs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;outputs)</span></div>
 <div class="block">Add multiple outputs to the mapper. Supported classes are <code>ItemStack</code> and <code>FluidStack</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -231,7 +244,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addOutputs(java.util.List)">
 <h3>addOutputs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOutputs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;outputs)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addOutputs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;?&gt;&nbsp;outputs)</span></div>
 <div class="block">Add multiple outputs to the mapper. Supported classes are <code>ItemStack</code> and <code>FluidStack</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -240,9 +253,30 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="addItem(net.minecraft.world.item.ItemStack)">
+<h3>addItem</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addItem</span><wbr><span class="parameters">(net.minecraft.world.item.ItemStack&nbsp;stack)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="addFluid(int,net.minecraft.world.level.material.Fluid)">
+<h3>addFluid</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.Builder.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput.Builder</a></span>&nbsp;<span class="element-name">addFluid</span><wbr><span class="parameters">(int&nbsp;amount,
+ net.minecraft.world.level.material.Fluid&nbsp;fluid)</span></div>
+</section>
+</li>
+<li>
 <section class="detail" id="toOutput()">
 <h3>toOutput</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></span>&nbsp;<span class="element-name">toOutput</span>()</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></span>&nbsp;<span class="element-name">toOutput</span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="build()">
+<h3>build</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss">NSSOutput</a></span>&nbsp;<span class="element-name">build</span>()</div>
 <div class="block">Get the resulting <a href="NSSOutput.html" title="class in com.tagnumelite.projecteintegration.api.recipe.nss"><code>NSSOutput</code></a> from all the outputs.</div>
 <dl class="notes">
 <dt>Returns:</dt>
