@@ -192,7 +192,7 @@ public class ManaAndArtificeAddon {
     public static class MAAConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Mana and Artifice")
+            builder
                     .before(ItemInit.VINTEUM_DUST.get(), 32)
                     .before(ItemInit.CHIMERITE_GEM.get(), 96);
         }

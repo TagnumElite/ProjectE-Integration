@@ -41,24 +41,24 @@ import java.util.*;
 public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> {
     private static final Map<ACustomRecipeMapper<?>, String> recipeMappers = new HashMap<>();
 
-    public static void loadMappers( ) {
+    public static void loadMappers() {
         if (recipeMappers.isEmpty()) {
             recipeMappers.putAll(Utils.getCustomRecipeMappers());
         }
     }
 
     @Override
-    public String getName( ) {
+    public String getName() {
         return "ProjectEIntegrationRecipeMapper";
     }
 
     @Override
-    public String getTranslationKey( ) {
+    public String getTranslationKey() {
         return ""; // @TODO
     }
 
     @Override
-    public String getDescription( ) {
+    public String getDescription() {
         return "Recipe mapper for custom recipes that don't implement IRecipe";
     }
 
@@ -85,7 +85,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
                     }
                 } catch (Exception e) {
                     PEIntegration.LOGGER.error("Custom Recipe Mapper ({}) failed to handle recipe: {}", name, recipe,
-                                               e);
+                            e);
                 }
             }
             //}
@@ -109,7 +109,7 @@ public class PEIRecipeMapper implements IEMCMapper<NormalizedSimpleStack, Long> 
             NSSFakeGroupManager.namespace = namespace;
         }
 
-        public static void resetNamespace( ) {
+        public static void resetNamespace() {
             NSSFakeGroupManager.namespace = "";
         }
 

@@ -69,11 +69,11 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
             return convertRecipe((R) recipe);
         } catch (ClassCastException e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
-                                       getClass().getName(), recipe.getClass().getName(),
-                                       ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
+                    getClass().getName(), recipe.getClass().getName(),
+                    ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
         } catch (Exception e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
-                                       getClass().getName(), recipeID, recipe.getClass().getName(), e);
+                    getClass().getName(), recipeID, recipe.getClass().getName(), e);
         }
         return false;
     }
@@ -117,7 +117,7 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
      *
      * @return A list of modids or null.
      */
-    public String[] getRequiredMods( ) {
+    public String[] getRequiredMods() {
         RecipeTypeMapper recipeTypeMapperAnnotation = getClass().getAnnotation(RecipeTypeMapper.class);
         if (recipeTypeMapperAnnotation != null) {
             return recipeTypeMapperAnnotation.requiredMods();
@@ -126,7 +126,7 @@ public abstract class ARecipeTypeMapper<R extends Recipe<?>> extends ABaseRecipe
     }
 
     @Override
-    public String getTranslationKey( ) {
+    public String getTranslationKey() {
         return "mapping." + PEIntegration.MODID + ".mapper." + getName().toLowerCase();
     }
 }

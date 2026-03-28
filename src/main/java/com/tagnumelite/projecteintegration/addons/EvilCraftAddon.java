@@ -50,7 +50,7 @@ public class EvilCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECBloodInfuserMapper extends ARecipeTypeMapper<RecipeBloodInfuser> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("BloodInfuser");
         }
 
@@ -65,7 +65,7 @@ public class EvilCraftAddon {
 
             recipe.getInputIngredient().ifPresent(builder::addIngredient);
             // We divide the value by ten otherwise blood will add too much EMC
-            recipe.getInputFluid().ifPresent(fluid -> builder.addFluid(fluid.copyWithAmount(fluid.getAmount()/10)));
+            recipe.getInputFluid().ifPresent(fluid -> builder.addFluid(fluid.copyWithAmount(fluid.getAmount() / 10)));
 
             return builder.build();
         }
@@ -74,7 +74,7 @@ public class EvilCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class ECEnvironmentalAccumulatorMapper extends ARecipeTypeMapper<RecipeEnvironmentalAccumulator> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("EnvironmentalAccumulator");
         }
 
@@ -102,13 +102,13 @@ public class EvilCraftAddon {
 
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for EvilCraft").before(RegistryEntries.FLUID_BLOOD.get(), 1)
-                   .before(RegistryEntries.ITEM_POISON_SAC.get(), 16).before(RegistryEntries.ITEM_DARK_GEM.get(), 64)
-                   .before(RegistryEntries.ITEM_WEREWOLF_BONE.get(), 144).before(ITEM_VENGEANCE_ESSENCE, 512)
-                   .before(ITEM_ENDER_TEAR, 1024).conversion(RegistryEntries.BLOCK_HARDENED_BLOOD.get())
-                   .ingredient(RegistryEntries.FLUID_BLOOD.get(), 1000).end()
-                   .conversion(RegistryEntries.ITEM_DARK_GEM_CRUSHED.get())
-                   .ingredient(RegistryEntries.ITEM_DARK_GEM.get()).end();
+            builder.before(RegistryEntries.FLUID_BLOOD.get(), 1).before(RegistryEntries.ITEM_POISON_SAC.get(), 16)
+                    .before(RegistryEntries.ITEM_DARK_GEM.get(), 64)
+                    .before(RegistryEntries.ITEM_WEREWOLF_BONE.get(), 144).before(ITEM_VENGEANCE_ESSENCE, 512)
+                    .before(ITEM_ENDER_TEAR, 1024).conversion(RegistryEntries.BLOCK_HARDENED_BLOOD.get())
+                    .ingredient(RegistryEntries.FLUID_BLOOD.get(), 1000).end()
+                    .conversion(RegistryEntries.ITEM_DARK_GEM_CRUSHED.get())
+                    .ingredient(RegistryEntries.ITEM_DARK_GEM.get()).end();
         }
     }
 }

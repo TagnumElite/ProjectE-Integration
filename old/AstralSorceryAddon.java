@@ -185,7 +185,7 @@ public class AstralSorceryAddon {
     public static class ASConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default conversions for Astral Sorcery")
+            builder
                     .before(gemTag("aquamarine"), 128)
                     .before(tag("forge:marble"), 32)
                     .before(BlocksAS.MARBLE_RAW, 32)

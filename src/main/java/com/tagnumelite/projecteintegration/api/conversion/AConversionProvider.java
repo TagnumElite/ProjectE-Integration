@@ -78,15 +78,15 @@ public abstract class AConversionProvider {
      * @return
      */
     protected static NormalizedSimpleStack commonTag(String tag) {
-        return tag("c:" + tag);
+        return tag("c", tag);
     }
 
     /**
      * @param resourceLocation
      * @return
      */
-    protected static NormalizedSimpleStack tag(String resourceLocation) {
-        return NSSItem.createTag(ResourceLocation.parse(resourceLocation));
+    protected static NormalizedSimpleStack tag(String namespace, String resourceLocation) {
+        return NSSItem.createTag(ResourceLocation.fromNamespaceAndPath(namespace, resourceLocation));
     }
 
     /**

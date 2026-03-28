@@ -86,8 +86,8 @@ public class CreateAddon {
         @Override
         public NSSOutput getOutput(R recipe) {
             List<Object> outputs = new ArrayList<>();
-            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO->pO.getChance() >= 1.0f)
-                                            .map(ProcessingOutput::getStack).toList();
+            List<ItemStack> results = recipe.getRollableResults().stream().filter(pO -> pO.getChance() >= 1.0f)
+                    .map(ProcessingOutput::getStack).toList();
             outputs.addAll(results);
             outputs.addAll(recipe.getFluidResults());
 
@@ -100,7 +100,7 @@ public class CreateAddon {
     public static class CreateBasinMapper extends CreateProcessingRecipeMapper<BasinRecipe> {
 
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("BASIN");
         }
 
@@ -113,7 +113,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCompactingMapper extends CreateProcessingRecipeMapper<CompactingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Compacting");
         }
 
@@ -126,7 +126,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCrushingMapper extends CreateProcessingRecipeMapper<CrushingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Crushing");
         }
 
@@ -139,7 +139,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateCuttingMapper extends CreateProcessingRecipeMapper<CuttingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Cutting");
         }
 
@@ -171,7 +171,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateHauntingMapper extends CreateProcessingRecipeMapper<HauntingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Haunting");
         }
 
@@ -184,7 +184,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMillingMapper extends CreateProcessingRecipeMapper<MillingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Milling");
         }
 
@@ -197,7 +197,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMixingMapper extends CreateProcessingRecipeMapper<MixingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("CUTTING");
         }
 
@@ -210,7 +210,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreatePressingMapper extends CreateProcessingRecipeMapper<PressingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Pressing");
         }
 
@@ -223,7 +223,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSplashingMapper extends CreateProcessingRecipeMapper<SplashingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Splashing");
         }
 
@@ -236,7 +236,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateDeployerApplicationMapper extends CreateProcessingRecipeMapper<DeployerApplicationRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("DeployerApplication");
         }
 
@@ -249,7 +249,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateMechanicalCraftingMapper extends ARecipeTypeMapper<MechanicalCraftingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("MechanicalCrafting");
         }
 
@@ -262,7 +262,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateItemApplicationMapper extends CreateProcessingRecipeMapper<ItemApplicationRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("ItemApplication");
         }
 
@@ -275,7 +275,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSequencedAssemblyMapper extends ARecipeTypeMapper<SequencedAssemblyRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SequencedAssembly");
         }
 
@@ -330,7 +330,7 @@ public class CreateAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class CreateSandPaperPolishingMapper extends CreateProcessingRecipeMapper<SandPaperPolishingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SandpaperPolishing");
         }
 

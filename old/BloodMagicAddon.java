@@ -177,7 +177,7 @@ public class BloodMagicAddon {
     public static class BloodMagicConversion extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default recipe conversions for Blood Magic")
+            builder
                     .before(BloodMagicItems.WEAK_BLOOD_SHARD.get(), 256)
                     .before(tag("bloodmagic:crystals/demon"), 512);
             // I'm ignoring demon wills on purpose.

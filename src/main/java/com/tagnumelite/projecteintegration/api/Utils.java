@@ -54,7 +54,7 @@ import java.util.*;
 public class Utils {
     private static final Type CUSTOM_RECIPE_MAPPER_TYPE = Type.getType(CustomRecipeMapper.class);
 
-    public static Map<? extends ACustomRecipeMapper<?>, String> getCustomRecipeMappers( ) {
+    public static Map<? extends ACustomRecipeMapper<?>, String> getCustomRecipeMappers() {
         ModList modList = ModList.get();
         Map<ACustomRecipeMapper<?>, String> recipeTypeMappers = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
@@ -89,7 +89,7 @@ public class Utils {
         String modId = getAnnotationData(data, key);
         if (modId != null && !ModList.get().isLoaded(modId)) {
             PEIntegration.debugLog("Skipped checking class {}, as its required mod ({}) is not loaded.",
-                                   data.memberName(), modId);
+                    data.memberName(), modId);
             return false;
         }
         return true;
@@ -103,7 +103,7 @@ public class Utils {
                 return (T) annotationData.get(key);
             } catch (ClassCastException e) {
                 PEIntegration.LOGGER.fatal("Annotation Data {}:{} was casted to an invalid class", key,
-                                           annotationData.get(key), e);
+                        annotationData.get(key), e);
             }
         }
         return null;
@@ -295,7 +295,7 @@ public class Utils {
                     totalOutputs += fluid.getAmount();
                 }
                 default -> PEIntegration.LOGGER.warn("Recipe ({}) has unsupported outputs: {}. Skipping...", recipeID,
-                                                     output);
+                        output);
             }
 
         }
@@ -333,7 +333,7 @@ public class Utils {
                     outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
                 }
                 default -> PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID,
-                                                     output);
+                        output);
             }
 
         }
@@ -352,7 +352,7 @@ public class Utils {
             return ingredient.getItems();
         } catch (Exception e) {
             PEIntegration.LOGGER.fatal("Failed to map recipe ({}). Ingredient ({}) failed to get matching stacks",
-                                       recipeID, ingredient.getClass().getName(), e);
+                    recipeID, ingredient.getClass().getName(), e);
             return null;
         }
     }

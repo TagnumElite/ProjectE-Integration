@@ -50,7 +50,7 @@ public class AppliedEnergisticsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEChargerMapper extends ARecipeTypeMapper<ChargerRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Charger");
         }
 
@@ -65,7 +65,7 @@ public class AppliedEnergisticsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AEInscriberMapper extends ARecipeTypeMapper<InscriberRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Inscriber");
         }
 
@@ -87,7 +87,7 @@ public class AppliedEnergisticsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AETransformMapper extends ARecipeTypeMapper<TransformRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Transform");
         }
 
@@ -101,8 +101,7 @@ public class AppliedEnergisticsAddon {
     public static class AEConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Set defaults conversions for Applied Energistics")
-                   .before(AEItems.CERTUS_QUARTZ_CRYSTAL.get(), 256).before(AEBlocks.SKY_STONE_BLOCK, 16);
+            builder.before(AEItems.CERTUS_QUARTZ_CRYSTAL.get(), 256).before(AEBlocks.SKY_STONE_BLOCK, 16);
         }
     }
 }

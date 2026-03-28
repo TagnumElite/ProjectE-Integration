@@ -49,7 +49,7 @@ public class FarmersDelightAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class FDCookingPotMapper extends ARecipeTypeMapper<CookingPotRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("CookingPot");
         }
 
@@ -63,7 +63,7 @@ public class FarmersDelightAddon {
     public static class FDCuttingBoardMapper extends ARecipeTypeMapper<CuttingBoardRecipe> {
 
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("CuttingBoard");
         }
 
@@ -74,8 +74,8 @@ public class FarmersDelightAddon {
 
         @Override
         public NSSOutput getOutput(CuttingBoardRecipe recipe) {
-            return mapOutputs(recipe.getRollableResults().stream().filter(r->r.chance() >= 1f).map(ChanceResult::stack)
-                                    .toArray());
+            return mapOutputs(recipe.getRollableResults().stream().filter(r -> r.chance() >= 1f).map(ChanceResult::stack)
+                    .toArray());
         }
     }
 
@@ -83,11 +83,11 @@ public class FarmersDelightAddon {
     public static class FDConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Set defaults conversions for Farmer's Delight").before(ModItems.RICE_PANICLE.get(), 1)
-                   .before(ModItems.STRAW.get(), 1).before(CommonTags.CROPS_RICE, 1).before(CommonTags.CROPS_GRAIN, 1)
-                   .before(CommonTags.CROPS_TOMATO, 32).before(CommonTags.CROPS_ONION, 32)
-                   .before(CommonTags.CROPS_CABBAGE, 32).before(ModItems.HAM.get(), 64)
-                   .before(ModBlocks.BROWN_MUSHROOM_COLONY.get(), 32).before(ModBlocks.RED_MUSHROOM_COLONY.get(), 32);
+            builder.before(ModItems.RICE_PANICLE.get(), 1).before(ModItems.STRAW.get(), 1)
+                    .before(CommonTags.CROPS_RICE, 1).before(CommonTags.CROPS_GRAIN, 1)
+                    .before(CommonTags.CROPS_TOMATO, 32).before(CommonTags.CROPS_ONION, 32)
+                    .before(CommonTags.CROPS_CABBAGE, 32).before(ModItems.HAM.get(), 64)
+                    .before(ModBlocks.BROWN_MUSHROOM_COLONY.get(), 32).before(ModBlocks.RED_MUSHROOM_COLONY.get(), 32);
         }
     }
 }

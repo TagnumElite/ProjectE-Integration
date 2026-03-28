@@ -56,7 +56,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRAmadronRecipeMapper extends ARecipeTypeMapper<AmadronRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("AmadronRecipe");
         }
 
@@ -85,7 +85,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRAssemblyMapper extends ARecipeTypeMapper<AssemblyRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Assembly");
         }
 
@@ -110,17 +110,17 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRExplosionCraftingMapper extends ARecipeTypeMapper<ExplosionCraftingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("ExplosionCrafting");
         }
 
         @Override
-        public String getDescription( ) {
+        public String getDescription() {
             return super.getDescription() + " NOTE: Disabled by default because this mapper ignore loss rate.";
         }
 
         @Override
-        public boolean isAvailable( ) {
+        public boolean isAvailable() {
             return false;
         }
 
@@ -143,7 +143,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRHeatFrameCoolingMapper extends ARecipeTypeMapper<HeatFrameCoolingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("HeatFrameCooling");
         }
 
@@ -158,15 +158,15 @@ public class PneumaticCraftAddon {
 
             if (eitherInput.right().isPresent()) {
                 Either<FluidStack, FluidContainerIngredient.TagWithAmount> fluidIng = eitherInput.right().get()
-                                                                                                 .either();
+                        .either();
 
                 if (fluidIng.right().isPresent()) { // TODO: WTF, this is a mess. I must clean this up later
                     return convertSingleIngredient(eitherInput.right().get().amount(), StreamSupport.stream(
-                                                                                                            BuiltInRegistries.FLUID.getTagOrEmpty(fluidIng.right().get().tag()).spliterator(), false)
-                                                                                                    .map(i->new FluidStack(
-                                                                                                            i.value(),
-                                                                                                            1))
-                                                                                                    .toList());
+                                    BuiltInRegistries.FLUID.getTagOrEmpty(fluidIng.right().get().tag()).spliterator(), false)
+                            .map(i -> new FluidStack(
+                                    i.value(),
+                                    1))
+                            .toList());
                 } else if (fluidIng.left().isPresent()) {
                     return convertSingleIngredient(1, Collections.singletonList(fluidIng.left().get()));
                 }
@@ -187,7 +187,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRPressureChamberMapper extends ARecipeTypeMapper<PressureChamberRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("PressureChamber");
         }
 
@@ -212,7 +212,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRRefineryMapper extends ARecipeTypeMapper<RefineryRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Refinery");
         }
 
@@ -224,7 +224,7 @@ public class PneumaticCraftAddon {
         @Override
         public NSSInput getInput(RefineryRecipe recipe) {
             return convertSingleIngredient(recipe.getInput().amount(),
-                                           Arrays.asList(recipe.getInput().ingredient().getStacks()));
+                    Arrays.asList(recipe.getInput().ingredient().getStacks()));
         }
 
         @Override
@@ -236,7 +236,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRThermoPlantMapper extends ARecipeTypeMapper<ThermoPlantRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("ThermopneumaticProcessingPlant");
         }
 
@@ -278,7 +278,7 @@ public class PneumaticCraftAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PCRFluidMixerMapper extends ARecipeTypeMapper<FluidMixerRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("FluidMixer");
         }
 
@@ -302,8 +302,8 @@ public class PneumaticCraftAddon {
     public static class PCRConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for PneumaticCraft").before(ModFluids.OIL.get(), 1)
-                   .conversion(ModItems.PLASTIC).ingredient(ModFluids.PLASTIC.get(), 1000);
+            builder.before(ModFluids.OIL.get(), 1).conversion(ModItems.PLASTIC)
+                    .ingredient(ModFluids.PLASTIC.get(), 1000);
         }
     }
 }

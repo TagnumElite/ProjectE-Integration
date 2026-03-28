@@ -40,6 +40,7 @@ import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -64,7 +65,7 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         return tag("c:ingots/" + ingot);
     }
 
-    private Map<AConversionProvider, String> getConversionProviders( ) {
+    private Map<AConversionProvider, String> getConversionProviders() {
         ModList modList = ModList.get();
         Map<AConversionProvider, String> conversionProviders = new HashMap<>();
         for (ModFileScanData scanData : modList.getAllScanData()) {
@@ -86,8 +87,8 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     private AConversionProvider createInstance(String className) {
         try {
-            return Class.forName(className).asSubclass(AConversionProvider.class).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            return Class.forName(className).asSubclass(AConversionProvider.class).getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             PEIntegration.LOGGER.error("Failed to load conversion provider: {}", className, e);
         }
         return null;
@@ -96,20 +97,21 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
     @Override
     protected void addCustomConversions(HolderLookup.@NotNull Provider provider) {
         createConversionBuilder(PEIntegration.RL("pei_metals")).before(ingotTag("zinc"), 128)
-                                                               .before(ingotTag("cobalt"), 412)
-                                                               .before(ingotTag("tungsten"), 356)
-                                                               .before(new FluidStack(Fluids.WATER, 250), 1);
+                .before(ingotTag("cobalt"), 412)
+                .before(ingotTag("tungsten"), 356)
+                .before(new FluidStack(Fluids.WATER, 250), 1);
 
         createConversionBuilder(PEIntegration.RL("pei_fluids")).before(
-                                                                       BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1)
-                                                               .before(tag("foods/milk"), 16);
+                        BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath("minecraft", "milk")), 1)
+                .before(tag("foods/milk"), 16);
 
         for (Map.Entry<AConversionProvider, String> entry : getConversionProviders().entrySet()) {
             ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(entry.getValue(),
-                                                                                      entry.getValue() + "_default");
-            PEIntegration.debugLog("Add custom conversions for {}", resourceLocation);
+                    entry.getValue() + "_default");
+            PEIntegration.debugLog("Adding custom conversions for {}", resourceLocation);
             CustomConversionBuilder builder = createConversionBuilder(resourceLocation);
-            entry.getKey().convert(builder);
+            entry.getKey().convert(builder.comment(
+                    "Default ProjectE Conversions for " + entry.getValue() + " by ProjectE Integration"));
         }
     }
 }

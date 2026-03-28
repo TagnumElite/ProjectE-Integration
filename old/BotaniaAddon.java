@@ -197,7 +197,7 @@ public class BotaniaAddon {
     public static class BotaniaConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Botania")
+            builder
                     .before(BotaniaItems.pebble, 1)
                     .before(BotaniaItems.livingroot, 1)
                     .before(BotaniaItems.lifeEssence, 256)

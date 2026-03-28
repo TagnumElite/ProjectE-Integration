@@ -35,7 +35,7 @@ public class AlexCavesAddon {
     public static final class ATMConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Alex's Caves")
+            builder
                     .before(ACItemRegistry.RAW_AZURE_NEODYMIUM.get(), 32)
                     .before(ACItemRegistry.RAW_SCARLET_NEODYMIUM.get(), 32)
                     .before(ACBlockRegistry.GALENA.get(), 4);

@@ -48,7 +48,7 @@ public class ActuallyAdditionsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AACrushingMapper extends ARecipeTypeMapper<CrushingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Crushing");
         }
 
@@ -71,7 +71,7 @@ public class ActuallyAdditionsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAEmpowerMapper extends ARecipeTypeMapper<EmpowererRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Empowerer");
         }
 
@@ -83,14 +83,14 @@ public class ActuallyAdditionsAddon {
         @Override
         protected List<Ingredient> getIngredients(EmpowererRecipe recipe) {
             return List.of(recipe.getInput(), recipe.getStandOne(), recipe.getStandTwo(), recipe.getStandThree(),
-                           recipe.getStandFour());
+                    recipe.getStandFour());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAFermentingMapper extends ARecipeTypeMapper<FermentingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Fermenting");
         }
 
@@ -114,7 +114,7 @@ public class ActuallyAdditionsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AALaserMapper extends ARecipeTypeMapper<LaserRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Laser");
         }
 
@@ -146,7 +146,7 @@ public class ActuallyAdditionsAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AAPressingMapper extends ARecipeTypeMapper<PressingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Pressing");
         }
 
@@ -165,10 +165,9 @@ public class ActuallyAdditionsAddon {
     public static class AAConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default conversions for Actually Additions")
-                   .before(ActuallyTags.Items.GEMS_BLACK_QUARTZ, 16).before(ActuallyTags.Items.COFFEE_BEANS, 4)
-                   .before(ActuallyItems.CANOLA, 4).before(ActuallyItems.BATS_WING, 16)
-                   .conversion(ActuallyItems.WATER_BOWL).ingredient(Items.BOWL).end();
+            builder.before(ActuallyTags.Items.GEMS_BLACK_QUARTZ, 16).before(ActuallyTags.Items.COFFEE_BEANS, 4)
+                    .before(ActuallyItems.CANOLA, 4).before(ActuallyItems.BATS_WING, 16)
+                    .conversion(ActuallyItems.WATER_BOWL).ingredient(Items.BOWL).end();
         }
     }
 }

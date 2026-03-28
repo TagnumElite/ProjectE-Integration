@@ -44,7 +44,7 @@ public class FRandom extends Random {
     }
 
     @Override
-    public int nextInt( ) {
+    public int nextInt() {
         return (int) rng;
     }
 
@@ -54,27 +54,27 @@ public class FRandom extends Random {
     }
 
     @Override
-    public long nextLong( ) {
+    public long nextLong() {
         return rng;
     }
 
     @Override
-    public boolean nextBoolean( ) {
+    public boolean nextBoolean() {
         return bool;
     }
 
     @Override
-    public float nextFloat( ) {
+    public float nextFloat() {
         return rng;
     }
 
     @Override
-    public double nextDouble( ) {
+    public double nextDouble() {
         return rng;
     }
 
     @Override
-    public synchronized double nextGaussian( ) {
+    public synchronized double nextGaussian() {
         return rng;
     }
 }

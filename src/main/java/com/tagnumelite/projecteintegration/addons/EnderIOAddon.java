@@ -63,14 +63,14 @@ public class EnderIOAddon {
                 if (result.isFluid()) return new NSSOutput(result.getFluid());
                 return new NSSOutput(result.getItem());
             }
-            return mapOutputs(results.stream().map(o->o.isFluid() ? o.getFluid() : o.getItem()).toArray());
+            return mapOutputs(results.stream().map(o -> o.isFluid() ? o.getFluid() : o.getItem()).toArray());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOAlloySmeltingMapper extends EIOMachineMapper<AlloySmeltingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("AlloySmelting");
         }
 
@@ -90,7 +90,7 @@ public class EnderIOAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOSagMillingMapper extends EIOMachineMapper<SagMillingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SagMilling");
         }
 
@@ -103,7 +103,7 @@ public class EnderIOAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOSlicingMapper extends EIOMachineMapper<SlicingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Slicing");
         }
 
@@ -116,7 +116,7 @@ public class EnderIOAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOSoulBindingMapper extends EIOMachineMapper<SoulBindingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SoulBinding");
         }
 
@@ -140,7 +140,7 @@ public class EnderIOAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOPaintingMapper extends EIOMachineMapper<PaintingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Painting");
         }
 
@@ -153,7 +153,7 @@ public class EnderIOAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class EIOFermentingMapper extends EIOMachineMapper<FermentingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Fermenting");
         }
 
@@ -165,7 +165,7 @@ public class EnderIOAddon {
         @Override
         public NSSInput getInput(FermentingRecipe recipe) {
             return getInputBuilder().addFluid(recipe.input()).addItemKey(recipe.firstReagent())
-                                    .addItemKey(recipe.secondReagent()).build();
+                    .addItemKey(recipe.secondReagent()).build();
         }
     }
 
@@ -173,10 +173,9 @@ public class EnderIOAddon {
     public static class EnderIOConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default EMC for EnderIO").before(EIOItems.GRAINS_OF_INFINITY, 4)
-                    .before(EIOItems.SUSPICIOUS_SEED, 8)
-                    .before(EIOBlocks.ENDERMAN_HEAD, 2048)
-                    .conversion(EIOItems.SILICON).ingredient(Items.SAND).end(); // TODO: I don't like this conversion
+            builder.before(EIOItems.GRAINS_OF_INFINITY, 4).before(EIOItems.SUSPICIOUS_SEED, 8)
+                    .before(EIOBlocks.ENDERMAN_HEAD, 2048).conversion(EIOItems.SILICON).ingredient(Items.SAND)
+                    .end(); // TODO: I don't like this conversion
         }
     }
 }

@@ -49,7 +49,7 @@ public class WootRevivedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootAnvilMapper extends ARecipeTypeMapper<StygianAnvilRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return "WootAnvilMapper";
         }
 
@@ -162,7 +162,7 @@ public class WootRevivedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootFluidConvertorMapper extends ARecipeTypeMapper<FluidInfuserRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return "WootFluidConvertorMapper";
         }
 
@@ -185,7 +185,7 @@ public class WootRevivedAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class WootInfuserMapper extends ARecipeTypeMapper<ItemInfuserRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return "WootInfuserMapper";
         }
 

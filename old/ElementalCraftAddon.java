@@ -170,7 +170,7 @@ public class ElementalCraftAddon {
     public static class ECConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for ElementalCraft")
+            builder
                     .before(ECItems.INERT_CRYSTAL.get(), 8)
                     .before(ECItems.AIR_SHARD.get(), 8)
                     .before(ECItems.EARTH_SHARD.get(), 8)

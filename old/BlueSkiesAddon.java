@@ -89,7 +89,7 @@ public class BlueSkiesAddon {
     public static class BSConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Blue Skies")
+            builder
                     .before(SkiesItems.horizofin_tunid, 64)
                     .before(SkiesItems.charscale_moki, 64)
                     .before(SkiesItems.municipal_monkfish, 64)

@@ -117,12 +117,12 @@ public class NSSOutput {
      *
      * @return A boolean value denoting that this object has something of value.
      */
-    public boolean isEmpty( ) {
+    public boolean isEmpty() {
         return this == EMPTY || amount <= 0 || nss == null;
     }
 
     @Override
-    public String toString( ) {
+    public String toString() {
         return "NSSOutput{amount=" + amount + ";nss=" + nss + "}";
     }
 
@@ -192,7 +192,7 @@ public class NSSOutput {
                     outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
                 } else {
                     PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output variant: {}. Skipping...", recipeID,
-                                              variant);
+                            variant);
                 }
             }
 
@@ -254,10 +254,10 @@ public class NSSOutput {
          *
          * @return A NSSOutput resulting from the outputs or {@link NSSOutput#EMPTY} if it failed.
          */
-        public NSSOutput toOutput( ) {
+        public NSSOutput toOutput() {
             if (totalOutputs <= 0 || outputStacks.isEmpty()) {
                 PEIntegration.LOGGER.warn("NSSOutput.Builder resulted in {} outputs from recipe ({}): {}", totalOutputs,
-                                          recipeID, outputStacks);
+                        recipeID, outputStacks);
                 return NSSOutput.EMPTY;
             }
 
@@ -275,7 +275,7 @@ public class NSSOutput {
          *
          * @return A True/False value of whether the outputStacks Map is empty
          */
-        public boolean isEmpty( ) {
+        public boolean isEmpty() {
             return outputStacks.isEmpty();
         }
     }

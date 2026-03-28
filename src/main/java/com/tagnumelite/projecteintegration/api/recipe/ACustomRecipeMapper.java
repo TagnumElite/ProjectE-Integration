@@ -40,7 +40,7 @@ import java.util.List;
  *
  */
 public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
-    public abstract List<R> getRecipes( );
+    public abstract List<R> getRecipes();
 
     protected abstract List<Ingredient> getIngredients(R recipe);
 
@@ -85,11 +85,11 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
             return convertRecipe((R) recipe);
         } catch (ClassCastException e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) is unable to handle recipe ({}), expected ({})",
-                                       getClass().getName(), recipe.getClass().getName(),
-                                       ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
+                    getClass().getName(), recipe.getClass().getName(),
+                    ((Class<R>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]).getTypeName());
         } catch (Exception e) {
             PEIntegration.LOGGER.fatal("RecipeMapper ({}) failed unexpectedly during the handling of recipe '{}' ({}).",
-                                       getClass().getName(), recipeID, recipe.getClass().getName(), e);
+                    getClass().getName(), recipeID, recipe.getClass().getName(), e);
         }
         return false;
     }
@@ -99,7 +99,7 @@ public abstract class ACustomRecipeMapper<R> extends ABaseRecipeMapper<R> {
      *
      * @return An array of a modid or a single array of 'unregistered_mapper'.
      */
-    public String[] getRequiredMods( ) {
+    public String[] getRequiredMods() {
         CustomRecipeMapper recipeTypeMapperAnnotation = getClass().getAnnotation(CustomRecipeMapper.class);
         if (recipeTypeMapperAnnotation != null) {
             return new String[]{recipeTypeMapperAnnotation.value()};

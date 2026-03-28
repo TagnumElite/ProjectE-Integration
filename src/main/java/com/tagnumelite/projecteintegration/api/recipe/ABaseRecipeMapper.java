@@ -53,7 +53,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
     }
 
     @Override
-    public String getDescription( ) {
+    public String getDescription() {
         return "ProjectE-Integration Recipe Mapper for " + getName().replaceAll("(\\p{Ll})(\\p{Lu})", "$1 $2") +
                 ". Required Mods: [" + String.join(",", getRequiredMods()) + ']';
     }
@@ -103,7 +103,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
                                              Object2IntMap<NormalizedSimpleStack> ingredientMap,
                                              List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertFluidIngredient(-1, Collections.singletonList(fluidIngredient), ingredientMap, fakeGroupMap,
-                                            fakeGroupManager, recipeID.toString());
+                fakeGroupManager, recipeID.toString());
     }
 
     @Deprecated(forRemoval = true, since = "8.3.0")
@@ -118,7 +118,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
                                              Object2IntMap<NormalizedSimpleStack> ingredientMap,
                                              List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertFluidIngredient(amount, fluidIngredient, ingredientMap, fakeGroupMap, fakeGroupManager,
-                                            recipeID.toString());
+                recipeID.toString());
     }
 
     protected NSSInput convertSingleItemStack(ItemStack stack) {
@@ -159,7 +159,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
                                         Object2IntMap<NormalizedSimpleStack> ingredientMap,
                                         List<Tuple<NormalizedSimpleStack, List<Object2IntMap<NormalizedSimpleStack>>>> fakeGroupMap) {
         return Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager,
-                                       recipeID.toString());
+                recipeID.toString());
     }
 
     protected NSSOutput mapOutputs(Object... allOutputs) {
@@ -204,7 +204,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      *
      * @return A NSSOutput.Builder to be used for mapping outputs
      */
-    public NSSOutput.Builder getOutputBuilder( ) {
+    public NSSOutput.Builder getOutputBuilder() {
         return new NSSOutput.Builder(mapper, fakeGroupManager, recipeID);
     }
 
@@ -213,7 +213,7 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      *
      * @return A NSSInput builder to convert recipes with
      */
-    protected NSSInput.Builder getInputBuilder( ) {
+    protected NSSInput.Builder getInputBuilder() {
         return new NSSInput.Builder(mapper, fakeGroupManager, recipeID);
     }
 
@@ -222,5 +222,5 @@ public abstract class ABaseRecipeMapper<R> implements IRecipeMapper<R> {
      *
      * @return A list of modids or null.
      */
-    public abstract String[] getRequiredMods( );
+    public abstract String[] getRequiredMods();
 }

@@ -56,7 +56,7 @@ public class IndustrialForegoingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFCrusherMapper extends ARecipeTypeMapper<CrusherRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Crusher");
         }
 
@@ -79,7 +79,7 @@ public class IndustrialForegoingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFDissolutionChamberMapper extends ARecipeTypeMapper<DissolutionChamberRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("DissolutionChamber");
         }
 
@@ -115,17 +115,17 @@ public class IndustrialForegoingAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class IFStoneWorkGenerateMapper extends ARecipeTypeMapper<StoneWorkGenerateRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("StoneWorksGenerate");
         }
 
         @Override
-        public String getDescription( ) {
+        public String getDescription() {
             return super.getDescription() + " NOTE: Disabled by default.";
         }
 
         @Override
-        public boolean isAvailable( ) {
+        public boolean isAvailable() {
             return false;
         }
 
@@ -163,14 +163,13 @@ public class IndustrialForegoingAddon {
     public static class IFConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Sets default conversions for Industrial Foregoing")
-                   .before(ModuleCore.SEWAGE.getSourceFluid().get(), 1).before(ModuleCore.DRY_RUBBER.get(), 12)
-                   .before(ModuleCore.SLUDGE.getSourceFluid().get(), 1)
-                   .before(ModuleCore.ESSENCE.getSourceFluid().get(), 1).before(ModuleCore.PINK_SLIME_ITEM.get(), 16)
-                   .before(ModuleCore.ETHER.getSourceFluid().get(), 1)
-                   .conversion(ModuleCore.LATEX.getSourceFluid().get(), 1600).ingredient(ItemTags.LOGS).end()
-                   .conversion(ModuleCore.FERTILIZER.get()).ingredient(ModuleCore.SEWAGE.getSourceFluid().get(), 1000)
-                   .end();
+            builder.before(ModuleCore.SEWAGE.getSourceFluid().get(), 1).before(ModuleCore.DRY_RUBBER.get(), 12)
+                    .before(ModuleCore.SLUDGE.getSourceFluid().get(), 1)
+                    .before(ModuleCore.ESSENCE.getSourceFluid().get(), 1).before(ModuleCore.PINK_SLIME_ITEM.get(), 16)
+                    .before(ModuleCore.ETHER.getSourceFluid().get(), 1)
+                    .conversion(ModuleCore.LATEX.getSourceFluid().get(), 1600).ingredient(ItemTags.LOGS).end()
+                    .conversion(ModuleCore.FERTILIZER.get()).ingredient(ModuleCore.SEWAGE.getSourceFluid().get(), 1000)
+                    .end();
             //.conversion(ModuleCore.TINY_DRY_RUBBER).ingredient(Fluids.WATER, 500).ingredient(ModuleCore.LATEX.getSourceFluid(), 100).end();
         }
     }

@@ -252,7 +252,7 @@ public class TinkersConstructAddon {
     public static class TCDataGenerator extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("Default conversions for Tinkers Construct")
+            builder
                     .before(ingotTag("cobalt"), 2048 * 2);
         }
     }

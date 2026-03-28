@@ -45,7 +45,7 @@ public class OccultismAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class OccultismCrushingMapper extends ARecipeTypeMapper<CrushingRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Crushing");
         }
 
@@ -71,7 +71,7 @@ public class OccultismAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class OccultismRitualMapper extends ARecipeTypeMapper<RitualRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Ritual");
         }
 
@@ -84,7 +84,7 @@ public class OccultismAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class OccultismSpiritFireMapper extends ARecipeTypeMapper<SpiritFireRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SpiritFire");
         }
 
@@ -97,7 +97,7 @@ public class OccultismAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class OccultismSpiritTradeMapper extends ARecipeTypeMapper<SpiritTradeRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("SpiritTrade");
         }
 
@@ -111,8 +111,8 @@ public class OccultismAddon {
     public static class OccultismConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default conversions for occultism").before(OccultismItems.TALLOW.get(), 16)
-                   .before(OccultismItems.AFRIT_ESSENCE.get(), 64).before(ingotTag("iesnium"), 512);
+            builder.before(OccultismItems.TALLOW.get(), 16).before(OccultismItems.AFRIT_ESSENCE.get(), 64)
+                    .before(ingotTag("iesnium"), 512);
         }
     }
 }

@@ -36,5 +36,5 @@ public @interface CustomRecipeMapper {
     /**
      * @return The modid
      */
-    String value( );
+    String value();
 }

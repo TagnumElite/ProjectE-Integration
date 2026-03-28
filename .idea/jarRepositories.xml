@@ -12,124 +12,19 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="Modmaven" />
-      <option name="name" value="Modmaven" />
-      <option name="url" value="https://modmaven.dev/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://libraries.minecraft.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Jitpack" />
-      <option name="name" value="Jitpack" />
-      <option name="url" value="https://jitpack.io" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="BlameJared" />
-      <option name="name" value="BlameJared" />
-      <option name="url" value="https://maven.blamejared.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="MavenRepo" />
-      <option name="name" value="MavenRepo" />
-      <option name="url" value="https://repo.maven.apache.org/maven2/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="TheIllusiveC4" />
-      <option name="name" value="TheIllusiveC4" />
-      <option name="url" value="https://maven.theillusivec4.top/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="CurseMaven" />
-      <option name="name" value="CurseMaven" />
-      <option name="url" value="https://www.cursemaven.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="TTerrag" />
-      <option name="name" value="TTerrag" />
-      <option name="url" value="https://maven.tterrag.com/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="ChickenBones" />
-      <option name="name" value="ChickenBones" />
-      <option name="url" value="https://chickenbones.net/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Progwm16" />
-      <option name="name" value="Progwm16" />
-      <option name="url" value="https://dvs1.progwm16.com/files/maven" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.minecraftforge.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Progwml6" />
-      <option name="name" value="Progwml6" />
-      <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Covers1624" />
-      <option name="name" value="Covers1624" />
-      <option name="url" value="https://maven.covers1624.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="GeckoMaven" />
-      <option name="name" value="GeckoMaven" />
-      <option name="url" value="https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="ParchmentMC" />
-      <option name="name" value="ParchmentMC" />
-      <option name="url" value="https://maven.parchmentmc.org/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="HorizonStudio" />
-      <option name="name" value="HorizonStudio" />
-      <option name="url" value="https://cdn.hrzn.studio/maven" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Architectury" />
-      <option name="name" value="Architectury" />
-      <option name="url" value="https://maven.architectury.dev/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Ellpeck" />
-      <option name="name" value="Ellpeck" />
-      <option name="url" value="https://maven.ellpeck.de" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Tamaized" />
-      <option name="name" value="Tamaized" />
-      <option name="url" value="https://maven.tamaized.com/releases" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://maven.neoforged.net/releases/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="klikli_dev" />
-      <option name="name" value="klikli_dev" />
-      <option name="url" value="https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.neoforged.net/releases" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="SmartBrainLib" />
-      <option name="name" value="SmartBrainLib" />
-      <option name="url" value="https://dl.cloudsmith.io/public/tslat/sbl/maven/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="Mojang Meta" />
       <option name="name" value="Mojang Meta" />
       <option name="url" value="https://maven.neoforged.net/mojang-meta/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Mojang Minecraft Libraries" />
+      <option name="name" value="Mojang Minecraft Libraries" />
+      <option name="url" value="https://libraries.minecraft.net/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="NeoForged Releases" />
+      <option name="name" value="NeoForged Releases" />
+      <option name="url" value="https://maven.neoforged.net/releases/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="MavenLocal" />
@@ -137,9 +32,59 @@
       <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="MavenRepo" />
+      <option name="name" value="MavenRepo" />
+      <option name="url" value="https://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="CurseMaven" />
+      <option name="name" value="CurseMaven" />
+      <option name="url" value="https://www.cursemaven.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Modrinth" />
+      <option name="name" value="Modrinth" />
+      <option name="url" value="https://api.modrinth.com/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Jitpack" />
+      <option name="name" value="Jitpack" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="klikli_dev" />
+      <option name="name" value="klikli_dev" />
+      <option name="url" value="https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="TwelveIterations" />
+      <option name="name" value="TwelveIterations" />
+      <option name="url" value="https://maven.twelveiterations.com/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Architectury" />
+      <option name="name" value="Architectury" />
+      <option name="url" value="https://maven.architectury.dev/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="BlameJared" />
+      <option name="name" value="BlameJared" />
+      <option name="url" value="https://maven.blamejared.com" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="BlakeBr0" />
       <option name="name" value="BlakeBr0" />
       <option name="url" value="https://maven.blakesmods.com/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="ChickenBones" />
+      <option name="name" value="ChickenBones" />
+      <option name="url" value="https://chickenbones.net/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Covers1624" />
+      <option name="name" value="Covers1624" />
+      <option name="url" value="https://maven.covers1624.net/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="Create" />
@@ -147,19 +92,64 @@
       <option name="url" value="https://maven.createmod.net" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="GeckoMaven" />
+      <option name="name" value="GeckoMaven" />
+      <option name="url" value="https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="NovaMachina" />
       <option name="name" value="NovaMachina" />
       <option name="url" value="https://dl.cloudsmith.io/public/novamachina-mods/release/maven/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="Saps" />
-      <option name="name" value="Saps" />
-      <option name="url" value="https://maven.saps.dev/release" />
+      <option name="id" value="Progwml6" />
+      <option name="name" value="Progwml6" />
+      <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="Modrinth" />
-      <option name="name" value="Modrinth" />
-      <option name="url" value="https://api.modrinth.com/maven" />
+      <option name="id" value="Rover656" />
+      <option name="name" value="Rover656" />
+      <option name="url" value="https://maven.rover656.dev/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Saps" />
+      <option name="name" value="Saps" />
+      <option name="url" value="https://maven.saps.dev/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="SmartBrainLib" />
+      <option name="name" value="SmartBrainLib" />
+      <option name="url" value="https://dl.cloudsmith.io/public/tslat/sbl/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="SomethingCatchy" />
+      <option name="name" value="SomethingCatchy" />
+      <option name="url" value="https://registry.somethingcatchy.net/repository/maven-releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Tamaized" />
+      <option name="name" value="Tamaized" />
+      <option name="url" value="https://maven.tamaized.com/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="TheIllusiveC4" />
+      <option name="name" value="TheIllusiveC4" />
+      <option name="url" value="https://maven.theillusivec4.top/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="TTerrag" />
+      <option name="name" value="TTerrag" />
+      <option name="url" value="https://maven.tterrag.com/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="WistForest" />
+      <option name="name" value="WistForest" />
+      <option name="url" value="https://maven.wispforest.io/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Modmaven" />
+      <option name="name" value="Modmaven" />
+      <option name="url" value="https://modmaven.dev/" />
     </remote-repository>
   </component>
 </project>

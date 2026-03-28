@@ -34,7 +34,7 @@ public class PsiAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class PsiTrickMapper extends ARecipeTypeMapper<TrickRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return "PsiTrickMapper";
         }
 

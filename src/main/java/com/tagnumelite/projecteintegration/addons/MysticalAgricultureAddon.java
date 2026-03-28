@@ -48,7 +48,7 @@ public class MysticalAgricultureAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class MAAwakeningMapper extends ARecipeTypeMapper<IAwakeningRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Awakening");
         }
 
@@ -67,7 +67,7 @@ public class MysticalAgricultureAddon {
 
             // We want to skip the essences because that has an amount to be counted
             builder.addIngredient(ingredients.get(1)).addIngredient(ingredients.get(3))
-                   .addIngredient(ingredients.get(5)).addIngredient(ingredients.get(7));
+                    .addIngredient(ingredients.get(5)).addIngredient(ingredients.get(7));
 
             return builder.build();
         }
@@ -76,7 +76,7 @@ public class MysticalAgricultureAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class MAInfusionMapper extends ARecipeTypeMapper<IInfusionRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Infusion");
         }
 
@@ -89,7 +89,7 @@ public class MysticalAgricultureAddon {
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class MAReprocessorMapper extends ARecipeTypeMapper<IReprocessorRecipe> {
         @Override
-        public String getName( ) {
+        public String getName() {
             return NAME("Reprocessor");
         }
 
@@ -103,9 +103,9 @@ public class MysticalAgricultureAddon {
     public static class MysticalAgricultureConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder.comment("default conversions for Mystical Agriculture").before(ModItems.PROSPERITY_SHARD.get(), 128)
-                   .before(ModItems.INFERIUM_ESSENCE.get(), 32).before(ModItems.SOULIUM_DUST.get(), 128)
-                   .before(ModItems.COGNIZANT_DUST.get(), 16384).before(ModBlocks.SOULSTONE_COBBLE.get(), 16);
+            builder.before(ModItems.PROSPERITY_SHARD.get(), 128).before(ModItems.INFERIUM_ESSENCE.get(), 32)
+                    .before(ModItems.SOULIUM_DUST.get(), 128).before(ModItems.COGNIZANT_DUST.get(), 16384)
+                    .before(ModBlocks.SOULSTONE_COBBLE.get(), 16);
         }
     }
 }

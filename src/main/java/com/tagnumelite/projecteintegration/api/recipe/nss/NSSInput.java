@@ -94,7 +94,7 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
         return new NSSInput(ingMap, true);
     }
 
-    public Object2IntMap<NormalizedSimpleStack> getMap( ) {
+    public Object2IntMap<NormalizedSimpleStack> getMap() {
         return ingredientMap;
     }
 
@@ -131,7 +131,7 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
 
         public Builder addIngredient(int amount, Ingredient ingredient) {
             success(Utils.convertIngredient(amount, ingredient, ingredientMap, fakeGroupMap, fakeGroupManager,
-                                            recipeID.toString()));
+                    recipeID.toString()));
             return this;
         }
 
@@ -150,7 +150,7 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
 
         public Builder addFluid(int amount, FluidIngredient fluidIngredient) {
             success(Utils.convertFluidIngredient(amount, Arrays.asList(fluidIngredient.getStacks()), ingredientMap,
-                                                 fakeGroupMap, fakeGroupManager, recipeID.toString()));
+                    fakeGroupMap, fakeGroupManager, recipeID.toString()));
             return this;
         }
 
@@ -162,7 +162,7 @@ public record NSSInput(Object2IntMap<NormalizedSimpleStack> ingredientMap,
             return addFluid(amount, FluidIngredient.of(fluidStacks.toArray(new FluidStack[0])));
         }
 
-        public NSSInput build( ) {
+        public NSSInput build() {
             return new NSSInput(ingredientMap, fakeGroupMap, successful);
         }
 
