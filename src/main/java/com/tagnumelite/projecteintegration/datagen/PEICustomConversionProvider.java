@@ -100,6 +100,13 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
         createConversionBuilder(PEIntegration.RL("pei_metals")).before(ingotTag("zinc"), 128)
                 .before(ingotTag("cobalt"), 412)
                 .before(ingotTag("tungsten"), 356)
+                .before(ingotTag("manganese"), 256)
+                .before(ingotTag("titanium"), 256)
+                .before(ingotTag("chromium"), 256)
+                .before(ingotTag("thallium"), 256)
+                .before(ingotTag("gallium"), 256)
+                .before(ingotTag("aluminium"), 256)
+                .before(ingotTag("magnesium"), 256)
                 .before(new FluidStack(Fluids.WATER, 250), 1);
 
         createConversionBuilder(PEIntegration.RL("pei_fluids")).before(

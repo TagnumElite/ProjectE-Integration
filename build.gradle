@@ -177,6 +177,7 @@ dependencies {
     localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
     localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}+${mc_version}"
     localRuntime "curse.maven:cyclops-core-232758:${version_cyclopscore}"
+    localRuntime "curse.maven:diamond-vein-1339002:${version_diamondvein}"
     localRuntime "software.bernie.geckolib:geckolib-neoforge-${mc_version}:${version_geckolib}"
     localRuntime "org.appliedenergistics:guideme:${version_guideme}"
     localRuntime "curse.maven:jupiter-1072905:${version_jupiter}"
@@ -184,10 +185,15 @@ dependencies {
     implementation "com.klikli_dev:modonomicon-${mc_version}-neoforge:${version_modonomicon}"
     localRuntime "vazkii.patchouli:Patchouli:${version_patchouli}"
     localRuntime "xyz.brassgoggledcoders:PatchouliProvider:${mc_version}-${version_patchouli_provider}"
+    localRuntime "curse.maven:power-utilities-572640:${version_powerutilities}"
+    localRuntime "curse.maven:quantum-generators-572971:${version_quantumgenerators}"
+    localRuntime "curse.maven:reactor-plus-1339176:${version_reactorplus}"
     implementation "curse.maven:resourceful-lib-570073:${version_resourceful_lib}"
+    localRuntime "curse.maven:simply-quarries-572662:${version_simplyquarries}"
     implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${mc_version}:${version_smartbrainlib}"
     implementation ("com.hrznstudio:titanium:${version_titanium}") { transitive = false }
     localRuntime "curse.maven:uranus-1010827:${version_uranus}"
+    localRuntime "curse.maven:watering-can-1339065:${version_wateringcan}"
 
     // ======================= [ Optional Mods ] =======================
     compileOnly "mezz.jei:jei-${mc_version}-common-api:${version_jei}"
@@ -213,6 +219,7 @@ dependencies {
     implementation "curse.maven:ice-and-fire-ce-1040076:${version_iceandfirece}"
     implementation "blusunrize.immersiveengineering:ImmersiveEngineering:${version_immersiveengineering}"
     implementation ("com.buuz135:industrialforegoing:${version_industrialforegoing}") { transitive = false }
+    implementation "curse.maven:industrial-upgrade-372007:${version_industrialupgrade}"
     implementation ("aztech:Modern-Industrialization:${version_modernindustrialization}") { transitive = false }
     implementation "curse.maven:mystical-agriculture-246640:${version_mysticalagriculture}"
     implementation "curse.maven:natures-aura-306626:${version_naturesaura}"
@@ -364,7 +371,7 @@ publisher {
                 'chipped', 'create', 'custom-machinery',
                 'enderio', 'evilcraft', 'extended-crafting',
                 'farmers-delight', 'farming-for-blockheads',
-                'iceandfire-ce', 'immersiveengineering', 'industrial-foregoing',
+                'iceandfire-ce', 'immersiveengineering', 'industrialupgrade', 'industrial-foregoing',
                 'mystical-agriculture',
                 'natures-aura',
                 'occultism',
@@ -381,7 +388,7 @@ publisher {
             'draconic-evolution',
             'ender-io', 'evilcraft', 'extended-crafting',
             'farmers-delight', 'farming-for-blockheads',
-            'iceandfire-ce', 'immersive-engineering', 'industrial-foregoing',
+            'iceandfire-ce', 'immersive-engineering', 'industrial-upgrade', 'industrial-foregoing',
             'mystical-agriculture',
             'natures-aura',
             'occultism',

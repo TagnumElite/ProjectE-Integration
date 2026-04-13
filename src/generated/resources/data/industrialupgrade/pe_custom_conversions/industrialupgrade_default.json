@@ -1,0 +1,328 @@
+{
+  "comment": "Default ProjectE Conversions for industrialupgrade by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "industrialupgrade:crafting_elements/crafting_290_element"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "industrialupgrade:crafting_elements/crafting_448_element"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/mikhail_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/yttrium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/vanadium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/germanium_ingot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/barium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/bismuth"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/gadolinium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/tantalum"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/polonium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/cadmium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/meteoric_iron"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/bloodstone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/draconid"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/mithril"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/orichalcum"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/adamantium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/zirconium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/strontium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/arsenic"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "industrialupgrade:itemingots/molybdenum"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:itemdust/calcium_sulfate_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:itemdust/calcium_fluoride_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4192,
+        "id": "industrialupgrade:nuclearresource/americium_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4192,
+        "id": "industrialupgrade:nuclearresource/neptunium_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4192,
+        "id": "industrialupgrade:nuclearresource/unprocessed_radioactive_uranium"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 465,
+        "id": "industrialupgrade:nuclearresource/thorium_shard"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4192,
+        "id": "industrialupgrade:nuclearresource/curium_dust"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/ariel_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/asteroids_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/callisto_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/ceres_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/charon_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/deimos_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/dione_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/enceladus_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/eris_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/europe_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/ganymede_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/haumea_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/io_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/makemake_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/mars_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone/mercury_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/mimas_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/miranda_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/moon_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/oberon_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/phobos_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/pluto_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/proteus_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/rhea_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/tethys_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/titan_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/titania_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/triton_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/umbriel_cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "industrialupgrade:spacecobblestone1/venus_cobblestone"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "minecraft:diamond"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "industrialupgrade:itemdust/diamond_dust"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "minecraft:coal"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "industrialupgrade:itemdust/coal_dust"
+        }
+      }
+    ]
+  }
+}

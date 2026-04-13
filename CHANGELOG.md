@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [8.3.1]
 ### Added
 - Support for [Modern Industrialization] (disabled quarry)
 - Support for [Custom Machinery]
+- Support for [Industrial Upgrade]
 
 ### Changed
 - NSSOutput.Builder that only has one output will just the single output
@@ -806,7 +809,9 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.2.0...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.3.1...HEAD
+[8.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.3.0...v8.3.1
+[8.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.2.0...v8.3.0
 [8.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.1.2...v8.2.0
 [8.1.2]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.1.1...v8.1.2
 [8.1.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.1.0...v8.1.1
@@ -924,6 +929,7 @@ Added support for 18 more mods
 [Ice and Fire]: https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons
 [Ice and Fire CE]: https://www.curseforge.com/minecraft/mc-mods/iceandfire-ce
 [Immersive Engineering]: https://www.curseforge.com/minecraft/mc-mods/immersive-engineering
+[Industrial Upgrade]: https://www.curseforge.com/minecraft/mc-mods/industrial-upgrade
 [Industrial Foregoing]: https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing
 [Mana And Artifice]: https://www.curseforge.com/minecraft/mc-mods/mana-and-artifice
 [MrCrayfish's Vehicle Mod]: https://www.curseforge.com/minecraft/mc-mods/mrcrayfishs-vehicle-mod
