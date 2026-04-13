@@ -149,6 +149,7 @@ repositories {
     maven { name 'Covers1624'; url 'https://maven.covers1624.net/' }
     maven { name 'Create'; url 'https://maven.createmod.net' }
     //maven { name 'Ellpeck'; url 'https://maven.ellpeck.de' }
+    maven { name 'Frinn'; url 'https://maven.frinn.fr/releases' }
     maven { name 'GeckoMaven'; url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name 'NovaMachina'; url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/' }
     maven { name 'Progwml6'; url 'https://dvs1.progwml6.com/files/maven/' }
@@ -172,7 +173,7 @@ dependencies {
     localRuntime "curse.maven:athena-841890:${version_athena}"
     localRuntime "curse.maven:balm-531761:${version_balm}"
     localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}"
-    localRuntime "io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}"
+    localRuntime ("io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}") { transitive = false }
     localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
     localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}+${mc_version}"
     localRuntime "curse.maven:cyclops-core-232758:${version_cyclopscore}"
@@ -201,6 +202,7 @@ dependencies {
     implementation "curse.maven:chipped-456956:${version_chipped}"
     implementation "curse.maven:corail-woodcutter-331983:${version_corail_woodcutter}"
     implementation("com.simibubi.create:create-${mc_version}:${version_create}-+"){ transitive = false }
+    implementation("frinn.custommachinery:CustomMachinery-neoforge:${mc_version}-${version_custommachinery}"){ transitive = false }
     implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}"
     implementation "com.enderio:enderio:${version_enderio}"
     implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
@@ -359,7 +361,7 @@ publisher {
 
     modrinthDepends {
         optional 'actually-additions', 'ae2', 'ars-nouveau',
-                'chipped', 'create',
+                'chipped', 'create', 'custom-machinery',
                 'enderio', 'evilcraft', 'extended-crafting',
                 'farmers-delight', 'farming-for-blockheads',
                 'iceandfire-ce', 'immersiveengineering', 'industrial-foregoing',
@@ -375,7 +377,7 @@ publisher {
         required 'projecte'
 
         optional 'actually-additions', 'allthemodium', 'applied-energistics-2', 'ars-nouveau',
-            'chipped', 'create', 'corail-woodcutter',
+            'chipped', 'create', 'corail-woodcutter', 'custom-machinery',
             'draconic-evolution',
             'ender-io', 'evilcraft', 'extended-crafting',
             'farmers-delight', 'farming-for-blockheads',

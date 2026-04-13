@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Support for [Modern Industrialization] (disabled quarry)
+- Support for [Custom Machinery]
 
 ### Changed
 - NSSOutput.Builder that only has one output will just the single output
@@ -911,6 +912,7 @@ Added support for 18 more mods
 [Compact Crafting]: https://www.curseforge.com/minecraft/mc-mods/compact-crafting
 [Corail Woodcutter]: https://www.curseforge.com/minecraft/mc-mods/corail-woodcutter
 [Create]: https://www.curseforge.com/minecraft/mc-mods/create
+[Custom Machinery]: https://www.curseforge.com/minecraft/mc-mods/custom-machinery
 [Draconic Evolution]: https://www.curseforge.com/minecraft/mc-mods/draconic-evolution
 [Elemental Craft]: https://www.curseforge.com/minecraft/mc-mods/elemental-craft
 [Ender IO]: https://www.curseforge.com/minecraft/mc-mods/ender-io

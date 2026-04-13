@@ -151,5 +151,10 @@
       <option name="name" value="Modmaven" />
       <option name="url" value="https://modmaven.dev/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Frinn" />
+      <option name="name" value="Frinn" />
+      <option name="url" value="https://maven.frinn.fr/releases" />
+    </remote-repository>
   </component>
 </project>
