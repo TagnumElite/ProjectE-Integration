@@ -339,18 +339,18 @@ public class ModernIndustrializationAddon {
         }
     }
 
-    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class MIQuarryMapper extends AMIMachineRecipeMapper {
-        @Override
-        public String getName() {
-            return NAME("Quarry");
-        }
-
-        @Override
-        public boolean canHandle(RecipeType<?> recipeType) {
-            return recipeType == MIMachineRecipeTypes.QUARRY;
-        }
-    }
+    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    //public static class MIQuarryMapper extends AMIMachineRecipeMapper {
+    //    @Override
+    //    public String getName() {
+    //        return NAME("Quarry");
+    //    }
+//
+    //    @Override
+    //    public boolean canHandle(RecipeType<?> recipeType) {
+    //        return recipeType == MIMachineRecipeTypes.QUARRY;
+    //    }
+    //}
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class MIVacuumFreezerMapper extends AMIMachineRecipeMapper {

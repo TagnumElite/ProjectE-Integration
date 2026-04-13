@@ -37,7 +37,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -264,6 +263,10 @@ public class NSSOutput {
             return this;
         }
 
+        public Builder addFluid(FluidStack stack) {
+            return addFluid(stack.getAmount(), stack.getFluid());
+        }
+
         public Builder addFluid(int amount, Fluid fluid) {
             outputStacks.put(NSSFluid.createFluid(fluid), amount);
             totalOutputs += amount;
@@ -285,6 +288,10 @@ public class NSSOutput {
                 PEIntegration.LOGGER.warn("NSSOutput.Builder resulted in {} outputs from recipe ({}): {}", totalOutputs,
                         recipeID, outputStacks);
                 return NSSOutput.EMPTY;
+            }
+
+            if (outputStacks.size() == 1) {
+                return new NSSOutput(totalOutputs, outputStacks.keySet().iterator().next());
             }
 
             NormalizedSimpleStack dummy = fakeGroupManager.getOrCreateFakeGroup(outputStacks.keySet()).dummy();

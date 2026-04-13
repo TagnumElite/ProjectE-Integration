@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Support for [Modern Industrialization]
+- Support for [Modern Industrialization] (disabled quarry)
+
+### Changed
+- NSSOutput.Builder that only has one output will just the single output
 
 ### Fixed
 - A bug that was causing recipes with fluids to not actually map. (Flipped a boolean)

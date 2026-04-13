@@ -142,7 +142,7 @@ public class ImmersiveEngineeringAddon {
 
         @Override
         public NSSInput getInput(BlastFurnaceRecipe recipe) {
-            return convertSingleIngredient(recipe.input.getCount(), recipe.input.getBaseIngredient());
+            return getInputBuilder().addIngredient(recipe.input.getCount(), recipe.input.getBaseIngredient()).build();
         }
     }
 
