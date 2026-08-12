@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - uses: gradle/wrapper-validation-action@v2
+      - uses: gradle/wrapper-validation-action@v3
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -77,7 +77,7 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - uses: gradle/wrapper-validation-action@v2
+      - uses: gradle/wrapper-validation-action@v3
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
