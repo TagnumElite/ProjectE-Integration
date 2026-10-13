@@ -178,6 +178,7 @@ dependencies {
     localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
     localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}+${mc_version}"
     localRuntime "curse.maven:cyclops-core-232758:${version_cyclopscore}"
+    localRuntime "curse.maven:datapack-anvil-432817:${version_datapackanvil}"
     localRuntime "curse.maven:diamond-vein-1339002:${version_diamondvein}"
     localRuntime "software.bernie.geckolib:geckolib-neoforge-${mc_version}:${version_geckolib}"
     localRuntime "org.appliedenergistics:guideme:${version_guideme}"
@@ -212,6 +213,7 @@ dependencies {
     implementation("com.simibubi.create:create-${mc_version}:${version_create}-+"){ transitive = false }
     implementation("frinn.custommachinery:CustomMachinery-neoforge:${mc_version}-${version_custommachinery}"){ transitive = false }
     implementation "com.brandon3055.draconicevolution:Draconic-Evolution:${mc_version}-${version_draconicevolution}"
+    implementation "curse.maven:elemental-craft-395158:${version_elementalcraft}"
     implementation "com.enderio:enderio:${version_enderio}"
     implementation "curse.maven:evilcraft-74610:${version_evilcraft}"
     //implementation "novamachina.exnihilosequentia:exnihilosequentia:${version_exnihilo_sequentia}"
@@ -388,7 +390,7 @@ publisher {
         optional 'actually-additions', 'allthemodium', 'applied-energistics-2', 'ars-nouveau', 'astral-sorcery',
             'chipped', 'create', 'corail-woodcutter', 'custom-machinery',
             'draconic-evolution',
-            'ender-io', 'evilcraft', 'extended-crafting',
+            'elemental-craft', 'ender-io', 'evilcraft', 'extended-crafting',
             'farmers-delight', 'farming-for-blockheads',
             'iceandfire-ce', 'immersive-engineering', 'industrial-upgrade', 'industrial-foregoing',
             'mystical-agriculture',

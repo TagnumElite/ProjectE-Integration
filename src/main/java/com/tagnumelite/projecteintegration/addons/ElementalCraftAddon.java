@@ -25,15 +25,11 @@ package com.tagnumelite.projecteintegration.addons;
 import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
 import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
-import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import sirttas.elementalcraft.item.ECItems;
 import sirttas.elementalcraft.recipe.ECRecipeTypes;
-import sirttas.elementalcraft.recipe.PureInfusionRecipe;
 import sirttas.elementalcraft.recipe.SpellCraftRecipe;
 import sirttas.elementalcraft.recipe.instrument.CrystallizationRecipe;
 import sirttas.elementalcraft.recipe.instrument.InscriptionRecipe;
@@ -41,6 +37,7 @@ import sirttas.elementalcraft.recipe.instrument.binding.AbstractBindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.infusion.IInfusionRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.grinding.IGrindingRecipe;
 import sirttas.elementalcraft.recipe.instrument.io.sawing.SawingRecipe;
+import sirttas.elementalcraft.recipe.pure.infusion.PureInfusionRecipe;
 
 public class ElementalCraftAddon {
     public static final String MODID = "elementalcraft";
@@ -83,21 +80,8 @@ public class ElementalCraftAddon {
         }
 
         @Override
-        public String getDescription() {
-            return super.getDescription() + " NOTE: Skips all recipes with more than one output chance";
-        }
-
-        @Override
         public boolean canHandle(RecipeType<?> recipeType) {
             return recipeType == ECRecipeTypes.CRYSTALLIZATION.get();
-        }
-
-        @Override
-        public NSSOutput getOutput(CrystallizationRecipe recipe) {
-            if (recipe.getOutputs().size() != 1) {
-                return NSSOutput.EMPTY;
-            }
-            return new NSSOutput(recipe.getOutputs().get(0).getResult());
         }
     }
 
@@ -170,21 +154,7 @@ public class ElementalCraftAddon {
     public static class ECConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder
-                    .before(ECItems.INERT_CRYSTAL.get(), 8)
-                    .before(ECItems.AIR_SHARD.get(), 8)
-                    .before(ECItems.EARTH_SHARD.get(), 8)
-                    .before(ECItems.FIRE_SHARD.get(), 8)
-                    .before(ECItems.WATER_SHARD.get(), 8);
-            gem(builder, ECItems.CRUDE_AIR_GEM.get(), ECItems.FINE_AIR_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
-            gem(builder, ECItems.CRUDE_EARTH_GEM.get(), ECItems.FINE_EARTH_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
-            gem(builder, ECItems.CRUDE_FIRE_GEM.get(), ECItems.FINE_FIRE_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
-            gem(builder, ECItems.CRUDE_WATER_GEM.get(), ECItems.FINE_WATER_GEM.get(), ECItems.AIR_CRYSTAL.get(), ECItems.AIR_SHARD.get());
-        }
-
-        protected void gem(CustomConversionBuilder builder, Item crudeGem, Item fineGem, Item crystal, Item shard) {
-            builder.conversion(crudeGem).ingredient(Items.DIAMOND).ingredient(crystal).ingredient(shard).end();
-            builder.conversion(fineGem).ingredient(Items.DIAMOND).ingredient(crystal).ingredient(shard).end();
+            builder.before(ECItems.INERT_CRYSTAL.get(), 8);
         }
     }
 }

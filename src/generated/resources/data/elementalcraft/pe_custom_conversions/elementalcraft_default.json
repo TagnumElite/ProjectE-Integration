@@ -1,0 +1,12 @@
+{
+  "comment": "Default ProjectE Conversions for elementalcraft by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "elementalcraft:inert_crystal"
+      }
+    ]
+  }
+}

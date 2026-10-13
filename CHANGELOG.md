@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Ported
 - Support for [Astral Sorcery]
+- Support for [Elemental Craft]
 
 ## [8.3.1]
 ### Added
