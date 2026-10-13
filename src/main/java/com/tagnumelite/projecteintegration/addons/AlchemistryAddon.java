@@ -25,19 +25,22 @@ package com.tagnumelite.projecteintegration.addons;
 import com.smashingmods.alchemistry.common.recipe.atomizer.AtomizerRecipe;
 import com.smashingmods.alchemistry.common.recipe.combiner.CombinerRecipe;
 import com.smashingmods.alchemistry.common.recipe.compactor.CompactorRecipe;
+import com.smashingmods.alchemistry.common.recipe.dissolver.DissolverRecipe;
+import com.smashingmods.alchemistry.common.recipe.dissolver.ProbabilitySet;
 import com.smashingmods.alchemistry.common.recipe.fission.FissionRecipe;
 import com.smashingmods.alchemistry.common.recipe.fusion.FusionRecipe;
 import com.smashingmods.alchemistry.common.recipe.liquifier.LiquifierRecipe;
 import com.smashingmods.alchemistry.registry.RecipeRegistry;
 import com.smashingmods.alchemylib.api.item.IngredientStack;
 import com.tagnumelite.projecteintegration.PEIntegration;
+import com.tagnumelite.projecteintegration.api.conversion.AConversionProvider;
+import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
+import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Contract;
@@ -69,7 +72,7 @@ public class AlchemistryAddon {
 
         @Override
         public NSSInput getInput(AtomizerRecipe recipe) {
-            return NSSInput.createFluid(recipe.getInput());
+            return NSSInput.ofFluid(recipe.getInput());
         }
     }
 
@@ -93,16 +96,11 @@ public class AlchemistryAddon {
                 return null;
             }
 
-            // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-
+            NSSInput.Builder input = getInputBuilder();
             for (IngredientStack ingredient : ingredients) {
-                if (!convertIngredient(ingredient.getCount(), ingredient.getIngredient(), ingredientMap, fakeGroupMap)) {
-                    return new NSSInput(ingredientMap, fakeGroupMap, false);
-                }
+                input.addIngredient(ingredient.getCount(), ingredient.getIngredient());
             }
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return input.build();
         }
     }
 
@@ -120,30 +118,37 @@ public class AlchemistryAddon {
 
         @Override
         public NSSInput getInput(CompactorRecipe recipe) {
-            // A 'Map' of NormalizedSimpleStack and List<IngredientMap>
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
             IngredientStack ingredient = recipe.getInput();
-
-            if (!convertIngredient(ingredient.getCount(), ingredient.getIngredient(), ingredientMap, fakeGroupMap)) {
-                return new NSSInput(ingredientMap, fakeGroupMap, false);
-            }
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return convertSingleIngredient(ingredient.getCount(), ingredient.getIngredient());
         }
     }
 
-    //@RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    //public static class AlchemistryDissolverMapper extends ARecipeTypeMapper<DissolverRecipe> {
-    //    @Override
-    //    public String getName() {
-    //        return NAME("Dissolver");
-    //    }
-    //
-    //    @Override
-    //    public boolean canHandle(RecipeType<?> recipeType) {
-    //        return recipeType == RecipeRegistry.DISSOLVER_TYPE;
-    //    }
-    //}
+    @RecipeTypeMapper(requiredMods = MODID, priority = 1)
+    public static class AlchemistryDissolverMapper extends ARecipeTypeMapper<DissolverRecipe> {
+        @Override
+        public String getName() {
+            return NAME("Dissolver");
+        }
+
+        @Override
+        public boolean canHandle(RecipeType<?> recipeType) {
+            return recipeType == RecipeRegistry.DISSOLVER_TYPE.get();
+        }
+
+        @Override
+        public NSSInput getInput(DissolverRecipe recipe) {
+            return convertSingleIngredient(recipe.getInput().getCount(), recipe.getInput().getIngredient());
+        }
+
+        @Override
+        public NSSOutput getOutput(DissolverRecipe recipe) {
+            ProbabilitySet probabilitySet = recipe.getOutput();
+
+            NSSOutput.Builder output = getOutputBuilder();
+            probabilitySet.getProbabilityGroups().forEach(group -> group.getOutput().stream().filter(i -> !i.is(Items.AIR)).forEach(output::addItem));
+            return output.build();
+        }
+    }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
     public static class AlchemistryFissionMapper extends ARecipeTypeMapper<FissionRecipe> {
@@ -203,18 +208,20 @@ public class AlchemistryAddon {
 
         @Override
         public NSSInput getInput(LiquifierRecipe recipe) {
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-
-            if (!convertIngredient(recipe.getInput().getCount(), recipe.getInput().getIngredient(), ingredientMap, fakeGroupMap))
-                return new NSSInput(ingredientMap, fakeGroupMap, false);
-
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return convertSingleIngredient(recipe.getInput().getCount(), recipe.getInput().getIngredient());
         }
 
         @Override
         public NSSOutput getOutput(LiquifierRecipe recipe) {
            return new NSSOutput(recipe.getOutput());
+        }
+    }
+
+    @ConversionProvider(MODID)
+    public static class AlchemistryConversionProvider extends AConversionProvider {
+        @Override
+        public void convert(CustomConversionBuilder builder) {
+            builder.before(ingotTag("lithium"), 312);
         }
     }
 }

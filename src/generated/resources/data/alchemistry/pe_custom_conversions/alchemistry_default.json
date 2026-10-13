@@ -1,0 +1,12 @@
+{
+  "comment": "Default ProjectE Conversions for alchemistry by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 312,
+        "tag": "c:ingots/lithium"
+      }
+    ]
+  }
+}

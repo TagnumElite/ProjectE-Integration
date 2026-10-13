@@ -170,10 +170,12 @@ dependencies {
 
     // ======================= [ Runtime Mods ] =======================
     localRuntime "curse.maven:ae-jei-1074338:${version_ae_jei}"
+    implementation "smashingmods:alchemylib:${mc_version}-${version_alchemy_lib}"
     implementation "dev.architectury:architectury-neoforge:${version_architectury}"
     localRuntime "curse.maven:athena-841890:${version_athena}"
     localRuntime "curse.maven:balm-531761:${version_balm}"
     localRuntime "com.brandon3055.brandonscore:BrandonsCore:${mc_version}-${version_brandonscore}"
+    implementation "smashingmods:chemlib:${mc_version}-${version_chemlib}"
     localRuntime ("io.codechicken:CodeChickenLib:${mc_version}-${version_codechickenlib}") { transitive = false }
     localRuntime "com.blakebr0.cucumber:Cucumber:${mc_version}-${version_cucumber}"
     localRuntime "top.theillusivec4.curios:curios-neoforge:${version_curios}+${mc_version}"
@@ -204,6 +206,7 @@ dependencies {
     localRuntime "maven.modrinth:jade:${version_jade}"
 
     implementation "de.ellpeck:actuallyadditions:${version_actually_additions}+mc${mc_version}"
+    implementation "smashingmods:alchemistry:${mc_version}-${version_alchemistry}"
     implementation "curse.maven:allthemodium-364466:${version_allthemodium}"
     implementation ("org.appliedenergistics:appliedenergistics2:${version_appliedenergistics}") { transitive = false }
     implementation "hellfirepvp.astralsorcery:AstralSorcery:${version_astralsorcery}"
@@ -373,7 +376,7 @@ publisher {
     modrinthDepends {
         optional 'actually-additions', 'ae2', 'ars-nouveau',
                 'chipped', 'create', 'custom-machinery',
-                'enderio', 'evilcraft', 'extended-crafting',
+                'elemental-craft', 'enderio', 'evilcraft', 'extended-crafting',
                 'farmers-delight', 'farming-for-blockheads',
                 'iceandfire-ce', 'immersiveengineering', 'industrialupgrade', 'industrial-foregoing',
                 'mystical-agriculture',
@@ -387,7 +390,7 @@ publisher {
     curseDepends {
         required 'projecte'
 
-        optional 'actually-additions', 'allthemodium', 'applied-energistics-2', 'ars-nouveau', 'astral-sorcery',
+        optional 'actually-additions', 'alchemistry', 'allthemodium', 'applied-energistics-2', 'ars-nouveau', 'astral-sorcery',
             'chipped', 'create', 'corail-woodcutter', 'custom-machinery',
             'draconic-evolution',
             'elemental-craft', 'ender-io', 'evilcraft', 'extended-crafting',

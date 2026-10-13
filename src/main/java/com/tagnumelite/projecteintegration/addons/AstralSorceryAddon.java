@@ -74,14 +74,20 @@ public class AstralSorceryAddon {
             for (IngredientBridge ingredient : grid.getInputs()) {
                 if (ingredient.test(FluidsAS.LIQUID_STARLIGHT.getBucket().toStack()))
                     continue; // We skip the liquid starlight buckets because I'm not assigning EMC to liquid starlight
-                input.addIngredient(ingredient.getIngredient());
+                addBridgeIngredient(input, ingredient);
             }
 
-            for (IngredientBridge relayIngredient : grid.getRelayInputs()) {
-                input.addIngredient(relayIngredient.getIngredient());
-            }
+            grid.getRelayInputs().forEach(relayIngredient -> addBridgeIngredient(input, relayIngredient));
 
             return input.build();
+        }
+
+        protected void addBridgeIngredient(NSSInput.Builder builder, IngredientBridge ingredient) {
+            switch (ingredient.getIngredientType()) {
+                case ITEM -> builder.addIngredient(ingredient.getIngredient());
+                case FLUID -> builder.addFluid(ingredient.getFluidIngredient());
+                default -> throw new UnsupportedOperationException("PEI Astral Sorcery AltarRecipe Mapper has encountered an unknown ingredient type - " + ingredient.getIngredientType());
+            }
         }
 
         @Override
