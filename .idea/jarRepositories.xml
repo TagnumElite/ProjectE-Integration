@@ -156,5 +156,10 @@
       <option name="name" value="Frinn" />
       <option name="url" value="https://maven.frinn.fr/releases" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="HellFirePvP" />
+      <option name="name" value="HellFirePvP" />
+      <option name="url" value="https://maven.hellfiredev.net" />
+    </remote-repository>
   </component>
 </project>

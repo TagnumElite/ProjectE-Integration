@@ -1,0 +1,70 @@
+{
+  "comment": "Default ProjectE Conversions for astralsorcery by ProjectE Integration",
+  "values": {
+    "before": [
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "tag": "c:gems/aquamarine"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "c:marbles"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "astralsorcery:infused_woods"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "astralsorcery:rock_crystal"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "astralsorcery:celestial_crystal"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "minecraft:iron_ingot"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "astralsorcery:starmetal_ingot"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "astralsorcery:starmetal_ingot"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "astralsorcery:stardust"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "projecte:item",
+            "id": "astralsorcery:celestial_crystal"
+          }
+        ],
+        "output": {
+          "type": "projecte:item",
+          "id": "astralsorcery:attuned_celestial_crystal"
+        }
+      }
+    ]
+  }
+}

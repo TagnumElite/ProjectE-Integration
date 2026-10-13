@@ -97,7 +97,8 @@ public class PEICustomConversionProvider extends CustomConversionProvider {
 
     @Override
     protected void addCustomConversions(HolderLookup.@NotNull Provider provider) {
-        createConversionBuilder(PEIntegration.RL("pei_metals")).before(ingotTag("zinc"), 128)
+        createConversionBuilder(PEIntegration.RL("pei_metals"))
+                .before(ingotTag("zinc"), 128)
                 .before(ingotTag("cobalt"), 412)
                 .before(ingotTag("tungsten"), 356)
                 .before(ingotTag("manganese"), 256)

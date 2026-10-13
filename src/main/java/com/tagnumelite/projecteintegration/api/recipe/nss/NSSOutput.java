@@ -237,8 +237,7 @@ public class NSSOutput {
                             continue;
                         }
 
-                        outputStacks.put(NSSItem.createItem(item), item.getCount());
-                        totalOutputs += item.getCount();
+                        addItem(item);
                     }
                     case FluidStack fluid -> {
                         if (fluid.isEmpty()) {
@@ -246,8 +245,7 @@ public class NSSOutput {
                             continue;
                         }
 
-                        outputStacks.put(NSSFluid.createFluid(fluid), fluid.getAmount());
-                        totalOutputs += fluid.getAmount();
+                        addFluid(fluid);
                     }
                     default ->
                             PEIntegration.LOGGER.warn("Recipe ({}) has unsupported output: {}. Skipping...", recipeID, output);
@@ -257,10 +255,14 @@ public class NSSOutput {
             return this;
         }
 
-        public Builder addItem(ItemStack stack) {
-            outputStacks.put(NSSItem.createItem(stack), stack.getCount());
-            totalOutputs += stack.getCount();
+        public Builder addNSS(NormalizedSimpleStack nss, int count) {
+            outputStacks.put(nss, count);
+            totalOutputs += count;
             return this;
+        }
+
+        public Builder addItem(ItemStack stack) {
+            return addNSS(NSSItem.createItem(stack), stack.getCount());
         }
 
         public Builder addFluid(FluidStack stack) {
@@ -268,9 +270,7 @@ public class NSSOutput {
         }
 
         public Builder addFluid(int amount, Fluid fluid) {
-            outputStacks.put(NSSFluid.createFluid(fluid), amount);
-            totalOutputs += amount;
-            return this;
+            return addNSS(NSSFluid.createFluid(fluid), amount);
         }
 
         @Deprecated(forRemoval = true)

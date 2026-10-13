@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 TagnumElite
+ * Copyright (c) 2019-2026 TagnumElite
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,27 +28,22 @@ import com.tagnumelite.projecteintegration.api.conversion.ConversionProvider;
 import com.tagnumelite.projecteintegration.api.recipe.ARecipeTypeMapper;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSInput;
 import com.tagnumelite.projecteintegration.api.recipe.nss.NSSOutput;
-import hellfirepvp.astralsorcery.common.crafting.helper.WrappedIngredient;
-import hellfirepvp.astralsorcery.common.crafting.recipe.BlockTransmutation;
-import hellfirepvp.astralsorcery.common.crafting.recipe.LiquidInfusion;
-import hellfirepvp.astralsorcery.common.crafting.recipe.SimpleAltarRecipe;
-import hellfirepvp.astralsorcery.common.crafting.recipe.WellLiquefaction;
-import hellfirepvp.astralsorcery.common.crafting.recipe.altar.AltarRecipeGrid;
-import hellfirepvp.astralsorcery.common.lib.BlocksAS;
+import hellfirepvp.astralsorcery.common.ingredient.IngredientBridge;
+import hellfirepvp.astralsorcery.common.lib.FluidsAS;
 import hellfirepvp.astralsorcery.common.lib.ItemsAS;
 import hellfirepvp.astralsorcery.common.lib.RecipeTypesAS;
+import hellfirepvp.astralsorcery.common.recipe.altar.AltarRecipe;
+import hellfirepvp.astralsorcery.common.recipe.altar.AltarRecipeGrid;
+import hellfirepvp.astralsorcery.common.recipe.focal.place.FocalTransmutationRecipe;
+import hellfirepvp.astralsorcery.common.recipe.infusion.InfusionRecipe;
+import hellfirepvp.astralsorcery.common.recipe.lightwell.LightwellRecipe;
 import moze_intel.projecte.api.data.CustomConversionBuilder;
 import moze_intel.projecte.api.mapper.recipe.RecipeTypeMapper;
-import moze_intel.projecte.api.nss.NormalizedSimpleStack;
-import moze_intel.projecte.emc.IngredientMap;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.RecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.Tuple;
-import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.fluids.FluidStack;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,7 +55,7 @@ public class AstralSorceryAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASAltarMapper extends ARecipeTypeMapper<SimpleAltarRecipe> {
+    public static class ASAltarMapper extends ARecipeTypeMapper<AltarRecipe> {
         @Override
         public String getName() {
             return NAME("Altar");
@@ -68,30 +63,31 @@ public class AstralSorceryAddon {
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == recipeTypesAS.TYPE_ALTAR.getType();
+            return recipeType == RecipeTypesAS.ALTAR_CRAFTING_TYPE.get();
         }
 
         @Override
-        public NSSInput getInput(SimpleAltarRecipe recipe) {
-            AltarRecipeGrid grid = recipe.getInputs();
-            IngredientMap<NormalizedSimpleStack> ingredientMap = new IngredientMap<>();
-            List<Tuple<NormalizedSimpleStack, List<IngredientMap<NormalizedSimpleStack>>>> fakeGroupMap = new ArrayList<>();
+        public NSSInput getInput(AltarRecipe recipe) {
+            AltarRecipeGrid grid = recipe.getGrid();
+            NSSInput.Builder input = getInputBuilder();
 
-            for (int slot = 0; slot < AltarRecipeGrid.MAX_INVENTORY_SIZE; slot++) {
-                convertIngredient(grid.getIngredient(slot), ingredientMap, fakeGroupMap);
+            for (IngredientBridge ingredient : grid.getInputs()) {
+                if (ingredient.test(FluidsAS.LIQUID_STARLIGHT.getBucket().toStack()))
+                    continue; // We skip the liquid starlight buckets because I'm not assigning EMC to liquid starlight
+                input.addIngredient(ingredient.getIngredient());
             }
 
-            for (WrappedIngredient relayInput : recipe.getRelayInputs()) {
-                convertIngredient(relayInput.getIngredient(), ingredientMap, fakeGroupMap);
+            for (IngredientBridge relayIngredient : grid.getRelayInputs()) {
+                input.addIngredient(relayIngredient.getIngredient());
             }
 
-            return new NSSInput(ingredientMap, fakeGroupMap, true);
+            return input.build();
         }
 
         @Override
-        public NSSOutput getOutput(SimpleAltarRecipe recipe) {
+        public NSSOutput getOutput(AltarRecipe recipe) {
             try {
-                return mapOutputs(recipe.getOutputs(null).toArray());
+                return mapOutputs(recipe.getOutputs().toArray());
             } catch (Exception e) {
                 PEIntegration.LOGGER.info("Failed to get outputs for Altar Recipe", e);
                 // TODO: This is an temporary replacement, must make sure to implement something proper.
@@ -101,47 +97,47 @@ public class AstralSorceryAddon {
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASBlockTransmutationMapper extends ARecipeTypeMapper<BlockTransmutation> {
+    public static class ASFocalTransmutationMapper extends ARecipeTypeMapper<FocalTransmutationRecipe> {
         @Override
         public String getName() {
-            return NAME("BlockTransmutation");
+            return NAME("FocalTransmutation");
         }
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == recipeTypesAS.TYPE_BLOCK_TRANSMUTATION.getType();
+            return recipeType == RecipeTypesAS.FOCAL_TRANSMUTATION_TYPE.get();
         }
 
         @Override
-        public NSSOutput getOutput(BlockTransmutation recipe) {
-            return new NSSOutput(recipe.getOutputDisplay());
+        public NSSOutput getOutput(FocalTransmutationRecipe recipe) {
+            return new NSSOutput(recipe.getOutputForDisplay().getLast());
         }
 
         @Override
-        protected List<Ingredient> getIngredients(BlockTransmutation recipe) {
-            return Collections.singletonList(Ingredient.of(recipe.getInputDisplay().stream()));
+        protected List<Ingredient> getIngredients(FocalTransmutationRecipe recipe) {
+            return Collections.singletonList(recipe.getInputDisplay());
         }
     }
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASLiquidInfusionMapper extends ARecipeTypeMapper<LiquidInfusion> {
+    public static class ASInfusionMapper extends ARecipeTypeMapper<InfusionRecipe> {
         @Override
         public String getName() {
-            return NAME("LiquidInfusion");
+            return NAME("Infusion");
         }
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == recipeTypesAS.TYPE_INFUSION.getType();
+            return recipeType == RecipeTypesAS.INFUSION_TYPE.get();
         }
 
         @Override
-        public NSSOutput getOutput(LiquidInfusion recipe) {
-            return new NSSOutput(recipe.getOutput(ItemStack.EMPTY));
+        public NSSOutput getOutput(InfusionRecipe recipe) {
+            return new NSSOutput(recipe.getOutput());
         }
 
         @Override
-        protected List<Ingredient> getIngredients(LiquidInfusion recipe) {
+        protected List<Ingredient> getIngredients(InfusionRecipe recipe) {
             return Collections.singletonList(recipe.getItemInput());
         }
     }
@@ -149,20 +145,20 @@ public class AstralSorceryAddon {
     // NOTE: There is no LiquidInteraction mapper, just because it shouldn't be needed.
 
     @RecipeTypeMapper(requiredMods = MODID, priority = 1)
-    public static class ASWellLiquefactionMapper extends ARecipeTypeMapper<WellLiquefaction> {
+    public static class ASLightwellMapper extends ARecipeTypeMapper<LightwellRecipe> {
         @Override
         public String getName() {
-            return NAME("WellLiquefaction");
+            return NAME("Lightwell");
         }
 
         @Override
         public String getDescription() {
-            return super.getDescription() + " NOTE: Disabled by default. Maps 1 Item to 1 bucket (" + FluidAttributes.BUCKET_VOLUME + ')';
+            return super.getDescription() + " NOTE: Disabled by default. Maps 1 Item to 1 bucket (1000)";
         }
 
         @Override
         public boolean canHandle(RecipeType<?> recipeType) {
-            returnrecipeType == recipeTypesAS.TYPE_WELL.getType();
+            return recipeType == RecipeTypesAS.LIGHTWELL_TYPE.get();
         }
 
         @Override
@@ -171,12 +167,12 @@ public class AstralSorceryAddon {
         }
 
         @Override
-        public NSSOutput getOutput(WellLiquefaction recipe) {
-            return new NSSOutput(new FluidStack(recipe.getFluidOutput(), FluidAttributes.BUCKET_VOLUME));
+        public NSSOutput getOutput(LightwellRecipe recipe) {
+            return new NSSOutput(new FluidStack(recipe.getGeneratedFluid(), 1000));
         }
 
         @Override
-        protected List<Ingredient> getIngredients(WellLiquefaction recipe) {
+        protected List<Ingredient> getIngredients(LightwellRecipe recipe) {
             return Collections.singletonList(recipe.getInput());
         }
     }
@@ -185,10 +181,12 @@ public class AstralSorceryAddon {
     public static class ASConversionProvider extends AConversionProvider {
         @Override
         public void convert(CustomConversionBuilder builder) {
-            builder
+            builder.conversion(ItemsAS.STARMETAL_INGOT).ingredient(Items.IRON_INGOT).end()
+                    .conversion(ItemsAS.STARDUST).ingredient(ItemsAS.STARMETAL_INGOT).end()
+                    .conversion(ItemsAS.ATTUNED_CELESTIAL_CRYSTAL).ingredient(ItemsAS.CELESTIAL_CRYSTAL).end()
                     .before(gemTag("aquamarine"), 128)
-                    .before(tag("forge:marble"), 32)
-                    .before(BlocksAS.MARBLE_RAW, 32)
+                    .before(commonTag("marbles"), 32)
+                    .before(tag(MODID, "infused_woods"), 32)
                     .before(ItemsAS.ROCK_CRYSTAL, 256)
                     .before(ItemsAS.CELESTIAL_CRYSTAL, 512);
         }
