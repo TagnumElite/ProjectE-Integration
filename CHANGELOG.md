@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [8.4.0]
 ### Ported
 - Support for [Astral Sorcery]
 - Support for [Elemental Craft]
@@ -813,7 +815,8 @@ Added support for 18 more mods
 - Added support for Extended Crafting
     - Combintation Core, Compressor, Ender Crafter and Tiered Tables
 
-[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.3.1...HEAD
+[Unreleased]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.4.0...HEAD
+[8.4.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.3.1...v8.4.0
 [8.3.1]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.3.0...v8.3.1
 [8.3.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.2.0...v8.3.0
 [8.2.0]: https://github.com/TagnumElite/ProjectE-Integration/compare/v8.1.2...v8.2.0
